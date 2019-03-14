@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Gavin&#39;s Blog</title>
-    <link>http://www.gavinblog.info/tags/</link>
+    <link>https://wushaoqiang.github.io/tags/</link>
     <description>Recent content in Tags on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://www.gavinblog.info/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://wushaoqiang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
