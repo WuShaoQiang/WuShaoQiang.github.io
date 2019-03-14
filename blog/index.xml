@@ -2,21 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blogs on Gavin&#39;s Blog</title>
-    <link>https://wushaoqiang.github.io/blog/</link>
+    <link>http://wushaoqiang.github.io/blog/</link>
     <description>Recent content in Blogs on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Gavin Wu</copyright>
     <lastBuildDate>Thu, 14 Mar 2019 16:10:59 +0800</lastBuildDate>
     
-	<atom:link href="https://wushaoqiang.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://wushaoqiang.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>LearningGo</title>
-      <link>https://wushaoqiang.github.io/blog/learninggo/</link>
+      <link>http://wushaoqiang.github.io/2019/03/learninggo/</link>
       <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/blog/learninggo/</guid>
+      <guid>http://wushaoqiang.github.io/2019/03/learninggo/</guid>
       <description>something
    name 111 222 333 444     aaa bbb ccc ddd eee   fff ggg hhh iii 000    </description>
     </item>
