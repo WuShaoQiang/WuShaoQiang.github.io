@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gavin&#39;s Blog</title>
-    <link>http://www.gavinblog.info/</link>
-    <description>Recent content on Gavin&#39;s Blog</description>
+    <title>Gos on Gavin&#39;s Blog</title>
+    <link>http://www.gavinblog.info/go/</link>
+    <description>Recent content in Gos on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 14 Mar 2019 15:03:15 +0800</lastBuildDate>
     
-	<atom:link href="http://www.gavinblog.info/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.gavinblog.info/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -25,15 +25,6 @@ unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII res, ok :
 2019.2.17 ==谨记！== ： 切片和Map在函数传递都是指针传递(引用)
 func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append() norm = fmt.Sprintf(&amp;quot;%-[1]*s&amp;quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
 姓名|技能|排行 &amp;ndash;|:&amp;ndash;:|&amp;ndash;: 刘备|哭|大哥 关羽|打|二哥 张飞|骂|三弟</description>
-    </item>
-    
-    <item>
-      <title>My First Post</title>
-      <link>http://www.gavinblog.info/posts/my-first-post/</link>
-      <pubDate>Thu, 14 Mar 2019 10:48:13 +0800</pubDate>
-      
-      <guid>http://www.gavinblog.info/posts/my-first-post/</guid>
-      <description>Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是 - 相对路径 - 处理函数</description>
     </item>
     
   </channel>

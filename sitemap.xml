@@ -3,29 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>www.gavinblog.info/posts/my-first-post/</loc>
+    <loc>http://www.gavinblog.info/go/learning/</loc>
+    <lastmod>2019-03-14T15:03:15+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.gavinblog.info/posts/my-first-post/</loc>
     <lastmod>2019-03-14T10:48:13+08:00</lastmod>
   </url>
   
   <url>
-    <loc>www.gavinblog.info/categories/</loc>
+    <loc>http://www.gavinblog.info/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.gavinblog.info/</loc>
+    <loc>http://www.gavinblog.info/</loc>
+    <lastmod>2019-03-14T15:03:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.gavinblog.info/go/</loc>
+    <lastmod>2019-03-14T15:03:15+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.gavinblog.info/posts/</loc>
     <lastmod>2019-03-14T10:48:13+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>www.gavinblog.info/posts/</loc>
-    <lastmod>2019-03-14T10:48:13+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>www.gavinblog.info/tags/</loc>
+    <loc>http://www.gavinblog.info/tags/</loc>
     <priority>0</priority>
   </url>
   

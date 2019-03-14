@@ -27,33 +27,33 @@
     
 
     
-      <link href="http://www.gavinblog.info/posts/index.xml" rel="alternate" type="application/rss+xml" title="Gavin&#39;s Blog" />
-      <link href="http://www.gavinblog.info/posts/index.xml" rel="feed" type="application/rss+xml" title="Gavin&#39;s Blog" />
+      <link href="http://www.gavinblog.info/go/index.xml" rel="alternate" type="application/rss+xml" title="Gavin&#39;s Blog" />
+      <link href="http://www.gavinblog.info/go/index.xml" rel="feed" type="application/rss+xml" title="Gavin&#39;s Blog" />
     
 
-    <meta property="og:title" content="Posts" />
+    <meta property="og:title" content="Gos" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://www.gavinblog.info/posts/" />
+<meta property="og:url" content="http://www.gavinblog.info/go/" />
 
 
 
-<meta property="og:updated_time" content="2019-03-14T10:48:13&#43;08:00"/>
-
-
-
-
+<meta property="og:updated_time" content="2019-03-14T15:03:15&#43;08:00"/>
 
 
 
 
 
 
-<meta itemprop="name" content="Posts">
+
+
+
+
+<meta itemprop="name" content="Gos">
 <meta itemprop="description" content="">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="Gos"/>
 <meta name="twitter:description" content=""/>
 
   </head>
@@ -91,7 +91,7 @@
 
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          Posts
+          Gos
         </h1>
         
       </div>
@@ -107,14 +107,21 @@
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
+    <span class="f6 db">Go</span>
     <h1 class="f3 near-black">
-      <a href="/posts/my-first-post/" class="link black dim">
-        My First Post
+      <a href="/go/learning/" class="link black dim">
+        Go语言学习笔记
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是 - 相对路径 - 处理函数
+      @TOC 在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
+2019.2.16 go test -tags tagname
+构造数组可以先 make([]int,0) 然后 再使用函数：func append(slice []Type, elems ...Type) []Type
+unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII res, ok := map[...] 中的ok变量可以用来判断key是否存在
+[]rune可以直接转换为字符串string([]rune)
+2019.2.17 ==谨记！== ： 切片和Map在函数传递都是指针传递(引用)
+func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append() norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
+姓名|技能|排行 &ndash;|:&ndash;:|&ndash;: 刘备|哭|大哥 关羽|打|二哥 张飞|骂|三弟
     </div>
   </div>
 </div>
