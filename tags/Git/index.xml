@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Git/</link>
+    <description>Recent content in Git on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Mar 2019 18:02:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git</title>
+      <link>https://wushaoqiang.github.io/posts/learn-git/</link>
+      <pubDate>Fri, 15 Mar 2019 18:02:59 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/learn-git/</guid>
+      <description>这篇博客是笔者总结学习git的过程，不是一篇专业性很强的文章，主要是笔记
+主要参考廖雪峰的博客学习
+笔者之前对Git有错误的理解(因为之前没学过，也只是听过)，总以为Github就是Git，其实Github是Git出来后才被创建的，为开源项目免费提供Git存储。
+无Github,纯属本地的Git &amp;mdash; 那么什么是Git呢？ Git是目前世界上最先进的分布式版本控制系统
+分布式：Git和其它集中式版本控制系统最大的区别，Git也可以有一个24小时开机的服务器来充当中央服务器，但这个服务器仅仅是为了让大家方便交换各自修改的。
+版本控制：因为我们的代码要不断的完善，所以就有版本之分啦。
+就算是我们自己在电脑上开发，也可以为自己代码创建版本库，用来记录修改和方便管理。
+&amp;mdash; 创建版本库 在想要创建版本库的文件夹里面，输入命令
+git init  就可以看到文件夹里面多了一个隐藏的文件夹.git
+添加文件到我们新建的版本库里面用
+//将某一个文件添加进缓冲区 git add &amp;lt;file&amp;gt; //将.git文件夹 所在的文件 里所有的文件添加进缓冲区 //所以不管你是在某一个子文件夹用这个命令，执行效果是一样的 git add -A //这个就是将缓冲区的提交到版本库里，并且携带提交信息 //(强烈推荐要写message，这样可以提醒那个时候修改了什么) git commit -m &amp;lt;message&amp;gt;  我们可以把代码所在区域分成
+ 工作区 缓冲区 当前分支  理解这几个工作区域会有助于理解命令的作用。
+工作区：我们自己电脑编辑代码的地方
+缓冲区：就是我们把修改过的文件放到一个区域装着，如果后面我又对这个文件做修改了，就可以继续往里面添加(同文件覆盖)
+当前分支：就是我们使用commit后将缓冲区的文件提交上去的地方
+&amp;mdash; 查看状态 git status  这个命令会告诉我们哪些被修改过的文件被添加到了缓冲去，哪些被修改的文件没有。
+On branch master Your branch is behind &#39;origin/master&#39; by 1 commit, and can be fast-forwarded. (use &amp;quot;git pull&amp;quot; to update your local branch) Untracked files (use &amp;quot;git add &amp;lt;file&amp;gt;.</description>
+    </item>
+    
+  </channel>
+</rss>
