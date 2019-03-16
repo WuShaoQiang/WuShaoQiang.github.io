@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Mar 2019 18:02:59 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 Mar 2019 16:10:59 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Beego</title>
+      <link>https://wushaoqiang.github.io/tags/Beego/</link>
+      <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Beego/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gin</title>
+      <link>https://wushaoqiang.github.io/tags/Gin/</link>
+      <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Gin/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Git</title>
@@ -35,15 +53,6 @@
       <pubDate>Sat, 16 Mar 2019 22:33:20 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Note</title>
-      <link>https://wushaoqiang.github.io/tags/Note/</link>
-      <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
-      
-      <guid>https://wushaoqiang.github.io/tags/Note/</guid>
       <description></description>
     </item>
     

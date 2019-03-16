@@ -186,6 +186,13 @@ disablePathToLower = true
   ## 这个是对阅读量的计数
   busuanzi = true
 
+## 这个是为了开评论区
+[params.utteranc]
+    enable = true
+    repo = &quot;username/repo-name&quot;    # 存储评论的Repo，格式为 owner/repo
+    issueTerm = &quot;pathname&quot;  #表示你选择以那种方式让github issue的评论和你的文章关联。
+    theme = &quot;github-light&quot; # 样式主题，有github-light和github-dark两种
+
 [menu]
 
   ## identifier标志符必须是唯一的，不能重复；weight用于排序，值越小越靠前。
@@ -202,6 +209,18 @@ disablePathToLower = true
     url = &quot;/about/&quot;
     weight = 3
 </code></pre>
+
+<h3 id="博客文章开头">博客文章开头</h3>
+
+<p>这个主题是支持分类和标签的，那么怎么用呢？</p>
+
+<pre><code>title: &quot;Learn Hugo&quot;
+date: 2019-03-16T22:33:20+08:00
+tags: [&quot;Hugo&quot;,&quot;Golang&quot;]
+categories: [&quot;Hugo&quot;]
+</code></pre>
+
+<p>就是这样啦</p>
 
                         </div>
 
@@ -309,13 +328,15 @@ disablePathToLower = true
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
     
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
-    
-    <a href="https://wushaoqiang.github.io/tags/Note/">Note</a>
     
 </div>
     </section>
