@@ -3,6 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+<<<<<<< HEAD
     <loc>https://wushaoqiang.github.io/posts/learn-hugo/</loc>
     <lastmod>2019-03-16T22:33:20+08:00</lastmod>
   </url>
@@ -19,10 +20,14 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/learningGo/</loc>
+=======
+    <loc>http://wushaoqiang.github.io/2019/03/learninggo/</loc>
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
     <lastmod>2019-03-14T16:10:59+08:00</lastmod>
   </url>
   
   <url>
+<<<<<<< HEAD
     <loc>https://wushaoqiang.github.io/categories/</loc>
     <priority>0</priority>
   </url>
@@ -53,11 +58,15 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Golang/</loc>
+=======
+    <loc>http://wushaoqiang.github.io/blog/</loc>
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
     <lastmod>2019-03-14T16:10:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+<<<<<<< HEAD
     <loc>https://wushaoqiang.github.io/tags/Hugo/</loc>
     <lastmod>2019-03-16T22:33:20+08:00</lastmod>
     <priority>0</priority>
@@ -71,24 +80,40 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Note/</loc>
+=======
+    <loc>http://wushaoqiang.github.io/</loc>
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
     <lastmod>2019-03-14T16:10:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+<<<<<<< HEAD
     <loc>https://wushaoqiang.github.io/posts/</loc>
     <lastmod>2019-03-16T22:33:20+08:00</lastmod>
+=======
+    <loc>http://wushaoqiang.github.io/series/</loc>
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
     <priority>0</priority>
   </url>
   
   <url>
+<<<<<<< HEAD
     <loc>https://wushaoqiang.github.io/tags/</loc>
     <lastmod>2019-03-15T18:02:59+08:00</lastmod>
+=======
+    <loc>http://wushaoqiang.github.io/series-desc/</loc>
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
     <priority>0</priority>
   </url>
   
   <url>
+<<<<<<< HEAD
     <loc>https://wushaoqiang.github.io/archives/</loc>
+=======
+    <loc>http://wushaoqiang.github.io/tags/</loc>
+    <priority>0</priority>
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
   </url>
   
 </urlset>

@@ -10,6 +10,7 @@
 	<atom:link href="https://wushaoqiang.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
+<<<<<<< HEAD
     <item>
       <title>Git</title>
       <link>https://wushaoqiang.github.io/categories/Git/</link>
@@ -37,5 +38,7 @@
       <description></description>
     </item>
     
+=======
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
   </channel>
 </rss>

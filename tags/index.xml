@@ -2,6 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Gavin&#39;s Blog</title>
+<<<<<<< HEAD
     <link>https://wushaoqiang.github.io/tags/</link>
     <description>Recent content in Tags on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
@@ -47,5 +48,16 @@
       <description></description>
     </item>
     
+=======
+    <link>http://wushaoqiang.github.io/tags/</link>
+    <description>Recent content in Tags on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Gavin Wu</copyright>
+    
+	<atom:link href="http://wushaoqiang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+>>>>>>> 964eabc668b12059423928818265329ee4acc4f9
   </channel>
 </rss>
