@@ -34,20 +34,14 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/Git/</loc>
-    <lastmod>2019-03-15T18:02:59+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://wushaoqiang.github.io/categories/Git/</loc>
     <lastmod>2019-03-15T18:02:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/Golang/</loc>
-    <lastmod>2019-03-16T22:33:20+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/Git/</loc>
+    <lastmod>2019-03-15T18:02:59+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -58,13 +52,19 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/Hugo/</loc>
+    <loc>https://wushaoqiang.github.io/tags/Golang/</loc>
     <lastmod>2019-03-16T22:33:20+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Hugo/</loc>
+    <lastmod>2019-03-16T22:33:20+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/Hugo/</loc>
     <lastmod>2019-03-16T22:33:20+08:00</lastmod>
     <priority>0</priority>
   </url>
