@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Learn Hugo | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Learn Hugo - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-16T22:33:20&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-16T22:33:20&#43;08:00">
+        
+    <meta name="Keywords" content="[Hugo]">
+    <meta name="description" content="Learn Hugo">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/learn-hugo/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Learn Hugo</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月16日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Hugo">Hugo</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。</p>
+
+<p>所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人</p>
+
+<p>以下命令都是以我自己建博客的为例</p>
+
+<h3 id="创建一个网站">创建一个网站</h3>
+
+<p><code>hugo new site blog</code> 这个命令会在目录里创建一个新的<code>blog</code>目录</p>
+
+<p>这个<code>blog</code>目录包含以下：</p>
+
+<ul>
+<li>archetypes/</li>
+<li>content/</li>
+<li>data/</li>
+<li>layouts/</li>
+<li>static/</li>
+<li>themes/</li>
+<li>config.toml</li>
+</ul>
+
+<h3 id="archetypes">archetypes/</h3>
+
+<p>这里一开始会有一个<code>default</code>文件，后面再讲有什么用，先看看文件</p>
+
+<pre><code>---
+title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot;
+date: {{ .Date }}
+draft: true
+---
+</code></pre>
+
+<h3 id="content">content/</h3>
+
+<p>这里就是博客的主要内容的根目录，我们创建的博客文章就应该放在这个文件夹里(不是直接)</p>
+
+<p>创建一个博客文章<code>hugo new posts/learn-hugo.md</code>，创建完后会发现文件在<code>content/posts/learn-hugo.md</code></p>
+
+<p>打开文件看一下，可以发现创建的新文件里面是有内容的</p>
+
+<pre><code>---
+title: &quot;Learn Hugo&quot;
+date: 2019-03-16T22:33:20+08:00
+draft: true
+---
+</code></pre>
+
+<p>这就和我们上面说到的<code>archetypes/default.md</code>有关，这里可以自动填充一些信息，方便我们写博客</p>
+
+<h3 id="theme">theme/</h3>
+
+<p>这里是放置博客主题的文件夹，Hugo有很多开源的主题，可以去官网找找看，笔者用的是<a href="https://www.flysnow.org/">飞雪无情</a>这位博主开源出来的<code>Maupassant</code>，笔者刚开始也按照这位博主的配置方法来配置博客，等后面对Hugo的配置了解更加深入时，再尝试配置。<a href="https://github.com/rujews/maupassant-hugo">Maupassant的仓库地址</a>，大家还可以顺手点个星，表示支持</p>
+
+<p>具体如何安装也很简单，可以参照github的使用方法</p>
+
+<h3 id="config-toml">config.toml</h3>
+
+<p>这个文件是配置我们的一些博客信息以及Hugo的配置</p>
+
+<pre><code>## 这个是我们主页的地址
+baseURL = &quot;https://wushaoqiang.github.io&quot;
+
+languageCode = &quot;en-us&quot;
+
+## 博客的标题(不是某篇文章，是整个博客)
+title = &quot;Gavin's Blog&quot;
+
+## 这里就是设定你要的主题，而且主题必须要下载到theme/目录
+theme = &quot;maupassant&quot;
+
+## 保持分类的原始名字（false会做转小写处理）
+preserveTaxonomyNames = true
+
+## 是否禁止URL Path转小写
+disablePathToLower = true
+
+## 这个会配置每一篇文章最后面的Copyright的作者名字
+## © 2019 Gavin's Blog By Gavin
+[author]
+  name = &quot;Gavin&quot;
+
+[params]
+  author = &quot;Gavin&quot;
+
+  ## 这是一个副标题，在主标题的下方
+  subtitle = &quot;Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记&quot;
+
+  keywords = &quot;Golang,Gavin,Blog&quot;
+
+  ## 这个是对阅读量的计数
+  busuanzi = true
+
+[menu]
+
+  ## identifier标志符必须是唯一的，不能重复；weight用于排序，值越小越靠前。
+
+  [[menu.main]]
+    identifier = &quot;archives&quot;
+    name = &quot;归档&quot;
+    url = &quot;/archives/&quot;
+    weight = 2
+
+  [[menu.main]]
+    identifier = &quot;about&quot;
+    name = &quot;关于&quot;
+    url = &quot;/about/&quot;
+    weight = 3
+</code></pre>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/learningGo/">LearningGo</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Hugo">Hugo</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/learn-hugo/" title="Learn Hugo">Learn Hugo</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/learn-git/" title="Git">Git</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/learningGo/" title="LearningGo">LearningGo</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Note/">Note</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

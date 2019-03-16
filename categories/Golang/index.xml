@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/categories/Golang/</link>
+    <description>Recent content in Golang on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Mar 2019 16:10:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LearningGo</title>
+      <link>https://wushaoqiang.github.io/posts/learningGo/</link>
+      <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/learningGo/</guid>
+      <description>在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
+2019.2.16 go test -tags tagname
+构造数组可以先 make([]int,0) 然后 再使用函数：func append(slice []Type, elems ...Type) []Type
+unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII res, ok := map[...] 中的ok变量可以用来判断key是否存在
+[]rune可以直接转换为字符串string([]rune)
+2019.2.17 ==谨记！== ： 切片和Map在函数传递都是指针传递(引用)
+func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append() norm = fmt.Sprintf(&amp;quot;%-[1]*s&amp;quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
+|类型|默认值 | |&amp;ndash;|&amp;ndash;| | int | 0 | |string|“”| | bool | false |</description>
+    </item>
+    
+  </channel>
+</rss>
