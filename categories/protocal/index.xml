@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Protocal on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/categories/protocal/</link>
+    <description>Recent content in Protocal on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Mar 2019 01:58:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/categories/protocal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>网络协议基础</title>
+      <link>https://wushaoqiang.github.io/posts/internet-protocal/</link>
+      <pubDate>Sun, 17 Mar 2019 01:58:00 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/internet-protocal/</guid>
+      <description>HTTP http的报文体常见的格式有四种 - application/json - application/x-www-form-urlencoded (就像url传参数那样) - application/xml - multipart/form-data(用于文件传输或者文本)</description>
+    </item>
+    
+  </channel>
+</rss>

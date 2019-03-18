@@ -7,22 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>标准库 | Gavin&#39;s Blog</title>
-    <meta property="og:title" content="标准库 - Gavin&#39;s Blog">
+    <title>Protocal | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Protocal - Gavin&#39;s Blog">
     <meta property="og:type" content="article">
         
         
     <meta name="Keywords" content="Golang,Gavin,Blog">
-    <meta name="description" content="标准库">
+    <meta name="description" content="Protocal">
         
     <meta name="author" content="Gavin">
-    <meta property="og:url" content="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">
+    <meta property="og:url" content="https://wushaoqiang.github.io/categories/protocal/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
     
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="alternate" type="application/rss+xml" href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/index.xml" title="Gavin's Blog" />
+    <link rel="alternate" type="application/rss+xml" href="https://wushaoqiang.github.io/categories/protocal/index.xml" title="Gavin's Blog" />
     <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 
     
@@ -68,9 +68,9 @@
                 <div class="res-cons">
                     
                     <h3 class="archive-title">
-                        包含标签
-                        <span class="keyword">标准库</span>
-                        的文章
+                        分类
+                        <span class="keyword">protocal</span>
+                        中的文章
                     </h3>
                     
 
@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">Golang标准库--Unicode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/internet-protocal/">网络协议基础</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -88,95 +88,13 @@
                             <div class="post-meta meta-category">
                                 |
                                 
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                    <a href="https://wushaoqiang.github.io/categories/protocal">protocal</a>
                                 
                             </div>
                             
                             <div class="post-content">
-                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
-&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
- 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
-&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
-&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
-如果p是空的，那么会返回RuneError,0
-如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
-&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
-&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
-&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
-&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
-&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
-&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-string/">Golang标准库--String</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
-&mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-string/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">Golang标准库--Bytes</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">Golang标准库--Bufio</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                                HTTP http的报文体常见的格式有四种 - application/json - application/x-www-form-urlencoded (就像url传参数那样) - application/xml - multipart/form-data(用于文件传输或者文本)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/internet-protocal/">阅读全文</a></p>
                             </div>
                         </article>
                     
