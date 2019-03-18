@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/categories/Linux/</link>
+    <description>Recent content in Linux on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Mar 2019 01:52:15 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux命令笔记</title>
+      <link>https://wushaoqiang.github.io/posts/linux-note/</link>
+      <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux-note/</guid>
+      <description>这里只是笔者对Linux常用命令的笔记，方便自己查询
+ifconfig 查看网络连接
+lsof -i:8000 查看端口8000占用情况
+kill -9 PID 把某个PID的进程结束了</description>
+    </item>
+    
+  </channel>
+</rss>

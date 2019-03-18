@@ -78,11 +78,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/">LearningGo</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/">Golang Exercism</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月14日
+                                2019年3月17日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -93,21 +93,283 @@
                             </div>
                             
                             <div class="post-content">
-                                在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
-2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0) 然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII res, ok := map[...] 中的ok变量可以用来判断key是否存在
-[]rune可以直接转换为字符串string([]rune)
-2019.2.17 ==谨记！== ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append() norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型|默认值 | |&ndash;|&ndash;| | int | 0 | |string|“”| | bool | false |……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
+                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
+func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/">Go圣经读书笔记</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
+func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
+输出/tmp/go-build115927302/b001/exe/main 123
+查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
+ func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
+ func (s *Scanner) Text() string  返回scanner所在行的文本
+counts := make(map[string]int) input := bufio.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-inaction/">Go语言实战</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Go语言优点：
+ Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
+ Go语言内置并发机制，对并发有着更好的性能
+ Go语言自带垃圾回收器
+ goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
+  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-inaction/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/">Go语言高级编程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
+这篇文章是开源的，欢迎大家去阅读
+本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
+第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
+ Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
+ 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
+  字符串  字符串的元素不可修改，是一个只读的字节数组
+ 字符串虽然不是切片，但是支持切片操作
+type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
+  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
+这种做法可以减少中间创建的临时切片
+copy append可以完成切片的添加 删除 插入操作……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-leetcode/">Golang--Leetcode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                此文章为做题时发现的不足
+ Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
+func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-leetcode/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">Golang标准库--Unicode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
+&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
+ 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
+&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
+&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
+如果p是空的，那么会返回RuneError,0
+如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
+&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
+&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
+&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
+&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
+&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
+&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-string/">Golang标准库--String</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
+&mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-string/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">Golang标准库--Bytes</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">Golang标准库--Bufio</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/web-strcuture/">Web框架</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是
+ 相对路径
+ 处理函数
+  这里面是Gin自己定义的一个HandlerFunc，和标准库里面的有所不同，这里的gin.*Context包含了标准库里的ResponseWriter和*http.Request还有一些其它
+介绍一些函数 // Query()	是匹配url上的参数，匹配不到就返回空字符串 // DefaultQuery() 也是匹配，如果匹配不到就用默认值 // 127.0.0.1:8000/post?id=111&amp;page=222 // 如果用curl，则需要在&amp;前面加\ id := c.Query(&quot;id&quot;) page := c.DefaultQuery(&quot;page&quot;, &quot;0&quot;) //这个是在表单上获取信息，通过POST方法发送过来的数据 name := c.PostForm(&quot;name&quot;) message := c.PostForm(&quot;message&quot;)  一个完整的路由 router.GET(&quot;/welcome&quot;, func(c *gin.Context) { firstname := c.DefaultQuery(&quot;firstname&quot;, &quot;Guest&quot;) lastname := c.Query(&quot;lastname&quot;) c.String(http.StatusOK, &quot;Hello %s %s&quot;, firstname, lastname) c.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/web-strcuture/">阅读全文</a></p>
                             </div>
                         </article>
                     
 
                     
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://wushaoqiang.github.io/categories/Golang/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Golang/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/categories/Golang/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -129,15 +391,43 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-hugo/" title="Learn Hugo">Learn Hugo</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-git/" title="Git">Git</a>
+        <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记">Mysql学习笔记</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/learningGo/" title="LearningGo">LearningGo</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记">Go圣经读书笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-inaction/" title="Go语言实战">Go语言实战</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程">Go语言高级编程</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode">Golang--Leetcode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode">Golang标准库--Unicode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
     </li>
     
 </ul>
@@ -154,11 +444,23 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%8D%8F%E8%AE%AE/">协议(1)</a>
     </li>
     
 </ul>
@@ -170,6 +472,8 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
@@ -177,6 +481,20 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8D%8F%E8%AE%AE/">协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     
 </div>
     </section>

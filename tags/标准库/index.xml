@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>标准库 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/</link>
+    <description>Recent content in 标准库 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Mar 2019 02:06:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang标准库--Unicode</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-unicode/</link>
+      <pubDate>Sun, 17 Mar 2019 02:06:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-unicode/</guid>
+      <description>unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
+&amp;mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
+ 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
+&amp;mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
+&amp;mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
+如果p是空的，那么会返回RuneError,0
+如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
+&amp;mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
+&amp;mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
+&amp;mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
+&amp;mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
+&amp;mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
+&amp;mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数</description>
+    </item>
+    
+    <item>
+      <title>Golang标准库--String</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-string/</link>
+      <pubDate>Sun, 17 Mar 2019 02:04:07 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-string/</guid>
+      <description>目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp;amp; copyCheck() (b *Builder) String() string &amp;amp; (b *Builder) Len() int &amp;amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp;amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
+&amp;mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.</description>
+    </item>
+    
+    <item>
+      <title>Golang标准库--Bytes</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-bytes/</link>
+      <pubDate>Sun, 17 Mar 2019 02:03:03 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-bytes/</guid>
+      <description>目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.</description>
+    </item>
+    
+    <item>
+      <title>Golang标准库--Bufio</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-bufio/</link>
+      <pubDate>Sun, 17 Mar 2019 01:59:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-bufio/</guid>
+      <description>目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp;amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.</description>
+    </item>
+    
+  </channel>
+</rss>

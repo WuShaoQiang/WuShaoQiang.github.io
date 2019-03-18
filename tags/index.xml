@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Exercism</title>
+      <link>https://wushaoqiang.github.io/tags/Exercism/</link>
+      <pubDate>Sun, 17 Mar 2019 02:15:05 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Exercism/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Gin</title>
       <link>https://wushaoqiang.github.io/tags/Gin/</link>
       <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
@@ -41,7 +50,7 @@
     <item>
       <title>Golang</title>
       <link>https://wushaoqiang.github.io/tags/Golang/</link>
-      <pubDate>Sat, 16 Mar 2019 22:33:20 +0800</pubDate>
+      <pubDate>Sun, 17 Mar 2019 02:15:05 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Golang/</guid>
       <description></description>
@@ -53,6 +62,69 @@
       <pubDate>Sat, 16 Mar 2019 22:33:20 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LeetCode</title>
+      <link>https://wushaoqiang.github.io/tags/LeetCode/</link>
+      <pubDate>Sun, 17 Mar 2019 02:07:37 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/LeetCode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://wushaoqiang.github.io/tags/Linux/</link>
+      <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>https://wushaoqiang.github.io/tags/Mysql/</link>
+      <pubDate>Sun, 17 Mar 2019 02:14:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://wushaoqiang.github.io/tags/Web/</link>
+      <pubDate>Sun, 17 Mar 2019 01:53:57 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>协议</title>
+      <link>https://wushaoqiang.github.io/tags/%E5%8D%8F%E8%AE%AE/</link>
+      <pubDate>Sun, 17 Mar 2019 01:58:00 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/%E5%8D%8F%E8%AE%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>基础</title>
+      <link>https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Sun, 17 Mar 2019 02:13:08 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>标准库</title>
+      <link>https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/</link>
+      <pubDate>Sun, 17 Mar 2019 02:06:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>基础 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/</link>
+    <description>Recent content in 基础 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Mar 2019 02:13:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go圣经读书笔记</title>
+      <link>https://wushaoqiang.github.io/posts/golang-bible/</link>
+      <pubDate>Sun, 17 Mar 2019 02:13:08 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-bible/</guid>
+      <description>第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
+func main() { var s, sep string for i := 0; i &amp;lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &amp;quot; &amp;quot; } fmt.Println(s) }  运行go run main.go 123
+输出/tmp/go-build115927302/b001/exe/main 123
+查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
+ func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
+ func (s *Scanner) Text() string  返回scanner所在行的文本
+counts := make(map[string]int) input := bufio.</description>
+    </item>
+    
+    <item>
+      <title>Go语言实战</title>
+      <link>https://wushaoqiang.github.io/posts/golang-inaction/</link>
+      <pubDate>Sun, 17 Mar 2019 02:11:56 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-inaction/</guid>
+      <description>Go语言优点：
+ Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
+ Go语言内置并发机制，对并发有着更好的性能
+ Go语言自带垃圾回收器
+ goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
+  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &amp;quot;fmt&amp;quot; &amp;quot;runtime&amp;quot; &amp;quot;sync&amp;quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.</description>
+    </item>
+    
+    <item>
+      <title>Go语言高级编程</title>
+      <link>https://wushaoqiang.github.io/posts/golang-highlevel/</link>
+      <pubDate>Sun, 17 Mar 2019 02:09:45 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-highlevel/</guid>
+      <description>感谢 在文章开头感谢两位作者:柴树杉和曹春晖
+这篇文章是开源的，欢迎大家去阅读
+本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
+第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
+ Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
+ 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
+  字符串  字符串的元素不可修改，是一个只读的字节数组
+ 字符串虽然不是切片，但是支持切片操作
+type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
+  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
+这种做法可以减少中间创建的临时切片
+copy append可以完成切片的添加 删除 插入操作</description>
+    </item>
+    
+  </channel>
+</rss>

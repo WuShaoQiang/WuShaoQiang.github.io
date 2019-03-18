@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/">LearningGo</a>
+                                    <a href="https://wushaoqiang.github.io/posts/learningGo/">Go琐碎笔记</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -95,12 +95,15 @@
                             <div class="post-content">
                                 在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
 2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0) 然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII res, ok := map[...] 中的ok变量可以用来判断key是否存在
+构造数组可以先 make([]int,0)
+然后 再使用函数：func append(slice []Type, elems ...Type) []Type
+unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII
+res, ok := map[...] 中的ok变量可以用来判断key是否存在
 []rune可以直接转换为字符串string([]rune)
-2019.2.17 ==谨记！== ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append() norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型|默认值 | |&ndash;|&ndash;| | int | 0 | |string|“”| | bool | false |……
+2019.2.17 谨记！ ： 切片和Map在函数传递都是指针传递(引用)
+func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
+norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
+|类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
                                 <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
                             </div>
                         </article>
@@ -129,15 +132,43 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-hugo/" title="Learn Hugo">Learn Hugo</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-git/" title="Git">Git</a>
+        <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记">Mysql学习笔记</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/learningGo/" title="LearningGo">LearningGo</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记">Go圣经读书笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-inaction/" title="Go语言实战">Go语言实战</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程">Go语言高级编程</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode">Golang--Leetcode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode">Golang标准库--Unicode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
     </li>
     
 </ul>
@@ -154,11 +185,23 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%8D%8F%E8%AE%AE/">协议(1)</a>
     </li>
     
 </ul>
@@ -170,6 +213,8 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
@@ -177,6 +222,20 @@ func normalize(cleartext string) string { var b strings.Builder for _, r := rang
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8D%8F%E8%AE%AE/">协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     
 </div>
     </section>

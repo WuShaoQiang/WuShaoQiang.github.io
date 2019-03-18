@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exercism on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Exercism/</link>
+    <description>Recent content in Exercism on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Mar 2019 02:15:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Exercism/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Exercism</title>
+      <link>https://wushaoqiang.github.io/posts/golang-exercism/</link>
+      <pubDate>Sun, 17 Mar 2019 02:15:05 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-exercism/</guid>
+      <description>Exercism &amp;ndash; Bob 我的方法：(总之非常愚蠢就是了)
+func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They&#39;re here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &amp;quot;&amp;quot;) { return &amp;quot;Fine. Be that way!&amp;quot; } whitespace := true for _, item := range []byte(remark) { if !</description>
+    </item>
+    
+  </channel>
+</rss>

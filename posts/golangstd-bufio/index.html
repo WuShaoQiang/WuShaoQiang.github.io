@@ -1,0 +1,2302 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Golang标准库--Bufio | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Golang标准库--Bufio - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-17T01:59:52&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-17T01:59:52&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Golang标准库--Bufio">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golangstd-bufio/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Golang标准库--Bufio</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月17日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="目录">目录</h3>
+
+<pre><code>bufio
+
+    bufio.go
+        常量
+        Reader
+            结构体
+            常量
+            NewReaderSize(rd io.Reader, size int) *Reader
+            NewReader(rd io.Reader) *Reader
+            (r *Reader) Size() int
+            (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader)
+            (b *Reader) fill()
+            (b *Reader) Peek(n int) ([]byte, error)
+            (b *Reader) Discard(n int) (discarded int, err error)
+            (b *Reader) Read(p []byte) (n int, err error)
+            (b *Reader) ReadByte() (byte, error)
+            (b *Reader) UnreadByte()
+            (b *Reader) ReadRune() (r rune, size int, err error)
+            (b *Reader) UnreadRune() error
+            (b *Reader) Buffered() int
+            (b *Reader) ReadSlice(delim byte) (line []byte, err error)
+            (b *Reader) ReadLine() (line []byte, isPrefix bool, err error)
+            (b *Reader) ReadBytes(delim byte) ([]byte, error)
+            (b *Reader) ReadString(delim byte) (string, error)
+            (b *Reader) WriteTo(w io.Writer) (n int64, err error)
+            (b *Reader) writeBuf(w io.Writer) (int64, error)
+        Writer
+            NewWriterSize(w io.Writer, size int) *Writer
+            NewWriter(w io.Writer) *Writer
+            (b *Writer) Size() int
+            (b *Writer) Reset(w io.Writer)
+            (b *Writer) Flush() error
+            (b *Writer) Available() int
+            (b *Writer) Buffered() int
+            (b *Writer) Write(p []byte) (nn int, err error)
+            (b *Writer) WriteByte(c byte) error
+            (b *Writer) WriteRune(r rune) (size int, err error)
+            (b *Writer) WriteString(s string) (int, error)
+            (b *Writer) ReadFrom(r io.Reader) (n int64, err error)
+        ReadWriter
+        总结一下
+    scan.go
+        Scanner
+            结构体
+            分隔函数
+            Errors
+            Const
+            NewScanner(r io.Reader) *Scanner
+            (s *Scanner) Err() error
+            (s *Scanner) Bytes() []byte
+            (s *Scanner) Text() string
+            (s *Scanner) Scan() bool
+            (s *Scanner) advance(n int) bool
+            (s *Scanner) setErr(err error)
+            (s *Scanner) Buffer(buf []byte, max int)
+            (s *Scanner) Split(split SplitFunc)
+        Split functions
+            ScanBytes(data []byte, atEOF bool) (advance int, token []byte, err error)
+            ScanRunes(data []byte, atEOF bool) (advance int, token []byte, err error)
+            dropCR(data []byte) []byte
+            ScanLines(data []byte, atEOF bool) (advance int, token []byte, err error)
+            isSpace(r rune) bool
+            ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error)
+        总结一下
+</code></pre>
+
+<h1 id="bufio">bufio</h1>
+
+<h2 id="bufio-go">bufio.go</h2>
+
+<h3 id="常量">常量</h3>
+
+<pre><code class="language-go">const (
+	defaultBufSize = 4096
+)
+</code></pre>
+
+<p>默认缓冲区大小为4096</p>
+
+<pre><code class="language-go">var (
+	ErrInvalidUnreadByte = errors.New(&quot;bufio: invalid use of UnreadByte&quot;)
+	ErrInvalidUnreadRune = errors.New(&quot;bufio: invalid use of UnreadRune&quot;)
+	ErrBufferFull        = errors.New(&quot;bufio: buffer full&quot;)
+	ErrNegativeCount     = errors.New(&quot;bufio: negative count&quot;)
+)
+</code></pre>
+
+<p>这是bufio常用的错误类型，单独声明出来了</p>
+
+<h3 id="reader">Reader</h3>
+
+<h4 id="结构体">结构体</h4>
+
+<pre><code class="language-go">type Reader struct {
+	buf          []byte
+	rd           io.Reader // reader provided by the client
+	r, w         int       // buf read and write positions
+	err          error
+	lastByte     int
+	lastRuneSize int
+}
+</code></pre>
+
+<p>我们观察这个<code>bufio.Reader</code>结构，我们生成一个Reader主要是前两项，分别是缓冲区的<code>[]byte</code>，和一个<code>io.Reader</code>，可以看出它是在<code>io.Reader</code>上加多了缓冲和其它的功能打造成了<code>bufio.Reader</code>。</p>
+
+<ul>
+<li><code>r,w</code>是buf的读写索引，b,r~b.w 是还未读取的区间</li>
+<li><code>err</code>为结构体存储错误</li>
+<li><code>lastByte</code>是记录每一次读取过后的最后一个字节</li>
+<li><code>lastRuneSize</code></li>
+</ul>
+
+<h4 id="常量-1">常量</h4>
+
+<pre><code class="language-go">const minReadBufferSize = 16
+const maxConsecutiveEmptyReads = 100
+</code></pre>
+
+<ul>
+<li>最小缓冲大小</li>
+<li>最大连续空读取</li>
+</ul>
+
+<h4 id="newreadersize-rd-io-reader-size-int-reader">NewReaderSize(rd io.Reader, size int) *Reader</h4>
+
+<pre><code class="language-go">// NewReaderSize returns a new Reader whose buffer has at least the specified
+// size. If the argument io.Reader is already a Reader with large enough
+// size, it returns the underlying Reader.
+func NewReaderSize(rd io.Reader, size int) *Reader {
+	// Is it already a Reader?
+	b, ok := rd.(*Reader)
+	if ok &amp;&amp; len(b.buf) &gt;= size {
+		return b
+	}
+	if size &lt; minReadBufferSize {
+		size = minReadBufferSize
+	}
+	r := new(Reader)
+	r.reset(make([]byte, size), rd)
+	return r
+}
+</code></pre>
+
+<p>这个函数的逻辑是，先判断传入的<code>rd</code>是否以及是一个<code>bufio.Reader</code>并且它的缓冲区长度是大于参数给的<code>size</code>，如果是就返回这个原本传入的<code>rb(赋值给了b，所以返回b也是一样的)</code>，并且这个函数规定了<code>size</code>不能低于<code>minReadBufferSize</code>这个常量。最后会用传入的两个参数构造一个<code>bufio,Reader</code>，返回这个结构体的指针</p>
+
+<p><strong>注意</strong>  这个函数不能够减少buffer容量，只能增多。</p>
+
+<h4 id="newreader-rd-io-reader-reader">NewReader(rd io.Reader) *Reader</h4>
+
+<pre><code class="language-go">// NewReader returns a new Reader whose buffer has the default size.
+func NewReader(rd io.Reader) *Reader {
+	return NewReaderSize(rd, defaultBufSize)
+}
+</code></pre>
+
+<p>如同上面，只是用了默认缓冲区大小</p>
+
+<h4 id="r-reader-size-int">(r *Reader) Size() int</h4>
+
+<pre><code class="language-go">// Size returns the size of the underlying buffer in bytes.
+func (r *Reader) Size() int { return len(r.buf) }
+</code></pre>
+
+<p>返回这个<code>bufio.Reader</code>的缓冲区大小</p>
+
+<h4 id="b-reader-reset-r-io-reader-b-reader-reset-buf-byte-r-io-reader">(b *Reader) Reset(r io.Reader) &amp;  (b *Reader) reset(buf []byte, r io.Reader)</h4>
+
+<pre><code class="language-go">// Reset discards any buffered data, resets all state, and switches
+// the buffered reader to read from r.
+func (b *Reader) Reset(r io.Reader) {
+	b.reset(b.buf, r)
+}
+
+func (b *Reader) reset(buf []byte, r io.Reader) {
+	*b = Reader{
+		buf:          buf,
+		rd:           r,
+		lastByte:     -1,
+		lastRuneSize: -1,
+	}
+}
+</code></pre>
+
+<p>首先第一个函数是要将原本<code>bufio.Reader</code>里面的<code>io.Reader</code>替换成参数上的<code>io.Reader</code>，缓冲区大小不变，但是里面的数据会丢失</p>
+
+<p>第二个函数就是重造一个<code>bufio.Reader</code>,这里没有返回值，改变的是对象本身，所以在调用时，需要先创建一个新的<code>bufio.Reader</code>来调用。</p>
+
+<h4 id="b-reader-fill">(b *Reader) fill()</h4>
+
+<pre><code class="language-go">// fill reads a new chunk into the buffer.
+func (b *Reader) fill() {
+	// Slide existing data to beginning.
+	if b.r &gt; 0 {
+		copy(b.buf, b.buf[b.r:b.w])
+		b.w -= b.r
+		b.r = 0
+	}
+
+	if b.w &gt;= len(b.buf) {
+		panic(&quot;bufio: tried to fill full buffer&quot;)
+	}
+
+	// Read new data: try a limited number of times.
+	for i := maxConsecutiveEmptyReads; i &gt; 0; i-- {
+		n, err := b.rd.Read(b.buf[b.w:])
+		if n &lt; 0 {
+			panic(errNegativeRead)
+		}
+		b.w += n
+		if err != nil {
+			b.err = err
+			return
+		}
+		if n &gt; 0 {
+			return
+		}
+	}
+	b.err = io.ErrNoProgress
+}
+</code></pre>
+
+<p>首先将读过的数据去掉，把还未读过的放到buffer的最前面，然后开始读取数据并且增加在buffer后面，如果100次里面有1次读取成功了(<code>n&gt;0</code>)，则会返回(数据以及添加进了buffer)，也就是给100次机会，读到一次就可以了。如果100次都没有读到任何数据或者错误，就会返回添加一个错误给结构体。</p>
+
+<p>这里函数名会产生一个小误会，会认为这个<code>fill</code>函数是将buffer填充满，实质上，如果要将fill填充满可以这样</p>
+
+<pre><code class="language-go">for b.w-b.r &lt; len(b.buf) &amp;&amp; b.err == nil{
+	b.fill()
+}
+</code></pre>
+
+<p>一定要记得<code>b.err == nil</code>，不然会进入死循环(当没有数据可以被读取时，会一直满足不了条件，从而一直执行<code>fill</code>)，所以这样<code>b.w-b.r &lt; len(b.buf)</code>会一直需要读取，知道满了<code>b.w-b.r = len(b.buf)</code></p>
+
+<pre><code class="language-go">func (b *Reader) readErr() error {
+	err := b.err
+	b.err = nil
+	return err
+}
+</code></pre>
+
+<p>读取结构体的err，并且置为<code>nil</code></p>
+
+<h4 id="b-reader-peek-n-int-byte-error">(b *Reader) Peek(n int) ([]byte, error)</h4>
+
+<pre><code class="language-go">// Peek returns the next n bytes without advancing the reader. The bytes stop
+// being valid at the next read call. If Peek returns fewer than n bytes, it
+// also returns an error explaining why the read is short. The error is
+// ErrBufferFull if n is larger than b's buffer size.
+func (b *Reader) Peek(n int) ([]byte, error) {
+	if n &lt; 0 {
+		return nil, ErrNegativeCount
+	}
+
+	for b.w-b.r &lt; n &amp;&amp; b.w-b.r &lt; len(b.buf) &amp;&amp; b.err == nil {
+		b.fill() // b.w-b.r &lt; len(b.buf) =&gt; buffer is not full
+	}
+
+	if n &gt; len(b.buf) {
+		return b.buf[b.r:b.w], ErrBufferFull
+	}
+
+	// 0 &lt;= n &lt;= len(b.buf)
+	var err error
+	if avail := b.w - b.r; avail &lt; n {
+		// not enough data in buffer
+		n = avail
+		err = b.readErr()
+		if err == nil {
+			err = ErrBufferFull
+		}
+	}
+	return b.buf[b.r : b.r+n], err
+}
+</code></pre>
+
+<p>我觉得这里的英文解释有点错误</p>
+
+<blockquote>
+<p>The bytes stop being valid at the next read call</p>
+</blockquote>
+
+<p>这句话我翻译过来是这些被读取的bytes下次被读取的时候停止有效(也就是失效了)</p>
+
+<p>但是从代码来看，它并没有改变<code>b.r</code>这个值，我们知道，这是buffer的索引，我们的读取都是在<code>b.r</code>开始的，所以笔者做了个实验证实一下我的想法。</p>
+
+<pre><code class="language-go">func main() {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(&quot;Open file occurs error: &quot;, err)
+	}
+	r := bufio.NewReader(file)
+	fmt.Println(r.Peek(100))
+	fmt.Println(r.ReadByte())
+}
+</code></pre>
+
+<p>其中读取的文件是这样的：</p>
+
+<pre><code class="language-txt">abc
+def
+ghi
+jkl
+</code></pre>
+
+<p>程序的执行结果是</p>
+
+<pre><code>[97 98 99 10 100 101 102 10 103 104 105 10 106 107 108] EOF
+97 &lt;nil&gt;
+</code></pre>
+
+<p>可以看到Peek函数读取过的字段，还是能被再次读取的。</p>
+
+<h4 id="b-reader-discard-n-int-discarded-int-err-error">(b *Reader) Discard(n int) (discarded int, err error)</h4>
+
+<pre><code class="language-go">// Discard skips the next n bytes, returning the number of bytes discarded.
+//
+// If Discard skips fewer than n bytes, it also returns an error.
+// If 0 &lt;= n &lt;= b.Buffered(), Discard is guaranteed to succeed without
+// reading from the underlying io.Reader.
+func (b *Reader) Discard(n int) (discarded int, err error) {
+	if n &lt; 0 {
+		return 0, ErrNegativeCount
+	}
+	if n == 0 {
+		return
+	}
+	remain := n
+	for {
+		skip := b.Buffered()
+		if skip == 0 {
+			b.fill()
+			skip = b.Buffered()
+		}
+		if skip &gt; remain {
+			skip = remain
+		}
+		b.r += skip
+		remain -= skip
+		if remain == 0 {
+			return n, nil
+		}
+		if b.err != nil {
+			return n - remain, b.readErr()
+		}
+	}
+}
+</code></pre>
+
+<p>根据函数的解释，函数的作用是，跳过你想要的字节数，只需要传入你想跳过的数目就可以了。
+跳出函数的条件：
+- 传入的n小于0会发生错误
+- n=0也是没有太多意义的
+- 成功跳过了传入的字节数
+- 出错了(根据函数，出错一般是需要跳过的字节数比总字节数还要大，会在fill函数出错)</p>
+
+<h4 id="b-reader-read-p-byte-n-int-err-error">(b *Reader) Read(p []byte) (n int, err error)</h4>
+
+<pre><code class="language-go">// Read reads data into p.
+// It returns the number of bytes read into p.
+// The bytes are taken from at most one Read on the underlying Reader,
+// hence n may be less than len(p).
+// At EOF, the count will be zero and err will be io.EOF.
+func (b *Reader) Read(p []byte) (n int, err error) {
+	n = len(p)
+	if n == 0 {
+		return 0, b.readErr()
+	}
+	if b.r == b.w {
+		if b.err != nil {
+			return 0, b.readErr()
+		}
+		if len(p) &gt;= len(b.buf) {
+			// Large read, empty buffer.
+			// Read directly into p to avoid copy.
+			n, b.err = b.rd.Read(p)
+			if n &lt; 0 {
+				panic(errNegativeRead)
+			}
+			if n &gt; 0 {
+				b.lastByte = int(p[n-1])
+				b.lastRuneSize = -1
+			}
+			return n, b.readErr()
+		}
+		// One read.
+		// Do not use b.fill, which will loop.
+		b.r = 0
+		b.w = 0
+		n, b.err = b.rd.Read(b.buf)
+		if n &lt; 0 {
+			panic(errNegativeRead)
+		}
+		if n == 0 {
+			return 0, b.readErr()
+		}
+		b.w += n
+	}
+
+	// copy as much as we can
+	n = copy(p, b.buf[b.r:b.w])
+	b.r += n
+	b.lastByte = int(b.buf[b.r-1])
+	b.lastRuneSize = -1
+	return n, nil
+}
+</code></pre>
+
+<p>根据函数的解释，可以知道这是一个传入一个切片(这个切片长度不能为0)，然后会返回读取的字节数和错误，我们可以利用这个返回的数字精准的定位到我们传入的切片哪些数据是有用的</p>
+
+<p>返回情况：
+- 切片长度为0
+- 发生错误
+- 正确读取数据</p>
+
+<p>其中正确读取数据也分两种情况
+- 传入的切片比buffer大，这个时候没有必要先读入buffer再Copy进切片，直接读入切片，然后返回
+- 传入的切片比buffer小，所以要多次Copy buffer中的数据进切片(最后一次不一定会把切片读满)，当buffer数据被读取完了，读取的索引会被置零，重新读取一次新的数据进入buffer，并更新<code>b.w</code>，这样又重新变成了一个未被读取过的buffer。</p>
+
+<p>所以传入的切片如果比缓冲区还大，其实就没有了缓冲的效果了。缓冲的作用就是不用每次都读取文件(内存和磁盘的传输)，可以直接数据拷贝(内存之间传输)。</p>
+
+<h4 id="b-reader-readbyte-byte-error">(b *Reader) ReadByte() (byte, error)</h4>
+
+<pre><code class="language-go">// ReadByte reads and returns a single byte.
+// If no byte is available, returns an error.
+func (b *Reader) ReadByte() (byte, error) {
+	b.lastRuneSize = -1
+	for b.r == b.w {
+		if b.err != nil {
+			return 0, b.readErr()
+		}
+		b.fill() // buffer is empty
+	}
+	c := b.buf[b.r]
+	b.r++
+	b.lastByte = int(c)
+	return c, nil
+}
+</code></pre>
+
+<p>读取一个字节，返回的是字节和错误</p>
+
+<h4 id="b-reader-unreadbyte">(b *Reader) UnreadByte()</h4>
+
+<pre><code class="language-go">// UnreadByte unreads the last byte. Only the most recently read byte can be unread.
+func (b *Reader) UnreadByte() error {
+	if b.lastByte &lt; 0 || b.r == 0 &amp;&amp; b.w &gt; 0 {
+		return ErrInvalidUnreadByte
+	}
+	// b.r &gt; 0 || b.w == 0
+	if b.r &gt; 0 {
+		b.r--
+	} else {
+		// b.r == 0 &amp;&amp; b.w == 0
+		b.w = 1
+	}
+	b.buf[b.r] = byte(b.lastByte)
+	b.lastByte = -1
+	b.lastRuneSize = -1
+	return nil
+}
+</code></pre>
+
+<p>这里会把我们记录在<code>lastByte</code>还原会buffer里面，但是这个操作只能做一次，因为还原后会把<code>lastByte</code>置<code>-1</code>，也就是说这个函数只能连续用一次。</p>
+
+<p>需要满足条件：
+- 确确实实有lastByte，只要是读过一次就会有的
+- buffer是要未更新过的，也就是说这个lastByte是要在这个buffer里读出来的(因为buffer被外面读取完了后会更新，这个时候索引也会全部更新，这个时候就不能Unread了)</p>
+
+<h4 id="b-reader-readrune-r-rune-size-int-err-error">(b *Reader) ReadRune() (r rune, size int, err error)</h4>
+
+<pre><code class="language-go">func (b *Reader) ReadRune() (r rune, size int, err error) {
+	for b.r+utf8.UTFMax &gt; b.w &amp;&amp; !utf8.FullRune(b.buf[b.r:b.w]) &amp;&amp; b.err == nil &amp;&amp; b.w-b.r &lt; len(b.buf) {
+		b.fill() // b.w-b.r &lt; len(buf) =&gt; buffer is not full
+	}
+	b.lastRuneSize = -1
+	if b.r == b.w {
+		return 0, 0, b.readErr()
+	}
+	r, size = rune(b.buf[b.r]), 1
+	if r &gt;= utf8.RuneSelf {
+		r, size = utf8.DecodeRune(b.buf[b.r:b.w])
+	}
+	b.r += size
+	b.lastByte = int(b.buf[b.r-1])
+	b.lastRuneSize = size
+	return r, size, nil
+}
+</code></pre>
+
+<p>顾名思义，这个是用来读<code>rune</code>，<code>rune</code>很好的支持了Unicode编码的字符(包括中文)，我们来看个例子把</p>
+
+<p>对比读<code>rune</code>和读<code>byte</code>的区别</p>
+
+<pre><code class="language-go">func main() {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(&quot;Open file occurs error: &quot;, err)
+	}
+	r := bufio.NewReader(file)
+	// fmt.Println(r.Peek(100))
+	fmt.Println(r.ReadRune())
+	fmt.Println(r.ReadByte())
+}
+</code></pre>
+
+<p>文本是这样的</p>
+
+<pre><code class="language-txt">你好
+abc
+def
+ghi
+jkl
+</code></pre>
+
+<p>结果是：</p>
+
+<pre><code>20320 3 &lt;nil&gt;
+229 &lt;nil&gt;
+</code></pre>
+
+<p>可以看出这个函数是可以读出中文的Unicode码的，而且字符串和<code>rune</code>之间是可以之间类型转换的，因此也可以相应显示出中文。</p>
+
+<p>而且这个函数用到了<code>lastRuneSize</code>,因为函数读取<code>Rune</code>可能是1个字节的，也可能是3个字节的，所以要得到这个Size才能够还原</p>
+
+<h4 id="b-reader-unreadrune-error">(b *Reader) UnreadRune() error</h4>
+
+<pre><code class="language-go">/ UnreadRune unreads the last rune. If the most recent read operation on
+// the buffer was not a ReadRune, UnreadRune returns an error.  (In this
+// regard it is stricter than UnreadByte, which will unread the last byte
+// from any read operation.)
+func (b *Reader) UnreadRune() error {
+	if b.lastRuneSize &lt; 0 || b.r &lt; b.lastRuneSize {
+		return ErrInvalidUnreadRune
+	}
+	b.r -= b.lastRuneSize
+	b.lastByte = -1
+	b.lastRuneSize = -1
+	return nil
+}
+</code></pre>
+
+<p>恢复一个<code>rune</code></p>
+
+<h4 id="b-reader-buffered-int">(b *Reader) Buffered() int</h4>
+
+<pre><code class="language-go">// Buffered returns the number of bytes that can be read from the current buffer.
+func (b *Reader) Buffered() int { return b.w - b.r }
+</code></pre>
+
+<p>返回buffer能被读的长度</p>
+
+<h4 id="b-reader-readslice-delim-byte-line-byte-err-error">(b *Reader) ReadSlice(delim byte) (line []byte, err error)</h4>
+
+<pre><code class="language-go">// ReadSlice reads until the first occurrence of delim in the input,
+// returning a slice pointing at the bytes in the buffer.
+// The bytes stop being valid at the next read.
+// If ReadSlice encounters an error before finding a delimiter,
+// it returns all the data in the buffer and the error itself (often io.EOF).
+// ReadSlice fails with error ErrBufferFull if the buffer fills without a delim.
+// Because the data returned from ReadSlice will be overwritten
+// by the next I/O operation, most clients should use
+// ReadBytes or ReadString instead.
+// ReadSlice returns err != nil if and only if line does not end in delim.
+func (b *Reader) ReadSlice(delim byte) (line []byte, err error) {
+	for {
+		// Search buffer.
+		if i := bytes.IndexByte(b.buf[b.r:b.w], delim); i &gt;= 0 {
+			line = b.buf[b.r : b.r+i+1]
+			b.r += i + 1
+			break
+		}
+
+		// Pending error?
+		if b.err != nil {
+			line = b.buf[b.r:b.w]
+			b.r = b.w
+			err = b.readErr()
+			break
+		}
+
+		// Buffer full?
+		if b.Buffered() &gt;= len(b.buf) {
+			b.r = b.w
+			line = b.buf
+			err = ErrBufferFull
+			break
+		}
+
+		b.fill() // buffer is not full
+	}
+
+	// Handle last byte, if any.
+	if i := len(line) - 1; i &gt;= 0 {
+		b.lastByte = int(line[i])
+		b.lastRuneSize = -1
+	}
+
+	return
+}
+</code></pre>
+
+<p>我先来翻译一下它的话
+这个函数一直读，直到这个传入的参数第一次出现，返回一个指向缓冲区的指针，并且这些被读过的byte下次就失效了，如果函数还没找到我们输入的参数就返回了错误，那么它会返回buffer的全部数据和错误(一般是EOF)。
+因为这里返回的是缓冲区的指针，就说明我们能够修改里面的数据，所以这里不推荐使用这个函数，而是使用<code>ReadBytes()</code>和<code>ReaderString()</code>作为替代。</p>
+
+<p>我们来研究一下代码</p>
+
+<pre><code class="language-go">if i := bytes.IndexByte(b.buf[b.r:b.w], delim); i &gt;= 0 {
+			line = b.buf[b.r : b.r+i+1]
+			b.r += i + 1
+			break
+		}
+</code></pre>
+
+<p>这里我们可以看到，它直接用<code>bytes.IndexByte()</code>函数来定位我们想找的byte，如果这个成功的话，我们可以看到它是直接把内容赋值给了line(要返回的值)</p>
+
+<pre><code class="language-go">// Pending error?
+		if b.err != nil {
+			line = b.buf[b.r:b.w]
+			b.r = b.w
+			err = b.readErr()
+			break
+		}
+</code></pre>
+
+<p>即使出错了也要返回数据</p>
+
+<pre><code class="language-go">// Buffer full?
+		if b.Buffered() &gt;= len(b.buf) {
+			b.r = b.w
+			line = b.buf
+			err = ErrBufferFull
+			break
+		}
+</code></pre>
+
+<p>如果buffer都满了还没找到，那就把buffer返回，并指定一个错误</p>
+
+<pre><code class="language-go">b.fill() // buffer is not full
+</code></pre>
+
+<p>在这个For循环里面，没有找到，没有错误，buffer没满，那就再添加点数据进buffer找找把</p>
+
+<p>出了For循环后，无论找到没 都是有数据的了，所以</p>
+
+<pre><code class="language-go">	// Handle last byte, if any.
+	if i := len(line) - 1; i &gt;= 0 {
+		b.lastByte = int(line[i])
+		b.lastRuneSize = -1
+	}
+
+	return
+</code></pre>
+
+<p>还是要标记好结构体的标志位，然后返回。这里返回省略了参数是因为在函数声明里面以及定义了名字了，所以函数就会返回这个名字的变量。</p>
+
+<h4 id="b-reader-readline-line-byte-isprefix-bool-err-error">(b *Reader) ReadLine() (line []byte, isPrefix bool, err error)</h4>
+
+<pre><code class="language-go">// ReadLine is a low-level line-reading primitive. Most callers should use
+// ReadBytes('\n') or ReadString('\n') instead or use a Scanner.
+//
+// ReadLine tries to return a single line, not including the end-of-line bytes.
+// If the line was too long for the buffer then isPrefix is set and the
+// beginning of the line is returned. The rest of the line will be returned
+// from future calls. isPrefix will be false when returning the last fragment
+// of the line. The returned buffer is only valid until the next call to
+// ReadLine. ReadLine either returns a non-nil line or it returns an error,
+// never both.
+//
+// The text returned from ReadLine does not include the line end (&quot;\r\n&quot; or &quot;\n&quot;).
+// No indication or error is given if the input ends without a final line end.
+// Calling UnreadByte after ReadLine will always unread the last byte read
+// (possibly a character belonging to the line end) even if that byte is not
+// part of the line returned by ReadLine.
+func (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) {
+	line, err = b.ReadSlice('\n')
+	if err == ErrBufferFull {
+		// Handle the case where &quot;\r\n&quot; straddles the buffer.
+		if len(line) &gt; 0 &amp;&amp; line[len(line)-1] == '\r' {
+			// Put the '\r' back on buf and drop it from line.
+			// Let the next call to ReadLine check for &quot;\r\n&quot;.
+			if b.r == 0 {
+				// should be unreachable
+				panic(&quot;bufio: tried to rewind past start of buffer&quot;)
+			}
+			b.r--
+			line = line[:len(line)-1]
+		}
+		return line, true, nil
+	}
+
+	if len(line) == 0 {
+		if err != nil {
+			line = nil
+		}
+		return
+	}
+	err = nil
+
+	if line[len(line)-1] == '\n' {
+		drop := 1
+		if len(line) &gt; 1 &amp;&amp; line[len(line)-2] == '\r' {
+			drop = 2
+		}
+		line = line[:len(line)-drop]
+	}
+	return
+}
+</code></pre>
+
+<p>同样的，先翻译一下它说什么：
+这个函数是一个低级的行读取，建议用 <code>ReadBytes('\n')</code> or <code>ReadString('\n')</code> or <code>Scanner</code>，因为每一行用回车符判断嘛～～。</p>
+
+<p>这个函数会返回单独的一行，不包括结尾的byte(回车符)，如果这一行太长了，返回的参数里面<code>IsPrefix</code>会变成<code>true</code>，并且会返回读取到的结果，并且要直到读取到下一行在会变为<code>false</code></p>
+
+<p>这个函数会返回一个非空的行或者一个错误，但永远不会两个都返回</p>
+
+<p>让我们来分析代码</p>
+
+<pre><code class="language-go">line, err = b.ReadSlice('\n')
+	if err == ErrBufferFull {
+		// Handle the case where &quot;\r\n&quot; straddles the buffer.
+		if len(line) &gt; 0 &amp;&amp; line[len(line)-1] == '\r' {
+			// Put the '\r' back on buf and drop it from line.
+			// Let the next call to ReadLine check for &quot;\r\n&quot;.
+			if b.r == 0 {
+				// should be unreachable
+				panic(&quot;bufio: tried to rewind past start of buffer&quot;)
+			}
+			b.r--
+			line = line[:len(line)-1]
+		}
+		return line, true, nil
+	}
+</code></pre>
+
+<p>它是通过<code>ReadSlice</code>得到的line，如果发生buffer满了的错误，那么就是说这一行读不完了，只能返回<code>return line, true, nil</code></p>
+
+<pre><code class="language-go">if len(line) == 0 {
+		if err != nil {
+			line = nil
+		}
+		return
+	}
+	err = nil
+</code></pre>
+
+<p>如果是没有内容，那么返回<code>nil,false,err</code></p>
+
+<pre><code class="language-go">if line[len(line)-1] == '\n' {
+		drop := 1
+		if len(line) &gt; 1 &amp;&amp; line[len(line)-2] == '\r' {
+			drop = 2
+		}
+		line = line[:len(line)-drop]
+	}
+	return
+</code></pre>
+
+<p>这里是对<code>\r\n</code>或者<code>\n</code>处理，我们返回的数据里面结尾不会包含这些</p>
+
+<p>这里补充一下这两个的不同
+&gt;计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
+
+<p>所以Go为了兼容这些系统，执行了判断。</p>
+
+<h4 id="b-reader-readbytes-delim-byte-byte-error">(b *Reader) ReadBytes(delim byte) ([]byte, error)</h4>
+
+<pre><code class="language-go">// ReadBytes reads until the first occurrence of delim in the input,
+// returning a slice containing the data up to and including the delimiter.
+// If ReadBytes encounters an error before finding a delimiter,
+// it returns the data read before the error and the error itself (often io.EOF).
+// ReadBytes returns err != nil if and only if the returned data does not end in
+// delim.
+// For simple uses, a Scanner may be more convenient.
+func (b *Reader) ReadBytes(delim byte) ([]byte, error) {
+	// Use ReadSlice to look for array,
+	// accumulating full buffers.
+	var frag []byte
+	var full [][]byte
+	var err error
+	for {
+		var e error
+		frag, e = b.ReadSlice(delim)
+		if e == nil { // got final fragment
+			break
+		}
+		if e != ErrBufferFull { // unexpected error
+			err = e
+			break
+		}
+
+		// Make a copy of the buffer.
+		buf := make([]byte, len(frag))
+		copy(buf, frag)
+		full = append(full, buf)
+	}
+
+	// Allocate new buffer to hold the full pieces and the fragment.
+	n := 0
+	for i := range full {
+		n += len(full[i])
+	}
+	n += len(frag)
+
+	// Copy full pieces and fragment in.
+	buf := make([]byte, n)
+	n = 0
+	for i := range full {
+		n += copy(buf[n:], full[i])
+	}
+	copy(buf[n:], frag)
+	return buf, err
+}
+</code></pre>
+
+<p>这个函数也是读到某个我们传入的byte才会停止并且返回，同样的，如果还没找到就发生了错误，那么它会将发生错误之前读到的数据和错误一起返回，这个函数只会在没找到的时候才会返回错误</p>
+
+<p>为了简单使用的话，Scanner可能会更方便</p>
+
+<p>我们分析代码：</p>
+
+<pre><code class="language-go">var frag []byte
+	var full [][]byte
+	var err error
+	for {
+		var e error
+		frag, e = b.ReadSlice(delim)
+		if e == nil { // got final fragment
+			break
+		}
+		if e != ErrBufferFull { // unexpected error
+			err = e
+			break
+		}
+
+		// Make a copy of the buffer.
+		buf := make([]byte, len(frag))
+		copy(buf, frag)
+		full = append(full, buf)
+	}
+</code></pre>
+
+<p>这个For循环是为了一直寻找，如果错误是buffer满了，就继续读取数据，如果有别的错误，那就退出循环(可能是数据以及被读完了等等)。</p>
+
+<p>退出循环就会把所有读过的数据整理成一个切片，并且返回。</p>
+
+<h4 id="b-reader-readstring-delim-byte-string-error">(b *Reader) ReadString(delim byte) (string, error)</h4>
+
+<pre><code class="language-go">// ReadString reads until the first occurrence of delim in the input,
+// returning a string containing the data up to and including the delimiter.
+// If ReadString encounters an error before finding a delimiter,
+// it returns the data read before the error and the error itself (often io.EOF).
+// ReadString returns err != nil if and only if the returned data does not end in
+// delim.
+// For simple uses, a Scanner may be more convenient.
+func (b *Reader) ReadString(delim byte) (string, error) {
+	bytes, err := b.ReadBytes(delim)
+	return string(bytes), err
+}
+</code></pre>
+
+<p>从代码上看可以知道，其实就是把切片强制转换为了字符串</p>
+
+<h4 id="b-reader-writeto-w-io-writer-n-int64-err-error">(b *Reader) WriteTo(w io.Writer) (n int64, err error)</h4>
+
+<pre><code class="language-go">// WriteTo implements io.WriterTo.
+// This may make multiple calls to the Read method of the underlying Reader.
+// If the underlying reader supports the WriteTo method,
+// this calls the underlying WriteTo without buffering.
+func (b *Reader) WriteTo(w io.Writer) (n int64, err error) {
+	n, err = b.writeBuf(w)
+	if err != nil {
+		return
+	}
+
+	if r, ok := b.rd.(io.WriterTo); ok {
+		m, err := r.WriteTo(w)
+		n += m
+		return n, err
+	}
+
+	if w, ok := w.(io.ReaderFrom); ok {
+		m, err := w.ReadFrom(b.rd)
+		n += m
+		return n, err
+	}
+
+	if b.w-b.r &lt; len(b.buf) {
+		b.fill() // buffer not full
+	}
+
+	for b.r &lt; b.w {
+		// b.r &lt; b.w =&gt; buffer is not empty
+		m, err := b.writeBuf(w)
+		n += m
+		if err != nil {
+			return n, err
+		}
+		b.fill() // buffer is empty
+	}
+
+	if b.err == io.EOF {
+		b.err = nil
+	}
+
+	return n, b.readErr()
+}
+</code></pre>
+
+<p>这个函数是把Reader的东西读出来直接放到传入的Writer上，举个例子</p>
+
+<pre><code class="language-go">func main() {
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(&quot;Open file occurs error: &quot;, err)
+	}
+	r := bufio.NewReader(file)
+	w := bufio.NewWriter(os.Stdout)
+	r.WriteTo(w)
+	w.Flush()
+}
+</code></pre>
+
+<p>这里经过了Writer的Flush后，会在控制台上输出<code>aaa</code>，也正是文本的内容
+ **记得要Flush **</p>
+
+<h4 id="b-reader-writebuf-w-io-writer-int64-error">(b *Reader) writeBuf(w io.Writer) (int64, error)</h4>
+
+<pre><code class="language-go">
+// writeBuf writes the Reader's buffer to the writer.
+func (b *Reader) writeBuf(w io.Writer) (int64, error) {
+	n, err := w.Write(b.buf[b.r:b.w])
+	if n &lt; 0 {
+		panic(errNegativeWrite)
+	}
+	b.r += n
+	return int64(n), err
+}
+</code></pre>
+
+<p>这个函数是将在Reader缓冲区的数据写入到我们传入的Writer里</p>
+
+<h3 id="writer">Writer</h3>
+
+<pre><code class="language-go">// Writer implements buffering for an io.Writer object.
+// If an error occurs writing to a Writer, no more data will be
+// accepted and all subsequent writes, and Flush, will return the error.
+// After all data has been written, the client should call the
+// Flush method to guarantee all data has been forwarded to
+// the underlying io.Writer.
+type Writer struct {
+	err error
+	buf []byte
+	n   int
+	wr  io.Writer
+}
+
+</code></pre>
+
+<p>这是buffer writer，它实现了<code>io.Writer</code>的缓冲，如果发生错误，就不会再有数据会被接受，并且后续的写入和刷新都会返回错误。</p>
+
+<p>在所有数据都被写入后，应该调用<code>Flush</code>函数来保证所有数据都被传送到底层的<code>io.Writer</code></p>
+
+<h4 id="newwritersize-w-io-writer-size-int-writer">NewWriterSize(w io.Writer, size int) *Writer</h4>
+
+<pre><code class="language-go">// NewWriterSize returns a new Writer whose buffer has at least the specified
+// size. If the argument io.Writer is already a Writer with large enough
+// size, it returns the underlying Writer.
+func NewWriterSize(w io.Writer, size int) *Writer {
+	// Is it already a Writer?
+	b, ok := w.(*Writer)
+	if ok &amp;&amp; len(b.buf) &gt;= size {
+		return b
+	}
+	if size &lt;= 0 {
+		size = defaultBufSize
+	}
+	return &amp;Writer{
+		buf: make([]byte, size),
+		wr:  w,
+	}
+}
+</code></pre>
+
+<p>根据代码可以看出，还是和Reader对应的函数有所不同的，这里创建的缓冲区大小可以为32以下，如果原本的缓冲区大，并不能通过这个函数减小缓冲区。</p>
+
+<h4 id="newwriter-w-io-writer-writer">NewWriter(w io.Writer) *Writer</h4>
+
+<pre><code class="language-go">// NewWriter returns a new Writer whose buffer has the default size.
+func NewWriter(w io.Writer) *Writer {
+	return NewWriterSize(w, defaultBufSize)
+}
+</code></pre>
+
+<p>返回默认缓冲区大小为4096的<code>bufio.Writer</code></p>
+
+<h4 id="b-writer-size-int">(b *Writer) Size() int</h4>
+
+<pre><code class="language-go">// Size returns the size of the underlying buffer in bytes.
+func (b *Writer) Size() int { return len(b.buf) }
+</code></pre>
+
+<p>返回缓冲区大小</p>
+
+<h4 id="b-writer-reset-w-io-writer">(b *Writer) Reset(w io.Writer)</h4>
+
+<pre><code class="language-go">// Reset discards any unflushed buffered data, clears any error, and
+// resets b to write its output to w.
+func (b *Writer) Reset(w io.Writer) {
+	b.err = nil
+	b.n = 0
+	b.wr = w
+}
+</code></pre>
+
+<p>清除所有buffer数据，清除所有错误，把原本内部嵌入的<code>io.Writer</code>改变成我们传入的</p>
+
+<h4 id="b-writer-flush-error">(b *Writer) Flush() error</h4>
+
+<pre><code class="language-go">// Flush writes any buffered data to the underlying io.Writer.
+func (b *Writer) Flush() error {
+	if b.err != nil {
+		return b.err
+	}
+	if b.n == 0 {
+		return nil
+	}
+	n, err := b.wr.Write(b.buf[0:b.n])
+	if n &lt; b.n &amp;&amp; err == nil {
+		err = io.ErrShortWrite
+	}
+	if err != nil {
+		if n &gt; 0 &amp;&amp; n &lt; b.n {
+			copy(b.buf[0:b.n-n], b.buf[n:b.n])
+		}
+		b.n -= n
+		b.err = err
+		return err
+	}
+	b.n = 0
+	return nil
+}
+</code></pre>
+
+<p>将我们写在缓冲区的数据完全写入底层<code>Writer</code></p>
+
+<p><strong>一定要记得，不然有可能会没有数据的</strong></p>
+
+<h4 id="b-writer-available-int">(b *Writer) Available() int</h4>
+
+<pre><code class="language-go">// Available returns how many bytes are unused in the buffer.
+func (b *Writer) Available() int { return len(b.buf) - b.n }
+</code></pre>
+
+<p>返回还有多少缓冲区没用到</p>
+
+<h4 id="b-writer-buffered-int">(b *Writer) Buffered() int</h4>
+
+<pre><code class="language-go">// Buffered returns the number of bytes that have been written into the current buffer.
+func (b *Writer) Buffered() int { return b.n }
+</code></pre>
+
+<p>返回缓冲区用了多少</p>
+
+<h4 id="b-writer-write-p-byte-nn-int-err-error">(b *Writer) Write(p []byte) (nn int, err error)</h4>
+
+<pre><code class="language-go">// Write writes the contents of p into the buffer.
+// It returns the number of bytes written.
+// If nn &lt; len(p), it also returns an error explaining
+// why the write is short.
+func (b *Writer) Write(p []byte) (nn int, err error) {
+	for len(p) &gt; b.Available() &amp;&amp; b.err == nil {
+		var n int
+		if b.Buffered() == 0 {
+			// Large write, empty buffer.
+			// Write directly from p to avoid copy.
+			n, b.err = b.wr.Write(p)
+		} else {
+			n = copy(b.buf[b.n:], p)
+			b.n += n
+			b.Flush()
+		}
+		nn += n
+		p = p[n:]
+	}
+	if b.err != nil {
+		return nn, b.err
+	}
+	n := copy(b.buf[b.n:], p)
+	b.n += n
+	nn += n
+	return nn, nil
+}
+</code></pre>
+
+<p>从代码上可以知道，当我们传入的切片很大时，Write函数也能够帮我们一次次的传入</p>
+
+<h4 id="b-writer-writebyte-c-byte-error">(b *Writer) WriteByte(c byte) error</h4>
+
+<pre><code class="language-go">// WriteByte writes a single byte.
+func (b *Writer) WriteByte(c byte) error {
+	if b.err != nil {
+		return b.err
+	}
+	if b.Available() &lt;= 0 &amp;&amp; b.Flush() != nil {
+		return b.err
+	}
+	b.buf[b.n] = c
+	b.n++
+	return nil
+}
+</code></pre>
+
+<p>写一个字节</p>
+
+<h4 id="b-writer-writerune-r-rune-size-int-err-error">(b *Writer) WriteRune(r rune) (size int, err error)</h4>
+
+<pre><code class="language-go">// WriteRune writes a single Unicode code point, returning
+// the number of bytes written and any error.
+func (b *Writer) WriteRune(r rune) (size int, err error) {
+	if r &lt; utf8.RuneSelf {
+		err = b.WriteByte(byte(r))
+		if err != nil {
+			return 0, err
+		}
+		return 1, nil
+	}
+	if b.err != nil {
+		return 0, b.err
+	}
+	n := b.Available()
+	if n &lt; utf8.UTFMax {
+		if b.Flush(); b.err != nil {
+			return 0, b.err
+		}
+		n = b.Available()
+		if n &lt; utf8.UTFMax {
+			// Can only happen if buffer is silly small.
+			return b.WriteString(string(r))
+		}
+	}
+	size = utf8.EncodeRune(b.buf[b.n:], r)
+	b.n += size
+	return size, nil
+}
+</code></pre>
+
+<p>写入一个<code>rune</code>进入缓冲区，并且返回这个<code>rune</code>占用了多少个byte，以及错误</p>
+
+<h4 id="b-writer-writestring-s-string-int-error">(b *Writer) WriteString(s string) (int, error)</h4>
+
+<pre><code class="language-go">// WriteString writes a string.
+// It returns the number of bytes written.
+// If the count is less than len(s), it also returns an error explaining
+// why the write is short.
+func (b *Writer) WriteString(s string) (int, error) {
+	nn := 0
+	for len(s) &gt; b.Available() &amp;&amp; b.err == nil {
+		n := copy(b.buf[b.n:], s)
+		b.n += n
+		nn += n
+		s = s[n:]
+		b.Flush()
+	}
+	if b.err != nil {
+		return nn, b.err
+	}
+	n := copy(b.buf[b.n:], s)
+	b.n += n
+	nn += n
+	return nn, nil
+}
+</code></pre>
+
+<p>写入字符串，并且返回真正写入了的byte数量，以及如果没有完全写入所发生的错误</p>
+
+<h4 id="b-writer-readfrom-r-io-reader-n-int64-err-error">(b *Writer) ReadFrom(r io.Reader) (n int64, err error)</h4>
+
+<pre><code class="language-go">// ReadFrom implements io.ReaderFrom. If the underlying writer
+// supports the ReadFrom method, and b has no buffered data yet,
+// this calls the underlying ReadFrom without buffering.
+func (b *Writer) ReadFrom(r io.Reader) (n int64, err error) {
+	if b.Buffered() == 0 {
+		if w, ok := b.wr.(io.ReaderFrom); ok {
+			return w.ReadFrom(r)
+		}
+	}
+	var m int
+	for {
+		if b.Available() == 0 {
+			if err1 := b.Flush(); err1 != nil {
+				return n, err1
+			}
+		}
+		nr := 0
+		for nr &lt; maxConsecutiveEmptyReads {
+			m, err = r.Read(b.buf[b.n:])
+			if m != 0 || err != nil {
+				break
+			}
+			nr++
+		}
+		if nr == maxConsecutiveEmptyReads {
+			return n, io.ErrNoProgress
+		}
+		b.n += m
+		n += int64(m)
+		if err != nil {
+			break
+		}
+	}
+	if err == io.EOF {
+		// If we filled the buffer exactly, flush preemptively.
+		if b.Available() == 0 {
+			err = b.Flush()
+		} else {
+			err = nil
+		}
+	}
+	return n, err
+}
+
+</code></pre>
+
+<p>如果buffer里面没有数据，并且底层的Writer是有实现了<code>ReadFrom</code>这个方法的，那么直接调用底层的方法，而不用buffer</p>
+
+<p>ReadFrom这个方法是将某个Reader里面的数据读取出来，并且写到Writer里面去</p>
+
+<p>其实很想Reader方法里面的<code>WriteTo</code></p>
+
+<p><strong>注意要Flush</strong></p>
+
+<h3 id="readwriter">ReadWriter</h3>
+
+<pre><code class="language-go">// buffered input and output
+
+// ReadWriter stores pointers to a Reader and a Writer.
+// It implements io.ReadWriter.
+type ReadWriter struct {
+	*Reader
+	*Writer
+}
+
+// NewReadWriter allocates a new ReadWriter that dispatches to r and w.
+func NewReadWriter(r *Reader, w *Writer) *ReadWriter {
+	return &amp;ReadWriter{r, w}
+}
+</code></pre>
+
+<p>这里就是把两个结合起来，只要是这两个结构体的方法，它们都能用。</p>
+
+<h3 id="总结一下">总结一下</h3>
+
+<ul>
+<li>可以很好的通过阅读Reader方法的代码了解到大神们写代码的风格</li>
+<li>在用有缓冲区的Writer时，一定要记得刷新缓冲区</li>
+<li>两者其实是很好的对应关系，读完Reader，Writer基本不用详细阅读</li>
+</ul>
+
+<h2 id="scan-go">scan.go</h2>
+
+<h3 id="scanner">Scanner</h3>
+
+<h4 id="结构体-1">结构体</h4>
+
+<pre><code class="language-go">// Scanner provides a convenient interface for reading data such as
+// a file of newline-delimited lines of text. Successive calls to
+// the Scan method will step through the 'tokens' of a file, skipping
+// the bytes between the tokens. The specification of a token is
+// defined by a split function of type SplitFunc; the default split
+// function breaks the input into lines with line termination stripped. Split
+// functions are defined in this package for scanning a file into
+// lines, bytes, UTF-8-encoded runes, and space-delimited words. The
+// client may instead provide a custom split function.
+//
+// Scanning stops unrecoverably at EOF, the first I/O error, or a token too
+// large to fit in the buffer. When a scan stops, the reader may have
+// advanced arbitrarily far past the last token. Programs that need more
+// control over error handling or large tokens, or must run sequential scans
+// on a reader, should use bufio.Reader instead.
+//
+type Scanner struct {
+	r            io.Reader // The reader provided by the client.
+	split        SplitFunc // The function to split the tokens.
+	maxTokenSize int       // Maximum size of a token; modified by tests.
+	token        []byte    // Last token returned by split.
+	buf          []byte    // Buffer used as argument to split.
+	start        int       // First non-processed byte in buf.
+	end          int       // End of data in buf.
+	err          error     // Sticky error.
+	empties      int       // Count of successive empty tokens.
+	scanCalled   bool      // Scan has been called; buffer is in use.
+	done         bool      // Scan has finished.
+}
+</code></pre>
+
+<p>我们先来解析一下原文的意思，这个<code>Scanner</code>结构体其实是为我们在读取<strong>以换行符分隔的文本组成的文件</strong>做了一个很方便的接口</p>
+
+<p>这里面有一个<code>SplitFunc</code>类型的split函数定义，是用来分隔的。默认就是：将文件分成很多个行，然后把行的终止符删除掉(一般就是换行符了)，当然我们自己也可以定义<code>SplitFunc</code>函数，只要符合它结构体的标准就可以了</p>
+
+<p>Scanner在EOF、IO错误或者被分隔后的数据太大以至于不能存储在buffer。在发生错误后，Reader所指向的地方可能已经不是我们读取的最后一个块了。</p>
+
+<p><strong>注意</strong>： 文中的Token其实是指被分隔后的每一个独立的部分。</p>
+
+<p>我们用这个Scanner读取文件的思路是这样的</p>
+
+<ol>
+<li><p>我们先从底层Reader接口读取数据到buffer里面</p></li>
+
+<li><p>通过分隔函数对buffer里面的数据进行分隔得到Token(每次只能得到一个Token)</p></li>
+
+<li><p>调用了<code>Scan()</code>函数后表明我们的Token已经准备好了</p></li>
+
+<li><p>可以通过<code>Byte</code>函数或者<code>Text</code>函数转换为字符串返回出来，就可以得到我们需要的数据了</p></li>
+</ol>
+
+<p>所以结构体成员的意义：</p>
+
+<ul>
+<li><p>要读取对象的Reader</p></li>
+
+<li><p>分隔函数(默认是按行分)</p></li>
+
+<li><p>每个Token最大的大小(byte)</p></li>
+
+<li><p>buf是为了提前在底层Reader读取一定量的数据，提升性能</p></li>
+
+<li><p>buf中未被处理过的数据中的第一个位置</p></li>
+
+<li><p>buf最后面数据的位置</p></li>
+
+<li><p>连续拿到空的Token的次数</p></li>
+
+<li><p>标志scan是否在被使用</p></li>
+
+<li><p>标志scan是否已经用完(也就是退出了)，没了</p></li>
+</ul>
+
+<h4 id="分隔函数">分隔函数</h4>
+
+<pre><code class="language-go">// SplitFunc is the signature of the split function used to tokenize the
+// input. The arguments are an initial substring of the remaining unprocessed
+// data and a flag, atEOF, that reports whether the Reader has no more data
+// to give. The return values are the number of bytes to advance the input
+// and the next token to return to the user, if any, plus an error, if any.
+//
+// Scanning stops if the function returns an error, in which case some of
+// the input may be discarded.
+//
+// Otherwise, the Scanner advances the input. If the token is not nil,
+// the Scanner returns it to the user. If the token is nil, the
+// Scanner reads more data and continues scanning; if there is no more
+// data--if atEOF was true--the Scanner returns. If the data does not
+// yet hold a complete token, for instance if it has no newline while
+// scanning lines, a SplitFunc can return (0, nil, nil) to signal the
+// Scanner to read more data into the slice and try again with a
+// longer slice starting at the same point in the input.
+//
+// The function is never called with an empty data slice unless atEOF
+// is true. If atEOF is true, however, data may be non-empty and,
+// as always, holds unprocessed text.
+type SplitFunc func(data []byte, atEOF bool) (advance int, token []byte, err error)
+</code></pre>
+
+<p>这是相当一个模板，我们可以根据这个模板定义自己的分隔函数，只需要明白每一个参数和返回值的意义</p>
+
+<p>参数：</p>
+
+<ul>
+<li><p>buf的数据，也就是未被处理过的数据</p></li>
+
+<li><p>是否到了EOF</p></li>
+</ul>
+
+<p>返回值：</p>
+
+<ul>
+<li><p>为了分隔这个Token，让数据前进了多少(记录有多少被处理过了)</p></li>
+
+<li><p>隔离出来的token</p></li>
+
+<li><p>错误信息</p></li>
+</ul>
+
+<h4 id="errors">Errors</h4>
+
+<pre><code class="language-go">
+// Errors returned by Scanner.
+var (
+	ErrTooLong         = errors.New(&quot;bufio.Scanner: token too long&quot;)
+	ErrNegativeAdvance = errors.New(&quot;bufio.Scanner: SplitFunc returns negative advance count&quot;)
+	ErrAdvanceTooFar   = errors.New(&quot;bufio.Scanner: SplitFunc returns advance count beyond input&quot;)
+)
+</code></pre>
+
+<h4 id="const">Const</h4>
+
+<pre><code class="language-go">const (
+	// MaxScanTokenSize is the maximum size used to buffer a token
+	// unless the user provides an explicit buffer with Scan.Buffer.
+	// The actual maximum token size may be smaller as the buffer
+	// may need to include, for instance, a newline.
+	MaxScanTokenSize = 64 * 1024
+
+	startBufSize = 4096 // Size of initial allocation for buffer.
+)
+
+</code></pre>
+
+<p>这里面这个<code>startBufSize</code>的意思是，初始化的buffer大小，因为我们并不需要一开始就设置<code>MaxScanTokenSize</code>为我们的缓冲区大小，这样太浪费资源了，如果buf大小实在不够，我们可以扩容。</p>
+
+<h4 id="newscanner-r-io-reader-scanner">NewScanner(r io.Reader) *Scanner</h4>
+
+<pre><code class="language-go">// NewScanner returns a new Scanner to read from r.
+// The split function defaults to ScanLines.
+func NewScanner(r io.Reader) *Scanner {
+	return &amp;Scanner{
+		r:            r,
+		split:        ScanLines,
+		maxTokenSize: MaxScanTokenSize,
+	}
+}
+</code></pre>
+
+<p>这个函数就是返回一个<code>*Scanner</code>，传入一个Reader，默认分隔函数是<code>ScanLines</code>，这就是我们平常时最常用的一种Scanner，对应的最大Token大小也会被传入，这个如果需要修改的话，要调用<code>Buffer()</code>函数</p>
+
+<h4 id="s-scanner-err-error">(s *Scanner) Err() error</h4>
+
+<pre><code class="language-go">// Err returns the first non-EOF error that was encountered by the Scanner.
+func (s *Scanner) Err() error {
+	if s.err == io.EOF {
+		return nil
+	}
+	return s.err
+}
+</code></pre>
+
+<p>这个函数不会返回EOF错误，只会返回其它类型的第一个错误。我们后面有一个记录错误的函数，也是只记录第一个非EOF的错误。</p>
+
+<h4 id="s-scanner-bytes-byte">(s *Scanner) Bytes() []byte</h4>
+
+<pre><code class="language-go">// Bytes returns the most recent token generated by a call to Scan.
+// The underlying array may point to data that will be overwritten
+// by a subsequent call to Scan. It does no allocation.
+func (s *Scanner) Bytes() []byte {
+	return s.token
+}
+</code></pre>
+
+<p>返回结构体中的token，也就是最近被生成的token，这个是返回 **指针 **，不会有新的分配，但是不会说因为我的Token变化后，这个会跟着变化。</p>
+
+<p>当这个函数返回时，是返回一个内存地址，然后当我们再次scan时，只是token这个指向的内存地址发生了改变，它原来的地址指向的数据还是在那里的。</p>
+
+<h4 id="s-scanner-text-string">(s *Scanner) Text() string</h4>
+
+<pre><code class="language-go">// Text returns the most recent token generated by a call to Scan
+// as a newly allocated string holding its bytes.
+func (s *Scanner) Text() string {
+	return string(s.token)
+}
+</code></pre>
+
+<p>同上，只是返回了一个新分配空间的字符串。</p>
+
+<h4 id="s-scanner-scan-bool">(s *Scanner) Scan() bool</h4>
+
+<pre><code class="language-go">// Scan advances the Scanner to the next token, which will then be
+// available through the Bytes or Text method. It returns false when the
+// scan stops, either by reaching the end of the input or an error.
+// After Scan returns false, the Err method will return any error that
+// occurred during scanning, except that if it was io.EOF, Err
+// will return nil.
+// Scan panics if the split function returns too many empty
+// tokens without advancing the input. This is a common error mode for
+// scanners.
+func (s *Scanner) Scan() bool {
+	if s.done {
+		return false
+	}
+	s.scanCalled = true
+	// Loop until we have a token.
+	for {
+		// See if we can get a token with what we already have.
+		// 这里的意思是，能否用buf现有的数据取出一个Token
+		// If we've run out of data but have an error, give the split function
+		// a chance to recover any remaining, possibly empty token.
+		if s.end &gt; s.start || s.err != nil {
+			advance, token, err := s.split(s.buf[s.start:s.end], s.err != nil)
+			if err != nil {
+				if err == ErrFinalToken {
+					s.token = token
+					s.done = true
+					return true
+				}
+				s.setErr(err)
+				return false
+			}
+			if !s.advance(advance) {
+				return false
+			}
+			s.token = token
+			if token != nil {
+				if s.err == nil || advance &gt; 0 {
+					s.empties = 0
+				} else {
+					// Returning tokens not advancing input at EOF.
+					s.empties++
+					if s.empties &gt; maxConsecutiveEmptyReads {
+						panic(&quot;bufio.Scan: too many empty tokens without progressing&quot;)
+					}
+				}
+				return true
+			}
+		}
+		// We cannot generate a token with what we are holding.
+		// If we've already hit EOF or an I/O error, we are done.
+		if s.err != nil {
+			// Shut it down.
+			s.start = 0
+			s.end = 0
+			return false
+		}
+		// Must read more data.
+		// First, shift data to beginning of buffer if there's lots of empty space
+		// or space is needed.
+		if s.start &gt; 0 &amp;&amp; (s.end == len(s.buf) || s.start &gt; len(s.buf)/2) {
+			copy(s.buf, s.buf[s.start:s.end])
+			s.end -= s.start
+			s.start = 0
+		}
+		// Is the buffer full? If so, resize.
+		if s.end == len(s.buf) {
+			// Guarantee no overflow in the multiplication below.
+			const maxInt = int(^uint(0) &gt;&gt; 1)
+			if len(s.buf) &gt;= s.maxTokenSize || len(s.buf) &gt; maxInt/2 {
+				s.setErr(ErrTooLong)
+				return false
+			}
+			newSize := len(s.buf) * 2
+			if newSize == 0 {
+				newSize = startBufSize
+			}
+			if newSize &gt; s.maxTokenSize {
+				newSize = s.maxTokenSize
+			}
+			newBuf := make([]byte, newSize)
+			copy(newBuf, s.buf[s.start:s.end])
+			s.buf = newBuf
+			s.end -= s.start
+			s.start = 0
+		}
+		// Finally we can read some input. Make sure we don't get stuck with
+		// a misbehaving Reader. Officially we don't need to do this, but let's
+		// be extra careful: Scanner is for safe, simple jobs.
+		for loop := 0; ; {
+			n, err := s.r.Read(s.buf[s.end:len(s.buf)])
+			s.end += n
+			if err != nil {
+				s.setErr(err)
+				break
+			}
+			if n &gt; 0 {
+				s.empties = 0
+				break
+			}
+			loop++
+			if loop &gt; maxConsecutiveEmptyReads {
+				s.setErr(io.ErrNoProgress)
+				break
+			}
+		}
+	}
+}
+</code></pre>
+
+<p>函数的解释很到位：
+Scan函数是让Scanner前进到下一个token，然后就可以调用<code>Byte</code>或者<code>Text</code>，如果成功，会返回true</p>
+
+<p>什么时候返回false呢：</p>
+
+<ul>
+<li><p>scan停止了</p></li>
+
+<li><p>到输入的末尾了</p></li>
+
+<li><p>有错误了</p></li>
+</ul>
+
+<p>Scan 如果多次返回空的Token并且Scanner没有向前(也就是说不是读取空字符)，就会panic。</p>
+
+<p>我们来拆分一下代码：
+首先，它是一个死循环，要一直找到所需要的Token，或者发生什么错误，panic才肯退出</p>
+
+<p>循环内：</p>
+
+<ol>
+<li>为了在已有的buf里面找到满足条件的token</li>
+</ol>
+
+<pre><code class="language-go">		// See if we can get a token with what we already have.
+		// If we've run out of data but have an error, give the split function
+		// a chance to recover any remaining, possibly empty token.
+		if s.end &gt; s.start || s.err != nil {
+			advance, token, err := s.split(s.buf[s.start:s.end], s.err != nil)
+			if err != nil {
+				if err == ErrFinalToken {
+					s.token = token
+					s.done = true
+					return true
+				}
+				s.setErr(err)
+				return false
+			}
+			if !s.advance(advance) {
+				return false
+			}
+			s.token = token
+			if token != nil {
+				if s.err == nil || advance &gt; 0 {
+					s.empties = 0
+				} else {
+					// Returning tokens not advancing input at EOF.
+					s.empties++
+					if s.empties &gt; maxConsecutiveEmptyReads {
+						panic(&quot;bufio.Scan: too many empty tokens without progressing&quot;)
+					}
+				}
+				return true
+			}
+		}
+</code></pre>
+
+<ol>
+<li>判断是否需要关闭Scanner</li>
+</ol>
+
+<pre><code class="language-go">
+		// We cannot generate a token with what we are holding.
+		// If we've already hit EOF or an I/O error, we are done.
+		if s.err != nil {
+			// Shut it down.
+			s.start = 0
+			s.end = 0
+			return false
+		}
+</code></pre>
+
+<ol>
+<li>因为第一步的时候证明了buf内的数据不足以分隔出一个Token，所以需要将未处理过的数据往前移，以便读取新的数据在后面。</li>
+</ol>
+
+<pre><code class="language-go">		// Must read more data.
+		// First, shift data to beginning of buffer if there's lots of empty space
+		// or space is needed.
+		if s.start &gt; 0 &amp;&amp; (s.end == len(s.buf) || s.start &gt; len(s.buf)/2) {
+			copy(s.buf, s.buf[s.start:s.end])
+			s.end -= s.start
+			s.start = 0
+		}
+</code></pre>
+
+<ol>
+<li>当end的位置刚好是buf的长度时，就表明buf满了，所以要扩容，扩容机制是两倍扩容，直到达到<code>maxTokenSize</code>为止</li>
+</ol>
+
+<pre><code class="language-go">		// Is the buffer full? If so, resize.
+		if s.end == len(s.buf) {
+			// Guarantee no overflow in the multiplication below.
+			const maxInt = int(^uint(0) &gt;&gt; 1)
+			if len(s.buf) &gt;= s.maxTokenSize || len(s.buf) &gt; maxInt/2 {
+				s.setErr(ErrTooLong)
+				return false
+			}
+			newSize := len(s.buf) * 2
+			if newSize == 0 {
+				newSize = startBufSize
+			}
+			if newSize &gt; s.maxTokenSize {
+				newSize = s.maxTokenSize
+			}
+			newBuf := make([]byte, newSize)
+			copy(newBuf, s.buf[s.start:s.end])
+			s.buf = newBuf
+			s.end -= s.start
+			s.start = 0
+		}
+</code></pre>
+
+<ol>
+<li>读取数据到buf里面</li>
+</ol>
+
+<pre><code class="language-go">		for loop := 0; ; {
+			n, err := s.r.Read(s.buf[s.end:len(s.buf)])
+			s.end += n
+			if err != nil {
+				s.setErr(err)
+				break
+			}
+			if n &gt; 0 {
+				s.empties = 0
+				break
+			}
+			loop++
+			if loop &gt; maxConsecutiveEmptyReads {
+				s.setErr(io.ErrNoProgress)
+				break
+			}
+		}
+</code></pre>
+
+<p>将代码分隔开来还是能理解的，只是有些细节方面有点难理解，比如</p>
+
+<pre><code class="language-go">if s.end &gt; s.start || s.err != nil
+</code></pre>
+
+<p>这个判断语句为什么要用 <code>s.err != nil</code></p>
+
+<h4 id="s-scanner-advance-n-int-bool">(s *Scanner) advance(n int) bool</h4>
+
+<pre><code class="language-go">// advance consumes n bytes of the buffer. It reports whether the advance was legal.
+func (s *Scanner) advance(n int) bool {
+	if n &lt; 0 {
+		s.setErr(ErrNegativeAdvance)
+		return false
+	}
+	if n &gt; s.end-s.start {
+		s.setErr(ErrAdvanceTooFar)
+		return false
+	}
+	s.start += n
+	return true
+}
+</code></pre>
+
+<p>这个函数用来确认前进的字节数是否合规
+什么叫不合规呢：
+- 超过了buf未处理数据的最大长度
+- 小于0</p>
+
+<h4 id="s-scanner-seterr-err-error">(s *Scanner) setErr(err error)</h4>
+
+<pre><code class="language-go">// setErr records the first error encountered.
+func (s *Scanner) setErr(err error) {
+	if s.err == nil || s.err == io.EOF {
+		s.err = err
+	}
+}
+</code></pre>
+
+<p>这个函数只会记录第一个非EOF的错误</p>
+
+<h4 id="s-scanner-buffer-buf-byte-max-int">(s *Scanner) Buffer(buf []byte, max int)</h4>
+
+<pre><code class="language-go">// Buffer sets the initial buffer to use when scanning and the maximum
+// size of buffer that may be allocated during scanning. The maximum
+// token size is the larger of max and cap(buf). If max &lt;= cap(buf),
+// Scan will use this buffer only and do no allocation.
+//
+// By default, Scan uses an internal buffer and sets the
+// maximum token size to MaxScanTokenSize.
+//
+// Buffer panics if it is called after scanning has started.
+func (s *Scanner) Buffer(buf []byte, max int) {
+	if s.scanCalled {
+		panic(&quot;Buffer called after Scan&quot;)
+	}
+	s.buf = buf[0:cap(buf)]
+	s.maxTokenSize = max
+}
+</code></pre>
+
+<p>从意思我们可以看到</p>
+
+<ul>
+<li><p>这是一个设置buffer大小和最大Token大小的函数</p></li>
+
+<li><p>如果buffer大小 &gt; 最大Token大小，那么只会用这个buffer，而不会扩充</p></li>
+
+<li><p>如果buffer大小 &lt; 最大Token大小，那么buffer不够用时会扩充，知道到达最大Token大小</p></li>
+
+<li><p>如果这个函数在scan正在进行的时候调用会发生panic</p></li>
+</ul>
+
+<h4 id="s-scanner-split-split-splitfunc">(s *Scanner) Split(split SplitFunc)</h4>
+
+<pre><code class="language-go">// Split sets the split function for the Scanner.
+// The default split function is ScanLines.
+//
+// Split panics if it is called after scanning has started.
+func (s *Scanner) Split(split SplitFunc) {
+	if s.scanCalled {
+		panic(&quot;Split called after Scan&quot;)
+	}
+	s.split = split
+}
+</code></pre>
+
+<p>这是一个为Scanner设置分隔函数的函数，传入一个分隔函数，然后就会被绑定在Scanner对象里</p>
+
+<h3 id="split-functions">Split functions</h3>
+
+<h4 id="scanbytes-data-byte-ateof-bool-advance-int-token-byte-err-error">ScanBytes(data []byte, atEOF bool) (advance int, token []byte, err error)</h4>
+
+<pre><code class="language-go">// ScanBytes is a split function for a Scanner that returns each byte as a token.
+func ScanBytes(data []byte, atEOF bool) (advance int, token []byte, err error) {
+	if atEOF &amp;&amp; len(data) == 0 {
+		return 0, nil, nil
+	}
+	return 1, data[0:1], nil
+}
+</code></pre>
+
+<p>这函数，每次调用只返回 一个字节，相当于Scanner是一个字节Scanner</p>
+
+<h4 id="scanrunes-data-byte-ateof-bool-advance-int-token-byte-err-error">ScanRunes(data []byte, atEOF bool) (advance int, token []byte, err error)</h4>
+
+<pre><code class="language-go">// ScanRunes is a split function for a Scanner that returns each
+// UTF-8-encoded rune as a token. The sequence of runes returned is
+// equivalent to that from a range loop over the input as a string, which
+// means that erroneous UTF-8 encodings translate to U+FFFD = &quot;\xef\xbf\xbd&quot;.
+// Because of the Scan interface, this makes it impossible for the client to
+// distinguish correctly encoded replacement runes from encoding errors.
+func ScanRunes(data []byte, atEOF bool) (advance int, token []byte, err error) {
+	if atEOF &amp;&amp; len(data) == 0 {
+		return 0, nil, nil
+	}
+
+	// Fast path 1: ASCII.
+	if data[0] &lt; utf8.RuneSelf {
+		return 1, data[0:1], nil
+	}
+
+	// Fast path 2: Correct UTF-8 decode without error.
+	_, width := utf8.DecodeRune(data)
+	if width &gt; 1 {
+		// It's a valid encoding. Width cannot be one for a correctly encoded
+		// non-ASCII rune.
+		return width, data[0:width], nil
+	}
+
+	// We know it's an error: we have width==1 and implicitly r==utf8.RuneError.
+	// Is the error because there wasn't a full rune to be decoded?
+	// FullRune distinguishes correctly between erroneous and incomplete encodings.
+	if !atEOF &amp;&amp; !utf8.FullRune(data) {
+		// Incomplete; get more bytes.
+		return 0, nil, nil
+	}
+
+	// We have a real UTF-8 encoding error. Return a properly encoded error rune
+	// but advance only one byte. This matches the behavior of a range loop over
+	// an incorrectly encoded string.
+	return 1, errorRune, nil
+}
+</code></pre>
+
+<p>这函数返回一个<code>rune</code>，但文中说因为这个接口，使得用户不可能正确分配出真正的<code>rune</code>和错误。</p>
+
+<h4 id="dropcr-data-byte-byte">dropCR(data []byte) []byte</h4>
+
+<pre><code class="language-go">// dropCR drops a terminal \r from the data.
+func dropCR(data []byte) []byte {
+	if len(data) &gt; 0 &amp;&amp; data[len(data)-1] == '\r' {
+		return data[0 : len(data)-1]
+	}
+	return data
+}
+</code></pre>
+
+<p>其实就是为了消去结尾的<code>\r</code>(如果有)</p>
+
+<h4 id="scanlines-data-byte-ateof-bool-advance-int-token-byte-err-error">ScanLines(data []byte, atEOF bool) (advance int, token []byte, err error)</h4>
+
+<pre><code class="language-go">// ScanLines is a split function for a Scanner that returns each line of
+// text, stripped of any trailing end-of-line marker. The returned line may
+// be empty. The end-of-line marker is one optional carriage return followed
+// by one mandatory newline. In regular expression notation, it is `\r?\n`.
+// The last non-empty line of input will be returned even if it has no
+// newline.
+func ScanLines(data []byte, atEOF bool) (advance int, token []byte, err error) {
+	if atEOF &amp;&amp; len(data) == 0 {
+		return 0, nil, nil
+	}
+	if i := bytes.IndexByte(data, '\n'); i &gt;= 0 {
+		// We have a full newline-terminated line.
+		return i + 1, dropCR(data[0:i]), nil
+	}
+	// If we're at EOF, we have a final, non-terminated line. Return it.
+	if atEOF {
+		return len(data), dropCR(data), nil
+	}
+	// Request more data.
+	return 0, nil, nil
+}
+
+</code></pre>
+
+<p>这个就是寻找换行符的分隔函数了。</p>
+
+<h4 id="isspace-r-rune-bool">isSpace(r rune) bool</h4>
+
+<pre><code class="language-go">// isSpace reports whether the character is a Unicode white space character.
+// We avoid dependency on the unicode package, but check validity of the implementation
+// in the tests.
+func isSpace(r rune) bool {
+	if r &lt;= '\u00FF' {
+		// Obvious ASCII ones: \t through \r plus space. Plus two Latin-1 oddballs.
+		switch r {
+		case ' ', '\t', '\n', '\v', '\f', '\r':
+			return true
+		case '\u0085', '\u00A0':
+			return true
+		}
+		return false
+	}
+	// High-valued ones.
+	if '\u2000' &lt;= r &amp;&amp; r &lt;= '\u200a' {
+		return true
+	}
+	switch r {
+	case '\u1680', '\u2028', '\u2029', '\u202f', '\u205f', '\u3000':
+		return true
+	}
+	return false
+}
+</code></pre>
+
+<p>判断Unicode空格，可以是<code>\t \n \v \f \r和空格</code>等等，这里有列举例子(case里面)</p>
+
+<h4 id="scanwords-data-byte-ateof-bool-advance-int-token-byte-err-error">ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error)</h4>
+
+<pre><code class="language-go">
+// ScanWords is a split function for a Scanner that returns each
+// space-separated word of text, with surrounding spaces deleted. It will
+// never return an empty string. The definition of space is set by
+// unicode.IsSpace.
+func ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error) {
+	// Skip leading spaces.
+	start := 0
+	for width := 0; start &lt; len(data); start += width {
+		var r rune
+		r, width = utf8.DecodeRune(data[start:])
+		if !isSpace(r) {
+			break
+		}
+	}
+	// Scan until space, marking end of word.
+	for width, i := 0, start; i &lt; len(data); i += width {
+		var r rune
+		r, width = utf8.DecodeRune(data[i:])
+		if isSpace(r) {
+			return i + width, data[start:i], nil
+		}
+	}
+	// If we're at EOF, we have a final, non-empty, non-terminated word. Return it.
+	if atEOF &amp;&amp; len(data) &gt; start {
+		return len(data), data[start:], nil
+	}
+	// Request more data.
+	return start, nil, nil
+}
+
+</code></pre>
+
+<p>这是一个<strong>按照空格</strong>来分隔的函数，并且空格是会删除掉的，并且不会返回空字符串</p>
+
+<p>分析代码：
+- 第一个循环是为了找出除了空格之外的开始位置
+- 第二个循环是为了找到开始位置到下一个空格的所有<code>rune</code></p>
+
+<h3 id="总结一下-1">总结一下</h3>
+
+<ul>
+<li>Scanner还是用来扫描行会比较好用</li>
+<li>Scanner扫描<code>rune</code>会出问题</li>
+<li>关于如何用Scanner的步骤已经在结构体那个部分说了</li>
+</ul>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/web-strcuture/">Web框架</a></li>
+        
+        <li><a href="/posts/learn-hugo/">Hugo建博客</a></li>
+        
+        <li><a href="/posts/learningGo/">Go琐碎笔记</a></li>
+        
+        <li><a href="/posts/internet-protocal/">网络协议基础</a></li>
+        
+        <li><a href="/posts/linux-note/">Linux命令笔记</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93">标准库</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记">Mysql学习笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记">Go圣经读书笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-inaction/" title="Go语言实战">Go语言实战</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程">Go语言高级编程</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode">Golang--Leetcode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode">Golang标准库--Unicode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%8D%8F%E8%AE%AE/">协议(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8D%8F%E8%AE%AE/">协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

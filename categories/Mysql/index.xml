@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/categories/Mysql/</link>
+    <description>Recent content in Mysql on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Mar 2019 02:14:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/categories/Mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql学习笔记</title>
+      <link>https://wushaoqiang.github.io/posts/mysql-basic/</link>
+      <pubDate>Sun, 17 Mar 2019 02:14:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/mysql-basic/</guid>
+      <description>安装 sudo apt-get install mysql-server mysql-client
+查询是否安装了： sudo netstat -tap grep mysql
+安装成功
+tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有叫输入密码
+登录 打开debian.cnf文件： sudo nano /etc/mysql/debian.cnf
+# Automatically generated for Debian scripts. DO NOT TOUCH! [client] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock [mysql_upgrade] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock  这里面有一个叫debian-sys-maint的user
+登录debian-sys-maint： mysql -u debian-sys-maint -p</description>
+    </item>
+    
+  </channel>
+</rss>

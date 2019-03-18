@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Web框架 | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Web框架 - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-17T01:53:57&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-17T01:53:57&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Web框架">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/web-strcuture/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Web框架</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月17日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h1 id="gin">Gin</h1>
+
+<h2 id="路由常用方法">路由常用方法</h2>
+
+<pre><code class="language-go">func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes 
+
+func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes
+
+type HandlerFunc func(*Context)
+</code></pre>
+
+<p>可以看出路由需要的参数是</p>
+
+<ul>
+<li><p>相对路径</p></li>
+
+<li><p>处理函数</p></li>
+</ul>
+
+<p>这里面是Gin自己定义的一个HandlerFunc，和标准库里面的有所不同，这里的<code>gin.*Context</code>包含了标准库里的<code>ResponseWriter</code>和<code>*http.Request</code>还有一些其它</p>
+
+<h2 id="介绍一些函数">介绍一些函数</h2>
+
+<pre><code class="language-go">// Query()			是匹配url上的参数，匹配不到就返回空字符串
+// DefaultQuery() 	也是匹配，如果匹配不到就用默认值
+// 127.0.0.1:8000/post?id=111&amp;page=222
+// 如果用curl，则需要在&amp;前面加\
+
+id := c.Query(&quot;id&quot;)
+page := c.DefaultQuery(&quot;page&quot;, &quot;0&quot;)
+
+//这个是在表单上获取信息，通过POST方法发送过来的数据
+name := c.PostForm(&quot;name&quot;)
+message := c.PostForm(&quot;message&quot;)
+</code></pre>
+
+<h2 id="一个完整的路由">一个完整的路由</h2>
+
+<pre><code class="language-go">router.GET(&quot;/welcome&quot;, func(c *gin.Context) {
+		firstname := c.DefaultQuery(&quot;firstname&quot;, &quot;Guest&quot;)
+		lastname := c.Query(&quot;lastname&quot;)
+
+		c.String(http.StatusOK, &quot;Hello %s %s&quot;, firstname, lastname)
+		c.JSON(http.StatusOK, gin.H{
+			&quot;status&quot;: gin.H{
+				&quot;status_code&quot;: http.StatusOK,
+				&quot;status&quot;:      &quot;ok&quot;,
+			},
+			&quot;firstname&quot;: firstname,
+			&quot;lastname&quot;:  lastname,
+		})
+	})
+</code></pre>
+
+<p>可以看见一个完整的路由所需要的东西其实就两个，相对路径和处理器函数。并且Gin的处理函数很多以及帮我们封装好了</p>
+
+<p>比如<code>c.String(http.StatusOK, &quot;Hello %s %s&quot;, firstname, lastname)</code></p>
+
+<pre><code class="language-go">// String writes the given string into the response body.
+func (c *Context) String(code int, format string, values ...interface{}) {
+	c.Render(code, render.String{Format: format, Data: values})
+}
+</code></pre>
+
+<p>可以看出其帮我们封装好了字符串写到响应主体的函数。</p>
+
+<p>还有<code>c.JSON()</code></p>
+
+<pre><code class="language-go">// JSON serializes the given struct as JSON into the response body.
+// It also sets the Content-Type as &quot;application/json&quot;.
+func (c *Context) JSON(code int, obj interface{}) {
+	c.Render(code, render.JSON{Data: obj})
+}
+</code></pre>
+
+<p>可以看出Gin对这个的解释是，这个函数会将JSON写入到Response body，然后还会改变Content-Type为<code>application/json</code></p>
+
+<h2 id="给服务器上传一个文件">给服务器上传一个文件</h2>
+
+<pre><code class="language-go">func main() {
+	router := gin.Default()
+
+	router.POST(&quot;/upload&quot;, func(c *gin.Context) {
+		name := c.PostForm(&quot;name&quot;)
+		fmt.Println(name)
+		file, header, err := c.Request.FormFile(&quot;upload&quot;)
+		if err != nil {
+			c.String(http.StatusBadRequest, &quot;Bad Request!&quot;)
+			return
+		}
+
+		filename := header.Filename
+
+		out, err := os.Create(filename)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer out.Close()
+
+		_, err = io.Copy(out, file)
+		if err != nil {
+			log.Fatal(err)
+		}
+		c.String(http.StatusCreated, &quot;upload successfully&quot;)
+	})
+
+	router.Run(&quot;:8000&quot;)
+}
+</code></pre>
+
+<p>这是一个完整的代码</p>
+
+<ol>
+<li><p>开头返回一个引擎实例</p>
+
+<pre><code class="language-go">router := gin.Default()
+</code></pre></li>
+
+<li><p>创建路由</p>
+
+<pre><code class="language-go">router.POST(&quot;/upload&quot;, func(c *gin.Context) {
+	...
+}
+</code></pre></li>
+
+<li><p>实现路由逻辑(实现路由HandlerFunc)</p></li>
+</ol>
+
+<pre><code class="language-go">file, header, err := c.Request.FormFile(&quot;upload&quot;)
+		if err != nil {
+			c.String(http.StatusBadRequest, &quot;Bad Request!&quot;)
+			return
+		}
+
+		filename := header.Filename
+		out, err := os.Create(filename)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer out.Close()
+
+		_, err = io.Copy(out, file)
+		if err != nil {
+			log.Fatal(err)
+		}
+		c.String(http.StatusCreated, &quot;upload successfully&quot;)
+</code></pre>
+
+<p>忽略掉错误处理，其实真正的业务是很少的。</p>
+
+<p>首先第一个函数</p>
+
+<pre><code class="language-go">FormFile func(key string) (multipart.File, *multipart.FileHeader, error)
+//FormFile returns the first file for the provided form key. 
+//FormFile calls ParseMultipartForm and ParseForm if necessary.
+</code></pre>
+
+<p>返回第一个对应上传入的Key的文件。</p>
+
+<p>这里我们能够获得其返回的两个结构体和一个错误。</p>
+
+<p>第一个结构体(接口)</p>
+
+<pre><code class="language-go">// File is an interface to access the file part of a multipart message.
+// Its contents may be either stored in memory or on disk.
+// If stored on disk, the File's underlying concrete type will be an *os.File.
+type File interface {
+	io.Reader
+	io.ReaderAt
+	io.Seeker
+	io.Closer
+}
+</code></pre>
+
+<p>第二个结构体</p>
+
+<pre><code class="language-go">// A FileHeader describes a file part of a multipart request.
+type FileHeader struct {
+	Filename string
+	Header   textproto.MIMEHeader
+	Size     int64
+
+	content []byte
+	tmpfile string
+}
+</code></pre>
+
+<p>可以看出第二个结构体中有文件的名字，名字不包含路径。</p>
+
+<p>然后我们再利用<code>os</code>包创建一个同样名字的文件</p>
+
+<p>利用<code>io.Copy()</code></p>
+
+<pre><code class="language-go">Copy func(dst Writer, src Reader) (written int64, err error)
+</code></pre>
+
+<p>将文件的内容复制到我们新建的文件。</p>
+
+<ol>
+<li>运行服务器
+<code>go
+router.Run(&quot;:8000&quot;)
+</code></li>
+</ol>
+
+<h2 id="上传多个文件">上传多个文件</h2>
+
+<p>整个路由(其它和上面的一样，只是路由实现不同而已)</p>
+
+<pre><code class="language-go">router.POST(&quot;/multiupload&quot;, func(c *gin.Context) {
+		err := c.Request.ParseMultipartForm(3000000)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		formdata := c.Request.MultipartForm
+
+		filesUpload := formdata.File[&quot;upload&quot;]
+		textUpload := formdata.Value[&quot;text&quot;]
+
+		fmt.Println(textUpload)
+		// filesOther := formdata.File[&quot;Other&quot;]
+
+		for index := range filesUpload {
+			file, err := filesUpload[index].Open()
+
+			defer file.Close()
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			out, err := os.Create(filesUpload[index].Filename)
+
+			defer out.Close()
+			if err != nil {
+				log.Fatal(err)
+			}
+			_, err = io.Copy(out, file)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+
+		c.String(http.StatusOK, &quot;upload multifile successfully!&quot;)
+
+	})
+</code></pre>
+
+<p>其实和读取单个文件的思想是类似的</p>
+
+<p><strong>必须要得到文件的名字和File结构体</strong></p>
+
+<p>Request结构体里有一个这样的结构体是用来接收<code>multipart/form-data</code>格式的报文的
+并且里面说到，这个字段是要在<code>ParseMultipartForm()</code>函数调用后才有用的。
+所以我们路由第一句里面</p>
+
+<pre><code class="language-go">/*
+ParseMultipartForm parses a request body as multipart/form-data. 
+The whole request body is parsed and up to a total of maxMemory bytes of its file parts are stored in memory, with the remainder stored on disk in temporary files. 
+*/
+err := c.Request.ParseMultipartForm(3000000)
+		if err != nil {
+			log.Fatal(err)
+		}
+</code></pre>
+
+<p>根据函数的解释，这个函数会将request body解析为<code>multipart/form-data</code>格式，并且最多会有<code>maxMemory</code>个byte会存储在内存中，剩余的存储在硬盘的临时文件。</p>
+
+<p>说了这么多，其实这个函数对我们最大的作用就是解析内容的格式</p>
+
+<p>说了那么多，看看那个字段先。</p>
+
+<pre><code class="language-go">// MultipartForm is the parsed multipart form, including file uploads.
+	// This field is only available after ParseMultipartForm is called.
+	// The HTTP client ignores MultipartForm and uses Body instead.
+	MultipartForm *multipart.Form
+</code></pre>
+
+<p>再深入进去是：</p>
+
+<pre><code class="language-go">// Form is a parsed multipart form.
+// Its File parts are stored either in memory or on disk,
+// and are accessible via the *FileHeader's Open method.
+// Its Value parts are stored as strings.
+// Both are keyed by field name.
+type Form struct {
+	Value map[string][]string
+	File  map[string][]*FileHeader
+}
+</code></pre>
+
+<p>可以看出这个字段其实是包含了两个<code>map</code>，它们的作用就是存储了</p>
+
+<p>再提醒一下<code>multipart/form-data</code>是可以发送文件和文本的</p>
+
+<p>对应下来</p>
+
+<ul>
+<li>Value存储的是文本(String)</li>
+<li>File存储的是文件，是一个<code>*FileHeader</code>切片</li>
+</ul>
+
+<p>这个切片是不是很熟悉，就是单个文件上传的时候我们分析过的一个结构体，里面包含了</p>
+
+<pre><code class="language-go">// A FileHeader describes a file part of a multipart request.
+type FileHeader struct {
+	Filename string
+	Header   textproto.MIMEHeader
+	Size     int64
+
+	content []byte
+	tmpfile string
+}
+</code></pre>
+
+<p>这个结构体有个方法</p>
+
+<pre><code class="language-go">// Open opens and returns the FileHeader's associated File.
+func (fh *FileHeader) Open() (File, error) {
+	if b := fh.content; b != nil {
+		r := io.NewSectionReader(bytes.NewReader(b), 0, int64(len(b)))
+		return sectionReadCloser{r}, nil
+	}
+	return os.Open(fh.tmpfile)
+}
+</code></pre>
+
+<p>这个函数就可以返回我们需要的File的结构体。</p>
+
+<p>一下子我们就满足了两个条件了，文件名，文件结构体。</p>
+
+<p>所以代码中<code>formdata := c.Request.MultipartForm</code> 这里面就已经包含了我们所有的文件、文本的信息了。</p>
+
+<pre><code class="language-go">	filesUpload := formdata.File[&quot;upload&quot;]
+	textUpload := formdata.Value[&quot;text&quot;]
+</code></pre>
+
+<p>这个时候我们就可以访问结构体里面的数据了，通过map的查询得到(和客户端上传时候用的Key一样)</p>
+
+<ul>
+<li>如果是文本的话，就直接取出来了</li>
+<li>如果是文件</li>
+</ul>
+
+<p>要通过迭代才能得到每一个文件</p>
+
+<pre><code class="language-go">for index := range filesUpload {
+			file, err := filesUpload[index].Open()
+
+			defer file.Close()
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			out, err := os.Create(filesUpload[index].Filename)
+
+			defer out.Close()
+			if err != nil {
+				log.Fatal(err)
+			}
+			_, err = io.Copy(out, file)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+</code></pre>
+
+<p>最后告诉客户端，上传成功了</p>
+
+<pre><code class="language-go">c.String(http.StatusOK, &quot;upload multifile successfully!&quot;)
+</code></pre>
+
+<h2 id="绑定html">绑定HTML</h2>
+
+<pre><code class="language-go">router.LoadHTMLGlob(&quot;/home/shelljo/Documents/GoProject/src/github.com/WuShaoQiang/Gin/templates/*&quot;)
+	router.GET(&quot;/upload&quot;, func(c *gin.Context) {
+		c.HTML(http.StatusOK, &quot;upload.html&quot;, gin.H{})
+	})
+</code></pre>
+
+<p>第一个函数</p>
+
+<pre><code class="language-go">// LoadHTMLGlob loads HTML files identified by glob pattern
+// and associates the result with HTML renderer.
+func (engine *Engine) LoadHTMLGlob(pattern string)
+</code></pre>
+
+<p>这是一个讲某个路径的HTML文件绑定在渲染器上的函数</p>
+
+<p>然后通过<code>c.HTML</code></p>
+
+<pre><code class="language-go">// HTML renders the HTTP template specified by its file name.
+// It also updates the HTTP code and sets the Content-Type as &quot;text/html&quot;.
+// See http://golang.org/doc/articles/wiki/
+func (c *Context) HTML(code int, name string, obj interface{})
+</code></pre>
+
+<p>将模板给客户端</p>
+
+<h2 id="用json通信">用JSON通信</h2>
+
+<pre><code class="language-go">type User struct {
+	Username string `form:&quot;username&quot; json:&quot;username&quot; binding:&quot;required&quot;`
+	Passwd   string `form:&quot;passwd&quot; json:&quot;passwd&quot; binding:&quot;required&quot;`
+	Age      int    `form:&quot;age&quot; json:&quot;age&quot;`
+}
+
+router.POST(&quot;/login&quot;, func(c *gin.Context) {
+		var user User
+		var err error
+		contentType := c.Request.Header.Get(&quot;Content-Type&quot;)
+
+		switch contentType {
+		case &quot;application/json&quot;:
+			err = c.BindJSON(&amp;user)
+
+		case &quot;application/x-www-form-urlencoded&quot;:
+			err = c.BindWith(&amp;user, binding.Form)
+		}
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		c.JSON(http.StatusOK, gin.H{
+			&quot;user&quot;:   user.Username,
+			&quot;passwd&quot;: user.Passwd,
+			&quot;age&quot;:    user.Age,
+		})
+	})
+</code></pre>
+
+<p>用JSON通信的基础就是结构体，一般来说都要构建合适的结构体才可以获取到JSON数据(不一定全部都拿到)</p>
+
+<p>这里要关注一下<code>tag</code> 我们解析器就靠这个和数据进行绑定了，才能够读取出来</p>
+
+<p>首先我们看下Gin支持的绑定形式</p>
+
+<pre><code class="language-go">// These implement the Binding interface and can be used to bind the data
+// present in the request to struct instances.
+var (
+	JSON          = jsonBinding{}
+	XML           = xmlBinding{}
+	Form          = formBinding{}
+	Query         = queryBinding{}
+	FormPost      = formPostBinding{}
+	FormMultipart = formMultipartBinding{}
+	ProtoBuf      = protobufBinding{}
+	MsgPack       = msgpackBinding{}
+	YAML          = yamlBinding{}
+	Uri           = uriBinding{}
+)
+</code></pre>
+
+<p>虽然有些我不太懂，但是JSON XML等常用的都被包含进去了</p>
+
+<p>代码中有三种tag</p>
+
+<ul>
+<li><p>form 符合 <code>application/x-www-form-urlencoded</code>格式的表单</p></li>
+
+<li><p>json 符合 <code>application/json</code>格式的表单</p></li>
+
+<li><p>binding:&ldquo;required&rdquo; 就是说这个数据必须要有</p></li>
+</ul>
+
+<p>tag当然不止这些，靠慢慢积累把</p>
+
+<p>代码中可以看到，我们使用了对<code>Content-Type</code>分辨来实现用哪种绑定模式来读取数据，并且读取都是要读取到我们代码里创建好的内存变量(也就是要有一个结构体的示例来存储数据)</p>
+
+<pre><code class="language-go">// BindJSON is a shortcut for c.MustBindWith(obj, binding.JSON).
+func (c *Context) BindJSON(obj interface{}) error {
+	return c.MustBindWith(obj, binding.JSON)
+}
+</code></pre>
+
+<pre><code class="language-go">// BindWith binds the passed struct pointer using the specified binding engine.
+// See the binding package.
+func (c *Context) BindWith(obj interface{}, b binding.Binding) error {
+	log.Println(`BindWith(\&quot;interface{}, binding.Binding\&quot;) error is going to
+	be deprecated, please check issue #662 and either use MustBindWith() if you
+	want HTTP 400 to be automatically returned if any error occur, or use
+	ShouldBindWith() if you need to manage the error.`)
+	return c.MustBindWith(obj, b)
+}
+
+</code></pre>
+
+<p>我们看到这两个绑定函数其实调用的都是<code>MustBindWith()</code></p>
+
+<p>我们再看看它的代码</p>
+
+<pre><code class="language-go">// MustBindWith binds the passed struct pointer using the specified binding engine.
+// It will abort the request with HTTP 400 if any error occurs.
+// See the binding package.
+func (c *Context) MustBindWith(obj interface{}, b binding.Binding) error {
+	if err := c.ShouldBindWith(obj, b); err != nil {
+		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) // nolint: errcheck
+		return err
+	}
+	return nil
+}
+</code></pre>
+
+<p>这个函数比较强硬，只要出错了都会发送HTTP 400码，我们可以看到它调用的是<code>ShouldBindWith</code>函数，只是在出错的时候直接弃用了。</p>
+
+<p>如果不想如此处理错误的话，我们可以自己写一个类似<code>MustBindWith</code>函数，只是在出错的时候有不一样的处理</p>
+
+<p>再看看下一层代码：</p>
+
+<pre><code class="language-go">// ShouldBindWith binds the passed struct pointer using the specified binding engine.
+// See the binding package.
+func (c *Context) ShouldBindWith(obj interface{}, b binding.Binding) error {
+	return b.Bind(c.Request, obj)
+}
+</code></pre>
+
+<p>在下一层就发现，这是一个接口类型，也就是说，Gin另外写了一个结构体去实现这个接口</p>
+
+<pre><code class="language-go">type Binding interface {
+	Name() string
+	Bind(*http.Request, interface{}) error
+}
+</code></pre>
+
+<p>找到Gin源代码里面的json.go</p>
+
+<pre><code class="language-go">type jsonBinding struct{}
+
+func (jsonBinding) Name() string {
+	return &quot;json&quot;
+}
+
+func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
+	if req == nil || req.Body == nil {
+		return fmt.Errorf(&quot;invalid request&quot;)
+	}
+	return decodeJSON(req.Body, obj)
+}
+</code></pre>
+
+<p>对应到<code>binding.JSON = jsonBinding{}</code></p>
+
+<pre><code class="language-go">JSON          = jsonBinding{}
+</code></pre>
+
+<p>真相大白。</p>
+
+<p>理一理顺序</p>
+
+<pre><code class="language-go">err = c.BindJSON(&amp;user)
+
+func (c *Context) BindJSON(obj interface{}) error {
+	return c.MustBindWith(obj, binding.JSON)
+}
+
+JSON          = jsonBinding{}
+
+type jsonBinding struct{}
+
+func (jsonBinding) Name() string {
+	return &quot;json&quot;
+}
+
+func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
+	if req == nil || req.Body == nil {
+		return fmt.Errorf(&quot;invalid request&quot;)
+	}
+	return decodeJSON(req.Body, obj)
+}
+</code></pre>
+
+<p>从上到下就能理解了。</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/learn-hugo/">Hugo建博客</a></li>
+        
+        <li><a href="/posts/learningGo/">Go琐碎笔记</a></li>
+        
+        <li><a href="/posts/linux-note/">Linux命令笔记</a></li>
+        
+        <li><a href="/about/">笔者</a></li>
+        
+        <li><a href="/posts/learn-git/">Git用法总结</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Web">Web</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记">Mysql学习笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记">Go圣经读书笔记</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-inaction/" title="Go语言实战">Go语言实战</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程">Go语言高级编程</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode">Golang--Leetcode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode">Golang标准库--Unicode</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%8D%8F%E8%AE%AE/">协议(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8D%8F%E8%AE%AE/">协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>
