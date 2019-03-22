@@ -78,6 +78,34 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/web-strcuture/">Web框架</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章是参考人世间博主写的一篇文章，这里哪里作为自己了解Gin框架的例子，笔者想在这做初步了解后再去深入了解源码，到时候再写一篇博客来说说Gin源码。
+Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是
+ 相对路径
+ 处理函数
+  这里面是Gin自己定义的一个HandlerFunc，和标准库里面的有所不同，这里的gin.*Context包含了标准库里的ResponseWriter和*http.Request还有一些其它
+介绍一些函数 // Query()	是匹配url上的参数，匹配不到就返回空字符串 // DefaultQuery() 也是匹配，如果匹配不到就用默认值 // 127.0.0.1:8000/post?id=111&amp;page=222 // 如果用curl，则需要在&amp;前面加\ id := c.Query(&quot;id&quot;) page := c.DefaultQuery(&quot;page&quot;, &quot;0&quot;) //这个是在表单上获取信息，通过POST方法发送过来的数据 name := c.PostForm(&quot;name&quot;) message := c.PostForm(&quot;message&quot;)  一个完整的路由 router.GET(&quot;/welcome&quot;, func(c *gin.Context) { firstname := c.DefaultQuery(&quot;firstname&quot;, &quot;Guest&quot;) lastname := c.Query(&quot;lastname&quot;) c.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/web-strcuture/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/learningGo/">Go琐碎笔记</a>
                                 </h1>
                             </header>
@@ -152,6 +180,14 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http">Golang标准库--http</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义">一些名词的定义</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
@@ -183,14 +219,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -201,11 +229,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(12)</a>
     </li>
     
     <li>
@@ -233,6 +265,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
@@ -242,6 +276,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     

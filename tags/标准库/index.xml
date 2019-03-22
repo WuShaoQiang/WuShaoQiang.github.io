@@ -6,10 +6,23 @@
     <description>Recent content in 标准库 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Mar 2019 02:06:01 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Mar 2019 20:52:05 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang标准库--http</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-net-http/</link>
+      <pubDate>Tue, 19 Mar 2019 20:52:05 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-net-http/</guid>
+      <description>这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
+Package http doc.go 先来看看官方对这个包的一个解释
+这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
+这里还举了一些方法的例子
+// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&amp;quot;http://example.com/&amp;quot;) ... resp, err := http.Post(&amp;quot;http://example.com/upload&amp;quot;, &amp;quot;image/jpeg&amp;quot;, &amp;amp;buf) ... resp, err := http.</description>
+    </item>
     
     <item>
       <title>Golang标准库--Unicode</title>

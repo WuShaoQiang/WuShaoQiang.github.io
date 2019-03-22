@@ -78,6 +78,33 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">Golang标准库--http</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月19日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
+Package http doc.go 先来看看官方对这个包的一个解释
+这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
+这里还举了一些方法的例子
+// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">Golang标准库--Unicode</a>
                                 </h1>
                             </header>
@@ -204,6 +231,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http">Golang标准库--http</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义">一些名词的定义</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
@@ -235,14 +270,6 @@
         <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -253,11 +280,15 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(12)</a>
     </li>
     
     <li>
@@ -285,6 +316,8 @@
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
@@ -294,6 +327,8 @@
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     

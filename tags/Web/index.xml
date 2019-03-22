@@ -17,11 +17,12 @@
       <pubDate>Sun, 17 Mar 2019 01:53:57 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/posts/web-strcuture/</guid>
-      <description>Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是
+      <description>这篇文章是参考人世间博主写的一篇文章，这里哪里作为自己了解Gin框架的例子，笔者想在这做初步了解后再去深入了解源码，到时候再写一篇博客来说说Gin源码。
+Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是
  相对路径
  处理函数
   这里面是Gin自己定义的一个HandlerFunc，和标准库里面的有所不同，这里的gin.*Context包含了标准库里的ResponseWriter和*http.Request还有一些其它
-介绍一些函数 // Query()	是匹配url上的参数，匹配不到就返回空字符串 // DefaultQuery() 也是匹配，如果匹配不到就用默认值 // 127.0.0.1:8000/post?id=111&amp;amp;page=222 // 如果用curl，则需要在&amp;amp;前面加\ id := c.Query(&amp;quot;id&amp;quot;) page := c.DefaultQuery(&amp;quot;page&amp;quot;, &amp;quot;0&amp;quot;) //这个是在表单上获取信息，通过POST方法发送过来的数据 name := c.PostForm(&amp;quot;name&amp;quot;) message := c.PostForm(&amp;quot;message&amp;quot;)  一个完整的路由 router.GET(&amp;quot;/welcome&amp;quot;, func(c *gin.Context) { firstname := c.DefaultQuery(&amp;quot;firstname&amp;quot;, &amp;quot;Guest&amp;quot;) lastname := c.Query(&amp;quot;lastname&amp;quot;) c.String(http.StatusOK, &amp;quot;Hello %s %s&amp;quot;, firstname, lastname) c.</description>
+介绍一些函数 // Query()	是匹配url上的参数，匹配不到就返回空字符串 // DefaultQuery() 也是匹配，如果匹配不到就用默认值 // 127.0.0.1:8000/post?id=111&amp;amp;page=222 // 如果用curl，则需要在&amp;amp;前面加\ id := c.Query(&amp;quot;id&amp;quot;) page := c.DefaultQuery(&amp;quot;page&amp;quot;, &amp;quot;0&amp;quot;) //这个是在表单上获取信息，通过POST方法发送过来的数据 name := c.PostForm(&amp;quot;name&amp;quot;) message := c.PostForm(&amp;quot;message&amp;quot;)  一个完整的路由 router.GET(&amp;quot;/welcome&amp;quot;, func(c *gin.Context) { firstname := c.DefaultQuery(&amp;quot;firstname&amp;quot;, &amp;quot;Guest&amp;quot;) lastname := c.Query(&amp;quot;lastname&amp;quot;) c.</description>
     </item>
     
   </channel>

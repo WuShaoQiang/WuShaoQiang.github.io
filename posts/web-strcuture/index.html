@@ -93,6 +93,8 @@
                         <div class="post-content">
                             
 
+<p>这篇文章是参考<a href="https://www.jianshu.com/p/a31e4ee25305">人世间</a>博主写的一篇文章，这里哪里作为自己了解Gin框架的例子，笔者想在这做初步了解后再去深入了解源码，到时候再写一篇博客来说说Gin源码。</p>
+
 <h1 id="gin">Gin</h1>
 
 <h2 id="路由常用方法">路由常用方法</h2>
@@ -669,6 +671,263 @@ func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
 
 <p>从上到下就能理解了。</p>
 
+<blockquote>
+<p>2019.03.19 因为将博客从CSDN转移到了Hugo，所以现在更新</p>
+</blockquote>
+
+<h2 id="重定向">重定向</h2>
+
+<p>Gin框架有一个方法叫</p>
+
+<pre><code class="language-go">func (c *Context) Redirect(code int, location string) {
+	c.Render(-1, render.Redirect{
+		Code:     code,
+		Location: location,
+		Request:  c.Request,
+	})
+}
+</code></pre>
+
+<p>Gin函数已经帮我们封装好了重定向的函数，我们只需要添加<code>StatusCode</code> 和 <code>重定向的网址</code>。</p>
+
+<p>就像这样</p>
+
+<pre><code class="language-go">router.GET(&quot;/redict/baidu&quot;, func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, &quot;http://www.baidu.com&quot;)
+	})
+</code></pre>
+
+<h2 id="分组路由">分组路由</h2>
+
+<p>什么是分组路由呢，其实这是为了开发者写的代码更加模块化，你不会想见到每一个路由都是从根目录出发，因为每个业务都可以做为一个独立的块去开发。同时这个分组也易于定义<strong>中间件</strong>的使用范围</p>
+
+<pre><code class="language-go">    v1 := router.Group(&quot;/v1&quot;)
+
+	v1.GET(&quot;/login&quot;, func(c *gin.Context) {
+		c.String(http.StatusOK, &quot;v1 login&quot;)
+	})
+
+	v2 := router.Group(&quot;/v2&quot;)
+
+	v2.GET(&quot;/login&quot;, func(c *gin.Context) {
+		c.String(http.StatusOK, &quot;v2 login&quot;)
+	})
+</code></pre>
+
+<p>只是将一些东西单独分开，形成一个个模块，方便管理与开发。</p>
+
+<h2 id="中间件-middleware">中间件 (middleware)</h2>
+
+<h3 id="全局中间件">全局中间件</h3>
+
+<p>中间件函数应该返回一个<code>gin.HandlerFunc</code></p>
+
+<pre><code>func MiddleWare() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		...
+	}
+}
+</code></pre>
+
+<p>当然，形式不只是只能这样，只要最后返回一个正确的类型，其它内部实现就按照自己的想法去实现了。</p>
+
+<p>对于全局中间件，如果调用了<code>router.Use()</code>，那么<strong>之后的路由都会被修饰</strong>，注意了，是<strong>之后的</strong>，前面的不会被修饰。</p>
+
+<pre><code class="language-go">    router.Use(MiddleWare())
+    {
+        router.GET(&quot;/middleware&quot;, func(c *gin.Context) {
+                ...
+        
+        })
+
+        router.GET(...){
+            ...
+        }
+    }
+
+    router.GET(...){
+        ...
+    }
+
+</code></pre>
+
+<p>写上花括号，外部的GET路由也会被修饰，所以花括号只是一种规范而已，实际上它作用于所有关于这个路由的所有函数，甚至是它的分组。</p>
+
+<p>什么是全局，只是对<code>router</code>这个路由全局。</p>
+
+<p>我们再来看一段代码来好好理解这个全局的意思</p>
+
+<pre><code class="language-go">    v1.Use(MiddleWare())
+	{
+		v1.GET(&quot;/middleware&quot;, func(c *gin.Context) {
+			request := c.MustGet(&quot;request&quot;).(string)
+			req, _ := c.Get(&quot;request&quot;)
+			c.JSON(http.StatusOK, gin.H{
+				&quot;middile_request&quot;: request,
+				&quot;request&quot;:         req,
+			})
+		})
+	}
+
+    router.GET(&quot;/before&quot;, func(c *gin.Context) {
+		request, _ := c.Get(&quot;request&quot;)
+		c.JSON(http.StatusOK, gin.H{
+			&quot;middile_request&quot;: request,
+		})
+	})
+</code></pre>
+
+<p>注意了，我们用中间件修饰了<code>v1</code>，我们在修饰后，<code>router</code>的路由函数不会被修饰，所以这就很好的体现了分组的优势了。</p>
+
+<p>笔者在想，因为<code>v1</code>是由<code>router</code>分组过来的，会不会是继承之类的关系呢。</p>
+
+<p>所以笔者在这里验证一下，修饰<code>router</code>，<code>v1</code>会不会因此被修饰。</p>
+
+<pre><code class="language-go">router.Use(MiddleWare())
+	{
+		router.GET(&quot;/middleware&quot;, func(c *gin.Context) {
+			request := c.MustGet(&quot;request&quot;).(string)
+			req, _ := c.Get(&quot;request&quot;)
+			c.JSON(http.StatusOK, gin.H{
+				&quot;middile_request&quot;: request,
+				&quot;request&quot;:         req,
+			})
+		})
+	}
+
+    v1 := router.Group(&quot;/v1&quot;)
+
+	v1.GET(&quot;/before&quot;, func(c *gin.Context) {
+		request, _ := c.Get(&quot;request&quot;)
+		c.JSON(http.StatusOK, gin.H{
+			&quot;middile_request&quot;: request,
+		})
+	})
+</code></pre>
+
+<p>答案是<strong>被修饰了</strong>，所以这是具有继承性的。</p>
+
+<p>所以我们总结一下全局中间件</p>
+
+<ul>
+<li><p>全局中间件是对某一个路由作用的，并不是路由函数</p></li>
+
+<li><p>用<code>router.Use()</code>来给<code>router</code>路由添加中间件，这个中间件会作用于这个路由所有的路由函数，包括由这个路由分组出来的路由</p></li>
+</ul>
+
+<h3 id="单个路由中间件">单个路由中间件</h3>
+
+<p>我们上一个中间件针对的对象是路由</p>
+
+<p>现在我们来认识一下针对单个路由函数的中间件使用方式(中间件还是一样，只是用的方式不同)</p>
+
+<pre><code class="language-go">    v1.GET(&quot;/before&quot;, MiddleWare(), func(c *gin.Context) {
+		request := c.MustGet(&quot;request&quot;).(string)
+		c.JSON(http.StatusOK, gin.H{
+			&quot;middile_request&quot;: request,
+		})
+	})
+</code></pre>
+
+<p>可以很明显看出这就是写在路由函数上的。</p>
+
+<h3 id="群组中间件">群组中间件</h3>
+
+<p>我们在全局中间件的时候介绍过，中间件是可以继承的，或者说是嵌套的。</p>
+
+<p>我们可以这样用群组中间件</p>
+
+<pre><code class="language-go">v1 := router.Group(&quot;/v1&quot;,MiddleWare())
+
+v2 := router.Group(&quot;/v2&quot;)
+
+v2.Use(MiddleWare()){
+    v2.GET(...){
+        ...
+    }
+}
+
+</code></pre>
+
+<h3 id="中间件的用途">中间件的用途</h3>
+
+<p>中间件一般用于<strong>记录</strong>或者是<strong>错误处理</strong>或者是<strong>认证</strong></p>
+
+<p>看一个关于Cookie的例子</p>
+
+<pre><code class="language-go">    router.GET(&quot;/auth/signin&quot;, func(c *gin.Context) {
+		cookie := &amp;http.Cookie{
+			Name:     &quot;session_id&quot;,
+			Value:    &quot;123&quot;,
+			Path:     &quot;/&quot;,
+			HttpOnly: true,
+		}
+		http.SetCookie(c.Writer, cookie)
+		c.String(http.StatusOK, &quot;Login successful&quot;)
+	})
+
+	router.GET(&quot;/home&quot;, AuthMiddleWare(), func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{&quot;data&quot;: &quot;home&quot;})
+	})
+
+	
+    
+
+    func AuthMiddleWare() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if cookie, err := c.Request.Cookie(&quot;session_id&quot;); err == nil {
+			value := cookie.Value
+			fmt.Println(value)
+			if value == &quot;123&quot; {
+				c.Next()
+				return
+			}
+		}
+		c.JSON(http.StatusUnauthorized, gin.H{
+			&quot;error&quot;: &quot;Unauthorized&quot;,
+		})
+		c.Abort()
+		return
+	}
+}
+
+</code></pre>
+
+<p>这里要先访问<code>/auth/signin</code>后才能够访问<code>/home</code></p>
+
+<p>而且中间件要比路由函数先执行。</p>
+
+<h2 id="异步">异步</h2>
+
+<p>直接看代码</p>
+
+<pre><code class="language-go">    router.GET(&quot;/sync&quot;, func(c *gin.Context) {
+		time.Sleep(5 * time.Second)
+		log.Println(&quot;Done! in path&quot; + c.Request.URL.Path)
+	})
+
+	router.GET(&quot;/async&quot;, func(c *gin.Context) {
+		cCp := c.Copy()
+		go func() {
+			time.Sleep(5 * time.Second)
+			log.Println(&quot;Done! in path&quot; + c.Request.URL.Path)
+		}()
+	})
+</code></pre>
+
+<p>我们可以看到第一个路由函数是同步的(因为没有启动goroutine)，而第二个是通过一个goroutine来输出在终端。</p>
+
+<p>这里其实学过Go并发的人都能理解，但是为什么要调用一个<code>Copy()</code>函数呢，我们来看看</p>
+
+<pre><code class="language-go">// Copy returns a copy of the current context that can be safely used outside the request's scope.
+// This has to be used when the context has to be passed to a goroutine.
+func (c *Context) Copy() *Context {
+    ...
+}
+</code></pre>
+
+<p>我们可以看到，在解释里，复制上下文是为了安全使用。</p>
+
                         </div>
 
                         
@@ -738,6 +997,14 @@ func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http">Golang标准库--http</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义">一些名词的定义</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
@@ -769,14 +1036,6 @@ func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
         <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String">Golang标准库--String</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes">Golang标准库--Bytes</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio">Golang标准库--Bufio</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -787,11 +1046,15 @@ func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(11)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(12)</a>
     </li>
     
     <li>
@@ -819,6 +1082,8 @@ func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
@@ -828,6 +1093,8 @@ func (jsonBinding) Bind(req *http.Request, obj interface{}) error {
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     
