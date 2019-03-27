@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/network/</link>
+    <description>Recent content in Network on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 26 Mar 2019 17:27:44 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Questions Network</title>
+      <link>https://wushaoqiang.github.io/posts/questions-network/</link>
+      <pubDate>Tue, 26 Mar 2019 17:27:44 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/questions-network/</guid>
+      <description>这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
+IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
+A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。</description>
+    </item>
+    
+  </channel>
+</rss>

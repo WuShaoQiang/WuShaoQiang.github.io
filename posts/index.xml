@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Mar 2019 20:52:05 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Mar 2019 17:27:44 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Questions Network</title>
+      <link>https://wushaoqiang.github.io/posts/questions-network/</link>
+      <pubDate>Tue, 26 Mar 2019 17:27:44 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/questions-network/</guid>
+      <description>这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
+IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
+A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。</description>
+    </item>
     
     <item>
       <title>Golang标准库--http</title>
@@ -180,7 +191,8 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &amp;lt;
       <pubDate>Sun, 17 Mar 2019 01:58:00 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/posts/internet-protocal/</guid>
-      <description>一直觉得自己的基础很不牢固，事实也确实是这样，希望自己能够系统的总结好计算机网络这本书
+      <description>OSI模型把网络通信的工作分为7层，分别是物理层、数据链路层、网络层、传输层、会话层、表示层和应用层
+一直觉得自己的基础很不牢固，事实也确实是这样，希望自己能够系统的总结好计算机网络这本书
 二、应用层 Web、电子邮件、DNS和对等文件分发等
 2.1 应用层协议原理 2.1.1 网络应用程序体系结构 应用程序体系结构
  客户-服务器体系结构
@@ -212,8 +224,7 @@ P2P面临的挑战
 安全包括
  机密性
  完整性
- 端点鉴别
-  2.</description>
+ 端点鉴别</description>
     </item>
     
     <item>
