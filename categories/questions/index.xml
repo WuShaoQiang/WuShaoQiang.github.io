@@ -19,7 +19,13 @@
       <guid>https://wushaoqiang.github.io/posts/questions-network/</guid>
       <description>这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
 IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
-A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。</description>
+A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。
+Session 在mega项目里遇到一个问题
+首先，我访问服务器，服务器将会返回一个Session给我，那么我在这个网页游走都可以用这个Session，没毛病
+现在我Logout，这个时候服务器调用函数将Session的期限变为-1，也就是将Session过期
+这个时候我把之前服务器给我的Session自己存起来，用Postman构造一个请求，并且附上这个Session(其实是通过Cookie传)，这个时候服务器不会因为将Session期限改为-1而不认识这个Session
+所以这个现象表明所谓的清除只是服务器给浏览器发送的Cookie期限设置为-1，然后浏览器看到Cookie已经过期了，因此就不用了
+这样也就验证了，一个用户在服务器上只有一个Session id？</description>
     </item>
     
   </channel>

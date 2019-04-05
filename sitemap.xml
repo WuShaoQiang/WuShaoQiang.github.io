@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/learn-gitflow/</loc>
+    <lastmod>2019-04-03T23:27:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/golang-mega/</loc>
+    <lastmod>2019-04-01T15:12:46+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/questions-network/</loc>
     <lastmod>2019-03-26T17:27:44+08:00</lastmod>
   </url>
@@ -133,7 +143,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-03-26T17:27:44+08:00</lastmod>
+    <lastmod>2019-04-03T23:27:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -145,25 +155,25 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Git/</loc>
-    <lastmod>2019-03-15T18:02:59+08:00</lastmod>
+    <lastmod>2019-04-03T23:27:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Git/</loc>
-    <lastmod>2019-03-15T18:02:59+08:00</lastmod>
+    <lastmod>2019-04-03T23:27:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Golang/</loc>
-    <lastmod>2019-03-19T20:52:05+08:00</lastmod>
+    <lastmod>2019-04-01T15:12:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Golang/</loc>
-    <lastmod>2019-03-19T20:52:05+08:00</lastmod>
+    <lastmod>2019-04-01T15:12:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -204,6 +214,12 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/tags/mega/</loc>
+    <lastmod>2019-04-01T15:12:46+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/tags/Mysql/</loc>
     <lastmod>2019-03-17T02:14:18+08:00</lastmod>
     <priority>0</priority>
@@ -223,7 +239,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-03-26T17:27:44+08:00</lastmod>
+    <lastmod>2019-04-03T23:27:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   

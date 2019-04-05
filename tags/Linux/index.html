@@ -93,10 +93,26 @@
                             </div>
                             
                             <div class="post-content">
-                                这里只是笔者对Linux常用命令的笔记，方便自己查询
+                                Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
 ifconfig 查看网络连接
 lsof -i:8000 查看端口8000占用情况
-kill -9 PID 把某个PID的进程结束了……
+kill -9 PID 把某个PID的进程结束了
+mkdir -p /1/2/3/4 可以一次创建多层文件夹
+pkill -f &lt;name&gt; 可以直接kill掉一个已知名字的进程
+把脚本放进/etc/init.d/里面就可以自启动
+chown user:group &lt;file&gt; 改变文件持有
+磁盘 du -hsc &lt;path&gt; 查看路径占用磁盘大小
+ncdu 更友好的查看磁盘占用情况的一个命令，需要安装
+df -h查看磁盘占用情况
+别名 alias &lt;name&gt;=&quot;&lt;command&gt;&quot; 用别名调用命令(适用于长命令)，如果需要持久化的话，需要写入.bashrc
+查找文件 find &lt;path&gt; -name &quot;*.log&quot; 寻找在路径里面结尾为.log的文件，同理，想要查找一类文件可以用这个命令
+find &lt;path&gt; ! -name &quot;*.log&quot; 与上面刚好相反
+find -mtime &lt;number&gt;这个命令还可以根据修改时间
+匹配 grep -r &quot;error&quot; &lt;path or file&gt; 会打印出所有含有error的字段
+查看CPU&amp;内存占用情况 top 这个命令对界面不太友好
+htop 这个对阅读更加友好
+update 能够看到电脑持续开机时间
+Shell if判断语句……
                                 <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-note/">阅读全文</a></p>
                             </div>
                         </article>
@@ -123,6 +139,14 @@ kill -9 PID 把某个PID的进程结束了……
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
+    </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network">Questions Network</a>
@@ -156,14 +180,6 @@ kill -9 PID 把某个PID的进程结束了……
         <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程">Go语言高级编程</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode">Golang--Leetcode</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode">Golang标准库--Unicode</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -178,11 +194,11 @@ kill -9 PID 把某个PID的进程结束了……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(12)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(13)</a>
     </li>
     
     <li>
@@ -235,6 +251,8 @@ kill -9 PID 把某个PID的进程结束了……
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
     
     <a href="https://wushaoqiang.github.io/tags/network/">network</a>
     

@@ -17,10 +17,26 @@
       <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/posts/linux-note/</guid>
-      <description>这里只是笔者对Linux常用命令的笔记，方便自己查询
+      <description>Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
 ifconfig 查看网络连接
 lsof -i:8000 查看端口8000占用情况
-kill -9 PID 把某个PID的进程结束了</description>
+kill -9 PID 把某个PID的进程结束了
+mkdir -p /1/2/3/4 可以一次创建多层文件夹
+pkill -f &amp;lt;name&amp;gt; 可以直接kill掉一个已知名字的进程
+把脚本放进/etc/init.d/里面就可以自启动
+chown user:group &amp;lt;file&amp;gt; 改变文件持有
+磁盘 du -hsc &amp;lt;path&amp;gt; 查看路径占用磁盘大小
+ncdu 更友好的查看磁盘占用情况的一个命令，需要安装
+df -h查看磁盘占用情况
+别名 alias &amp;lt;name&amp;gt;=&amp;quot;&amp;lt;command&amp;gt;&amp;quot; 用别名调用命令(适用于长命令)，如果需要持久化的话，需要写入.bashrc
+查找文件 find &amp;lt;path&amp;gt; -name &amp;quot;*.log&amp;quot; 寻找在路径里面结尾为.log的文件，同理，想要查找一类文件可以用这个命令
+find &amp;lt;path&amp;gt; ! -name &amp;quot;*.log&amp;quot; 与上面刚好相反
+find -mtime &amp;lt;number&amp;gt;这个命令还可以根据修改时间
+匹配 grep -r &amp;quot;error&amp;quot; &amp;lt;path or file&amp;gt; 会打印出所有含有error的字段
+查看CPU&amp;amp;内存占用情况 top 这个命令对界面不太友好
+htop 这个对阅读更加友好
+update 能够看到电脑持续开机时间
+Shell if判断语句</description>
     </item>
     
   </channel>

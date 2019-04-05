@@ -91,13 +91,77 @@
                         </div>
                         
                         <div class="post-content">
-                            <p>这里只是笔者对Linux常用命令的笔记，方便自己查询</p>
+                            
+
+<h2 id="command">Command</h2>
+
+<p>这里只是笔者对Linux常用命令的笔记，方便自己查询</p>
 
 <p><code>ifconfig</code> 查看网络连接</p>
 
 <p><code>lsof -i:8000</code> 查看端口8000占用情况</p>
 
 <p><code>kill -9 PID</code> 把某个PID的进程结束了</p>
+
+<p><code>mkdir -p /1/2/3/4</code> 可以一次创建多层文件夹</p>
+
+<p><code>pkill -f &lt;name&gt;</code> 可以直接kill掉一个已知名字的进程</p>
+
+<p>把脚本放进<code>/etc/init.d/</code>里面就可以自启动</p>
+
+<p><code>chown user:group &lt;file&gt;</code> 改变文件持有</p>
+
+<h3 id="磁盘">磁盘</h3>
+
+<p><code>du -hsc &lt;path&gt;</code> 查看路径占用磁盘大小</p>
+
+<p><code>ncdu</code> 更友好的查看磁盘占用情况的一个命令，需要安装</p>
+
+<p><code>df -h</code>查看磁盘占用情况</p>
+
+<h3 id="别名">别名</h3>
+
+<p><code>alias &lt;name&gt;=&quot;&lt;command&gt;&quot;</code> 用别名调用命令(适用于长命令)，如果需要持久化的话，需要写入<code>.bashrc</code></p>
+
+<h3 id="查找文件">查找文件</h3>
+
+<p><code>find &lt;path&gt; -name &quot;*.log&quot;</code> 寻找在路径里面结尾为<code>.log</code>的文件，同理，想要查找一类文件可以用这个命令</p>
+
+<p><code>find &lt;path&gt; ! -name &quot;*.log&quot;</code> 与上面刚好相反</p>
+
+<p><code>find -mtime &lt;number&gt;</code>这个命令还可以根据修改时间</p>
+
+<h3 id="匹配">匹配</h3>
+
+<p><code>grep -r &quot;error&quot; &lt;path or file&gt;</code> 会打印出所有含有error的字段</p>
+
+<h3 id="查看cpu-内存占用情况">查看CPU&amp;内存占用情况</h3>
+
+<p><code>top</code> 这个命令对界面不太友好</p>
+
+<p><code>htop</code> 这个对阅读更加友好</p>
+
+<p><code>update</code> 能够看到电脑持续开机时间</p>
+
+<h2 id="shell">Shell</h2>
+
+<p>if判断语句</p>
+
+<pre><code class="language-sh">if [condition] 
+then
+
+else
+
+fi
+</code></pre>
+
+<p>循环语句</p>
+
+<pre><code class="language-sh">while [condition]
+do
+
+done
+</code></pre>
 
                         </div>
 
@@ -166,6 +230,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network">Questions Network</a>
     </li>
     
@@ -197,14 +269,6 @@
         <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程">Go语言高级编程</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode">Golang--Leetcode</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode">Golang标准库--Unicode</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -219,11 +283,11 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Git/">Git(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(12)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(13)</a>
     </li>
     
     <li>
@@ -276,6 +340,8 @@
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
     
     <a href="https://wushaoqiang.github.io/tags/network/">network</a>
     

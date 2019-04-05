@@ -7,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Golang标准库--Unicode | Gavin&#39;s Blog</title>
-    <meta property="og:title" content="Golang标准库--Unicode - Gavin&#39;s Blog">
+    <title>Learn Gitflow | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Learn Gitflow - Gavin&#39;s Blog">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2019-03-17T02:06:01&#43;08:00">
+    <meta property="article:published_time" content="2019-04-03T23:27:50&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2019-03-17T02:06:01&#43;08:00">
+    <meta property="article:modified_time" content="2019-04-03T23:27:50&#43;08:00">
         
     <meta name="Keywords" content="Golang,Gavin,Blog">
-    <meta name="description" content="Golang标准库--Unicode">
+    <meta name="description" content="Learn Gitflow">
         
     <meta name="author" content="Gavin">
-    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golangstd-unicode/">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/learn-gitflow/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
@@ -72,16 +72,16 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">Golang标准库--Unicode</h1>
+                            <h1 class="post-title">Learn Gitflow</h1>
                         </header>
                         <date class="post-meta meta-date">
-                            2019年3月17日
+                            2019年4月3日
                         </date>
                         
                         <div class="post-meta">
                             <span>|</span>
                             
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
                             
                         </div>
                         
@@ -93,187 +93,197 @@
                         <div class="post-content">
                             
 
-<h1 id="unicode">unicode</h1>
+<p>gitflow是一种规范，适合大项目开发</p>
 
-<h2 id="package-utf8">package utf8</h2>
+<p>Github上开源了一个遵循这样规范的一个Git工具<a href="https://github.com/nvie/gitflow">gitflow</a></p>
 
-<h3 id="utf8-go">utf8.go</h3>
+<h3 id="初始化一个git">初始化一个git</h3>
 
-<p>这里就不详细分析源码了，只说函数的作用</p>
-
-<h4 id="fullrune-p-byte-bool">&mdash; FullRune(p []byte) bool</h4>
-
-<blockquote>
-<p>FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。</p>
-</blockquote>
-
-<p>无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。</p>
-
-<h4 id="fullruneinstring-s-string-bool">&mdash; FullRuneInString(s string) bool</h4>
-
-<p>和<code>FullRune</code>一样，只是传入了字符串</p>
-
-<h4 id="decoderune-p-byte-r-rune-size-int">&mdash; DecodeRune(p []byte) (r rune, size int)</h4>
-
-<p>这个函数将切片p中第一个<code>rune</code>返回，并且返回这个rune的大小。</p>
-
-<p>如果p是空的，那么会返回<code>RuneError,0</code></p>
-
-<p>如果切片中的编码是无效的，那么会返回<code>RuneError,1</code>,对应上一个函数，当编码无效时依然返回<code>true</code></p>
-
-<h4 id="decoderuneinstring-s-string-r-rune-size-int">&mdash; DecodeRuneInString(s string) (r rune, size int)</h4>
-
-<p>同上，只是参数变成了字符串</p>
-
-<h4 id="func-decodelastrune-p-byte-r-rune-size-int">&mdash; func DecodeLastRune(p []byte) (r rune, size int)</h4>
-
-<p>只是从后面开始了，功能一样。</p>
-
-<h4 id="decodelastruneinstring-s-string-r-rune-size-int">&mdash; DecodeLastRuneInString(s string) (r rune, size int)</h4>
-
-<p>如上，参数换了字符串</p>
-
-<h4 id="runelen-r-rune-int">&mdash; RuneLen(r rune) int</h4>
-
-<p>返回一个rune的长度，也就是其大小</p>
-
-<h4 id="encoderune-p-byte-r-rune-int">&mdash; EncodeRune(p []byte, r rune) int</h4>
-
-<p>这个就是将rune写入到byte切片上</p>
-
-<h4 id="runecount-p-byte-int">&mdash; RuneCount(p []byte) int</h4>
-
-<p>返回整个切片里面rune的个数</p>
-
-<h4 id="runecountinstring-s-string-n-int">&mdash; RuneCountInString(s string) (n int)</h4>
-
-<p>同理，参数变成了字符串。</p>
-
-<h4 id="runestart-b-byte-bool">&mdash; RuneStart(b byte) bool</h4>
-
-<pre><code class="language-go">// RuneStart reports whether the byte could be the first byte of an encoded,
-// possibly invalid rune. Second and subsequent bytes always have the top two
-// bits set to 10.
-func RuneStart(b byte) bool { return b&amp;0xC0 != 0x80 }
+<pre><code>git flow init
 </code></pre>
 
-<p>这个是判断一个byte会不会以<code>11</code>`开头(二进制)</p>
+<p>然后会提醒一系列创建操作，类似</p>
 
-<h4 id="valid-p-byte-bool">&mdash; Valid(p []byte) bool</h4>
+<pre><code>Which branch should be used for bringing forth production releases?
+Branch name for production releases: [master]
 
-<p>判断一个切片是否全部都符合utf8编码</p>
+Which branch should be used for integration of the &quot;next release&quot;?
+Branch name for &quot;next release&quot; development: [develop]
 
-<h4 id="validstring-s-string-bool">&mdash; ValidString(s string) bool</h4>
-
-<p>同理，只是变成了字符串</p>
-
-<h4 id="func-validrune-r-rune-bool">&mdash; func ValidRune(r rune) bool</h4>
-
-<p>这个函数返回 r是否可以被编码成UTF-8</p>
-
-<p>如果超过了范围，就会不合规。</p>
-
-<pre><code class="language-go">func ValidRune(r rune) bool {
-	switch {
-	case 0 &lt;= r &amp;&amp; r &lt; surrogateMin:
-		return true
-	case surrogateMax &lt; r &amp;&amp; r &lt;= MaxRune:
-		return true
-	}
-	return false
-}
-
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [/home/shelljo/go/src/github.com/WuShaoQiang/mega/.git/hooks]
 </code></pre>
 
-<p>从代码上我们可以看出UTF8的范围。</p>
+<p>我一般就是按照默认</p>
 
-<h3 id="digit-go">digit.go</h3>
+<p>到这里我们就有了两个分支<code>master</code>和<code>develop</code></p>
 
-<h4 id="isdigit-r-rune-bool">&mdash; IsDigit(r rune) bool</h4>
+<h3 id="功能分支">功能分支</h3>
 
-<pre><code class="language-go">// IsDigit reports whether the rune is a decimal digit.
-func IsDigit(r rune) bool {
-	if r &lt;= MaxLatin1 {
-		return '0' &lt;= r &amp;&amp; r &lt;= '9'
-	}
-	return isExcludingLatin(Digit, r)
-}
+<p>如果要对软件实现一个功能，我们就可以创建一个<code>feature</code>分支</p>
+
+<pre><code>git flow feature start resetPassword
 </code></pre>
 
-<p>返回 这个rune是否是十进制数字。</p>
+<p>会出现</p>
 
-<h3 id="letter-go">letter.go</h3>
+<pre><code>Switched to a new branch 'feature/resetPassword'
 
-<p>这里只介绍我能理解，并且常用的几个函数</p>
+Summary of actions:
+- A new branch 'feature/resetPassword' was created, based on 'develop'
+- You are now on branch 'feature/resetPassword'
 
-<h4 id="is系列">Is系列</h4>
+Now, start committing on your feature. When done, use:
 
-<pre><code class="language-go">// IsUpper reports whether the rune is an upper case letter.
-func IsUpper(r rune) bool {
-	// See comment in IsGraphic.
-	if uint32(r) &lt;= MaxLatin1 {
-		return properties[uint8(r)]&amp;pLmask == pLu
-	}
-	return isExcludingLatin(Upper, r)
-}
-
-// IsLower reports whether the rune is a lower case letter.
-func IsLower(r rune) bool {
-	// See comment in IsGraphic.
-	if uint32(r) &lt;= MaxLatin1 {
-		return properties[uint8(r)]&amp;pLmask == pLl
-	}
-	return isExcludingLatin(Lower, r)
-}
-
-// IsTitle reports whether the rune is a title case letter.
-func IsTitle(r rune) bool {
-	if r &lt;= MaxLatin1 {
-		return false
-	}
-	return isExcludingLatin(Title, r)
-}
+     git flow feature finish resetPassword
 </code></pre>
 
-<p>Is系列都是在判断</p>
+<p>这里提示，你已经进入到了一个新的分支叫<code>feature/resetPassword</code>，是基于<code>develop</code>分支的，这个时候我们就可以在这个分支上做功能的实现了</p>
 
-<h3 id="to系列">To系列</h3>
+<p>一般来说，功能分支都是自己本地管理，不用提交到远程上的，但是万一功能还未实现却需要做别的事情，我们也可以提交上去作为一个备份</p>
 
-<pre><code class="language-go">// ToUpper maps the rune to upper case.
-func ToUpper(r rune) rune {
-	if r &lt;= MaxASCII {
-		if 'a' &lt;= r &amp;&amp; r &lt;= 'z' {
-			r -= 'a' - 'A'
-		}
-		return r
-	}
-	return To(UpperCase, r)
-}
-
-// ToLower maps the rune to lower case.
-func ToLower(r rune) rune {
-	if r &lt;= MaxASCII {
-		if 'A' &lt;= r &amp;&amp; r &lt;= 'Z' {
-			r += 'a' - 'A'
-		}
-		return r
-	}
-	return To(LowerCase, r)
-}
-
-// ToTitle maps the rune to title case.
-func ToTitle(r rune) rune {
-	if r &lt;= MaxASCII {
-		if 'a' &lt;= r &amp;&amp; r &lt;= 'z' { // title case is upper case for ASCII
-			r -= 'a' - 'A'
-		}
-		return r
-	}
-	return To(TitleCase, r)
-}
+<pre><code>git add -A
+git commit -m &quot;message&quot;
+git push origin
 </code></pre>
 
-<p>To系列是指变换的。这里说到，ASCII码的title case就是upper case。</p>
+<p>如果流没有对应的话，它会提醒你设置的<code>--set-upstream</code></p>
+
+<p>我们假设功能已经完成，现在需要提交到<code>develop</code>分支上，输入</p>
+
+<pre><code>git add -A
+git commit -m &quot;message&quot;
+git flow feature finish
+</code></pre>
+
+<p>会出现</p>
+
+<pre><code>Switched to branch 'develop'
+Your branch is up to date with 'origin/develop'.
+Updating be78ba5..99525b9
+Fast-forward
+ cmd/db_init/main.go | 2 ++
+ 1 file changed, 2 insertions(+)
+To github.com:WuShaoQiang/mega
+ - [deleted]         feature/test
+Deleted branch feature/test (was 99525b9).
+
+Summary of actions:
+- The feature branch 'feature/test' was merged into 'develop'
+- Feature branch 'feature/test' has been locally deleted; it has been remotely deleted from 'origin'
+- You are now on branch 'develop'
+</code></pre>
+
+<p>这里可以看到gitflow自动把已经合并的分支给删除了，并且自动切换到了<code>develop</code>分支</p>
+
+<p>这个时候我们可以将本地的<code>develop</code>分支推到远程的<code>develop</code>分支</p>
+
+<pre><code>git push origin
+</code></pre>
+
+<h3 id="发布版本">发布版本</h3>
+
+<p>发布版本是要上线到<code>master</code>分支的时候</p>
+
+<pre><code>git flow release start &lt;version&gt;
+</code></pre>
+
+<p>会出现</p>
+
+<pre><code>Switched to a new branch 'release/1.0.1'
+
+Summary of actions:
+- A new branch 'release/1.0.1' was created, based on 'develop'
+- You are now on branch 'release/1.0.1'
+
+Follow-up actions:
+- Bump the version number now!
+- Start committing last-minute fixes in preparing your release
+- When done, run:
+
+     git flow release finish '1.0.1'
+</code></pre>
+
+<p>可以看到也是自动创建和切换分支</p>
+
+<p>当测试完毕的时候</p>
+
+<pre><code>git flow release finish 
+</code></pre>
+
+<p>会出现</p>
+
+<pre><code>Switched to branch 'master'
+Merge made by the 'recursive' strategy.
+ cmd/db_init/main.go | 2 ++
+ 1 file changed, 2 insertions(+)
+Already on 'master'
+Switched to branch 'develop'
+Your branch is up to date with 'origin/develop'.
+Already up to date!
+Merge made by the 'recursive' strategy.
+Deleted branch release/1.0.1 (was 99525b9).
+
+Summary of actions:
+- Release branch 'release/1.0.1' has been merged into 'master'
+- The release was tagged '1.0.1'
+- Release tag '1.0.1' has been back-merged into 'develop'
+- Release branch 'release/1.0.1' has been locally deleted
+- You are now on branch 'develop'
+</code></pre>
+
+<p>我们还要执行</p>
+
+<pre><code>git push origin --all --follow-tags
+</code></pre>
+
+<p>一定要跟<code>--follow-tags</code>，不然无法创建</p>
+
+<h3 id="小结">小结</h3>
+
+<p>gitflow当然不止这些，还有bug分支等，等用到了再总结。</p>
+
+<h2 id="关于-gitignore">关于.gitignore</h2>
+
+<p>笔者近期发现自己竟然把配置文件都给推到Github上了，真是惊了，于是乎想起有一个叫做.gitignore的文件，能够让我们在push到远程的时候不会把一些我们不想推的文件推上去，下面是关于.gitignore的配置，只是作为一个记录方便查阅，并不需要记</p>
+
+<pre><code>#               表示此为注释,将被Git忽略
+*.a             表示忽略所有 .a 结尾的文件
+!lib.a          表示但lib.a除外
+/TODO           表示仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+build/          表示忽略 build/目录下的所有文件，过滤整个build文件夹；
+doc/*.txt       表示会忽略doc/notes.txt但不包括 doc/server/arch.txt
+ 
+bin/:           表示忽略当前路径下的bin文件夹，该文件夹下的所有内容都会被忽略，不忽略 bin 文件
+/bin:           表示忽略根目录下的bin文件
+/*.c:           表示忽略cat.c，不忽略 build/cat.c
+debug/*.obj:    表示忽略debug/io.obj，不忽略 debug/common/io.obj和tools/debug/io.obj
+**/foo:         表示忽略/foo,a/foo,a/b/foo等
+a/**/b:         表示忽略a/b, a/x/b,a/x/y/b等
+!/bin/run.sh    表示不忽略bin目录下的run.sh文件
+*.log:          表示忽略所有 .log 文件
+config.php:     表示忽略当前路径的 config.php 文件
+ 
+/mtk/           表示过滤整个文件夹
+*.zip           表示过滤所有.zip文件
+/mtk/do.c       表示过滤某个具体文件
+</code></pre>
+
+<p>整理来源于<a href="https://www.cnblogs.com/kevingrace/p/5690241.html">散尽浮华</a></p>
+
+<p>前面我说了，我已经不小心将配置文件推到了Github上，所以我急忙补了一个.gitignore，但发现文件还是照样上传上去了，为什么呢？</p>
+
+<p>因为.gitignore文件只对还没加入版本管理的文件起作用，所以我们要在git上删除，并且更新到远程，然后下次才能不将这个文件推上去</p>
+
+<h2 id="在git上遇到了坑">在Git上遇到了坑</h2>
+
+<p>笔者在某一天早晨发现，之前写的代码全没了。。 看了之前调用的命令才发现，不知道什么时候调用了<code>git checkout</code>把工作区所有的修改都还原了，也就是退回到和本地版本库里的版本。。。所以大家慎用<code>git checkout</code></p>
 
                         </div>
 
@@ -286,15 +296,15 @@ func ToTitle(r rune) rune {
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/posts/golangstd-string/">Golang标准库--String</a></li>
+        <li><a href="/posts/learn-git/">Git用法总结</a></li>
         
-        <li><a href="/posts/golangstd-bytes/">Golang标准库--Bytes</a></li>
+        <li><a href="/posts/golang-mega/">Golang Mega</a></li>
         
-        <li><a href="/posts/golangstd-bufio/">Golang标准库--Bufio</a></li>
+        <li><a href="/posts/questions-network/">Questions Network</a></li>
         
-        <li><a href="/posts/web-strcuture/">Web框架</a></li>
+        <li><a href="/posts/golangstd-net-http/">Golang标准库--http</a></li>
         
-        <li><a href="/posts/learn-hugo/">Hugo建博客</a></li>
+        <li><a href="/posts/definition/">一些名词的定义</a></li>
         
     </ul>
 </div>
@@ -304,9 +314,7 @@ func ToTitle(r rune) rune {
                             
                             <ul class="clearfix">
                                 
-                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
-                                
-                                <li><a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93">标准库</a></li>
+                                <li><a href="https://wushaoqiang.github.io/tags/Git">Git</a></li>
                                 
                             </ul>
                             

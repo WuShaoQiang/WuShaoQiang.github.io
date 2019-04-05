@@ -6,10 +6,22 @@
     <description>Recent content in Git on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 15 Mar 2019 18:02:59 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 03 Apr 2019 23:27:50 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Git/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Learn Gitflow</title>
+      <link>https://wushaoqiang.github.io/posts/learn-gitflow/</link>
+      <pubDate>Wed, 03 Apr 2019 23:27:50 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/learn-gitflow/</guid>
+      <description>gitflow是一种规范，适合大项目开发
+Github上开源了一个遵循这样规范的一个Git工具gitflow
+初始化一个git git flow init  然后会提醒一系列创建操作，类似
+Which branch should be used for bringing forth production releases? Branch name for production releases: [master] Which branch should be used for integration of the &amp;quot;next release&amp;quot;? Branch name for &amp;quot;next release&amp;quot; development: [develop] How to name your supporting branch prefixes? Feature branches? [feature/] Bugfix branches? [bugfix/] Release branches? [release/] Hotfix branches? [hotfix/] Support branches? [support/] Version tag prefix? [] Hooks and filters directory?</description>
+    </item>
     
     <item>
       <title>Git用法总结</title>
