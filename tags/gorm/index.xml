@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gorm on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/gorm/</link>
+    <description>Recent content in Gorm on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 Apr 2019 20:37:11 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/gorm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Gorm</title>
+      <link>https://wushaoqiang.github.io/posts/golang-gorm/</link>
+      <pubDate>Fri, 05 Apr 2019 20:37:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-gorm/</guid>
+      <description>连接数据库 Mysql db, err := gorm.Open(&amp;quot;mysql&amp;quot;, &amp;quot;root:123456@tcp/test?charset=utf8&amp;amp;parseTime=True&amp;quot;) if err != nil { panic(&amp;quot;连接数据库失败&amp;quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
+db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
+比如db.CreateTable(&amp;amp;Product{})，在数据库表单里面会得到一个名字为products
+所以一般都会加上这个函数
+创建Table db.CreateTable(&amp;amp;Product{})  创建多个table
+db.CreateTable(&amp;amp;Product{},&amp;amp;User{})  删除Table 关于删除，有两个
+db.DropTableIfExist(interface{}) db.DropTable(interface{})  这里可以传入字符串，也可以传入一个结构体
+接着上面的例子
+db.DropTableIfExist(&amp;quot;product&amp;quot;) db.DropTableIfExist(&amp;amp;Product{})  删除Column 删除Column是要指定Table，所以不能这样
+db.DropColumn(&amp;quot;created_at&amp;quot;)  要定位Table，则需要
+db.Model(&amp;amp;Product).DropColumn(&amp;quot;created_at&amp;quot;)  创建数据 db.Create(&amp;amp;Product{Code: &amp;quot;L1213&amp;quot;, Price: 1002})  查询数据 // 最后一个符合条件，默认id最后的那个 // Get last record, order by primary key db.Last(&amp;amp;user) //// SELECT * FROM users ORDER BY id DESC LIMIT 1; // 将所有符合条件的返回，这里要传一个结构体数组 // Get all records db.</description>
+    </item>
+    
+  </channel>
+</rss>
