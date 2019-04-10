@@ -36,7 +36,7 @@ find -mtime &amp;lt;number&amp;gt;这个命令还可以根据修改时间
 查看CPU&amp;amp;内存占用情况 top 这个命令对界面不太友好
 htop 这个对阅读更加友好
 update 能够看到电脑持续开机时间
-Shell if判断语句</description>
+查看Linux发行版本 cat /proc/version or lsb_release -a</description>
     </item>
     
   </channel>

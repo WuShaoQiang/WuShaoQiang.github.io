@@ -115,6 +115,45 @@
 
 <p>这样也就验证了，一个用户在服务器上只有一个Session id？</p>
 
+<h3 id="resp-body">resp.Body</h3>
+
+<pre><code class="language-go">    resp, err := http.DefaultClient.Do(req)
+    if err != nil {
+        log.Fatalf(&quot;Do Error %s\n&quot;, err)
+    }
+
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+    	log.Fatalf(&quot;ReadAll Error %s\n&quot;, err)
+    }
+
+    // fmt.Println(string(body))
+    file, err := os.Create(path + keyword + &quot;.html&quot;)
+    if err != nil {
+    	log.Fatalf(&quot;Create File Error %s\n&quot;, err)
+    }
+
+    defer file.Close()
+
+    _, err = file.Write(body)
+    if err != nil {
+    	log.Fatalf(&quot;Write Error %s\n&quot;, err)
+    }
+
+    doc, err := goquery.NewDocumentFromReader(resp.Body)
+    if err != nil {
+        log.Fatalf(&quot;go query Error %s\n&quot;, err)
+    }
+</code></pre>
+
+<p>发现resp.Body被读取写入文件后，下面在调用resp.Body无效了，难道这个只能用一次吗，那怎么重复使用呢，下面给出一个方案</p>
+
+<pre><code class="language-go">bodyRCer := ioutil.NopCloser(bytes.NewBuffer(body))
+</code></pre>
+
+<p>通过读出来的body重新构造一个<code>io.ReadCloser</code></p>
+
                         </div>
 
                         
@@ -184,6 +223,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
     </li>
     
@@ -215,14 +262,6 @@
         <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记">Mysql学习笔记</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记">Go圣经读书笔记</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -241,7 +280,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(15)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(17)</a>
     </li>
     
     <li>
@@ -295,6 +334,8 @@
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
     <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
     
     <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
@@ -306,6 +347,8 @@
     <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     

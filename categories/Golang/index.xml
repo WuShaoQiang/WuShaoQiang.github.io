@@ -6,10 +6,45 @@
     <description>Recent content in Golang on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Apr 2019 20:37:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 08 Apr 2019 23:10:14 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang goquery</title>
+      <link>https://wushaoqiang.github.io/posts/golang-goquery/</link>
+      <pubDate>Mon, 08 Apr 2019 23:10:14 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-goquery/</guid>
+      <description>goquery是一个开源的库，针对解析HTML
+今天在做爬虫的时候用到了一些功能，记录下来方便查阅
+创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&amp;quot;go query Error %s\n&amp;quot;, err) }  doc对象就包含了我们要解析的HTML主体
+一般我们这样用，Find()里面的字符串就是我们要填写的规则
+doc.Find(&amp;quot;div&amp;quot;).Each(func(i int, s *goquery.Selection) { fmt.Println(i,s.Text()) })  规则 我们可以根据HTML的源码分析对应的属性id，class等等
+ div#id #id是某个div的id属性，筛选出此id的div标签
+ div.class .class 同理，是class属性
+ div[class],div[lang] 这个也是属性的筛选
+ div&amp;gt;p div嵌套的p标签，这里规定只有一级标签，一级以后的p标签不会被筛选出来
+ div p div嵌套的p标签，这里无论第几级都会被筛选出来
+  属性可以和嵌套一起使用，例如div.class&amp;gt;p&amp;gt;li
+Size num := doc.Find(&amp;quot;ul&amp;gt;li&amp;gt;div.job-primary&amp;quot;).Size()  取出标签内的属性 doc.Find(&amp;quot;ul&amp;gt;li&amp;gt;div.job-primary&amp;gt;div&amp;gt;h3&amp;gt;a&amp;quot;).Each(func(i int, s *goquery.Selection) { detail := s.Get(0).Attr[0].Val // fmt.Println(i, nextPage) jobs[i].Detail = detail })  我在这里踩过一个坑</description>
+    </item>
+    
+    <item>
+      <title>Golangstd Request</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-request/</link>
+      <pubDate>Mon, 08 Apr 2019 11:37:38 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-request/</guid>
+      <description>最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
+我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
+所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
+Request结构体 type Request struct { Method string URL *url.URL Proto string // &amp;quot;HTTP/1.0&amp;quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &amp;lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
+Method 这就是一个请求的方法(如GET、POST)
+但是Go的HTTP客户端不支持发送方法为CONNECT的请求
+URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).</description>
+    </item>
     
     <item>
       <title>Golang Gorm</title>

@@ -143,6 +143,10 @@
 
 <p><code>update</code> 能够看到电脑持续开机时间</p>
 
+<h3 id="查看linux发行版本">查看Linux发行版本</h3>
+
+<p><code>cat /proc/version</code> or <code>lsb_release -a</code></p>
+
 <h2 id="shell">Shell</h2>
 
 <p>if判断语句</p>
@@ -162,6 +166,115 @@ do
 
 done
 </code></pre>
+
+<h2 id="内存">内存</h2>
+
+<h3 id="虚拟内存和物理内存">虚拟内存和物理内存</h3>
+
+<p>内存的一项主要任务，就是存储进程的相关数据</p>
+
+<p>进程并不能直接访问物理内存，进程中能访问的地址，只能是<strong>虚拟内存地址</strong>,这种内存管理方式，称为虚拟内存</p>
+
+<p>每个进程都有自己的一套虚拟内存地址，进程的虚拟内存地址相互独立，所以两个进程空间可以有相同的虚拟内存地址</p>
+
+<p>我们对进程的某个虚拟地址操作会被CPU翻译成对某个物理地址的操作</p>
+
+<p>说到这里可以看出，应用程序对物理内存地址一无所知，无论是什么类型的语言，所表达出来的地址统统是<strong>虚拟内存地址</strong></p>
+
+<pre><code>虚拟内存地址 ---&gt; CPU ---&gt; 物理内存地址
+</code></pre>
+
+<p>所以我们物理内存地址的掌控权在操作系统上，因此操作系统可以通过讲不同的进程映射到不同的内存区域来达到两个进程<code>不往来</code>，从而减少进程出错的可能性</p>
+
+<h3 id="内存共享">内存共享</h3>
+
+<p>操作系统控制着物理内存，进程控制着虚拟内存</p>
+
+<p>只要将操作系统的物理内存投射到不同的进程中的虚拟内存中，就可以达到<code>无复制</code>的数据共享(内存共享)</p>
+
+<p>比如我们的内核，每个进程空间最初一部分的虚拟内存地址，都对应到物理内存中预留给内核的空间</p>
+
+<h3 id="内存分页">内存分页</h3>
+
+<p>因为CPU在两种内存之间做了<code>翻译者</code>的角色，因此，这种模式会耗费计算机资源</p>
+
+<h4 id="最简单的翻译">最简单的翻译</h4>
+
+<p>把所有对应关系都记录在一个表中，这个表又必须放在内存当中，但是这种方式非常非常浪费资源，甚至会把所有物理内存占满，导致计算机崩溃</p>
+
+<p>这种方法的映射关系是这样的</p>
+
+<pre><code>单个字节(虚拟内存)  ---&gt; CPU ---&gt; 单个字节(物理内存)
+</code></pre>
+
+<h4 id="分页">分页</h4>
+
+<p>Linux采用了分页的方式来记录对应关系</p>
+
+<p>所谓分页，相对上面的<code>最简单方法</code>而言，分页将连续的地址(比如大小为4kb)组成一个页</p>
+
+<p>所以在进程空间到物理内存之间的映射关系就变成了</p>
+
+<pre><code>页(虚拟内存) ---&gt; CPU ---&gt; 页(物理内存)
+</code></pre>
+
+<p>内存中的总页数就是内存字节数的<code>1/4000</code></p>
+
+<p>不过我们要清楚知道的是<strong>页中的内存地址是连续的</strong></p>
+
+<p>并且<code>页的大小</code>在虚拟内存和物理内存中是一样的，这样才能保证页内的数据一一对应</p>
+
+<p>虽然是一一对应，那么我们怎么才能通过某一个虚拟内存地址来访问对应一个物理内存地址呢</p>
+
+<p>通过<strong>偏移量</strong>， 虚拟地址包含了两个部分<code>页编号</code>和<code>偏移量</code></p>
+
+<p>比如我们的每一页是4096个字节，那么偏移量就用12个bit来表示(因为2^12=4096)，举个例子</p>
+
+<p>虚拟内存地址<code>0x00f11011</code>，那么页编号是<code>0x00f11</code> 偏移量是<code>011</code></p>
+
+<p>这个时候CPU里面有一个表写着</p>
+
+<pre><code>0x00f11 --&gt; 0x01010 
+</code></pre>
+
+<p><strong>注意</strong>CPU只是做页的映射，偏移量还是那个</p>
+
+<p>所以我们从虚拟内存地址<code>0x00f11011</code>得到了物理内存地址<code>0x01010011</code>，这个时候就可以具体到某一个内存地址来读取数据了</p>
+
+<h4 id="多级分页表">多级分页表</h4>
+
+<p>由于每个进程都会有一套虚拟内存地址，所以每个进程都会有一个分页表，为了查询更块，分页表也会保存在内存中</p>
+
+<p>分页表有多种实现方式</p>
+
+<h5 id="最简单的方法">最简单的方法</h5>
+
+<p>我们前面讲的线性列表就是最简单的方式</p>
+
+<p>但这有一个缺点</p>
+
+<p>我们每个进程空间都会为栈和堆的增长预留了地址，但栈和堆很少能够占满进程空间</p>
+
+<p>在这种情况下，没有用到的内存空间也具有映射关系，很多条目就会没有被真正用到(没有数据用啥用)</p>
+
+<p>因此，Linux中的分页表，采用了多层的数据结构，能够有效减少分页表的空间</p>
+
+<h5 id="多层的数据结构">多层的数据结构</h5>
+
+<p>其实和上面的线性结构区别就在于，这里分多了几级，最新的Linux系统中的分页表多达3层</p>
+
+<p>举一个双层的例子</p>
+
+<p>虚拟内存地址还是<code>0x00f11011</code></p>
+
+<pre><code>
+0x00 ---&gt; 一级表 ---&gt; 二级表(这个二级表所有开头都为0x00) ---&gt; 查询f11映射 ---&gt; 得到对应物理内存的页地址 ---&gt; 根据偏移量 --&gt; 得出最终地址
+
+</code></pre>
+
+<p>其实我们可以看到和上面的线性结构相比，双层结构只是变成了树状结构，3层也就变成了更大的树</p>
+
+<p>多层分页表的基本原理都是一样的</p>
 
                         </div>
 
@@ -193,6 +306,8 @@ done
                             <ul class="clearfix">
                                 
                                 <li><a href="https://wushaoqiang.github.io/tags/Linux">Linux</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86">内存管理</a></li>
                                 
                             </ul>
                             
@@ -230,6 +345,14 @@ done
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
     </li>
     
@@ -261,14 +384,6 @@ done
         <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记">Mysql学习笔记</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记">Go圣经读书笔记</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -287,7 +402,7 @@ done
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(15)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(17)</a>
     </li>
     
     <li>
@@ -341,6 +456,8 @@ done
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
     <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
     
     <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
@@ -352,6 +469,8 @@ done
     <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     

@@ -25,7 +25,8 @@ Session 在mega项目里遇到一个问题
 现在我Logout，这个时候服务器调用函数将Session的期限变为-1，也就是将Session过期
 这个时候我把之前服务器给我的Session自己存起来，用Postman构造一个请求，并且附上这个Session(其实是通过Cookie传)，这个时候服务器不会因为将Session期限改为-1而不认识这个Session
 所以这个现象表明所谓的清除只是服务器给浏览器发送的Cookie期限设置为-1，然后浏览器看到Cookie已经过期了，因此就不用了
-这样也就验证了，一个用户在服务器上只有一个Session id？</description>
+这样也就验证了，一个用户在服务器上只有一个Session id？
+resp.Body resp, err := http.DefaultClient.Do(req) if err != nil { log.Fatalf(&amp;quot;Do Error %s\n&amp;quot;, err) } defer resp.Body.Close() body, err := ioutil.ReadAll(resp.Body) if err != nil { log.Fatalf(&amp;quot;ReadAll Error %s\n&amp;quot;, err) } // fmt.Println(string(body)) file, err := os.Create(path + keyword + &amp;quot;.html&amp;quot;) if err != nil { log.Fatalf(&amp;quot;Create File Error %s\n&amp;quot;, err) } defer file.Close() _, err = file.</description>
     </item>
     
   </channel>

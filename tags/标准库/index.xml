@@ -6,10 +6,25 @@
     <description>Recent content in 标准库 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Mar 2019 20:52:05 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 08 Apr 2019 11:37:38 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golangstd Request</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-request/</link>
+      <pubDate>Mon, 08 Apr 2019 11:37:38 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-request/</guid>
+      <description>最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
+我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
+所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
+Request结构体 type Request struct { Method string URL *url.URL Proto string // &amp;quot;HTTP/1.0&amp;quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &amp;lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
+Method 这就是一个请求的方法(如GET、POST)
+但是Go的HTTP客户端不支持发送方法为CONNECT的请求
+URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).</description>
+    </item>
     
     <item>
       <title>Golang标准库--http</title>
