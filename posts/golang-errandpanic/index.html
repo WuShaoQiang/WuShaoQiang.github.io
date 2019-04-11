@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Golang Errandpanic | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Golang Errandpanic - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-04-11T21:28:42&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-04-11T21:28:42&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Golang Errandpanic">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golang-errandpanic/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Golang Errandpanic</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年4月11日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结</p>
+
+<p>本文参考了<a href="http://www.cnblogs.com/zhangboyu/p/7911190.html?utm_campaign=studygolang.com&amp;utm_medium=studygolang.com&amp;utm_source=studygolang.com">张伯雨的博客</a>
+<a href="https://www.flysnow.org/2019/01/01/golang-error-handle-suggestion.html">飞雪无情的博客</a>
+<a href="https://medium.com/benchkram/less-verbose-error-handling-in-golang-10e2679707a2">外国友人的博客</a></p>
+
+<h3 id="直观理解">直观理解</h3>
+
+<p>虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常</p>
+
+<p><strong>错误</strong>是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情</p>
+
+<p><strong>异常</strong>是我们意料之外的事情，比如空指针、数组越界等</p>
+
+<h3 id="defer">defer</h3>
+
+<p>说到异常就要提一下<code>defer</code>，它是一个关键字，用于延迟函数的执行，我们常见的是</p>
+
+<pre><code class="language-go">...
+
+
+defer file1.Close()
+defer file2.Close()
+
+...
+</code></pre>
+
+<p>当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了</p>
+
+<p>并且它是按照一个栈的形式来执行，也就是<code>先进后出</code>，在上面的例子中，<code>file2</code>会比<code>file1</code>先执行<code>Close()</code></p>
+
+<p>如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕</p>
+
+<h3 id="同样的功能-不同的设计">同样的功能，不同的设计</h3>
+
+<p>比如说，许多标准库里的函数，会有两种设计</p>
+
+<ol>
+<li><p>一般设计，如果输入有误，则返回错误</p></li>
+
+<li><p>异常设计，如果输入有误，直接抛出异常</p></li>
+</ol>
+
+<p>怎么看都觉得第二种好恐怖啊，动不动就抛出异常</p>
+
+<p>其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用<code>template</code>标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了</p>
+
+<h3 id="凡事要有规则">凡事要有规则</h3>
+
+<p>异常处理的作用域</p>
+
+<ol>
+<li><p>空指针引用</p></li>
+
+<li><p>下标越界</p></li>
+
+<li><p>除数为0</p></li>
+
+<li><p>不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支</p></li>
+
+<li><p>输入不应该引起函数错误</p></li>
+</ol>
+
+<h3 id="错误处理正确姿势">错误处理正确姿势</h3>
+
+<h4 id="1-失败原因只有一个时-不用error">1.失败原因只有一个时，不用error</h4>
+
+<p>比如只是一些简单的判断，这个时候输出bool会更好</p>
+
+<h4 id="2-没有错误-不用error">2.没有错误，不用error</h4>
+
+<p>有些时候error成为了一些人的追求了，弄不弄都要返回一个error类型</p>
+
+<h4 id="3-error应该在返回值的最后">3.error应该在返回值的最后</h4>
+
+<p>无论返回多少个返回值，error都在最后</p>
+
+<h4 id="4-错误值应该统一-不要任性">4.错误值应该统一，不要任性</h4>
+
+<p>我们在本应该是同类型的错误里，不要定义不同的错误</p>
+
+<p>应该在包中增加一些常见的错误类型</p>
+
+<h4 id="5-错误逐层传递时-层层都加日志">5.错误逐层传递时，层层都加日志</h4>
+
+<p>这是为了好定位错误</p>
+
+<h4 id="6-错误处理使用defer">6.错误处理使用defer</h4>
+
+<p>对于闭包的参数是值传递，对于外部变量却是引用传递，所以闭包中的外部变量err的值会是最新发生error的值</p>
+
+<p>参考代码别人写的代码</p>
+
+<pre><code class="language-go">func deferDemo() error {
+    err := createResource1()
+    if err != nil {
+        return ERR_CREATE_RESOURCE1_FAILED
+    }
+    defer func() {
+        if err != nil {
+            destroyResource1()
+        }
+    }()
+    err = createResource2()
+    if err != nil {
+        return ERR_CREATE_RESOURCE2_FAILED
+    }
+    defer func() {
+        if err != nil {
+            destroyResource2()
+        }
+    }()
+
+    err = createResource3()
+    if err != nil {
+        return ERR_CREATE_RESOURCE3_FAILED
+    }
+    defer func() {
+        if err != nil {
+            destroyResource3()
+        }
+    }()
+
+    err = createResource4()
+    if err != nil {
+        return ERR_CREATE_RESOURCE4_FAILED
+    }
+    return nil
+}
+</code></pre>
+
+<h4 id="7-尝试多几次-先别立刻返回错误">7.尝试多几次，先别立刻返回错误</h4>
+
+<p>在一些时候，有些操作的可行性不是百分百，比如网络中的请求，会因为网路原因失败，这个时候我们应该多尝试几次，当然重试次数要明确，不然可能会发生死循环</p>
+
+<p>笔者在这里有亲身经历，拿爬虫来说，爬虫被封是很正常的事情，这不能说程序出错了，我们在检验到爬虫屡次请求都不通过的时候，应该是要换一些配置，而不是发生错误</p>
+
+<h4 id="8-当上层函数不关心错误的时候-不返回error">8.当上层函数不关心错误的时候，不返回error</h4>
+
+<p>对一些资源清理的相关函数(delete)，如果子函数出错，打印日志即可，而无需将错误进一步反馈到上层函数</p>
+
+<h4 id="9-当发生错误时-不忽略有用的返回值">9.当发生错误时，不忽略有用的返回值</h4>
+
+<p>这个我就不太理解了</p>
+
+<h3 id="异常处理正确姿势">异常处理正确姿势</h3>
+
+<h4 id="1-在程序开发阶段-可以多用panic">1.在程序开发阶段，可以多用panic</h4>
+
+<p>这样会使得错误能够被挖掘出来，Bug能尽快得到修复</p>
+
+<h4 id="2-在程序部署后-应恢复异常避免程序终止">2.在程序部署后，应恢复异常避免程序终止</h4>
+
+<p>一旦Golang程序部署后，在任何情况下发生的异常都不应该导致程序异常退出，我们在上层函数中加一个延迟执行的recover调用来达到这个目的</p>
+
+<p>我们调用recover的延迟函数中以最合理的方式响应该异常</p>
+
+<ol>
+<li><p>打印堆栈的异常调用信息和关键的业务信息，保证这些问题可见</p></li>
+
+<li><p>将异常转换为错误，保证程序恢复到健康状态继续运行</p></li>
+</ol>
+
+<p>顺便说一下，recover要和defer搭配使用才能有效捕获异常</p>
+
+<p>并且panic异常处理机制不会自动将错误信息传递给error</p>
+
+<p>看别人写的代码示例</p>
+
+<pre><code class="language-go">func funcA() error {
+    defer func() {
+        if p := recover(); p != nil {
+            fmt.Printf(&quot;panic recover! p: %v&quot;, p)
+            debug.PrintStack()
+        }
+    }()
+    return funcB()
+}
+
+func funcB() error {
+    // simulation
+    panic(&quot;foo&quot;)
+    return errors.New(&quot;success&quot;)
+}
+
+func test() {
+    err := funcA()
+    if err == nil {
+        fmt.Printf(&quot;err is nil\\n&quot;)
+    } else {
+        fmt.Printf(&quot;err is %v\\n&quot;, err)
+    }
+}
+</code></pre>
+
+<p>这里最后输出<code>err is nil</code>，因为funcB在抛出异常给funcA捕获后，并没有直接将错误赋值给err返回值，所以是nil</p>
+
+<p>改成这样</p>
+
+<pre><code class="language-go">func funcA() (err error) {
+    defer func() {
+        if p := recover(); p != nil {
+            fmt.Println(&quot;panic recover! p:&quot;, p)
+            str, ok := p.(string)
+            if ok {
+                err = errors.New(str)
+            } else {
+                err = errors.New(&quot;panic&quot;)
+            }
+            debug.PrintStack()
+        }
+    }()
+    return funcB()
+}
+</code></pre>
+
+<h4 id="3-对于不应该出现的分支-使用异常处理">3.对于不应该出现的分支，使用异常处理</h4>
+
+<p>这种情况一般是，本应该程序的结果就在某个分支上，但是实际上结果却不在我们所想的任意一条分支上，这个时候要panic了，因为这符合了我们前面所说的，发生在意料之外</p>
+
+<h4 id="4-针对入参不应该有问题的函数-使用panic设计">4.针对入参不应该有问题的函数，使用panic设计</h4>
+
+<p>就是参数必须必须要对的时候，采用这种设计</p>
+
+<hr />
+
+<h3 id="pkg-errors">pkg/errors</h3>
+
+<p>上面我们认识到了一些规则，能够让错误和异常得到很好的简化和必要性</p>
+
+<p>其中标准库的<code>errors</code>不能够跟踪错误信息源，以至于我们想跟踪的话，得在每一层都写日志记录</p>
+
+<p>Github上有一些项目解决了这一问题，分别有<a href="https://github.com/palantir/stacktrace">palantir/stacktrace</a>,<a href="https://github.com/go-errors/errors">go-errors/errors</a>,<a href="https://github.com/pkg/errors">pkg/errors</a></p>
+
+<p>其中<code>pkg/errors</code>比较简便，使用比较舒服</p>
+
+<p>简单示例</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&quot;fmt&quot;
+
+	&quot;github.com/pkg/errors&quot;
+)
+func A() error {
+	return errors.New(&quot;NullPointerException&quot;)
+}
+
+func B() error {
+	return A()
+}
+
+func main() {
+	fmt.Printf(&quot;Error: %+v&quot;, B())
+}
+</code></pre>
+
+<p>这个包实现了Format的支持，我们这里用<code>%+v</code>可以输出堆栈信息</p>
+
+<p>如果不需要追踪，则<code>%v</code>即可</p>
+
+<h4 id="adding-context-to-an-error">adding context to an error</h4>
+
+<pre><code class="language-go">_, err := ioutil.ReadAll(r)
+if err != nil {
+        return errors.Wrap(err, &quot;read failed&quot;)
+}
+</code></pre>
+
+<p>这个<code>Wrap</code>函数是为了在错误上添加一些自己的Debug语句</p>
+
+<p>比如我们打开文件失败了，返回了一个error</p>
+
+<p>这个时候我们可以用这个函数来写一些自己的Message</p>
+
+<p>就拿这个例子写个代码演示一下</p>
+
+<pre><code class="language-go">func openFileError() (*os.File, error) {
+	file, err := os.Open(&quot;...&quot;)
+	return file, err
+
+}
+
+func Log(err error) {
+	if err != nil {
+		log.Printf(&quot;%+v&quot;, errors.Wrap(err, &quot;log&quot;))
+	}
+}
+
+func main() {
+	// fmt.Printf(&quot;Error: %+v\n&quot;, B())
+	_, err := openFileError()
+	Log(err)
+}
+</code></pre>
+
+<p>结果如下</p>
+
+<pre><code>2019/04/12 00:51:04 open ...: no such file or directory
+log
+main.Log
+        /home/shelljo/go/src/github.com/WuShaoQiang/test/errors/main.go:33
+main.main
+        /home/shelljo/go/src/github.com/WuShaoQiang/test/errors/main.go:40
+runtime.main
+        /usr/local/go/src/runtime/proc.go:201
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1333
+</code></pre>
+
+<p>可以看出error发生的地方是一步步从上层到下层显示出来</p>
+
+<h4 id="retrieving-the-cause-of-an-error">retrieving the cause of an error</h4>
+
+<pre><code class="language-go">switch err := errors.Cause(err).(type) {
+case *MyError:
+        // handle specifically
+default:
+        // unknown error
+}
+</code></pre>
+
+<p>Github有一个小项目是对<code>pkg/errors</code>的二次包装，代码如下</p>
+
+<pre><code class="language-go">//Fatal panics on error
+//First parameter of msgs is used each following variadic arg is dropped
+func Fatal(err error, msgs ...string) {
+	if err != nil {
+		var str string
+		for _, msg := range msgs {
+			str = msg
+			break
+		}
+		panic(errors.Wrap(err, str))
+	}
+}
+
+//Recover recovers a panic introduced by Fatal, any other function which calls panics
+//				or a memory corruption. Logs the error when called without args.
+//
+//Must be used at the top of the function defered
+//defer Recover()
+//or
+//defer Recover(&amp;err)
+func Recover(errs ...*error) {
+	var e *error
+	for _, err := range errs {
+		e = err
+		break
+	}
+
+	//handle panic
+	if r := recover(); r != nil {
+		var errmsg error
+		//Preserve error which might have happend before panic/recover
+		//Check if a error ptr was passed + a error occured
+		if e != nil &amp;&amp; *e != nil {
+			//When error occured before panic then Wrap panic error around it
+			errmsg = errors.Wrap(*e, r.(error).Error())
+		} else {
+			//No error occured just add a stacktrace
+			errmsg = errors.Wrap(r.(error), &quot;&quot;)
+		}
+
+		//If error cant't bubble up -&gt; Log it
+		if e != nil {
+			*e = errmsg
+		} else {
+			log.Printf(&quot;%+v&quot;, errmsg)
+		}
+	}
+}
+
+//Log logs an error + stack trace directly to console or file
+//Use this at the top level to publish errors without creating a new error object
+func Log(err error, msgs ...string) {
+	if err != nil {
+		var str string
+		for _, msg := range msgs {
+			str = msg
+			break
+		}
+		log.Printf(&quot;%+v&quot;, errors.Wrap(err, str))
+	}
+}
+</code></pre>
+
+<p>并且给了几个例子</p>
+
+<pre><code class="language-go">func bar() (err error){
+  defer errz.Recover(&amp;err) //recover all panics
+
+  err = foo()
+  errz.Fatal(err) //panics on error
+
+  //Some pieces of code.
+  //Not executed when foo() returned a error
+  //..
+  //..
+
+  return err
+}
+</code></pre>
+
+<h3 id="总结一下">总结一下</h3>
+
+<p>笔者觉得前面那些正确姿势并不一定要反复检查是否严格遵守每一步(虽然它有它的道理),只要我们自己心中清楚这些人性化的处理，我们写出来的代码就不会给错误处理给弄得不美观</p>
+
+<p>笔者觉得错误处理的第5,6点建议就不太必要</p>
+
+<p>层层记录已经有第三方包帮我们实现了</p>
+
+<p>第六点写的那个代码不美观</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/golang-crawler/">Golang Crawler</a></li>
+        
+        <li><a href="/posts/golang-handle/">Golang Handle</a></li>
+        
+        <li><a href="/posts/golang-goquery/">Golang goquery</a></li>
+        
+        <li><a href="/posts/golangstd-request/">Golangstd Request</a></li>
+        
+        <li><a href="/posts/golang-gorm/">Golang Gorm</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86">错误处理</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">异常处理</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper">Golang Viper</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

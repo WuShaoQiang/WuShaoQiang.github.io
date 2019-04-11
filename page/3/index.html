@@ -68,6 +68,132 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String" >Golang标准库--String</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
+&mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-string/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes" >Golang标准库--Bytes</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio" >Golang标准库--Bufio</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/internet-protocal/" title="网络协议基础" >网络协议基础</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/protocal">protocal</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                OSI模型把网络通信的工作分为7层，分别是物理层、数据链路层、网络层、传输层、会话层、表示层和应用层
+一直觉得自己的基础很不牢固，事实也确实是这样，希望自己能够系统的总结好计算机网络这本书
+二、应用层 Web、电子邮件、DNS和对等文件分发等
+2.1 应用层协议原理 2.1.1 网络应用程序体系结构 应用程序体系结构
+ 客户-服务器体系结构
+ 对等体系结构(P2P)
+  现在大多数应用都是以客户-服务器体系结构
+P2P面临的挑战
+ 下载比上传多很多
+ 安全性
+ 用户是否能自愿提供带宽、存储和计算资源
+  最近比较火的一个名词区块链就是倡导去中心化的网络，也就是P2P
+2.1.2 进程通信 在同一个端系统上(可以理解为同一部电脑)，进程间通信的规则由端系统上的操作系统决定
+在不同端系统上，通过跨越计算机网络交换报文来相互通信
+2.1.2.1 客户和服务器进程 发起通信的进程就是客户
+等待联系的进程是服务器
+2.1.2.2 进程与计算机网络之间的接口 进程通过一个称为套接字的软件接口向网络发送报文和从网络接收报文
+这个套接字就好比如一个房子的大门，发送或者接收都要先开门
+而这里把进程比作房子，运输层协议(TCP等)比作两个房子的路
+所以套接字是应用层和运输层的接口，也叫应用程序编程接口(API)
+2.1.2.3 进程寻址 主机由IP地址标识
+指定的进程由端口号标识
+2.1.3 可供应用程序使用的运输服务 根据运输层所提供的服务来决定用哪种运输层协议
+2.1.3.1 可靠数据传输 当一个运输协议提供这种服务时，发送进程只要将其数据传递进套接字，就可以完全相信该数据将能无差错地到达接收进程
+有些能够容忍数据丢失的应用可以不使用可靠数据传输
+2.1.3.2 吞吐量 吞吐量就是发送进程能够向接收进程交付比特的速率
+具有吞吐量要求的应用被称为带宽敏感应用
+否则就称为弹性应用
+2.1.3.3 定时 对于实时要求较高的应用
+2.1.3.4 安全性 防止数据以某种方式在两个进程之间被观察到
+安全包括
+ 机密性
+ 完整性
+ 端点鉴别……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/internet-protocal/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/web-strcuture/" title="Web框架" >Web框架</a>
                                 </h1>
                             </header>
@@ -267,7 +393,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/page/3/">3</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/4/">4</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/page/4/">下一页</a>
+    </li>
     
 </ol>
 
@@ -289,6 +423,22 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
+    </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
@@ -314,22 +464,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network">Questions Network</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http">Golang标准库--http</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义">一些名词的定义</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -348,7 +482,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(17)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
     </li>
     
     <li>
@@ -380,6 +514,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
@@ -398,6 +534,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
@@ -405,6 +543,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
     
     <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
     
     <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
     
@@ -420,7 +560,11 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     
 </div>
     </section>

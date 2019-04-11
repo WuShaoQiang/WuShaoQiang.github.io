@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>错误处理 | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="错误处理 - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="错误处理">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/index.xml" title="Gavin's Blog" />
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+                    <h3 class="archive-title">
+                        包含标签
+                        <span class="keyword">错误处理</span>
+                        的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">Golang Errandpanic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等
+defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好
+2.没有错误，不用error 有些时候error成为了一些人的追求了，弄不弄都要返回一个error类型
+3.error应该在返回值的最后 无论返回多少个返回值，error都在最后
+4.错误值应该统一，不要任性 我们在本应该是同类型的错误里，不要定义不同的错误
+应该在包中增加一些常见的错误类型
+5.错误逐层传递时，层层都加日志 这是为了好定位错误
+6.错误处理使用defer 对于闭包的参数是值传递，对于外部变量却是引用传递，所以闭包中的外部变量err的值会是最新发生error的值
+参考代码别人写的代码
+func deferDemo() error { err := createResource1() if err != nil { return ERR_CREATE_RESOURCE1_FAILED } defer func() { if err !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+
+                    
+
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper">Golang Viper</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+
+</body>
+</html>

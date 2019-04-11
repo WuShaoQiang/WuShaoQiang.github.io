@@ -78,6 +78,121 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/">Golang Exercism</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
+func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/">Go圣经读书笔记</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
+func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
+输出/tmp/go-build115927302/b001/exe/main 123
+查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
+ func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
+ func (s *Scanner) Text() string  返回scanner所在行的文本
+counts := make(map[string]int) input := bufio.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-inaction/">Go语言实战</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Go语言优点：
+ Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
+ Go语言内置并发机制，对并发有着更好的性能
+ Go语言自带垃圾回收器
+ goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
+  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-inaction/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/">Go语言高级编程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
+这篇文章是开源的，欢迎大家去阅读
+本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
+第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
+ Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
+ 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
+  字符串  字符串的元素不可修改，是一个只读的字节数组
+ 字符串虽然不是切片，但是支持切片操作
+type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
+  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
+这种做法可以减少中间创建的临时切片
+copy append可以完成切片的添加 删除 插入操作……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-leetcode/">Golang--Leetcode</a>
                                 </h1>
                             </header>
@@ -233,75 +348,6 @@ Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handl
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learn-hugo/">Hugo建博客</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月16日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Hugo">Hugo</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。
-所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人
-以下命令都是以我自己建博客的为例
-创建一个网站 hugo new site blog 这个命令会在目录里创建一个新的blog目录
-这个blog目录包含以下：
- archetypes/ content/ data/ layouts/ static/ themes/ config.toml  archetypes/ 这里一开始会有一个default文件，后面再讲有什么用，先看看文件
---- title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot; date: {{ .Date }} draft: true ---  content/ 这里就是博客的主要内容的根目录，我们创建的博客文章就应该放在这个文件夹里(不是直接)
-创建一个博客文章hugo new posts/learn-hugo.md，创建完后会发现文件在content/posts/learn-hugo.md
-打开文件看一下，可以发现创建的新文件里面是有内容的
---- title: &quot;Learn Hugo&quot; date: 2019-03-16T22:33:20+08:00 draft: true ---  这就和我们上面说到的archetypes/default.md有关，这里可以自动填充一些信息，方便我们写博客
-theme/ 这里是放置博客主题的文件夹，Hugo有很多开源的主题，可以去官网找找看，笔者用的是飞雪无情这位博主开源出来的Maupassant，笔者刚开始也按照这位博主的配置方法来配置博客，等后面对Hugo的配置了解更加深入时，再尝试配置。Maupassant的仓库地址，大家还可以顺手点个星，表示支持
-具体如何安装也很简单，可以参照github的使用方法
-config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
-## 这个是我们主页的地址 baseURL = &quot;https://wushaoqiang.github.io&quot; languageCode = &quot;en-us&quot; ## 博客的标题(不是某篇文章，是整个博客) title = &quot;Gavin's Blog&quot; ## 这里就是设定你要的主题，而且主题必须要下载到theme/目录 theme = &quot;maupassant&quot; ## 保持分类的原始名字（false会做转小写处理） preserveTaxonomyNames = true ## 是否禁止URL Path转小写 disablePathToLower = true ## 这个会配置每一篇文章最后面的Copyright的作者名字 ## © 2019 Gavin's Blog By Gavin [author] name = &quot;Gavin&quot; [params] author = &quot;Gavin&quot; ## 这是一个副标题，在主标题的下方 subtitle = &quot;Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记&quot; keywords = &quot;Golang,Gavin,Blog&quot; ## 这个是对阅读量的计数 busuanzi = true ## 这个是为了开评论区 [params.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-hugo/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/">Go琐碎笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月14日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
-2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0)
-然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII
-res, ok := map[...] 中的ok变量可以用来判断key是否存在
-[]rune可以直接转换为字符串string([]rune)
-2019.2.17 谨记！ ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
-norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -322,7 +368,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/tags/Golang/page/2/">2</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Golang/page/3/">3</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/tags/Golang/page/3/">下一页</a>
+    </li>
     
 </ol>
 
@@ -344,6 +398,22 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
+    </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
@@ -369,22 +439,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network">Questions Network</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http">Golang标准库--http</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义">一些名词的定义</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -403,7 +457,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(17)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
     </li>
     
     <li>
@@ -435,6 +489,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
@@ -453,6 +509,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
@@ -460,6 +518,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
     
     <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
     
     <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
     
@@ -475,7 +535,11 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     
 </div>
     </section>

@@ -6,10 +6,85 @@
     <description>Recent content in Golang on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Apr 2019 23:10:14 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Apr 2019 01:34:09 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang Log</title>
+      <link>https://wushaoqiang.github.io/posts/golang-log/</link>
+      <pubDate>Fri, 12 Apr 2019 01:34:09 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-log/</guid>
+      <description>笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库</description>
+    </item>
+    
+    <item>
+      <title>Golang Errandpanic</title>
+      <link>https://wushaoqiang.github.io/posts/golang-errandpanic/</link>
+      <pubDate>Thu, 11 Apr 2019 21:28:42 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-errandpanic/</guid>
+      <description>笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等
+defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好
+2.没有错误，不用error 有些时候error成为了一些人的追求了，弄不弄都要返回一个error类型
+3.error应该在返回值的最后 无论返回多少个返回值，error都在最后
+4.错误值应该统一，不要任性 我们在本应该是同类型的错误里，不要定义不同的错误
+应该在包中增加一些常见的错误类型
+5.错误逐层传递时，层层都加日志 这是为了好定位错误
+6.错误处理使用defer 对于闭包的参数是值传递，对于外部变量却是引用传递，所以闭包中的外部变量err的值会是最新发生error的值
+参考代码别人写的代码
+func deferDemo() error { err := createResource1() if err != nil { return ERR_CREATE_RESOURCE1_FAILED } defer func() { if err !</description>
+    </item>
+    
+    <item>
+      <title>Golang Crawler</title>
+      <link>https://wushaoqiang.github.io/posts/golang-crawler/</link>
+      <pubDate>Thu, 11 Apr 2019 17:35:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-crawler/</guid>
+      <description>笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
+goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP  过程中遇到的错误(不分顺序)
+ first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
+ invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
+  defer func () { if resp != nil { resp.Body.Close() } }()  </description>
+    </item>
+    
+    <item>
+      <title>Golang Handle</title>
+      <link>https://wushaoqiang.github.io/posts/golang-handle/</link>
+      <pubDate>Thu, 11 Apr 2019 11:14:34 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-handle/</guid>
+      <description>本文主要解释Golang中http-handler几个容易混淆的概念
+HandleFunc 源代码
+在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
+http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
+当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
+myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
+// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
+// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&amp;quot;http: nil handler&amp;quot;) } mux.</description>
+    </item>
     
     <item>
       <title>Golang goquery</title>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Handler on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/handler/</link>
+    <description>Recent content in Handler on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Apr 2019 11:14:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/handler/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Handle</title>
+      <link>https://wushaoqiang.github.io/posts/golang-handle/</link>
+      <pubDate>Thu, 11 Apr 2019 11:14:34 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-handle/</guid>
+      <description>本文主要解释Golang中http-handler几个容易混淆的概念
+HandleFunc 源代码
+在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
+http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
+当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
+myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
+// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
+// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&amp;quot;http: nil handler&amp;quot;) } mux.</description>
+    </item>
+    
+  </channel>
+</rss>

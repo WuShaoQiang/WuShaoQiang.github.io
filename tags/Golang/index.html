@@ -78,6 +78,137 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-log/">Golang Log</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-log/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">Golang Errandpanic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等
+defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好
+2.没有错误，不用error 有些时候error成为了一些人的追求了，弄不弄都要返回一个error类型
+3.error应该在返回值的最后 无论返回多少个返回值，error都在最后
+4.错误值应该统一，不要任性 我们在本应该是同类型的错误里，不要定义不同的错误
+应该在包中增加一些常见的错误类型
+5.错误逐层传递时，层层都加日志 这是为了好定位错误
+6.错误处理使用defer 对于闭包的参数是值传递，对于外部变量却是引用传递，所以闭包中的外部变量err的值会是最新发生error的值
+参考代码别人写的代码
+func deferDemo() error { err := createResource1() if err != nil { return ERR_CREATE_RESOURCE1_FAILED } defer func() { if err !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-crawler/">Golang Crawler</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
+goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP  过程中遇到的错误(不分顺序)
+ first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
+ invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
+  defer func () { if resp != nil { resp.Body.Close() } }()  ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-crawler/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-handle/">Golang Handle</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                本文主要解释Golang中http-handler几个容易混淆的概念
+HandleFunc 源代码
+在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
+http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
+当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
+myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
+// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
+// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&quot;http: nil handler&quot;) } mux.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-handle/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-goquery/">Golang goquery</a>
                                 </h1>
                             </header>
@@ -255,121 +386,6 @@ Package http doc.go 先来看看官方对这个包的一个解释
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/">Golang Exercism</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
-func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/">Go圣经读书笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
-func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
-输出/tmp/go-build115927302/b001/exe/main 123
-查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
- func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
- func (s *Scanner) Text() string  返回scanner所在行的文本
-counts := make(map[string]int) input := bufio.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-inaction/">Go语言实战</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Go语言优点：
- Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
- Go语言内置并发机制，对并发有着更好的性能
- Go语言自带垃圾回收器
- goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
-  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-inaction/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/">Go语言高级编程</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
-这篇文章是开源的，欢迎大家去阅读
-本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
-第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
- Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
- 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
-  字符串  字符串的元素不可修改，是一个只读的字节数组
- 字符串虽然不是切片，但是支持切片操作
-type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
-  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
-这种做法可以减少中间创建的临时切片
-copy append可以完成切片的添加 删除 插入操作……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -384,6 +400,10 @@ copy append可以完成切片的添加 删除 插入操作……
     
     <li >
         <a href="https://wushaoqiang.github.io/tags/Golang/page/2/">2</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Golang/page/3/">3</a>
     </li>
     
 
@@ -414,6 +434,22 @@ copy append可以完成切片的添加 删除 插入操作……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
     </li>
     
@@ -437,22 +473,6 @@ copy append可以完成切片的添加 删除 插入操作……
         <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network">Questions Network</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http">Golang标准库--http</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义">一些名词的定义</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism">Golang Exercism</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -471,7 +491,7 @@ copy append可以完成切片的添加 删除 插入操作……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(17)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
     </li>
     
     <li>
@@ -503,6 +523,8 @@ copy append可以完成切片的添加 删除 插入操作……
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
@@ -521,6 +543,8 @@ copy append可以完成切片的添加 删除 插入操作……
     
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
@@ -528,6 +552,8 @@ copy append可以完成切片的添加 删除 插入操作……
     <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
     
     <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
     
     <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
     
@@ -543,7 +569,11 @@ copy append可以完成切片的添加 删除 插入操作……
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     
 </div>
     </section>
