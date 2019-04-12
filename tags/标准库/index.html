@@ -78,6 +78,32 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-os/">Golang标准库--os</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
+bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
+// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
+// Flags to OpenFile wrapping those of the underlying system.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golangstd-request/">Golangstd Request</a>
                                 </h1>
                             </header>
@@ -260,6 +286,22 @@ Package http doc.go 先来看看官方对这个包的一个解释
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion">Opinion</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
     </li>
     
@@ -283,22 +325,6 @@ Package http doc.go 先来看看官方对这个包的一个解释
         <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper">Golang Viper</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -313,11 +339,15 @@ Package http doc.go 先来看看官方对这个包的一个解释
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(23)</a>
     </li>
     
     <li>
@@ -330,6 +360,10 @@ Package http doc.go 先来看看官方对这个包的一个解释
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
     </li>
     
     <li>
@@ -355,6 +389,8 @@ Package http doc.go 先来看看官方对这个包的一个解释
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
@@ -372,6 +408,10 @@ Package http doc.go 先来看看官方对这个包的一个解释
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
     
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
@@ -398,6 +438,8 @@ Package http doc.go 先来看看官方对这个包的一个解释
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     

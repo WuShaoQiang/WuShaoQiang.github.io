@@ -94,7 +94,7 @@
                             
                             <div class="post-content">
                                 笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
-goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP  过程中遇到的错误(不分顺序)
+goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
  first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
  invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
   defer func () { if resp != nil { resp.Body.Close() } }()  ……
@@ -126,6 +126,22 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion">Opinion</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
     </li>
     
@@ -149,22 +165,6 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
         <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper">Golang Viper</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -179,11 +179,15 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(23)</a>
     </li>
     
     <li>
@@ -196,6 +200,10 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
     </li>
     
     <li>
@@ -221,6 +229,8 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
@@ -238,6 +248,10 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
     
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
@@ -264,6 +278,8 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     

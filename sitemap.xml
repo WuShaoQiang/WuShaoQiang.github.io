@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/golangstd-os/</loc>
+    <lastmod>2019-04-12T20:24:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/golang-path-problem/</loc>
+    <lastmod>2019-04-12T17:28:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/nice-sentences/</loc>
+    <lastmod>2019-04-12T16:13:54+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/opinion/</loc>
+    <lastmod>2019-04-12T16:13:32+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/golang-log/</loc>
     <lastmod>2019-04-12T01:34:09+08:00</lastmod>
   </url>
@@ -188,8 +208,20 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/tags/Favorite/</loc>
+    <lastmod>2019-04-12T16:13:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/categories/Favorite/</loc>
+    <lastmod>2019-04-12T16:13:54+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-04-12T01:34:09+08:00</lastmod>
+    <lastmod>2019-04-12T20:24:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,13 +245,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Golang/</loc>
-    <lastmod>2019-04-12T01:34:09+08:00</lastmod>
+    <lastmod>2019-04-12T20:24:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Golang/</loc>
-    <lastmod>2019-04-12T01:34:09+08:00</lastmod>
+    <lastmod>2019-04-12T20:24:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -308,8 +340,20 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/categories/Opinion/</loc>
+    <lastmod>2019-04-12T16:13:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/Path/</loc>
+    <lastmod>2019-04-12T17:28:21+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-04-12T01:34:09+08:00</lastmod>
+    <lastmod>2019-04-12T20:24:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -334,6 +378,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/categories/questions/</loc>
     <lastmod>2019-03-26T17:27:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/Sentences/</loc>
+    <lastmod>2019-04-12T16:13:54+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -379,7 +429,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/</loc>
-    <lastmod>2019-04-08T11:37:38+08:00</lastmod>
+    <lastmod>2019-04-12T20:24:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/</loc>
+    <lastmod>2019-04-12T16:13:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   

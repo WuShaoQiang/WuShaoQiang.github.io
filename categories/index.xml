@@ -20,6 +20,15 @@
     </item>
     
     <item>
+      <title>Favorite</title>
+      <link>https://wushaoqiang.github.io/categories/Favorite/</link>
+      <pubDate>Fri, 12 Apr 2019 16:13:54 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/categories/Favorite/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Git</title>
       <link>https://wushaoqiang.github.io/categories/Git/</link>
       <pubDate>Wed, 03 Apr 2019 23:27:50 +0800</pubDate>
@@ -31,7 +40,7 @@
     <item>
       <title>Golang</title>
       <link>https://wushaoqiang.github.io/categories/Golang/</link>
-      <pubDate>Fri, 12 Apr 2019 01:34:09 +0800</pubDate>
+      <pubDate>Fri, 12 Apr 2019 20:24:48 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/categories/Golang/</guid>
       <description></description>
@@ -61,6 +70,15 @@
       <pubDate>Sun, 17 Mar 2019 02:14:18 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/categories/Mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opinion</title>
+      <link>https://wushaoqiang.github.io/categories/Opinion/</link>
+      <pubDate>Fri, 12 Apr 2019 16:13:32 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/categories/Opinion/</guid>
       <description></description>
     </item>
     

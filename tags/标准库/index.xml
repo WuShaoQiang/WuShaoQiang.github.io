@@ -6,10 +6,22 @@
     <description>Recent content in 标准库 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Apr 2019 11:37:38 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Apr 2019 20:24:48 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang标准库--os</title>
+      <link>https://wushaoqiang.github.io/posts/golangstd-os/</link>
+      <pubDate>Fri, 12 Apr 2019 20:24:48 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golangstd-os/</guid>
+      <description>Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
+bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
+// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
+// Flags to OpenFile wrapping those of the underlying system.</description>
+    </item>
     
     <item>
       <title>Golangstd Request</title>

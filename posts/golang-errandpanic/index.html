@@ -105,7 +105,11 @@
 
 <p><strong>错误</strong>是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情</p>
 
-<p><strong>异常</strong>是我们意料之外的事情，比如空指针、数组越界等</p>
+<p><strong>异常</strong>是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的</p>
+
+<blockquote>
+<p>but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time</p>
+</blockquote>
 
 <h3 id="defer">defer</h3>
 
@@ -416,6 +420,80 @@ default:
 }
 </code></pre>
 
+<p>这里的重点在于<code>errors.Cause()</code>这个函数，因为这个函数，我们能够看到发生错误第一层的信息，而不用去观察所有的跟踪信息，这其实就是<code>Unwrap</code>的操作，是相对应的</p>
+
+<p>举个例子吧</p>
+
+<pre><code class="language-go">func B() error {
+	// return A()
+	return errors.Wrap(openFileError(), &quot;B func message&quot;)
+}
+
+func openFileError() error {
+	_, err := os.Open(&quot;...&quot;)
+	return err
+
+}
+
+func main() {
+	fmt.Printf(&quot;Error: %+v\n&quot;, errors.Cause(B()))
+}
+</code></pre>
+
+<p>我们Open发生错误，传递给了B，B调用了Wrap进行跟踪，到了主函数调用了Cause进行筛选出最初发生错误的原因</p>
+
+<p>输出如下</p>
+
+<pre><code>Error: open ...: no such file or directory
+</code></pre>
+
+<p>就一句话，这句话就是我们Open的时候发生的错误</p>
+
+<p>如果不加Cause函数，会是这样</p>
+
+<pre><code>Error: open ...: no such file or directory
+B func message
+main.B
+        /home/shelljo/go/src/github.com/WuShaoQiang/test/errors/main.go:19
+main.main
+        /home/shelljo/go/src/github.com/WuShaoQiang/test/errors/main.go:39
+runtime.main
+        /usr/local/go/src/runtime/proc.go:201
+runtime.goexit
+        /usr/local/go/src/runtime/asm_amd64.s:1333
+</code></pre>
+
+<p>不知道你有没有细心发现，这里。。定位不到Open这个函数，只能定位到B返回错误的地方，我们改一下</p>
+
+<pre><code class="language-go">func openFileError() error {
+	_, err := os.Open(&quot;...&quot;)
+	return errors.Wrap(err, &quot;Open File Failed&quot;)
+
+}
+
+func B() error {
+	// return A()
+	return openFileError()
+}
+
+func main() {
+	fmt.Printf(&quot;Error: %+v\n&quot;, B())
+}
+</code></pre>
+
+<p>这样子就能精准定位到Open这个函数了，开心至极</p>
+
+<p><strong>更爆炸的是这里！！！！</strong></p>
+
+<p>有没有发现，笔者一直没用判断语句来判断error的值，我们来看一下如果Open正确打开文件了，程序会输出什么</p>
+
+<pre><code>Error: &lt;nil&gt;
+</code></pre>
+
+<p>这里的Wrap函数能够自动帮我们检测错误，如果是nil，则在后面加的Message不会被添加上去</p>
+
+<p>####二次包装</p>
+
 <p>Github有一个小项目是对<code>pkg/errors</code>的二次包装，代码如下</p>
 
 <pre><code class="language-go">//Fatal panics on error
@@ -500,6 +578,8 @@ func Log(err error, msgs ...string) {
 
 <h3 id="总结一下">总结一下</h3>
 
+<h4 id="关于姿势">关于姿势</h4>
+
 <p>笔者觉得前面那些正确姿势并不一定要反复检查是否严格遵守每一步(虽然它有它的道理),只要我们自己心中清楚这些人性化的处理，我们写出来的代码就不会给错误处理给弄得不美观</p>
 
 <p>笔者觉得错误处理的第5,6点建议就不太必要</p>
@@ -507,6 +587,14 @@ func Log(err error, msgs ...string) {
 <p>层层记录已经有第三方包帮我们实现了</p>
 
 <p>第六点写的那个代码不美观</p>
+
+<h4 id="关于第三方库使用">关于第三方库使用</h4>
+
+<p>对于Wrap，我认为尽量在底层的函数上使用，这样能够更好的直接定位到最直接的位置。将被包装过的error进行返回，当调用者接收到返回的错误时，应该相应执行错误处理，比如说多操作几次看看还会不会出错，比如说这个出错了试试另一个方案等等</p>
+
+<p>尽量不要Wrap嵌套了，会很丑的，因为出错信息太长了</p>
+
+<p>对于Cause，需要使用的时候就使用吧，这个只是为了让你直接看到出错的底层信息而已，其实Wrap里面也有，只是巴拉巴拉一大串而已</p>
 
                         </div>
 
@@ -579,6 +667,22 @@ func Log(err error, msgs ...string) {
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion">Opinion</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
     </li>
     
@@ -602,22 +706,6 @@ func Log(err error, msgs ...string) {
         <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper">Golang Viper</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -632,11 +720,15 @@ func Log(err error, msgs ...string) {
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(23)</a>
     </li>
     
     <li>
@@ -649,6 +741,10 @@ func Log(err error, msgs ...string) {
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
     </li>
     
     <li>
@@ -674,6 +770,8 @@ func Log(err error, msgs ...string) {
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
@@ -691,6 +789,10 @@ func Log(err error, msgs ...string) {
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
     
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
@@ -717,6 +819,8 @@ func Log(err error, msgs ...string) {
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     

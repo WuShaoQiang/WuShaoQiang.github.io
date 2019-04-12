@@ -97,8 +97,9 @@
 本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
 直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
 错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
-异常是我们意料之外的事情，比如空指针、数组越界等
-defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
+ but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
+ defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
 ... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
 并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
 如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
@@ -113,15 +114,7 @@ defer 说到异常就要提一下defer，它是一个关键字，用于延迟函
  除数为0
  不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
  输入不应该引起函数错误
-  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好
-2.没有错误，不用error 有些时候error成为了一些人的追求了，弄不弄都要返回一个error类型
-3.error应该在返回值的最后 无论返回多少个返回值，error都在最后
-4.错误值应该统一，不要任性 我们在本应该是同类型的错误里，不要定义不同的错误
-应该在包中增加一些常见的错误类型
-5.错误逐层传递时，层层都加日志 这是为了好定位错误
-6.错误处理使用defer 对于闭包的参数是值传递，对于外部变量却是引用传递，所以闭包中的外部变量err的值会是最新发生error的值
-参考代码别人写的代码
-func deferDemo() error { err := createResource1() if err != nil { return ERR_CREATE_RESOURCE1_FAILED } defer func() { if err !……
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
                                 <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">阅读全文</a></p>
                             </div>
                         </article>
@@ -150,6 +143,22 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion">Opinion</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
     </li>
     
@@ -173,22 +182,6 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
         <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm">Golang Gorm</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper">Golang Viper</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow">Learn Gitflow</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega">Golang Mega</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -203,11 +196,15 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(21)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(23)</a>
     </li>
     
     <li>
@@ -220,6 +217,10 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
     </li>
     
     <li>
@@ -245,6 +246,8 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
     <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
@@ -262,6 +265,10 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
     
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
@@ -288,6 +295,8 @@ func deferDemo() error { err := createResource1() if err != nil { return ERR_CRE
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
     

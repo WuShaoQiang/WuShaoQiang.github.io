@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Path on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Path/</link>
+    <description>Recent content in Path on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Apr 2019 17:28:21 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Path/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Path Problem</title>
+      <link>https://wushaoqiang.github.io/posts/golang-path-problem/</link>
+      <pubDate>Fri, 12 Apr 2019 17:28:21 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-path-problem/</guid>
+      <description>笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
+直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
+filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
+所谓前后是值文件夹的前后
+所以写在程序里面，你在这个目录执行成功了，你退一个目录就不行了，因为这个时候工作路径改变了
+笔者感觉这种方法不安全，或者我们写应用的时候指定要在某某目录执行，我有见过类似的项目
+同一目录下，package都为main，不能调用 如果我们有两个文件，package都为main，比如是这样的
+-main.go | -file.go  main.go想调用file.go的函数，会返回未定义的错误
+有两种解决方法
+ go install Or go build 转换为二进制文件执行
+ go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
+  解决相对路径的最稳的方法 来自外国友人icza</description>
+    </item>
+    
+  </channel>
+</rss>
