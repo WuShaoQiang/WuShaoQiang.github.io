@@ -21,7 +21,7 @@
 goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
  first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
  invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
-  defer func () { if resp != nil { resp.Body.Close() } }()  </description>
+  defer func () { if resp != nil { resp.Body.Close() } }()  单元测试 func TestCrawler(t *testing.T) { // keywords := []string{&amp;quot;golang&amp;quot;, &amp;quot;java&amp;quot;} keywords := &amp;quot;golang,java&amp;quot; refresh := &amp;quot;on&amp;quot; value := url.</description>
     </item>
     
   </channel>

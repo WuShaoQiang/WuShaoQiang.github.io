@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Validation on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Validation/</link>
+    <description>Recent content in Validation on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Apr 2019 14:43:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Validation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Validation</title>
+      <link>https://wushaoqiang.github.io/posts/golang-validation/</link>
+      <pubDate>Sun, 14 Apr 2019 14:43:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-validation/</guid>
+      <description>Validation项目地址
+创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
+ valid.Required(name,&amp;quot;name&amp;quot;)：检验变量不能为空，字符串不能为&amp;quot;&amp;quot;,后面的&amp;quot;name&amp;quot;是用来标识而已
+ valid.MaxSize(name,100,&amp;quot;name&amp;quot;)：最大长度
+ valid.Range(state,0,1,&amp;quot;state&amp;quot;)：范围
+ valid.HasErrors()：这个会返回布尔值，是否有不符合限定的内容
+ valid.Errors：这个是一个Error数组，其中Error是这个包自带的，并不是标准库的error
+ valid.Min(id,1,&amp;quot;id&amp;quot;)：id最小为1
+  以上这些都返回*Result
+Result方法 我们拿上面一个返回*Result对象做例子
+ valid.Required(name,&amp;quot;name&amp;quot;).Message(&amp;quot;name不能为空&amp;quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Blog/</link>
+    <description>Recent content in Blog on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Apr 2019 13:47:15 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Build blog with gin</title>
+      <link>https://wushaoqiang.github.io/posts/golang-blog/</link>
+      <pubDate>Sun, 14 Apr 2019 13:47:15 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-blog/</guid>
+      <description> Package  ini &amp;mdash;配置文件的读取
+ com &amp;mdash;功能性
+ validation &amp;mdash;做验证
+ jwt-go &amp;mdash;Token
+ endless &amp;mdash;服务器热启动
+ swag &amp;mdash;API文档
+  </description>
+    </item>
+    
+  </channel>
+</rss>

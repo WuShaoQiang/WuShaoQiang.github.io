@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Golang Interface | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Golang Interface - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-04-20T13:36:59&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-04-20T13:36:59&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Golang Interface">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golang-interface/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Golang Interface</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年4月20日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为</p>
+
+<ul>
+<li><p>concrete type(具体类型,int,string&hellip;)</p></li>
+
+<li><p>abstract type(抽象类型 io.Writer,io.Reader&hellip;)</p></li>
+</ul>
+
+<p>具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节</p>
+
+<p>抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的</p>
+
+<h3 id="具体化谈interface">具体化谈Interface</h3>
+
+<p>举个非常简单的例子，我们在读文件的时候，可能会这样做</p>
+
+<pre><code class="language-go">func main() {
+	f, err := os.Open(&quot;abc.txt&quot;)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	byte, _ := ioutil.ReadAll(f)
+	fmt.Println(string(byte))
+}
+</code></pre>
+
+<p>看一下<code>ioutil.ReadAll()</code></p>
+
+<pre><code class="language-go">func ReadAll(r io.Reader) ([]byte, error) {
+	return readAll(r, bytes.MinRead)
+}
+</code></pre>
+
+<p>这里需要传入的是一个<code>io.Reader</code>接口，为什么<code>*File</code>类型传入一样可以呢</p>
+
+<p>这里<code>io.Reader</code>是一个接口，接口里面只要一个函数</p>
+
+<pre><code class="language-go">type Reader interface {
+	Read(p []byte) (n int, err error)
+}
+</code></pre>
+
+<p>而<code>*File</code>里面也实现了这个接口的函数</p>
+
+<pre><code class="language-go">func (f *File) Read(b []byte) (n int, err error) {
+	if err := f.checkValid(&quot;read&quot;); err != nil {
+		return 0, err
+	}
+	n, e := f.read(b)
+	return n, f.wrapErr(&quot;read&quot;, e)
+}
+</code></pre>
+
+<p>所以说，实质上是执行了<code>*File</code>的Read函数，这就实现了多态，只要是实现了接口的函数，就可以成为合法的接口参数传递</p>
+
+<h3 id="抽象化谈interface">抽象化谈Interface</h3>
+
+<p>接口实质上是定义一个交流规则，或者说是一个协议</p>
+
+<h4 id="举个生活中的例子">举个生活中的例子</h4>
+
+<p>火车运集装箱，集装箱的规格是限定的，火车要符合集装箱的拉运规则才能拉集装箱(火车要实现了接口)</p>
+
+<p>现在有一艘船也想拉集装箱，那么它只要实现了集装箱的规格就可以了(轮船实现接口)</p>
+
+<p>所以我们不管交通工具是什么，只要是符合规则的(实现了接口函数)，那么它就是OK的</p>
+
+<h3 id="为什么用接口">为什么用接口</h3>
+
+<ul>
+<li><p>writing generic algorithms</p></li>
+
+<li><p>hiding implementation detail</p></li>
+
+<li><p>providing interception points</p></li>
+</ul>
+
+<p>这个特性能让我们的接口包分割</p>
+
+<h3 id="interface组合">Interface组合</h3>
+
+<p>组合从概念上理解，就是简单的将接口拼凑一起，实现两个接口或者更多接口</p>
+
+<p><code>io.ReadWriter</code>就是个很好的例子，这个接口实现了Reader和Writer的接口，所以它能符合两种单独的接口参数</p>
+
+<h3 id="interface大小">Interface大小</h3>
+
+<p>Interface应该越小越好，越小抽象化越高</p>
+
+<blockquote>
+<p>The bigger the interface, the weaker the abstraction  &ndash;Rob Pike</p>
+</blockquote>
+
+<h2 id="准则">准则</h2>
+
+<ul>
+<li><p>interface{} says nothing</p></li>
+
+<li><p>Be conservative in what you send, be liberal in what you accept</p></li>
+</ul>
+
+<p>这里的send是指函数返回一个接口类型的时候要保守点，比如<code>New() interface{}</code>就要小心了，我们更加需要一个确定的类型，比如<code>os.Open()(*File,err)</code>，返回File类型是比较好的</p>
+
+<p>如果是函数接收一个接口，可以自由点。比如<code>io.Copy()</code>就是接收接口的</p>
+
+<ul>
+<li>Return concrete types receive interfaces as parameters</li>
+</ul>
+
+<h3 id="assertion">assertion</h3>
+
+<p>有两种方式</p>
+
+<p>将抽象化的东西具体化</p>
+
+<pre><code class="language-go">select t:=v.(type){
+    case int:
+    ...
+    case string:
+    ...
+}
+</code></pre>
+
+<p>抽象化保留</p>
+
+<pre><code class="language-go">func do(v interfaceP{}){
+    s := v.(fmt.Stringer) //might panic if not the type
+
+    s ,ok := v.(fmt.Stringer)  
+}
+</code></pre>
+
+<p>推荐抽象化保留，这样更加容易</p>
+
+<h3 id="之后有什么再补充吧">之后有什么再补充吧</h3>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/golang-tips/">Golang Tips</a></li>
+        
+        <li><a href="/posts/golang-gin/">Golang Gin</a></li>
+        
+        <li><a href="/posts/golang-validation/">Golang Validation</a></li>
+        
+        <li><a href="/posts/golang-blog/">Golang Build blog with gin</a></li>
+        
+        <li><a href="/posts/golangstd-os/">Golang标准库--os</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Interface">Interface</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel">Golang Channel</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface">Golang Interface</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips">Golang Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm Sort">Algorithm Sort</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin">Golang Gin</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation">Golang Validation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-blog/" title="Golang Build blog with gin">Golang Build blog with gin</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(29)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Algorithm Sort | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Algorithm Sort - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-04-15T20:03:27&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-04-15T20:03:27&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Algorithm Sort">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/algorithm-sort/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Algorithm Sort</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年4月15日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="排序时间复杂度">排序时间复杂度</h3>
+
+<p><img src="https://blog.gavinblog.info/posts/image/time.jpeg" alt="时间复杂度" /></p>
+
+<h3 id="堆排序">堆排序</h3>
+
+<p>参考<a href="https://www.cnblogs.com/chengxiao/">dreamcatcher-cx博客</a></p>
+
+<p>最好最坏的平均时间复杂度都为O(NlogN)</p>
+
+<h4 id="代码">代码</h4>
+
+<pre><code class="language-go">func HeapSortUp(a []int) []int {
+	for i := len(a)/2 - 1; i &gt;= 0; i-- {
+		adjustHeapUp(a, i, len(a))
+	}
+
+	for j := len(a) - 1; j &gt; 0; j-- {
+		a[0], a[j] = a[j], a[0]
+		adjustHeapUp(a, 0, j)
+	}
+	return a
+}
+
+func adjustHeapUp(a []int, i int, length int) {
+	tmp := a[i]
+	for k := 2*i + 1; k &lt; length; k = 2*k + 1 {
+		if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] {
+			k++
+		}
+
+		if a[k] &gt; tmp {
+			a[i] = a[k]
+			i = k
+		} else {
+			break
+		}
+	}
+	a[i] = tmp
+}
+</code></pre>
+
+<h4 id="思路">思路</h4>
+
+<ol>
+<li><p>先将数组变换为一个大顶堆</p></li>
+
+<li><p>将大顶堆的顶部和堆的最后一个元素交换</p></li>
+
+<li><p>再将堆变成大顶堆，重复2，知道最后一个元素</p></li>
+</ol>
+
+<h4 id="注意">注意</h4>
+
+<p>初次构造大顶堆和重构大顶堆不一样</p>
+
+<ul>
+<li><p>初次构造大顶堆需要从下到上，从右到左</p></li>
+
+<li><p>重构大顶堆从0开始</p></li>
+</ul>
+
+<h3 id="归并排序">归并排序</h3>
+
+<p>参考<a href="https://www.cnblogs.com/chengxiao/">dreamcatcher-cx博客</a></p>
+
+<p>最坏情形时间复杂度O(NlogN)</p>
+
+<h4 id="代码-1">代码</h4>
+
+<pre><code class="language-go">package chapter7
+
+func MergeSort(a []int) []int {
+	tmp := make([]int, len(a))
+	sort(a, 0, len(a)-1, tmp)
+	return a
+
+}
+
+func sort(a []int, left, right int, tmp []int) {
+	if left &lt; right {
+		mid := (right + left) / 2
+		sort(a, left, mid, tmp)
+		sort(a, mid+1, right, tmp)
+		merge(a, left, mid, right, tmp)
+	}
+}
+
+func merge(a []int, left, mid, right int, tmp []int) {
+	l := left
+	r := mid + 1
+	t := 0
+
+	for l &lt;= mid &amp;&amp; r &lt;= right {
+		if a[l] &lt;= a[r] {
+			tmp[t] = a[l]
+			t++
+			l++
+		} else {
+			tmp[t] = a[r]
+			t++
+			r++
+		}
+	}
+
+	for l &lt;= mid {
+		tmp[t] = a[l]
+		t++
+		l++
+	}
+	for r &lt;= right {
+		tmp[t] = a[r]
+		t++
+		r++
+	}
+
+	t = 0
+	for left &lt;= right {
+		a[left] = tmp[t]
+		left++
+		t++
+	}
+}
+
+</code></pre>
+
+<h4 id="思路-1">思路</h4>
+
+<ol>
+<li><p>递归将其拆成一个元素，通过merge排序两个元素</p></li>
+
+<li><p>将排序好的替换到原数组上</p></li>
+
+<li><p>现在每两个元素之间是有序的了，继续将两个部分进行merge排序，循环2&hellip;</p></li>
+</ol>
+
+<h3 id="希尔排序">希尔排序</h3>
+
+<h4 id="代码-2">代码</h4>
+
+<pre><code class="language-go">func ShellSort(a []int) []int {
+	for increment := len(a) / 2; increment &gt; 0; increment = increment / 2 {
+		for i := increment; i &lt; len(a); i++ {
+			//插入排序
+			temp := a[i]
+			var j int
+			for j = i; j &gt;= increment &amp;&amp; a[j-increment] &gt; temp; j -= increment {
+				a[j] = a[j-increment]
+			}
+			a[j] = temp
+		}
+	}
+	return a
+}
+</code></pre>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/golang-gin/">Golang Gin</a></li>
+        
+        <li><a href="/posts/golang-validation/">Golang Validation</a></li>
+        
+        <li><a href="/posts/golang-blog/">Golang Build blog with gin</a></li>
+        
+        <li><a href="/posts/golangstd-os/">Golang标准库--os</a></li>
+        
+        <li><a href="/posts/golang-path-problem/">Golang Path Problem</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Sort">Sort</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Algorithm">Algorithm</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel">Golang Channel</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface">Golang Interface</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips">Golang Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm Sort">Algorithm Sort</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin">Golang Gin</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation">Golang Validation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-blog/" title="Golang Build blog with gin">Golang Build blog with gin</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(29)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

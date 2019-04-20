@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Channel on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Channel/</link>
+    <description>Recent content in Channel on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Apr 2019 17:19:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Channel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Channel</title>
+      <link>https://wushaoqiang.github.io/posts/golang-channel/</link>
+      <pubDate>Sat, 20 Apr 2019 17:19:20 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-channel/</guid>
+      <description>这里就不再赘述重要性了
+Channel特性  goroutine-safe
+ 两个goroutine之间传递数据
+ FIFO
+ cause goroutine to block and unblock
+  What is the inside of channel  mutex
+ send-index and recieve index
+ buf
+  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
+How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.</description>
+    </item>
+    
+  </channel>
+</rss>

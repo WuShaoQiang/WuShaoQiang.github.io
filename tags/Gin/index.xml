@@ -6,10 +6,36 @@
     <description>Recent content in Gin on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Mar 2019 16:10:59 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Apr 2019 23:12:41 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Gin/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang Gin</title>
+      <link>https://wushaoqiang.github.io/posts/golang-gin/</link>
+      <pubDate>Sun, 14 Apr 2019 23:12:41 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-gin/</guid>
+      <description> 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
+func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
+gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&amp;quot;/api/v1&amp;quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 </description>
+    </item>
+    
+    <item>
+      <title>Golang Build blog with gin</title>
+      <link>https://wushaoqiang.github.io/posts/golang-blog/</link>
+      <pubDate>Sun, 14 Apr 2019 13:47:15 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-blog/</guid>
+      <description> Package  ini &amp;mdash;配置文件的读取
+ com &amp;mdash;功能性
+ validation &amp;mdash;做验证
+ jwt-go &amp;mdash;Token
+ endless &amp;mdash;服务器热启动
+ swag &amp;mdash;API文档
+  </description>
+    </item>
     
     <item>
       <title>Go琐碎笔记</title>

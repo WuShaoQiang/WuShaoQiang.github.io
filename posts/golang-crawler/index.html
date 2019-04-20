@@ -91,7 +91,9 @@
                         </div>
                         
                         <div class="post-content">
-                            <p>笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结</p>
+                            
+
+<p>笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结</p>
 
 <pre><code>goquery         --处理HTML标签
 viper           --读取配置文件
@@ -116,6 +118,39 @@ lfhook          --为了生成log本地文件，与logrus配合使用
       resp.Body.Close()
    }
 }()
+</code></pre>
+
+<h3 id="单元测试">单元测试</h3>
+
+<pre><code class="language-go">func TestCrawler(t *testing.T) {
+	// keywords := []string{&quot;golang&quot;, &quot;java&quot;}
+	keywords := &quot;golang,java&quot;
+	refresh := &quot;on&quot;
+	value := url.Values{
+		keywords: []string{keywords},
+		refresh:  []string{refresh},
+	}
+	resp, err := http.PostForm(&quot;http://127.0.0.1:8080&quot;, value)
+	if err != nil {
+		t.Fatal(&quot;PostForm Error : &quot;, err)
+	}
+
+	defer func() {
+		if resp.Body != nil {
+			resp.Body.Close()
+		}
+	}()
+
+	if resp.StatusCode != 200 {
+		t.Errorf(&quot;Receive a statuscode : %v&quot;, resp.StatusCode)
+	}
+}
+</code></pre>
+
+<p>结果有点儿慢啊，看来是要在性能上先做做功夫了</p>
+
+<pre><code>ok	13.505s	coverage: 0.0% of statements
+Success: Tests passed.
 </code></pre>
 
                         </div>
@@ -187,6 +222,34 @@ lfhook          --为了生成log本地文件，与logrus配合使用
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel">Golang Channel</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface">Golang Interface</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips">Golang Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm Sort">Algorithm Sort</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin">Golang Gin</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation">Golang Validation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-blog/" title="Golang Build blog with gin">Golang Build blog with gin</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
     </li>
     
@@ -198,34 +261,6 @@ lfhook          --为了生成log本地文件，与logrus配合使用
         <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion">Opinion</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -234,6 +269,10 @@ lfhook          --为了生成log本地文件，与logrus配合使用
     <section class="widget">
         <h3 class="widget-title">分类</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+    </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
@@ -248,7 +287,7 @@ lfhook          --为了生成log本地文件，与logrus配合使用
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(29)</a>
     </li>
     
     <li>
@@ -282,7 +321,13 @@ lfhook          --为了生成log本地文件，与logrus配合使用
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     
     <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
     
@@ -300,6 +345,8 @@ lfhook          --为了生成log本地文件，与logrus配合使用
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
@@ -313,6 +360,10 @@ lfhook          --为了生成log本地文件，与logrus配合使用
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
@@ -336,9 +387,13 @@ lfhook          --为了生成log本地文件，与logrus配合使用
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     

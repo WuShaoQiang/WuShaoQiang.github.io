@@ -354,6 +354,60 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
 <pre><code class="language-go">db.Delete(&amp;Product{}, &quot;price=?&quot;, 1002)
 </code></pre>
 
+<h3 id="关于传入参数map">关于传入参数map</h3>
+
+<pre><code class="language-go">maps := make(map[string]interface{})
+</code></pre>
+
+<p>比如我需要向Where传入参数<code>&quot;name = Mike&quot; AND &quot;state = 1&quot;</code></p>
+
+<p>那么我们的maps就是</p>
+
+<pre><code class="language-go">maps{
+    &quot;name&quot;:&quot;Mike&quot;,
+    &quot;state&quot;:1
+}
+
+db.Where(maps)
+</code></pre>
+
+<h3 id="关于回调">关于回调</h3>
+
+<pre><code class="language-go">func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
+    scope.SetColumn(&quot;CreatedOn&quot;, time.Now().Unix())
+    return nil
+}
+func (tag *Tag) BeforeUpdate(scope *gorm.Scope) error {
+    scope.SetColumn(&quot;ModifiedOn&quot;, time.Now().Unix())
+    return nil
+}
+</code></pre>
+
+<p>gorm所支持的回调方法：</p>
+
+<ul>
+<li><p>创建：BeforeSave、BeforeCreate、AfterCreate、AfterSave</p></li>
+
+<li><p>更新：BeforeSave、BeforeUpdate、AfterUpdate、AfterSave</p></li>
+
+<li><p>删除：BeforeDelete、AfterDelete</p></li>
+
+<li><p>查询：AfterFind</p></li>
+</ul>
+
+<h3 id="关于默认table名字">关于默认Table名字</h3>
+
+<pre><code class="language-go">gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
+    return setting.TablePrefix + defaultTableName
+}
+</code></pre>
+
+<p>在这里的<code>setting.TablePrefix</code>是我们自己定义的一个字符串，用于创建表名时的前缀</p>
+
+<p>比如结构体name在数据库的表名默认是name(前提是db.SingularTable(true),不然就是names了)</p>
+
+<p>在调用了上面代码后，表名变成<code>setting.TablePrefix</code>+<code>name</code></p>
+
                         </div>
 
                         
@@ -423,6 +477,34 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel">Golang Channel</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface">Golang Interface</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips">Golang Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm Sort">Algorithm Sort</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin">Golang Gin</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation">Golang Validation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-blog/" title="Golang Build blog with gin">Golang Build blog with gin</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
     </li>
     
@@ -434,34 +516,6 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
         <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion">Opinion</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log">Golang Log</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic">Golang Errandpanic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler">Golang Crawler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle">Golang Handle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery">Golang goquery</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request">Golangstd Request</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -470,6 +524,10 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
     <section class="widget">
         <h3 class="widget-title">分类</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+    </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
@@ -484,7 +542,7 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(29)</a>
     </li>
     
     <li>
@@ -518,7 +576,13 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     
     <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
     
@@ -536,6 +600,8 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
@@ -549,6 +615,10 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
     
@@ -572,9 +642,13 @@ db.Table(&quot;product&quot;).Where(&quot;price=?&quot;, 1001).Update(&quot;pric
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     

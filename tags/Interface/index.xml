@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Interface on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Interface/</link>
+    <description>Recent content in Interface on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Apr 2019 13:36:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Interface/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Interface</title>
+      <link>https://wushaoqiang.github.io/posts/golang-interface/</link>
+      <pubDate>Sat, 20 Apr 2019 13:36:59 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-interface/</guid>
+      <description>在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
+ concrete type(具体类型,int,string&amp;hellip;)
+ abstract type(抽象类型 io.Writer,io.Reader&amp;hellip;)
+  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
+抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
+具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
+func main() { f, err := os.Open(&amp;quot;abc.txt&amp;quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
+func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
+这里io.Reader是一个接口，接口里面只要一个函数
+type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
+func (f *File) Read(b []byte) (n int, err error) { if err := f.</description>
+    </item>
+    
+  </channel>
+</rss>

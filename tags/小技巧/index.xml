@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小技巧 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in 小技巧 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Apr 2019 22:56:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Tips</title>
+      <link>https://wushaoqiang.github.io/posts/golang-tips/</link>
+      <pubDate>Thu, 18 Apr 2019 22:56:20 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-tips/</guid>
+      <description>关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &amp;lt;- 1 string_chan &amp;lt;- &amp;quot;hello&amp;quot; select { case value := &amp;lt;-string_chan: fmt.Println(value) case value := &amp;lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
+关于defer func DeferCalc() { a := 1 b := 2 defer calc(&amp;quot;1&amp;quot;, a, calc(&amp;quot;10&amp;quot;, a, b)) a = 0 defer calc(&amp;quot;2&amp;quot;, a, calc(&amp;quot;20&amp;quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.</description>
+    </item>
+    
+  </channel>
+</rss>
