@@ -6,10 +6,64 @@
     <description>Recent content in Golang on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Apr 2019 17:19:20 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2019 10:59:13 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang Pipeline</title>
+      <link>https://wushaoqiang.github.io/posts/golang-pipeline/</link>
+      <pubDate>Sun, 21 Apr 2019 10:59:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-pipeline/</guid>
+      <description>根据官网博客学习Pipeline
+什么是Pipeline 管道其实就是一系列的Channel连接起来
+ 通过channel(可能不止一个)来接收数据
+ 处理数据
+ 用Channel向下传递数据(也可能不止一个)
+  代码演示 package main import ( &amp;quot;fmt&amp;quot; &amp;quot;sync&amp;quot; ) func main() { // Set up a done channel that&#39;s shared by the whole pipeline, // and close that channel when this pipeline exits, as a signal // for all the goroutines we started to exit. done := make(chan struct{}) defer close(done) in := gen(done, 2, 3) // Distribute the sq work across two goroutines that both read from in.</description>
+    </item>
+    
+    <item>
+      <title>Golang make vs new</title>
+      <link>https://wushaoqiang.github.io/posts/golang-makevsnew/</link>
+      <pubDate>Sun, 21 Apr 2019 00:30:06 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-makevsnew/</guid>
+      <description>make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
+ new可以对任何类型作用
+  make和new的返回值  make返回主体
+ new也是返回指针，比如new(int)，返回一个int的指针，这个指针的内容是0
+  初始化 两者都会初始化为“0”值
+总结 所以我觉得它们最大的区别还是返回值的区别，以及作用对象</description>
+    </item>
+    
+    <item>
+      <title>Golang Map</title>
+      <link>https://wushaoqiang.github.io/posts/golang-map/</link>
+      <pubDate>Sat, 20 Apr 2019 20:03:42 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-map/</guid>
+      <description>Construct: m:=map[key]value{}
+ Insert: m[k] = v
+ Lookup: v = m[k]
+ Delete: delete(m,k)
+ lterate: for k,v := range m
+ Size: len(m)
+  Key不能为 maps,slices,funcs. 因为它们不可比较
+Map底层 map header
+len lg(#buckets) bucket array hash seed  流程  接收到一个key
+ 对key进行hash
+ 通过hash找到是哪一个bucket
+ 取hash前8bit作为extra(作为快速检查)
+ 找到bucket的内存(对不同的类型，大小会有不同)
+  扩容  新创建一个两倍的空间
+ 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
+ 用新的bucket
+  和其它Map比较  Go map不能用指针指向单个value
+ 迭代的时候，go map是可以修改的</description>
+    </item>
     
     <item>
       <title>Golang Channel</title>

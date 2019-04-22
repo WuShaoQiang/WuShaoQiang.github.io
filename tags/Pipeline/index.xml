@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pipeline on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Pipeline/</link>
+    <description>Recent content in Pipeline on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Apr 2019 10:59:13 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Pipeline/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Pipeline</title>
+      <link>https://wushaoqiang.github.io/posts/golang-pipeline/</link>
+      <pubDate>Sun, 21 Apr 2019 10:59:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-pipeline/</guid>
+      <description>根据官网博客学习Pipeline
+什么是Pipeline 管道其实就是一系列的Channel连接起来
+ 通过channel(可能不止一个)来接收数据
+ 处理数据
+ 用Channel向下传递数据(也可能不止一个)
+  代码演示 package main import ( &amp;quot;fmt&amp;quot; &amp;quot;sync&amp;quot; ) func main() { // Set up a done channel that&#39;s shared by the whole pipeline, // and close that channel when this pipeline exits, as a signal // for all the goroutines we started to exit. done := make(chan struct{}) defer close(done) in := gen(done, 2, 3) // Distribute the sq work across two goroutines that both read from in.</description>
+    </item>
+    
+  </channel>
+</rss>

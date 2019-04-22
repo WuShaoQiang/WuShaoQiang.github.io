@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UDP on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/UDP/</link>
+    <description>Recent content in UDP on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Apr 2019 16:35:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/UDP/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>UDP</title>
+      <link>https://wushaoqiang.github.io/posts/udp/</link>
+      <pubDate>Mon, 22 Apr 2019 16:35:03 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/udp/</guid>
+      <description>  UDP无连接建立
+ 不需要维护连接状态
+ 报文头比TCP小
+ 能尽可能的快，没有速度限制
+  应用场景 对丢包不是很看重，对速度很敏感
+ DNS
+ SNMP
+  报文结构 </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Map on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Map/</link>
+    <description>Recent content in Map on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Apr 2019 20:03:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Map/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang Map</title>
+      <link>https://wushaoqiang.github.io/posts/golang-map/</link>
+      <pubDate>Sat, 20 Apr 2019 20:03:42 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-map/</guid>
+      <description>Construct: m:=map[key]value{}
+ Insert: m[k] = v
+ Lookup: v = m[k]
+ Delete: delete(m,k)
+ lterate: for k,v := range m
+ Size: len(m)
+  Key不能为 maps,slices,funcs. 因为它们不可比较
+Map底层 map header
+len lg(#buckets) bucket array hash seed  流程  接收到一个key
+ 对key进行hash
+ 通过hash找到是哪一个bucket
+ 取hash前8bit作为extra(作为快速检查)
+ 找到bucket的内存(对不同的类型，大小会有不同)
+  扩容  新创建一个两倍的空间
+ 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
+ 用新的bucket
+  和其它Map比较  Go map不能用指针指向单个value
+ 迭代的时候，go map是可以修改的</description>
+    </item>
+    
+  </channel>
+</rss>

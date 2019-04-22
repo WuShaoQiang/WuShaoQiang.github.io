@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>网络协议 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</link>
+    <description>Recent content in 网络协议 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Apr 2019 20:59:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DHCP 和 NAT</title>
+      <link>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</link>
+      <pubDate>Mon, 22 Apr 2019 20:59:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</guid>
+      <description>DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
+四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
+ DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了
+ 再次对准确地址发出请求
+ DHCP响应
+  到这里交互就完成了
+NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，因为现在IPv4的资源已经枯竭，利用NAT能够使得大家共用一个对外的IP，而内部会有不同的IP(局域网内IP)
+比如我在学习请求百度这个网页，百度实际上看到的IP地址是我学校的IP地址，并且将内容返回给这个IP地址，学校再通过NAT转换表把东西转给我
+有些人也说道，NAT实质上很大阻碍了IPv6的发展</description>
+    </item>
+    
+    <item>
+      <title>IPv4 数据报格式与分片</title>
+      <link>https://wushaoqiang.github.io/posts/ip-message-field/</link>
+      <pubDate>Mon, 22 Apr 2019 20:21:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/ip-message-field/</guid>
+      <description>直接上图  版本号
+ 首部长度：一般为20
+ 服务类型：为了区分数据报，有点想女士优先这种
+ 数据报长度(首部加数据，一般不超过1500字节)
+ 标识、标志、片偏移：与IP数据报分片有关(别的篇幅讲)
+ 寿命：每经过一台路由器，TTL减1，若为0的时候，这个数据报就要丢掉了
+ 上层协议：6代表TCP；17代表UDP
+ 首部校验和(检验IP数据报比特错误)
+ 源和目的IP地址
+ 选项(很少用)
+ 数据(TCP or UDP报文段)
+  IP数据报分片 发送方与目的地路径上的每段链路可能使用不同的链路层协议，且每种协议可能具备不同的MTU
+比如以太网的MTU为1500
+所以在通过MTU比较小的链路段时，就需要分片了
+为了让目的主机执行重装任务，IPv4的设计者将标识、标志、片偏移字段放在IP数据报首部
+分别解释这三个字段 标识 发送主机在发送IP数据报的时候，通常会将它发送的每个数据报的标识号加1
+所以目的地址收到了很多片，这些片上标识号是同一个数字的，那么它们就是可以组合的
+标志 最后一个片的标志比特被设为0，表明已经接收到某个标识的最后一个片
+偏移量 毫无疑问，是为了将片重新组织回去的</description>
+    </item>
+    
+    <item>
+      <title>HTTP 报文</title>
+      <link>https://wushaoqiang.github.io/posts/http-message-field/</link>
+      <pubDate>Mon, 22 Apr 2019 19:17:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/http-message-field/</guid>
+      <description> 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
+HTTP是一个无状态协议
+报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  </description>
+    </item>
+    
+    <item>
+      <title>UDP</title>
+      <link>https://wushaoqiang.github.io/posts/udp/</link>
+      <pubDate>Mon, 22 Apr 2019 16:35:03 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/udp/</guid>
+      <description>  UDP无连接建立
+ 不需要维护连接状态
+ 报文头比TCP小
+ 能尽可能的快，没有速度限制
+  应用场景 对丢包不是很看重，对速度很敏感
+ DNS
+ SNMP
+  报文结构 </description>
+    </item>
+    
+    <item>
+      <title>TCP 流量控制</title>
+      <link>https://wushaoqiang.github.io/posts/tcp-flow-control/</link>
+      <pubDate>Mon, 22 Apr 2019 15:17:17 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/tcp-flow-control/</guid>
+      <description>流量控制是为了匹配发送方和接收方的数据交换速度，如果发送方发的太快，接收方的缓存可能会溢出
+还要提醒一下流量控制和拥塞控制是两码事
+TCP通过让发送方维护一个称为接收窗口的变量来提供流量控制
+在接收方一定要满足
+LastByteRcvd - LastByteRead &amp;lt;= RcvBuffer
+用rwnd表示还有多少空间可以用，所以rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)
+在TCP报文首部里有一个叫做接收窗口，这个就是接收者告诉发送者rwnd的
+在发送方，通过将未确认的数据量控制在值rwnd以内，就可以保证接收者不会缓存溢出了
+UDP是不提供流量控制的，所以UDP很有可能会出现缓存溢出</description>
+    </item>
+    
+    <item>
+      <title>TCP 拥塞控制</title>
+      <link>https://wushaoqiang.github.io/posts/tcp-congestion-control/</link>
+      <pubDate>Mon, 22 Apr 2019 13:11:08 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/tcp-congestion-control/</guid>
+      <description> TCP必须使用端到端拥塞控制而不是网络辅助的拥塞控制
+TCP所采用的方法是让每一个发送方根据所感知到的网络拥塞程度来限制其能向连接发送流量的速率
+三个问题 我们如何知道网络开始拥塞？
+我们如何限制发送方发送速率
+当发送方感受到拥塞时，用什么算法去限制其发送速率
+如何知道网络拥塞 TCP是不会有一种特殊的包叫“我拥塞啦”
+接收到Ack 没有拥塞，可以提速
+没接收到Ack 可能拥塞，降速
+如何限制发送方速率 改变cwnd
+当一切顺利，cwnd增加；丢包，cwnd减少
+我们发送方被限制在min(rwnd,cwnd)
+LastByteSent - LastByteAcked &amp;lt;= cwnd
+rwnd和cwnd是不同的，前者是表示接收方的buffer还有多少能用，后者是改变在网络上的容量
+用什么算法来限制速度 我们希望TCP能在不发生拥塞情况上利用最大的带宽
+所以发送方速率有点像三角波，上上下下，因为要尽可能利用带宽又不要制造拥塞
+慢启动 在包被收到的情况下 cwnd每次是之前的两倍1,2,4,8,16...，直到大于或等于阈值，切换到拥塞避免
+在包没有被收到的情况下 三次冗余Ack 进入快速恢复
+超时 阈值=cwnd/2
+把cwnd变为1
+阈值(threhold) 记录上一次拥塞时一半的cwnd
+拥塞避免 在包被接收到的情况下 线性增长，每次在所有分片的Ack被接收到的情况下(一个RTT)，增加一个MSS
+在包没有被接收到的情况下 三次冗余Ack 进入快速恢复
+超时 切换到慢启动
+快速恢复 每个冗余的Ack对cwnd增加一个MSS，当丢失报文段的Ack最终回到时，再减少一个MSS
+进入拥塞避免状态
+出现超时，进入慢启动
+出现丢包，cwnd设置为1，阈值设置为cwnd的一半
+总结一下 三次冗余ACK  阈值设置为cwnd/2
+ cwnd设置为阈值(有快速恢复的情况下)
+  超时  阈值设置为cwnd/2
+ cwnd设置为1(MSS)
+  </description>
+    </item>
+    
+    <item>
+      <title>TCP 连接 --三次握手和四次挥手</title>
+      <link>https://wushaoqiang.github.io/posts/tcp-connect/</link>
+      <pubDate>Mon, 22 Apr 2019 12:52:03 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/tcp-connect/</guid>
+      <description> 首先这里所说的握手，是进程之间的握手
+三次握手 简单来说就是
+A --&amp;gt; B 不承载有效负荷 B --&amp;gt; A 不承载有效负荷 A --&amp;gt; B 可以承载有效负荷  再细致点说就是
+ 客户端应用程序发起一个TCP连接
+ 发送报文里有SYN
+ 收到来自服务器端的SYN&amp;amp;ACK
+ 再次向服务器端发送ACK
+  这里面总共有3次报文，所以为三次握手
+最大报文段长度&amp;amp;最大传输单元 最大报文段长度(MSS):一般为1460
+最大传输单元(MTU):一般为1500
+之说以说一般，是因为一般来说TCP/IP的首部字段加起来是40字节
+1500-40=1460
+清除认识 当进程通过套接字把数据给到TCP的时候，数据就和进程没关系了，已经全权交给TCP了
+为什么不是两次握手？ 这是书本上的一个问题
+在我理解，握手其实是为了双方知道对方的初始序列号
+ 客户端给服务器端发送初始序列号
+ 服务器端收到了客户端的初始序列号，并且发送服务器端的初始序列号
+  如果客户端不产生第三次握手，那么服务器端不知道客户端到底拿到了初始序列号没
+ 客户端看到回复后就知道服务器端拿到了自己的初始序列号，于是也和服务器端说明，已经拿到它的初始序列号了  四次挥手  客户端应用程序发起关闭连接
+ 发送报文里包含FIN
+ 服务器端发送一个ACK表示接收到了
+ 服务器端再次发一个FIN
+ 客户端给服务器端发一个ACK
+ 等待一会，资源就释放了
+  </description>
+    </item>
+    
+    <item>
+      <title>TCP --报文</title>
+      <link>https://wushaoqiang.github.io/posts/tcp-message-field/</link>
+      <pubDate>Mon, 22 Apr 2019 12:14:31 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/tcp-message-field/</guid>
+      <description> 之间写过一个关于《计算机网络(原书第六版)：自顶向下方法》的一部分笔记，当时没继续写下去是因为觉得一个篇幅太多了，决定分开写，这样可能可以更加详细点，也算是第二次的复习吧
+这篇主要讲报文
+先看看报文的格式
+首先，TCP是运输层的协议，IP是网络层的协议，一般运输层协议会确定端口号，网络层协议则确定IP地址
+ 源/目的端口号
+ 序号/确认号：是用来双方实现可靠传输的(下面详细讲)
+ 接收窗口字段：用于流量控制(可能会在别的篇幅讲)
+ 首部长度：由于有选项这个字段，使得TCP的首部长度是可以变化的，不过通常就是20字节
+ 标志字段/紧急指针：标志字段包括确认字段有效、建立和拆除连接、紧急数据。紧急指针指向紧急数据
+  序号/确认号 一条TCP连接的双发均可随机地选择初始序号，可能是0和4294967295之间的任意值
+我们假设初始序号为0
+A --&amp;gt; B Seq=42,ACK=79,data=1 B --&amp;gt; A Seq=79,ACK=43,data=2 A --&amp;gt; B Seq=43,ACK=80,data=3 ...  在我理解
+序号是标识我要发送给对方的数据
+确认号是标识我需要对方发送给我的数据
+所以上面场景就是
+A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Make on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/make/</link>
+    <description>Recent content in Make on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 21 Apr 2019 00:30:06 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/make/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang make vs new</title>
+      <link>https://wushaoqiang.github.io/posts/golang-makevsnew/</link>
+      <pubDate>Sun, 21 Apr 2019 00:30:06 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-makevsnew/</guid>
+      <description>make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
+ new可以对任何类型作用
+  make和new的返回值  make返回主体
+ new也是返回指针，比如new(int)，返回一个int的指针，这个指针的内容是0
+  初始化 两者都会初始化为“0”值
+总结 所以我觉得它们最大的区别还是返回值的区别，以及作用对象</description>
+    </item>
+    
+  </channel>
+</rss>

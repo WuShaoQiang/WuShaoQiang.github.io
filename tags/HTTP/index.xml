@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/HTTP/</link>
+    <description>Recent content in HTTP on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Apr 2019 19:17:47 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/HTTP/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTTP 报文</title>
+      <link>https://wushaoqiang.github.io/posts/http-message-field/</link>
+      <pubDate>Mon, 22 Apr 2019 19:17:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/http-message-field/</guid>
+      <description> 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
+HTTP是一个无状态协议
+报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  </description>
+    </item>
+    
+  </channel>
+</rss>

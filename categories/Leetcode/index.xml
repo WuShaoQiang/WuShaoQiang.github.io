@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leetcode on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/categories/Leetcode/</link>
+    <description>Recent content in Leetcode on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Apr 2019 00:46:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/categories/Leetcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Leetcode 20</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-20/</link>
+      <pubDate>Mon, 22 Apr 2019 00:46:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-20/</guid>
+      <description>题目 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &amp;quot;()&amp;quot; 输出: true 示例 2: 输入: &amp;quot;()[]{}&amp;quot; 输出: true 示例 3: 输入: &amp;quot;(]&amp;quot; 输出: false 示例 4: 输入: &amp;quot;([)]&amp;quot; 输出: false 示例 5: 输入: &amp;quot;{[]}&amp;quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
+var ( relation = map[string]string{&amp;quot;(&amp;quot;: &amp;quot;)&amp;quot;, &amp;quot;[&amp;quot;: &amp;quot;]&amp;quot;, &amp;quot;{&amp;quot;: &amp;quot;}&amp;quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 14</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-14/</link>
+      <pubDate>Mon, 22 Apr 2019 00:45:56 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-14/</guid>
+      <description>题目 编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 &amp;quot;&amp;quot;。 示例 1: 输入: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot;,&amp;quot;flight&amp;quot;] 输出: &amp;quot;fl&amp;quot; 示例 2: 输入: [&amp;quot;dog&amp;quot;,&amp;quot;racecar&amp;quot;,&amp;quot;car&amp;quot;] 输出: &amp;quot;&amp;quot; 解释: 输入不存在公共前缀。 说明: 所有输入只包含小写字母 a-z 。  我的解答 func longestCommonPrefix(strs []string) string { if len(strs) == 0 { return &amp;quot;&amp;quot; } if len(strs) == 1 { return strs[0] } shortestLen := len(strs[0]) for _, str := range strs { if len(str) &amp;lt; shortestLen { shortestLen = len(str) } } var finalStr string for i := 0; i &amp;lt; shortestLen; i++ { tmp := strs[0][i] for j := 1; j &amp;lt; len(strs); j++ { if tmp !</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 13</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-13/</link>
+      <pubDate>Mon, 22 Apr 2019 00:45:53 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-13/</guid>
+      <description>题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &amp;quot;III&amp;quot; 输出: 3 示例 2: 输入: &amp;quot;IV&amp;quot; 输出: 4 示例 3: 输入: &amp;quot;IX&amp;quot; 输出: 9 示例 4: 输入: &amp;quot;LVIII&amp;quot; 输出: 58 解释: L = 50, V= 5, III = 3.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 9</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-9/</link>
+      <pubDate>Mon, 22 Apr 2019 00:45:41 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-9/</guid>
+      <description>题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &amp;lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 1</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-1/</link>
+      <pubDate>Mon, 22 Apr 2019 00:19:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-1/</guid>
+      <description>题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+示例:
+给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  我的解答 func twoSum(nums []int, target int) []int { myMap := make(map[int]int) for idx,num := range nums{ myMap[num] = idx } for idx,num := range nums{ tmp := target - num if pos,exist := myMap[tmp]; exist{ if idx &amp;gt; pos{ return []int{pos,idx} } else if idx &amp;lt; pos{ return []int{idx,pos} }else{ continue } } } return nil }  方法是通过map来达到快速查找，而不像暴力法需要每次都遍历整个数组</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 7</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-7/</link>
+      <pubDate>Mon, 22 Apr 2019 00:19:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-7/</guid>
+      <description>题目 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 示例 1: 输入: 123 输出: 321 示例 2: 输入: -123 输出: -321 示例 3: 输入: 120 输出: 21 注意: 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31, 2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  我的解答 func reverse(x int) int { var rev int for x != 0 { lastNum := x % 10 x = x / 10 if rev &amp;gt; math.MaxInt32/10 || rev == math.MaxInt32/10 &amp;amp;&amp;amp; lastNum &amp;gt; 7 { return 0 } if rev &amp;lt; math.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 开篇</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-before-start/</link>
+      <pubDate>Mon, 22 Apr 2019 00:00:37 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-before-start/</guid>
+      <description> 不积跬步无以至千里，不积小流无以成江海
+ 作为Leetcode的开篇作，在这里希望自己能够坚持每天code一两道题(视难度而定)
+以后博客应该是以这样的方式呈现
+### 题目 ### 我的解答 ### 最优解答 ### 难疑点&amp;amp;核心  </description>
+    </item>
+    
+  </channel>
+</rss>

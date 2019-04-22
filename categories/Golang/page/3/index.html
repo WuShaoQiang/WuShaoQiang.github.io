@@ -78,6 +78,86 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">Golang标准库--http</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月19日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
+Package http doc.go 先来看看官方对这个包的一个解释
+这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
+这里还举了一些方法的例子
+// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/">Golang Exercism</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
+func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/">Go圣经读书笔记</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
+func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
+输出/tmp/go-build115927302/b001/exe/main 123
+查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
+ func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
+ func (s *Scanner) Text() string  返回scanner所在行的文本
+counts := make(map[string]int) input := bufio.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-inaction/">Go语言实战</a>
                                 </h1>
                             </header>
@@ -267,67 +347,6 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/web-strcuture/">Web框架</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章是参考人世间博主写的一篇文章，这里哪里作为自己了解Gin框架的例子，笔者想在这做初步了解后再去深入了解源码，到时候再写一篇博客来说说Gin源码。
-Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是
- 相对路径
- 处理函数
-  这里面是Gin自己定义的一个HandlerFunc，和标准库里面的有所不同，这里的gin.*Context包含了标准库里的ResponseWriter和*http.Request还有一些其它
-介绍一些函数 // Query()	是匹配url上的参数，匹配不到就返回空字符串 // DefaultQuery() 也是匹配，如果匹配不到就用默认值 // 127.0.0.1:8000/post?id=111&amp;page=222 // 如果用curl，则需要在&amp;前面加\ id := c.Query(&quot;id&quot;) page := c.DefaultQuery(&quot;page&quot;, &quot;0&quot;) //这个是在表单上获取信息，通过POST方法发送过来的数据 name := c.PostForm(&quot;name&quot;) message := c.PostForm(&quot;message&quot;)  一个完整的路由 router.GET(&quot;/welcome&quot;, func(c *gin.Context) { firstname := c.DefaultQuery(&quot;firstname&quot;, &quot;Guest&quot;) lastname := c.Query(&quot;lastname&quot;) c.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/web-strcuture/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/">Go琐碎笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月14日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
-2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0)
-然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII
-res, ok := map[...] 中的ok变量可以用来判断key是否存在
-[]rune可以直接转换为字符串string([]rune)
-2019.2.17 谨记！ ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
-norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -352,7 +371,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/categories/Golang/page/3/">3</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Golang/page/4/">4</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/categories/Golang/page/4/">下一页</a>
+    </li>
     
 </ol>
 
@@ -376,43 +403,43 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel">Golang Channel</a>
+        <a href="https://wushaoqiang.github.io/posts/DHCP-and-NAT/" title="DHCP 和 NAT">DHCP 和 NAT</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface">Golang Interface</a>
+        <a href="https://wushaoqiang.github.io/posts/ip-message-field/" title="IPv4 数据报格式与分片">IPv4 数据报格式与分片</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips">Golang Tips</a>
+        <a href="https://wushaoqiang.github.io/posts/http-message-field/" title="HTTP 报文">HTTP 报文</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm Sort">Algorithm Sort</a>
+        <a href="https://wushaoqiang.github.io/posts/udp/" title="UDP">UDP</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin">Golang Gin</a>
+        <a href="https://wushaoqiang.github.io/posts/tcp-flow-control/" title="TCP 流量控制">TCP 流量控制</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation">Golang Validation</a>
+        <a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/" title="TCP 拥塞控制">TCP 拥塞控制</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-blog/" title="Golang Build blog with gin">Golang Build blog with gin</a>
+        <a href="https://wushaoqiang.github.io/posts/tcp-connect/" title="TCP 连接 --三次握手和四次挥手">TCP 连接 --三次握手和四次挥手</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os">Golang标准库--os</a>
+        <a href="https://wushaoqiang.github.io/posts/tcp-message-field/" title="TCP --报文">TCP --报文</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem">Golang Path Problem</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-20/" title="Leetcode 20">Leetcode 20</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences">Nice Sentences</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-14/" title="Leetcode 14">Leetcode 14</a>
     </li>
     
 </ul>
@@ -441,11 +468,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(29)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(32)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(7)</a>
     </li>
     
     <li>
@@ -468,6 +499,10 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
     </li>
     
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(8)</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -485,7 +520,11 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
     
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
@@ -497,7 +536,11 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
     
     <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
     
@@ -505,17 +548,29 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
     
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
     
     <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     
@@ -527,9 +582,13 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
     
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
     <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
     
     <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
     
     <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
     
@@ -548,6 +607,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     

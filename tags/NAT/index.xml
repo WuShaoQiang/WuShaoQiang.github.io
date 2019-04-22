@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NAT on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/NAT/</link>
+    <description>Recent content in NAT on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 22 Apr 2019 20:59:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/NAT/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DHCP 和 NAT</title>
+      <link>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</link>
+      <pubDate>Mon, 22 Apr 2019 20:59:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</guid>
+      <description>DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
+四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
+ DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了
+ 再次对准确地址发出请求
+ DHCP响应
+  到这里交互就完成了
+NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，因为现在IPv4的资源已经枯竭，利用NAT能够使得大家共用一个对外的IP，而内部会有不同的IP(局域网内IP)
+比如我在学习请求百度这个网页，百度实际上看到的IP地址是我学校的IP地址，并且将内容返回给这个IP地址，学校再通过NAT转换表把东西转给我
+有些人也说道，NAT实质上很大阻碍了IPv6的发展</description>
+    </item>
+    
+  </channel>
+</rss>
