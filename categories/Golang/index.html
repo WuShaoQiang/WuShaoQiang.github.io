@@ -78,6 +78,81 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-context/">Golang Context</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
+参考博客理解Go Context机制
+Golang的执行单元是goroutine，main也是一个goroutine
+上下文，上下则是存在上下层的传递，我们在编写Web后端的时候，接收到一个请求可能会执行一些列的goroutine(数据库，业务层处理)来达到并发效果
+这个时候，如果客户端那边取消了呢？如果我们在服务器端检测不到这个信号，那么我们服务器还是会继续服务，直到完成所有服务的时候，发现客户端已经不见了(资源就被浪费了)
+所以我们需要在每一个由Request产生的goroutine里面装一个监控，这个监控会告诉程序客户端是否还在等待返回，如果客户端离开，那么程序立即停止对客户端的服务
+Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) Done() &lt;-chan struct{} Err() error Value(key interface{}) interface{} }   Deadline会返回一个超时时间，Goroutine获得了超时时间后，例如可以对某些io操作设定超时时间。
+ Done方法返回一个信道（channel），当Context被撤销或过期时，该信道是关闭的，即它是一个表示Context是否已关闭的信号。
+ 当Done信道关闭后，Err方法表明Context被撤的原因。
+ Value可以让Goroutine共享一些数据，当然获得数据是协程安全的。但使用这些数据的时候要注意同步，比如返回了一个map，而这个map的读写则要加锁。
+  每当我们处理一个Request的时候，都应该从Request里拿一个Context
+req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
+ 如果Request的context是nil，那么它会返回一个context.Background()
+var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-context/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview/">Interview</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
+go的调度 这里应该指的是goroutine的调度模式
+读过Go Web编程那本书的人可能知道，go的并发是由线程、处理器、调度器和一个个的goroutine
+简单说一下运行的一些规则
+ 每一个线程里面有一个的协程，从微观角度来看是顺序执行的，但是从宏观角度来看，因为执行速度快，线程里的协程不断切换，因此可以看作是并行
+ 处理器主要就是用来执行goroutine的，它也维护了一个goroutine的队列，里面有在等待的goroutine
+ 只有线程和处理器结合起来才能构造一个goroutine执行环境
+ 调度器，当协程阻塞的时候，会保存上下文，直到下次可以恢复运行
+  这是一些比较浅显运行的规则，如果要深入goroutine的源码分析，推荐一篇文章
+go struct能不能比较 如果是值类型，是可以比较的，比如
+p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Age: 1} if p1 == p2 { fmt.Println(&quot;same&quot;) }  这样是有输出的
+那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子
+type Person struct { Name string Age int } type Student struct { *Person ID int }  由于Student里面的Person是一个引用类型，所以比较是比较了地址，因此是不同的
+go defer defer这个要注意的点有两个
+ 执行顺序，先进后出
+ 参数还是闭包
+  参数传递会根据传递参数时的值进行执行……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-pipeline/">Golang Pipeline</a>
                                 </h1>
                             </header>
@@ -318,61 +393,6 @@ Result方法 我们拿上面一个返回*Result对象做例子
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-blog/">Golang Build blog with gin</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 Package  ini &mdash;配置文件的读取
- com &mdash;功能性
- validation &mdash;做验证
- jwt-go &mdash;Token
- endless &mdash;服务器热启动
- swag &mdash;API文档
-  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-blog/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-os/">Golang标准库--os</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
-bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
-// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
-// Flags to OpenFile wrapping those of the underlying system.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -425,6 +445,22 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/" title="Golang Vscode Problem">Golang Vscode Problem</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang-context/" title="Golang Context">Golang Context</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/" title="Interview">Interview</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/encryption-basic/" title="关于加密 --基础">关于加密 --基础</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-83/" title="Leetcode 83">Leetcode 83</a>
     </li>
     
@@ -446,22 +482,6 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-58/" title="Leetcode 58">Leetcode 58</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-53/" title="Leetcode 53">Leetcode 53</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-35/" title="Leetcode 35">Leetcode 35</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-28/" title="Leetcode 28">Leetcode 28</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-27/" title="Leetcode 27">Leetcode 27</a>
     </li>
     
 </ul>
@@ -490,7 +510,7 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(32)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(34)</a>
     </li>
     
     <li>
@@ -510,11 +530,19 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
     </li>
     
     <li>
@@ -539,6 +567,8 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
     
     <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
     
@@ -596,7 +626,11 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     
     <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
     
@@ -620,7 +654,11 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
     
@@ -636,7 +674,11 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
     
 </div>
     </section>
