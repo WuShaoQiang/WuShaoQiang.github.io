@@ -6,10 +6,128 @@
     <description>Recent content in Leetcode on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Apr 2019 00:46:01 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 23 Apr 2019 22:21:39 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 83</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-83/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:39 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-83/</guid>
+      <description>题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&amp;gt;1-&amp;gt;2 输出: 1-&amp;gt;2 示例 2: 输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3 输出: 1-&amp;gt;2-&amp;gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
+最优解答 /** * Definition for singly-linked list.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 70</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-70/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-70/</guid>
+      <description>题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &amp;gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 69</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-69/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:31 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-69/</guid>
+      <description>题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
+最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &amp;gt; x { i = (i + x/i) / 2 } return i }  数学公式</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 67</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-67/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:26 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-67/</guid>
+      <description>题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &amp;quot;11&amp;quot;, b = &amp;quot;1&amp;quot; 输出: &amp;quot;100&amp;quot; 示例 2: 输入: a = &amp;quot;1010&amp;quot;, b = &amp;quot;1011&amp;quot; 输出: &amp;quot;10101&amp;quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &amp;quot;&amp;quot; if len(a) &amp;gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &amp;gt;= 0; i-- { if i &amp;gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 66</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-66/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:23 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-66/</guid>
+      <description>题目 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。 你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321。  我的解答 func plusOne(digits []int) []int { for i := len(digits) - 1; i &amp;gt;= 0; i-- { if digits[i] != 9 { digits[i]++ return digits } digits[i] = 0 } digits = append([]int{1}, digits...) return digits }  比较简单
+最优解答 无
+难疑点&amp;amp;核心 无</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 58</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-58/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:19 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-58/</guid>
+      <description> 题目 给定一个仅包含大小写字母和空格 &#39; &#39; 的字符串，返回其最后一个单词的长度。 如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例: 输入: &amp;quot;Hello World&amp;quot; 输出: 5  我的解答 func lengthOfLastWord(s string) int { if s == &amp;quot;&amp;quot; { return 0 } if !strings.Contains(s, &amp;quot; &amp;quot;) { return len(s) } s = strings.TrimSpace(s) lastSpaceIndex := strings.LastIndex(s, &amp;quot; &amp;quot;) return len(s) - lastSpaceIndex - 1 }  前面两个判断是为了能够快速判断简单情况
+要注意去掉头尾的空格，不然索引查找会出错
+这里也调用了标准库，可能在算法上不算合规
+最优解答 无
+难疑点&amp;amp;核心  容易把头尾的空格忽略掉  </description>
+    </item>
+    
+    <item>
+      <title>Leetcode 53</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-53/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:16 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-53/</guid>
+      <description>题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4], 输出: 6 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 进阶: 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。  我的解答 func maxSubArray(nums []int) int { if len(nums) == 0 { return 0 } if len(nums) == 1 { return nums[0] } total := nums[0] max := nums[0] for i := 1; i &amp;lt; len(nums); i++ { if total &amp;lt; 0 { total = 0 } total += nums[i] if max &amp;lt; total { max = total } } return max }  暴力法的话，时间复杂度是O(N^2)，这里使用的方法时间复杂度O(N)</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 35</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-35/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:07 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-35/</guid>
+      <description>题目 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。 你可以假设数组中无重复元素。 示例 1: 输入: [1,3,5,6], 5 输出: 2 示例 2: 输入: [1,3,5,6], 2 输出: 1 示例 3: 输入: [1,3,5,6], 7 输出: 4 示例 4: 输入: [1,3,5,6], 0 输出: 0  我的解答 func searchInsert(nums []int, target int) int { isFound, idx := binarySearch(nums, 0, len(nums)-1, target) if isFound { return idx } if nums[idx] &amp;gt; target { return idx } else { return idx + 1 } } func binarySearch(nums []int, left, right, target int) (found bool, idx int) { if left &amp;lt; right { mid := (left + right) / 2 if nums[mid] == target { return true, mid } else if nums[mid] &amp;gt; target { return binarySearch(nums, left, mid-1, target) } else { return binarySearch(nums, mid+1, right, target) } } else if nums[left] == target { return true, left } else { return false, left } }  因为是个有序的数组，因此可以不用暴力搜索，这里使用比较简单的二分法，找到索引(就算没有相等的，也找到最后一个查找的索引)</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 28</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-28/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:04 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-28/</guid>
+      <description>题目 实现 strStr() 函数。 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。 示例 1: 输入: haystack = &amp;quot;hello&amp;quot;, needle = &amp;quot;ll&amp;quot; 输出: 2 示例 2: 输入: haystack = &amp;quot;aaaaa&amp;quot;, needle = &amp;quot;bba&amp;quot; 输出: -1 说明: 当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。 对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。  我的解答 func strStr(haystack string, needle string) int { return strings.Index(haystack, needle) }  这里可能有点赖皮，直接调用了标准库，看网上说还有一种KMP的算法，比较难，按笔者现在的进度，先刷60简单题吧，后面再考虑实现。
+当然还有暴力算法，但是我宁愿使用标准库吧
+最优解答 无</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 27</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-27/</link>
+      <pubDate>Tue, 23 Apr 2019 22:21:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-27/</guid>
+      <description>题目 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。 示例 1: 给定 nums = [3,2,2,3], val = 3, 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,1,2,2,3,0,4,2], val = 2, 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。 注意这五个元素可为任意顺序。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝 int len = removeElement(nums, val); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &amp;lt; len; i++) { print(nums[i]); }  我的解答 func removeElement(nums []int, val int) int { if len(nums) == 0 { return 0 } i := 0 j := len(nums) - 1 for i &amp;lt; j { if nums[i] == val { nums[i] = nums[j] j-- } else { i++ } } if nums[i] == val { return j } return j+1 }  因为题目说只需要给索引就可以了，因此不需要创建新的内存存放，只需要用一个索引将符合要求的值和不符合要求的值划分开(所以要交换它们位置)</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 26</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-26/</link>
+      <pubDate>Tue, 23 Apr 2019 22:20:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-26/</guid>
+      <description>题目 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &amp;lt; len; i++) { print(nums[i]); }  我的解答 func removeDuplicates(nums []int) int { if len(nums) == 0 || len(nums) == 1 { return len(nums) } count := 0 existMap := make(map[int]bool) for _, num := range nums { if _, exist := existMap[num]; !</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 21</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-21/</link>
+      <pubDate>Tue, 23 Apr 2019 22:20:50 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-21/</guid>
+      <description>题目 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4 输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4  我的解答 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode { l4 := &amp;amp;ListNode{} l3 := &amp;amp;ListNode{} l4.Next = l3 for l1 != nil || l2 != nil { if l1 == nil { return l2 } if l2 == nil { return l1 } if l1.</description>
+    </item>
     
     <item>
       <title>Leetcode 20</title>

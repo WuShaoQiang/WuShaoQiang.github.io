@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/SQL/</link>
+    <description>Recent content in SQL on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Apr 2019 10:25:40 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/SQL/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SQL 进阶</title>
+      <link>https://wushaoqiang.github.io/posts/SQL-highlevel/</link>
+      <pubDate>Tue, 23 Apr 2019 10:25:40 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/SQL-highlevel/</guid>
+      <description>只针对Mysql的SQL语句
+##创建TABLE
+CREATE TABLE user ( id int PRIMARY KEY, username varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL );  约束也可以这样写
+CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255) NOT NULL City varchar(255) DEFAULT &#39;Sandnes&#39; UNIQUE(username) PRIMARY KEY(id) FOREIGN KEY (P_id) REFERENCES Persons(P_id) )  约束  NOT NULL
+ UNIQUE
+ PRIMARY KEY(NOT NULL和UNIQUE的结合)
+ FOREIGN KEY:保证一个表中的数据匹配另一个表中的值的参照完整性
+ CHECK
+ DEFAULT 默认值，在没有赋值的情况下就是默认值
+  NOT NULL 强制不接受NULL，如果不向该字段添加值，就无法插入新纪录或者更新记录</description>
+    </item>
+    
+    <item>
+      <title>SQL 基础</title>
+      <link>https://wushaoqiang.github.io/posts/SQL-basic/</link>
+      <pubDate>Mon, 22 Apr 2019 23:05:06 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/SQL-basic/</guid>
+      <description>笔者之前学了一些基础的Mysql的语法，现在进一步学习
+关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
+非关系型数据库有自己的一套语言
+只针对Mysql的SQL语句
+SELECT 选定要输出的列
+SELECT column_name,column_name FROM table_name;  将所有列输出
+SELECT * FROM table_name;  SELECT DISTINCT 如果一个列中包含了很多相同的，比如国家里面有很多人是中国的、日本的等等，我们指向查看有多少种的话，这样看起来很费劲
+介绍一个解决这种问题的命令
+和SELECT语法基本一样，只是这里不会输出相同的字段
+SELECT DISTINCT column_name,column_name FROM table_name;  WHERE WHERE子句用于提取那些满足指定标准的记录
+SELECT column_name,column_name FROM table_name WHERE column_name operator value;  例如，我要id大于3的user的id和name字段
+SELECT id,name FROM user WHERE id &amp;gt; 3  这里提醒一点，当实例是文本字段需要加单引号，如果是数值字段，就像上面一样直接写就好
+WHERE的运算符 WHERE column_name operator value  这里的operator就是运算符的位置
+运算符有：
+ =,&amp;gt;,&amp;gt;=,&amp;lt;,&amp;lt;= 这些就比较好理解了
+ &amp;lt;&amp;gt; 不等于
+ BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2</description>
+    </item>
+    
+    <item>
+      <title>Mysql学习笔记</title>
+      <link>https://wushaoqiang.github.io/posts/mysql-basic/</link>
+      <pubDate>Sun, 17 Mar 2019 02:14:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/mysql-basic/</guid>
+      <description>安装 sudo apt-get install mysql-server mysql-client
+查询是否安装了： sudo netstat -tap grep mysql
+安装成功
+tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有叫输入密码
+登录 打开debian.cnf文件： sudo nano /etc/mysql/debian.cnf
+# Automatically generated for Debian scripts. DO NOT TOUCH! [client] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock [mysql_upgrade] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock  这里面有一个叫debian-sys-maint的user
+登录debian-sys-maint： mysql -u debian-sys-maint -p</description>
+    </item>
+    
+  </channel>
+</rss>

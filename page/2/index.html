@@ -68,11 +68,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-13/" title="Leetcode 13" >Leetcode 13</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-26/" title="Leetcode 26" >Leetcode 26</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月22日
+                                2019年4月23日
                             </date>
                             
                             <div class="post-meta">
@@ -83,19 +83,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &quot;III&quot; 输出: 3 示例 2: 输入: &quot;IV&quot; 输出: 4 示例 3: 输入: &quot;IX&quot; 输出: 9 示例 4: 输入: &quot;LVIII&quot; 输出: 58 解释: L = 50, V= 5, III = 3.……
+                                题目 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); }  我的解答 func removeDuplicates(nums []int) int { if len(nums) == 0 || len(nums) == 1 { return len(nums) } count := 0 existMap := make(map[int]bool) for _, num := range nums { if _, exist := existMap[num]; !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-13/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-26/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-9/" title="Leetcode 9" >Leetcode 9</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-21/" title="Leetcode 21" >Leetcode 21</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月22日
+                                2019年4月23日
                             </date>
                             
                             <div class="post-meta">
@@ -106,15 +106,47 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度……
+                                题目 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4  我的解答 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode { l4 := &amp;ListNode{} l3 := &amp;ListNode{} l4.Next = l3 for l1 != nil || l2 != nil { if l1 == nil { return l2 } if l2 == nil { return l1 } if l1.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-9/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-21/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-1/" title="Leetcode 1" >Leetcode 1</a>
+                                    <a href="https://wushaoqiang.github.io/posts/SQL-highlevel/" title="SQL 进阶" >SQL 进阶</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                只针对Mysql的SQL语句
+##创建TABLE
+CREATE TABLE user ( id int PRIMARY KEY, username varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL );  约束也可以这样写
+CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255) NOT NULL City varchar(255) DEFAULT 'Sandnes' UNIQUE(username) PRIMARY KEY(id) FOREIGN KEY (P_id) REFERENCES Persons(P_id) )  约束  NOT NULL
+ UNIQUE
+ PRIMARY KEY(NOT NULL和UNIQUE的结合)
+ FOREIGN KEY:保证一个表中的数据匹配另一个表中的值的参照完整性
+ CHECK
+ DEFAULT 默认值，在没有赋值的情况下就是默认值
+  NOT NULL 强制不接受NULL，如果不向该字段添加值，就无法插入新纪录或者更新记录……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/SQL-highlevel/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/SQL-basic/" title="SQL 基础" >SQL 基础</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -124,23 +156,36 @@
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
-示例:
-给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  我的解答 func twoSum(nums []int, target int) []int { myMap := make(map[int]int) for idx,num := range nums{ myMap[num] = idx } for idx,num := range nums{ tmp := target - num if pos,exist := myMap[tmp]; exist{ if idx &gt; pos{ return []int{pos,idx} } else if idx &lt; pos{ return []int{idx,pos} }else{ continue } } } return nil }  方法是通过map来达到快速查找，而不像暴力法需要每次都遍历整个数组……
+                                笔者之前学了一些基础的Mysql的语法，现在进一步学习
+关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
+非关系型数据库有自己的一套语言
+只针对Mysql的SQL语句
+SELECT 选定要输出的列
+SELECT column_name,column_name FROM table_name;  将所有列输出
+SELECT * FROM table_name;  SELECT DISTINCT 如果一个列中包含了很多相同的，比如国家里面有很多人是中国的、日本的等等，我们指向查看有多少种的话，这样看起来很费劲
+介绍一个解决这种问题的命令
+和SELECT语法基本一样，只是这里不会输出相同的字段
+SELECT DISTINCT column_name,column_name FROM table_name;  WHERE WHERE子句用于提取那些满足指定标准的记录
+SELECT column_name,column_name FROM table_name WHERE column_name operator value;  例如，我要id大于3的user的id和name字段
+SELECT id,name FROM user WHERE id &gt; 3  这里提醒一点，当实例是文本字段需要加单引号，如果是数值字段，就像上面一样直接写就好
+WHERE的运算符 WHERE column_name operator value  这里的operator就是运算符的位置
+运算符有：
+ =,&gt;,&gt;=,&lt;,&lt;= 这些就比较好理解了
+ &lt;&gt; 不等于
+ BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-1/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/SQL-basic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-7/" title="Leetcode 7" >Leetcode 7</a>
+                                    <a href="https://wushaoqiang.github.io/posts/DHCP-and-NAT/" title="DHCP 和 NAT" >DHCP 和 NAT</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -150,20 +195,28 @@
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 示例 1: 输入: 123 输出: 321 示例 2: 输入: -123 输出: -321 示例 3: 输入: 120 输出: 21 注意: 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31, 2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  我的解答 func reverse(x int) int { var rev int for x != 0 { lastNum := x % 10 x = x / 10 if rev &gt; math.MaxInt32/10 || rev == math.MaxInt32/10 &amp;&amp; lastNum &gt; 7 { return 0 } if rev &lt; math.……
+                                DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
+四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
+ DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了
+ 再次对准确地址发出请求
+ DHCP响应
+  到这里交互就完成了
+NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，因为现在IPv4的资源已经枯竭，利用NAT能够使得大家共用一个对外的IP，而内部会有不同的IP(局域网内IP)
+比如我在学习请求百度这个网页，百度实际上看到的IP地址是我学校的IP地址，并且将内容返回给这个IP地址，学校再通过NAT转换表把东西转给我
+有些人也说道，NAT实质上很大阻碍了IPv6的发展……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-7/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/DHCP-and-NAT/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-before-start/" title="Leetcode 开篇" >Leetcode 开篇</a>
+                                    <a href="https://wushaoqiang.github.io/posts/ip-message-field/" title="IPv4 数据报格式与分片" >IPv4 数据报格式与分片</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -173,178 +226,172 @@
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                 不积跬步无以至千里，不积小流无以成江海
- 作为Leetcode的开篇作，在这里希望自己能够坚持每天code一两道题(视难度而定)
-以后博客应该是以这样的方式呈现
-### 题目 ### 我的解答 ### 最优解答 ### 难疑点&amp;核心  ……
+                                直接上图  版本号
+ 首部长度：一般为20
+ 服务类型：为了区分数据报，有点想女士优先这种
+ 数据报长度(首部加数据，一般不超过1500字节)
+ 标识、标志、片偏移：与IP数据报分片有关(别的篇幅讲)
+ 寿命：每经过一台路由器，TTL减1，若为0的时候，这个数据报就要丢掉了
+ 上层协议：6代表TCP；17代表UDP
+ 首部校验和(检验IP数据报比特错误)
+ 源和目的IP地址
+ 选项(很少用)
+ 数据(TCP or UDP报文段)
+  IP数据报分片 发送方与目的地路径上的每段链路可能使用不同的链路层协议，且每种协议可能具备不同的MTU
+比如以太网的MTU为1500
+所以在通过MTU比较小的链路段时，就需要分片了
+为了让目的主机执行重装任务，IPv4的设计者将标识、标志、片偏移字段放在IP数据报首部
+分别解释这三个字段 标识 发送主机在发送IP数据报的时候，通常会将它发送的每个数据报的标识号加1
+所以目的地址收到了很多片，这些片上标识号是同一个数字的，那么它们就是可以组合的
+标志 最后一个片的标志比特被设为0，表明已经接收到某个标识的最后一个片
+偏移量 毫无疑问，是为了将片重新组织回去的……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-before-start/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/ip-message-field/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-pipeline/" title="Golang Pipeline" >Golang Pipeline</a>
+                                    <a href="https://wushaoqiang.github.io/posts/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月21日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                根据官网博客学习Pipeline
-什么是Pipeline 管道其实就是一系列的Channel连接起来
- 通过channel(可能不止一个)来接收数据
- 处理数据
- 用Channel向下传递数据(也可能不止一个)
-  代码演示 package main import ( &quot;fmt&quot; &quot;sync&quot; ) func main() { // Set up a done channel that's shared by the whole pipeline, // and close that channel when this pipeline exits, as a signal // for all the goroutines we started to exit. done := make(chan struct{}) defer close(done) in := gen(done, 2, 3) // Distribute the sq work across two goroutines that both read from in.……
+                                 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
+HTTP是一个无状态协议
+报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-pipeline/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/http-message-field/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-makevsnew/" title="Golang make vs new" >Golang make vs new</a>
+                                    <a href="https://wushaoqiang.github.io/posts/udp/" title="UDP" >UDP</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月21日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
- new可以对任何类型作用
-  make和new的返回值  make返回主体
- new也是返回指针，比如new(int)，返回一个int的指针，这个指针的内容是0
-  初始化 两者都会初始化为“0”值
-总结 所以我觉得它们最大的区别还是返回值的区别，以及作用对象……
+                                  UDP无连接建立
+ 不需要维护连接状态
+ 报文头比TCP小
+ 能尽可能的快，没有速度限制
+  应用场景 对丢包不是很看重，对速度很敏感
+ DNS
+ SNMP
+  报文结构 ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-makevsnew/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/udp/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-map/" title="Golang Map" >Golang Map</a>
+                                    <a href="https://wushaoqiang.github.io/posts/tcp-flow-control/" title="TCP 流量控制" >TCP 流量控制</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月20日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                Construct: m:=map[key]value{}
- Insert: m[k] = v
- Lookup: v = m[k]
- Delete: delete(m,k)
- lterate: for k,v := range m
- Size: len(m)
-  Key不能为 maps,slices,funcs. 因为它们不可比较
-Map底层 map header
-len lg(#buckets) bucket array hash seed  流程  接收到一个key
- 对key进行hash
- 通过hash找到是哪一个bucket
- 取hash前8bit作为extra(作为快速检查)
- 找到bucket的内存(对不同的类型，大小会有不同)
-  扩容  新创建一个两倍的空间
- 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
- 用新的bucket
-  和其它Map比较  Go map不能用指针指向单个value
- 迭代的时候，go map是可以修改的……
+                                流量控制是为了匹配发送方和接收方的数据交换速度，如果发送方发的太快，接收方的缓存可能会溢出
+还要提醒一下流量控制和拥塞控制是两码事
+TCP通过让发送方维护一个称为接收窗口的变量来提供流量控制
+在接收方一定要满足
+LastByteRcvd - LastByteRead &lt;= RcvBuffer
+用rwnd表示还有多少空间可以用，所以rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)
+在TCP报文首部里有一个叫做接收窗口，这个就是接收者告诉发送者rwnd的
+在发送方，通过将未确认的数据量控制在值rwnd以内，就可以保证接收者不会缓存溢出了
+UDP是不提供流量控制的，所以UDP很有可能会出现缓存溢出……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-map/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-flow-control/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel" >Golang Channel</a>
+                                    <a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/" title="TCP 拥塞控制" >TCP 拥塞控制</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月20日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                这里就不再赘述重要性了
-Channel特性  goroutine-safe
- 两个goroutine之间传递数据
- FIFO
- cause goroutine to block and unblock
-  What is the inside of channel  mutex
- send-index and recieve index
- buf
-  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
-How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
+                                 TCP必须使用端到端拥塞控制而不是网络辅助的拥塞控制
+TCP所采用的方法是让每一个发送方根据所感知到的网络拥塞程度来限制其能向连接发送流量的速率
+三个问题 我们如何知道网络开始拥塞？
+我们如何限制发送方发送速率
+当发送方感受到拥塞时，用什么算法去限制其发送速率
+如何知道网络拥塞 TCP是不会有一种特殊的包叫“我拥塞啦”
+接收到Ack 没有拥塞，可以提速
+没接收到Ack 可能拥塞，降速
+如何限制发送方速率 改变cwnd
+当一切顺利，cwnd增加；丢包，cwnd减少
+我们发送方被限制在min(rwnd,cwnd)
+LastByteSent - LastByteAcked &lt;= cwnd
+rwnd和cwnd是不同的，前者是表示接收方的buffer还有多少能用，后者是改变在网络上的容量
+用什么算法来限制速度 我们希望TCP能在不发生拥塞情况上利用最大的带宽
+所以发送方速率有点像三角波，上上下下，因为要尽可能利用带宽又不要制造拥塞
+慢启动 在包被收到的情况下 cwnd每次是之前的两倍1,2,4,8,16...，直到大于或等于阈值，切换到拥塞避免
+在包没有被收到的情况下 三次冗余Ack 进入快速恢复
+超时 阈值=cwnd/2
+把cwnd变为1
+阈值(threhold) 记录上一次拥塞时一半的cwnd
+拥塞避免 在包被接收到的情况下 线性增长，每次在所有分片的Ack被接收到的情况下(一个RTT)，增加一个MSS
+在包没有被接收到的情况下 三次冗余Ack 进入快速恢复
+超时 切换到慢启动
+快速恢复 每个冗余的Ack对cwnd增加一个MSS，当丢失报文段的Ack最终回到时，再减少一个MSS
+进入拥塞避免状态
+出现超时，进入慢启动
+出现丢包，cwnd设置为1，阈值设置为cwnd的一半
+总结一下 三次冗余ACK  阈值设置为cwnd/2
+ cwnd设置为阈值(有快速恢复的情况下)
+  超时  阈值设置为cwnd/2
+ cwnd设置为1(MSS)
+  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-channel/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface" >Golang Interface</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
- concrete type(具体类型,int,string&hellip;)
- abstract type(抽象类型 io.Writer,io.Reader&hellip;)
-  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
-抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
-具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
-func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
-func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
-这里io.Reader是一个接口，接口里面只要一个函数
-type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
-func (f *File) Read(b []byte) (n int, err error) { if err := f.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-interface/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/">阅读全文</a></p>
                         </article>
                     
 
@@ -383,6 +430,14 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
         <a href="https://wushaoqiang.github.io/page/6/">6</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/7/">7</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/8/">8</a>
+    </li>
+    
 
     
     <li class="next">
@@ -411,43 +466,43 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/DHCP-and-NAT/" title="DHCP 和 NAT">DHCP 和 NAT</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-83/" title="Leetcode 83">Leetcode 83</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/ip-message-field/" title="IPv4 数据报格式与分片">IPv4 数据报格式与分片</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-70/" title="Leetcode 70">Leetcode 70</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/http-message-field/" title="HTTP 报文">HTTP 报文</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-69/" title="Leetcode 69">Leetcode 69</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/udp/" title="UDP">UDP</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-67/" title="Leetcode 67">Leetcode 67</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/tcp-flow-control/" title="TCP 流量控制">TCP 流量控制</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-66/" title="Leetcode 66">Leetcode 66</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/" title="TCP 拥塞控制">TCP 拥塞控制</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-58/" title="Leetcode 58">Leetcode 58</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/tcp-connect/" title="TCP 连接 --三次握手和四次挥手">TCP 连接 --三次握手和四次挥手</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-53/" title="Leetcode 53">Leetcode 53</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/tcp-message-field/" title="TCP --报文">TCP --报文</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-35/" title="Leetcode 35">Leetcode 35</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-20/" title="Leetcode 20">Leetcode 20</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-28/" title="Leetcode 28">Leetcode 28</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-14/" title="Leetcode 14">Leetcode 14</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-27/" title="Leetcode 27">Leetcode 27</a>
     </li>
     
 </ul>
@@ -484,15 +539,11 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(7)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(19)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/Mysql/">Mysql(1)</a>
     </li>
     
     <li>
@@ -505,6 +556,10 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(3)</a>
     </li>
     
     <li>
@@ -564,13 +619,13 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     
     <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
     
-    <a href="https://wushaoqiang.github.io/tags/Mysql/">Mysql</a>
-    
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
     <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
     
@@ -611,6 +666,8 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     
