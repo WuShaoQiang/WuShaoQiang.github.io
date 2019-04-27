@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>依赖注入 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</link>
+    <description>Recent content in 依赖注入 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 26 Apr 2019 21:05:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang 依赖注入</title>
+      <link>https://wushaoqiang.github.io/posts/golang-dependency-injection/</link>
+      <pubDate>Fri, 26 Apr 2019 21:05:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-dependency-injection/</guid>
+      <description>面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
+没有DI 把所有创建变量放在New函数里面
+type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;amp;Person{} } func NewStudent() *Student{ return &amp;amp;Student{ person:&amp;amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
+有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;amp;Student{ person:person, } } func main(){ p := NewPerson(&amp;quot;abc&amp;quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长</description>
+    </item>
+    
+  </channel>
+</rss>

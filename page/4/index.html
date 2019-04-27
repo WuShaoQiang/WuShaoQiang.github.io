@@ -68,7 +68,343 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-1/" title="Leetcode 1" >Leetcode 1</a>
+                                    <a href="https://wushaoqiang.github.io/posts/SQL-basic/" title="SQL 基础" >SQL 基础</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者之前学了一些基础的Mysql的语法，现在进一步学习
+关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
+非关系型数据库有自己的一套语言
+只针对Mysql的SQL语句
+SELECT 选定要输出的列
+SELECT column_name,column_name FROM table_name;  将所有列输出
+SELECT * FROM table_name;  SELECT DISTINCT 如果一个列中包含了很多相同的，比如国家里面有很多人是中国的、日本的等等，我们指向查看有多少种的话，这样看起来很费劲
+介绍一个解决这种问题的命令
+和SELECT语法基本一样，只是这里不会输出相同的字段
+SELECT DISTINCT column_name,column_name FROM table_name;  WHERE WHERE子句用于提取那些满足指定标准的记录
+SELECT column_name,column_name FROM table_name WHERE column_name operator value;  例如，我要id大于3的user的id和name字段
+SELECT id,name FROM user WHERE id &gt; 3  这里提醒一点，当实例是文本字段需要加单引号，如果是数值字段，就像上面一样直接写就好
+WHERE的运算符 WHERE column_name operator value  这里的operator就是运算符的位置
+运算符有：
+ =,&gt;,&gt;=,&lt;,&lt;= 这些就比较好理解了
+ &lt;&gt; 不等于
+ BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/SQL-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/DHCP-and-NAT/" title="DHCP 和 NAT" >DHCP 和 NAT</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
+四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
+ DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了
+ 再次对准确地址发出请求
+ DHCP响应
+  到这里交互就完成了
+NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，因为现在IPv4的资源已经枯竭，利用NAT能够使得大家共用一个对外的IP，而内部会有不同的IP(局域网内IP)
+比如我在学习请求百度这个网页，百度实际上看到的IP地址是我学校的IP地址，并且将内容返回给这个IP地址，学校再通过NAT转换表把东西转给我
+有些人也说道，NAT实质上很大阻碍了IPv6的发展……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/DHCP-and-NAT/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/ip-message-field/" title="IPv4 数据报格式与分片" >IPv4 数据报格式与分片</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                直接上图  版本号
+ 首部长度：一般为20
+ 服务类型：为了区分数据报，有点想女士优先这种
+ 数据报长度(首部加数据，一般不超过1500字节)
+ 标识、标志、片偏移：与IP数据报分片有关(别的篇幅讲)
+ 寿命：每经过一台路由器，TTL减1，若为0的时候，这个数据报就要丢掉了
+ 上层协议：6代表TCP；17代表UDP
+ 首部校验和(检验IP数据报比特错误)
+ 源和目的IP地址
+ 选项(很少用)
+ 数据(TCP or UDP报文段)
+  IP数据报分片 发送方与目的地路径上的每段链路可能使用不同的链路层协议，且每种协议可能具备不同的MTU
+比如以太网的MTU为1500
+所以在通过MTU比较小的链路段时，就需要分片了
+为了让目的主机执行重装任务，IPv4的设计者将标识、标志、片偏移字段放在IP数据报首部
+分别解释这三个字段 标识 发送主机在发送IP数据报的时候，通常会将它发送的每个数据报的标识号加1
+所以目的地址收到了很多片，这些片上标识号是同一个数字的，那么它们就是可以组合的
+标志 最后一个片的标志比特被设为0，表明已经接收到某个标识的最后一个片
+偏移量 毫无疑问，是为了将片重新组织回去的……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/ip-message-field/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
+HTTP是一个无状态协议
+报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/http-message-field/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/udp/" title="UDP" >UDP</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                  UDP无连接建立
+ 不需要维护连接状态
+ 报文头比TCP小
+ 能尽可能的快，没有速度限制
+  应用场景 对丢包不是很看重，对速度很敏感
+ DNS
+ SNMP
+  报文结构 ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/udp/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/tcp-flow-control/" title="TCP 流量控制" >TCP 流量控制</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                流量控制是为了匹配发送方和接收方的数据交换速度，如果发送方发的太快，接收方的缓存可能会溢出
+还要提醒一下流量控制和拥塞控制是两码事
+TCP通过让发送方维护一个称为接收窗口的变量来提供流量控制
+在接收方一定要满足
+LastByteRcvd - LastByteRead &lt;= RcvBuffer
+用rwnd表示还有多少空间可以用，所以rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)
+在TCP报文首部里有一个叫做接收窗口，这个就是接收者告诉发送者rwnd的
+在发送方，通过将未确认的数据量控制在值rwnd以内，就可以保证接收者不会缓存溢出了
+UDP是不提供流量控制的，所以UDP很有可能会出现缓存溢出……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-flow-control/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/" title="TCP 拥塞控制" >TCP 拥塞控制</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 TCP必须使用端到端拥塞控制而不是网络辅助的拥塞控制
+TCP所采用的方法是让每一个发送方根据所感知到的网络拥塞程度来限制其能向连接发送流量的速率
+三个问题 我们如何知道网络开始拥塞？
+我们如何限制发送方发送速率
+当发送方感受到拥塞时，用什么算法去限制其发送速率
+如何知道网络拥塞 TCP是不会有一种特殊的包叫“我拥塞啦”
+接收到Ack 没有拥塞，可以提速
+没接收到Ack 可能拥塞，降速
+如何限制发送方速率 改变cwnd
+当一切顺利，cwnd增加；丢包，cwnd减少
+我们发送方被限制在min(rwnd,cwnd)
+LastByteSent - LastByteAcked &lt;= cwnd
+rwnd和cwnd是不同的，前者是表示接收方的buffer还有多少能用，后者是改变在网络上的容量
+用什么算法来限制速度 我们希望TCP能在不发生拥塞情况上利用最大的带宽
+所以发送方速率有点像三角波，上上下下，因为要尽可能利用带宽又不要制造拥塞
+慢启动 在包被收到的情况下 cwnd每次是之前的两倍1,2,4,8,16...，直到大于或等于阈值，切换到拥塞避免
+在包没有被收到的情况下 三次冗余Ack 进入快速恢复
+超时 阈值=cwnd/2
+把cwnd变为1
+阈值(threhold) 记录上一次拥塞时一半的cwnd
+拥塞避免 在包被接收到的情况下 线性增长，每次在所有分片的Ack被接收到的情况下(一个RTT)，增加一个MSS
+在包没有被接收到的情况下 三次冗余Ack 进入快速恢复
+超时 切换到慢启动
+快速恢复 每个冗余的Ack对cwnd增加一个MSS，当丢失报文段的Ack最终回到时，再减少一个MSS
+进入拥塞避免状态
+出现超时，进入慢启动
+出现丢包，cwnd设置为1，阈值设置为cwnd的一半
+总结一下 三次冗余ACK  阈值设置为cwnd/2
+ cwnd设置为阈值(有快速恢复的情况下)
+  超时  阈值设置为cwnd/2
+ cwnd设置为1(MSS)
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/tcp-connect/" title="TCP 连接 --三次握手和四次挥手" >TCP 连接 --三次握手和四次挥手</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 首先这里所说的握手，是进程之间的握手
+三次握手 简单来说就是
+A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可以承载有效负荷  再细致点说就是
+ 客户端应用程序发起一个TCP连接
+ 发送报文里有SYN
+ 收到来自服务器端的SYN&amp;ACK
+ 再次向服务器端发送ACK
+  这里面总共有3次报文，所以为三次握手
+最大报文段长度&amp;最大传输单元 最大报文段长度(MSS):一般为1460
+最大传输单元(MTU):一般为1500
+之说以说一般，是因为一般来说TCP/IP的首部字段加起来是40字节
+1500-40=1460
+清除认识 当进程通过套接字把数据给到TCP的时候，数据就和进程没关系了，已经全权交给TCP了
+为什么不是两次握手？ 这是书本上的一个问题
+在我理解，握手其实是为了双方知道对方的初始序列号
+ 客户端给服务器端发送初始序列号
+ 服务器端收到了客户端的初始序列号，并且发送服务器端的初始序列号
+  如果客户端不产生第三次握手，那么服务器端不知道客户端到底拿到了初始序列号没
+ 客户端看到回复后就知道服务器端拿到了自己的初始序列号，于是也和服务器端说明，已经拿到它的初始序列号了  四次挥手  客户端应用程序发起关闭连接
+ 发送报文里包含FIN
+ 服务器端发送一个ACK表示接收到了
+ 服务器端再次发一个FIN
+ 客户端给服务器端发一个ACK
+ 等待一会，资源就释放了
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-connect/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/tcp-message-field/" title="TCP --报文" >TCP --报文</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 之间写过一个关于《计算机网络(原书第六版)：自顶向下方法》的一部分笔记，当时没继续写下去是因为觉得一个篇幅太多了，决定分开写，这样可能可以更加详细点，也算是第二次的复习吧
+这篇主要讲报文
+先看看报文的格式
+首先，TCP是运输层的协议，IP是网络层的协议，一般运输层协议会确定端口号，网络层协议则确定IP地址
+ 源/目的端口号
+ 序号/确认号：是用来双方实现可靠传输的(下面详细讲)
+ 接收窗口字段：用于流量控制(可能会在别的篇幅讲)
+ 首部长度：由于有选项这个字段，使得TCP的首部长度是可以变化的，不过通常就是20字节
+ 标志字段/紧急指针：标志字段包括确认字段有效、建立和拆除连接、紧急数据。紧急指针指向紧急数据
+  序号/确认号 一条TCP连接的双发均可随机地选择初始序号，可能是0和4294967295之间的任意值
+我们假设初始序号为0
+A --&gt; B Seq=42,ACK=79,data=1 B --&gt; A Seq=79,ACK=43,data=2 A --&gt; B Seq=43,ACK=80,data=3 ...  在我理解
+序号是标识我要发送给对方的数据
+确认号是标识我需要对方发送给我的数据
+所以上面场景就是
+A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-message-field/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-20/" title="Leetcode 20" >Leetcode 20</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -83,271 +419,10 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
-示例:
-给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  我的解答 func twoSum(nums []int, target int) []int { myMap := make(map[int]int) for idx,num := range nums{ myMap[num] = idx } for idx,num := range nums{ tmp := target - num if pos,exist := myMap[tmp]; exist{ if idx &gt; pos{ return []int{pos,idx} } else if idx &lt; pos{ return []int{idx,pos} }else{ continue } } } return nil }  方法是通过map来达到快速查找，而不像暴力法需要每次都遍历整个数组……
+                                题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &quot;()&quot; 输出: true 示例 2: 输入: &quot;()[]{}&quot; 输出: true 示例 3: 输入: &quot;(]&quot; 输出: false 示例 4: 输入: &quot;([)]&quot; 输出: false 示例 5: 输入: &quot;{[]}&quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
+var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: &quot;]&quot;, &quot;{&quot;: &quot;}&quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-1/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-7/" title="Leetcode 7" >Leetcode 7</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 示例 1: 输入: 123 输出: 321 示例 2: 输入: -123 输出: -321 示例 3: 输入: 120 输出: 21 注意: 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31, 2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  我的解答 func reverse(x int) int { var rev int for x != 0 { lastNum := x % 10 x = x / 10 if rev &gt; math.MaxInt32/10 || rev == math.MaxInt32/10 &amp;&amp; lastNum &gt; 7 { return 0 } if rev &lt; math.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-7/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-before-start/" title="Leetcode 开篇" >Leetcode 开篇</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 不积跬步无以至千里，不积小流无以成江海
- 作为Leetcode的开篇作，在这里希望自己能够坚持每天code一两道题(视难度而定)
-以后博客应该是以这样的方式呈现
-### 题目 ### 我的解答 ### 最优解答 ### 难疑点&amp;核心  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-before-start/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-pipeline/" title="Golang Pipeline" >Golang Pipeline</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月21日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                根据官网博客学习Pipeline
-什么是Pipeline 管道其实就是一系列的Channel连接起来
- 通过channel(可能不止一个)来接收数据
- 处理数据
- 用Channel向下传递数据(也可能不止一个)
-  代码演示 package main import ( &quot;fmt&quot; &quot;sync&quot; ) func main() { // Set up a done channel that's shared by the whole pipeline, // and close that channel when this pipeline exits, as a signal // for all the goroutines we started to exit. done := make(chan struct{}) defer close(done) in := gen(done, 2, 3) // Distribute the sq work across two goroutines that both read from in.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-pipeline/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-makevsnew/" title="Golang make vs new" >Golang make vs new</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月21日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
- new可以对任何类型作用
-  make和new的返回值  make返回主体
- new也是返回指针，比如new(int)，返回一个int的指针，这个指针的内容是0
-  初始化 两者都会初始化为“0”值
-总结 所以我觉得它们最大的区别还是返回值的区别，以及作用对象……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-makevsnew/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-map/" title="Golang Map" >Golang Map</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Construct: m:=map[key]value{}
- Insert: m[k] = v
- Lookup: v = m[k]
- Delete: delete(m,k)
- lterate: for k,v := range m
- Size: len(m)
-  Key不能为 maps,slices,funcs. 因为它们不可比较
-Map底层 map header
-len lg(#buckets) bucket array hash seed  流程  接收到一个key
- 对key进行hash
- 通过hash找到是哪一个bucket
- 取hash前8bit作为extra(作为快速检查)
- 找到bucket的内存(对不同的类型，大小会有不同)
-  扩容  新创建一个两倍的空间
- 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
- 用新的bucket
-  和其它Map比较  Go map不能用指针指向单个value
- 迭代的时候，go map是可以修改的……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-map/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel" >Golang Channel</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这里就不再赘述重要性了
-Channel特性  goroutine-safe
- 两个goroutine之间传递数据
- FIFO
- cause goroutine to block and unblock
-  What is the inside of channel  mutex
- send-index and recieve index
- buf
-  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
-How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-channel/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface" >Golang Interface</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
- concrete type(具体类型,int,string&hellip;)
- abstract type(抽象类型 io.Writer,io.Reader&hellip;)
-  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
-抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
-具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
-func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
-func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
-这里io.Reader是一个接口，接口里面只要一个函数
-type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
-func (f *File) Read(b []byte) (n int, err error) { if err := f.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-interface/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips" >Golang Tips</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月18日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
-关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-tips/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm Sort" >Algorithm Sort</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                排序时间复杂度 堆排序 参考dreamcatcher-cx博客
-最好最坏的平均时间复杂度都为O(NlogN)
-代码 func HeapSortUp(a []int) []int { for i := len(a)/2 - 1; i &gt;= 0; i-- { adjustHeapUp(a, i, len(a)) } for j := len(a) - 1; j &gt; 0; j-- { a[0], a[j] = a[j], a[0] adjustHeapUp(a, 0, j) } return a } func adjustHeapUp(a []int, i int, length int) { tmp := a[i] for k := 2*i + 1; k &lt; length; k = 2*k + 1 { if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] { k++ } if a[k] &gt; tmp { a[i] = a[k] i = k } else { break } } a[i] = tmp }  思路  先将数组变换为一个大顶堆……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm-sort/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-20/">阅读全文</a></p>
                         </article>
                     
 
@@ -394,6 +469,14 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
         <a href="https://wushaoqiang.github.io/page/8/">8</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/9/">9</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/10/">10</a>
+    </li>
+    
 
     
     <li class="next">
@@ -422,43 +505,43 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/" title="Golang Vscode Problem">Golang Vscode Problem</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-context/" title="Golang Context">Golang Context</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-107/" title="Leetcode 107">Leetcode 107</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/" title="Interview">Interview</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-104/" title="Leetcode 104">Leetcode 104</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/encryption-basic/" title="关于加密 --基础">关于加密 --基础</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-101/" title="Leetcode 101">Leetcode 101</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-83/" title="Leetcode 83">Leetcode 83</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-100/" title="Leetcode 100">Leetcode 100</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-70/" title="Leetcode 70">Leetcode 70</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-88/" title="Leetcode 88">Leetcode 88</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-69/" title="Leetcode 69">Leetcode 69</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-67/" title="Leetcode 67">Leetcode 67</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-66/" title="Leetcode 66">Leetcode 66</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-58/" title="Leetcode 58">Leetcode 58</a>
+        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -487,7 +570,7 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(34)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
     </li>
     
     <li>
@@ -495,11 +578,11 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(19)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(25)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(3)</a>
     </li>
     
     <li>
@@ -555,9 +638,15 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
@@ -629,6 +718,8 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
@@ -649,7 +740,11 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
     

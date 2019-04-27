@@ -6,10 +6,227 @@
     <description>Recent content in Posts on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Apr 2019 20:56:13 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Apr 2019 23:13:54 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 108</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-108/</link>
+      <pubDate>Sat, 27 Apr 2019 23:13:54 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-108/</guid>
+      <description>题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &amp;lt;= right { mid := (left + right) / 2 // fmt.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 107</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-107/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-107/</guid>
+      <description>题目 Given a binary tree, return the bottom-up level order traversal of its nodes&#39; values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &amp;gt; 0 { len := len(que) var level []int for i := 0; i &amp;lt; len; i++ { node := que[0] que = que[1:] level = append(level, node.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 104</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-104/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:42 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-104/</guid>
+      <description>题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 101</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-101/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:39 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-101/</guid>
+      <description>题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 100</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-100/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-100/</guid>
+      <description>题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 88</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-88/</link>
+      <pubDate>Sat, 27 Apr 2019 21:33:45 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-88/</guid>
+      <description>题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &amp;gt; 0 &amp;amp;&amp;amp; n &amp;gt; 0 { if nums1[m-1] &amp;gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &amp;gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了</description>
+    </item>
+    
+    <item>
+      <title>Golang GC</title>
+      <link>https://wushaoqiang.github.io/posts/golang-GC/</link>
+      <pubDate>Sat, 27 Apr 2019 12:48:58 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-GC/</guid>
+      <description>用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
+参考  legendtkl
+ Golang UK Conference 2017 | Will Sewell &amp;amp; Jim Fisher - Golang&amp;rsquo;s Realtime GC in Theory and Practice
+  算法模型 三色标记算法(Mark-and-sweep)
+三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
+ 这个算法实现广度优先(BF)
+ 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
+ 这个重复选取直到没有灰色的对象为止
+  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
+ 黑色：已经遍历过这个对象的所有对象
+ 灰色：这个对象所指向的对象还没有被遍历过
+ 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
+  结束阶段里，按算法所解释的，是不会再有灰色了，只有
+ 黑色：有用的数据
+ 白色：已经不可能到达的数据(垃圾，会被清理)
+  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
+ 执行我们前面所说的模型里的循环
+ 在处理完循环后，清理所有白色标记的对象
+  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现</description>
+    </item>
+    
+    <item>
+      <title>Golang 依赖注入</title>
+      <link>https://wushaoqiang.github.io/posts/golang-dependency-injection/</link>
+      <pubDate>Fri, 26 Apr 2019 21:05:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-dependency-injection/</guid>
+      <description>面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
+没有DI 把所有创建变量放在New函数里面
+type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;amp;Person{} } func NewStudent() *Student{ return &amp;amp;Student{ person:&amp;amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
+有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;amp;Student{ person:person, } } func main(){ p := NewPerson(&amp;quot;abc&amp;quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长</description>
+    </item>
+    
+    <item>
+      <title>Golang 泛型</title>
+      <link>https://wushaoqiang.github.io/posts/golang-generic/</link>
+      <pubDate>Fri, 26 Apr 2019 19:55:21 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-generic/</guid>
+      <description>笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
+泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
+比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
+type LinkListNode struct { Value int Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  如果我们还要写一个字符串的链表，这个时候将Value的类型改成string就行了，其它不用变，如果我们还要..balabala，可能就要定义上百个结构体了，到时候代码全是结构体
+有些同学说，用接口不就可以了吗？用接口不就无法实现类型的判断了吗，万一程序哪个地方本应该收到int，却收了一个string，然后程序boom
+关于网上很多网友使用interface来达到所谓的泛型，我是越看越像多态呀，并且还是达不到泛型所能提供的类型保护啊，虽然算法确实可以复用了(有些)
+泛型的目的是减少代码的重复性，也就是增加重用性，还能够确定数据类型，比如Java中的一个例子
+class Factory&amp;lt;T&amp;gt;{ private T value; public T getValue() { return value; } public void setValue(T v) { this.value = v; } }  T我可以是字符串，也可以是整数等，或者是自己定义的结构体。但是一旦定下来，创建了的变量类型就不能变了
+所以我说了那么多。。怎么实现啊
+实现 Go2草稿中有提到这个话题Go 2 Draft Designs
+目前只是一个草稿，并且是由Gopher们共同推进的一个话题，所以说现在Go内置里面还未实现泛型
+笔者也去看了一些关于泛型的讨论，到最后都还是建议不要在现阶段写泛型程序，因为Go有一个很本质的特点，就是简单写、简单读，如果通过一些自己的&amp;rdquo;创造&amp;rdquo;而造成别人阅读代码困难，那是得不偿失
+所以真香，还是用回多态吧，有机会再详细阅读一下草稿
+对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
+这里是Go2官方对这些修改的想法视频</description>
+    </item>
+    
+    <item>
+      <title>Effective Go</title>
+      <link>https://wushaoqiang.github.io/posts/effective-go/</link>
+      <pubDate>Thu, 25 Apr 2019 23:46:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/effective-go/</guid>
+      <description>参考Effective Go中英双语版
+ It&amp;rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
+ Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)
+所以我们今天来谈谈代码规范吧，这里只记录了我自己有时候会忽略的点，有一些规范我以及掌握并且时刻用在编写Golang程序上了，因此不记录，想看完整的请阅读上面的开源书本
+格式化 Go的gofmt为我们做好了，所以安装这个程序，在保存的时候就可以自动帮你调整代码布局
+注释 行注释更为常用，而块注释则主要用作包的注释
+每个包都应包含一段包注释，即放置在包子句前的一个块注释。对于包含多个文件的包， 包注释只需出现在其中的任一文件中即可。包注释应在整体上对该包进行介绍，并提供包的相关信息。 它将出现在 godoc 页面中的最上面，并为紧随其后的内容建立详细的文档。
+每个可导出（首字母大写）的名称都应该有文档注释。
+命名 我记得有一个叫go-lint会检查这个
+Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
+只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
+若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择</description>
+    </item>
+    
+    <item>
+      <title>Interview2</title>
+      <link>https://wushaoqiang.github.io/posts/interview2/</link>
+      <pubDate>Thu, 25 Apr 2019 22:05:12 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/interview2/</guid>
+      <description>最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
+ 这里应该用channel来达到通信
+在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
+进程和线程的区别 进程：操作系统对一个正在运行的程序的一种抽象，一个系统上可以运行多个进程，这些进程在单核的处理器下一样可以显得好像的并发的一样，这是通过处理器在进程之间的切换实现的，这种交错执行的机制称为上下文切换
+线程：一个进程可以由多个线程的执行单元组成，每个线程都运行在进程的上下文中
+区别：
+ 进程在系统上运行，线程在进程上运行，因此进程是独立的地址空间、线程共享进程的地址空间
+ 线程比进程的开销要小
+ 线程一般来说比进程更高效
+ 线程之间的数据共享比进程的简单
+ 线程必须依赖在进程上执行
+  临界区是啥 临界区从通俗层面来讲就是我们锁-解锁之间的代码，通常会写在程序(或者说资源)无法同时被使用的地方
+这个区域只能允许一个线程或进程进入，其它后来的需要等待解锁
+死锁是啥。死锁产生的条件是什么 在我理解里，线程A占用了资源C，这个时候线程A还要申请资源D(占用且申请)，但线程B这时占用着资源D，而且线程A无法将资源抢过来，所以现在线程A就在等待线程B释放资源D。线程B在这个时候也需要使用资源C，并且不得到就不离开(一直等待)，所以现在局面就是A在等B释放D，B在等A释放C(循环等待)，并且都不肯让资源(不可抢占)，并且资源CD都是只能有一个线程占有的(互斥)
+若干进程竞争有限资源，但顺序或者决策不当，使得大家都在无限循环等待，就形成了死锁
+ 互斥条件
+ 不可抢占条件
+ 占有且申请条件(这个的意思是在占有资源的情况下还要去申请别的资源)
+ 循环等待条件
+  只要上述条件有一个不满足，就可以避免死锁
+给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率 占时还不太清除这个
+Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
+所以查找pid有lsof -i:port和netstat -p |grep port</description>
+    </item>
+    
+    <item>
+      <title>Linux 网络管理</title>
+      <link>https://wushaoqiang.github.io/posts/linux-network-management/</link>
+      <pubDate>Thu, 25 Apr 2019 20:29:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux-network-management/</guid>
+      <description>ping -c 发送一定数量的报文
+ifconfig 其中输出信息里
+enp0s31f6：以太网(有线)
+lo：回传
+wlp4s0：无线网
+tcpdump 这是一个类似wireshark抓包的命令,需要权限
+-c：指定抓取包的数量
+-i：指定接口(上面说到有3个接口)
+port：指定端口
+netstat -r：显示路由
+-i：显示接口
+-n：显示IP
+-t：tcp
+-u：udp</description>
+    </item>
+    
+    <item>
+      <title>Linux 进程管理</title>
+      <link>https://wushaoqiang.github.io/posts/linux-process-management/</link>
+      <pubDate>Thu, 25 Apr 2019 17:04:19 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux-process-management/</guid>
+      <description>进程状态  R 正在运行或在运行队列
+ D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
+ S 中断，等待某个事件完成或者被信号唤醒
+ Z 僵死，进程已经终止但其父进程没有用wait()或在waitpid()来释放它
+ T 停止，可能是收到控制信号，也可能是被跟踪
+  相关命令 ps,pstree,top(htop),jobs,kill，nice，nohup
+Crtl+c:终结进程
+Ctrl+z:暂停进程
+ps(Process Status) ps 只会给当前终端中运行的进程
+ps -a Select all processes except both session leaders (see getsid(2)) and processes not associated with a terminal.
+ps -u root显示root用户的process，这里root也可以是别的用户名
+ps -l 相对ps，会显示父PID等信息
+ps aux 显示所有process
+ps -ef 详细显示所有process
+pstree pstree 进程树
+pstree -p 显示PID
+pstree (username) 显示用户的进程
+jobs jobs 查看后台运行的进程
+fg %num 将后台程序转移到前台</description>
+    </item>
     
     <item>
       <title>Golang Vscode Problem</title>
@@ -612,7 +829,7 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.</description>
     </item>
     
     <item>
-      <title>Algorithm Sort</title>
+      <title>Algorithm 排序</title>
       <link>https://wushaoqiang.github.io/posts/algorithm-sort/</link>
       <pubDate>Mon, 15 Apr 2019 20:03:27 +0800</pubDate>
       
@@ -1163,7 +1380,7 @@ Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handl
       <description>Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
 ifconfig 查看网络连接
 lsof -i:8000 查看端口8000占用情况
-kill -9 PID 把某个PID的进程结束了
+kill -9 PID 把某个PID的进程结束了，kill还有许多flag，1:挂起， 2:中断 ，3:退出
 mkdir -p /1/2/3/4 可以一次创建多层文件夹
 pkill -f &amp;lt;name&amp;gt; 可以直接kill掉一个已知名字的进程
 把脚本放进/etc/init.d/里面就可以自启动
@@ -1178,8 +1395,7 @@ find -mtime &amp;lt;number&amp;gt;这个命令还可以根据修改时间
 匹配 grep -r &amp;quot;error&amp;quot; &amp;lt;path or file&amp;gt; 会打印出所有含有error的字段
 查看CPU&amp;amp;内存占用情况 top 这个命令对界面不太友好
 htop 这个对阅读更加友好
-update 能够看到电脑持续开机时间
-查看Linux发行版本 cat /proc/version or lsb_release -a</description>
+update 能够看到电脑持续开机时间</description>
     </item>
     
     <item>

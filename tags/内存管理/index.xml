@@ -20,7 +20,7 @@
       <description>Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
 ifconfig 查看网络连接
 lsof -i:8000 查看端口8000占用情况
-kill -9 PID 把某个PID的进程结束了
+kill -9 PID 把某个PID的进程结束了，kill还有许多flag，1:挂起， 2:中断 ，3:退出
 mkdir -p /1/2/3/4 可以一次创建多层文件夹
 pkill -f &amp;lt;name&amp;gt; 可以直接kill掉一个已知名字的进程
 把脚本放进/etc/init.d/里面就可以自启动
@@ -35,8 +35,7 @@ find -mtime &amp;lt;number&amp;gt;这个命令还可以根据修改时间
 匹配 grep -r &amp;quot;error&amp;quot; &amp;lt;path or file&amp;gt; 会打印出所有含有error的字段
 查看CPU&amp;amp;内存占用情况 top 这个命令对界面不太友好
 htop 这个对阅读更加友好
-update 能够看到电脑持续开机时间
-查看Linux发行版本 cat /proc/version or lsb_release -a</description>
+update 能够看到电脑持续开机时间</description>
     </item>
     
   </channel>

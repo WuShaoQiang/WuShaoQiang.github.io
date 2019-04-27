@@ -6,10 +6,65 @@
     <description>Recent content in Leetcode on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Apr 2019 22:21:39 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Apr 2019 23:13:54 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 108</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-108/</link>
+      <pubDate>Sat, 27 Apr 2019 23:13:54 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-108/</guid>
+      <description>题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &amp;lt;= right { mid := (left + right) / 2 // fmt.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 107</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-107/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-107/</guid>
+      <description>题目 Given a binary tree, return the bottom-up level order traversal of its nodes&#39; values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &amp;gt; 0 { len := len(que) var level []int for i := 0; i &amp;lt; len; i++ { node := que[0] que = que[1:] level = append(level, node.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 104</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-104/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:42 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-104/</guid>
+      <description>题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 101</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-101/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:39 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-101/</guid>
+      <description>题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 100</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-100/</link>
+      <pubDate>Sat, 27 Apr 2019 21:36:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-100/</guid>
+      <description>题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 88</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-88/</link>
+      <pubDate>Sat, 27 Apr 2019 21:33:45 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-88/</guid>
+      <description>题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &amp;gt; 0 &amp;amp;&amp;amp; n &amp;gt; 0 { if nums1[m-1] &amp;gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &amp;gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了</description>
+    </item>
     
     <item>
       <title>Leetcode 83</title>

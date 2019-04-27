@@ -290,6 +290,142 @@ type Student struct {
 <li><p>直接选择排序(不稳定)</p></li>
 </ul>
 
+<h3 id="http-get跟head">http get跟head</h3>
+
+<p>get和head的区别在于，head只返回头部信息，没有主体信息</p>
+
+<h3 id="http-401-403">http 401,403</h3>
+
+<p>401 ： 未认证</p>
+
+<p>403 ： 禁止访问</p>
+
+<h3 id="http-keep-alive">http keep-alive</h3>
+
+<p>还记得我们的请求报文头里有<code>Connection:keep-alive</code></p>
+
+<p>目的是为了不要在短时间内重复创建连接，应该在创建一次连接后保持一阵子(取决于keep-alive的timeout变量)，以便在短时间内都可以以这个连接交换内容</p>
+
+<p>所以正确的设置timeout显得比较重要了，不然会过多的浪费资源</p>
+
+<blockquote>
+<p>In HTTP 1.1, all connections are considered persistent unless declared otherwise</p>
+</blockquote>
+
+<h3 id="http能不能一次连接多次请求-不等后端返回">http能不能一次连接多次请求，不等后端返回</h3>
+
+<blockquote>
+<p>HTTP pipelining is a technique in which multiple HTTP requests are sent on a single TCP connection without waiting for the corresponding responses</p>
+</blockquote>
+
+<p>这是维基上的解释，事实证明在服务器端，是可以做这样的事情的</p>
+
+<blockquote>
+<p>Implementing pipelining in web servers is a relatively simple matter of making sure that network buffers are not discarded between requests. For that reason, most modern web servers handle pipelining without any problem.</p>
+</blockquote>
+
+<p>但是很多现代的浏览器都不支持pipeline</p>
+
+<blockquote>
+<p>As of 2018, HTTP pipelining is not enabled by default in modern browsers, due to several issues including buggy proxy servers and HOL blocking</p>
+</blockquote>
+
+<h3 id="tcp与udp区别-udp优点-适用场景">tcp与udp区别，udp优点，适用场景</h3>
+
+<p>TCP是可靠传输，拥有流量控制，拥塞控制。并且TCP的报文比UDP的长，TCP是需要建立连接并且维护连接</p>
+
+<p>UDP是不面向连接也不创建和维护连接，它会没有速度的管制，并且报文还比TCP短</p>
+
+<p>UDP使用于DNS，音频、视频媒体流</p>
+
+<h3 id="time-wait的作用">time-wait的作用</h3>
+
+<p>time-wait是指在四次挥手的主动关闭方最后要进入的状态</p>
+
+<p>至于为什么要进入一个这样的状态，书上说道：</p>
+
+<blockquote>
+<p>假定ACK丢失(说的是最后一个ACK),TIME_WAIT状态使得TCP重传最后的确认报文</p>
+</blockquote>
+
+<p>网上有另一种解释：</p>
+
+<blockquote>
+<p>允许老的重复分节在网络中的消逝</p>
+</blockquote>
+
+<p>也就是说要等待一段时间，让之前连接所发送到路由器的信息经过一段时间(生命周期)被遗弃后，再去建立新连接</p>
+
+<h3 id="数据库如何建索引">数据库如何建索引</h3>
+
+<p>对数据库还不太了解，先不解释，后面再说</p>
+
+<h3 id="孤儿进程-僵尸进程">孤儿进程，僵尸进程</h3>
+
+<p>一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。</p>
+
+<p>孤儿进程将被 init 进程（进程号为 1）所收养，并由 init 进程对它们完成状态收集工作。</p>
+
+<p>由于孤儿进程会被 init 进程收养，所以孤儿进程不会对系统造成危害。</p>
+
+<hr />
+
+<p>一个子进程的进程描述符在子进程退出时不会释放，只有当父进程通过 wait() 或 waitpid() 获取了子进程信息后才会释放。如果子进程退出，而父进程并没有调用 wait() 或 waitpid()，那么子进程的进程描述符仍然保存在系统中，这种进程称之为僵尸进程。</p>
+
+<p>僵尸进程通过 ps 命令显示出来的状态为 Z（zombie）。</p>
+
+<p>系统所能使用的进程号是有限的，如果产生大量僵尸进程，将因为没有可用的进程号而导致系统不能产生新的进程。</p>
+
+<p>要消灭系统中大量的僵尸进程，只需要将其父进程杀死，此时僵尸进程就会变成孤儿进程，从而被 init 进程所收养，这样 init 进程就会释放所有的僵尸进程所占有的资源，从而结束僵尸进程。</p>
+
+<h3 id="死锁条件-如何避免">死锁条件，如何避免</h3>
+
+<p>死锁如何形成，笔者之前遇到的一个死锁是这样的</p>
+
+<p>那个时候是在写一个栈的数据结构，为了线程安全用到了锁，在每一个读写操作都加了相应的锁，于是在一个函数中，我先开了锁，这个时候我要获得栈的长度，我有一个函数<code>Len()</code>(这个函数有读锁)，和一个变量<code>len</code></p>
+
+<p>我竟然用了函数。。所以造成了死锁，为什么死锁呢？我在一个函数中进入了锁，又在该函数中调用有锁的函数，这个时候因为第二个函数有锁，所以一直无法进入，第一个函数因为一直卡在第二个函数的返回上，所以也一直不动，就死锁了，程序就停在那了</p>
+
+<p>这只是笔者的一个例子，具体死锁的条件和避免， 我从网上摘一段下来</p>
+
+<h4 id="死锁条件">死锁条件</h4>
+
+<ol>
+<li><p>互斥(Mutual exclusion)。进程对所分配到的资源进行排它性使用，在一段时间内某资源只由一个进程占用</p></li>
+
+<li><p>持有并等待(Hold and wait)。指某个进程已经持有了一个或多个资源，但是还要请求其他资源，而它请求的资源不能立即获得，需要等待。</p></li>
+
+<li><p>不可抢占(No preemption)。即进程已经获取的资源在使用过程中不能被其他进程抢占，只能在使用完后，由该进程自己释放。</p></li>
+
+<li><p>环路等待(Circular wait)。即形成进程和请求资源之间的环路</p></li>
+</ol>
+
+<h4 id="避免死锁">避免死锁</h4>
+
+<ol>
+<li><p>打破互斥条件：改造独占性资源为虚拟资源，大部分资源已无法改造</p></li>
+
+<li><p>打破不可抢占条件：当一进程占有一独占性资源后又申请一独占性资源而无法满足，则退出原占有的资源</p></li>
+
+<li><p>打破占有且申请条件：采用资源预先分配策略，即进程运行前申请全部资源，满足则运行，不然就等待，这样就不会占有且申请。</p></li>
+
+<li><p>打破循环等待条件：实现资源有序分配策略，对所有设备实现分类编号，所有进程只能采用按序号递增的形式申请资源</p></li>
+</ol>
+
+<p>这些只是一些原则上的东西，只要死锁四个条件之一不符合，就不会发生死锁</p>
+
+<p>还需在代码里多体会呀</p>
+
+<h3 id="linux命令-查看端口占用-cpu负载-内存占用-如何发送信号给一个进程">linux命令，查看端口占用，cpu负载，内存占用，如何发送信号给一个进程</h3>
+
+<p>这个考察就是基本命令了</p>
+
+<p>查看端口：具体可以参考<code>lsof</code>和<code>netstat</code>的使用</p>
+
+<p>cpu负载和内存占用可以用<code>htop</code>，这个需要下载</p>
+
+<p>如何发送信号可以参考<code>kill</code>相关命令，比如<code>kill -9 pid</code>就是杀死某进程，还有挂起、中断等信号</p>
+
                         </div>
 
                         
@@ -359,43 +495,43 @@ type Student struct {
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/" title="Golang Vscode Problem">Golang Vscode Problem</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-context/" title="Golang Context">Golang Context</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-107/" title="Leetcode 107">Leetcode 107</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/" title="Interview">Interview</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-104/" title="Leetcode 104">Leetcode 104</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/encryption-basic/" title="关于加密 --基础">关于加密 --基础</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-101/" title="Leetcode 101">Leetcode 101</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-83/" title="Leetcode 83">Leetcode 83</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-100/" title="Leetcode 100">Leetcode 100</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-70/" title="Leetcode 70">Leetcode 70</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-88/" title="Leetcode 88">Leetcode 88</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-69/" title="Leetcode 69">Leetcode 69</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-67/" title="Leetcode 67">Leetcode 67</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-66/" title="Leetcode 66">Leetcode 66</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-58/" title="Leetcode 58">Leetcode 58</a>
+        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -424,7 +560,7 @@ type Student struct {
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(34)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
     </li>
     
     <li>
@@ -432,11 +568,11 @@ type Student struct {
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(19)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(25)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(3)</a>
     </li>
     
     <li>
@@ -492,9 +628,15 @@ type Student struct {
     
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
@@ -566,6 +708,8 @@ type Student struct {
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
@@ -586,7 +730,11 @@ type Student struct {
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
     

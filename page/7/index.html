@@ -68,11 +68,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism" >Golang Exercism</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-log/" title="Golang Log" >Golang Log</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月12日
                             </date>
                             
                             <div class="post-meta">
@@ -83,49 +83,36 @@
                             </div>
                             
                             <div class="post-content">
-                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
-func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
+                                笔者上面总结了一下网上关于错误处理和异常处理的资料，发现不知道什么时候要记录一个信息，什么时候不应该，再去找找别人的经验，总结到这篇博客。当然，笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库
+我们做后台开发，无论有什么语言，都有相应的一套日志记录系统，并且日志记录的信息可能是一些小小的问题，也可能是一些大问题，这个时候就要分级处理了，很多人(包括我之前)都对分级这个界限划分的认识模糊，不知道什么时候该用什么级别的信息
+在很多时候，log给我们提供的级别种类非常多，例如info、warning、debug、error等等，其实我对这些有些难以区分
+在一些论坛上，大家也为这些发表意见，都有各自的道理，我把我觉得有道理的记录下来，以后我就会按照这样的一套标准(并非所有人的标准)来实现我的日志记录
+先讲标准，在来简单分析一下第三方库的使用
+warning  Nobody needs a warning log level
+ 警告是什么意思？出错了吗，还是没出错，不知道，有点模棱两可的感觉
+所以要么是正常的信息输出(INFO)，要么就是错误
+其实笔者后来觉得，warning可以在下面情况使用
+ 对，是出错了，但是经过我们的错误处理，在合适的尝试次数中成功了，这样我们可以给出警告，告诉开发者，这里曾经出过错  fatal 首先，在Go里面，Fatal是会调用os.Exit(1)的
+这代表着什么样的结果(灾难)呢
+ 在其它线程的defer没有得到调用(比如一个文件的关闭在defer里，这样这个文件就未关闭，程序就挂了)
+ 缓冲区没有刷新(flush)，我们都知道，缓冲区要刷新，数据才能真正流入到我们想它到达的地方
+ 临时文件或者文件夹不会被移除(程序可能会生成临时文件，这是我们在结果中不想要的东西)
+   It is commonly accepted that libraries should not use panic, but if calling log.Fatal has the same effect, surely this should also be outlawed.
+ 网上看到别人这样说，称panic,fatal应该属于违规操作
+stackoverflow上赞同较多的答案说
+ You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-log/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记" >Mysql学习笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/" title="Golang Errandpanic" >Golang Errandpanic</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                安装 sudo apt-get install mysql-server mysql-client
-查询是否安装了： sudo netstat -tap grep mysql
-安装成功
-tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有叫输入密码
-登录 打开debian.cnf文件： sudo nano /etc/mysql/debian.cnf
-# Automatically generated for Debian scripts. DO NOT TOUCH! [client] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock [mysql_upgrade] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock  这里面有一个叫debian-sys-maint的user
-登录debian-sys-maint： mysql -u debian-sys-maint -p……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mysql-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记" >Go圣经读书笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月11日
                             </date>
                             
                             <div class="post-meta">
@@ -136,25 +123,40 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
                             </div>
                             
                             <div class="post-content">
-                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
-func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
-输出/tmp/go-build115927302/b001/exe/main 123
-查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
- func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
- func (s *Scanner) Text() string  返回scanner所在行的文本
-counts := make(map[string]int) input := bufio.……
+                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
+ but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
+ defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-inaction/" title="Go语言实战" >Go语言实战</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-crawler/" title="Golang Crawler" >Golang Crawler</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月11日
                             </date>
                             
                             <div class="post-meta">
@@ -165,24 +167,23 @@ counts := make(map[string]int) input := bufio.……
                             </div>
                             
                             <div class="post-content">
-                                Go语言优点：
- Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
- Go语言内置并发机制，对并发有着更好的性能
- Go语言自带垃圾回收器
- goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
-  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
+                                笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
+goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
+ first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
+ invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
+  defer func () { if resp != nil { resp.Body.Close() } }()  单元测试 func TestCrawler(t *testing.T) { // keywords := []string{&quot;golang&quot;, &quot;java&quot;} keywords := &quot;golang,java&quot; refresh := &quot;on&quot; value := url.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-inaction/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-crawler/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程" >Go语言高级编程</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle" >Golang Handle</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月11日
                             </date>
                             
                             <div class="post-meta">
@@ -193,30 +194,26 @@ counts := make(map[string]int) input := bufio.……
                             </div>
                             
                             <div class="post-content">
-                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
-这篇文章是开源的，欢迎大家去阅读
-本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
-第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
- Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
- 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
-  字符串  字符串的元素不可修改，是一个只读的字节数组
- 字符串虽然不是切片，但是支持切片操作
-type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
-  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
-这种做法可以减少中间创建的临时切片
-copy append可以完成切片的添加 删除 插入操作……
+                                本文主要解释Golang中http-handler几个容易混淆的概念
+HandleFunc 源代码
+在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
+http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
+当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
+myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
+// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
+// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&quot;http: nil handler&quot;) } mux.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-handle/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode" >Golang--Leetcode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery" >Golang goquery</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月8日
                             </date>
                             
                             <div class="post-meta">
@@ -227,21 +224,30 @@ copy append可以完成切片的添加 删除 插入操作……
                             </div>
                             
                             <div class="post-content">
-                                此文章为做题时发现的不足
- Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
-func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
+                                goquery是一个开源的库，针对解析HTML
+今天在做爬虫的时候用到了一些功能，记录下来方便查阅
+创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&quot;go query Error %s\n&quot;, err) }  doc对象就包含了我们要解析的HTML主体
+一般我们这样用，Find()里面的字符串就是我们要填写的规则
+doc.Find(&quot;div&quot;).Each(func(i int, s *goquery.Selection) { fmt.Println(i,s.Text()) })  规则 我们可以根据HTML的源码分析对应的属性id，class等等
+ div#id #id是某个div的id属性，筛选出此id的div标签
+ div.class .class 同理，是class属性
+ div[class],div[lang] 这个也是属性的筛选
+ div&gt;p div嵌套的p标签，这里规定只有一级标签，一级以后的p标签不会被筛选出来
+ div p div嵌套的p标签，这里无论第几级都会被筛选出来
+  属性可以和嵌套一起使用，例如div.class&gt;p&gt;li
+Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标签内的属性 doc.Find(&quot;ul&gt;li&gt;div.job-primary&gt;div&gt;h3&gt;a&quot;).Each(func(i int, s *goquery.Selection) { detail := s.Get(0).Attr[0].Val // fmt.Println(i, nextPage) jobs[i].Detail = detail })  我在这里踩过一个坑……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-leetcode/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-goquery/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request" >Golangstd Request</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月8日
                             </date>
                             
                             <div class="post-meta">
@@ -252,31 +258,25 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             </div>
                             
                             <div class="post-content">
-                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
-&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
- 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
-&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
-&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
-如果p是空的，那么会返回RuneError,0
-如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
-&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
-&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
-&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
-&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
-&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
-&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
+                                最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
+我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
+所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
+Request结构体 type Request struct { Method string URL *url.URL Proto string // &quot;HTTP/1.0&quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
+Method 这就是一个请求的方法(如GET、POST)
+但是Go的HTTP客户端不支持发送方法为CONNECT的请求
+URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-request/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String" >Golang标准库--String</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm" >Golang Gorm</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月5日
                             </date>
                             
                             <div class="post-meta">
@@ -287,20 +287,29 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             </div>
                             
                             <div class="post-content">
-                                目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
-&mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
+                                连接数据库 Mysql db, err := gorm.Open(&quot;mysql&quot;, &quot;root:123456@tcp/test?charset=utf8&amp;parseTime=True&quot;) if err != nil { panic(&quot;连接数据库失败&quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
+db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
+比如db.CreateTable(&amp;Product{})，在数据库表单里面会得到一个名字为products
+所以一般都会加上这个函数
+创建Table db.CreateTable(&amp;Product{})  创建多个table
+db.CreateTable(&amp;Product{},&amp;User{})  删除Table 关于删除，有两个
+db.DropTableIfExist(interface{}) db.DropTable(interface{})  这里可以传入字符串，也可以传入一个结构体
+接着上面的例子
+db.DropTableIfExist(&quot;product&quot;) db.DropTableIfExist(&amp;Product{})  删除Column 删除Column是要指定Table，所以不能这样
+db.DropColumn(&quot;created_at&quot;)  要定位Table，则需要
+db.Model(&amp;Product).DropColumn(&quot;created_at&quot;)  创建数据 db.Create(&amp;Product{Code: &quot;L1213&quot;, Price: 1002})  查询数据 // 最后一个符合条件，默认id最后的那个 // Get last record, order by primary key db.Last(&amp;user) //// SELECT * FROM users ORDER BY id DESC LIMIT 1; // 将所有符合条件的返回，这里要传一个结构体数组 // Get all records db.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-string/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-gorm/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes" >Golang标准库--Bytes</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper" >Golang Viper</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月5日
                             </date>
                             
                             <div class="post-meta">
@@ -311,19 +320,52 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             </div>
                             
                             <div class="post-content">
-                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
+                                Github
+ Viper is a complete configuration solution for Go applications
+ 这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用
+Reading Config Files  a single Viper instance only supports a single configuration file
+ 一个Viper对象只能对应一个配置文件，是一个一一对应的映射关系
+但是我们在搜索配置文件的时候，可以设置多个路径，如果没有设置路径，则当前程序的目录上寻找，所以我们要设置好路径
+这是Github上的一个例子
+viper.SetConfigName(&quot;config&quot;) // name of config file (without extension) viper.AddConfigPath(&quot;/etc/appname/&quot;) // path to look for the config file in viper.AddConfigPath(&quot;$HOME/.appname&quot;) // call multiple times to add many search paths viper.AddConfigPath(&quot;.&quot;) // optionally look for config in the working directory err := viper.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-viper/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio" >Golang标准库--Bufio</a>
+                                    <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow" >Learn Gitflow</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                gitflow是一种规范，适合大项目开发
+Github上开源了一个遵循这样规范的一个Git工具gitflow
+初始化一个git git flow init  然后会提醒一系列创建操作，类似
+Which branch should be used for bringing forth production releases? Branch name for production releases: [master] Which branch should be used for integration of the &quot;next release&quot;? Branch name for &quot;next release&quot; development: [develop] How to name your supporting branch prefixes? Feature branches? [feature/] Bugfix branches? [bugfix/] Release branches? [release/] Hotfix branches? [hotfix/] Support branches? [support/] Version tag prefix? [] Hooks and filters directory?……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-gitflow/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega" >Golang Mega</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月1日
                             </date>
                             
                             <div class="post-meta">
@@ -334,9 +376,13 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             </div>
                             
                             <div class="post-content">
-                                目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
+                                不积跬步无以至千里，不积小流无以成江海
+ 本文是博主在学习基础记录的笔记
+2019-04-01到2019-04-04，后面会自己DIY一些内容上去(想做成一个小小的技术论坛)
+先来总体看一下整个项目的目录吧
+. ├── cmd │ └── db_init │ └── main.go ├── config │ └── g.go ├── config.yml ├── controller │ ├── g.go │ ├── home.go │ ├── middle.go │ └── utils.go ├── main.go ├── model │ ├── g.go │ ├── post.go │ ├── user.go │ └── utils.go ├── templates │ ├── 404.html │ ├── _base.html │ ├── content │ │ ├── explore.html │ │ ├── index.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-mega/">阅读全文</a></p>
                         </article>
                     
 
@@ -383,6 +429,14 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
         <a href="https://wushaoqiang.github.io/page/8/">8</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/9/">9</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/10/">10</a>
+    </li>
+    
 
     
     <li class="next">
@@ -411,43 +465,43 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/" title="Golang Vscode Problem">Golang Vscode Problem</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-context/" title="Golang Context">Golang Context</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-107/" title="Leetcode 107">Leetcode 107</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/" title="Interview">Interview</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-104/" title="Leetcode 104">Leetcode 104</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/encryption-basic/" title="关于加密 --基础">关于加密 --基础</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-101/" title="Leetcode 101">Leetcode 101</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-83/" title="Leetcode 83">Leetcode 83</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-100/" title="Leetcode 100">Leetcode 100</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-70/" title="Leetcode 70">Leetcode 70</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-88/" title="Leetcode 88">Leetcode 88</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-69/" title="Leetcode 69">Leetcode 69</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-67/" title="Leetcode 67">Leetcode 67</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-66/" title="Leetcode 66">Leetcode 66</a>
+        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-58/" title="Leetcode 58">Leetcode 58</a>
+        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -476,7 +530,7 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(34)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
     </li>
     
     <li>
@@ -484,11 +538,11 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(19)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(25)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(3)</a>
     </li>
     
     <li>
@@ -544,9 +598,15 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
     
@@ -618,6 +678,8 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
@@ -638,7 +700,11 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
     

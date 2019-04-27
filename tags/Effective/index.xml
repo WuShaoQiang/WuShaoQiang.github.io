@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Effective on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Effective/</link>
+    <description>Recent content in Effective on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 Apr 2019 23:46:13 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Effective/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Effective Go</title>
+      <link>https://wushaoqiang.github.io/posts/effective-go/</link>
+      <pubDate>Thu, 25 Apr 2019 23:46:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/effective-go/</guid>
+      <description>参考Effective Go中英双语版
+ It&amp;rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
+ Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)
+所以我们今天来谈谈代码规范吧，这里只记录了我自己有时候会忽略的点，有一些规范我以及掌握并且时刻用在编写Golang程序上了，因此不记录，想看完整的请阅读上面的开源书本
+格式化 Go的gofmt为我们做好了，所以安装这个程序，在保存的时候就可以自动帮你调整代码布局
+注释 行注释更为常用，而块注释则主要用作包的注释
+每个包都应包含一段包注释，即放置在包子句前的一个块注释。对于包含多个文件的包， 包注释只需出现在其中的任一文件中即可。包注释应在整体上对该包进行介绍，并提供包的相关信息。 它将出现在 godoc 页面中的最上面，并为紧随其后的内容建立详细的文档。
+每个可导出（首字母大写）的名称都应该有文档注释。
+命名 我记得有一个叫go-lint会检查这个
+Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
+只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
+若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择</description>
+    </item>
+    
+  </channel>
+</rss>

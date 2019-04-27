@@ -86,9 +86,18 @@
     <item>
       <title>Easy</title>
       <link>https://wushaoqiang.github.io/tags/Easy/</link>
-      <pubDate>Tue, 23 Apr 2019 22:21:39 +0800</pubDate>
+      <pubDate>Sat, 27 Apr 2019 23:13:54 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Easy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Effective</title>
+      <link>https://wushaoqiang.github.io/tags/Effective/</link>
+      <pubDate>Thu, 25 Apr 2019 23:46:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Effective/</guid>
       <description></description>
     </item>
     
@@ -107,6 +116,24 @@
       <pubDate>Fri, 12 Apr 2019 16:13:54 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Favorite/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GC</title>
+      <link>https://wushaoqiang.github.io/tags/GC/</link>
+      <pubDate>Sat, 27 Apr 2019 12:48:58 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/GC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Generic</title>
+      <link>https://wushaoqiang.github.io/tags/Generic/</link>
+      <pubDate>Fri, 26 Apr 2019 19:55:21 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/Generic/</guid>
       <description></description>
     </item>
     
@@ -140,7 +167,7 @@
     <item>
       <title>Golang</title>
       <link>https://wushaoqiang.github.io/tags/Golang/</link>
-      <pubDate>Wed, 24 Apr 2019 19:07:52 +0800</pubDate>
+      <pubDate>Sat, 27 Apr 2019 12:48:58 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Golang/</guid>
       <description></description>
@@ -230,7 +257,7 @@
     <item>
       <title>Leetcode</title>
       <link>https://wushaoqiang.github.io/tags/Leetcode/</link>
-      <pubDate>Tue, 23 Apr 2019 22:21:39 +0800</pubDate>
+      <pubDate>Sat, 27 Apr 2019 23:13:54 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Leetcode/</guid>
       <description></description>
@@ -239,7 +266,7 @@
     <item>
       <title>Linux</title>
       <link>https://wushaoqiang.github.io/tags/Linux/</link>
-      <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
+      <pubDate>Thu, 25 Apr 2019 20:29:02 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/Linux/</guid>
       <description></description>
@@ -426,6 +453,15 @@
     </item>
     
     <item>
+      <title>依赖注入</title>
+      <link>https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</link>
+      <pubDate>Fri, 26 Apr 2019 21:05:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>内存管理</title>
       <link>https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</link>
       <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
@@ -516,11 +552,29 @@
     </item>
     
     <item>
+      <title>网络管理</title>
+      <link>https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 25 Apr 2019 20:29:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>观点</title>
       <link>https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/</link>
       <pubDate>Fri, 12 Apr 2019 16:13:32 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>进程管理</title>
+      <link>https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 25 Apr 2019 17:04:19 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</guid>
       <description></description>
     </item>
     
@@ -545,7 +599,7 @@
     <item>
       <title>面试</title>
       <link>https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/</link>
-      <pubDate>Wed, 24 Apr 2019 15:32:21 +0800</pubDate>
+      <pubDate>Thu, 25 Apr 2019 22:05:12 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/</guid>
       <description></description>
