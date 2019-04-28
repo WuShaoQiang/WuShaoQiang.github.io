@@ -68,6 +68,106 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-makevsnew/" title="Golang make vs new" >Golang make vs new</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
+ new可以对任何类型作用
+  make和new的返回值  make返回主体
+ new也是返回指针，比如new(int)，返回一个int的指针，这个指针的内容是0
+  初始化 两者都会初始化为“0”值
+总结 所以我觉得它们最大的区别还是返回值的区别，以及作用对象……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-makevsnew/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-map/" title="Golang Map" >Golang Map</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Construct: m:=map[key]value{}
+ Insert: m[k] = v
+ Lookup: v = m[k]
+ Delete: delete(m,k)
+ lterate: for k,v := range m
+ Size: len(m)
+  Key不能为 maps,slices,funcs. 因为它们不可比较
+Map底层 map header
+len lg(#buckets) bucket array hash seed  流程  接收到一个key
+ 对key进行hash
+ 通过hash找到是哪一个bucket
+ 取hash前8bit作为extra(作为快速检查)
+ 找到bucket的内存(对不同的类型，大小会有不同)
+  扩容  新创建一个两倍的空间
+ 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
+ 用新的bucket
+  和其它Map比较  Go map不能用指针指向单个value
+ 迭代的时候，go map是可以修改的……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-map/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-channel/" title="Golang Channel" >Golang Channel</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这里就不再赘述重要性了
+Channel特性  goroutine-safe
+ 两个goroutine之间传递数据
+ FIFO
+ cause goroutine to block and unblock
+  What is the inside of channel  mutex
+ send-index and recieve index
+ buf
+  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
+How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-channel/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface" >Golang Interface</a>
                                 </h1>
                             </header>
@@ -260,95 +360,6 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem" >Golang Path Problem</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
-直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
-filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
-所谓前后是值文件夹的前后
-所以写在程序里面，你在这个目录执行成功了，你退一个目录就不行了，因为这个时候工作路径改变了
-笔者感觉这种方法不安全，或者我们写应用的时候指定要在某某目录执行，我有见过类似的项目
-同一目录下，package都为main，不能调用 如果我们有两个文件，package都为main，比如是这样的
--main.go | -file.go  main.go想调用file.go的函数，会返回未定义的错误
-有两种解决方法
- go install Or go build 转换为二进制文件执行
- go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
-  解决相对路径的最稳的方法 来自外国友人icza……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-path-problem/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Favorite">Favorite</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 Don&rsquo;t assume that you are right, just because nobody has proved you wrong
-The bigger the interface, the weaker the abstraction &ndash;Rob Pike
- ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/nice-sentences/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion" >Opinion</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Opinion">Opinion</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 关于在百度搜索问题 笔者在很早就体会到一点，百度搜出来的东西，理论价值真的不高
-我开发遇到Bug第一时间去的都是google，基本第一页搞定我的问题
-我在安装东西，工具最基本的使用，我会百度，因为这些东西肯定一大堆人在写
-这也让我开始反思，写博客的人，应该以一种什么样的心态去写呢？
-下面我总结出了两个点
- 理论性较强的文章，应该多权威性的网站或者论坛(比如stackoverflow这类型的)，对比大家的意见，再结合自己对这些的想法和理解，写出一篇有深度的文章，而不仅仅停留在发现问题&ndash;解决问题&ndash;完事
- 工具类型的文章，为了让自己能够在忘记怎么使用某一个工具时翻阅，属于一种笔记类型，不算文章
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/opinion/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -429,6 +440,18 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure">Data Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程">Web请求历程</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
@@ -454,18 +477,6 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -494,7 +505,7 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
     </li>
     
     <li>
@@ -534,7 +545,11 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
     </li>
     
 </ul>
@@ -657,6 +672,8 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     

@@ -6,10 +6,19 @@
     <description>Recent content in 面试 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Apr 2019 22:05:12 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2019 16:25:41 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TenToSeventeen</title>
+      <link>https://wushaoqiang.github.io/posts/tenToSeventeen/</link>
+      <pubDate>Sun, 28 Apr 2019 16:25:41 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/tenToSeventeen/</guid>
+      <description>代码 func findHighBit(num int) (tmp, b int) { tmp = 1 b = 0 for { if tmp*16 &amp;gt; num { return tmp, b } tmp = tmp * 16 b++ } } func tenToSeventeen(num int) []int { tmp, b := findHighBit(num) result := make([]int, 0) for i := b; i &amp;gt;= 0; i-- { j := 0 for { if tmp*j &amp;lt;= num { j++ } else { break } } result = append(result, j-1) num = num - tmp*(j-1) tmp = tmp / 16 } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &amp;lt; 10: strs = append(strs, strconv.</description>
+    </item>
     
     <item>
       <title>Interview2</title>

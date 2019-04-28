@@ -78,6 +78,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/">TenToSeventeen</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                代码 func findHighBit(num int) (tmp, b int) { tmp = 1 b = 0 for { if tmp*16 &gt; num { return tmp, b } tmp = tmp * 16 b++ } } func tenToSeventeen(num int) []int { tmp, b := findHighBit(num) result := make([]int, 0) for i := b; i &gt;= 0; i-- { j := 0 for { if tmp*j &lt;= num { j++ } else { break } } result = append(result, j-1) num = num - tmp*(j-1) tmp = tmp / 16 } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tenToSeventeen/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/interview2/">Interview2</a>
                                 </h1>
                             </header>
@@ -183,6 +206,18 @@ go defer defer这个要注意的点有两个
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure">Data Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程">Web请求历程</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
@@ -208,18 +243,6 @@ go defer defer这个要注意的点有两个
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -248,7 +271,7 @@ go defer defer这个要注意的点有两个
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
     </li>
     
     <li>
@@ -288,7 +311,11 @@ go defer defer这个要注意的点有两个
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
     </li>
     
 </ul>
@@ -411,6 +438,8 @@ go defer defer这个要注意的点有两个
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     

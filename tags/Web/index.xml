@@ -6,10 +6,47 @@
     <description>Recent content in Web on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Mar 2019 01:53:57 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Apr 2019 10:19:02 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Web/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Web请求历程</title>
+      <link>https://wushaoqiang.github.io/posts/web-request-process/</link>
+      <pubDate>Sun, 28 Apr 2019 10:19:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/web-request-process/</guid>
+      <description>这几乎是做后端开发面试的时候必问的一道题，答案可以说得很简单，也可以是很复杂，当然面试官喜欢看到你对此有所深入，因此这篇文章就从头到尾详细的讲一遍这个历程
+参考 《计算机网络》
+1 当一台电脑将网线插上，网线的另一端是以太网的交换机(交换机能够知道连接它的机器的MAC地址，如果不清楚交换机是什么，建议自己搜一下，这里不做解释)
+首先，刚开始电脑是没有IP地址的，这个时候电脑会生成一个DHCP请求报文，这个报文是一个UDP报文，目的端口为67，源端口为68。这个UDP报文被装载到IP报文，有目的IP地址是255.255.255.255，因为电脑不知道可以从哪个IP请求到自己的IP地址，源IP地址是0.0.0.0。再次往下传递就到了链路层，我们这里假设用的是以太网，所以链路层会将网络层的数据包放置在以太网帧中，目的MAC地址为FF:FF:FF:FF:FF:FF，源MAC地址就是你电脑网卡的MAC地址了，这个我们不用关心。这个时候一个广播的报文就做好了
+报文被发送到交换机上，因为这是一个广播报文，因此在交换机上连接的所有设备都应该能收到这个报文，包括了DHCP服务器
+这里说多一句，现阶段，一般DHCP服务器集成在了路由器上，而这个路由器一般来说是我们的网关(至少在我这边是这样的)，具体如何查的，用wireshark抓包看看吧，抓到DHCP包你就知道了(记得先拔网线再插上)
+2 我们假设这个DHCP包已经完整到达了路由，这个路由生成了一个UDP-IP-以太网报文，这个时候数据报里包含了
+ 分配给电脑的IP
+ DNS服务器IP
+ 默认网关路由器IP
+ 网络掩码
+  这个数据包是具有一个准确的目的MAC地址的(也就是电脑的MAC，我们之前发送的报文里有记录)
+所以交换机能够将这个DHCP的响应报文发给电脑
+3 刚插上网线呢，就做了这么多东西了
+这个时候我们打开浏览器，输入网址域名
+这个时候我们需要得到这个域名的IP地址才能与其建立连接
+再次构造一个UDP报文，目的端口为53，源端口任意
+封装到IP数据包，源和目的IP地址在上面已经得到了，填上
+到了链路层需要两个MAC地址，好像我们只有自己的MAC地址，目的MAC地址未知
+这个时候电脑会生成一个ARP报文寻找默认网关的MAC地址(这个就不详细说了)
+关于DNS报文的所有要的东西都齐全了，发送DNS报文
+4 一般来说，常用的域名的IP都会存储在DNS缓存里，因此会比较快速
+关于更多的DNS相关的，不在这次范围内
+因此我们假设已经在某DNS服务器上拿到了DNS回答报文，这个报文就包括了我们要访问的URL的IP
+5 这个时候电脑以及具备和远程的服务器建立TCP连接了
+首先先是TCP的三次握手，三次握手在别的文章里讲到
+握手成功后，发送请求报文，经过互联网路由器的一系列转发到达了相应的服务器
+服务器收到了电脑发送的请求，并做出相应的处理，将结果写入响应报文，按照原来的TCP连接返回给电脑
+6 电脑的浏览器通过处理渲染以及加载就呈现出了看到的网页</description>
+    </item>
     
     <item>
       <title>Web框架</title>

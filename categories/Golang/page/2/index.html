@@ -78,6 +78,46 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-map/">Golang Map</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Construct: m:=map[key]value{}
+ Insert: m[k] = v
+ Lookup: v = m[k]
+ Delete: delete(m,k)
+ lterate: for k,v := range m
+ Size: len(m)
+  Key不能为 maps,slices,funcs. 因为它们不可比较
+Map底层 map header
+len lg(#buckets) bucket array hash seed  流程  接收到一个key
+ 对key进行hash
+ 通过hash找到是哪一个bucket
+ 取hash前8bit作为extra(作为快速检查)
+ 找到bucket的内存(对不同的类型，大小会有不同)
+  扩容  新创建一个两倍的空间
+ 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
+ 用新的bucket
+  和其它Map比较  Go map不能用指针指向单个value
+ 迭代的时候，go map是可以修改的……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-map/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-channel/">Golang Channel</a>
                                 </h1>
                             </header>
@@ -351,50 +391,6 @@ stackoverflow上赞同较多的答案说
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">Golang Errandpanic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
-本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
-直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
-错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
-异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
- but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
- defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
-... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
-并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
-如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
-同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
- 一般设计，如果输入有误，则返回错误
- 异常设计，如果输入有误，直接抛出异常
-  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
-其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
-凡事要有规则 异常处理的作用域
- 空指针引用
- 下标越界
- 除数为0
- 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
- 输入不应该引起函数错误
-  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -451,6 +447,18 @@ stackoverflow上赞同较多的答案说
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure">Data Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程">Web请求历程</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
@@ -476,18 +484,6 @@ stackoverflow上赞同较多的答案说
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -516,7 +512,7 @@ stackoverflow上赞同较多的答案说
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
     </li>
     
     <li>
@@ -556,7 +552,11 @@ stackoverflow上赞同较多的答案说
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
     </li>
     
 </ul>
@@ -679,6 +679,8 @@ stackoverflow上赞同较多的答案说
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     

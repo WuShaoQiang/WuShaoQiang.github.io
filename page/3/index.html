@@ -68,6 +68,77 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-83/" title="Leetcode 83" >Leetcode 83</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
+最优解答 /** * Definition for singly-linked list.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-83/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-70/" title="Leetcode 70" >Leetcode 70</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-70/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-69/" title="Leetcode 69" >Leetcode 69</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
+最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &gt; x { i = (i + x/i) / 2 } return i }  数学公式……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-69/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode-67/" title="Leetcode 67" >Leetcode 67</a>
                                 </h1>
                             </header>
@@ -234,84 +305,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-27/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-26/" title="Leetcode 26" >Leetcode 26</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); }  我的解答 func removeDuplicates(nums []int) int { if len(nums) == 0 || len(nums) == 1 { return len(nums) } count := 0 existMap := make(map[int]bool) for _, num := range nums { if _, exist := existMap[num]; !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-26/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-21/" title="Leetcode 21" >Leetcode 21</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4  我的解答 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode { l4 := &amp;ListNode{} l3 := &amp;ListNode{} l4.Next = l3 for l1 != nil || l2 != nil { if l1 == nil { return l2 } if l2 == nil { return l1 } if l1.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-21/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/SQL-highlevel/" title="SQL 进阶" >SQL 进阶</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                只针对Mysql的SQL语句
-##创建TABLE
-CREATE TABLE user ( id int PRIMARY KEY, username varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL );  约束也可以这样写
-CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255) NOT NULL City varchar(255) DEFAULT 'Sandnes' UNIQUE(username) PRIMARY KEY(id) FOREIGN KEY (P_id) REFERENCES Persons(P_id) )  约束  NOT NULL
- UNIQUE
- PRIMARY KEY(NOT NULL和UNIQUE的结合)
- FOREIGN KEY:保证一个表中的数据匹配另一个表中的值的参照完整性
- CHECK
- DEFAULT 默认值，在没有赋值的情况下就是默认值
-  NOT NULL 强制不接受NULL，如果不向该字段添加值，就无法插入新纪录或者更新记录……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/SQL-highlevel/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -392,6 +385,18 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure">Data Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程">Web请求历程</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
@@ -417,18 +422,6 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -457,7 +450,7 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
     </li>
     
     <li>
@@ -497,7 +490,11 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
     </li>
     
 </ul>
@@ -620,6 +617,8 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     

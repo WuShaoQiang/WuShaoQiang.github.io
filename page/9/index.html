@@ -68,6 +68,100 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程" >Go语言高级编程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
+这篇文章是开源的，欢迎大家去阅读
+本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
+第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
+ Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
+ 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
+  字符串  字符串的元素不可修改，是一个只读的字节数组
+ 字符串虽然不是切片，但是支持切片操作
+type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
+  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
+这种做法可以减少中间创建的临时切片
+copy append可以完成切片的添加 删除 插入操作……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode" >Golang--Leetcode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                此文章为做题时发现的不足
+ Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
+func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-leetcode/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
+&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
+ 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
+&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
+&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
+如果p是空的，那么会返回RuneError,0
+如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
+&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
+&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
+&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
+&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
+&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
+&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String" >Golang标准库--String</a>
                                 </h1>
                             </header>
@@ -296,78 +390,6 @@ config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-hugo/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learn-git/" title="Git用法总结" >Git用法总结</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇博客是笔者总结学习git的过程，不是一篇专业性很强的文章，主要是笔记
-主要参考廖雪峰的博客学习
-笔者之前对Git有错误的理解(因为之前没学过，也只是听过)，总以为Github就是Git，其实Github是Git出来后才被创建的，为开源项目免费提供Git存储。
-无Github,纯属本地的Git &mdash; 那么什么是Git呢？ Git是目前世界上最先进的分布式版本控制系统
-分布式：Git和其它集中式版本控制系统最大的区别，Git也可以有一个24小时开机的服务器来充当中央服务器，但这个服务器仅仅是为了让大家方便交换各自修改的。
-版本控制：因为我们的代码要不断的完善，所以就有版本之分啦。
-就算是我们自己在电脑上开发，也可以为自己代码创建版本库，用来记录修改和方便管理。
-&mdash; 创建版本库 在想要创建版本库的文件夹里面，输入命令
-git init  就可以看到文件夹里面多了一个隐藏的文件夹.git
-添加文件到我们新建的版本库里面用
-//将某一个文件添加进缓冲区 git add &lt;file&gt; //将.git文件夹 所在的文件 里所有的文件添加进缓冲区 //所以不管你是在某一个子文件夹用这个命令，执行效果是一样的 git add -A //这个就是将缓冲区的提交到版本库里，并且携带提交信息 //(强烈推荐要写message，这样可以提醒那个时候修改了什么) git commit -m &lt;message&gt;  我们可以把代码所在区域分成
- 工作区 缓冲区 当前分支  理解这几个工作区域会有助于理解命令的作用。
-工作区：我们自己电脑编辑代码的地方
-缓冲区：就是我们把修改过的文件放到一个区域装着，如果后面我又对这个文件做修改了，就可以继续往里面添加(同文件覆盖)
-当前分支：就是我们使用commit后将缓冲区的文件提交上去的地方
-&mdash; 查看状态 git status  这个命令会告诉我们哪些被修改过的文件被添加到了缓冲去，哪些被修改的文件没有。
-On branch master Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded. (use &quot;git pull&quot; to update your local branch) Untracked files (use &quot;git add &lt;file&gt;.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-git/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/" title="Go琐碎笔记" >Go琐碎笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
-2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0)
-然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII
-res, ok := map[...] 中的ok变量可以用来判断key是否存在
-[]rune可以直接转换为字符串string([]rune)
-2019.2.17 谨记！ ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
-norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -448,6 +470,18 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure">Data Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程">Web请求历程</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
@@ -473,18 +507,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入">Golang 依赖注入</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型">Golang 泛型</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go">Effective Go</a>
     </li>
     
 </ul>
@@ -513,7 +535,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(39)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
     </li>
     
     <li>
@@ -553,7 +575,11 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
     </li>
     
 </ul>
@@ -676,6 +702,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
     

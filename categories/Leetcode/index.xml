@@ -27,7 +27,7 @@
       
       <guid>https://wushaoqiang.github.io/posts/leetcode-107/</guid>
       <description>题目 Given a binary tree, return the bottom-up level order traversal of its nodes&#39; values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
-最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &amp;gt; 0 { len := len(que) var level []int for i := 0; i &amp;lt; len; i++ { node := que[0] que = que[1:] level = append(level, node.</description>
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &amp;gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &amp;lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.</description>
     </item>
     
     <item>
