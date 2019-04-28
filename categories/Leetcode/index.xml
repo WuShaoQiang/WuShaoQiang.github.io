@@ -6,10 +6,64 @@
     <description>Recent content in Leetcode on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 27 Apr 2019 23:13:54 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 29 Apr 2019 00:38:18 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 121</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-121/</link>
+      <pubDate>Mon, 29 Apr 2019 00:38:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-121/</guid>
+      <description>题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 119</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-119/</link>
+      <pubDate>Mon, 29 Apr 2019 00:38:14 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-119/</guid>
+      <description>题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal&#39;s triangle. Note that the row index starts from 0. In Pascal&#39;s triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &amp;lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &amp;gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 118</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-118/</link>
+      <pubDate>Mon, 29 Apr 2019 00:38:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-118/</guid>
+      <description>题目 Given a non-negative integer numRows, generate the first numRows of Pascal&#39;s triangle. In Pascal&#39;s triangle, each number is the sum of the two numbers directly above it.  我的解答 func generate(numRows int) [][]int { if numRows == 0 { return nil } result := make([][]int, numRows) for i := 0; i &amp;lt; numRows; i++ { result[i] = make([]int, i+1) result[i][0] = 1 result[i][i] = 1 for j := 1; j &amp;lt; i; j++ { result[i][j] = result[i-1][j-1] + result[i-1][j] } } return result }  最优解答 无</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 112</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-112/</link>
+      <pubDate>Mon, 29 Apr 2019 00:38:06 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-112/</guid>
+      <description>题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&amp;gt;4-&amp;gt;11-&amp;gt;2 which sum is 22.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 111</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-111/</link>
+      <pubDate>Mon, 29 Apr 2019 00:38:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-111/</guid>
+      <description>题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 110</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-110/</link>
+      <pubDate>Mon, 29 Apr 2019 00:38:00 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-110/</guid>
+      <description>题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.</description>
+    </item>
     
     <item>
       <title>Leetcode 108</title>

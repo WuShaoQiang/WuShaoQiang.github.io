@@ -68,6 +68,213 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes" >Golang标准库--Bytes</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio" >Golang标准库--Bufio</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/internet-protocal/" title="网络协议基础" >网络协议基础</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/protocal">protocal</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                OSI模型把网络通信的工作分为7层，分别是物理层、数据链路层、网络层、传输层、会话层、表示层和应用层
+一直觉得自己的基础很不牢固，事实也确实是这样，希望自己能够系统的总结好计算机网络这本书
+二、应用层 Web、电子邮件、DNS和对等文件分发等
+2.1 应用层协议原理 2.1.1 网络应用程序体系结构 应用程序体系结构
+ 客户-服务器体系结构
+ 对等体系结构(P2P)
+  现在大多数应用都是以客户-服务器体系结构
+P2P面临的挑战
+ 下载比上传多很多
+ 安全性
+ 用户是否能自愿提供带宽、存储和计算资源
+  最近比较火的一个名词区块链就是倡导去中心化的网络，也就是P2P
+2.1.2 进程通信 在同一个端系统上(可以理解为同一部电脑)，进程间通信的规则由端系统上的操作系统决定
+在不同端系统上，通过跨越计算机网络交换报文来相互通信
+2.1.2.1 客户和服务器进程 发起通信的进程就是客户
+等待联系的进程是服务器
+2.1.2.2 进程与计算机网络之间的接口 进程通过一个称为套接字的软件接口向网络发送报文和从网络接收报文
+这个套接字就好比如一个房子的大门，发送或者接收都要先开门
+而这里把进程比作房子，运输层协议(TCP等)比作两个房子的路
+所以套接字是应用层和运输层的接口，也叫应用程序编程接口(API)
+2.1.2.3 进程寻址 主机由IP地址标识
+指定的进程由端口号标识
+2.1.3 可供应用程序使用的运输服务 根据运输层所提供的服务来决定用哪种运输层协议
+2.1.3.1 可靠数据传输 当一个运输协议提供这种服务时，发送进程只要将其数据传递进套接字，就可以完全相信该数据将能无差错地到达接收进程
+有些能够容忍数据丢失的应用可以不使用可靠数据传输
+2.1.3.2 吞吐量 吞吐量就是发送进程能够向接收进程交付比特的速率
+具有吞吐量要求的应用被称为带宽敏感应用
+否则就称为弹性应用
+2.1.3.3 定时 对于实时要求较高的应用
+2.1.3.4 安全性 防止数据以某种方式在两个进程之间被观察到
+安全包括
+ 机密性
+ 完整性
+ 端点鉴别……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/internet-protocal/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/web-strcuture/" title="Web框架" >Web框架</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章是参考人世间博主写的一篇文章，这里哪里作为自己了解Gin框架的例子，笔者想在这做初步了解后再去深入了解源码，到时候再写一篇博客来说说Gin源码。
+Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRoutes func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes type HandlerFunc func(*Context)  可以看出路由需要的参数是
+ 相对路径
+ 处理函数
+  这里面是Gin自己定义的一个HandlerFunc，和标准库里面的有所不同，这里的gin.*Context包含了标准库里的ResponseWriter和*http.Request还有一些其它
+介绍一些函数 // Query()	是匹配url上的参数，匹配不到就返回空字符串 // DefaultQuery() 也是匹配，如果匹配不到就用默认值 // 127.0.0.1:8000/post?id=111&amp;page=222 // 如果用curl，则需要在&amp;前面加\ id := c.Query(&quot;id&quot;) page := c.DefaultQuery(&quot;page&quot;, &quot;0&quot;) //这个是在表单上获取信息，通过POST方法发送过来的数据 name := c.PostForm(&quot;name&quot;) message := c.PostForm(&quot;message&quot;)  一个完整的路由 router.GET(&quot;/welcome&quot;, func(c *gin.Context) { firstname := c.DefaultQuery(&quot;firstname&quot;, &quot;Guest&quot;) lastname := c.Query(&quot;lastname&quot;) c.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/web-strcuture/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux-note/" title="Linux命令笔记" >Linux命令笔记</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
+ifconfig 查看网络连接
+lsof -i:8000 查看端口8000占用情况
+kill -9 PID 把某个PID的进程结束了，kill还有许多flag，1:挂起， 2:中断 ，3:退出
+mkdir -p /1/2/3/4 可以一次创建多层文件夹
+pkill -f &lt;name&gt; 可以直接kill掉一个已知名字的进程
+把脚本放进/etc/init.d/里面就可以自启动
+chown user:group &lt;file&gt; 改变文件持有
+磁盘 du -hsc &lt;path&gt; 查看路径占用磁盘大小
+ncdu 更友好的查看磁盘占用情况的一个命令，需要安装
+df -h查看磁盘占用情况
+别名 alias &lt;name&gt;=&quot;&lt;command&gt;&quot; 用别名调用命令(适用于长命令)，如果需要持久化的话，需要写入.bashrc
+查找文件 find &lt;path&gt; -name &quot;*.log&quot; 寻找在路径里面结尾为.log的文件，同理，想要查找一类文件可以用这个命令
+find &lt;path&gt; ! -name &quot;*.log&quot; 与上面刚好相反
+find -mtime &lt;number&gt;这个命令还可以根据修改时间
+匹配 grep -r &quot;error&quot; &lt;path or file&gt; 会打印出所有含有error的字段
+查看CPU&amp;内存占用情况 top 这个命令对界面不太友好
+htop 这个对阅读更加友好
+update 能够看到电脑持续开机时间……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-note/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/learn-hugo/" title="Hugo建博客" >Hugo建博客</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月16日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Hugo">Hugo</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。
+所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人
+以下命令都是以我自己建博客的为例
+创建一个网站 hugo new site blog 这个命令会在目录里创建一个新的blog目录
+这个blog目录包含以下：
+ archetypes/ content/ data/ layouts/ static/ themes/ config.toml  archetypes/ 这里一开始会有一个default文件，后面再讲有什么用，先看看文件
+--- title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot; date: {{ .Date }} draft: true ---  content/ 这里就是博客的主要内容的根目录，我们创建的博客文章就应该放在这个文件夹里(不是直接)
+创建一个博客文章hugo new posts/learn-hugo.md，创建完后会发现文件在content/posts/learn-hugo.md
+打开文件看一下，可以发现创建的新文件里面是有内容的
+--- title: &quot;Learn Hugo&quot; date: 2019-03-16T22:33:20+08:00 draft: true ---  这就和我们上面说到的archetypes/default.md有关，这里可以自动填充一些信息，方便我们写博客
+theme/ 这里是放置博客主题的文件夹，Hugo有很多开源的主题，可以去官网找找看，笔者用的是飞雪无情这位博主开源出来的Maupassant，笔者刚开始也按照这位博主的配置方法来配置博客，等后面对Hugo的配置了解更加深入时，再尝试配置。Maupassant的仓库地址，大家还可以顺手点个星，表示支持
+具体如何安装也很简单，可以参照github的使用方法
+config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
+## 这个是我们主页的地址 baseURL = &quot;https://wushaoqiang.github.io&quot; languageCode = &quot;en-us&quot; ## 博客的标题(不是某篇文章，是整个博客) title = &quot;Gavin's Blog&quot; ## 这里就是设定你要的主题，而且主题必须要下载到theme/目录 theme = &quot;maupassant&quot; ## 保持分类的原始名字（false会做转小写处理） preserveTaxonomyNames = true ## 是否禁止URL Path转小写 disablePathToLower = true ## 这个会配置每一篇文章最后面的Copyright的作者名字 ## © 2019 Gavin's Blog By Gavin [author] name = &quot;Gavin&quot; [params] author = &quot;Gavin&quot; ## 这是一个副标题，在主标题的下方 subtitle = &quot;Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记&quot; keywords = &quot;Golang,Gavin,Blog&quot; ## 这个是对阅读量的计数 busuanzi = true ## 这个是为了开评论区 [params.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-hugo/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/learn-git/" title="Git用法总结" >Git用法总结</a>
                                 </h1>
                             </header>
@@ -213,6 +420,30 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-121/" title="Leetcode 121">Leetcode 121</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-119/" title="Leetcode 119">Leetcode 119</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-118/" title="Leetcode 118">Leetcode 118</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-112/" title="Leetcode 112">Leetcode 112</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-111/" title="Leetcode 111">Leetcode 111</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-110/" title="Leetcode 110">Leetcode 110</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
     </li>
     
@@ -226,30 +457,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-107/" title="Leetcode 107">Leetcode 107</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-104/" title="Leetcode 104">Leetcode 104</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-101/" title="Leetcode 101">Leetcode 101</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-100/" title="Leetcode 100">Leetcode 100</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-88/" title="Leetcode 88">Leetcode 88</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
     </li>
     
 </ul>
@@ -286,7 +493,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(25)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(31)</a>
     </li>
     
     <li>

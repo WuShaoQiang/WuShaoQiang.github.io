@@ -68,6 +68,163 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-107/" title="Leetcode 107" >Leetcode 107</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-107/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-104/" title="Leetcode 104" >Leetcode 104</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-104/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-101/" title="Leetcode 101" >Leetcode 101</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-101/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-100/" title="Leetcode 100" >Leetcode 100</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-100/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-88/" title="Leetcode 88" >Leetcode 88</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &gt; 0 &amp;&amp; n &gt; 0 { if nums1[m-1] &gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-88/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC" >Golang GC</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
+参考  legendtkl
+ Golang UK Conference 2017 | Will Sewell &amp; Jim Fisher - Golang&rsquo;s Realtime GC in Theory and Practice
+  算法模型 三色标记算法(Mark-and-sweep)
+三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
+ 这个算法实现广度优先(BF)
+ 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
+ 这个重复选取直到没有灰色的对象为止
+  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
+ 黑色：已经遍历过这个对象的所有对象
+ 灰色：这个对象所指向的对象还没有被遍历过
+ 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
+  结束阶段里，按算法所解释的，是不会再有灰色了，只有
+ 黑色：有用的数据
+ 白色：已经不可能到达的数据(垃圾，会被清理)
+  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
+ 执行我们前面所说的模型里的循环
+ 在处理完循环后，清理所有白色标记的对象
+  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-GC/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入" >Golang 依赖注入</a>
                                 </h1>
                             </header>
@@ -207,222 +364,6 @@ Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview2/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux-network-management/" title="Linux 网络管理" >Linux 网络管理</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                ping -c 发送一定数量的报文
-ifconfig 其中输出信息里
-enp0s31f6：以太网(有线)
-lo：回传
-wlp4s0：无线网
-tcpdump 这是一个类似wireshark抓包的命令,需要权限
--c：指定抓取包的数量
--i：指定接口(上面说到有3个接口)
-port：指定端口
-netstat -r：显示路由
--i：显示接口
--n：显示IP
--t：tcp
--u：udp……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-network-management/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux-process-management/" title="Linux 进程管理" >Linux 进程管理</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                进程状态  R 正在运行或在运行队列
- D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
- S 中断，等待某个事件完成或者被信号唤醒
- Z 僵死，进程已经终止但其父进程没有用wait()或在waitpid()来释放它
- T 停止，可能是收到控制信号，也可能是被跟踪
-  相关命令 ps,pstree,top(htop),jobs,kill，nice，nohup
-Crtl+c:终结进程
-Ctrl+z:暂停进程
-ps(Process Status) ps 只会给当前终端中运行的进程
-ps -a Select all processes except both session leaders (see getsid(2)) and processes not associated with a terminal.
-ps -u root显示root用户的process，这里root也可以是别的用户名
-ps -l 相对ps，会显示父PID等信息
-ps aux 显示所有process
-ps -ef 详细显示所有process
-pstree pstree 进程树
-pstree -p 显示PID
-pstree (username) 显示用户的进程
-jobs jobs 查看后台运行的进程
-fg %num 将后台程序转移到前台……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-process-management/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/" title="Golang Vscode Problem" >Golang Vscode Problem</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Vscode">Vscode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                今天Vscode用着用着，突然自动补全不能用了，不仅没有自动导入，也没有函数提示等
-突然觉得自己被打入地狱(没有自动补全就像手写代码一样，很不是滋味)
-在Google上找了别人的方法也都没用，最后瞎搞一下搞好了
-方法 删掉gocode
-go get github.com/nsf/gocode,这是一个老版本的gocode，现在已经被新的替代了
-这个时候vscode会提示你下载推荐版本的gocode，按下载就可以了
-疑问 我也曾经重试下载最新版gocode，但是没用，不知道为什么直接在vscode更新就有用……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-context/" title="Golang Context" >Golang Context</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
-参考博客理解Go Context机制
-Golang的执行单元是goroutine，main也是一个goroutine
-上下文，上下则是存在上下层的传递，我们在编写Web后端的时候，接收到一个请求可能会执行一些列的goroutine(数据库，业务层处理)来达到并发效果
-这个时候，如果客户端那边取消了呢？如果我们在服务器端检测不到这个信号，那么我们服务器还是会继续服务，直到完成所有服务的时候，发现客户端已经不见了(资源就被浪费了)
-所以我们需要在每一个由Request产生的goroutine里面装一个监控，这个监控会告诉程序客户端是否还在等待返回，如果客户端离开，那么程序立即停止对客户端的服务
-Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) Done() &lt;-chan struct{} Err() error Value(key interface{}) interface{} }   Deadline会返回一个超时时间，Goroutine获得了超时时间后，例如可以对某些io操作设定超时时间。
- Done方法返回一个信道（channel），当Context被撤销或过期时，该信道是关闭的，即它是一个表示Context是否已关闭的信号。
- 当Done信道关闭后，Err方法表明Context被撤的原因。
- Value可以让Goroutine共享一些数据，当然获得数据是协程安全的。但使用这些数据的时候要注意同步，比如返回了一个map，而这个map的读写则要加锁。
-  每当我们处理一个Request的时候，都应该从Request里拿一个Context
-req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
- 如果Request的context是nil，那么它会返回一个context.Background()
-var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-context/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/interview/" title="Interview" >Interview</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
-go的调度 这里应该指的是goroutine的调度模式
-读过Go Web编程那本书的人可能知道，go的并发是由线程、处理器、调度器和一个个的goroutine
-简单说一下运行的一些规则
- 每一个线程里面有一个的协程，从微观角度来看是顺序执行的，但是从宏观角度来看，因为执行速度快，线程里的协程不断切换，因此可以看作是并行
- 处理器主要就是用来执行goroutine的，它也维护了一个goroutine的队列，里面有在等待的goroutine
- 只有线程和处理器结合起来才能构造一个goroutine执行环境
- 调度器，当协程阻塞的时候，会保存上下文，直到下次可以恢复运行
-  这是一些比较浅显运行的规则，如果要深入goroutine的源码分析，推荐一篇文章
-go struct能不能比较 如果是值类型，是可以比较的，比如
-p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Age: 1} if p1 == p2 { fmt.Println(&quot;same&quot;) }  这样是有输出的
-那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子
-type Person struct { Name string Age int } type Student struct { *Person ID int }  由于Student里面的Person是一个引用类型，所以比较是比较了地址，因此是不同的
-go defer defer这个要注意的点有两个
- 执行顺序，先进后出
- 参数还是闭包
-  参数传递会根据传递参数时的值进行执行……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 我们现在接触较多的两种加密方式
- 对称加密
- 公钥加密
-  对称加密 利用一样的秘钥，在持有者双方进行加密和解密
-但是第一次建立连接并且传输秘钥的时候不安全(当然可以通过其它方式传输)
-速度快
-公钥加密 用对方的公钥加密，发送给对方，因为只要对方有自己的私钥，因此就算密文半路被拦截，也不会泄露信息
-安全性好，但速度慢
-结合 结合两种加密方式，创建一个既安全又快的连接
- 利用对方公钥加密对称秘钥，发送给对方
- 对方收到用自己秘钥解密，得到对称秘钥
- 双方用对称秘钥进行接下来的通信
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/encryption-basic/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -503,6 +444,30 @@ go defer defer这个要注意的点有两个
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-121/" title="Leetcode 121">Leetcode 121</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-119/" title="Leetcode 119">Leetcode 119</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-118/" title="Leetcode 118">Leetcode 118</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-112/" title="Leetcode 112">Leetcode 112</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-111/" title="Leetcode 111">Leetcode 111</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-110/" title="Leetcode 110">Leetcode 110</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
     </li>
     
@@ -516,30 +481,6 @@ go defer defer这个要注意的点有两个
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-107/" title="Leetcode 107">Leetcode 107</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-104/" title="Leetcode 104">Leetcode 104</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-101/" title="Leetcode 101">Leetcode 101</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-100/" title="Leetcode 100">Leetcode 100</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-88/" title="Leetcode 88">Leetcode 88</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC">Golang GC</a>
     </li>
     
 </ul>
@@ -576,7 +517,7 @@ go defer defer这个要注意的点有两个
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(25)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(31)</a>
     </li>
     
     <li>
