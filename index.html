@@ -68,6 +68,214 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-169/" title="Leetcode 169" >Leetcode 169</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that the array is non-empty and the majority element always exist in the array. Example 1: Input: [3,2,3] Output: 3 Example 2: Input: [2,2,1,1,1,2,2] Output: 2  我的解答 func majorityElement(nums []int) int { insertSort(nums) return nums[len(nums)/2] } func insertSort(nums []int) { for i := 1; i &lt; len(nums); i++ { tmp := nums[i] j := i - 1 for ; j &gt;= 0 &amp;&amp; tmp &lt; nums[j]; j-- { nums[j+1] = nums[j] } nums[j+1] = tmp } }  最优解答 func majorityElement(nums []int) int { if len(nums) &lt; 1 { return 0 } count, flag := 1, nums[0] for i := 1; i &lt; len(nums); i++ { if count &lt; 1 { count = 1 flag = nums[i] continue } if flag == nums[i] { count++ } else { count-- } } return flag }  难疑点&amp;核心 因题目特殊性，题目规定众数要超过数量的一半……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-169/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-168/" title="Leetcode 168" >Leetcode 168</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1 -&gt; A 2 -&gt; B 3 -&gt; C ... 26 -&gt; Z 27 -&gt; AA 28 -&gt; AB ... Example 1: Input: 1 Output: &quot;A&quot; Example 2: Input: 28 Output: &quot;AB&quot; Example 3: Input: 701 Output: &quot;ZY&quot;  我的解答 func convertToTitle(n int) string { if n &lt;= 0 { return &quot;&quot; } len := 0 tmp := n for tmp/26 &gt; 0 { len++ tmp = tmp / 26 } strs := make([]string, len+1) for n &gt; 0 { n-- strs[len] = string((n % 26) + 'A') n = n / 26 len-- } return strings.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-168/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-167/" title="Leetcode 167" >Leetcode 167</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Note: Your returned answers (both index1 and index2) are not zero-based. You may assume that each input would have exactly one solution and you may not use the same element twice.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-167/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-160/" title="Leetcode 160" >Leetcode 160</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Write a program to find the node at which the intersection of two singly linked lists begins. For example, the following two linked lists: begin to intersect at node c1. Example 1: Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3 Output: Reference of the node with value = 8 Input Explanation: The intersected node's value is 8 (note that this must not be 0 if the two lists intersect).……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-160/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-155/" title="Leetcode 155" >Leetcode 155</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目  Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. push(x) -- Push element x onto stack. pop() -- Removes the element on top of the stack. top() -- Get the top element. getMin() -- Retrieve the minimum element in the stack. Example: MinStack minStack = new MinStack(); minStack.push(-2); minStack.push(0); minStack.push(-3); minStack.getMin(); --&gt; Returns -3. minStack.pop(); minStack.top(); --&gt; Returns 0. minStack.getMin(); --&gt; Returns -2.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-155/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-141/" title="Leetcode 141" >Leetcode 141</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a linked list, determine if it has a cycle in it. To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list. Example 1: Input: head = [3,2,0,-4], pos = 1 Output: true Explanation: There is a cycle in the linked list, where tail connects to the second node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-141/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-136/" title="Leetcode 136" >Leetcode 136</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-empty array of integers, every element appears twice except for one. Find that single one. Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? Example 1: Input: [2,2,1] Output: 1 Example 2: Input: [4,1,2,1,2] Output: 4  我的解答 没想出来，看了评论区才知道
+最优解答 func singleNumber(nums []int) int { for i := len(nums) - 1; i &gt; 0; i-- { nums[i-1] = nums[i-1] ^ nums[i] } return nums[0] }  难疑点&amp;核心 因为题目说了，只有一个数字是不会出现两次，其它数字都出现两次……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-136/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-125/" title="Leetcode 125" >Leetcode 125</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。 说明：本题中，我们将空字符串定义为有效的回文串。 示例 1: 输入: &quot;A man, a plan, a canal: Panama&quot; 输出: true 示例 2: 输入: &quot;race a car&quot; 输出: false  我的解答 func isPalindrome(s string) bool { s = strings.Join(filter(s), &quot;&quot;) n := len(s) for i := 0; i &lt; n/2; i++ { if s[i] != s[n-1-i] { return false } } return true } func filter(s string) []string { return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-125/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-122/" title="Leetcode 122" >Leetcode 122</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  我的解答 func maxProfit(prices []int) int { buy := 0 sell := 0 profit := 0 n := len(prices) for { for buy &lt; n-1 &amp;&amp; prices[buy+1] &lt;= prices[buy] { buy++ } sell = buy for sell &lt; n-1 &amp;&amp; prices[sell+1] &gt; prices[sell] { sell++ } if sell == buy { return profit } profit += prices[sell] - prices[buy] buy = sell } }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-122/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode-121/" title="Leetcode 121" >Leetcode 121</a>
                                 </h1>
                             </header>
@@ -86,243 +294,6 @@
                                 题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-121/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-119/" title="Leetcode 119" >Leetcode 119</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle. Note that the row index starts from 0. In Pascal's triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-119/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-118/" title="Leetcode 118" >Leetcode 118</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a non-negative integer numRows, generate the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it.  我的解答 func generate(numRows int) [][]int { if numRows == 0 { return nil } result := make([][]int, numRows) for i := 0; i &lt; numRows; i++ { result[i] = make([]int, i+1) result[i][0] = 1 result[i][i] = 1 for j := 1; j &lt; i; j++ { result[i][j] = result[i-1][j-1] + result[i-1][j] } } return result }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-118/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-112/" title="Leetcode 112" >Leetcode 112</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-112/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-111/" title="Leetcode 111" >Leetcode 111</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-111/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-110/" title="Leetcode 110" >Leetcode 110</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-110/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen" >TenToSeventeen</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                代码 func findHighBit(num int) (tmp, b int) { tmp = 1 b = 0 for { if tmp*16 &gt; num { return tmp, b } tmp = tmp * 16 b++ } } func tenToSeventeen(num int) []int { tmp, b := findHighBit(num) result := make([]int, 0) for i := b; i &gt;= 0; i-- { j := 0 for { if tmp*j &lt;= num { j++ } else { break } } result = append(result, j-1) num = num - tmp*(j-1) tmp = tmp / 16 } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tenToSeventeen/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure" >Data Structure</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 前段时间复习了一些数据结构，一直没来得及总结一下
-链表(双向) 单向链表和循环链表思路是差不多的
-结构体 type LinkListNode struct { Value interface{} Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程" >Web请求历程</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这几乎是做后端开发面试的时候必问的一道题，答案可以说得很简单，也可以是很复杂，当然面试官喜欢看到你对此有所深入，因此这篇文章就从头到尾详细的讲一遍这个历程
-参考 《计算机网络》
-1 当一台电脑将网线插上，网线的另一端是以太网的交换机(交换机能够知道连接它的机器的MAC地址，如果不清楚交换机是什么，建议自己搜一下，这里不做解释)
-首先，刚开始电脑是没有IP地址的，这个时候电脑会生成一个DHCP请求报文，这个报文是一个UDP报文，目的端口为67，源端口为68。这个UDP报文被装载到IP报文，有目的IP地址是255.255.255.255，因为电脑不知道可以从哪个IP请求到自己的IP地址，源IP地址是0.0.0.0。再次往下传递就到了链路层，我们这里假设用的是以太网，所以链路层会将网络层的数据包放置在以太网帧中，目的MAC地址为FF:FF:FF:FF:FF:FF，源MAC地址就是你电脑网卡的MAC地址了，这个我们不用关心。这个时候一个广播的报文就做好了
-报文被发送到交换机上，因为这是一个广播报文，因此在交换机上连接的所有设备都应该能收到这个报文，包括了DHCP服务器
-这里说多一句，现阶段，一般DHCP服务器集成在了路由器上，而这个路由器一般来说是我们的网关(至少在我这边是这样的)，具体如何查的，用wireshark抓包看看吧，抓到DHCP包你就知道了(记得先拔网线再插上)
-2 我们假设这个DHCP包已经完整到达了路由，这个路由生成了一个UDP-IP-以太网报文，这个时候数据报里包含了
- 分配给电脑的IP
- DNS服务器IP
- 默认网关路由器IP
- 网络掩码
-  这个数据包是具有一个准确的目的MAC地址的(也就是电脑的MAC，我们之前发送的报文里有记录)
-所以交换机能够将这个DHCP的响应报文发给电脑
-3 刚插上网线呢，就做了这么多东西了
-这个时候我们打开浏览器，输入网址域名
-这个时候我们需要得到这个域名的IP地址才能与其建立连接
-再次构造一个UDP报文，目的端口为53，源端口任意
-封装到IP数据包，源和目的IP地址在上面已经得到了，填上
-到了链路层需要两个MAC地址，好像我们只有自己的MAC地址，目的MAC地址未知
-这个时候电脑会生成一个ARP报文寻找默认网关的MAC地址(这个就不详细说了)
-关于DNS报文的所有要的东西都齐全了，发送DNS报文
-4 一般来说，常用的域名的IP都会存储在DNS缓存里，因此会比较快速
-关于更多的DNS相关的，不在这次范围内
-因此我们假设已经在某DNS服务器上拿到了DNS回答报文，这个报文就包括了我们要访问的URL的IP
-5 这个时候电脑以及具备和远程的服务器建立TCP连接了
-首先先是TCP的三次握手，三次握手在别的文章里讲到
-握手成功后，发送请求报文，经过互联网路由器的一系列转发到达了相应的服务器
-服务器收到了电脑发送的请求，并做出相应的处理，将结果写入响应报文，按照原来的TCP连接返回给电脑
-6 电脑的浏览器通过处理渲染以及加载就呈现出了看到的网页……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/web-request-process/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108" >Leetcode 108</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-108/">阅读全文</a></p>
                         </article>
                     
 
@@ -373,6 +344,10 @@
         <a href="https://wushaoqiang.github.io/page/10/">10</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/11/">11</a>
+    </li>
+    
 
     
     <li class="next">
@@ -401,43 +376,43 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-169/" title="Leetcode 169">Leetcode 169</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-168/" title="Leetcode 168">Leetcode 168</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-167/" title="Leetcode 167">Leetcode 167</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-160/" title="Leetcode 160">Leetcode 160</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-155/" title="Leetcode 155">Leetcode 155</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-141/" title="Leetcode 141">Leetcode 141</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-136/" title="Leetcode 136">Leetcode 136</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-125/" title="Leetcode 125">Leetcode 125</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-122/" title="Leetcode 122">Leetcode 122</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-121/" title="Leetcode 121">Leetcode 121</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-119/" title="Leetcode 119">Leetcode 119</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-118/" title="Leetcode 118">Leetcode 118</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-112/" title="Leetcode 112">Leetcode 112</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-111/" title="Leetcode 111">Leetcode 111</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-110/" title="Leetcode 110">Leetcode 110</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/" title="TenToSeventeen">TenToSeventeen</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/data-structure/" title="Data Structure">Data Structure</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/web-request-process/" title="Web请求历程">Web请求历程</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-108/" title="Leetcode 108">Leetcode 108</a>
     </li>
     
 </ul>
@@ -474,7 +449,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(31)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(40)</a>
     </li>
     
     <li>
