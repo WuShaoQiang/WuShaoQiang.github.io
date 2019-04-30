@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机系统 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 计算机系统 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Apr 2019 21:34:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>计算机系统</title>
+      <link>https://wushaoqiang.github.io/posts/computer-system/</link>
+      <pubDate>Tue, 30 Apr 2019 21:34:14 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/computer-system/</guid>
+      <description> 最近复习了一遍计算机网络、数据结构等书，过了快一个星期了，可以开始看看《深入理解计算机系统》了，很多人不推荐一开始就啃这本书，吸收会比较慢，可以先看一些公开课
+这里推荐B站的公开课
+配套课件
+Day2 整数注意溢出，浮点数注意大数吃小数(虽然也要注意溢出，但是大数吃小数情况更加容易出现)
+大数吃小数的例子
+func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c) //不会吃 fmt.Println(a - (b + c)) //会吃 }  二维数组，一行一行扫描比一列列扫描性能要好
+无符号和有符号的数字需要小心分析它底层的bit，举例子
+无符号：1 1 1 1 --&amp;gt; 2^3+2^2+2^1+2^0 = 15 有符号：1 1 1 1 --&amp;gt; -2^3+2^2+2^1+2^0 = -1  大端法：最高有效字节在最前面的方式
+比如0x01234567,在内存的表示是
+01 23 45 67  小端法：最低有效字节在最前面的方式
+比如0x01234567,在内存的表示是
+67 45 23 01  </description>
+    </item>
+    
+  </channel>
+</rss>
