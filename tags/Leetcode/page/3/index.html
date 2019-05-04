@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-110/">Leetcode 110</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-168/">Leetcode 168</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -93,19 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-110/">阅读全文</a></p>
+                                题目 Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1 -&gt; A 2 -&gt; B 3 -&gt; C ... 26 -&gt; Z 27 -&gt; AA 28 -&gt; AB ... Example 1: Input: 1 Output: &quot;A&quot; Example 2: Input: 28 Output: &quot;AB&quot; Example 3: Input: 701 Output: &quot;ZY&quot;  我的解答 func convertToTitle(n int) string { if n &lt;= 0 { return &quot;&quot; } len := 0 tmp := n for tmp/26 &gt; 0 { len++ tmp = tmp / 26 } strs := make([]string, len+1) for n &gt; 0 { n-- strs[len] = string((n % 26) + 'A') n = n / 26 len-- } return strings.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-168/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-108/">Leetcode 108</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-167/">Leetcode 167</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -116,19 +116,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-108/">阅读全文</a></p>
+                                题目 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Note: Your returned answers (both index1 and index2) are not zero-based. You may assume that each input would have exactly one solution and you may not use the same element twice.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-167/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-107/">Leetcode 107</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-160/">Leetcode 160</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -139,20 +139,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
-最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-107/">阅读全文</a></p>
+                                题目 Write a program to find the node at which the intersection of two singly linked lists begins. For example, the following two linked lists: begin to intersect at node c1. Example 1: Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3 Output: Reference of the node with value = 8 Input Explanation: The intersected node's value is 8 (note that this must not be 0 if the two lists intersect).……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-160/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-104/">Leetcode 104</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-155/">Leetcode 155</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -163,19 +162,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-104/">阅读全文</a></p>
+                                题目  Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. push(x) -- Push element x onto stack. pop() -- Removes the element on top of the stack. top() -- Get the top element. getMin() -- Retrieve the minimum element in the stack. Example: MinStack minStack = new MinStack(); minStack.push(-2); minStack.push(0); minStack.push(-3); minStack.getMin(); --&gt; Returns -3. minStack.pop(); minStack.top(); --&gt; Returns 0. minStack.getMin(); --&gt; Returns -2.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-155/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-101/">Leetcode 101</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-141/">Leetcode 141</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -186,19 +185,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-101/">阅读全文</a></p>
+                                题目 Given a linked list, determine if it has a cycle in it. To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list. Example 1: Input: head = [3,2,0,-4], pos = 1 Output: true Explanation: There is a cycle in the linked list, where tail connects to the second node.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-141/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-100/">Leetcode 100</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-136/">Leetcode 136</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -209,19 +208,20 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-100/">阅读全文</a></p>
+                                题目 Given a non-empty array of integers, every element appears twice except for one. Find that single one. Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? Example 1: Input: [2,2,1] Output: 1 Example 2: Input: [4,1,2,1,2] Output: 4  我的解答 没想出来，看了评论区才知道
+最优解答 func singleNumber(nums []int) int { for i := len(nums) - 1; i &gt; 0; i-- { nums[i-1] = nums[i-1] ^ nums[i] } return nums[0] }  难疑点&amp;核心 因为题目说了，只有一个数字是不会出现两次，其它数字都出现两次……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-136/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-88/">Leetcode 88</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-125/">Leetcode 125</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -232,19 +232,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &gt; 0 &amp;&amp; n &gt; 0 { if nums1[m-1] &gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-88/">阅读全文</a></p>
+                                题目 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。 说明：本题中，我们将空字符串定义为有效的回文串。 示例 1: 输入: &quot;A man, a plan, a canal: Panama&quot; 输出: true 示例 2: 输入: &quot;race a car&quot; 输出: false  我的解答 func isPalindrome(s string) bool { s = strings.Join(filter(s), &quot;&quot;) n := len(s) for i := 0; i &lt; n/2; i++ { if s[i] != s[n-1-i] { return false } } return true } func filter(s string) []string { return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-125/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-83/">Leetcode 83</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-122/">Leetcode 122</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月23日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -255,20 +255,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
-最优解答 /** * Definition for singly-linked list.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-83/">阅读全文</a></p>
+                                题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  我的解答 func maxProfit(prices []int) int { buy := 0 sell := 0 profit := 0 n := len(prices) for { for buy &lt; n-1 &amp;&amp; prices[buy+1] &lt;= prices[buy] { buy++ } sell = buy for sell &lt; n-1 &amp;&amp; prices[sell+1] &gt; prices[sell] { sell++ } if sell == buy { return profit } profit += prices[sell] - prices[buy] buy = sell } }  最优解答 无……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-122/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-70/">Leetcode 70</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-121/">Leetcode 121</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月23日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -279,19 +278,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-70/">阅读全文</a></p>
+                                题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-121/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-69/">Leetcode 69</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-119/">Leetcode 119</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月23日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -302,9 +301,8 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
-最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &gt; x { i = (i + x/i) / 2 } return i }  数学公式……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-69/">阅读全文</a></p>
+                                题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle. Note that the row index starts from 0. In Pascal's triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-119/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -340,6 +338,10 @@
         <a href="https://wushaoqiang.github.io/tags/Leetcode/page/5/">5</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Leetcode/page/6/">6</a>
+    </li>
+    
 
     
     <li class="next">
@@ -368,43 +370,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-198/" title="Leetcode 198">Leetcode 198</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-242/" title="Leetcode 242">Leetcode 242</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-191/" title="Leetcode 191">Leetcode 191</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-237/" title="Leetcode 237">Leetcode 237</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-190/" title="Leetcode 190">Leetcode 190</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-235/" title="Leetcode 235">Leetcode 235</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-189/" title="Leetcode 189">Leetcode 189</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-234/" title="Leetcode 234">Leetcode 234</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-172/" title="Leetcode 172">Leetcode 172</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-231/" title="Leetcode 231">Leetcode 231</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-171/" title="Leetcode 171">Leetcode 171</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-226/" title="Leetcode 226">Leetcode 226</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-system/" title="计算机系统">计算机系统</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-219/" title="Leetcode 219">Leetcode 219</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-169/" title="Leetcode 169">Leetcode 169</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-217/" title="Leetcode 217">Leetcode 217</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-168/" title="Leetcode 168">Leetcode 168</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-206/" title="Leetcode 206">Leetcode 206</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-167/" title="Leetcode 167">Leetcode 167</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-205/" title="Leetcode 205">Leetcode 205</a>
     </li>
     
 </ul>
@@ -441,7 +443,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(59)</a>
     </li>
     
     <li>

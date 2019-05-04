@@ -6,10 +6,131 @@
     <description>Recent content in Leetcode on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Apr 2019 22:38:42 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 04 May 2019 20:58:20 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 242</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-242/</link>
+      <pubDate>Sat, 04 May 2019 20:58:20 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-242/</guid>
+      <description>题目 Given two strings s and t , write a function to determine if t is an anagram of s. Example 1: Input: s = &amp;quot;anagram&amp;quot;, t = &amp;quot;nagaram&amp;quot; Output: true Example 2: Input: s = &amp;quot;rat&amp;quot;, t = &amp;quot;car&amp;quot; Output: false Note: You may assume the string contains only lowercase alphabets. Follow up: What if the inputs contain unicode characters? How would you adapt your solution to such case?</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 237</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-237/</link>
+      <pubDate>Sat, 04 May 2019 20:58:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-237/</guid>
+      <description>题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&amp;gt; 1 -&amp;gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&amp;gt; 5 -&amp;gt; 9 after calling your function.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 235</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-235/</link>
+      <pubDate>Sat, 04 May 2019 20:58:10 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-235/</guid>
+      <description>题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 234</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-234/</link>
+      <pubDate>Sat, 04 May 2019 20:58:07 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-234/</guid>
+      <description>题目 Given a singly linked list, determine if it is a palindrome. Example 1: Input: 1-&amp;gt;2 Output: false Example 2: Input: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1 Output: true Follow up: Could you do it in O(n) time and O(1) space?  我的解答 如果不限定空间复杂度
+func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &amp;lt; l/2; i++ { if v[i] !</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 231</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-231/</link>
+      <pubDate>Sat, 04 May 2019 20:58:03 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-231/</guid>
+      <description>题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp;amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
+最优解答 无</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 226</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-226/</link>
+      <pubDate>Sat, 04 May 2019 20:57:59 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-226/</guid>
+      <description>题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 219</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-219/</link>
+      <pubDate>Sat, 04 May 2019 20:57:54 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-219/</guid>
+      <description>题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 217</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-217/</link>
+      <pubDate>Sat, 04 May 2019 20:57:49 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-217/</guid>
+      <description>题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 206</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-206/</link>
+      <pubDate>Sat, 04 May 2019 20:57:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-206/</guid>
+      <description>题目 Reverse a singly linked list. Example: Input: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL Output: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
+func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 205</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-205/</link>
+      <pubDate>Sat, 04 May 2019 20:57:39 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-205/</guid>
+      <description>题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &amp;quot;egg&amp;quot;, t = &amp;quot;add&amp;quot; Output: true Example 2: Input: s = &amp;quot;foo&amp;quot;, t = &amp;quot;bar&amp;quot; Output: false Example 3: Input: s = &amp;quot;paper&amp;quot;, t = &amp;quot;title&amp;quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &amp;lt; len(s); i++ { if b, exist := letterMap[s[i]]; !</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 204</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-204/</link>
+      <pubDate>Sat, 04 May 2019 20:57:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-204/</guid>
+      <description>题目 Count the number of prime numbers less than a non-negative number, n. Example: Input: 10 Output: 4 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.  我的解答 这题跟着评论区的思路做出来的&amp;ndash;厄拉多塞筛法
+func countPrimes(n int) int { // 简单判断 if n &amp;lt; 3 { return 0 } // 标志哪些0～n-1已经被访问过 flag := make([]bool, n) //因为0,1不是素数，先减去 total := n - 2 // 只需要找n的根号前的素数 for i := 2; i*i &amp;lt; n; i++ { // 访问过 if flag[i] { continue } // 没访问过，这个素数i的所有倍数(在n内)都不是素数，去除 for j := 2; i*j &amp;lt; n; j++ { if !</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 203</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-203/</link>
+      <pubDate>Sat, 04 May 2019 20:57:33 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-203/</guid>
+      <description>题目 Remove all elements from a linked list of integers that have value val. Example: Input: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6 Output: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  我的解答 func removeElements(head *ListNode, val int) *ListNode { for head != nil &amp;amp;&amp;amp; head.Val == val { head = head.Next } if head == nil { return head } tmp := head for tmp.Next != nil { if tmp.Next.Val == val { tmp.Next = tmp.Next.Next } else { tmp = tmp.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 202</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode-202/</link>
+      <pubDate>Sat, 04 May 2019 20:57:29 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode-202/</guid>
+      <description>题目 Write an algorithm to determine if a number is &amp;quot;happy&amp;quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.</description>
+    </item>
     
     <item>
       <title>Leetcode 198</title>

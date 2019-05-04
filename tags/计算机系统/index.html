@@ -93,18 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                 最近复习了一遍计算机网络、数据结构等书，过了快一个星期了，可以开始看看《深入理解计算机系统》了，很多人不推荐一开始就啃这本书，吸收会比较慢，可以先看一些公开课
+                                最近复习了一遍计算机网络、数据结构等书，过了快一个星期了，可以开始看看《深入理解计算机系统》了，很多人不推荐一开始就啃这本书，吸收会比较慢，可以先看一些公开课
 这里推荐B站的公开课
 配套课件
-Day2 整数注意溢出，浮点数注意大数吃小数(虽然也要注意溢出，但是大数吃小数情况更加容易出现)
+第二章 溢出 整数注意溢出，浮点数注意大数吃小数(虽然也要注意溢出，但是大数吃小数情况更加容易出现)
 大数吃小数的例子
-func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c) //不会吃 fmt.Println(a - (b + c)) //会吃 }  二维数组，一行一行扫描比一列列扫描性能要好
+func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c) //不会吃 fmt.Println(a - (b + c)) //会吃 }  性能与底层bit 二维数组，一行一行扫描比一列列扫描性能要好
 无符号和有符号的数字需要小心分析它底层的bit，举例子
-无符号：1 1 1 1 --&gt; 2^3+2^2+2^1+2^0 = 15 有符号：1 1 1 1 --&gt; -2^3+2^2+2^1+2^0 = -1  大端法：最高有效字节在最前面的方式
+无符号：1 1 1 1 --&gt; 2^3+2^2+2^1+2^0 = 15 有符号：1 1 1 1 --&gt; -2^3+2^2+2^1+2^0 = -1  ###大小端
+大端法：最高有效字节在最前面的方式
 比如0x01234567,在内存的表示是
 01 23 45 67  小端法：最低有效字节在最前面的方式
 比如0x01234567,在内存的表示是
-67 45 23 01  ……
+67 45 23 01  一般操作系统用的都是小端法……
                                 <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-system/">阅读全文</a></p>
                             </div>
                         </article>
@@ -133,43 +134,43 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-198/" title="Leetcode 198">Leetcode 198</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-242/" title="Leetcode 242">Leetcode 242</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-191/" title="Leetcode 191">Leetcode 191</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-237/" title="Leetcode 237">Leetcode 237</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-190/" title="Leetcode 190">Leetcode 190</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-235/" title="Leetcode 235">Leetcode 235</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-189/" title="Leetcode 189">Leetcode 189</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-234/" title="Leetcode 234">Leetcode 234</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-172/" title="Leetcode 172">Leetcode 172</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-231/" title="Leetcode 231">Leetcode 231</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-171/" title="Leetcode 171">Leetcode 171</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-226/" title="Leetcode 226">Leetcode 226</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-system/" title="计算机系统">计算机系统</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-219/" title="Leetcode 219">Leetcode 219</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-169/" title="Leetcode 169">Leetcode 169</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-217/" title="Leetcode 217">Leetcode 217</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-168/" title="Leetcode 168">Leetcode 168</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-206/" title="Leetcode 206">Leetcode 206</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-167/" title="Leetcode 167">Leetcode 167</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-205/" title="Leetcode 205">Leetcode 205</a>
     </li>
     
 </ul>
@@ -206,7 +207,7 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(59)</a>
     </li>
     
     <li>
