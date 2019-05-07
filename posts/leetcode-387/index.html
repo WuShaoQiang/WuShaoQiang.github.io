@@ -95,11 +95,46 @@
 
 <h3 id="题目">题目</h3>
 
+<pre><code> Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+Examples:
+
+s = &quot;leetcode&quot;
+return 0.
+
+s = &quot;loveleetcode&quot;,
+return 2.
+
+Note: You may assume the string contain only lowercase letters. 
+</code></pre>
+
 <h3 id="我的解答">我的解答</h3>
+
+<pre><code class="language-go">func firstUniqChar(s string) int {
+	m := make([]int, 26)
+	for _, b := range s {
+		m[b-'a']++
+	}
+
+	for idx, b := range s {
+		if m[b-'a'] == 1 {
+			return idx
+		}
+	}
+
+	return -1
+}
+</code></pre>
+
+<p>记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引</p>
 
 <h3 id="最优解答">最优解答</h3>
 
+<p>无</p>
+
 <h3 id="难疑点-核心">难疑点&amp;核心</h3>
+
+<p>无</p>
 
                         </div>
 

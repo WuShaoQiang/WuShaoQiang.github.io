@@ -58,7 +58,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
       <pubDate>Tue, 07 May 2019 21:25:34 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/posts/leetcode-387/</guid>
-      <description> 题目 我的解答 最优解答 难疑点&amp;amp;核心 </description>
+      <description>题目  Given a string, find the first non-repeating character in it and return it&#39;s index. If it doesn&#39;t exist, return -1. Examples: s = &amp;quot;leetcode&amp;quot; return 0. s = &amp;quot;loveleetcode&amp;quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-&#39;a&#39;]++ } for idx, b := range s { if m[b-&#39;a&#39;] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引</description>
     </item>
     
     <item>
