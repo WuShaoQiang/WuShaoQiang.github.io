@@ -78,11 +78,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-118/">Leetcode 118</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-206/">Leetcode 206</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月29日
+                                2019年5月4日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -93,19 +93,20 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a non-negative integer numRows, generate the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it.  我的解答 func generate(numRows int) [][]int { if numRows == 0 { return nil } result := make([][]int, numRows) for i := 0; i &lt; numRows; i++ { result[i] = make([]int, i+1) result[i][0] = 1 result[i][i] = 1 for j := 1; j &lt; i; j++ { result[i][j] = result[i-1][j-1] + result[i-1][j] } } return result }  最优解答 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-118/">阅读全文</a></p>
+                                题目 Reverse a singly linked list. Example: Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
+func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-206/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-112/">Leetcode 112</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-205/">Leetcode 205</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月29日
+                                2019年5月4日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -116,19 +117,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-112/">阅读全文</a></p>
+                                题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &quot;egg&quot;, t = &quot;add&quot; Output: true Example 2: Input: s = &quot;foo&quot;, t = &quot;bar&quot; Output: false Example 3: Input: s = &quot;paper&quot;, t = &quot;title&quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &lt; len(s); i++ { if b, exist := letterMap[s[i]]; !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-205/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-111/">Leetcode 111</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-204/">Leetcode 204</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月29日
+                                2019年5月4日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -139,19 +140,20 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-111/">阅读全文</a></p>
+                                题目 Count the number of prime numbers less than a non-negative number, n. Example: Input: 10 Output: 4 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.  我的解答 这题跟着评论区的思路做出来的&ndash;厄拉多塞筛法
+func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志哪些0～n-1已经被访问过 flag := make([]bool, n) //因为0,1不是素数，先减去 total := n - 2 // 只需要找n的根号前的素数 for i := 2; i*i &lt; n; i++ { // 访问过 if flag[i] { continue } // 没访问过，这个素数i的所有倍数(在n内)都不是素数，去除 for j := 2; i*j &lt; n; j++ { if !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-204/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-110/">Leetcode 110</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-203/">Leetcode 203</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月29日
+                                2019年5月4日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -162,19 +164,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-110/">阅读全文</a></p>
+                                题目 Remove all elements from a linked list of integers that have value val. Example: Input: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6 Output: 1-&gt;2-&gt;3-&gt;4-&gt;5  我的解答 func removeElements(head *ListNode, val int) *ListNode { for head != nil &amp;&amp; head.Val == val { head = head.Next } if head == nil { return head } tmp := head for tmp.Next != nil { if tmp.Next.Val == val { tmp.Next = tmp.Next.Next } else { tmp = tmp.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-203/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-108/">Leetcode 108</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-202/">Leetcode 202</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年5月4日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -185,19 +187,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-108/">阅读全文</a></p>
+                                题目 Write an algorithm to determine if a number is &quot;happy&quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-202/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-107/">Leetcode 107</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-198/">Leetcode 198</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月30日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -208,20 +210,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
-最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-107/">阅读全文</a></p>
+                                题目 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night. Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-198/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-104/">Leetcode 104</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-191/">Leetcode 191</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月30日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -232,19 +233,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-104/">阅读全文</a></p>
+                                题目 Example 1: Input: 00000000000000000000000000001011 Output: 3 Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits. Example 2: Input: 00000000000000000000000010000000 Output: 1 Explanation: The input binary string 00000000000000000000000010000000 has a total of one '1' bit. Example 3: Input: 11111111111111111111111111111101 Output: 31 Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one '1' bits. Note: Note that in some languages such as Java, there is no unsigned integer type.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-191/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-101/">Leetcode 101</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-190/">Leetcode 190</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月30日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -255,19 +256,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-101/">阅读全文</a></p>
+                                题目 Reverse bits of a given 32 bits unsigned integer. Example 1: Input: 00000010100101000001111010011100 Output: 00111001011110000010100101000000 Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000. Example 2: Input: 11111111111111111111111111111101 Output: 10111111111111111111111111111111 Explanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10101111110010110010011101101001. Note: Note that in some languages such as Java, there is no unsigned integer type.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-190/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-100/">Leetcode 100</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-189/">Leetcode 189</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月30日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -278,19 +279,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-100/">阅读全文</a></p>
+                                题目 Given an array, rotate the array to the right by k steps, where k is non-negative. Example 1: Input: [1,2,3,4,5,6,7] and k = 3 Output: [5,6,7,1,2,3,4] Explanation: rotate 1 steps to the right: [7,1,2,3,4,5,6] rotate 2 steps to the right: [6,7,1,2,3,4,5] rotate 3 steps to the right: [5,6,7,1,2,3,4] Example 2: Input: [-1,-100,3,99] and k = 2 Output: [3,99,-1,-100] Explanation: rotate 1 steps to the right: [99,-1,-100,3] rotate 2 steps to the right: [3,99,-1,-100] Note: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-189/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-88/">Leetcode 88</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-172/">Leetcode 172</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月27日
+                                2019年4月30日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -301,8 +302,9 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &gt; 0 &amp;&amp; n &gt; 0 { if nums1[m-1] &gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-88/">阅读全文</a></p>
+                                题目 Given an integer n, return the number of trailing zeroes in n!. Example 1: Input: 3 Output: 0 Explanation: 3! = 6, no trailing zero. Example 2: Input: 5 Output: 1 Explanation: 5! = 120, one trailing zero. Note: Your solution should be in logarithmic time complexity.  我的解答 看了些提示才做出来
+func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt; 0 { len++ tmp = tmp * 5 } for i := 0; i &lt; len; i++ { count += (n / tmp) tmp = tmp / 5 } return count }  最优解答 无……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-172/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -342,6 +344,18 @@
         <a href="https://wushaoqiang.github.io/tags/Leetcode/page/6/">6</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Leetcode/page/7/">7</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Leetcode/page/8/">8</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Leetcode/page/9/">9</a>
+    </li>
+    
 
     
     <li class="next">
@@ -370,43 +384,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-242/" title="Leetcode 242">Leetcode 242</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-237/" title="Leetcode 237">Leetcode 237</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-235/" title="Leetcode 235">Leetcode 235</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-234/" title="Leetcode 234">Leetcode 234</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-231/" title="Leetcode 231">Leetcode 231</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-226/" title="Leetcode 226">Leetcode 226</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-219/" title="Leetcode 219">Leetcode 219</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-217/" title="Leetcode 217">Leetcode 217</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-206/" title="Leetcode 206">Leetcode 206</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-205/" title="Leetcode 205">Leetcode 205</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
     </li>
     
 </ul>
@@ -419,7 +433,7 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
@@ -435,7 +449,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
     </li>
     
     <li>
@@ -443,11 +457,11 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(59)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
     </li>
     
     <li>
@@ -500,6 +514,8 @@
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
     
     <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
     
@@ -555,13 +571,19 @@
     
     <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
     
     <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     

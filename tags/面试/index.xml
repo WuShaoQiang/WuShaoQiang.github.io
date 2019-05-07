@@ -58,7 +58,19 @@ Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为�
       
       <guid>https://wushaoqiang.github.io/posts/interview/</guid>
       <description>本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
-go的调度 这里应该指的是goroutine的调度模式
+go的优势  Go是Google工程师基于现实世界开发经验进行改进的友好型语言
+ 简单明了
+ 容易学习
+ 简单的内置并发
+ 持有现代化标准库
+ 编译快
+ 格式被标准化
+ 较小内存占用
+ 部署独立
+ 支持vendor依赖
+ 兼容性好
+ 商业支持的开源
+  go的调度 这里应该指的是goroutine的调度模式
 读过Go Web编程那本书的人可能知道，go的并发是由线程、处理器、调度器和一个个的goroutine
 简单说一下运行的一些规则
  每一个线程里面有一个的协程，从微观角度来看是顺序执行的，但是从宏观角度来看，因为执行速度快，线程里的协程不断切换，因此可以看作是并行
@@ -68,12 +80,7 @@ go的调度 这里应该指的是goroutine的调度模式
   这是一些比较浅显运行的规则，如果要深入goroutine的源码分析，推荐一篇文章
 go struct能不能比较 如果是值类型，是可以比较的，比如
 p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} if p1 == p2 { fmt.Println(&amp;quot;same&amp;quot;) }  这样是有输出的
-那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子
-type Person struct { Name string Age int } type Student struct { *Person ID int }  由于Student里面的Person是一个引用类型，所以比较是比较了地址，因此是不同的
-go defer defer这个要注意的点有两个
- 执行顺序，先进后出
- 参数还是闭包
-  参数传递会根据传递参数时的值进行执行</description>
+那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子</description>
     </item>
     
   </channel>

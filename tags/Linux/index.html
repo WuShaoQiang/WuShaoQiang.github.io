@@ -78,6 +78,34 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux-apt/">Ubuntu apt</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 这个总结一下我经常用到的关于apt的命令
+apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
+其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好
+因此对于新入门的来说，建议使用apt
+当然，apt-get并没有被遗弃，也有很多人在用
+常用命令 更新仓库 sudo apt update 更新本地可更新的 sudo apt upgrade 一键更新 sudo apt update &amp;&amp; sudo apt upgrade -y 安装，如果pkg本身就已经安装，这个就是更新操作了 sudo apt install &lt;pkg&gt; 如果安装的包存在，不要更新，如果不存在，就安装 sudo apt install &lt;pkg&gt; --no-upgrade 如果包存在就更新，不存在也不安装 sudo apt install &lt;pkg&gt; --only-upgrade 指定版本安装 sudo apt install &lt;pkg&gt;=&lt;version&gt; 删除(不包括配置文件) sudo apt remove &lt;pkg&gt; 彻底删除(包括配置文件) sudo apt purge &lt;pkg&gt; 显示出这个term所有的package apt search &lt;term&gt; 这个可以显示pkg详细信息 apt show &lt;pkg&gt; 显示已安装的pkg apt list --installed 自动清除(清除那些没有用的pkg) sudo apt autoremove  ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-apt/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux-network-management/">Linux 网络管理</a>
                                 </h1>
                             </header>
@@ -217,43 +245,43 @@ update 能够看到电脑持续开机时间……
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-242/" title="Leetcode 242">Leetcode 242</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-237/" title="Leetcode 237">Leetcode 237</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-235/" title="Leetcode 235">Leetcode 235</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-234/" title="Leetcode 234">Leetcode 234</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-231/" title="Leetcode 231">Leetcode 231</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-226/" title="Leetcode 226">Leetcode 226</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-219/" title="Leetcode 219">Leetcode 219</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-217/" title="Leetcode 217">Leetcode 217</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-206/" title="Leetcode 206">Leetcode 206</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-205/" title="Leetcode 205">Leetcode 205</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
     </li>
     
 </ul>
@@ -266,7 +294,7 @@ update 能够看到电脑持续开机时间……
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
@@ -282,7 +310,7 @@ update 能够看到电脑持续开机时间……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
     </li>
     
     <li>
@@ -290,11 +318,11 @@ update 能够看到电脑持续开机时间……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(59)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
     </li>
     
     <li>
@@ -347,6 +375,8 @@ update 能够看到电脑持续开机时间……
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
     
     <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
     
@@ -402,13 +432,19 @@ update 能够看到电脑持续开机时间……
     
     <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
     
     <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     

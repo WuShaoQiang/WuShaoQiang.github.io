@@ -6,10 +6,36 @@
     <description>Recent content in Map on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Apr 2019 20:03:42 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 18:32:49 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Map/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang Sync Map</title>
+      <link>https://wushaoqiang.github.io/posts/golang-sync-map/</link>
+      <pubDate>Mon, 06 May 2019 18:32:49 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-sync-map/</guid>
+      <description>Sync.Map简介 Sync.Map就像是map[interface{}]interface{}，只是省去了开发人员关于map在并发时的安全调度设计
+用空间换时间
+Map的线程问题 今天被问到
+golang的map是线程安全的吗，我呆了一下，觉得它不是(没有仔细验证过)，其实答案也确实
+map不是线程安全的
+如果有两个goroutine，一个向map写，一个向map读，会发生panic
+所以在这里讨论一下有关map和它的线程安全问题
+在Go1.9的时候，官方推出了sync.map
+Youtu
+在这说一下，不是所有情况sync.Map都是好用的，官方建议大多数情况下还是用Go的原生map，需要了解其底层以及开发的业务需求和它本身的特性(在某些情况下比较好用,后面提)
+推出这个的原因 在我们多线程的应用里，访问同一个map需要加锁，这样导致的结果是
+ 本应该是并行的程序(假设几个内核在运行这个进程)，因为加锁问题，它们只能排队运行。这造成的就是时间复杂度从O(1)-&amp;gt;O(N)  这个sync.map实际上是拥有两个map，一个是read-only,一个是read-write
+我们参照官方文档来进行一个初步了解
+适用场景  当我们的map只需要写入一次，然后会被多次读取的时候
+ 当有多个goroutine读，写，覆盖的操作
+  在这两种情况下，sync.Map相对于普通map加Mutex(只是一个比喻，在实现上有很大的区别)
+方法 func (m *Map) Delete(key interface{}) func (m *Map) Load(key interface{}) (value interface{}, ok bool) func (m *Map) LoadOrStore(key, value interface{}) (actual interface{}, loaded bool) func (m *Map) Range(f func(key, value interface{}) bool) func (m *Map) Store(key, value interface{})  最基本的一些存取删除等操作已经实现
+剖析 关于结构方面 type Map struct { mu Mutex // read contains the portion of the map&#39;s contents that are safe for // concurrent access (with or without mu held).</description>
+    </item>
     
     <item>
       <title>Golang Map</title>

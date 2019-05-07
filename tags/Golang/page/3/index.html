@@ -78,6 +78,80 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-path-problem/">Golang Path Problem</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
+直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
+filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
+所谓前后是值文件夹的前后
+所以写在程序里面，你在这个目录执行成功了，你退一个目录就不行了，因为这个时候工作路径改变了
+笔者感觉这种方法不安全，或者我们写应用的时候指定要在某某目录执行，我有见过类似的项目
+同一目录下，package都为main，不能调用 如果我们有两个文件，package都为main，比如是这样的
+-main.go | -file.go  main.go想调用file.go的函数，会返回未定义的错误
+有两种解决方法
+ go install Or go build 转换为二进制文件执行
+ go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
+  解决相对路径的最稳的方法 来自外国友人icza……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-path-problem/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-log/">Golang Log</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者上面总结了一下网上关于错误处理和异常处理的资料，发现不知道什么时候要记录一个信息，什么时候不应该，再去找找别人的经验，总结到这篇博客。当然，笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库
+我们做后台开发，无论有什么语言，都有相应的一套日志记录系统，并且日志记录的信息可能是一些小小的问题，也可能是一些大问题，这个时候就要分级处理了，很多人(包括我之前)都对分级这个界限划分的认识模糊，不知道什么时候该用什么级别的信息
+在很多时候，log给我们提供的级别种类非常多，例如info、warning、debug、error等等，其实我对这些有些难以区分
+在一些论坛上，大家也为这些发表意见，都有各自的道理，我把我觉得有道理的记录下来，以后我就会按照这样的一套标准(并非所有人的标准)来实现我的日志记录
+先讲标准，在来简单分析一下第三方库的使用
+warning  Nobody needs a warning log level
+ 警告是什么意思？出错了吗，还是没出错，不知道，有点模棱两可的感觉
+所以要么是正常的信息输出(INFO)，要么就是错误
+其实笔者后来觉得，warning可以在下面情况使用
+ 对，是出错了，但是经过我们的错误处理，在合适的尝试次数中成功了，这样我们可以给出警告，告诉开发者，这里曾经出过错  fatal 首先，在Go里面，Fatal是会调用os.Exit(1)的
+这代表着什么样的结果(灾难)呢
+ 在其它线程的defer没有得到调用(比如一个文件的关闭在defer里，这样这个文件就未关闭，程序就挂了)
+ 缓冲区没有刷新(flush)，我们都知道，缓冲区要刷新，数据才能真正流入到我们想它到达的地方
+ 临时文件或者文件夹不会被移除(程序可能会生成临时文件，这是我们在结果中不想要的东西)
+   It is commonly accepted that libraries should not use panic, but if calling log.Fatal has the same effect, surely this should also be outlawed.
+ 网上看到别人这样说，称panic,fatal应该属于违规操作
+stackoverflow上赞同较多的答案说
+ You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-log/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">Golang Errandpanic</a>
                                 </h1>
                             </header>
@@ -329,57 +403,6 @@ viper.SetConfigName(&quot;config&quot;) // name of config file (without extensio
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">Golang标准库--http</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月19日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
-Package http doc.go 先来看看官方对这个包的一个解释
-这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
-这里还举了一些方法的例子
-// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/">Golang Exercism</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
-func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -440,43 +463,43 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-242/" title="Leetcode 242">Leetcode 242</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-237/" title="Leetcode 237">Leetcode 237</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-235/" title="Leetcode 235">Leetcode 235</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-234/" title="Leetcode 234">Leetcode 234</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-231/" title="Leetcode 231">Leetcode 231</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-226/" title="Leetcode 226">Leetcode 226</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-219/" title="Leetcode 219">Leetcode 219</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-217/" title="Leetcode 217">Leetcode 217</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-206/" title="Leetcode 206">Leetcode 206</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-205/" title="Leetcode 205">Leetcode 205</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
     </li>
     
 </ul>
@@ -489,7 +512,7 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
@@ -505,7 +528,7 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(40)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
     </li>
     
     <li>
@@ -513,11 +536,11 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(59)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
     </li>
     
     <li>
@@ -570,6 +593,8 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
     
     <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
     
@@ -625,13 +650,19 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
     
     <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
     
     <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
     

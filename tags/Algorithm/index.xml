@@ -6,10 +6,19 @@
     <description>Recent content in Algorithm on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Apr 2019 20:03:27 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2019 18:24:12 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithm 二分查找</title>
+      <link>https://wushaoqiang.github.io/posts/algorithm-binarysearch/</link>
+      <pubDate>Sun, 05 May 2019 18:24:12 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/algorithm-binarysearch/</guid>
+      <description> 递归式 func binarySearch(arr []int,left,right,target int) int{ if left &amp;lt;= right { mid := (left + right)/2 if arr[mid] == target{ return mid } if arr[mid] &amp;gt; target{ return binarySearch(arr,left,mid-1,target) } if arr[mid] &amp;lt; target{ return binarySearch(arr,mid+1,right,target) } } return -1 }  非递归式 func binarySearch(arr []int,target int) int{ left := 0 right := len(arr)-1 for left &amp;lt;= right{ mid := (left+right)/2 if arr[mid] == target{ return mid } if arr[mid] &amp;gt; target { right = mid-1 }else{ left = mid+1 } } return -1 }  </description>
+    </item>
     
     <item>
       <title>Algorithm 排序</title>

@@ -6,10 +6,24 @@
     <description>Recent content in Linux on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Apr 2019 20:29:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 May 2019 11:00:18 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ubuntu apt</title>
+      <link>https://wushaoqiang.github.io/posts/linux-apt/</link>
+      <pubDate>Tue, 07 May 2019 11:00:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux-apt/</guid>
+      <description> 这个总结一下我经常用到的关于apt的命令
+apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
+其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好
+因此对于新入门的来说，建议使用apt
+当然，apt-get并没有被遗弃，也有很多人在用
+常用命令 更新仓库 sudo apt update 更新本地可更新的 sudo apt upgrade 一键更新 sudo apt update &amp;amp;&amp;amp; sudo apt upgrade -y 安装，如果pkg本身就已经安装，这个就是更新操作了 sudo apt install &amp;lt;pkg&amp;gt; 如果安装的包存在，不要更新，如果不存在，就安装 sudo apt install &amp;lt;pkg&amp;gt; --no-upgrade 如果包存在就更新，不存在也不安装 sudo apt install &amp;lt;pkg&amp;gt; --only-upgrade 指定版本安装 sudo apt install &amp;lt;pkg&amp;gt;=&amp;lt;version&amp;gt; 删除(不包括配置文件) sudo apt remove &amp;lt;pkg&amp;gt; 彻底删除(包括配置文件) sudo apt purge &amp;lt;pkg&amp;gt; 显示出这个term所有的package apt search &amp;lt;term&amp;gt; 这个可以显示pkg详细信息 apt show &amp;lt;pkg&amp;gt; 显示已安装的pkg apt list --installed 自动清除(清除那些没有用的pkg) sudo apt autoremove  </description>
+    </item>
     
     <item>
       <title>Linux 网络管理</title>
