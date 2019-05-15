@@ -78,6 +78,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-53/">Leetcode 53</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4], 输出: 6 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 进阶: 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。  我的解答 func maxSubArray(nums []int) int { if len(nums) == 0 { return 0 } if len(nums) == 1 { return nums[0] } total := nums[0] max := nums[0] for i := 1; i &lt; len(nums); i++ { if total &lt; 0 { total = 0 } total += nums[i] if max &lt; total { max = total } } return max }  暴力法的话，时间复杂度是O(N^2)，这里使用的方法时间复杂度O(N)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-53/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode-35/">Leetcode 35</a>
                                 </h1>
                             </header>
@@ -285,32 +308,6 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-1/">Leetcode 1</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
-示例:
-给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  我的解答 func twoSum(nums []int, target int) []int { myMap := make(map[int]int) for idx,num := range nums{ myMap[num] = idx } for idx,num := range nums{ tmp := target - num if pos,exist := myMap[tmp]; exist{ if idx &gt; pos{ return []int{pos,idx} } else if idx &lt; pos{ return []int{idx,pos} }else{ continue } } } return nil }  方法是通过map来达到快速查找，而不像暴力法需要每次都遍历整个数组……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-1/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -391,6 +388,10 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
@@ -424,10 +425,6 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -464,7 +461,7 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
     </li>
     
     <li>

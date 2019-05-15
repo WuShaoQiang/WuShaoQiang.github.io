@@ -68,6 +68,31 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin" >Golang Gin</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
+func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
+gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-gin/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation" >Golang Validation</a>
                                 </h1>
                             </header>
@@ -353,36 +378,6 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-crawler/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-handle/" title="Golang Handle" >Golang Handle</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                本文主要解释Golang中http-handler几个容易混淆的概念
-HandleFunc 源代码
-在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
-http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
-当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
-myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
-// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
-// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&quot;http: nil handler&quot;) } mux.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-handle/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -495,6 +490,10 @@ myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
@@ -528,10 +527,6 @@ myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -568,7 +563,7 @@ myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
     </li>
     
     <li>

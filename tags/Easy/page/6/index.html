@@ -78,6 +78,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-189/">Leetcode 189</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array, rotate the array to the right by k steps, where k is non-negative. Example 1: Input: [1,2,3,4,5,6,7] and k = 3 Output: [5,6,7,1,2,3,4] Explanation: rotate 1 steps to the right: [7,1,2,3,4,5,6] rotate 2 steps to the right: [6,7,1,2,3,4,5] rotate 3 steps to the right: [5,6,7,1,2,3,4] Example 2: Input: [-1,-100,3,99] and k = 2 Output: [3,99,-1,-100] Explanation: rotate 1 steps to the right: [99,-1,-100,3] rotate 2 steps to the right: [3,99,-1,-100] Note: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-189/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode-172/">Leetcode 172</a>
                                 </h1>
                             </header>
@@ -284,29 +307,6 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-125/">Leetcode 125</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。 说明：本题中，我们将空字符串定义为有效的回文串。 示例 1: 输入: &quot;A man, a plan, a canal: Panama&quot; 输出: true 示例 2: 输入: &quot;race a car&quot; 输出: false  我的解答 func isPalindrome(s string) bool { s = strings.Join(filter(s), &quot;&quot;) n := len(s) for i := 0; i &lt; n/2; i++ { if s[i] != s[n-1-i] { return false } } return true } func filter(s string) []string { return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-125/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -387,6 +387,10 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
@@ -420,10 +424,6 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -460,7 +460,7 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
     </li>
     
     <li>

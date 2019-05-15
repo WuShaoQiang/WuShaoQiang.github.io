@@ -68,6 +68,39 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
+提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
+如果是还未创建的collection
+ use db.createCollection() with the validator option.
+ 如果是已经创建了的collection
+ use collMod command with the validator option.
+ 这里还提供了两个options
+validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
+ use the $jsonSchema operator in your validator expression.
+ 官网例子
+db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-schema-validation/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
                                 </h1>
                             </header>
@@ -294,30 +327,6 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-371/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367" >Leetcode 367</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a positive integer num, write a function which returns True if num is a perfect square else False. Note: Do not use any built-in library function such as sqrt. Example 1: Input: 16 Output: true Example 2: Input: 14 Output: false  我的解答 根据数学公式 1+3+&hellip;+(2n-1) = n**2
-func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for i := 1; i &lt;= num/2 &amp;&amp; total &lt; num; i++ { total += 2*i - 1 } return total == num }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-367/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -430,6 +439,10 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
@@ -463,10 +476,6 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -503,7 +512,7 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
     </li>
     
     <li>

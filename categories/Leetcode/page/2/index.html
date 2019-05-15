@@ -78,6 +78,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-412/">Leetcode 412</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &quot;1&quot;, &quot;2&quot;, &quot;Fizz&quot;, &quot;4&quot;, &quot;Buzz&quot;, &quot;Fizz&quot;, &quot;7&quot;, &quot;8&quot;, &quot;Fizz&quot;, &quot;Buzz&quot;, &quot;11&quot;, &quot;Fizz&quot;, &quot;13&quot;, &quot;14&quot;, &quot;FizzBuzz&quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &lt; n; i++ { if (i+1)%15 == 0 { res[i] = &quot;FizzBuzz&quot; } else if (i+1)%5 == 0 { res[i] = &quot;Buzz&quot; } else if (i+1)%3 == 0 { res[i] = &quot;Fizz&quot; } else { res[i] = strconv.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-412/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode-409/">Leetcode 409</a>
                                 </h1>
                             </header>
@@ -290,29 +313,6 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-350/">Leetcode 350</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given two arrays, write a function to compute their intersection. Example 1: Input: nums1 = [1,2,2,1], nums2 = [2,2] Output: [2,2] Example 2: Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4] Output: [4,9] Note: Each element in the result should appear as many times as it shows in both arrays. The result can be in any order.  我的解答 func intersect(nums1 []int, nums2 []int) []int { res := make([]int, 0) m := make(map[int]int) for _, num1 := range nums1 { m[num1]++ } for _, num2 := range nums2 { if count, exist := m[num2]; exist &amp;&amp; count &gt; 0 { res = append(res, num2) m[num2]-- } } return res }  和上题区别在于,这里有数量的区别,所以要稍微改动就可以了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-350/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -393,6 +393,10 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
@@ -426,10 +430,6 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -466,7 +466,7 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
     </li>
     
     <li>
