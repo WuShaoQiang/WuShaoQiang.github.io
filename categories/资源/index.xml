@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>资源 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/</link>
+    <description>Recent content in 资源 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 May 2019 22:54:34 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Good Resource</title>
+      <link>https://wushaoqiang.github.io/posts/good-resource/</link>
+      <pubDate>Mon, 13 May 2019 22:54:34 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/good-resource/</guid>
+      <description> 下面的笔者觉得比较好的一些资源,大多是关于Go和计算机方面的,像stackoverflow这类型知名的就不说了
+数据结构 data structure visualzation
+大牛博客 飞雪无情
+Tony Bai
+legendtkl
+公众号  stormzhang
+ Go语言中文网
+ 纯洁的微笑
+ 架构师之路
+ Go中国
+  开源书籍 Effective Go
+书栈网
+算法题  leetcode
+ 牛客网
+  做简历  超级简历  </description>
+    </item>
+    
+  </channel>
+</rss>

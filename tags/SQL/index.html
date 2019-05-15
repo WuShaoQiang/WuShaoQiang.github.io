@@ -78,6 +78,44 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">SQL vs NoSQL</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月9日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                花了点时间去了解了一下NoSQL,总结一下一些概念
+SQL: Strcuture Query Language
+NoSQL: Not Only SQL
+一些概念 ACID 这是关系型数据库遵循的法则
+A: Atomatic -all or nothing,要么全部完成,要么回滚什么都不做 C: Consistancy -一致性,系统就算是并发多个的,也必须如同串行事务一样 I: Isolation -用于竟态保护,并行安全,确保只有一个事务在使用系统 D: Durability -once executed, data is immediately saved  CAP 这是Eric Brewer说的,三个指标不可能同时做到,这就是CAP定理
+Consistency 一致性 Availablility 可用性 Partition tolerance 分区容错  在分布式服务上,必须要满足P,所以只剩下了C和A选
+最常见的是AP组合,一致性靠一个时间窗口达到
+因为NoSQL常用在分布式系统上,所以这个概念也非常重要
+SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能够往table里添加固定的结构数据
+ 优点:开发者知道要往table里面添加什么值,已经清楚table里面有什么具体的field
+ 缺点:随着业务需求,可能对结构会有所变化,变化麻烦
+  NoSQL没有固定的collection字段,collection下面是document(一般是json),document里面的数据可以拥有不同的字段
+ 优点和缺点刚好和上面相反  关系(有利有弊) SQL通过table之间的关系来达到分布式数据
+ 优点:通过一个table将数据连接起来,没有过多的冗余数据
+ 缺点:对分布式不友好,并且一旦关系多了,会产生混乱
+  NoSQL没有关系,全部都是直接存储……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/SQL-highlevel/">SQL 进阶</a>
                                 </h1>
                             </header>
@@ -199,43 +237,43 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -264,7 +302,7 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
     </li>
     
     <li>
@@ -272,7 +310,7 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
     </li>
     
     <li>
@@ -300,11 +338,11 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
     </li>
     
     <li>
@@ -313,6 +351,10 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
     </li>
     
 </ul>
@@ -358,6 +400,8 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
@@ -378,7 +422,13 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     
     <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
@@ -459,6 +509,8 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     

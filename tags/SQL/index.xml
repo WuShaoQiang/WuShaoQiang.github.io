@@ -6,10 +6,34 @@
     <description>Recent content in SQL on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Apr 2019 10:25:40 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 09 May 2019 22:05:07 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/SQL/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SQL vs NoSQL</title>
+      <link>https://wushaoqiang.github.io/posts/sql-vs-nosql/</link>
+      <pubDate>Thu, 09 May 2019 22:05:07 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/sql-vs-nosql/</guid>
+      <description>花了点时间去了解了一下NoSQL,总结一下一些概念
+SQL: Strcuture Query Language
+NoSQL: Not Only SQL
+一些概念 ACID 这是关系型数据库遵循的法则
+A: Atomatic -all or nothing,要么全部完成,要么回滚什么都不做 C: Consistancy -一致性,系统就算是并发多个的,也必须如同串行事务一样 I: Isolation -用于竟态保护,并行安全,确保只有一个事务在使用系统 D: Durability -once executed, data is immediately saved  CAP 这是Eric Brewer说的,三个指标不可能同时做到,这就是CAP定理
+Consistency 一致性 Availablility 可用性 Partition tolerance 分区容错  在分布式服务上,必须要满足P,所以只剩下了C和A选
+最常见的是AP组合,一致性靠一个时间窗口达到
+因为NoSQL常用在分布式系统上,所以这个概念也非常重要
+SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能够往table里添加固定的结构数据
+ 优点:开发者知道要往table里面添加什么值,已经清楚table里面有什么具体的field
+ 缺点:随着业务需求,可能对结构会有所变化,变化麻烦
+  NoSQL没有固定的collection字段,collection下面是document(一般是json),document里面的数据可以拥有不同的字段
+ 优点和缺点刚好和上面相反  关系(有利有弊) SQL通过table之间的关系来达到分布式数据
+ 优点:通过一个table将数据连接起来,没有过多的冗余数据
+ 缺点:对分布式不友好,并且一旦关系多了,会产生混乱
+  NoSQL没有关系,全部都是直接存储</description>
+    </item>
     
     <item>
       <title>SQL 进阶</title>

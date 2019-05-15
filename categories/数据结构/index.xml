@@ -6,10 +6,50 @@
     <description>Recent content in 数据结构 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Apr 2019 11:03:57 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 May 2019 21:21:24 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Structure Tree</title>
+      <link>https://wushaoqiang.github.io/posts/data-structure-bplus-tree/</link>
+      <pubDate>Mon, 13 May 2019 21:21:24 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/data-structure-bplus-tree/</guid>
+      <description>为了搞明白关于数据库的一些索引结构开的一篇数据结构-树博客
+前言 这只是笔者的一些笔记和觉得不错的教学资源,分享一下
+推荐一个可视化的数据结构网站
+树是一个重要的数据结构,不仅要知道相关概念,建议在leetcode上刷上几十题
+BST BST相信很多人都已经比较了解,不赘述了,说说会有哪些问题
+BST按照不同的插入顺序会有不同的形状,在极端的条件下会变成一个线性链表,这样查找的时间复杂度就变成了O(logN)
+因为查找和插入都相对比较简单,这里就不说了,说说删除的思路
+ 二叉树删除某个叶子节点,就直接删除就好
+ 二叉树删除某个中间节点(包括root节点),则需要一定的操作(建议多在上面推荐的网站上多试几次,就明白了)
+  以要被删除的节点A开始,把它当做root节点(也就是把子树先看做整个树,其它部分先不管)
+往左边找第一个节点B,如果左边不存在节点,直接用A的右节点去代替它
+找到左边第一个节点B后,找基于这个节点的最右节点C(也就是路径是一直往右边走的,不存在往左走一段后再往右)
+如果没有右边节点(一个右子树都没),则直接用刚才找到的节点B去代替它
+如果有右节点C(并且已经按照规则找到最右的),那么我们将用这个结点C去替代它
+如果这个结点C有左节点,那么节点C的父亲节点的右子树会指向C的左节点
+完!
+我相信看到这段文字心态是崩的,再建议一次,用上面的网站去得到图形化的结构
+AVL 参考Youtube学习
+又名(Balanced binary search tree)
+解决了上面BST的问题:容易因为插入顺序问题造成一棵树倾斜(这样就无法得到该有的查询速度)
+先解释一下什么叫平衡(Balanced)
+一颗平衡的数满足这个条件
+ 无论从哪个节点开始数,它的左子树深度和右子树深度的差值的绝对值小于1  因为这个条件的限定,所以即使我们插入顺序比较极端,只要我们实现了AVL Tree,那么它就能自动帮我们平衡
+这里要提醒一点
+ 不是说以前的不平衡树放进去就能平衡,这是要重新一个个插入才能达到这样的效果  所以说,如果以前的二叉树要转为AVL树,需要将二叉树的值重新插入一遍
+这里再提醒一个点,我们所有的反转操作(rotation)都是只看三个节点
+进入正题
+1 \ 2 \ 3  这样的一个树就是不平衡的,因为从结点1看来,左子树的深度为0,右子树的深度为2,因此|0-2|&amp;lt;=1不成立
+这种情况就是RR-imbalanced,需要做的操作叫RR-rotation(RR:Right of right)
+变成
+ 2 / \ 1 3  再复杂一点就是这也(注意focus三个节点就好)
+ 6 / \ 4 7 / \ 2 5 / \ 1 3  这里我要再说明一点</description>
+    </item>
     
     <item>
       <title>Data Structure</title>

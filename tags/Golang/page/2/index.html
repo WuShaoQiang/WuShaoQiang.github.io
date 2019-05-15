@@ -78,6 +78,133 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview2/">Interview2</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
+ 这里应该用channel来达到通信
+在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
+进程和线程的区别 进程：操作系统对一个正在运行的程序的一种抽象，一个系统上可以运行多个进程，这些进程在单核的处理器下一样可以显得好像的并发的一样，这是通过处理器在进程之间的切换实现的，这种交错执行的机制称为上下文切换
+线程：一个进程可以由多个线程的执行单元组成，每个线程都运行在进程的上下文中
+区别：
+ 进程在系统上运行，线程在进程上运行，因此进程是独立的地址空间、线程共享进程的地址空间
+ 线程比进程的开销要小
+ 线程一般来说比进程更高效
+ 线程之间的数据共享比进程的简单
+ 线程必须依赖在进程上执行
+  临界区是啥 临界区从通俗层面来讲就是我们锁-解锁之间的代码，通常会写在程序(或者说资源)无法同时被使用的地方
+这个区域只能允许一个线程或进程进入，其它后来的需要等待解锁
+死锁是啥。死锁产生的条件是什么 在我理解里，线程A占用了资源C，这个时候线程A还要申请资源D(占用且申请)，但线程B这时占用着资源D，而且线程A无法将资源抢过来，所以现在线程A就在等待线程B释放资源D。线程B在这个时候也需要使用资源C，并且不得到就不离开(一直等待)，所以现在局面就是A在等B释放D，B在等A释放C(循环等待)，并且都不肯让资源(不可抢占)，并且资源CD都是只能有一个线程占有的(互斥)
+若干进程竞争有限资源，但顺序或者决策不当，使得大家都在无限循环等待，就形成了死锁
+ 互斥条件
+ 不可抢占条件
+ 占有且申请条件(这个的意思是在占有资源的情况下还要去申请别的资源)
+ 循环等待条件
+  只要上述条件有一个不满足，就可以避免死锁
+给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率 占时还不太清除这个
+Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
+所以查找pid有lsof -i:port和netstat -p |grep port……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview2/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-context/">Golang Context</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
+参考博客理解Go Context机制
+Golang的执行单元是goroutine，main也是一个goroutine
+上下文，上下则是存在上下层的传递，我们在编写Web后端的时候，接收到一个请求可能会执行一些列的goroutine(数据库，业务层处理)来达到并发效果
+这个时候，如果客户端那边取消了呢？如果我们在服务器端检测不到这个信号，那么我们服务器还是会继续服务，直到完成所有服务的时候，发现客户端已经不见了(资源就被浪费了)
+所以我们需要在每一个由Request产生的goroutine里面装一个监控，这个监控会告诉程序客户端是否还在等待返回，如果客户端离开，那么程序立即停止对客户端的服务
+Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) Done() &lt;-chan struct{} Err() error Value(key interface{}) interface{} }   Deadline会返回一个超时时间，Goroutine获得了超时时间后，例如可以对某些io操作设定超时时间。
+ Done方法返回一个信道（channel），当Context被撤销或过期时，该信道是关闭的，即它是一个表示Context是否已关闭的信号。
+ 当Done信道关闭后，Err方法表明Context被撤的原因。
+ Value可以让Goroutine共享一些数据，当然获得数据是协程安全的。但使用这些数据的时候要注意同步，比如返回了一个map，而这个map的读写则要加锁。
+  每当我们处理一个Request的时候，都应该从Request里拿一个Context
+req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
+ 如果Request的context是nil，那么它会返回一个context.Background()
+var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-context/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview/">Interview</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
+go的优势  Go是Google工程师基于现实世界开发经验进行改进的友好型语言
+ 简单明了
+ 容易学习
+ 简单的内置并发
+ 持有现代化标准库
+ 编译快
+ 格式被标准化
+ 较小内存占用
+ 部署独立
+ 支持vendor依赖
+ 兼容性好
+ 商业支持的开源
+  go的调度 这里应该指的是goroutine的调度模式
+读过Go Web编程那本书的人可能知道，go的并发是由线程、处理器、调度器和一个个的goroutine
+简单说一下运行的一些规则
+ 每一个线程里面有一个的协程，从微观角度来看是顺序执行的，但是从宏观角度来看，因为执行速度快，线程里的协程不断切换，因此可以看作是并行
+ 处理器主要就是用来执行goroutine的，它也维护了一个goroutine的队列，里面有在等待的goroutine
+ 只有线程和处理器结合起来才能构造一个goroutine执行环境
+ 调度器，当协程阻塞的时候，会保存上下文，直到下次可以恢复运行
+  这是一些比较浅显运行的规则，如果要深入goroutine的源码分析，推荐一篇文章
+go struct能不能比较 如果是值类型，是可以比较的，比如
+p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Age: 1} if p1 == p2 { fmt.Println(&quot;same&quot;) }  这样是有输出的
+那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang-pipeline/">Golang Pipeline</a>
                                 </h1>
                             </header>
@@ -285,94 +412,6 @@ gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()�
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-validation/">Golang Validation</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Validation项目地址
-创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
- valid.Required(name,&quot;name&quot;)：检验变量不能为空，字符串不能为&quot;&quot;,后面的&quot;name&quot;是用来标识而已
- valid.MaxSize(name,100,&quot;name&quot;)：最大长度
- valid.Range(state,0,1,&quot;state&quot;)：范围
- valid.HasErrors()：这个会返回布尔值，是否有不符合限定的内容
- valid.Errors：这个是一个Error数组，其中Error是这个包自带的，并不是标准库的error
- valid.Min(id,1,&quot;id&quot;)：id最小为1
-  以上这些都返回*Result
-Result方法 我们拿上面一个返回*Result对象做例子
- valid.Required(name,&quot;name&quot;).Message(&quot;name不能为空&quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-validation/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-blog/">Golang Build blog with gin</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 Package  ini &mdash;配置文件的读取
- com &mdash;功能性
- validation &mdash;做验证
- jwt-go &mdash;Token
- endless &mdash;服务器热启动
- swag &mdash;API文档
-  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-blog/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-os/">Golang标准库--os</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
-bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
-// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
-// Flags to OpenFile wrapping those of the underlying system.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -433,43 +472,43 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -498,7 +537,7 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
     </li>
     
     <li>
@@ -506,7 +545,7 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
     </li>
     
     <li>
@@ -534,11 +573,11 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
     </li>
     
     <li>
@@ -547,6 +586,10 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
     </li>
     
 </ul>
@@ -592,6 +635,8 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
@@ -612,7 +657,13 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
@@ -693,6 +744,8 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     

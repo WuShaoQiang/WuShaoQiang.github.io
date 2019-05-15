@@ -68,86 +68,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learn-hugo/" title="Hugo建博客" >Hugo建博客</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang-goquery/" title="Golang goquery" >Golang goquery</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月16日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Hugo">Hugo</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。
-所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人
-以下命令都是以我自己建博客的为例
-创建一个网站 hugo new site blog 这个命令会在目录里创建一个新的blog目录
-这个blog目录包含以下：
- archetypes/ content/ data/ layouts/ static/ themes/ config.toml  archetypes/ 这里一开始会有一个default文件，后面再讲有什么用，先看看文件
---- title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot; date: {{ .Date }} draft: true ---  content/ 这里就是博客的主要内容的根目录，我们创建的博客文章就应该放在这个文件夹里(不是直接)
-创建一个博客文章hugo new posts/learn-hugo.md，创建完后会发现文件在content/posts/learn-hugo.md
-打开文件看一下，可以发现创建的新文件里面是有内容的
---- title: &quot;Learn Hugo&quot; date: 2019-03-16T22:33:20+08:00 draft: true ---  这就和我们上面说到的archetypes/default.md有关，这里可以自动填充一些信息，方便我们写博客
-theme/ 这里是放置博客主题的文件夹，Hugo有很多开源的主题，可以去官网找找看，笔者用的是飞雪无情这位博主开源出来的Maupassant，笔者刚开始也按照这位博主的配置方法来配置博客，等后面对Hugo的配置了解更加深入时，再尝试配置。Maupassant的仓库地址，大家还可以顺手点个星，表示支持
-具体如何安装也很简单，可以参照github的使用方法
-config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
-## 这个是我们主页的地址 baseURL = &quot;https://wushaoqiang.github.io&quot; languageCode = &quot;en-us&quot; ## 博客的标题(不是某篇文章，是整个博客) title = &quot;Gavin's Blog&quot; ## 这里就是设定你要的主题，而且主题必须要下载到theme/目录 theme = &quot;maupassant&quot; ## 保持分类的原始名字（false会做转小写处理） preserveTaxonomyNames = true ## 是否禁止URL Path转小写 disablePathToLower = true ## 这个会配置每一篇文章最后面的Copyright的作者名字 ## © 2019 Gavin's Blog By Gavin [author] name = &quot;Gavin&quot; [params] author = &quot;Gavin&quot; ## 这是一个副标题，在主标题的下方 subtitle = &quot;Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记&quot; keywords = &quot;Golang,Gavin,Blog&quot; ## 这个是对阅读量的计数 busuanzi = true ## 这个是为了开评论区 [params.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-hugo/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learn-git/" title="Git用法总结" >Git用法总结</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇博客是笔者总结学习git的过程，不是一篇专业性很强的文章，主要是笔记
-主要参考廖雪峰的博客学习
-笔者之前对Git有错误的理解(因为之前没学过，也只是听过)，总以为Github就是Git，其实Github是Git出来后才被创建的，为开源项目免费提供Git存储。
-无Github,纯属本地的Git &mdash; 那么什么是Git呢？ Git是目前世界上最先进的分布式版本控制系统
-分布式：Git和其它集中式版本控制系统最大的区别，Git也可以有一个24小时开机的服务器来充当中央服务器，但这个服务器仅仅是为了让大家方便交换各自修改的。
-版本控制：因为我们的代码要不断的完善，所以就有版本之分啦。
-就算是我们自己在电脑上开发，也可以为自己代码创建版本库，用来记录修改和方便管理。
-&mdash; 创建版本库 在想要创建版本库的文件夹里面，输入命令
-git init  就可以看到文件夹里面多了一个隐藏的文件夹.git
-添加文件到我们新建的版本库里面用
-//将某一个文件添加进缓冲区 git add &lt;file&gt; //将.git文件夹 所在的文件 里所有的文件添加进缓冲区 //所以不管你是在某一个子文件夹用这个命令，执行效果是一样的 git add -A //这个就是将缓冲区的提交到版本库里，并且携带提交信息 //(强烈推荐要写message，这样可以提醒那个时候修改了什么) git commit -m &lt;message&gt;  我们可以把代码所在区域分成
- 工作区 缓冲区 当前分支  理解这几个工作区域会有助于理解命令的作用。
-工作区：我们自己电脑编辑代码的地方
-缓冲区：就是我们把修改过的文件放到一个区域装着，如果后面我又对这个文件做修改了，就可以继续往里面添加(同文件覆盖)
-当前分支：就是我们使用commit后将缓冲区的文件提交上去的地方
-&mdash; 查看状态 git status  这个命令会告诉我们哪些被修改过的文件被添加到了缓冲去，哪些被修改的文件没有。
-On branch master Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded. (use &quot;git pull&quot; to update your local branch) Untracked files (use &quot;git add &lt;file&gt;.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-git/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/" title="Go琐碎笔记" >Go琐碎笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月14日
+                                2019年4月8日
                             </date>
                             
                             <div class="post-meta">
@@ -158,19 +83,289 @@ On branch master Your branch is behind 'origin/master' by 1 commit, and can be f
                             </div>
                             
                             <div class="post-content">
-                                在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
-2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0)
-然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII
-res, ok := map[...] 中的ok变量可以用来判断key是否存在
-[]rune可以直接转换为字符串string([]rune)
-2019.2.17 谨记！ ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
-norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
+                                goquery是一个开源的库，针对解析HTML
+今天在做爬虫的时候用到了一些功能，记录下来方便查阅
+创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&quot;go query Error %s\n&quot;, err) }  doc对象就包含了我们要解析的HTML主体
+一般我们这样用，Find()里面的字符串就是我们要填写的规则
+doc.Find(&quot;div&quot;).Each(func(i int, s *goquery.Selection) { fmt.Println(i,s.Text()) })  规则 我们可以根据HTML的源码分析对应的属性id，class等等
+ div#id #id是某个div的id属性，筛选出此id的div标签
+ div.class .class 同理，是class属性
+ div[class],div[lang] 这个也是属性的筛选
+ div&gt;p div嵌套的p标签，这里规定只有一级标签，一级以后的p标签不会被筛选出来
+ div p div嵌套的p标签，这里无论第几级都会被筛选出来
+  属性可以和嵌套一起使用，例如div.class&gt;p&gt;li
+Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标签内的属性 doc.Find(&quot;ul&gt;li&gt;div.job-primary&gt;div&gt;h3&gt;a&quot;).Each(func(i int, s *goquery.Selection) { detail := s.Get(0).Attr[0].Val // fmt.Println(i, nextPage) jobs[i].Detail = detail })  我在这里踩过一个坑……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-goquery/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-request/" title="Golangstd Request" >Golangstd Request</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
+我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
+所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
+Request结构体 type Request struct { Method string URL *url.URL Proto string // &quot;HTTP/1.0&quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
+Method 这就是一个请求的方法(如GET、POST)
+但是Go的HTTP客户端不支持发送方法为CONNECT的请求
+URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-request/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-gorm/" title="Golang Gorm" >Golang Gorm</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                连接数据库 Mysql db, err := gorm.Open(&quot;mysql&quot;, &quot;root:123456@tcp/test?charset=utf8&amp;parseTime=True&quot;) if err != nil { panic(&quot;连接数据库失败&quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
+db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
+比如db.CreateTable(&amp;Product{})，在数据库表单里面会得到一个名字为products
+所以一般都会加上这个函数
+创建Table db.CreateTable(&amp;Product{})  创建多个table
+db.CreateTable(&amp;Product{},&amp;User{})  删除Table 关于删除，有两个
+db.DropTableIfExist(interface{}) db.DropTable(interface{})  这里可以传入字符串，也可以传入一个结构体
+接着上面的例子
+db.DropTableIfExist(&quot;product&quot;) db.DropTableIfExist(&amp;Product{})  删除Column 删除Column是要指定Table，所以不能这样
+db.DropColumn(&quot;created_at&quot;)  要定位Table，则需要
+db.Model(&amp;Product).DropColumn(&quot;created_at&quot;)  创建数据 db.Create(&amp;Product{Code: &quot;L1213&quot;, Price: 1002})  查询数据 // 最后一个符合条件，默认id最后的那个 // Get last record, order by primary key db.Last(&amp;user) //// SELECT * FROM users ORDER BY id DESC LIMIT 1; // 将所有符合条件的返回，这里要传一个结构体数组 // Get all records db.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-gorm/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-viper/" title="Golang Viper" >Golang Viper</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Github
+ Viper is a complete configuration solution for Go applications
+ 这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用
+Reading Config Files  a single Viper instance only supports a single configuration file
+ 一个Viper对象只能对应一个配置文件，是一个一一对应的映射关系
+但是我们在搜索配置文件的时候，可以设置多个路径，如果没有设置路径，则当前程序的目录上寻找，所以我们要设置好路径
+这是Github上的一个例子
+viper.SetConfigName(&quot;config&quot;) // name of config file (without extension) viper.AddConfigPath(&quot;/etc/appname/&quot;) // path to look for the config file in viper.AddConfigPath(&quot;$HOME/.appname&quot;) // call multiple times to add many search paths viper.AddConfigPath(&quot;.&quot;) // optionally look for config in the working directory err := viper.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-viper/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/learn-gitflow/" title="Learn Gitflow" >Learn Gitflow</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                gitflow是一种规范，适合大项目开发
+Github上开源了一个遵循这样规范的一个Git工具gitflow
+初始化一个git git flow init  然后会提醒一系列创建操作，类似
+Which branch should be used for bringing forth production releases? Branch name for production releases: [master] Which branch should be used for integration of the &quot;next release&quot;? Branch name for &quot;next release&quot; development: [develop] How to name your supporting branch prefixes? Feature branches? [feature/] Bugfix branches? [bugfix/] Release branches? [release/] Hotfix branches? [hotfix/] Support branches? [support/] Version tag prefix? [] Hooks and filters directory?……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learn-gitflow/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-mega/" title="Golang Mega" >Golang Mega</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月1日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                不积跬步无以至千里，不积小流无以成江海
+ 本文是博主在学习基础记录的笔记
+2019-04-01到2019-04-04，后面会自己DIY一些内容上去(想做成一个小小的技术论坛)
+先来总体看一下整个项目的目录吧
+. ├── cmd │ └── db_init │ └── main.go ├── config │ └── g.go ├── config.yml ├── controller │ ├── g.go │ ├── home.go │ ├── middle.go │ └── utils.go ├── main.go ├── model │ ├── g.go │ ├── post.go │ ├── user.go │ └── utils.go ├── templates │ ├── 404.html │ ├── _base.html │ ├── content │ │ ├── explore.html │ │ ├── index.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-mega/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network" >Questions Network</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/questions">questions</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
+IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
+A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。
+Session 在mega项目里遇到一个问题
+首先，我访问服务器，服务器将会返回一个Session给我，那么我在这个网页游走都可以用这个Session，没毛病
+现在我Logout，这个时候服务器调用函数将Session的期限变为-1，也就是将Session过期
+这个时候我把之前服务器给我的Session自己存起来，用Postman构造一个请求，并且附上这个Session(其实是通过Cookie传)，这个时候服务器不会因为将Session期限改为-1而不认识这个Session
+所以这个现象表明所谓的清除只是服务器给浏览器发送的Cookie期限设置为-1，然后浏览器看到Cookie已经过期了，因此就不用了
+这样也就验证了，一个用户在服务器上只有一个Session id？
+resp.Body resp, err := http.DefaultClient.Do(req) if err != nil { log.Fatalf(&quot;Do Error %s\n&quot;, err) } defer resp.Body.Close() body, err := ioutil.ReadAll(resp.Body) if err != nil { log.Fatalf(&quot;ReadAll Error %s\n&quot;, err) } // fmt.Println(string(body)) file, err := os.Create(path + keyword + &quot;.html&quot;) if err != nil { log.Fatalf(&quot;Create File Error %s\n&quot;, err) } defer file.Close() _, err = file.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/questions-network/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http" >Golang标准库--http</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
+Package http doc.go 先来看看官方对这个包的一个解释
+这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
+这里还举了一些方法的例子
+// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义" >一些名词的定义</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Definition">Definition</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这里是为了记录一些常用名词的定义，大多参照百度百科和Wiki
+句柄 句柄是一种特殊的智能指针 。当一个应用程序要引用其他系统（如数据库、操作系统）所管理的内存块或对象时，就要使用句柄
+在Golang里面，我们使用函数打开一个文件得到的就是一个文件句柄(打开的文件就是操作系统所管理的内存块)
+在Golang里面，我们使用数据库的驱动连接数据库时，返回的也是一个句柄，这个返回值只是一个对象，并不是一个连接
+Redis  redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set &ndash;有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。
+ TLS  传输层安全性协议（英语：Transport Layer Security，缩写作TLS），及其前身安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。
+安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。 该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。
+ Cookie&amp;Session Cookie Cookie是客户端保持状态
+Cookie的内容主要包括：名字，值，过期时间，路径和域
+若不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，关闭浏览器窗口，cookie就消失。这种生命期为浏览器会话期的cookie被称为会话cookie
+Session Session是服务器端保持状态
+一个用户在服务器上拥有唯一的一个session Id
+如果一个用户不断在请求同一个东西或者行为异常(爬虫？)，则可以对这个用户进行相应操作
+Session能够记录用户的动作，比如淘宝能够记录你购物车有多少东西
+Difference 我们拿淘宝作例子
+我们登录淘宝不用账号密码的时候用的就是Cookie
+但是我们在挑选商品加入购物车，淘宝的服务器也在记录我们的动作信息(比如添加商品)，这个时候用的是Session
+所以我们可以用Session来跟踪用户的动作。
+安全性 Session会比Cookie安全，因为Cookie可能会被欺骗(Cookie在一定程度上就算是你的用户名和密码，被人获取后，别人就可以用你的身份来做事了)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/definition/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism" >Golang Exercism</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
+func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
                         </article>
                     
 
@@ -249,7 +444,19 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/page/16/">16</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/17/">17</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/18/">18</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/page/17/">下一页</a>
+    </li>
     
 </ol>
 
@@ -273,43 +480,43 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -338,7 +545,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
     </li>
     
     <li>
@@ -346,7 +553,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
     </li>
     
     <li>
@@ -374,11 +581,11 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
     </li>
     
     <li>
@@ -387,6 +594,10 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
     </li>
     
 </ul>
@@ -432,6 +643,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
@@ -452,7 +665,13 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
@@ -533,6 +752,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     

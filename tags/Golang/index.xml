@@ -6,10 +6,58 @@
     <description>Recent content in Golang on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 May 2019 18:32:49 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 May 2019 09:59:56 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gopher 2019 Testing Talk</title>
+      <link>https://wushaoqiang.github.io/posts/gopher-2019/</link>
+      <pubDate>Mon, 13 May 2019 09:59:56 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/gopher-2019/</guid>
+      <description>go test -coverprofile cover.out go tool cover -html=cover.out -o cover.html  </description>
+    </item>
+    
+    <item>
+      <title>Golang Module</title>
+      <link>https://wushaoqiang.github.io/posts/golang-module/</link>
+      <pubDate>Fri, 10 May 2019 21:33:39 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-module/</guid>
+      <description>在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
+不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
+不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
+因为go module对版本有着严格的控制,因此如果我们按照同样的方法去github clone一份的话,就没有这么方便了
+爽的地方 可能这个我认为好的地方,也有人认为不好,就是它把所有的package存放在了$GOPATH/pkg/mod里面了,在以前,我基本都是直接go get到src上的,所以整个src的文件夹都是库
+这样一来,可以让src整洁很多吧
+当然还不止一些,如果当上面关系下载包的问题被解决了,也就意味着,下载别人的代码,即使本地不存在它的依赖,也可以一键运行了?
+如何解决下载问题 goproxy &amp;ndash;最简单的方法
+通过他人做好的一个代理,之后对包的请求都会经过这个代理,但是无法下载私密仓库(也就是没有认证功能)
+athens &amp;ndash;复杂点但全面的方法
+这个是微软大力支持的一个开源项目,规模和功能什么的都比上面的多,但是现在还没有v1版本
+对我来说,我更多的还是在github上下载公共仓库,所以,先用第一个吧
+好,万一哪天代理不好用了,那还有一种比较难受的方法
+在go.mod里面用replace替换下载的目的地
+一些简单介绍 要启用module模式,需要
+export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是方便了,但我感觉有也不错)
+如果打开了module模式,那么程序在寻找包的依赖就不再是在GOPATH/src上找了,而是在GOPATH/pkg/mod
+如果想要查看一个程序的所有module依赖
+go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
+go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.</description>
+    </item>
+    
+    <item>
+      <title>Golang Mongodb</title>
+      <link>https://wushaoqiang.github.io/posts/golang-mongodb/</link>
+      <pubDate>Fri, 10 May 2019 21:17:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang-mongodb/</guid>
+      <description>简单收集一些基本操作,作为一个笔记查找
+参考官方文章
+package main import ( &amp;quot;context&amp;quot; &amp;quot;fmt&amp;quot; &amp;quot;log&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/bson&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/mongo&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/mongo/options&amp;quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&amp;quot;mongodb://localhost:27017&amp;quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.</description>
+    </item>
     
     <item>
       <title>Golang Sync Map</title>

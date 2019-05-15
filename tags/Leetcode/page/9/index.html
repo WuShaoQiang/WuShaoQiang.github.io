@@ -78,7 +78,124 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-before-start/">Leetcode 开篇</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-35/">Leetcode 35</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。 你可以假设数组中无重复元素。 示例 1: 输入: [1,3,5,6], 5 输出: 2 示例 2: 输入: [1,3,5,6], 2 输出: 1 示例 3: 输入: [1,3,5,6], 7 输出: 4 示例 4: 输入: [1,3,5,6], 0 输出: 0  我的解答 func searchInsert(nums []int, target int) int { isFound, idx := binarySearch(nums, 0, len(nums)-1, target) if isFound { return idx } if nums[idx] &gt; target { return idx } else { return idx + 1 } } func binarySearch(nums []int, left, right, target int) (found bool, idx int) { if left &lt; right { mid := (left + right) / 2 if nums[mid] == target { return true, mid } else if nums[mid] &gt; target { return binarySearch(nums, left, mid-1, target) } else { return binarySearch(nums, mid+1, right, target) } } else if nums[left] == target { return true, left } else { return false, left } }  因为是个有序的数组，因此可以不用暴力搜索，这里使用比较简单的二分法，找到索引(就算没有相等的，也找到最后一个查找的索引)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-35/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-28/">Leetcode 28</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 实现 strStr() 函数。 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。 示例 1: 输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot; 输出: 2 示例 2: 输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot; 输出: -1 说明: 当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。 对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。  我的解答 func strStr(haystack string, needle string) int { return strings.Index(haystack, needle) }  这里可能有点赖皮，直接调用了标准库，看网上说还有一种KMP的算法，比较难，按笔者现在的进度，先刷60简单题吧，后面再考虑实现。
+当然还有暴力算法，但是我宁愿使用标准库吧
+最优解答 无……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-28/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-27/">Leetcode 27</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。 示例 1: 给定 nums = [3,2,2,3], val = 3, 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,1,2,2,3,0,4,2], val = 2, 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。 注意这五个元素可为任意顺序。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝 int len = removeElement(nums, val); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); }  我的解答 func removeElement(nums []int, val int) int { if len(nums) == 0 { return 0 } i := 0 j := len(nums) - 1 for i &lt; j { if nums[i] == val { nums[i] = nums[j] j-- } else { i++ } } if nums[i] == val { return j } return j+1 }  因为题目说只需要给索引就可以了，因此不需要创建新的内存存放，只需要用一个索引将符合要求的值和不符合要求的值划分开(所以要交换它们位置)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-27/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-26/">Leetcode 26</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); }  我的解答 func removeDuplicates(nums []int) int { if len(nums) == 0 || len(nums) == 1 { return len(nums) } count := 0 existMap := make(map[int]bool) for _, num := range nums { if _, exist := existMap[num]; !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-26/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-21/">Leetcode 21</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4  我的解答 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode { l4 := &amp;ListNode{} l3 := &amp;ListNode{} l4.Next = l3 for l1 != nil || l2 != nil { if l1 == nil { return l2 } if l2 == nil { return l1 } if l1.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-21/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-20/">Leetcode 20</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -93,11 +210,104 @@
                             </div>
                             
                             <div class="post-content">
-                                 不积跬步无以至千里，不积小流无以成江海
- 作为Leetcode的开篇作，在这里希望自己能够坚持每天code一两道题(视难度而定)
-以后博客应该是以这样的方式呈现
-### 题目 ### 我的解答 ### 最优解答 ### 难疑点&amp;核心  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-before-start/">阅读全文</a></p>
+                                题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &quot;()&quot; 输出: true 示例 2: 输入: &quot;()[]{}&quot; 输出: true 示例 3: 输入: &quot;(]&quot; 输出: false 示例 4: 输入: &quot;([)]&quot; 输出: false 示例 5: 输入: &quot;{[]}&quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
+var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: &quot;]&quot;, &quot;{&quot;: &quot;}&quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-20/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-14/">Leetcode 14</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 &quot;&quot;。 示例 1: 输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;] 输出: &quot;fl&quot; 示例 2: 输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;] 输出: &quot;&quot; 解释: 输入不存在公共前缀。 说明: 所有输入只包含小写字母 a-z 。  我的解答 func longestCommonPrefix(strs []string) string { if len(strs) == 0 { return &quot;&quot; } if len(strs) == 1 { return strs[0] } shortestLen := len(strs[0]) for _, str := range strs { if len(str) &lt; shortestLen { shortestLen = len(str) } } var finalStr string for i := 0; i &lt; shortestLen; i++ { tmp := strs[0][i] for j := 1; j &lt; len(strs); j++ { if tmp !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-14/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-13/">Leetcode 13</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &quot;III&quot; 输出: 3 示例 2: 输入: &quot;IV&quot; 输出: 4 示例 3: 输入: &quot;IX&quot; 输出: 9 示例 4: 输入: &quot;LVIII&quot; 输出: 58 解释: L = 50, V= 5, III = 3.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-13/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-9/">Leetcode 9</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-9/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode-1/">Leetcode 1</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+示例:
+给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  我的解答 func twoSum(nums []int, target int) []int { myMap := make(map[int]int) for idx,num := range nums{ myMap[num] = idx } for idx,num := range nums{ tmp := target - num if pos,exist := myMap[tmp]; exist{ if idx &gt; pos{ return []int{pos,idx} } else if idx &lt; pos{ return []int{idx,pos} }else{ continue } } } return nil }  方法是通过map来达到快速查找，而不像暴力法需要每次都遍历整个数组……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-1/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -149,7 +359,15 @@
         <a href="https://wushaoqiang.github.io/tags/Leetcode/page/9/">9</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Leetcode/page/10/">10</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/tags/Leetcode/page/10/">下一页</a>
+    </li>
     
 </ol>
 
@@ -173,43 +391,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-405/" title="Leetcode 405">Leetcode 405</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-404/" title="Leetcode 404">Leetcode 404</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-400/" title="Leetcode 400">Leetcode 400</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-389/" title="Leetcode 389">Leetcode 389</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-387/" title="Leetcode 387">Leetcode 387</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-383/" title="Leetcode 383">Leetcode 383</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-371/" title="Leetcode 371">Leetcode 371</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-367/" title="Leetcode 367">Leetcode 367</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-350/" title="Leetcode 350">Leetcode 350</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-349/" title="Leetcode 349">Leetcode 349</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode-412/" title="Leetcode 412">Leetcode 412</a>
     </li>
     
 </ul>
@@ -238,7 +456,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(42)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
     </li>
     
     <li>
@@ -246,7 +464,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(81)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(92)</a>
     </li>
     
     <li>
@@ -274,11 +492,11 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(3)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
     </li>
     
     <li>
@@ -287,6 +505,10 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
     </li>
     
 </ul>
@@ -332,6 +554,8 @@
     
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
     <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
@@ -352,7 +576,13 @@
     
     <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
@@ -433,6 +663,8 @@
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
     
