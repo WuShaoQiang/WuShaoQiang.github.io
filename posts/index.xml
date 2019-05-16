@@ -6,10 +6,37 @@
     <description>Recent content in Posts on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 May 2019 20:03:31 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 15 May 2019 23:54:02 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 669</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-669/</link>
+      <pubDate>Wed, 15 May 2019 23:54:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-669/</guid>
+      <description>题目  Given a binary search tree and the lowest and highest boundaries as L and R, trim the tree so that all its elements lies in [L, R] (R &amp;gt;= L). You might need to change the root of the tree, so the result should return the new root of the trimmed binary search tree. Example 1: Input: 1 / \ 0 2 L = 1 R = 2 Output: 1 \ 2 Example 2: Input: 3 / \ 0 4 \ 2 / 1 L = 1 R = 3 Output: 3 / 2 / 1  我的解答 // 执行用时 : 32 ms, 在Trim a Binary Search Tree的Go提交中击败了54.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 653</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-653/</link>
+      <pubDate>Wed, 15 May 2019 23:53:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-653/</guid>
+      <description>题目 Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target. Example 1: Input: 5 / \ 3 6 / \ \ 2 4 7 Target = 9 Output: True Example 2: Input: 5 / \ 3 6 / \ \ 2 4 7 Target = 28 Output: False  我的解答 // 第一思路,换成数组,利用双边夹方法 func findTarget(root *TreeNode, k int) bool { if root == nil { return false } res := make([]int, 0) inOrder(root, &amp;amp;res) // 确定首尾索引 head := 0 tail := len(res) - 1 for head &amp;lt; tail { sum := res[head] + res[tail] if sum == k { return true } if sum &amp;gt; k { tail-- } else { head++ } } return false } // 执行用时 : 40 ms, 在Two Sum IV - Input is a BST的Go提交中击败了98.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 637</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-637/</link>
+      <pubDate>Wed, 15 May 2019 23:53:48 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-637/</guid>
+      <description>题目 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组. 示例 1: 输入: 3 / \ 9 20 / \ 15 7 输出: [3, 14.5, 11] 解释: 第0层的平均值是 3, 第1层是 14.5, 第2层是 11. 因此返回 [3, 14.5, 11]. 注意： 节点值的范围在32位有符号整数范围内。  我的解答 // 执行用时 : 28 ms, 在Average of Levels in Binary Tree的Go提交中击败了97.44% 的用户 // 内存消耗 : 8.1 MB, 在Average of Levels in Binary Tree的Go提交中击败了9.09% 的用户 func averageOfLevels(root *TreeNode) []float64 { if root == nil { return nil } res := make([]float64, 0) // 将第一个点放入队列 quene := []*TreeNode{root} for { // 确定这一次遍历的个数 l := len(quene) sum := 0 // 因为下面有判断quene长度,因此这里不可能为0,所以不用怕除数为0 count := l // 当遍历个数用完的时候表明这一层遍历完了,应当退出循环重新确定下一层 for l &amp;gt; 0 { tmp := quene[l-1] sum += tmp.</description>
+    </item>
     
     <item>
       <title>Leetcode 617</title>
@@ -22,40 +49,40 @@
     
     <item>
       <title>Leetcode 606</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-606/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-606/</link>
       <pubDate>Wed, 15 May 2019 10:41:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-606/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-606/</guid>
       <description>题目 映射关系的空括号对。 示例 1: 输入: 二叉树: [1,2,3,4] 1 / \ 2 3 / 4 输出: &amp;quot;1(2(4))(3)&amp;quot; 解释: 原本将是“1(2(4)())(3())”， 在你省略所有不必要的空括号对之后， 它将是“1(2(4))(3)”。 示例 2: 输入: 二叉树: [1,2,3,null,4] 1 / \ 2 3 \ 4 输出: &amp;quot;1(2()(4))(3)&amp;quot; 解释: 和第一个示例相似， 除了我们不能省略第一个对括号来中断输入和输出之间的一对一映射关系。  我的解答 一个先序遍历的题目(题目都告诉你了),只是加上了一些感觉很难的括号,其实很简单,先看代码
 // 执行用时 : 40 ms, 在Construct String from Binary Tree的Go提交中击败了18.52% 的用户 // 内存消耗 : 8.8 MB, 在Construct String from Binary Tree的Go提交中击败了26.67% 的用户 func tree2str(t *TreeNode) string { if t == nil{ return &amp;quot;&amp;quot; } return createStr(t) } func createStr(t *TreeNode) string { if t.</description>
     </item>
     
     <item>
       <title>Leetcode 572</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-572/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-572/</link>
       <pubDate>Wed, 15 May 2019 10:41:14 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-572/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-572/</guid>
       <description>题目 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。 示例 1: 给定的树 s: 3 / \ 4 5 / \ 1 2 给定的树 t： 4 / \ 1 2 返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2: 给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2 返回 false。  我的解答 第一个实现
 // 执行用时 : 40 ms, 在Subtree of Another Tree的Go提交中击败了39.</description>
     </item>
     
     <item>
       <title>Leetcode 563</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-563/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-563/</link>
       <pubDate>Wed, 15 May 2019 10:41:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-563/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-563/</guid>
       <description>题目 给定一个二叉树，计算整个树的坡度。 一个树的节点的坡度定义即为，该节点左子树的结点之和和右子树结点之和的差的绝对值。空结点的的坡度是0。 整个树的坡度就是其所有节点的坡度之和。 示例: 输入: 1 / \ 2 3 输出: 1 解释: 结点的坡度 2 : 0 结点的坡度 3 : 0 结点的坡度 1 : |2-3| = 1 树的坡度 : 0 + 0 + 1 = 1 注意: 任何子树的结点的和不会超过32位整数的范围。 坡度的值不会超过32位整数的范围。  我的解答 这道题和543题是基本一样的,只是将直径(与结点数值无关)转换为了与数值有关而已
 func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;amp;sum) return sum } func findWeight(root *TreeNode, sum *int) int { if root == nil { return 0 } left := findWeight(root.</description>
     </item>
     
     <item>
       <title>Leetcode 543</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-543/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-543/</link>
       <pubDate>Wed, 15 May 2019 10:41:09 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-543/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-543/</guid>
       <description>题目 给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。 示例 : 给定二叉树 1 / \ 2 3 / \ 4 5 返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。 注意：两结点之间的路径长度是以它们之间边的数目表示。  我的解答 这里要注意了,不一定是要经过根节点才会有直径最大
 第一种方法
 // 执行用时 : 28 ms, 在Diameter of Binary Tree的Go提交中击败了11.54% 的用户 // 内存消耗 : 4.5 MB, 在Diameter of Binary Tree的Go提交中击败了95.83% 的用户 func diameterOfBinaryTree(root *TreeNode) int { if root == nil { return 0 } var max int iteration(root, &amp;amp;max) return max } func iteration(root *TreeNode, max *int) { if root !</description>
@@ -63,10 +90,10 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;amp;sum) r
     
     <item>
       <title>Leetcode 538</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-538/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-538/</link>
       <pubDate>Wed, 15 May 2019 10:41:03 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-538/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-538/</guid>
       <description>题目 给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。 例如： 输入: 二叉搜索树: 5 / \ 2 13 输出: 转换为累加树: 18 / \ 20 13  我的解答 这个题主要在于发现它的规律,节点所有比自身大的节点到底有哪些
 用树的思想去做会比较麻烦
 // 执行用时 : 540 ms, 在Convert BST to Greater Tree的Go提交中击败了35.56% 的用户 // 内存消耗 : 41.9 MB, 在Convert BST to Greater Tree的Go提交中击败了100.00% 的用户 func convertBST(root *TreeNode) *TreeNode { if root == nil { return nil } orderByIn(root, nil) return root } func orderByIn(root *TreeNode, lastNode *TreeNode) { if root == nil { return } // 表明是有转折点的 // 有转折点的意思是这个节点在某个祖先节点的左子树上(所以要加上这个祖先节点) if lastNode !</description>
@@ -74,57 +101,57 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;amp;sum) r
     
     <item>
       <title>Leetcode 530</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-530/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-530/</link>
       <pubDate>Wed, 15 May 2019 10:41:00 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-530/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-530/</guid>
       <description>题目 给定一个所有节点为非负值的二叉搜索树，求树中任意两节点的差的绝对值的最小值。 示例 : 输入: 1 \ 3 / 2 输出: 1 解释: 最小绝对差为1，其中 2 和 1 的差的绝对值为 1（或者 2 和 3）。 注意: 树中至少有2个节点。  我的解答 这题在做的时候犯困了,把最小值看成最大值,懵了很久
 // 执行用时 : 20 ms, 在Minimum Absolute Difference in BST的Go提交中击败了100.00% 的用户 // 内存消耗 : 6.4 MB, 在Minimum Absolute Difference in BST的Go提交中击败了85.71% 的用户 func getMinimumDifference(root *TreeNode) int { if root == nil { return 0 } res := make([]int, 0) orderByIn(root, &amp;amp;res) // fmt.</description>
     </item>
     
     <item>
       <title>Leetcode 501</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-501/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-501/</link>
       <pubDate>Wed, 15 May 2019 10:40:57 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-501/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-501/</guid>
       <description>题目 给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。 假定 BST 有如下定义： 结点左子树中所含结点的值小于等于当前结点的值 结点右子树中所含结点的值大于等于当前结点的值 左子树和右子树都是二叉搜索树 例如： 给定 BST [1,null,2,2], 1 \ 2 / 2 返回[2]. 提示：如果众数超过1个，不需考虑输出顺序 进阶：你可以不使用额外的空间吗？（假设由递归产生的隐式调用栈的开销不被计算在内）  我的解答 // 执行用时 : 24 ms, 在Find Mode in Binary Search Tree的Go提交中击败了71.43% 的用户 // 内存消耗 : 6.5 MB, 在Find Mode in Binary Search Tree的Go提交中击败了23.53% 的用户 func findMode(root *TreeNode) []int { if root == nil { return nil } m := make(map[int]int) iteration(root, m) res := make(map[int][]int) max := 0 for k, v := range m { if max &amp;lt;= v { max = v res[v] = append(res[v], k) } } return res[max] } func iteration(root *TreeNode, m map[int]int) { if root !</description>
     </item>
     
     <item>
       <title>Leetcode 437</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-437/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-437/</link>
       <pubDate>Wed, 15 May 2019 10:40:51 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-437/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-437/</guid>
       <description>题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。 示例： root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8 10 / \ 5 -3 / \ \ 3 2 11 / \ \ 3 -2 1 返回 3。和等于 8 的路径有: 1. 5 -&amp;gt; 3 2. 5 -&amp;gt; 2 -&amp;gt; 1 3. -3 -&amp;gt; 11  我的解答 // 执行用时 : 20 ms, 在Path Sum III的Go提交中击败了87.72% 的用户 // 内存消耗 : 4.6 MB, 在Path Sum III的Go提交中击败了47.06% 的用户 func pathSum(root *TreeNode, sum int) int { if root == nil { return 0 } var count int iteration(root, sum, &amp;amp;count) return count } func iteration(root *TreeNode, target int, count *int) { // 每一个不为nil的节点都作为开始节点 if root !</description>
     </item>
     
     <item>
       <title>Leetcode 414</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-414/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-414/</link>
       <pubDate>Wed, 15 May 2019 10:40:48 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-414/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-414/</guid>
       <description>题目 给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。 示例 1: 输入: [3, 2, 1] 输出: 1 解释: 第三大的数是 1. 示例 2: 输入: [1, 2] 输出: 2 解释: 第三大的数不存在, 所以返回最大的数 2 . 示例 3: 输入: [2, 2, 3, 1] 输出: 1 解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。 存在两个值为2的数，它们都排第二。  我的解答 用切片记录
 // 执行用时 : 16 ms, 在Third Maximum Number的Go提交中击败了27.08% 的用户 // 内存消耗 : 4 MB, 在Third Maximum Number的Go提交中击败了23.33% 的用户 func thirdMax(nums []int) int { max := make([]int, 3) for i := 0; i &amp;lt; 3; i++ { max[i] = math.</description>
     </item>
     
     <item>
       <title>Leetcode 412</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-412/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-412/</link>
       <pubDate>Wed, 15 May 2019 10:40:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-412/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-412/</guid>
       <description>题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &amp;quot;1&amp;quot;, &amp;quot;2&amp;quot;, &amp;quot;Fizz&amp;quot;, &amp;quot;4&amp;quot;, &amp;quot;Buzz&amp;quot;, &amp;quot;Fizz&amp;quot;, &amp;quot;7&amp;quot;, &amp;quot;8&amp;quot;, &amp;quot;Fizz&amp;quot;, &amp;quot;Buzz&amp;quot;, &amp;quot;11&amp;quot;, &amp;quot;Fizz&amp;quot;, &amp;quot;13&amp;quot;, &amp;quot;14&amp;quot;, &amp;quot;FizzBuzz&amp;quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &amp;lt; n; i++ { if (i+1)%15 == 0 { res[i] = &amp;quot;FizzBuzz&amp;quot; } else if (i+1)%5 == 0 { res[i] = &amp;quot;Buzz&amp;quot; } else if (i+1)%3 == 0 { res[i] = &amp;quot;Fizz&amp;quot; } else { res[i] = strconv.</description>
     </item>
     
     <item>
       <title>Leetcode 409</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-409/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-409/</link>
       <pubDate>Wed, 15 May 2019 10:40:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-409/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-409/</guid>
       <description>题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &amp;quot;Aa&amp;quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &amp;quot;abccccdd&amp;quot; Output: 7 Explanation: One longest palindrome that can be built is &amp;quot;dccaccd&amp;quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.</description>
     </item>
     
@@ -362,38 +389,38 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
     
     <item>
       <title>Leetcode 405</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-405/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-405/</link>
       <pubDate>Tue, 07 May 2019 21:25:48 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-405/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-405/</guid>
       <description>题目  Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used. Note: All letters in hexadecimal (a-f) must be in lowercase. The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character &#39;0&#39;; otherwise, the first character in the hexadecimal string will not be the zero character. The given number is guaranteed to fit within the range of a 32-bit signed integer.</description>
     </item>
     
     <item>
       <title>Leetcode 404</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-404/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-404/</link>
       <pubDate>Tue, 07 May 2019 21:25:46 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-404/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-404/</guid>
       <description>题目 Find the sum of all left leaves in a given binary tree. Example: 3 / \ 9 20 / \ 15 7 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.  我的解答 这个题参考了一下别人的思路写出来
 func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } search(root, false, &amp;amp;sum) return sum } func search(root *TreeNode, flag bool, sum *int) { if root == nil { return } if flag &amp;amp;&amp;amp; root.</description>
     </item>
     
     <item>
       <title>Leetcode 400</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-400/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-400/</link>
       <pubDate>Tue, 07 May 2019 21:25:44 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-400/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-400/</guid>
       <description>题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &amp;lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .</description>
     </item>
     
     <item>
       <title>Leetcode 389</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-389/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-389/</link>
       <pubDate>Tue, 07 May 2019 21:25:40 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-389/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-389/</guid>
       <description>题目  Given two strings s and t which consist of only lowercase letters. String t is generated by random shuffling string s and then add one more letter at a random position. Find the letter that was added in t. Example: Input: s = &amp;quot;abcd&amp;quot; t = &amp;quot;abcde&amp;quot; Output: e Explanation: &#39;e&#39; is the letter that was added.  我的解答 这道题我用了三种方法
  全部统计,因为只会有一个字符是奇数,所以那个就是新增
  用t-byte的总和减去s-byte的总和
@@ -403,28 +430,28 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <item>
       <title>Leetcode 387</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-387/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-387/</link>
       <pubDate>Tue, 07 May 2019 21:25:34 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-387/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-387/</guid>
       <description>题目  Given a string, find the first non-repeating character in it and return it&#39;s index. If it doesn&#39;t exist, return -1. Examples: s = &amp;quot;leetcode&amp;quot; return 0. s = &amp;quot;loveleetcode&amp;quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-&#39;a&#39;]++ } for idx, b := range s { if m[b-&#39;a&#39;] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引</description>
     </item>
     
     <item>
       <title>Leetcode 383</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-383/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-383/</link>
       <pubDate>Tue, 07 May 2019 21:25:30 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-383/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-383/</guid>
       <description>题目  Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note. Note: You may assume that both strings contain only lowercase letters. canConstruct(&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;) -&amp;gt; false canConstruct(&amp;quot;aa&amp;quot;, &amp;quot;ab&amp;quot;) -&amp;gt; false canConstruct(&amp;quot;aa&amp;quot;, &amp;quot;aab&amp;quot;) -&amp;gt; true  我的解答 题目的意思是,右边的字符串能否凑成左边的字符串(每个字符只能用一次)</description>
     </item>
     
     <item>
       <title>Leetcode 371</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-371/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-371/</link>
       <pubDate>Tue, 07 May 2019 21:25:19 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-371/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-371/</guid>
       <description>题目 Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. Example 1: Input: a = 1, b = 2 Output: 3 Example 2: Input: a = -2, b = 3 Output: 1  我的解答 这个题也是考验对二进制的熟悉
 我们来验算一下
 以下都是二进制 a = 100 b = 111 结果应该等于 1011 add = 100^111 = 011 carry = (100&amp;amp;111)&amp;lt;&amp;lt;1 =1000 sum = add^carry  // 用&amp;amp;来得到是否有进位，并且要右移1位 // 用^来得到不考虑进位的相加 // 然后进位和不考虑进位的结果再次执行同样的操作，直到没有进位 func getSum(a int, b int) int { res := 0 for { carry := (a &amp;amp; b) &amp;lt;&amp;lt; 1 sum := a ^ b if carry&amp;amp;sum == 0 { res = carry ^ sum break } a = carry b = sum } return res }  最优解答 无</description>
@@ -432,58 +459,58 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <item>
       <title>Leetcode 367</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-367/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-367/</link>
       <pubDate>Tue, 07 May 2019 21:25:16 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-367/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-367/</guid>
       <description>题目 Given a positive integer num, write a function which returns True if num is a perfect square else False. Note: Do not use any built-in library function such as sqrt. Example 1: Input: 16 Output: true Example 2: Input: 14 Output: false  我的解答 根据数学公式 1+3+&amp;hellip;+(2n-1) = n**2
 func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for i := 1; i &amp;lt;= num/2 &amp;amp;&amp;amp; total &amp;lt; num; i++ { total += 2*i - 1 } return total == num }  最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 350</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-350/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-350/</link>
       <pubDate>Tue, 07 May 2019 21:25:10 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-350/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-350/</guid>
       <description>题目 Given two arrays, write a function to compute their intersection. Example 1: Input: nums1 = [1,2,2,1], nums2 = [2,2] Output: [2,2] Example 2: Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4] Output: [4,9] Note: Each element in the result should appear as many times as it shows in both arrays. The result can be in any order.  我的解答 func intersect(nums1 []int, nums2 []int) []int { res := make([]int, 0) m := make(map[int]int) for _, num1 := range nums1 { m[num1]++ } for _, num2 := range nums2 { if count, exist := m[num2]; exist &amp;amp;&amp;amp; count &amp;gt; 0 { res = append(res, num2) m[num2]-- } } return res }  和上题区别在于,这里有数量的区别,所以要稍微改动就可以了</description>
     </item>
     
     <item>
       <title>Leetcode 349</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-349/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-349/</link>
       <pubDate>Tue, 07 May 2019 21:25:05 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-349/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-349/</guid>
       <description>题目 Given two arrays, write a function to compute their intersection. Example 1: Input: nums1 = [1,2,2,1], nums2 = [2,2] Output: [2] Example 2: Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4] Output: [9,4] Note: Each element in the result must be unique. The result can be in any order.  我的解答 func intersection(nums1 []int, nums2 []int) []int { res := make([]int, 0) m := make(map[int]bool) for _, num1 := range nums1 { m[num1] = true } for _, num2 := range nums2 { if use, exist := m[num2]; exist &amp;amp;&amp;amp; use { res = append(res, num2) m[num2] = false } } return res }  要注意这里只显示一次,所以要通过exist和use共同判断</description>
     </item>
     
     <item>
       <title>Leetcode 345</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-345/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-345/</link>
       <pubDate>Tue, 07 May 2019 21:25:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-345/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-345/</guid>
       <description>题目 Write a function that takes a string as input and reverse only the vowels of a string. Example 1: Input: &amp;quot;hello&amp;quot; Output: &amp;quot;holle&amp;quot; Example 2: Input: &amp;quot;leetcode&amp;quot; Output: &amp;quot;leotcede&amp;quot; Note: The vowels does not include the letter &amp;quot;y&amp;quot;.  我的解答 这个题目意思是,两个元音字母交换
 func reverseVowels(s string) string { b := []byte(s) // m := map[byte]bool{ // &#39;a&#39;: true, // &#39;e&#39;: true, // &#39;i&#39;: true, // &#39;o&#39;: true, // &#39;u&#39;: true, // &#39;A&#39;: true, // &#39;E&#39;: true, // &#39;I&#39;: true, // &#39;O&#39;: true, // &#39;U&#39;: true, // } i := 0 j := len(b) - 1 for { for ; i &amp;lt; len(b); i++ { if isVowel(b[i]) { break } } for ; j &amp;gt;= 0; j-- { if isVowel(b[j]) { break } } if i &amp;gt;= j { break } b[i], b[j] = b[j], b[i] i++ j-- } return string(b) } func isVowel(b byte) bool { return b == &#39;a&#39; || b == &#39;e&#39; || b == &#39;i&#39; || b == &#39;o&#39; || b == &#39;u&#39; || b == &#39;A&#39; || b == &#39;E&#39; || b == &#39;I&#39; || b == &#39;O&#39; || b == &#39;U&#39; }  这个有点像快速排序那样,这里用函数好像会比较快</description>
     </item>
     
     <item>
       <title>Leetcode 344</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-344/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-344/</link>
       <pubDate>Tue, 07 May 2019 21:25:00 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-344/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-344/</guid>
       <description>题目 Write a function that reverses a string. The input string is given as an array of characters char[]. Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory. You may assume all the characters consist of printable ascii characters. Example 1: Input: [&amp;quot;h&amp;quot;,&amp;quot;e&amp;quot;,&amp;quot;l&amp;quot;,&amp;quot;l&amp;quot;,&amp;quot;o&amp;quot;] Output: [&amp;quot;o&amp;quot;,&amp;quot;l&amp;quot;,&amp;quot;l&amp;quot;,&amp;quot;e&amp;quot;,&amp;quot;h&amp;quot;] Example 2: Input: [&amp;quot;H&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;n&amp;quot;,&amp;quot;n&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;h&amp;quot;] Output: [&amp;quot;h&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;n&amp;quot;,&amp;quot;n&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;H&amp;quot;]  我的解答 这个好像就没什么难度了..
 func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j := 0, len(s)-1; i &amp;lt; j; i, j = i+1, j-1 { tmp = s[i] s[i] = s[j] s[j] = tmp } }  最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 342</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-342/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-342/</link>
       <pubDate>Tue, 07 May 2019 21:24:58 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-342/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-342/</guid>
       <description>题目 Given an integer (signed 32 bits), write a function to check whether it is a power of 4. Example 1: Input: 16 Output: true Example 2: Input: 5 Output: false Follow up: Could you solve it without loops/recursion?  我的解答 func isPowerOfFour(num int) bool { return num &amp;gt; 0 &amp;amp;&amp;amp; 6148914691236517205&amp;amp;num == num &amp;amp;&amp;amp; num&amp;amp;(num-1) == 0 }   num要是整数
  这一串数字是64位有符号int010101.....01,因为4的倍数在二进制中是隔开的10000(16),100(4),所以这个是验证num偶数bit是否都为0
  验证了偶数bit都为0后,要验证是否只有一个位置1,其实就是验证是否是2的幂
@@ -492,77 +519,77 @@ func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j :=
     
     <item>
       <title>Leetcode 326</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-326/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-326/</link>
       <pubDate>Tue, 07 May 2019 21:24:51 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-326/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-326/</guid>
       <description>题目 Given an integer, write a function to determine if it is a power of three. Example 1: Input: 27 Output: true Example 2: Input: 0 Output: false Example 3: Input: 9 Output: true Example 4: Input: 45 Output: false Follow up: Could you do it without using any loop / recursion?  我的解答 一般思路,不断整除3,但题目提示了,这道题不用循环也可以做出来
 func isPowerOfThree(n int) bool { return n &amp;gt; 0 &amp;amp;&amp;amp; 4052555153018976267%n == 0 }  这个一长串的数字是我通过程序计算出来的64位有符号int类型中最大的3的幂,也就是说,只要是3的幂,都肯定会被这个最大的数给整除,因此表示为余数为0</description>
     </item>
     
     <item>
       <title>Leetcode 303</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-303/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-303/</link>
       <pubDate>Tue, 07 May 2019 21:24:46 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-303/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-303/</guid>
       <description>题目 Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive. Example: Given nums = [-2, 0, 3, -5, 2, -1] sumRange(0, 2) -&amp;gt; 1 sumRange(2, 5) -&amp;gt; -1 sumRange(0, 5) -&amp;gt; -3 Note: You may assume that the array does not change. There are many calls to sumRange function.  我的解答 题目重点在于
 You may assume that the array does not change.</description>
     </item>
     
     <item>
       <title>Leetcode 292</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-292/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-292/</link>
       <pubDate>Tue, 07 May 2019 21:24:43 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-292/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-292/</guid>
       <description>题目 You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones. Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.</description>
     </item>
     
     <item>
       <title>Leetcode 290</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-290/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-290/</link>
       <pubDate>Tue, 07 May 2019 21:24:38 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-290/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-290/</guid>
       <description>题目 Given a pattern and a string str, find if str follows the same pattern. Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str. Example 1: Input: pattern = &amp;quot;abba&amp;quot;, str = &amp;quot;dog cat cat dog&amp;quot; Output: true Example 2: Input:pattern = &amp;quot;abba&amp;quot;, str = &amp;quot;dog cat cat fish&amp;quot; Output: false Example 3: Input: pattern = &amp;quot;aaaa&amp;quot;, str = &amp;quot;dog cat cat dog&amp;quot; Output: false Example 4: Input: pattern = &amp;quot;abba&amp;quot;, str = &amp;quot;dog dog dog dog&amp;quot; Output: false Notes: You may assume pattern contains only lowercase letters, and str contains lowercase letters that may be separated by a single space.</description>
     </item>
     
     <item>
       <title>Leetcode 283</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-283/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-283/</link>
       <pubDate>Tue, 07 May 2019 21:24:35 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-283/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-283/</guid>
       <description>题目 Given an array nums, write a function to move all 0&#39;s to the end of it while maintaining the relative order of the non-zero elements. Example: Input: [0,1,0,3,12] Output: [1,3,12,0,0] Note: You must do this in-place without making a copy of the array. Minimize the total number of operations.  我的解答 同样,暴力法也可以做,只是速度非常慢,不建议
 // 将非零的直接往前移，剩下的全部写0 func moveZeroes(nums []int) { i := 0 for j := 0; j &amp;lt; len(nums); j++ { if nums[j] == 0 { continue } nums[i] = nums[j] i++ } // for ; i &amp;lt; len(nums); i++ { // nums[i] = 0 // } copy(nums[i:], make([]int, len(nums)-i)) }  因为我们只需要把非零的保留就已经不会缺失信息了,因此0是无关紧要的</description>
     </item>
     
     <item>
       <title>Leetcode 268</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-268/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-268/</link>
       <pubDate>Tue, 07 May 2019 21:24:29 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-268/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-268/</guid>
       <description>题目 Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. Example 1: Input: [3,0,1] Output: 2 Example 2: Input: [9,6,4,2,3,5,7,0,1] Output: 8 Note: Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?  我的解答 这个之前在一个博客上见到过,所以思路很清晰
 func missingNumber(nums []int) int { total := 0 sum := 0 for i := 0; i &amp;lt; len(nums); i++ { total += i sum += nums[i] } total += len(nums) return total - sum }  直接加起来再相减,得到的数字就是缺少的数字</description>
     </item>
     
     <item>
       <title>Leetcode 263</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-263/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-263/</link>
       <pubDate>Tue, 07 May 2019 21:24:26 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-263/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-263/</guid>
       <description>题目 Write a program to check whether a given number is an ugly number. Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. Example 1: Input: 6 Output: true Explanation: 6 = 2 × 3 Example 2: Input: 8 Output: true Explanation: 8 = 2 × 2 × 2 Example 3: Input: 14 Output: false Explanation: 14 is not ugly since it includes another prime factor 7.</description>
     </item>
     
     <item>
       <title>Leetcode 258</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-258/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-258/</link>
       <pubDate>Tue, 07 May 2019 21:24:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-258/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-258/</guid>
       <description>题目 Given a non-negative integer num, repeatedly add all its digits until the result has only one digit. Example: Input: 38 Output: 2 Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it. Follow up: Could you do it without any loop/recursion in O(1) runtime?  我的解答 这道题一开始我是用迭代去写的,运行效率太低,但是思路比较简单,读者可以自己尝试实现
 这里主要讲一下另一种快速的实现
 func addDigits(num int) int { if num &amp;lt;= 9 { return num } if num%9 == 0 { return 9 } return num % 9 }  理论依据是 f(10*x+y) = f(9x+x+y) ?</description>
@@ -570,10 +597,10 @@ func addDigits(num int) int { if num &amp;lt;= 9 { return num } if num%9 == 0 { 
     
     <item>
       <title>Leetcode 257</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-257/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-257/</link>
       <pubDate>Tue, 07 May 2019 21:24:06 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-257/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-257/</guid>
       <description>题目 Given a binary tree, return all root-to-leaf paths. Note: A leaf is a node with no children. Example: Input: 1 / \ 2 3 \ 5 Output: [&amp;quot;1-&amp;gt;2-&amp;gt;5&amp;quot;, &amp;quot;1-&amp;gt;3&amp;quot;] Explanation: All root-to-leaf paths are: 1-&amp;gt;2-&amp;gt;5, 1-&amp;gt;3  我的解答 /** * Definition for a binary tree node. * type TreeNode struct { * Val int * Left *TreeNode * Right *TreeNode * } */ func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &amp;quot;&amp;quot;, &amp;amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.</description>
     </item>
     
@@ -665,177 +692,177 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     
     <item>
       <title>Leetcode 242</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-242/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-242/</link>
       <pubDate>Sat, 04 May 2019 20:58:20 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-242/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-242/</guid>
       <description>题目 Given two strings s and t , write a function to determine if t is an anagram of s. Example 1: Input: s = &amp;quot;anagram&amp;quot;, t = &amp;quot;nagaram&amp;quot; Output: true Example 2: Input: s = &amp;quot;rat&amp;quot;, t = &amp;quot;car&amp;quot; Output: false Note: You may assume the string contains only lowercase alphabets. Follow up: What if the inputs contain unicode characters? How would you adapt your solution to such case?</description>
     </item>
     
     <item>
       <title>Leetcode 237</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-237/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-237/</link>
       <pubDate>Sat, 04 May 2019 20:58:13 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-237/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-237/</guid>
       <description>题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&amp;gt; 1 -&amp;gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&amp;gt; 5 -&amp;gt; 9 after calling your function.</description>
     </item>
     
     <item>
       <title>Leetcode 235</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-235/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-235/</link>
       <pubDate>Sat, 04 May 2019 20:58:10 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-235/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-235/</guid>
       <description>题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.</description>
     </item>
     
     <item>
       <title>Leetcode 234</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-234/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-234/</link>
       <pubDate>Sat, 04 May 2019 20:58:07 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-234/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-234/</guid>
       <description>题目 Given a singly linked list, determine if it is a palindrome. Example 1: Input: 1-&amp;gt;2 Output: false Example 2: Input: 1-&amp;gt;2-&amp;gt;2-&amp;gt;1 Output: true Follow up: Could you do it in O(n) time and O(1) space?  我的解答 如果不限定空间复杂度
 func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &amp;lt; l/2; i++ { if v[i] !</description>
     </item>
     
     <item>
       <title>Leetcode 231</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-231/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-231/</link>
       <pubDate>Sat, 04 May 2019 20:58:03 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-231/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-231/</guid>
       <description>题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp;amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
 最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 226</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-226/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-226/</link>
       <pubDate>Sat, 04 May 2019 20:57:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-226/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-226/</guid>
       <description>题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.</description>
     </item>
     
     <item>
       <title>Leetcode 219</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-219/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-219/</link>
       <pubDate>Sat, 04 May 2019 20:57:54 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-219/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-219/</guid>
       <description>题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢</description>
     </item>
     
     <item>
       <title>Leetcode 217</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-217/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-217/</link>
       <pubDate>Sat, 04 May 2019 20:57:49 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-217/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-217/</guid>
       <description>题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升</description>
     </item>
     
     <item>
       <title>Leetcode 206</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-206/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-206/</link>
       <pubDate>Sat, 04 May 2019 20:57:43 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-206/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-206/</guid>
       <description>题目 Reverse a singly linked list. Example: Input: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;NULL Output: 5-&amp;gt;4-&amp;gt;3-&amp;gt;2-&amp;gt;1-&amp;gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
 func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.</description>
     </item>
     
     <item>
       <title>Leetcode 205</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-205/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-205/</link>
       <pubDate>Sat, 04 May 2019 20:57:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-205/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-205/</guid>
       <description>题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &amp;quot;egg&amp;quot;, t = &amp;quot;add&amp;quot; Output: true Example 2: Input: s = &amp;quot;foo&amp;quot;, t = &amp;quot;bar&amp;quot; Output: false Example 3: Input: s = &amp;quot;paper&amp;quot;, t = &amp;quot;title&amp;quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &amp;lt; len(s); i++ { if b, exist := letterMap[s[i]]; !</description>
     </item>
     
     <item>
       <title>Leetcode 204</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-204/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-204/</link>
       <pubDate>Sat, 04 May 2019 20:57:35 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-204/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-204/</guid>
       <description>题目 Count the number of prime numbers less than a non-negative number, n. Example: Input: 10 Output: 4 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.  我的解答 这题跟着评论区的思路做出来的&amp;ndash;厄拉多塞筛法
 func countPrimes(n int) int { // 简单判断 if n &amp;lt; 3 { return 0 } // 标志哪些0～n-1已经被访问过 flag := make([]bool, n) //因为0,1不是素数，先减去 total := n - 2 // 只需要找n的根号前的素数 for i := 2; i*i &amp;lt; n; i++ { // 访问过 if flag[i] { continue } // 没访问过，这个素数i的所有倍数(在n内)都不是素数，去除 for j := 2; i*j &amp;lt; n; j++ { if !</description>
     </item>
     
     <item>
       <title>Leetcode 203</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-203/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-203/</link>
       <pubDate>Sat, 04 May 2019 20:57:33 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-203/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-203/</guid>
       <description>题目 Remove all elements from a linked list of integers that have value val. Example: Input: 1-&amp;gt;2-&amp;gt;6-&amp;gt;3-&amp;gt;4-&amp;gt;5-&amp;gt;6, val = 6 Output: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5  我的解答 func removeElements(head *ListNode, val int) *ListNode { for head != nil &amp;amp;&amp;amp; head.Val == val { head = head.Next } if head == nil { return head } tmp := head for tmp.Next != nil { if tmp.Next.Val == val { tmp.Next = tmp.Next.Next } else { tmp = tmp.</description>
     </item>
     
     <item>
       <title>Leetcode 202</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-202/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-202/</link>
       <pubDate>Sat, 04 May 2019 20:57:29 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-202/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-202/</guid>
       <description>题目 Write an algorithm to determine if a number is &amp;quot;happy&amp;quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.</description>
     </item>
     
     <item>
       <title>Leetcode 198</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-198/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-198/</link>
       <pubDate>Tue, 30 Apr 2019 22:38:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-198/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-198/</guid>
       <description>题目 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night. Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.</description>
     </item>
     
     <item>
       <title>Leetcode 191</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-191/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-191/</link>
       <pubDate>Tue, 30 Apr 2019 22:38:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-191/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-191/</guid>
       <description>题目 Example 1: Input: 00000000000000000000000000001011 Output: 3 Explanation: The input binary string 00000000000000000000000000001011 has a total of three &#39;1&#39; bits. Example 2: Input: 00000000000000000000000010000000 Output: 1 Explanation: The input binary string 00000000000000000000000010000000 has a total of one &#39;1&#39; bit. Example 3: Input: 11111111111111111111111111111101 Output: 31 Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one &#39;1&#39; bits. Note: Note that in some languages such as Java, there is no unsigned integer type.</description>
     </item>
     
     <item>
       <title>Leetcode 190</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-190/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-190/</link>
       <pubDate>Tue, 30 Apr 2019 22:38:37 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-190/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-190/</guid>
       <description>题目 Reverse bits of a given 32 bits unsigned integer. Example 1: Input: 00000010100101000001111010011100 Output: 00111001011110000010100101000000 Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000. Example 2: Input: 11111111111111111111111111111101 Output: 10111111111111111111111111111111 Explanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10101111110010110010011101101001. Note: Note that in some languages such as Java, there is no unsigned integer type.</description>
     </item>
     
     <item>
       <title>Leetcode 189</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-189/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-189/</link>
       <pubDate>Tue, 30 Apr 2019 22:38:28 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-189/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-189/</guid>
       <description>题目 Given an array, rotate the array to the right by k steps, where k is non-negative. Example 1: Input: [1,2,3,4,5,6,7] and k = 3 Output: [5,6,7,1,2,3,4] Explanation: rotate 1 steps to the right: [7,1,2,3,4,5,6] rotate 2 steps to the right: [6,7,1,2,3,4,5] rotate 3 steps to the right: [5,6,7,1,2,3,4] Example 2: Input: [-1,-100,3,99] and k = 2 Output: [3,99,-1,-100] Explanation: rotate 1 steps to the right: [99,-1,-100,3] rotate 2 steps to the right: [3,99,-1,-100] Note: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.</description>
     </item>
     
     <item>
       <title>Leetcode 172</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-172/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-172/</link>
       <pubDate>Tue, 30 Apr 2019 22:38:25 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-172/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-172/</guid>
       <description>题目 Given an integer n, return the number of trailing zeroes in n!. Example 1: Input: 3 Output: 0 Explanation: 3! = 6, no trailing zero. Example 2: Input: 5 Output: 1 Explanation: 5! = 120, one trailing zero. Note: Your solution should be in logarithmic time complexity.  我的解答 看了些提示才做出来
 func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &amp;gt; 0 { len++ tmp = tmp * 5 } for i := 0; i &amp;lt; len; i++ { count += (n / tmp) tmp = tmp / 5 } return count }  最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 171</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-171/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-171/</link>
       <pubDate>Tue, 30 Apr 2019 22:38:08 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-171/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-171/</guid>
       <description>题目 Given a column title as appear in an Excel sheet, return its corresponding column number. For example: A -&amp;gt; 1 B -&amp;gt; 2 C -&amp;gt; 3 ... Z -&amp;gt; 26 AA -&amp;gt; 27 AB -&amp;gt; 28 ... Example 1: Input: &amp;quot;A&amp;quot; Output: 1 Example 2: Input: &amp;quot;AB&amp;quot; Output: 28 Example 3: Input: &amp;quot;ZY&amp;quot; Output: 701  我的解答 func titleToNumber(s string) int { result := 0 tmp := 1 for i := len(s) - 1; i &amp;gt;= 0; i-- { num := int(s[i] - 64) result += (num * tmp) tmp = tmp * 26 } return result }  最优解答 无</description>
     </item>
     
@@ -862,137 +889,137 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     
     <item>
       <title>Leetcode 169</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-169/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-169/</link>
       <pubDate>Mon, 29 Apr 2019 22:27:15 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-169/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-169/</guid>
       <description>题目 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that the array is non-empty and the majority element always exist in the array. Example 1: Input: [3,2,3] Output: 3 Example 2: Input: [2,2,1,1,1,2,2] Output: 2  我的解答 func majorityElement(nums []int) int { insertSort(nums) return nums[len(nums)/2] } func insertSort(nums []int) { for i := 1; i &amp;lt; len(nums); i++ { tmp := nums[i] j := i - 1 for ; j &amp;gt;= 0 &amp;amp;&amp;amp; tmp &amp;lt; nums[j]; j-- { nums[j+1] = nums[j] } nums[j+1] = tmp } }  最优解答 func majorityElement(nums []int) int { if len(nums) &amp;lt; 1 { return 0 } count, flag := 1, nums[0] for i := 1; i &amp;lt; len(nums); i++ { if count &amp;lt; 1 { count = 1 flag = nums[i] continue } if flag == nums[i] { count++ } else { count-- } } return flag }  难疑点&amp;amp;核心 因题目特殊性，题目规定众数要超过数量的一半</description>
     </item>
     
     <item>
       <title>Leetcode 168</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-168/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-168/</link>
       <pubDate>Mon, 29 Apr 2019 22:27:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-168/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-168/</guid>
       <description>题目 Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1 -&amp;gt; A 2 -&amp;gt; B 3 -&amp;gt; C ... 26 -&amp;gt; Z 27 -&amp;gt; AA 28 -&amp;gt; AB ... Example 1: Input: 1 Output: &amp;quot;A&amp;quot; Example 2: Input: 28 Output: &amp;quot;AB&amp;quot; Example 3: Input: 701 Output: &amp;quot;ZY&amp;quot;  我的解答 func convertToTitle(n int) string { if n &amp;lt;= 0 { return &amp;quot;&amp;quot; } len := 0 tmp := n for tmp/26 &amp;gt; 0 { len++ tmp = tmp / 26 } strs := make([]string, len+1) for n &amp;gt; 0 { n-- strs[len] = string((n % 26) + &#39;A&#39;) n = n / 26 len-- } return strings.</description>
     </item>
     
     <item>
       <title>Leetcode 167</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-167/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-167/</link>
       <pubDate>Mon, 29 Apr 2019 22:27:05 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-167/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-167/</guid>
       <description>题目 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Note: Your returned answers (both index1 and index2) are not zero-based. You may assume that each input would have exactly one solution and you may not use the same element twice.</description>
     </item>
     
     <item>
       <title>Leetcode 160</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-160/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-160/</link>
       <pubDate>Mon, 29 Apr 2019 22:26:55 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-160/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-160/</guid>
       <description>题目 Write a program to find the node at which the intersection of two singly linked lists begins. For example, the following two linked lists: begin to intersect at node c1. Example 1: Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3 Output: Reference of the node with value = 8 Input Explanation: The intersected node&#39;s value is 8 (note that this must not be 0 if the two lists intersect).</description>
     </item>
     
     <item>
       <title>Leetcode 155</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-155/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-155/</link>
       <pubDate>Mon, 29 Apr 2019 22:26:50 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-155/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-155/</guid>
       <description>题目  Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. push(x) -- Push element x onto stack. pop() -- Removes the element on top of the stack. top() -- Get the top element. getMin() -- Retrieve the minimum element in the stack. Example: MinStack minStack = new MinStack(); minStack.push(-2); minStack.push(0); minStack.push(-3); minStack.getMin(); --&amp;gt; Returns -3. minStack.pop(); minStack.top(); --&amp;gt; Returns 0. minStack.getMin(); --&amp;gt; Returns -2.</description>
     </item>
     
     <item>
       <title>Leetcode 141</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-141/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-141/</link>
       <pubDate>Mon, 29 Apr 2019 22:26:44 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-141/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-141/</guid>
       <description>题目 Given a linked list, determine if it has a cycle in it. To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list. Example 1: Input: head = [3,2,0,-4], pos = 1 Output: true Explanation: There is a cycle in the linked list, where tail connects to the second node.</description>
     </item>
     
     <item>
       <title>Leetcode 136</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-136/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-136/</link>
       <pubDate>Mon, 29 Apr 2019 22:26:40 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-136/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-136/</guid>
       <description>题目 Given a non-empty array of integers, every element appears twice except for one. Find that single one. Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? Example 1: Input: [2,2,1] Output: 1 Example 2: Input: [4,1,2,1,2] Output: 4  我的解答 没想出来，看了评论区才知道
 最优解答 func singleNumber(nums []int) int { for i := len(nums) - 1; i &amp;gt; 0; i-- { nums[i-1] = nums[i-1] ^ nums[i] } return nums[0] }  难疑点&amp;amp;核心 因为题目说了，只有一个数字是不会出现两次，其它数字都出现两次</description>
     </item>
     
     <item>
       <title>Leetcode 125</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-125/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-125/</link>
       <pubDate>Mon, 29 Apr 2019 22:26:35 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-125/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-125/</guid>
       <description>题目 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。 说明：本题中，我们将空字符串定义为有效的回文串。 示例 1: 输入: &amp;quot;A man, a plan, a canal: Panama&amp;quot; 输出: true 示例 2: 输入: &amp;quot;race a car&amp;quot; 输出: false  我的解答 func isPalindrome(s string) bool { s = strings.Join(filter(s), &amp;quot;&amp;quot;) n := len(s) for i := 0; i &amp;lt; n/2; i++ { if s[i] != s[n-1-i] { return false } } return true } func filter(s string) []string { return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !</description>
     </item>
     
     <item>
       <title>Leetcode 122</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-122/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-122/</link>
       <pubDate>Mon, 29 Apr 2019 22:26:29 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-122/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-122/</guid>
       <description>题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  我的解答 func maxProfit(prices []int) int { buy := 0 sell := 0 profit := 0 n := len(prices) for { for buy &amp;lt; n-1 &amp;amp;&amp;amp; prices[buy+1] &amp;lt;= prices[buy] { buy++ } sell = buy for sell &amp;lt; n-1 &amp;amp;&amp;amp; prices[sell+1] &amp;gt; prices[sell] { sell++ } if sell == buy { return profit } profit += prices[sell] - prices[buy] buy = sell } }  最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 121</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-121/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-121/</link>
       <pubDate>Mon, 29 Apr 2019 00:38:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-121/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-121/</guid>
       <description>题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.</description>
     </item>
     
     <item>
       <title>Leetcode 119</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-119/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-119/</link>
       <pubDate>Mon, 29 Apr 2019 00:38:14 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-119/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-119/</guid>
       <description>题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal&#39;s triangle. Note that the row index starts from 0. In Pascal&#39;s triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &amp;lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &amp;gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 118</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-118/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-118/</link>
       <pubDate>Mon, 29 Apr 2019 00:38:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-118/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-118/</guid>
       <description>题目 Given a non-negative integer numRows, generate the first numRows of Pascal&#39;s triangle. In Pascal&#39;s triangle, each number is the sum of the two numbers directly above it.  我的解答 func generate(numRows int) [][]int { if numRows == 0 { return nil } result := make([][]int, numRows) for i := 0; i &amp;lt; numRows; i++ { result[i] = make([]int, i+1) result[i][0] = 1 result[i][i] = 1 for j := 1; j &amp;lt; i; j++ { result[i][j] = result[i-1][j-1] + result[i-1][j] } } return result }  最优解答 无</description>
     </item>
     
     <item>
       <title>Leetcode 112</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-112/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-112/</link>
       <pubDate>Mon, 29 Apr 2019 00:38:06 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-112/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-112/</guid>
       <description>题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&amp;gt;4-&amp;gt;11-&amp;gt;2 which sum is 22.</description>
     </item>
     
     <item>
       <title>Leetcode 111</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-111/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-111/</link>
       <pubDate>Mon, 29 Apr 2019 00:38:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-111/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-111/</guid>
       <description>题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.</description>
     </item>
     
     <item>
       <title>Leetcode 110</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-110/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-110/</link>
       <pubDate>Mon, 29 Apr 2019 00:38:00 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-110/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-110/</guid>
       <description>题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.</description>
     </item>
     
@@ -1055,56 +1082,56 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     
     <item>
       <title>Leetcode 108</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-108/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-108/</link>
       <pubDate>Sat, 27 Apr 2019 23:13:54 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-108/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-108/</guid>
       <description>题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &amp;lt;= right { mid := (left + right) / 2 // fmt.</description>
     </item>
     
     <item>
       <title>Leetcode 107</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-107/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-107/</link>
       <pubDate>Sat, 27 Apr 2019 21:36:47 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-107/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-107/</guid>
       <description>题目 Given a binary tree, return the bottom-up level order traversal of its nodes&#39; values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
 最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &amp;gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &amp;lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.</description>
     </item>
     
     <item>
       <title>Leetcode 104</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-104/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-104/</link>
       <pubDate>Sat, 27 Apr 2019 21:36:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-104/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-104/</guid>
       <description>题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.</description>
     </item>
     
     <item>
       <title>Leetcode 101</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-101/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-101/</link>
       <pubDate>Sat, 27 Apr 2019 21:36:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-101/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-101/</guid>
       <description>题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了</description>
     </item>
     
     <item>
       <title>Leetcode 100</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-100/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-100/</link>
       <pubDate>Sat, 27 Apr 2019 21:36:35 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-100/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-100/</guid>
       <description>题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.</description>
     </item>
     
     <item>
       <title>Leetcode 88</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-88/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-88/</link>
       <pubDate>Sat, 27 Apr 2019 21:33:45 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-88/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-88/</guid>
       <description>题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &amp;gt; 0 &amp;amp;&amp;amp; n &amp;gt; 0 { if nums1[m-1] &amp;gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &amp;gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了</description>
     </item>
     
@@ -1365,48 +1392,48 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Leetcode 83</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-83/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-83/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-83/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-83/</guid>
       <description>题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&amp;gt;1-&amp;gt;2 输出: 1-&amp;gt;2 示例 2: 输入: 1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;3 输出: 1-&amp;gt;2-&amp;gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
 最优解答 /** * Definition for singly-linked list.</description>
     </item>
     
     <item>
       <title>Leetcode 70</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-70/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-70/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:35 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-70/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-70/</guid>
       <description>题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &amp;gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.</description>
     </item>
     
     <item>
       <title>Leetcode 69</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-69/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-69/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:31 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-69/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-69/</guid>
       <description>题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
 最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &amp;gt; x { i = (i + x/i) / 2 } return i }  数学公式</description>
     </item>
     
     <item>
       <title>Leetcode 67</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-67/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-67/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:26 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-67/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-67/</guid>
       <description>题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &amp;quot;11&amp;quot;, b = &amp;quot;1&amp;quot; 输出: &amp;quot;100&amp;quot; 示例 2: 输入: a = &amp;quot;1010&amp;quot;, b = &amp;quot;1011&amp;quot; 输出: &amp;quot;10101&amp;quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &amp;quot;&amp;quot; if len(a) &amp;gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &amp;gt;= 0; i-- { if i &amp;gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.</description>
     </item>
     
     <item>
       <title>Leetcode 66</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-66/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-66/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:23 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-66/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-66/</guid>
       <description>题目 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。 你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321。  我的解答 func plusOne(digits []int) []int { for i := len(digits) - 1; i &amp;gt;= 0; i-- { if digits[i] != 9 { digits[i]++ return digits } digits[i] = 0 } digits = append([]int{1}, digits...) return digits }  比较简单
 最优解答 无
 难疑点&amp;amp;核心 无</description>
@@ -1414,10 +1441,10 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Leetcode 58</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-58/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-58/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:19 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-58/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-58/</guid>
       <description> 题目 给定一个仅包含大小写字母和空格 &#39; &#39; 的字符串，返回其最后一个单词的长度。 如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例: 输入: &amp;quot;Hello World&amp;quot; 输出: 5  我的解答 func lengthOfLastWord(s string) int { if s == &amp;quot;&amp;quot; { return 0 } if !strings.Contains(s, &amp;quot; &amp;quot;) { return len(s) } s = strings.TrimSpace(s) lastSpaceIndex := strings.LastIndex(s, &amp;quot; &amp;quot;) return len(s) - lastSpaceIndex - 1 }  前面两个判断是为了能够快速判断简单情况
 要注意去掉头尾的空格，不然索引查找会出错
 这里也调用了标准库，可能在算法上不算合规
@@ -1427,28 +1454,28 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Leetcode 53</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-53/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-53/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:16 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-53/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-53/</guid>
       <description>题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4], 输出: 6 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 进阶: 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。  我的解答 func maxSubArray(nums []int) int { if len(nums) == 0 { return 0 } if len(nums) == 1 { return nums[0] } total := nums[0] max := nums[0] for i := 1; i &amp;lt; len(nums); i++ { if total &amp;lt; 0 { total = 0 } total += nums[i] if max &amp;lt; total { max = total } } return max }  暴力法的话，时间复杂度是O(N^2)，这里使用的方法时间复杂度O(N)</description>
     </item>
     
     <item>
       <title>Leetcode 35</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-35/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-35/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:07 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-35/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-35/</guid>
       <description>题目 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。 你可以假设数组中无重复元素。 示例 1: 输入: [1,3,5,6], 5 输出: 2 示例 2: 输入: [1,3,5,6], 2 输出: 1 示例 3: 输入: [1,3,5,6], 7 输出: 4 示例 4: 输入: [1,3,5,6], 0 输出: 0  我的解答 func searchInsert(nums []int, target int) int { isFound, idx := binarySearch(nums, 0, len(nums)-1, target) if isFound { return idx } if nums[idx] &amp;gt; target { return idx } else { return idx + 1 } } func binarySearch(nums []int, left, right, target int) (found bool, idx int) { if left &amp;lt; right { mid := (left + right) / 2 if nums[mid] == target { return true, mid } else if nums[mid] &amp;gt; target { return binarySearch(nums, left, mid-1, target) } else { return binarySearch(nums, mid+1, right, target) } } else if nums[left] == target { return true, left } else { return false, left } }  因为是个有序的数组，因此可以不用暴力搜索，这里使用比较简单的二分法，找到索引(就算没有相等的，也找到最后一个查找的索引)</description>
     </item>
     
     <item>
       <title>Leetcode 28</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-28/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-28/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:04 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-28/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-28/</guid>
       <description>题目 实现 strStr() 函数。 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。 示例 1: 输入: haystack = &amp;quot;hello&amp;quot;, needle = &amp;quot;ll&amp;quot; 输出: 2 示例 2: 输入: haystack = &amp;quot;aaaaa&amp;quot;, needle = &amp;quot;bba&amp;quot; 输出: -1 说明: 当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。 对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。  我的解答 func strStr(haystack string, needle string) int { return strings.Index(haystack, needle) }  这里可能有点赖皮，直接调用了标准库，看网上说还有一种KMP的算法，比较难，按笔者现在的进度，先刷60简单题吧，后面再考虑实现。
 当然还有暴力算法，但是我宁愿使用标准库吧
 最优解答 无</description>
@@ -1456,28 +1483,28 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Leetcode 27</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-27/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-27/</link>
       <pubDate>Tue, 23 Apr 2019 22:21:01 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-27/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-27/</guid>
       <description>题目 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。 示例 1: 给定 nums = [3,2,2,3], val = 3, 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,1,2,2,3,0,4,2], val = 2, 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。 注意这五个元素可为任意顺序。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝 int len = removeElement(nums, val); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &amp;lt; len; i++) { print(nums[i]); }  我的解答 func removeElement(nums []int, val int) int { if len(nums) == 0 { return 0 } i := 0 j := len(nums) - 1 for i &amp;lt; j { if nums[i] == val { nums[i] = nums[j] j-- } else { i++ } } if nums[i] == val { return j } return j+1 }  因为题目说只需要给索引就可以了，因此不需要创建新的内存存放，只需要用一个索引将符合要求的值和不符合要求的值划分开(所以要交换它们位置)</description>
     </item>
     
     <item>
       <title>Leetcode 26</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-26/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-26/</link>
       <pubDate>Tue, 23 Apr 2019 22:20:55 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-26/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-26/</guid>
       <description>题目 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &amp;lt; len; i++) { print(nums[i]); }  我的解答 func removeDuplicates(nums []int) int { if len(nums) == 0 || len(nums) == 1 { return len(nums) } count := 0 existMap := make(map[int]bool) for _, num := range nums { if _, exist := existMap[num]; !</description>
     </item>
     
     <item>
       <title>Leetcode 21</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-21/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-21/</link>
       <pubDate>Tue, 23 Apr 2019 22:20:50 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-21/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-21/</guid>
       <description>题目 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4 输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4  我的解答 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode { l4 := &amp;amp;ListNode{} l3 := &amp;amp;ListNode{} l4.Next = l3 for l1 != nil || l2 != nil { if l1 == nil { return l2 } if l2 == nil { return l1 } if l1.</description>
     </item>
     
@@ -1711,47 +1738,47 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     
     <item>
       <title>Leetcode 20</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-20/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-20/</link>
       <pubDate>Mon, 22 Apr 2019 00:46:01 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-20/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-20/</guid>
       <description>题目 给定一个只包括 &#39;(&#39;，&#39;)&#39;，&#39;{&#39;，&#39;}&#39;，&#39;[&#39;，&#39;]&#39; 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &amp;quot;()&amp;quot; 输出: true 示例 2: 输入: &amp;quot;()[]{}&amp;quot; 输出: true 示例 3: 输入: &amp;quot;(]&amp;quot; 输出: false 示例 4: 输入: &amp;quot;([)]&amp;quot; 输出: false 示例 5: 输入: &amp;quot;{[]}&amp;quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
 var ( relation = map[string]string{&amp;quot;(&amp;quot;: &amp;quot;)&amp;quot;, &amp;quot;[&amp;quot;: &amp;quot;]&amp;quot;, &amp;quot;{&amp;quot;: &amp;quot;}&amp;quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !</description>
     </item>
     
     <item>
       <title>Leetcode 14</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-14/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-14/</link>
       <pubDate>Mon, 22 Apr 2019 00:45:56 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-14/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-14/</guid>
       <description>题目 编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 &amp;quot;&amp;quot;。 示例 1: 输入: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot;,&amp;quot;flight&amp;quot;] 输出: &amp;quot;fl&amp;quot; 示例 2: 输入: [&amp;quot;dog&amp;quot;,&amp;quot;racecar&amp;quot;,&amp;quot;car&amp;quot;] 输出: &amp;quot;&amp;quot; 解释: 输入不存在公共前缀。 说明: 所有输入只包含小写字母 a-z 。  我的解答 func longestCommonPrefix(strs []string) string { if len(strs) == 0 { return &amp;quot;&amp;quot; } if len(strs) == 1 { return strs[0] } shortestLen := len(strs[0]) for _, str := range strs { if len(str) &amp;lt; shortestLen { shortestLen = len(str) } } var finalStr string for i := 0; i &amp;lt; shortestLen; i++ { tmp := strs[0][i] for j := 1; j &amp;lt; len(strs); j++ { if tmp !</description>
     </item>
     
     <item>
       <title>Leetcode 13</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-13/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-13/</link>
       <pubDate>Mon, 22 Apr 2019 00:45:53 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-13/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-13/</guid>
       <description>题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &amp;quot;III&amp;quot; 输出: 3 示例 2: 输入: &amp;quot;IV&amp;quot; 输出: 4 示例 3: 输入: &amp;quot;IX&amp;quot; 输出: 9 示例 4: 输入: &amp;quot;LVIII&amp;quot; 输出: 58 解释: L = 50, V= 5, III = 3.</description>
     </item>
     
     <item>
       <title>Leetcode 9</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-9/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-9/</link>
       <pubDate>Mon, 22 Apr 2019 00:45:41 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-9/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-9/</guid>
       <description>题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &amp;lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度</description>
     </item>
     
     <item>
       <title>Leetcode 1</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-1/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-1/</link>
       <pubDate>Mon, 22 Apr 2019 00:19:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-1/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-1/</guid>
       <description>题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
 示例:
@@ -1760,19 +1787,19 @@ var ( relation = map[string]string{&amp;quot;(&amp;quot;: &amp;quot;)&amp;quot;,
     
     <item>
       <title>Leetcode 7</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-7/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-7/</link>
       <pubDate>Mon, 22 Apr 2019 00:19:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-7/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-7/</guid>
       <description>题目 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 示例 1: 输入: 123 输出: 321 示例 2: 输入: -123 输出: -321 示例 3: 输入: 120 输出: 21 注意: 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31, 2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  我的解答 func reverse(x int) int { var rev int for x != 0 { lastNum := x % 10 x = x / 10 if rev &amp;gt; math.MaxInt32/10 || rev == math.MaxInt32/10 &amp;amp;&amp;amp; lastNum &amp;gt; 7 { return 0 } if rev &amp;lt; math.</description>
     </item>
     
     <item>
       <title>Leetcode 开篇</title>
-      <link>https://wushaoqiang.github.io/posts/leetcode-before-start/</link>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-before-start/</link>
       <pubDate>Mon, 22 Apr 2019 00:00:37 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/leetcode-before-start/</guid>
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-before-start/</guid>
       <description> 不积跬步无以至千里，不积小流无以成江海
  作为Leetcode的开篇作，在这里希望自己能够坚持每天code一两道题(视难度而定)
 以后博客应该是以这样的方式呈现

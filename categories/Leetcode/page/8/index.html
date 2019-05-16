@@ -78,7 +78,77 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-104/">Leetcode 104</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/">Leetcode 110</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/">Leetcode 108</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/">Leetcode 107</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/">Leetcode 104</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -94,14 +164,14 @@
                             
                             <div class="post-content">
                                 题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-104/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-101/">Leetcode 101</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/">Leetcode 101</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -117,14 +187,14 @@
                             
                             <div class="post-content">
                                 题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-101/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-100/">Leetcode 100</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/">Leetcode 100</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -140,14 +210,14 @@
                             
                             <div class="post-content">
                                 题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-100/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-88/">Leetcode 88</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/">Leetcode 88</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -163,14 +233,14 @@
                             
                             <div class="post-content">
                                 题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &gt; 0 &amp;&amp; n &gt; 0 { if nums1[m-1] &gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-88/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-83/">Leetcode 83</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/">Leetcode 83</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -187,14 +257,14 @@
                             <div class="post-content">
                                 题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
 最优解答 /** * Definition for singly-linked list.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-83/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-70/">Leetcode 70</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/">Leetcode 70</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -210,14 +280,14 @@
                             
                             <div class="post-content">
                                 题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-70/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-69/">Leetcode 69</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/">Leetcode 69</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -234,82 +304,7 @@
                             <div class="post-content">
                                 题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
 最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &gt; x { i = (i + x/i) / 2 } return i }  数学公式……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-69/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-67/">Leetcode 67</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &quot;11&quot;, b = &quot;1&quot; 输出: &quot;100&quot; 示例 2: 输入: a = &quot;1010&quot;, b = &quot;1011&quot; 输出: &quot;10101&quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &quot;&quot; if len(a) &gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &gt;= 0; i-- { if i &gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-67/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-66/">Leetcode 66</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。 你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321。  我的解答 func plusOne(digits []int) []int { for i := len(digits) - 1; i &gt;= 0; i-- { if digits[i] != 9 { digits[i]++ return digits } digits[i] = 0 } digits = append([]int{1}, digits...) return digits }  比较简单
-最优解答 无
-难疑点&amp;核心 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-66/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-58/">Leetcode 58</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。 如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例: 输入: &quot;Hello World&quot; 输出: 5  我的解答 func lengthOfLastWord(s string) int { if s == &quot;&quot; { return 0 } if !strings.Contains(s, &quot; &quot;) { return len(s) } s = strings.TrimSpace(s) lastSpaceIndex := strings.LastIndex(s, &quot; &quot;) return len(s) - lastSpaceIndex - 1 }  前面两个判断是为了能够快速判断简单情况
-要注意去掉头尾的空格，不然索引查找会出错
-这里也调用了标准库，可能在算法上不算合规
-最优解答 无
-难疑点&amp;核心  容易把头尾的空格忽略掉  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-58/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -393,43 +388,43 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
 </ul>
@@ -466,7 +461,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
     </li>
     
     <li>

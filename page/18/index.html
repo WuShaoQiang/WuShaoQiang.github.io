@@ -68,6 +68,76 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-string/" title="Golang标准库--String" >Golang标准库--String</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
+&mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-string/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/" title="Golang标准库--Bytes" >Golang标准库--Bytes</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/" title="Golang标准库--Bufio" >Golang标准库--Bufio</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/internet-protocal/" title="网络协议基础" >网络协议基础</a>
                                 </h1>
                             </header>
@@ -382,7 +452,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/page/18/">18</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/19/">19</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/page/19/">下一页</a>
+    </li>
     
 </ol>
 
@@ -406,43 +484,43 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
 </ul>
@@ -479,7 +557,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
     </li>
     
     <li>

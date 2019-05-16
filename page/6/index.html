@@ -68,7 +68,104 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-237/" title="Leetcode 237" >Leetcode 237</a>
+                                    <a href="https://wushaoqiang.github.io/posts/algorithm-binarysearch/" title="Algorithm 二分查找" >Algorithm 二分查找</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 递归式 func binarySearch(arr []int,left,right,target int) int{ if left &lt;= right { mid := (left + right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target{ return binarySearch(arr,left,mid-1,target) } if arr[mid] &lt; target{ return binarySearch(arr,mid+1,right,target) } } return -1 }  非递归式 func binarySearch(arr []int,target int) int{ left := 0 right := len(arr)-1 for left &lt;= right{ mid := (left+right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target { right = mid-1 }else{ left = mid+1 } } return -1 }  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm-binarysearch/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang-slice/" title="Golang Slice底层" >Golang Slice底层</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                参考 golang blog
+之前一直对slice有一定的误解
+误解  以为是引用传递
+ 以为子函数改变切片，主函数会跟着变
+ 以为扩容只是简单的内存扩大
+  开始 我们可以把byte的slice比喻成
+type sliceHeader struct { Length int Capacity int ZerothElement *byte }   slice的传递是值传递，类似一个结构体的传递  这意味着，我们把一个slice传入到函数里，在主函数上的slice可能是不变的
+为什么说可能，我们来看一下情况
+值传递 发生扩容 这种情况下，切片所指向的数组发生变化，因此和原来的那块内存失去了联系
+长度发生改变 在子函数里面，切片长度发生改变并不会影响主函数切片的长度(值传递)
+同理容量也是
+唯一造成影响 所以唯一能够在子函数里面影响主函数切片的方法只有一种
+就是指向的数据数组，子函数修改了相同内存空间的数组，主函数切片也会跟着改变(只有不扩容的情况下才会维持同一个数组内存地址)
+小结 不要认为切片是引用传递(很多博客为了方便解释会这样说)，它们唯一能够达到这个效果的情况是共用同一个数组，只要对切片底层认识够深就不会被这个困惑
+记住切片是值传递
+切片指针传递 我们也可以传递一个切片的指针，这个时候类似于传入一个指向结构体的指针
+注意指针
+这个指针并不是说数组数据的指针，而是指向这个切片结构体的指针
+这个时候和上面的值传递就有很大的不同了
+长度、容量、数组指针发生改变 因为是指针传递，改变这个切片的任何东西都会影响到主函数的切片，因此无论是长度发生改变、扩容导致容量发生改变、扩容导致数组指针发生改变，主函数的切片都能看见这些改变
+ 切片在扩容的时候，指针会发生改变(以前的数据会复制到新的内存上，新的内存能够存储更多数据)
+ 在容量大于长度的时候，不会进行扩容
+  小结 对切片进行指针传递才是真正的引用传递，所有的改变都不会产生新的切片变量
+用途 一般来说我们都会选择使用值传递，我们只要看什么时候需要用指针传递
+ 当你不清除一个切片到程序最后有多少个元素(也就是无法提前估计容量)，但是你又需要把所有结果放入这个切片，这个时候要用指针传递(这里说的是传入给函数参数)  为什么呢？
+由于切片扩容的时候，改变了数据的指向。值传递切片不会因为子函数改变了指向而改变指向(事实上我们需要改变指向)
+给个例子吧
+这是一个二叉树所有根节点到叶子节点路径的程序
+type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-slice/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/" title="Leetcode 242" >Leetcode 242</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two strings s and t , write a function to determine if t is an anagram of s. Example 1: Input: s = &quot;anagram&quot;, t = &quot;nagaram&quot; Output: true Example 2: Input: s = &quot;rat&quot;, t = &quot;car&quot; Output: false Note: You may assume the string contains only lowercase alphabets. Follow up: What if the inputs contain unicode characters? How would you adapt your solution to such case?……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/" title="Leetcode 237" >Leetcode 237</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -85,13 +182,13 @@
                             <div class="post-content">
                                 题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&gt; 1 -&gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-237/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-235/" title="Leetcode 235" >Leetcode 235</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/" title="Leetcode 235" >Leetcode 235</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -108,13 +205,13 @@
                             <div class="post-content">
                                 题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-235/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-234/" title="Leetcode 234" >Leetcode 234</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/" title="Leetcode 234" >Leetcode 234</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -132,13 +229,13 @@
                                 题目 Given a singly linked list, determine if it is a palindrome. Example 1: Input: 1-&gt;2 Output: false Example 2: Input: 1-&gt;2-&gt;2-&gt;1 Output: true Follow up: Could you do it in O(n) time and O(1) space?  我的解答 如果不限定空间复杂度
 func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &lt; l/2; i++ { if v[i] !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-234/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-231/" title="Leetcode 231" >Leetcode 231</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/" title="Leetcode 231" >Leetcode 231</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -156,13 +253,13 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                                 题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
 最优解答 无……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-231/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-226/" title="Leetcode 226" >Leetcode 226</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/" title="Leetcode 226" >Leetcode 226</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -179,13 +276,13 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             <div class="post-content">
                                 题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-226/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-219/" title="Leetcode 219" >Leetcode 219</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/" title="Leetcode 219" >Leetcode 219</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -202,13 +299,13 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             <div class="post-content">
                                 题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-219/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-217/" title="Leetcode 217" >Leetcode 217</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/" title="Leetcode 217" >Leetcode 217</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -225,78 +322,7 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             <div class="post-content">
                                 题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-217/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-206/" title="Leetcode 206" >Leetcode 206</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Reverse a singly linked list. Example: Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
-func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-206/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-205/" title="Leetcode 205" >Leetcode 205</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &quot;egg&quot;, t = &quot;add&quot; Output: true Example 2: Input: s = &quot;foo&quot;, t = &quot;bar&quot; Output: false Example 3: Input: s = &quot;paper&quot;, t = &quot;title&quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &lt; len(s); i++ { if b, exist := letterMap[s[i]]; !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-205/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode-204/" title="Leetcode 204" >Leetcode 204</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Count the number of prime numbers less than a non-negative number, n. Example: Input: 10 Output: 4 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.  我的解答 这题跟着评论区的思路做出来的&ndash;厄拉多塞筛法
-func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志哪些0～n-1已经被访问过 flag := make([]bool, n) //因为0,1不是素数，先减去 total := n - 2 // 只需要找n的根号前的素数 for i := 2; i*i &lt; n; i++ { // 访问过 if flag[i] { continue } // 没访问过，这个素数i的所有倍数(在n内)都不是素数，去除 for j := 2; i*j &lt; n; j++ { if !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode-204/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/">阅读全文</a></p>
                         </article>
                     
 
@@ -383,6 +409,10 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
         <a href="https://wushaoqiang.github.io/page/18/">18</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/19/">19</a>
+    </li>
+    
 
     
     <li class="next">
@@ -411,43 +441,43 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-501/" title="Leetcode 501">Leetcode 501</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-437/" title="Leetcode 437">Leetcode 437</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode-414/" title="Leetcode 414">Leetcode 414</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
     </li>
     
 </ul>
@@ -484,7 +514,7 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(93)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
     </li>
     
     <li>
