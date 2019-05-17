@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/tcp-flow-control/">TCP 流量控制</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/">TCP 流量控制</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -102,14 +102,14 @@ LastByteRcvd - LastByteRead &lt;= RcvBuffer
 在TCP报文首部里有一个叫做接收窗口，这个就是接收者告诉发送者rwnd的
 在发送方，通过将未确认的数据量控制在值rwnd以内，就可以保证接收者不会缓存溢出了
 UDP是不提供流量控制的，所以UDP很有可能会出现缓存溢出……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-flow-control/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/">TCP 拥塞控制</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/">TCP 拥塞控制</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -156,14 +156,14 @@ rwnd和cwnd是不同的，前者是表示接收方的buffer还有多少能用，
   超时  阈值设置为cwnd/2
  cwnd设置为1(MSS)
   ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-congestion-control/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/tcp-connect/">TCP 连接 --三次握手和四次挥手</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">TCP 连接 --三次握手和四次挥手</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -203,14 +203,14 @@ A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可
  客户端给服务器端发一个ACK
  等待一会，资源就释放了
   ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-connect/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/tcp-message-field/">TCP --报文</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">TCP --报文</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -241,7 +241,7 @@ A --&gt; B Seq=42,ACK=79,data=1 B --&gt; A Seq=79,ACK=43,data=2 A --&gt; B Seq=4
 确认号是标识我需要对方发送给我的数据
 所以上面场景就是
 A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tcp-message-field/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">阅读全文</a></p>
                             </div>
                         </article>
                     

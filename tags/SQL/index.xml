@@ -13,10 +13,10 @@
     
     <item>
       <title>SQL vs NoSQL</title>
-      <link>https://wushaoqiang.github.io/posts/sql-vs-nosql/</link>
+      <link>https://wushaoqiang.github.io/posts/database/sql-vs-nosql/</link>
       <pubDate>Thu, 09 May 2019 22:05:07 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/sql-vs-nosql/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/sql-vs-nosql/</guid>
       <description>花了点时间去了解了一下NoSQL,总结一下一些概念
 SQL: Strcuture Query Language
 NoSQL: Not Only SQL
@@ -37,10 +37,10 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
     
     <item>
       <title>SQL 进阶</title>
-      <link>https://wushaoqiang.github.io/posts/SQL-highlevel/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/</link>
       <pubDate>Tue, 23 Apr 2019 10:25:40 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/SQL-highlevel/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/</guid>
       <description>只针对Mysql的SQL语句
 ##创建TABLE
 CREATE TABLE user ( id int PRIMARY KEY, username varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL );  约束也可以这样写
@@ -55,10 +55,10 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     
     <item>
       <title>SQL 基础</title>
-      <link>https://wushaoqiang.github.io/posts/SQL-basic/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/</link>
       <pubDate>Mon, 22 Apr 2019 23:05:06 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/SQL-basic/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/</guid>
       <description>笔者之前学了一些基础的Mysql的语法，现在进一步学习
 关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
 非关系型数据库有自己的一套语言
@@ -80,10 +80,10 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
     
     <item>
       <title>Mysql学习笔记</title>
-      <link>https://wushaoqiang.github.io/posts/mysql-basic/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/</link>
       <pubDate>Sun, 17 Mar 2019 02:14:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/mysql-basic/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/</guid>
       <description>安装 sudo apt-get install mysql-server mysql-client
 查询是否安装了： sudo netstat -tap grep mysql
 安装成功

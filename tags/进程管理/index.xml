@@ -13,10 +13,10 @@
     
     <item>
       <title>Linux 进程管理</title>
-      <link>https://wushaoqiang.github.io/posts/linux-process-management/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-management/</link>
       <pubDate>Thu, 25 Apr 2019 17:04:19 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-process-management/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-management/</guid>
       <description>进程状态  R 正在运行或在运行队列
  D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
  S 中断，等待某个事件完成或者被信号唤醒

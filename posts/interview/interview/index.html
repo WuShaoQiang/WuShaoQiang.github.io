@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Interview | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Interview - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-04-24T15:32:21&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-04-24T15:32:21&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Interview">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/interview/interview/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Interview</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年4月24日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升</p>
+
+<h3 id="go的优势">go的优势</h3>
+
+<ul>
+<li><p>Go是Google工程师基于现实世界开发经验进行改进的友好型语言</p></li>
+
+<li><p>简单明了</p></li>
+
+<li><p>容易学习</p></li>
+
+<li><p>简单的内置并发</p></li>
+
+<li><p>持有现代化标准库</p></li>
+
+<li><p>编译快</p></li>
+
+<li><p>格式被标准化</p></li>
+
+<li><p>较小内存占用</p></li>
+
+<li><p>部署独立</p></li>
+
+<li><p>支持vendor依赖</p></li>
+
+<li><p>兼容性好</p></li>
+
+<li><p>商业支持的开源</p></li>
+</ul>
+
+<h3 id="go的调度">go的调度</h3>
+
+<p>这里应该指的是goroutine的调度模式</p>
+
+<p>读过Go Web编程那本书的人可能知道，go的并发是由<code>线程</code>、<code>处理器</code>、<code>调度器</code>和<code>一个个的goroutine</code></p>
+
+<p>简单说一下运行的一些规则</p>
+
+<ol>
+<li><p>每一个线程里面有一个的协程，从微观角度来看是顺序执行的，但是从宏观角度来看，因为执行速度快，线程里的协程不断切换，因此可以看作是并行</p></li>
+
+<li><p>处理器主要就是用来执行goroutine的，它也维护了一个goroutine的队列，里面有在等待的goroutine</p></li>
+
+<li><p>只有线程和处理器结合起来才能构造一个goroutine执行环境</p></li>
+
+<li><p>调度器，当协程阻塞的时候，会保存上下文，直到下次可以恢复运行</p></li>
+</ol>
+
+<p>这是一些比较浅显运行的规则，如果要深入goroutine的源码分析，推荐一篇<a href="https://blog.csdn.net/qq_25870633/article/details/83445946">文章</a></p>
+
+<h3 id="go-struct能不能比较">go struct能不能比较</h3>
+
+<p>如果是值类型，是可以比较的，比如</p>
+
+<pre><code class="language-go">p1 := Person{Name: &quot;SQ&quot;, Age: 1}
+p2 := Person{Name: &quot;SQ&quot;, Age: 1}
+if p1 == p2 {
+    fmt.Println(&quot;same&quot;)
+}
+</code></pre>
+
+<p>这样是有输出的</p>
+
+<p>那如果是嵌套呢？也是一样的，只要是具有可比性的，如<code>string</code>,<code>int</code>这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子</p>
+
+<pre><code class="language-go">type Person struct {
+	Name string
+	Age  int
+}
+
+type Student struct {
+	*Person
+	ID int
+}
+</code></pre>
+
+<p>由于Student里面的Person是一个引用类型，所以比较是比较了地址，因此是不同的</p>
+
+<h3 id="go-defer">go defer</h3>
+
+<p>defer这个要注意的点有两个</p>
+
+<ul>
+<li><p>执行顺序，先进后出</p></li>
+
+<li><p>参数还是闭包</p></li>
+</ul>
+
+<p>参数传递会根据传递参数时的值进行执行</p>
+
+<p>闭包会根据最后这个变量的值来执行</p>
+
+<h3 id="go-select可以用于什么">go select可以用于什么</h3>
+
+<p>先来看看官方说明</p>
+
+<blockquote>
+<p>A &ldquo;select&rdquo; statement chooses which of a set of possible send or receive operations will proceed. It looks similar to a &ldquo;switch&rdquo; statement but with the cases all referring to communication operations.</p>
+</blockquote>
+
+<p>select这个语法是像switch的，但是要注意几点</p>
+
+<ul>
+<li><p>select是用于channel的，比如接收channel的值，发送给channel一个值</p></li>
+
+<li><p>select是依靠是否阻塞来执行</p></li>
+
+<li><p>如果select的case有多个channel没有被阻塞，会随机选一个运行</p></li>
+
+<li><p>在goroutine的信息传递非常重要，还有可以通过select来关闭channel(向select传递一个done-channel，接收到信号就执行关闭操作)</p></li>
+</ul>
+
+<h3 id="context包的用途">context包的用途</h3>
+
+<pre><code class="language-go">    type Context interface {
+        Deadline() (deadline time.Time, ok bool)
+        Done() &lt;-chan struct{}
+        Err() error
+        Value(key interface{}) interface{}
+    }
+</code></pre>
+
+<p>Context可以很好帮我们管理goroutine的生存周期，比如超时、主动关闭，还可以管理Request的键值对</p>
+
+<p>详情可以看我博客一篇专门写Context的文章</p>
+
+<h3 id="client如何实现长连接">client如何实现长连接</h3>
+
+<p>我们首先要知道，HTTP也有长连接的，它有一个请求字段<code>Connection:keep-alive</code></p>
+
+<p>但是我们在做类似直播、游戏等，不是用HTTP这个应用层协议的，而是用到基于TCP的Socket(SOCK_STREAM)</p>
+
+<p>也就是Socket编程，不知道是否触及到你的知识盲区，笔者之前用Java的时候学过一点点皮毛，觉得很大的不同是，Socket面对的是字节流的传输</p>
+
+<p>在Go里建立Socket连接的方法</p>
+
+<pre><code class="language-go">    addr := &quot;wwww.baidu.com:80&quot; 
+    conn,err := net.Dial(&quot;tcp&quot;,addr)
+    if err != nil {
+        log.Fatal(err)
+    }
+</code></pre>
+
+<h3 id="主协程如何等其余协程完再操作">主协程如何等其余协程完再操作</h3>
+
+<p>第一反应，这里可以通过<code>sync</code>上的WaitGroup来实现</p>
+
+<p>第二反应，通过channel阻塞实现</p>
+
+<h3 id="slice-len-cap-共享-扩容">slice，len，cap，共享，扩容</h3>
+
+<p>这里想问的应该是关于slice(切片)的底层指向问题</p>
+
+<p>比如</p>
+
+<pre><code class="language-go">    a := []int{1, 2, 3, 4}
+	b := a[1:3]
+	a[1] = 10
+	fmt.Println(b[0])
+</code></pre>
+
+<p>这个程序会输出10，因为a和b共享同一个底层切片，但是如果我们提前用append()来让b扩容，它们就不是指向同一个底层了</p>
+
+<p>或者我们在创建b的时候，利用append(b,a&hellip;)来填充</p>
+
+<p>总之，注意共享底层的问题，注意扩容后底层的问题</p>
+
+<h3 id="map如何顺序读取">map如何顺序读取</h3>
+
+<p>map迭代是乱序的这个应该都知道，那么如何顺序读取？</p>
+
+<p>我的第一反应是：需要通过外部变量来保存顺序，这个变量一般是切片，切片记录着我们想要的顺序(可以是添加前后的顺序，也可以是按照我们自己的排序算法的顺序)</p>
+
+<h3 id="实现set">实现set</h3>
+
+<p>golang map本身的key自带set功能</p>
+
+<p>所以我们可以根据这个性质，自己构建一个struct</p>
+
+<p>注意：如果要多线程的话，加锁</p>
+
+<h3 id="实现消息队列-多生产者-多消费者">实现消息队列（多生产者，多消费者）</h3>
+
+<p>队列其实golang里有天然的，channel</p>
+
+<p>channel是一个典型的FIFO，并且还自带了锁，所以如果是同一个进程内部的消息队列，用channel省心省力，但是也要知道，一旦程序挂了，channel里面的数据就没了</p>
+
+<p>如果是不同程序之间的消息队列，则需要用一些第三方消息队列则会比较稳定，网上推荐别较多的有<code>kafka</code>，<code>rebbitmq</code>等，这里还不大了解</p>
+
+<p>多生产，多消费，让我想到了pipeline，我也写过一篇关于pipeline的基础，实现channel合并和拓展，所以多生产可以合并到某一个channel，再由这个channel发送给消费者</p>
+
+<h3 id="大文件排序">大文件排序</h3>
+
+<p>这里一开始没有思路，在网上搜索一下后才知道是要<code>分而治之</code></p>
+
+<p>这类处理问题模式也见过很多次了</p>
+
+<p>具体为将大文件分割为小文件，并且将小文件内部进行排序</p>
+
+<p>对每个小文件取同样数量的数据进行排序形成新的一个临时文件，这里总共生成的临时文件应该是和之前小文件的数量一样的</p>
+
+<p>然后合并文件就有序了</p>
+
+<h3 id="基本排序-哪些是稳定的">基本排序，哪些是稳定的</h3>
+
+<p>之前写过一系列基础排序，包括</p>
+
+<ul>
+<li><p>冒泡排序(稳定)</p></li>
+
+<li><p>折半查找(稳定)</p></li>
+
+<li><p>插入排序(稳定)</p></li>
+
+<li><p>归并排序(稳定)</p></li>
+
+<li><p>堆排序(不稳定)</p></li>
+
+<li><p>希尔排序(不稳定)</p></li>
+
+<li><p>快速排序(不稳定)</p></li>
+
+<li><p>直接选择排序(不稳定)</p></li>
+</ul>
+
+<h3 id="http-get跟head">http get跟head</h3>
+
+<p>get和head的区别在于，head只返回头部信息，没有主体信息</p>
+
+<h3 id="http-401-403">http 401,403</h3>
+
+<p>401 ： 未认证</p>
+
+<p>403 ： 禁止访问</p>
+
+<h3 id="http-keep-alive">http keep-alive</h3>
+
+<p>还记得我们的请求报文头里有<code>Connection:keep-alive</code></p>
+
+<p>目的是为了不要在短时间内重复创建连接，应该在创建一次连接后保持一阵子(取决于keep-alive的timeout变量)，以便在短时间内都可以以这个连接交换内容</p>
+
+<p>所以正确的设置timeout显得比较重要了，不然会过多的浪费资源</p>
+
+<blockquote>
+<p>In HTTP 1.1, all connections are considered persistent unless declared otherwise</p>
+</blockquote>
+
+<h3 id="http能不能一次连接多次请求-不等后端返回">http能不能一次连接多次请求，不等后端返回</h3>
+
+<blockquote>
+<p>HTTP pipelining is a technique in which multiple HTTP requests are sent on a single TCP connection without waiting for the corresponding responses</p>
+</blockquote>
+
+<p>这是维基上的解释，事实证明在服务器端，是可以做这样的事情的</p>
+
+<blockquote>
+<p>Implementing pipelining in web servers is a relatively simple matter of making sure that network buffers are not discarded between requests. For that reason, most modern web servers handle pipelining without any problem.</p>
+</blockquote>
+
+<p>但是很多现代的浏览器都不支持pipeline</p>
+
+<blockquote>
+<p>As of 2018, HTTP pipelining is not enabled by default in modern browsers, due to several issues including buggy proxy servers and HOL blocking</p>
+</blockquote>
+
+<h3 id="tcp与udp区别-udp优点-适用场景">tcp与udp区别，udp优点，适用场景</h3>
+
+<p>TCP是可靠传输，拥有流量控制，拥塞控制。并且TCP的报文比UDP的长，TCP是需要建立连接并且维护连接</p>
+
+<p>UDP是不面向连接也不创建和维护连接，它会没有速度的管制，并且报文还比TCP短</p>
+
+<p>UDP使用于DNS，音频、视频媒体流</p>
+
+<h3 id="time-wait的作用">time-wait的作用</h3>
+
+<p>time-wait是指在四次挥手的主动关闭方最后要进入的状态</p>
+
+<p>至于为什么要进入一个这样的状态，书上说道：</p>
+
+<blockquote>
+<p>假定ACK丢失(说的是最后一个ACK),TIME_WAIT状态使得TCP重传最后的确认报文</p>
+</blockquote>
+
+<p>网上有另一种解释：</p>
+
+<blockquote>
+<p>允许老的重复分节在网络中的消逝</p>
+</blockquote>
+
+<p>也就是说要等待一段时间，让之前连接所发送到路由器的信息经过一段时间(生命周期)被遗弃后，再去建立新连接</p>
+
+<h3 id="数据库如何建索引">数据库如何建索引</h3>
+
+<p>对数据库还不太了解，先不解释，后面再说</p>
+
+<h3 id="孤儿进程-僵尸进程">孤儿进程，僵尸进程</h3>
+
+<p>一个父进程退出，而它的一个或多个子进程还在运行，那么这些子进程将成为孤儿进程。</p>
+
+<p>孤儿进程将被 init 进程（进程号为 1）所收养，并由 init 进程对它们完成状态收集工作。</p>
+
+<p>由于孤儿进程会被 init 进程收养，所以孤儿进程不会对系统造成危害。</p>
+
+<hr />
+
+<p>一个子进程的进程描述符在子进程退出时不会释放，只有当父进程通过 wait() 或 waitpid() 获取了子进程信息后才会释放。如果子进程退出，而父进程并没有调用 wait() 或 waitpid()，那么子进程的进程描述符仍然保存在系统中，这种进程称之为僵尸进程。</p>
+
+<p>僵尸进程通过 ps 命令显示出来的状态为 Z（zombie）。</p>
+
+<p>系统所能使用的进程号是有限的，如果产生大量僵尸进程，将因为没有可用的进程号而导致系统不能产生新的进程。</p>
+
+<p>要消灭系统中大量的僵尸进程，只需要将其父进程杀死，此时僵尸进程就会变成孤儿进程，从而被 init 进程所收养，这样 init 进程就会释放所有的僵尸进程所占有的资源，从而结束僵尸进程。</p>
+
+<h3 id="死锁条件-如何避免">死锁条件，如何避免</h3>
+
+<p>死锁如何形成，笔者之前遇到的一个死锁是这样的</p>
+
+<p>那个时候是在写一个栈的数据结构，为了线程安全用到了锁，在每一个读写操作都加了相应的锁，于是在一个函数中，我先开了锁，这个时候我要获得栈的长度，我有一个函数<code>Len()</code>(这个函数有读锁)，和一个变量<code>len</code></p>
+
+<p>我竟然用了函数。。所以造成了死锁，为什么死锁呢？我在一个函数中进入了锁，又在该函数中调用有锁的函数，这个时候因为第二个函数有锁，所以一直无法进入，第一个函数因为一直卡在第二个函数的返回上，所以也一直不动，就死锁了，程序就停在那了</p>
+
+<p>这只是笔者的一个例子，具体死锁的条件和避免， 我从网上摘一段下来</p>
+
+<h4 id="死锁条件">死锁条件</h4>
+
+<ol>
+<li><p>互斥(Mutual exclusion)。进程对所分配到的资源进行排它性使用，在一段时间内某资源只由一个进程占用</p></li>
+
+<li><p>持有并等待(Hold and wait)。指某个进程已经持有了一个或多个资源，但是还要请求其他资源，而它请求的资源不能立即获得，需要等待。</p></li>
+
+<li><p>不可抢占(No preemption)。即进程已经获取的资源在使用过程中不能被其他进程抢占，只能在使用完后，由该进程自己释放。</p></li>
+
+<li><p>环路等待(Circular wait)。即形成进程和请求资源之间的环路</p></li>
+</ol>
+
+<h4 id="避免死锁">避免死锁</h4>
+
+<ol>
+<li><p>打破互斥条件：改造独占性资源为虚拟资源，大部分资源已无法改造</p></li>
+
+<li><p>打破不可抢占条件：当一进程占有一独占性资源后又申请一独占性资源而无法满足，则退出原占有的资源</p></li>
+
+<li><p>打破占有且申请条件：采用资源预先分配策略，即进程运行前申请全部资源，满足则运行，不然就等待，这样就不会占有且申请。</p></li>
+
+<li><p>打破循环等待条件：实现资源有序分配策略，对所有设备实现分类编号，所有进程只能采用按序号递增的形式申请资源</p></li>
+</ol>
+
+<p>这些只是一些原则上的东西，只要死锁四个条件之一不符合，就不会发生死锁</p>
+
+<p>还需在代码里多体会呀</p>
+
+<h3 id="linux命令-查看端口占用-cpu负载-内存占用-如何发送信号给一个进程">linux命令，查看端口占用，cpu负载，内存占用，如何发送信号给一个进程</h3>
+
+<p>这个考察就是基本命令了</p>
+
+<p>查看端口：具体可以参考<code>lsof</code>和<code>netstat</code>的使用</p>
+
+<p>cpu负载和内存占用可以用<code>htop</code>，这个需要下载</p>
+
+<p>如何发送信号可以参考<code>kill</code>相关命令，比如<code>kill -9 pid</code>就是杀死某进程，还有挂起、中断等信号</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/golang/golang-pipeline/">Golang Pipeline</a></li>
+        
+        <li><a href="/posts/golang/golang-makevsnew/">Golang make vs new</a></li>
+        
+        <li><a href="/posts/golang/golang-map/">Golang Map</a></li>
+        
+        <li><a href="/posts/golang/golang-channel/">Golang Channel</a></li>
+        
+        <li><a href="/posts/golang/golang-interface/">Golang Interface</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95">面试</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

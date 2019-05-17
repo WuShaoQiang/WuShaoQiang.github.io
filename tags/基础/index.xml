@@ -13,10 +13,10 @@
     
     <item>
       <title>Go圣经读书笔记</title>
-      <link>https://wushaoqiang.github.io/posts/golang-bible/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-bible/</link>
       <pubDate>Sun, 17 Mar 2019 02:13:08 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-bible/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-bible/</guid>
       <description>第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
 func main() { var s, sep string for i := 0; i &amp;lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &amp;quot; &amp;quot; } fmt.Println(s) }  运行go run main.go 123
 输出/tmp/go-build115927302/b001/exe/main 123
@@ -28,10 +28,10 @@ counts := make(map[string]int) input := bufio.</description>
     
     <item>
       <title>Go语言实战</title>
-      <link>https://wushaoqiang.github.io/posts/golang-inaction/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-inaction/</link>
       <pubDate>Sun, 17 Mar 2019 02:11:56 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-inaction/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-inaction/</guid>
       <description>Go语言优点：
  Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
  Go语言内置并发机制，对并发有着更好的性能
@@ -42,10 +42,10 @@ counts := make(map[string]int) input := bufio.</description>
     
     <item>
       <title>Go语言高级编程</title>
-      <link>https://wushaoqiang.github.io/posts/golang-highlevel/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-highlevel/</link>
       <pubDate>Sun, 17 Mar 2019 02:09:45 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-highlevel/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-highlevel/</guid>
       <description>感谢 在文章开头感谢两位作者:柴树杉和曹春晖
 这篇文章是开源的，欢迎大家去阅读
 本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！

@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Module</title>
-      <link>https://wushaoqiang.github.io/posts/golang-module/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-module/</link>
       <pubDate>Fri, 10 May 2019 21:33:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-module/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-module/</guid>
       <description>在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
 不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
 不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份

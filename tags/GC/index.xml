@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang GC</title>
-      <link>https://wushaoqiang.github.io/posts/golang-GC/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-GC/</link>
       <pubDate>Sat, 27 Apr 2019 12:48:58 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-GC/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-GC/</guid>
       <description>用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
 参考  legendtkl
  Golang UK Conference 2017 | Will Sewell &amp;amp; Jim Fisher - Golang&amp;rsquo;s Realtime GC in Theory and Practice

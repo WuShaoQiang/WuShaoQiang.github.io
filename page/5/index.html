@@ -257,7 +257,7 @@ func addDigits(num int) int { if num &lt;= 9 { return num } if num%9 == 0 { retu
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux-apt/" title="Ubuntu apt" >Ubuntu apt</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-apt/" title="Ubuntu apt" >Ubuntu apt</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -279,13 +279,13 @@ apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有�
 当然，apt-get并没有被遗弃，也有很多人在用
 常用命令 更新仓库 sudo apt update 更新本地可更新的 sudo apt upgrade 一键更新 sudo apt update &amp;&amp; sudo apt upgrade -y 安装，如果pkg本身就已经安装，这个就是更新操作了 sudo apt install &lt;pkg&gt; 如果安装的包存在，不要更新，如果不存在，就安装 sudo apt install &lt;pkg&gt; --no-upgrade 如果包存在就更新，不存在也不安装 sudo apt install &lt;pkg&gt; --only-upgrade 指定版本安装 sudo apt install &lt;pkg&gt;=&lt;version&gt; 删除(不包括配置文件) sudo apt remove &lt;pkg&gt; 彻底删除(包括配置文件) sudo apt purge &lt;pkg&gt; 显示出这个term所有的package apt search &lt;term&gt; 这个可以显示pkg详细信息 apt show &lt;pkg&gt; 显示已安装的pkg apt list --installed 自动清除(清除那些没有用的pkg) sudo apt autoremove  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-apt/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-apt/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-sync-map/" title="Golang Sync Map" >Golang Sync Map</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/" title="Golang Sync Map" >Golang Sync Map</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -319,7 +319,7 @@ Youtu
 方法 func (m *Map) Delete(key interface{}) func (m *Map) Load(key interface{}) (value interface{}, ok bool) func (m *Map) LoadOrStore(key, value interface{}) (actual interface{}, loaded bool) func (m *Map) Range(f func(key, value interface{}) bool) func (m *Map) Store(key, value interface{})  最基本的一些存取删除等操作已经实现
 剖析 关于结构方面 type Map struct { mu Mutex // read contains the portion of the map's contents that are safe for // concurrent access (with or without mu held).……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-sync-map/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/">阅读全文</a></p>
                         </article>
                     
 

@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Errandpanic</title>
-      <link>https://wushaoqiang.github.io/posts/golang-errandpanic/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-errandpanic/</link>
       <pubDate>Thu, 11 Apr 2019 21:28:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-errandpanic/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-errandpanic/</guid>
       <description>笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
 本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
 直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常

@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-gin/">Golang Gin</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">Golang Gin</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -96,14 +96,14 @@
                                  中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
 func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
 gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-gin/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-blog/">Golang Build blog with gin</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">Golang Build blog with gin</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -125,14 +125,14 @@ gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()�
  endless &mdash;服务器热启动
  swag &mdash;API文档
   ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-blog/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/learningGo/">Go琐碎笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/learningGo/">Go琐碎笔记</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -158,7 +158,7 @@ res, ok := map[...] 中的ok变量可以用来判断key是否存在
 func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
 norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
 |类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/learningGo/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/learningGo/">阅读全文</a></p>
                             </div>
                         </article>
                     

@@ -13,10 +13,10 @@
     
     <item>
       <title>Data Structure Tree</title>
-      <link>https://wushaoqiang.github.io/posts/data-structure-bplus-tree/</link>
+      <link>https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/</link>
       <pubDate>Mon, 13 May 2019 21:21:24 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/data-structure-bplus-tree/</guid>
+      <guid>https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/</guid>
       <description>为了搞明白关于数据库的一些索引结构开的一篇数据结构-树博客
 前言 这只是笔者的一些笔记和觉得不错的教学资源,分享一下
 推荐一个可视化的数据结构网站
@@ -53,10 +53,10 @@ AVL 参考Youtube学习
     
     <item>
       <title>Data Structure</title>
-      <link>https://wushaoqiang.github.io/posts/data-structure/</link>
+      <link>https://wushaoqiang.github.io/posts/data-structure/data-structure/</link>
       <pubDate>Sun, 28 Apr 2019 11:03:57 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/data-structure/</guid>
+      <guid>https://wushaoqiang.github.io/posts/data-structure/data-structure/</guid>
       <description> 前段时间复习了一些数据结构，一直没来得及总结一下
 链表(双向) 单向链表和循环链表思路是差不多的
 结构体 type LinkListNode struct { Value interface{} Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  </description>

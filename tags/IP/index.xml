@@ -13,10 +13,10 @@
     
     <item>
       <title>IPv4 数据报格式与分片</title>
-      <link>https://wushaoqiang.github.io/posts/ip-message-field/</link>
+      <link>https://wushaoqiang.github.io/posts/computer-network/ip-message-field/</link>
       <pubDate>Mon, 22 Apr 2019 20:21:55 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/ip-message-field/</guid>
+      <guid>https://wushaoqiang.github.io/posts/computer-network/ip-message-field/</guid>
       <description>直接上图  版本号
  首部长度：一般为20
  服务类型：为了区分数据报，有点想女士优先这种

@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Exercism</title>
-      <link>https://wushaoqiang.github.io/posts/golang-exercism/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-exercism/</link>
       <pubDate>Sun, 17 Mar 2019 02:15:05 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-exercism/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-exercism/</guid>
       <description>Exercism &amp;ndash; Bob 我的方法：(总之非常愚蠢就是了)
 func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They&#39;re here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &amp;quot;&amp;quot;) { return &amp;quot;Fine. Be that way!&amp;quot; } whitespace := true for _, item := range []byte(remark) { if !</description>
     </item>

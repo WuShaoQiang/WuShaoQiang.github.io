@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Golang Exercism | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Golang Exercism - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-17T02:15:05&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-17T02:15:05&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Golang Exercism">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golang/golang-exercism/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Golang Exercism</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月17日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="exercism-bob">Exercism &ndash; Bob</h3>
+
+<p>我的方法：(总之非常愚蠢就是了)</p>
+
+<pre><code class="language-go">func Hey(remark string) string {
+	// Write some code here to pass the test suite.
+	// Then remove all the stock comments.
+	// They're here to help you get started but they only clutter a finished solution.
+	// If you leave them in, reviewers may protest!
+
+	if strings.EqualFold(remark, &quot;&quot;) {
+		return &quot;Fine. Be that way!&quot;
+	}
+
+	whitespace := true
+	for _, item := range []byte(remark) {
+		if !strings.EqualFold(string(item), &quot; &quot;) &amp;&amp; !strings.EqualFold(string(item), &quot;\t&quot;) &amp;&amp; !strings.EqualFold(string(item), &quot;\n&quot;) &amp;&amp; !strings.EqualFold(string(item), &quot;\r&quot;) {
+			whitespace = false
+			break
+		}
+	}
+	if whitespace {
+		return &quot;Fine. Be that way!&quot;
+	}
+
+	if strings.Contains(remark, &quot;?&quot;) &amp;&amp; strings.Compare(strings.ToUpper(remark), remark) == 0 &amp;&amp; strings.Compare(strings.ToLower(remark), remark) != 0 {
+		return &quot;Calm down, I know what I'm doing!&quot;
+	}
+
+	if strings.Contains(remark, &quot;?&quot;) &amp;&amp; strings.LastIndex(remark, &quot;?&quot;) == strings.Index(remark, &quot;?&quot;) {
+		if len(remark) &gt; strings.LastIndex(remark, &quot;?&quot;)+1 {
+			notwhitespace := false
+			for _, item := range []byte(remark[strings.Index(remark, &quot;?&quot;)+1:]) {
+				if !strings.EqualFold(string(item), &quot; &quot;) {
+					notwhitespace = true
+					break
+				}
+			}
+			if notwhitespace {
+				return &quot;Whatever.&quot;
+			} else {
+				return &quot;Sure.&quot;
+			}
+		} else {
+			return &quot;Sure.&quot;
+		}
+	}
+
+	if strings.Compare(strings.ToUpper(remark), remark) == 0 &amp;&amp; strings.Compare(strings.ToLower(remark), remark) != 0 {
+		return &quot;Whoa, chill out!&quot;
+	} else {
+		return &quot;Whatever.&quot;
+	}
+	return &quot;&quot;
+}
+
+</code></pre>
+
+<p>他人的方法(@ivgalic)：</p>
+
+<pre><code class="language-go">func hasLetters(str string) bool {
+	for _, x := range str {
+		if unicode.IsLetter(x) {
+			return true
+		}
+	}
+	return false
+}
+
+// Hey should have a comment documenting it.
+func Hey(remark string) string {
+	isQuestion := strings.HasSuffix(strings.TrimSpace(remark), &quot;?&quot;)
+	isShout := strings.ToUpper(remark) == remark &amp;&amp; hasLetters(remark)
+	isEmpty := strings.TrimSpace(remark) == &quot;&quot;
+
+	if isEmpty {
+		return &quot;Fine. Be that way!&quot;
+	} else if isQuestion &amp;&amp; isShout {
+		return &quot;Calm down, I know what I'm doing!&quot;
+	} else if isShout {
+		return &quot;Whoa, chill out!&quot;
+	} else if isQuestion {
+		return &quot;Sure.&quot;
+	} else {
+		return &quot;Whatever.&quot;
+	}
+}
+</code></pre>
+
+<p>主要用到了unicode和strings</p>
+
+<p>利用for index, x := range str 来遍历字符串,index是数组的序号，x是单个遍历的字符</p>
+
+<pre><code>0 : S 1 : o 2 : m 3 : e 4 : t 5 : h 6 : i 7 : n 8 : g
+</code></pre>
+
+<p><code>unicode.IsLetter(r rune) bool</code> : 判断是否是字母</p>
+
+<p><code>strings.HasSuffix(s string,c string) bool</code> : 判断s的结尾是不是c</p>
+
+<p><code>strings.TrimSpace(s string) string</code> : 将字符串s前后的空格字符去掉</p>
+
+<p><code>strings.ToUpper(s string) string</code> : 全部大写</p>
+
+<p>总结：熟悉strings对字符串处理有很大帮助。</p>
+
+<h3 id="exercism-acronym">Exercism &ndash; Acronym</h3>
+
+<p>我的方法(愚蠢的方法)：</p>
+
+<pre><code class="language-go">var b bytes.Buffer
+	var whilespace []byte = []byte(&quot; &quot;)
+	line := []byte(&quot;-&quot;)
+	b.Grow(64)
+	string_bytes := []byte(s)
+	// fmt.Println(len(string_bytes))
+	b.WriteByte(string_bytes[0])
+	for i := 1; i &lt; len(string_bytes); i++ {
+		if string_bytes[i] == whilespace[0] {
+			if string_bytes[i+1] != line[0] {
+				b.WriteByte(string_bytes[i+1])
+			}
+			continue
+		}
+		if string_bytes[i] == line[0] {
+			if string_bytes[i+1] != whilespace[0] {
+				b.WriteByte(string_bytes[i+1])
+				continue
+			}
+
+		}
+	}
+	return strings.ToUpper(b.String())
+</code></pre>
+
+<p>他人的方法(@ivgalic):</p>
+
+<pre><code class="language-go">fields := strings.FieldsFunc(input, func(r rune) bool {
+		return !unicode.IsLetter(r) &amp;&amp; !(r == '\'')
+	})
+	abbrev := make([]rune, len(fields))
+	for idx, field := range fields {
+		abbrev[idx] = ([]rune(field))[0]
+	}
+	fmt.Println(strings.ToUpper(string(abbrev)))
+</code></pre>
+
+<p><code>strings.FieldsFunc(s string , f func(r rune) bool)</code>: 把输入的字符串按照 f函数的规律分割成[]strings</p>
+
+<p><code>for idx, field := range fields</code> : 遍历[]string也可以用for range来遍历</p>
+
+<p><code>string([] rune)</code>可以直接转换到字符串</p>
+
+<h3 id="exercism-twofer">Exercism &ndash; twofer</h3>
+
+<pre><code class="language-go">name = strings.TrimSpace(name)
+	if name == &quot;&quot; {
+		return &quot;One for you, one for me.&quot;
+	} else {
+		str := []string{&quot;One for &quot;, name, &quot;, one for me.&quot;}
+		return strings.Join(str, &quot;&quot;)
+	}
+
+if name == &quot;&quot; {
+		name = &quot;you&quot;
+	}
+	return fmt.Sprintf(&quot;One for %s, one for me.&quot;, name)
+</code></pre>
+
+<ul>
+<li>字符串可以直接用 == != 来比较</li>
+<li><code>[] string{..., ..., ...}</code> 做成[] string，其他的也可以用{}来创建数组</li>
+<li><code>strings.Join(s []string, seq string)</code> : 将字符串数组用seq连接成一个字符串</li>
+<li><code>fmt.Sprintf(s string, interface{}) string</code> : 将字符串里面的%&hellip;用 interface{}代替，返回一个字符串</li>
+</ul>
+
+<h3 id="exercism-hamming">Exercism &ndash; Hamming</h3>
+
+<p>我的方法：</p>
+
+<pre><code class="language-go">package hamming
+
+import (
+	&quot;errors&quot;
+)
+
+func Distance(a, b string) (int, error) {
+	if len(a) != len(b) {
+		return 0, errors.New(&quot;length different&quot;)
+	}
+	var count int
+	a_rune := make([]rune, len(a))
+	b_rune := make([]rune, len(a))
+	for a_index, a_single := range a {
+		a_rune[a_index] = a_single
+	}
+
+	for b_index, b_single := range b {
+		b_rune[b_index] = b_single
+	}
+
+	for index, _ := range a_rune {
+		if a_rune[index] != b_rune[index] {
+			count += 1
+		}
+	}
+
+	return count, nil
+}
+</code></pre>
+
+<p>他人的方法(@mpjmarshall):</p>
+
+<pre><code class="language-go">package hamming
+
+import (
+	&quot;errors&quot;
+)
+
+//Distance finds the hamming distance between two DNA strands.
+func Distance(a, b string) (int, error) {
+
+	hammingCount := 0
+
+	if len(a) != len(b) {
+		return 0, errors.New(&quot;Not equal length&quot;)
+	} else if len(a) == 0 &amp;&amp; len(b) == 0 {
+		return 0, nil
+	}
+
+	for i := 0; i &lt; len(a); i++ {
+		if a[i] != b[i] {
+			hammingCount++
+		}
+
+	}
+	return hammingCount, nil
+
+}
+</code></pre>
+
+<ul>
+<li><code>errors.New(s string) error</code> 可以返回一个<code>error</code>类型的对象，用于自己创建错误</li>
+<li><code>make([] rune,len(a))</code> : 创建一个长度为<code>len(a)</code>的<code>rune</code>数组，也可用于创建其它数据类型的数组。</li>
+<li>字符串其实是可以直接用下角标来取出字符的。(局限与ASCII)</li>
+<li>要遍历汉字，先存到<code>[]rune</code>，再用<code>for range</code></li>
+</ul>
+
+<h3 id="exercism-space-age">Exercism &ndash; space_age</h3>
+
+<p>我的方法：</p>
+
+<pre><code class="language-go">package space
+
+type Planet string
+
+func Age(second float64, planet Planet) float64 {
+	const earth_year_bysecond float64 = 31557600.0
+	const earth2Mercury float64 = 0.2408467
+	const earth2Venus float64 = 0.61519726
+	const earth2Mars float64 = 1.8808158
+	const earth2Jupiter float64 = 11.862615
+	const earth2Saturn float64 = 29.447498
+	const earth2Uranus float64 = 84.016846
+	const earth2Neptune float64 = 164.79132
+
+	switch planet {
+	case &quot;Earth&quot;:
+		return second / earth_year_bysecond
+	case &quot;Mercury&quot;:
+		return second / earth_year_bysecond / earth2Mercury
+	case &quot;Venus&quot;:
+		return second / earth_year_bysecond / earth2Venus
+	case &quot;Mars&quot;:
+		return second / earth_year_bysecond / earth2Mars
+	case &quot;Jupiter&quot;:
+		return second / earth_year_bysecond / earth2Jupiter
+	case &quot;Saturn&quot;:
+		return second / earth_year_bysecond / earth2Saturn
+	case &quot;Uranus&quot;:
+		return second / earth_year_bysecond / earth2Uranus
+	case &quot;Neptune&quot;:
+		return second / earth_year_bysecond / earth2Neptune
+	}
+	return 0
+}
+</code></pre>
+
+<p>他人的方法(@Myifan610)</p>
+
+<pre><code class="language-go">package space
+
+import (
+	&quot;fmt&quot;
+	&quot;strconv&quot;
+)
+
+type Planet = string
+var orbitalPeriod = map[Planet]float64{
+	&quot;Earth&quot;:   1.0,
+	&quot;Mercury&quot;: 0.2408467,
+	&quot;Venus&quot;:   0.61519726,
+	&quot;Mars&quot;:    1.8808158,
+	&quot;Jupiter&quot;: 11.862615,
+	&quot;Saturn&quot;:  29.447498,
+	&quot;Uranus&quot;:  84.016846,
+	&quot;Neptune&quot;: 164.79132,
+}
+func Age(seconds float64, planet string) float64 {
+	vaule := seconds/(31557600 * orbitalPeriod[planet])
+	res,_ :=strconv.ParseFloat(fmt.Sprintf(&quot;%.2f&quot;, vaule),64)
+	return res
+}
+
+    map[...]... : 映射
+    strconv.ParseFloat(fmt.Sprintf(&quot;%.2f&quot;,vaule),64) : 将value这个值保留两位小(此时是字符串形式)，利用ParseFloat转换为float64
+</code></pre>
+
+<h3 id="exercism-droprains">Exercism &ndash; droprains</h3>
+
+<p>我的方法：</p>
+
+<pre><code class="language-go">package raindrops
+
+import (
+	&quot;fmt&quot;
+	&quot;math&quot;
+	&quot;strconv&quot;
+)
+
+func Convert(input int) string {
+	isPling := false
+	isPlong := false
+	isPlang := false
+
+	if math.Mod(float64(input), 3) == 0 {
+		isPling = true
+	}
+	if math.Mod(float64(input), 5) == 0 {
+		isPlang = true
+	}
+	if math.Mod(float64(input), 7) == 0 {
+		isPlong = true
+	}
+
+	if isPling || isPlang || isPlong {
+		var str string = &quot;&quot;
+		if isPling {
+			str = fmt.Sprintf(&quot;%sPling&quot;, str)
+		}
+		if isPlang {
+			str = fmt.Sprintf(&quot;%sPlang&quot;, str)
+		}
+		if isPlong {
+			str = fmt.Sprintf(&quot;%sPlong&quot;, str)
+		}
+		return str
+	} else {
+		return strconv.Itoa(input)
+	}
+}
+</code></pre>
+
+<p>他人的方法(@snoqadam):</p>
+
+<pre><code class="language-go">package raindrops
+
+import (
+	&quot;strconv&quot;
+	&quot;strings&quot;
+)
+
+// Convert Pling Plang Plong
+func Convert(input int) string {
+	var output []string
+	for _, i := range []int{3, 5, 7} {
+		if input%i == 0 {
+			switch i {
+			case 3:
+				output = append(output, &quot;Pling&quot;)
+			case 5:
+				output = append(output, &quot;Plang&quot;)
+			case 7:
+				output = append(output, &quot;Plong&quot;)
+			}
+		}
+	}
+	if len(output) == 0 {
+		return strconv.Itoa(input)
+	}
+	return strings.Join(output, &quot;&quot;)
+}
+</code></pre>
+
+<ul>
+<li><code>math.Mod(x, y float64)</code> : 浮点类型的取余</li>
+<li><code>x%y</code> ： 整形取余     x/y : 取模</li>
+<li>利用<code>Sprintf</code>可以构造字符串</li>
+<li>也可以用字符串数组，然后用<code>strings.Join()</code>来连接字符串</li>
+<li><code>strconv.Itoa()</code> : 是int类型转换为字符串类型</li>
+<li>字符串之间可以直接用 <code>+</code> 连接、</li>
+</ul>
+
+<h3 id="exercism-scrabble-score">Exercism &ndash; scrabble_score</h3>
+
+<p>我的方法：</p>
+
+<pre><code class="language-go">package scrabble
+
+import (
+	&quot;strings&quot;
+)
+
+func Score(input string) int {
+	var letterMap = map[string]int{
+		&quot;a&quot;: 1, &quot;b&quot;: 3, &quot;c&quot;: 3, &quot;d&quot;: 2, &quot;e&quot;: 1,
+		&quot;f&quot;: 4, &quot;g&quot;: 2, &quot;h&quot;: 4, &quot;i&quot;: 1, &quot;j&quot;: 8,
+		&quot;k&quot;: 5, &quot;l&quot;: 1, &quot;m&quot;: 3, &quot;n&quot;: 1, &quot;o&quot;: 1,
+		&quot;p&quot;: 3, &quot;q&quot;: 10, &quot;r&quot;: 1, &quot;s&quot;: 1, &quot;t&quot;: 1,
+		&quot;u&quot;: 1, &quot;v&quot;: 4, &quot;w&quot;: 4, &quot;x&quot;: 8, &quot;y&quot;: 4,
+		&quot;z&quot;: 10,
+	}
+	var Count int = 0
+	str := strings.ToLower(input)
+	for _, single := range str {
+		Count += letterMap[string(single)]
+	}
+	return Count
+}
+</code></pre>
+
+<ul>
+<li>利用map，从字符串映射到int</li>
+</ul>
+
+<h3 id="exercism-isogram">Exercism &ndash; isogram</h3>
+
+<p>我的方法：</p>
+
+<pre><code class="language-go">package isogram
+
+import (
+	&quot;strings&quot;
+	&quot;unicode&quot;
+)
+
+func IsIsogram(input string) bool {
+	var isIsogram bool = true
+	input = strings.ToLower(input)
+	strs := strings.FieldsFunc(input, func(r rune) bool {
+		return !unicode.IsLetter(r)
+	})
+	new_input := strings.Join(strs, &quot;&quot;)
+	for _, single := range new_input {
+		wordCounter := strings.Count(new_input, string(single))
+		if wordCounter != 1 {
+			isIsogram = false
+			break
+		}
+	}
+	return isIsogram
+}
+</code></pre>
+
+<p>他人的方法(@jayceazua):</p>
+
+<pre><code class="language-go">package isogram
+
+import (
+	&quot;strings&quot;
+	&quot;unicode&quot;
+)
+
+// IsIsogram checks if the word input is a isogram
+func IsIsogram(w string) bool {
+	// memoization mapping
+	runes := map[rune] bool {}
+	// make all the characters in the string lowercase
+	wl := strings.ToLower(w)
+	for _, r := range wl {
+		// check if it is a letter
+		if unicode.IsLetter(r) &amp;&amp; runes[r] {
+			return false
+		}
+		runes[r] = true
+	}
+	return true
+}
+</code></pre>
+
+<ul>
+<li>可以用<code>strings.FieldFunc()</code>来滤掉字符串中的非字母字符</li>
+<li><code>for range</code>一个字符串得到的single是<code>rune</code>类型</li>
+<li>临时改变的方案：
+<br /></li>
+</ul>
+
+<pre><code class="language-go">package isogram
+
+import (
+	&quot;strings&quot;
+	&quot;unicode&quot;
+)
+
+func IsIsogram(input string) bool {
+	var isIsogram bool = true
+	new_input := strings.ToLower(input)
+	for _, single := range new_input {
+		if unicode.IsLetter(single) {
+			wordCounter := strings.Count(new_input, string(single))
+			if wordCounter != 1 {
+				isIsogram = false
+				break
+			}
+		}
+	}
+	return isIsogram
+}
+</code></pre>
+
+<h3 id="exercism-reverse-string">Exercism &ndash; reverse_string</h3>
+
+<p>我的方法：</p>
+
+<pre><code class="language-go">package reverse
+
+import &quot;fmt&quot;
+
+func String(input string) string {
+	input_rune := []rune(input)
+	strs := make([]rune, len(input_rune))
+	var string_reverse string
+	for index, single := range input_rune {
+		strs[len(input_rune)-1-index] = single
+	}
+	for _, str := range strs {
+		string_reverse += fmt.Sprintf(&quot;%c&quot;, str)
+	}
+	return string_reverse
+}
+</code></pre>
+
+<ul>
+<li>非常要注意一个点  <code>string == string</code> 实质上是 <code>[]byte(string) == []byte(string)</code> 也就是通过<code>slice</code>来比较的</li>
+<li>处理字符串时，如果包含特殊字符，可以转换为<code>[]rune</code>操作</li>
+</ul>
+
+<p>他人的方法(@simonmarton):</p>
+
+<pre><code class="language-go">package reverse
+
+import &quot;strings&quot;
+
+// String reverses string
+func String(input string) string {
+	var chars = strings.Split(input, &quot;&quot;)
+
+	for i := 0; i &lt; len(chars)/2; i++ {
+		j := len(chars) - i - 1
+
+		chars[i], chars[j] = chars[j], chars[i]
+	}
+
+	return strings.Join(chars, &quot;&quot;)
+}
+</code></pre>
+
+<p>使用了简单的对调也可以实现</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/golang/golang-bible/">Go圣经读书笔记</a></li>
+        
+        <li><a href="/posts/golang/golang-inaction/">Go语言实战</a></li>
+        
+        <li><a href="/posts/golang/golang-highlevel/">Go语言高级编程</a></li>
+        
+        <li><a href="/posts/golang/golang-leetcode/">Golang--Leetcode</a></li>
+        
+        <li><a href="/posts/golang/golangstd-unicode/">Golang标准库--Unicode</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Exercism">Exercism</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

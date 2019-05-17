@@ -78,57 +78,57 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/good-resource/</loc>
+    <loc>https://wushaoqiang.github.io/posts/others/good-resource/</loc>
     <lastmod>2019-05-13T22:54:34+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/data-structure-bplus-tree/</loc>
+    <loc>https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/</loc>
     <lastmod>2019-05-13T21:21:24+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/gopher-2019/</loc>
+    <loc>https://wushaoqiang.github.io/posts/gopher/gopher-2019/</loc>
     <lastmod>2019-05-13T09:59:56+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/mongodb-installation-and-config/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/</loc>
     <lastmod>2019-05-11T19:39:42+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/mongodb-role/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/</loc>
     <lastmod>2019-05-11T19:39:35+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-module/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-module/</loc>
     <lastmod>2019-05-10T21:33:39+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-mongodb/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-mongodb/</loc>
     <lastmod>2019-05-10T21:17:02+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/</loc>
     <lastmod>2019-05-10T18:54:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/mongodb-schema-validation/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/</loc>
     <lastmod>2019-05-10T16:06:32+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/mongodb-command/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/</loc>
     <lastmod>2019-05-10T00:03:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/sql-vs-nosql/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/sql-vs-nosql/</loc>
     <lastmod>2019-05-09T22:05:07+08:00</lastmod>
   </url>
   
@@ -243,22 +243,22 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/linux-apt/</loc>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-apt/</loc>
     <lastmod>2019-05-07T11:00:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-sync-map/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-sync-map/</loc>
     <lastmod>2019-05-06T18:32:49+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/algorithm-binarysearch/</loc>
+    <loc>https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/</loc>
     <lastmod>2019-05-05T18:24:12+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-slice/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-slice/</loc>
     <lastmod>2019-05-05T11:36:45+08:00</lastmod>
   </url>
   
@@ -358,7 +358,7 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/computer-system/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-system/computer-system/</loc>
     <lastmod>2019-04-30T21:34:14+08:00</lastmod>
   </url>
   
@@ -438,17 +438,17 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/tenToSeventeen/</loc>
+    <loc>https://wushaoqiang.github.io/posts/others/tenToSeventeen/</loc>
     <lastmod>2019-04-28T16:25:41+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/data-structure/</loc>
+    <loc>https://wushaoqiang.github.io/posts/data-structure/data-structure/</loc>
     <lastmod>2019-04-28T11:03:57+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/web-request-process/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/web-request-process/</loc>
     <lastmod>2019-04-28T10:19:02+08:00</lastmod>
   </url>
   
@@ -483,57 +483,57 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-GC/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-GC/</loc>
     <lastmod>2019-04-27T12:48:58+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-dependency-injection/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/</loc>
     <lastmod>2019-04-26T21:05:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-generic/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-generic/</loc>
     <lastmod>2019-04-26T19:55:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/effective-go/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/effective-go/</loc>
     <lastmod>2019-04-25T23:46:13+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/interview2/</loc>
+    <loc>https://wushaoqiang.github.io/posts/interview/interview2/</loc>
     <lastmod>2019-04-25T22:05:12+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/linux-network-management/</loc>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-network-management/</loc>
     <lastmod>2019-04-25T20:29:02+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/linux-process-management/</loc>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-process-management/</loc>
     <lastmod>2019-04-25T17:04:19+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-vscode-problem/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/</loc>
     <lastmod>2019-04-24T20:56:13+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-context/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-context/</loc>
     <lastmod>2019-04-24T19:07:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/interview/</loc>
+    <loc>https://wushaoqiang.github.io/posts/interview/interview/</loc>
     <lastmod>2019-04-24T15:32:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/encryption-basic/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/encryption-basic/</loc>
     <lastmod>2019-04-24T11:03:38+08:00</lastmod>
   </url>
   
@@ -598,52 +598,52 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/SQL-highlevel/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/</loc>
     <lastmod>2019-04-23T10:25:40+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/SQL-basic/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/</loc>
     <lastmod>2019-04-22T23:05:06+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/</loc>
     <lastmod>2019-04-22T20:59:55+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/ip-message-field/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/ip-message-field/</loc>
     <lastmod>2019-04-22T20:21:55+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/http-message-field/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/http-message-field/</loc>
     <lastmod>2019-04-22T19:17:47+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/udp/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/udp/</loc>
     <lastmod>2019-04-22T16:35:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/tcp-flow-control/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/</loc>
     <lastmod>2019-04-22T15:17:17+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/tcp-congestion-control/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/</loc>
     <lastmod>2019-04-22T13:11:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/tcp-connect/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/tcp-connect/</loc>
     <lastmod>2019-04-22T12:52:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/tcp-message-field/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/</loc>
     <lastmod>2019-04-22T12:14:31+08:00</lastmod>
   </url>
   
@@ -683,192 +683,192 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-pipeline/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-pipeline/</loc>
     <lastmod>2019-04-21T10:59:13+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-makevsnew/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-makevsnew/</loc>
     <lastmod>2019-04-21T00:30:06+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-map/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-map/</loc>
     <lastmod>2019-04-20T20:03:42+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-channel/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-channel/</loc>
     <lastmod>2019-04-20T17:19:20+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-interface/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-interface/</loc>
     <lastmod>2019-04-20T13:36:59+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-tips/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-tips/</loc>
     <lastmod>2019-04-18T22:56:20+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/algorithm-sort/</loc>
+    <loc>https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/</loc>
     <lastmod>2019-04-15T20:03:27+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-gin/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-gin/</loc>
     <lastmod>2019-04-14T23:12:41+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-validation/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-validation/</loc>
     <lastmod>2019-04-14T14:43:43+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-blog/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-blog/</loc>
     <lastmod>2019-04-14T13:47:15+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-os/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-os/</loc>
     <lastmod>2019-04-12T20:24:48+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-path-problem/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-path-problem/</loc>
     <lastmod>2019-04-12T17:28:21+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/nice-sentences/</loc>
+    <loc>https://wushaoqiang.github.io/posts/others/nice-sentences/</loc>
     <lastmod>2019-04-12T16:13:54+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/opinion/</loc>
+    <loc>https://wushaoqiang.github.io/posts/others/opinion/</loc>
     <lastmod>2019-04-12T16:13:32+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-log/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-log/</loc>
     <lastmod>2019-04-12T01:34:09+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-errandpanic/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-errandpanic/</loc>
     <lastmod>2019-04-11T21:28:42+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-crawler/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-crawler/</loc>
     <lastmod>2019-04-11T17:35:02+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-handle/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-handle/</loc>
     <lastmod>2019-04-11T11:14:34+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-goquery/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-goquery/</loc>
     <lastmod>2019-04-08T23:10:14+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-request/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-request/</loc>
     <lastmod>2019-04-08T11:37:38+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-gorm/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-gorm/</loc>
     <lastmod>2019-04-05T20:37:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-viper/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-viper/</loc>
     <lastmod>2019-04-05T17:41:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/learn-gitflow/</loc>
+    <loc>https://wushaoqiang.github.io/posts/git/learn-gitflow/</loc>
     <lastmod>2019-04-03T23:27:50+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-mega/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-mega/</loc>
     <lastmod>2019-04-01T15:12:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/questions-network/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/questions-network/</loc>
     <lastmod>2019-03-26T17:27:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-net-http/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-net-http/</loc>
     <lastmod>2019-03-19T20:52:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/definition/</loc>
+    <loc>https://wushaoqiang.github.io/posts/others/definition/</loc>
     <lastmod>2019-03-19T20:07:44+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-exercism/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-exercism/</loc>
     <lastmod>2019-03-17T02:15:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/mysql-basic/</loc>
+    <loc>https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/</loc>
     <lastmod>2019-03-17T02:14:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-bible/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-bible/</loc>
     <lastmod>2019-03-17T02:13:08+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-inaction/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-inaction/</loc>
     <lastmod>2019-03-17T02:11:56+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-highlevel/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-highlevel/</loc>
     <lastmod>2019-03-17T02:09:45+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golang-leetcode/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golang-leetcode/</loc>
     <lastmod>2019-03-17T02:07:37+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-unicode/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-unicode/</loc>
     <lastmod>2019-03-17T02:06:01+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-string/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-string/</loc>
     <lastmod>2019-03-17T02:04:07+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-bytes/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-bytes/</loc>
     <lastmod>2019-03-17T02:03:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/golangstd-bufio/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/golangstd-bufio/</loc>
     <lastmod>2019-03-17T01:59:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/internet-protocal/</loc>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/internet-protocal/</loc>
     <lastmod>2019-03-17T01:58:00+08:00</lastmod>
   </url>
   
@@ -878,12 +878,12 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/linux-note/</loc>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-note/</loc>
     <lastmod>2019-03-17T01:52:15+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/learn-hugo/</loc>
+    <loc>https://wushaoqiang.github.io/posts/others/learn-hugo/</loc>
     <lastmod>2019-03-16T22:33:20+08:00</lastmod>
   </url>
   
@@ -893,12 +893,12 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/learn-git/</loc>
+    <loc>https://wushaoqiang.github.io/posts/git/learn-git/</loc>
     <lastmod>2019-03-15T18:02:59+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/posts/learningGo/</loc>
+    <loc>https://wushaoqiang.github.io/posts/golang/learningGo/</loc>
     <lastmod>2019-03-14T16:10:59+08:00</lastmod>
   </url>
   

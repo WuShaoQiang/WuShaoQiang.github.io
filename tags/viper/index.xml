@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Viper</title>
-      <link>https://wushaoqiang.github.io/posts/golang-viper/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-viper/</link>
       <pubDate>Fri, 05 Apr 2019 17:41:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-viper/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-viper/</guid>
       <description>Github
  Viper is a complete configuration solution for Go applications
  这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用

@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang make vs new</title>
-      <link>https://wushaoqiang.github.io/posts/golang-makevsnew/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-makevsnew/</link>
       <pubDate>Sun, 21 Apr 2019 00:30:06 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-makevsnew/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-makevsnew/</guid>
       <description>make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
  new可以对任何类型作用
   make和new的返回值  make返回主体

@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Handle</title>
-      <link>https://wushaoqiang.github.io/posts/golang-handle/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-handle/</link>
       <pubDate>Thu, 11 Apr 2019 11:14:34 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-handle/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-handle/</guid>
       <description>本文主要解释Golang中http-handler几个容易混淆的概念
 HandleFunc 源代码
 在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用

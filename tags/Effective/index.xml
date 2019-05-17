@@ -13,10 +13,10 @@
     
     <item>
       <title>Effective Go</title>
-      <link>https://wushaoqiang.github.io/posts/effective-go/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/effective-go/</link>
       <pubDate>Thu, 25 Apr 2019 23:46:13 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/effective-go/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/effective-go/</guid>
       <description>参考Effective Go中英双语版
  It&amp;rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
  Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)

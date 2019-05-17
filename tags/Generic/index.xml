@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang 泛型</title>
-      <link>https://wushaoqiang.github.io/posts/golang-generic/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-generic/</link>
       <pubDate>Fri, 26 Apr 2019 19:55:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-generic/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-generic/</guid>
       <description>笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
 泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
 比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是

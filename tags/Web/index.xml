@@ -13,10 +13,10 @@
     
     <item>
       <title>Web请求历程</title>
-      <link>https://wushaoqiang.github.io/posts/web-request-process/</link>
+      <link>https://wushaoqiang.github.io/posts/computer-network/web-request-process/</link>
       <pubDate>Sun, 28 Apr 2019 10:19:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/web-request-process/</guid>
+      <guid>https://wushaoqiang.github.io/posts/computer-network/web-request-process/</guid>
       <description>这几乎是做后端开发面试的时候必问的一道题，答案可以说得很简单，也可以是很复杂，当然面试官喜欢看到你对此有所深入，因此这篇文章就从头到尾详细的讲一遍这个历程
 参考 《计算机网络》
 1 当一台电脑将网线插上，网线的另一端是以太网的交换机(交换机能够知道连接它的机器的MAC地址，如果不清楚交换机是什么，建议自己搜一下，这里不做解释)

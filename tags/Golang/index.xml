@@ -13,19 +13,23 @@
     
     <item>
       <title>Gopher 2019 Testing Talk</title>
-      <link>https://wushaoqiang.github.io/posts/gopher-2019/</link>
+      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2019/</link>
       <pubDate>Mon, 13 May 2019 09:59:56 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/gopher-2019/</guid>
-      <description>go test -coverprofile cover.out go tool cover -html=cover.out -o cover.html  </description>
+      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2019/</guid>
+      <description>这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
+下面是一些我觉得有借鉴价值的东西
+这里是如何查看一个coverage
+// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
+func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &amp;quot;Number 1&amp;quot;: { input: Input{ node: &amp;amp;TreeNode{Val: 5, Left: &amp;amp;TreeNode{Val: 3, Left: &amp;amp;TreeNode{Val: 2}, Right: &amp;amp;TreeNode{Val: 4}}, Right: &amp;amp;TreeNode{Val: 6, Right: &amp;amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &amp;quot;Number 2&amp;quot;: { input: Input{ node: &amp;amp;TreeNode{Val: 5, Left: &amp;amp;TreeNode{Val: 3, Left: &amp;amp;TreeNode{Val: 2}, Right: &amp;amp;TreeNode{Val: 4}}, Right: &amp;amp;TreeNode{Val: 6, Right: &amp;amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.</description>
     </item>
     
     <item>
       <title>Golang Module</title>
-      <link>https://wushaoqiang.github.io/posts/golang-module/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-module/</link>
       <pubDate>Fri, 10 May 2019 21:33:39 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-module/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-module/</guid>
       <description>在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
 不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
 不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
@@ -50,10 +54,10 @@ go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bu
     
     <item>
       <title>Golang Mongodb</title>
-      <link>https://wushaoqiang.github.io/posts/golang-mongodb/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-mongodb/</link>
       <pubDate>Fri, 10 May 2019 21:17:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-mongodb/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-mongodb/</guid>
       <description>简单收集一些基本操作,作为一个笔记查找
 参考官方文章
 package main import ( &amp;quot;context&amp;quot; &amp;quot;fmt&amp;quot; &amp;quot;log&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/bson&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/mongo&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/mongo/options&amp;quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&amp;quot;mongodb://localhost:27017&amp;quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.</description>
@@ -61,10 +65,10 @@ package main import ( &amp;quot;context&amp;quot; &amp;quot;fmt&amp;quot; &amp;q
     
     <item>
       <title>Golang Sync Map</title>
-      <link>https://wushaoqiang.github.io/posts/golang-sync-map/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-sync-map/</link>
       <pubDate>Mon, 06 May 2019 18:32:49 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-sync-map/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-sync-map/</guid>
       <description>Sync.Map简介 Sync.Map就像是map[interface{}]interface{}，只是省去了开发人员关于map在并发时的安全调度设计
 用空间换时间
 Map的线程问题 今天被问到
@@ -87,10 +91,10 @@ Youtu
     
     <item>
       <title>Golang Slice底层</title>
-      <link>https://wushaoqiang.github.io/posts/golang-slice/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-slice/</link>
       <pubDate>Sun, 05 May 2019 11:36:45 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-slice/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-slice/</guid>
       <description>参考 golang blog
 之前一直对slice有一定的误解
 误解  以为是引用传递
@@ -124,19 +128,19 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     
     <item>
       <title>TenToSeventeen</title>
-      <link>https://wushaoqiang.github.io/posts/tenToSeventeen/</link>
+      <link>https://wushaoqiang.github.io/posts/others/tenToSeventeen/</link>
       <pubDate>Sun, 28 Apr 2019 16:25:41 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/tenToSeventeen/</guid>
+      <guid>https://wushaoqiang.github.io/posts/others/tenToSeventeen/</guid>
       <description>代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &amp;gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &amp;gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &amp;lt; 10: strs = append(strs, strconv.</description>
     </item>
     
     <item>
       <title>Golang GC</title>
-      <link>https://wushaoqiang.github.io/posts/golang-GC/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-GC/</link>
       <pubDate>Sat, 27 Apr 2019 12:48:58 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-GC/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-GC/</guid>
       <description>用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
 参考  legendtkl
  Golang UK Conference 2017 | Will Sewell &amp;amp; Jim Fisher - Golang&amp;rsquo;s Realtime GC in Theory and Practice
@@ -163,10 +167,10 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     
     <item>
       <title>Golang 依赖注入</title>
-      <link>https://wushaoqiang.github.io/posts/golang-dependency-injection/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/</link>
       <pubDate>Fri, 26 Apr 2019 21:05:43 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-dependency-injection/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/</guid>
       <description>面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
 没有DI 把所有创建变量放在New函数里面
 type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;amp;Person{} } func NewStudent() *Student{ return &amp;amp;Student{ person:&amp;amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
@@ -175,10 +179,10 @@ type Person struct{ name string age int } type Student struct{ person *Person } 
     
     <item>
       <title>Golang 泛型</title>
-      <link>https://wushaoqiang.github.io/posts/golang-generic/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-generic/</link>
       <pubDate>Fri, 26 Apr 2019 19:55:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-generic/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-generic/</guid>
       <description>笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
 泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
 比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
@@ -198,10 +202,10 @@ class Factory&amp;lt;T&amp;gt;{ private T value; public T getValue() { return va
     
     <item>
       <title>Effective Go</title>
-      <link>https://wushaoqiang.github.io/posts/effective-go/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/effective-go/</link>
       <pubDate>Thu, 25 Apr 2019 23:46:13 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/effective-go/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/effective-go/</guid>
       <description>参考Effective Go中英双语版
  It&amp;rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
  Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)
@@ -218,10 +222,10 @@ Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式�
     
     <item>
       <title>Interview2</title>
-      <link>https://wushaoqiang.github.io/posts/interview2/</link>
+      <link>https://wushaoqiang.github.io/posts/interview/interview2/</link>
       <pubDate>Thu, 25 Apr 2019 22:05:12 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/interview2/</guid>
+      <guid>https://wushaoqiang.github.io/posts/interview/interview2/</guid>
       <description>最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
  这里应该用channel来达到通信
 在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
@@ -249,10 +253,10 @@ Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为�
     
     <item>
       <title>Golang Context</title>
-      <link>https://wushaoqiang.github.io/posts/golang-context/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-context/</link>
       <pubDate>Wed, 24 Apr 2019 19:07:52 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-context/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-context/</guid>
       <description>Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
 参考博客理解Go Context机制
 Golang的执行单元是goroutine，main也是一个goroutine
@@ -271,10 +275,10 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     
     <item>
       <title>Interview</title>
-      <link>https://wushaoqiang.github.io/posts/interview/</link>
+      <link>https://wushaoqiang.github.io/posts/interview/interview/</link>
       <pubDate>Wed, 24 Apr 2019 15:32:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/interview/</guid>
+      <guid>https://wushaoqiang.github.io/posts/interview/interview/</guid>
       <description>本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
 go的优势  Go是Google工程师基于现实世界开发经验进行改进的友好型语言
  简单明了
@@ -303,10 +307,10 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Golang Pipeline</title>
-      <link>https://wushaoqiang.github.io/posts/golang-pipeline/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-pipeline/</link>
       <pubDate>Sun, 21 Apr 2019 10:59:13 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-pipeline/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-pipeline/</guid>
       <description>根据官网博客学习Pipeline
 什么是Pipeline 管道其实就是一系列的Channel连接起来
  通过channel(可能不止一个)来接收数据
@@ -317,10 +321,10 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Golang make vs new</title>
-      <link>https://wushaoqiang.github.io/posts/golang-makevsnew/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-makevsnew/</link>
       <pubDate>Sun, 21 Apr 2019 00:30:06 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-makevsnew/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-makevsnew/</guid>
       <description>make和new的对象  make只能对slice、map、channel作用，比如不能make(int)
  new可以对任何类型作用
   make和new的返回值  make返回主体
@@ -331,10 +335,10 @@ p1 := Person{Name: &amp;quot;SQ&amp;quot;, Age: 1} p2 := Person{Name: &amp;quot;
     
     <item>
       <title>Golang Map</title>
-      <link>https://wushaoqiang.github.io/posts/golang-map/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-map/</link>
       <pubDate>Sat, 20 Apr 2019 20:03:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-map/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-map/</guid>
       <description>Construct: m:=map[key]value{}
  Insert: m[k] = v
  Lookup: v = m[k]
@@ -357,10 +361,10 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
     
     <item>
       <title>Golang Channel</title>
-      <link>https://wushaoqiang.github.io/posts/golang-channel/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-channel/</link>
       <pubDate>Sat, 20 Apr 2019 17:19:20 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-channel/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-channel/</guid>
       <description>这里就不再赘述重要性了
 Channel特性  goroutine-safe
  两个goroutine之间传递数据
@@ -375,10 +379,10 @@ How it work Send  When it is going to send data to the channel, it will acquire 
     
     <item>
       <title>Golang Interface</title>
-      <link>https://wushaoqiang.github.io/posts/golang-interface/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-interface/</link>
       <pubDate>Sat, 20 Apr 2019 13:36:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-interface/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-interface/</guid>
       <description>在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
  concrete type(具体类型,int,string&amp;hellip;)
  abstract type(抽象类型 io.Writer,io.Reader&amp;hellip;)
@@ -394,20 +398,20 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.</description>
     
     <item>
       <title>Golang Tips</title>
-      <link>https://wushaoqiang.github.io/posts/golang-tips/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-tips/</link>
       <pubDate>Thu, 18 Apr 2019 22:56:20 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-tips/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-tips/</guid>
       <description>关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &amp;lt;- 1 string_chan &amp;lt;- &amp;quot;hello&amp;quot; select { case value := &amp;lt;-string_chan: fmt.Println(value) case value := &amp;lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
 关于defer func DeferCalc() { a := 1 b := 2 defer calc(&amp;quot;1&amp;quot;, a, calc(&amp;quot;10&amp;quot;, a, b)) a = 0 defer calc(&amp;quot;2&amp;quot;, a, calc(&amp;quot;20&amp;quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.</description>
     </item>
     
     <item>
       <title>Golang Gin</title>
-      <link>https://wushaoqiang.github.io/posts/golang-gin/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-gin/</link>
       <pubDate>Sun, 14 Apr 2019 23:12:41 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-gin/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-gin/</guid>
       <description> 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
 func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
 gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&amp;quot;/api/v1&amp;quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 </description>
@@ -415,10 +419,10 @@ gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()�
     
     <item>
       <title>Golang Validation</title>
-      <link>https://wushaoqiang.github.io/posts/golang-validation/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-validation/</link>
       <pubDate>Sun, 14 Apr 2019 14:43:43 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-validation/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-validation/</guid>
       <description>Validation项目地址
 创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
  valid.Required(name,&amp;quot;name&amp;quot;)：检验变量不能为空，字符串不能为&amp;quot;&amp;quot;,后面的&amp;quot;name&amp;quot;是用来标识而已
@@ -434,10 +438,10 @@ Result方法 我们拿上面一个返回*Result对象做例子
     
     <item>
       <title>Golang Build blog with gin</title>
-      <link>https://wushaoqiang.github.io/posts/golang-blog/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-blog/</link>
       <pubDate>Sun, 14 Apr 2019 13:47:15 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-blog/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-blog/</guid>
       <description> Package  ini &amp;mdash;配置文件的读取
  com &amp;mdash;功能性
  validation &amp;mdash;做验证
@@ -449,10 +453,10 @@ Result方法 我们拿上面一个返回*Result对象做例子
     
     <item>
       <title>Golang标准库--os</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-os/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-os/</link>
       <pubDate>Fri, 12 Apr 2019 20:24:48 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-os/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-os/</guid>
       <description>Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
 bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
 // Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
@@ -461,10 +465,10 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <item>
       <title>Golang Path Problem</title>
-      <link>https://wushaoqiang.github.io/posts/golang-path-problem/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-path-problem/</link>
       <pubDate>Fri, 12 Apr 2019 17:28:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-path-problem/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-path-problem/</guid>
       <description>笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
 直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
 filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
@@ -481,10 +485,10 @@ filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，
     
     <item>
       <title>Golang Log</title>
-      <link>https://wushaoqiang.github.io/posts/golang-log/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-log/</link>
       <pubDate>Fri, 12 Apr 2019 01:34:09 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-log/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-log/</guid>
       <description>笔者上面总结了一下网上关于错误处理和异常处理的资料，发现不知道什么时候要记录一个信息，什么时候不应该，再去找找别人的经验，总结到这篇博客。当然，笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库
 我们做后台开发，无论有什么语言，都有相应的一套日志记录系统，并且日志记录的信息可能是一些小小的问题，也可能是一些大问题，这个时候就要分级处理了，很多人(包括我之前)都对分级这个界限划分的认识模糊，不知道什么时候该用什么级别的信息
 在很多时候，log给我们提供的级别种类非常多，例如info、warning、debug、error等等，其实我对这些有些难以区分
@@ -507,10 +511,10 @@ stackoverflow上赞同较多的答案说
     
     <item>
       <title>Golang Errandpanic</title>
-      <link>https://wushaoqiang.github.io/posts/golang-errandpanic/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-errandpanic/</link>
       <pubDate>Thu, 11 Apr 2019 21:28:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-errandpanic/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-errandpanic/</guid>
       <description>笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
 本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
 直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
@@ -537,10 +541,10 @@ stackoverflow上赞同较多的答案说
     
     <item>
       <title>Golang Crawler</title>
-      <link>https://wushaoqiang.github.io/posts/golang-crawler/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-crawler/</link>
       <pubDate>Thu, 11 Apr 2019 17:35:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-crawler/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-crawler/</guid>
       <description>笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
 goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
  first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
@@ -550,10 +554,10 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
     
     <item>
       <title>Golang Handle</title>
-      <link>https://wushaoqiang.github.io/posts/golang-handle/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-handle/</link>
       <pubDate>Thu, 11 Apr 2019 11:14:34 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-handle/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-handle/</guid>
       <description>本文主要解释Golang中http-handler几个容易混淆的概念
 HandleFunc 源代码
 在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
@@ -566,10 +570,10 @@ myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说
     
     <item>
       <title>Golang goquery</title>
-      <link>https://wushaoqiang.github.io/posts/golang-goquery/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-goquery/</link>
       <pubDate>Mon, 08 Apr 2019 23:10:14 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-goquery/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-goquery/</guid>
       <description>goquery是一个开源的库，针对解析HTML
 今天在做爬虫的时候用到了一些功能，记录下来方便查阅
 创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&amp;quot;go query Error %s\n&amp;quot;, err) }  doc对象就包含了我们要解析的HTML主体
@@ -586,10 +590,10 @@ Size num := doc.Find(&amp;quot;ul&amp;gt;li&amp;gt;div.job-primary&amp;quot;).Si
     
     <item>
       <title>Golangstd Request</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-request/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-request/</link>
       <pubDate>Mon, 08 Apr 2019 11:37:38 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-request/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-request/</guid>
       <description>最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
 我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
 所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
@@ -601,10 +605,10 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     
     <item>
       <title>Golang Gorm</title>
-      <link>https://wushaoqiang.github.io/posts/golang-gorm/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-gorm/</link>
       <pubDate>Fri, 05 Apr 2019 20:37:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-gorm/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-gorm/</guid>
       <description>连接数据库 Mysql db, err := gorm.Open(&amp;quot;mysql&amp;quot;, &amp;quot;root:123456@tcp/test?charset=utf8&amp;amp;parseTime=True&amp;quot;) if err != nil { panic(&amp;quot;连接数据库失败&amp;quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
 db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
 比如db.CreateTable(&amp;amp;Product{})，在数据库表单里面会得到一个名字为products
@@ -620,10 +624,10 @@ db.Model(&amp;amp;Product).DropColumn(&amp;quot;created_at&amp;quot;)  创建数
     
     <item>
       <title>Golang Viper</title>
-      <link>https://wushaoqiang.github.io/posts/golang-viper/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-viper/</link>
       <pubDate>Fri, 05 Apr 2019 17:41:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-viper/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-viper/</guid>
       <description>Github
  Viper is a complete configuration solution for Go applications
  这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用
@@ -636,10 +640,10 @@ viper.SetConfigName(&amp;quot;config&amp;quot;) // name of config file (without 
     
     <item>
       <title>Golang Mega</title>
-      <link>https://wushaoqiang.github.io/posts/golang-mega/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-mega/</link>
       <pubDate>Mon, 01 Apr 2019 15:12:46 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-mega/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-mega/</guid>
       <description>不积跬步无以至千里，不积小流无以成江海
  本文是博主在学习基础记录的笔记
 2019-04-01到2019-04-04，后面会自己DIY一些内容上去(想做成一个小小的技术论坛)
@@ -649,10 +653,10 @@ viper.SetConfigName(&amp;quot;config&amp;quot;) // name of config file (without 
     
     <item>
       <title>Golang标准库--http</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-net-http/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-net-http/</link>
       <pubDate>Tue, 19 Mar 2019 20:52:05 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-net-http/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-net-http/</guid>
       <description>这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
 Package http doc.go 先来看看官方对这个包的一个解释
 这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
@@ -662,20 +666,20 @@ Package http doc.go 先来看看官方对这个包的一个解释
     
     <item>
       <title>Golang Exercism</title>
-      <link>https://wushaoqiang.github.io/posts/golang-exercism/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-exercism/</link>
       <pubDate>Sun, 17 Mar 2019 02:15:05 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-exercism/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-exercism/</guid>
       <description>Exercism &amp;ndash; Bob 我的方法：(总之非常愚蠢就是了)
 func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They&#39;re here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &amp;quot;&amp;quot;) { return &amp;quot;Fine. Be that way!&amp;quot; } whitespace := true for _, item := range []byte(remark) { if !</description>
     </item>
     
     <item>
       <title>Go圣经读书笔记</title>
-      <link>https://wushaoqiang.github.io/posts/golang-bible/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-bible/</link>
       <pubDate>Sun, 17 Mar 2019 02:13:08 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-bible/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-bible/</guid>
       <description>第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
 func main() { var s, sep string for i := 0; i &amp;lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &amp;quot; &amp;quot; } fmt.Println(s) }  运行go run main.go 123
 输出/tmp/go-build115927302/b001/exe/main 123
@@ -687,10 +691,10 @@ counts := make(map[string]int) input := bufio.</description>
     
     <item>
       <title>Go语言实战</title>
-      <link>https://wushaoqiang.github.io/posts/golang-inaction/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-inaction/</link>
       <pubDate>Sun, 17 Mar 2019 02:11:56 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-inaction/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-inaction/</guid>
       <description>Go语言优点：
  Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
  Go语言内置并发机制，对并发有着更好的性能
@@ -701,10 +705,10 @@ counts := make(map[string]int) input := bufio.</description>
     
     <item>
       <title>Go语言高级编程</title>
-      <link>https://wushaoqiang.github.io/posts/golang-highlevel/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-highlevel/</link>
       <pubDate>Sun, 17 Mar 2019 02:09:45 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-highlevel/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-highlevel/</guid>
       <description>感谢 在文章开头感谢两位作者:柴树杉和曹春晖
 这篇文章是开源的，欢迎大家去阅读
 本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
@@ -721,10 +725,10 @@ copy append可以完成切片的添加 删除 插入操作</description>
     
     <item>
       <title>Golang--Leetcode</title>
-      <link>https://wushaoqiang.github.io/posts/golang-leetcode/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-leetcode/</link>
       <pubDate>Sun, 17 Mar 2019 02:07:37 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-leetcode/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-leetcode/</guid>
       <description>此文章为做题时发现的不足
  Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;amp;Head  &amp;mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
 func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &amp;lt; len(s); i++ { m := make(map[string]bool) for j := i; j &amp;lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &amp;lt; j-i+1 { max = j - i + 1 } } } else { if max &amp;lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &amp;lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {</description>
@@ -732,10 +736,10 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &amp;lt;
     
     <item>
       <title>Golang标准库--Unicode</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-unicode/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-unicode/</link>
       <pubDate>Sun, 17 Mar 2019 02:06:01 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-unicode/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-unicode/</guid>
       <description>unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
 &amp;mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
  无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
@@ -753,29 +757,29 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &amp;lt;
     
     <item>
       <title>Golang标准库--String</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-string/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-string/</link>
       <pubDate>Sun, 17 Mar 2019 02:04:07 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-string/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-string/</guid>
       <description>目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp;amp; copyCheck() (b *Builder) String() string &amp;amp; (b *Builder) Len() int &amp;amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp;amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
 &amp;mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.</description>
     </item>
     
     <item>
       <title>Golang标准库--Bytes</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-bytes/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-bytes/</link>
       <pubDate>Sun, 17 Mar 2019 02:03:03 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-bytes/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-bytes/</guid>
       <description>目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.</description>
     </item>
     
     <item>
       <title>Golang标准库--Bufio</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-bufio/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-bufio/</link>
       <pubDate>Sun, 17 Mar 2019 01:59:52 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-bufio/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-bufio/</guid>
       <description>目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp;amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.</description>
     </item>
     
@@ -795,10 +799,10 @@ Gin 路由常用方法 func (group *RouterGroup) POST(relativePath string, handl
     
     <item>
       <title>Hugo建博客</title>
-      <link>https://wushaoqiang.github.io/posts/learn-hugo/</link>
+      <link>https://wushaoqiang.github.io/posts/others/learn-hugo/</link>
       <pubDate>Sat, 16 Mar 2019 22:33:20 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learn-hugo/</guid>
+      <guid>https://wushaoqiang.github.io/posts/others/learn-hugo/</guid>
       <description>笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。
 所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人
 以下命令都是以我自己建博客的为例
@@ -817,10 +821,10 @@ config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
     
     <item>
       <title>Go琐碎笔记</title>
-      <link>https://wushaoqiang.github.io/posts/learningGo/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/learningGo/</link>
       <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learningGo/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/learningGo/</guid>
       <description>在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
 2019.2.16 go test -tags tagname
 构造数组可以先 make([]int,0)

@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">SQL vs NoSQL</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">SQL vs NoSQL</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -109,14 +109,14 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
  优点:通过一个table将数据连接起来,没有过多的冗余数据
  缺点:对分布式不友好,并且一旦关系多了,会产生混乱
   NoSQL没有关系,全部都是直接存储……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/SQL-highlevel/">SQL 进阶</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">SQL 进阶</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -141,14 +141,14 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
  CHECK
  DEFAULT 默认值，在没有赋值的情况下就是默认值
   NOT NULL 强制不接受NULL，如果不向该字段添加值，就无法插入新纪录或者更新记录……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/SQL-highlevel/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/SQL-basic/">SQL 基础</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/">SQL 基础</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -180,14 +180,14 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
  =,&gt;,&gt;=,&lt;,&lt;= 这些就比较好理解了
  &lt;&gt; 不等于
  BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/SQL-basic/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mysql-basic/">Mysql学习笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/">Mysql学习笔记</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -209,7 +209,7 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
 登录 打开debian.cnf文件： sudo nano /etc/mysql/debian.cnf
 # Automatically generated for Debian scripts. DO NOT TOUCH! [client] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock [mysql_upgrade] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock  这里面有一个叫debian-sys-maint的user
 登录debian-sys-maint： mysql -u debian-sys-maint -p……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mysql-basic/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/">阅读全文</a></p>
                             </div>
                         </article>
                     

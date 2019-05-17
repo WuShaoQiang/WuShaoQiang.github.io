@@ -13,10 +13,10 @@
     
     <item>
       <title>Linux命令笔记</title>
-      <link>https://wushaoqiang.github.io/posts/linux-note/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-note/</link>
       <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-note/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-note/</guid>
       <description>Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
 ifconfig 查看网络连接
 lsof -i:8000 查看端口8000占用情况

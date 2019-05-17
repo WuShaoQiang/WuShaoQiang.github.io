@@ -13,10 +13,10 @@
     
     <item>
       <title>一些名词的定义</title>
-      <link>https://wushaoqiang.github.io/posts/definition/</link>
+      <link>https://wushaoqiang.github.io/posts/others/definition/</link>
       <pubDate>Tue, 19 Mar 2019 20:07:44 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/definition/</guid>
+      <guid>https://wushaoqiang.github.io/posts/others/definition/</guid>
       <description>这里是为了记录一些常用名词的定义，大多参照百度百科和Wiki
 句柄 句柄是一种特殊的智能指针 。当一个应用程序要引用其他系统（如数据库、操作系统）所管理的内存块或对象时，就要使用句柄
 在Golang里面，我们使用函数打开一个文件得到的就是一个文件句柄(打开的文件就是操作系统所管理的内存块)

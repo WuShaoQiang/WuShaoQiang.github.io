@@ -207,7 +207,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-GC/" title="Golang GC" >Golang GC</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/" title="Golang GC" >Golang GC</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -245,13 +245,13 @@
 在最后面讲到GC的问题的时候，发现GC的一个问题
  对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-GC/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/" title="Golang 依赖注入" >Golang 依赖注入</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/" title="Golang 依赖注入" >Golang 依赖注入</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -271,13 +271,13 @@
 type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
 有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-generic/" title="Golang 泛型" >Golang 泛型</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/" title="Golang 泛型" >Golang 泛型</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -308,13 +308,13 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
 对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
 这里是Go2官方对这些修改的想法视频……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-generic/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/effective-go/" title="Effective Go" >Effective Go</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/effective-go/" title="Effective Go" >Effective Go</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -342,7 +342,7 @@ Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式�
 只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
 若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/effective-go/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/effective-go/">阅读全文</a></p>
                         </article>
                     
 

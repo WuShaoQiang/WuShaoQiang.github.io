@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Sync Map</title>
-      <link>https://wushaoqiang.github.io/posts/golang-sync-map/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-sync-map/</link>
       <pubDate>Mon, 06 May 2019 18:32:49 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-sync-map/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-sync-map/</guid>
       <description>Sync.Map简介 Sync.Map就像是map[interface{}]interface{}，只是省去了开发人员关于map在并发时的安全调度设计
 用空间换时间
 Map的线程问题 今天被问到
@@ -39,10 +39,10 @@ Youtu
     
     <item>
       <title>Golang Map</title>
-      <link>https://wushaoqiang.github.io/posts/golang-map/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-map/</link>
       <pubDate>Sat, 20 Apr 2019 20:03:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-map/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-map/</guid>
       <description>Construct: m:=map[key]value{}
  Insert: m[k] = v
  Lookup: v = m[k]

@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Context</title>
-      <link>https://wushaoqiang.github.io/posts/golang-context/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-context/</link>
       <pubDate>Wed, 24 Apr 2019 19:07:52 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-context/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-context/</guid>
       <description>Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
 参考博客理解Go Context机制
 Golang的执行单元是goroutine，main也是一个goroutine

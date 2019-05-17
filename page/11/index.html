@@ -68,7 +68,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/interview2/" title="Interview2" >Interview2</a>
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview2/" title="Interview2" >Interview2</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -107,13 +107,13 @@
 Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
 所以查找pid有lsof -i:port和netstat -p |grep port……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview2/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview2/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux-network-management/" title="Linux 网络管理" >Linux 网络管理</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/" title="Linux 网络管理" >Linux 网络管理</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -143,13 +143,13 @@ netstat -r：显示路由
 -t：tcp
 -u：udp……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-network-management/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux-process-management/" title="Linux 进程管理" >Linux 进程管理</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/" title="Linux 进程管理" >Linux 进程管理</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -184,13 +184,13 @@ pstree (username) 显示用户的进程
 jobs jobs 查看后台运行的进程
 fg %num 将后台程序转移到前台……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux-process-management/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/" title="Golang Vscode Problem" >Golang Vscode Problem</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/" title="Golang Vscode Problem" >Golang Vscode Problem</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -213,13 +213,13 @@ go get github.com/nsf/gocode,这是一个老版本的gocode，现在已经被新
 这个时候vscode会提示你下载推荐版本的gocode，按下载就可以了
 疑问 我也曾经重试下载最新版gocode，但是没用，不知道为什么直接在vscode更新就有用……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-vscode-problem/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-context/" title="Golang Context" >Golang Context</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-context/" title="Golang Context" >Golang Context</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -249,13 +249,13 @@ req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil)
  如果Request的context是nil，那么它会返回一个context.Background()
 var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-context/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-context/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/interview/" title="Interview" >Interview</a>
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview/" title="Interview" >Interview</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -295,13 +295,13 @@ go struct能不能比较 如果是值类型，是可以比较的，比如
 p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Age: 1} if p1 == p2 { fmt.Println(&quot;same&quot;) }  这样是有输出的
 那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -330,7 +330,7 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
  双方用对称秘钥进行接下来的通信
   ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/encryption-basic/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">

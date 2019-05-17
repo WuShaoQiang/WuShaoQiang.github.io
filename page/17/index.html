@@ -68,7 +68,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/questions-network/" title="Questions Network" >Questions Network</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/" title="Questions Network" >Questions Network</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -94,13 +94,13 @@ Session 在mega项目里遇到一个问题
 这样也就验证了，一个用户在服务器上只有一个Session id？
 resp.Body resp, err := http.DefaultClient.Do(req) if err != nil { log.Fatalf(&quot;Do Error %s\n&quot;, err) } defer resp.Body.Close() body, err := ioutil.ReadAll(resp.Body) if err != nil { log.Fatalf(&quot;ReadAll Error %s\n&quot;, err) } // fmt.Println(string(body)) file, err := os.Create(path + keyword + &quot;.html&quot;) if err != nil { log.Fatalf(&quot;Create File Error %s\n&quot;, err) } defer file.Close() _, err = file.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/questions-network/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/" title="Golang标准库--http" >Golang标准库--http</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/" title="Golang标准库--http" >Golang标准库--http</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -121,13 +121,13 @@ Package http doc.go 先来看看官方对这个包的一个解释
 这里还举了一些方法的例子
 // Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/definition/" title="一些名词的定义" >一些名词的定义</a>
+                                    <a href="https://wushaoqiang.github.io/posts/others/definition/" title="一些名词的定义" >一些名词的定义</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -162,13 +162,13 @@ Difference 我们拿淘宝作例子
 所以我们可以用Session来跟踪用户的动作。
 安全性 Session会比Cookie安全，因为Cookie可能会被欺骗(Cookie在一定程度上就算是你的用户名和密码，被人获取后，别人就可以用你的身份来做事了)……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/definition/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/definition/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-exercism/" title="Golang Exercism" >Golang Exercism</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-exercism/" title="Golang Exercism" >Golang Exercism</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -186,13 +186,13 @@ Difference 我们拿淘宝作例子
                                 Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
 func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-exercism/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-exercism/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mysql-basic/" title="Mysql学习笔记" >Mysql学习笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/" title="Mysql学习笔记" >Mysql学习笔记</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -215,13 +215,13 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
 # Automatically generated for Debian scripts. DO NOT TOUCH! [client] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock [mysql_upgrade] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock  这里面有一个叫debian-sys-maint的user
 登录debian-sys-maint： mysql -u debian-sys-maint -p……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mysql-basic/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/" title="Go圣经读书笔记" >Go圣经读书笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-bible/" title="Go圣经读书笔记" >Go圣经读书笔记</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -244,13 +244,13 @@ func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep 
  func (s *Scanner) Text() string  返回scanner所在行的文本
 counts := make(map[string]int) input := bufio.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-inaction/" title="Go语言实战" >Go语言实战</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/" title="Go语言实战" >Go语言实战</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -272,13 +272,13 @@ counts := make(map[string]int) input := bufio.……
  goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
   第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-inaction/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/" title="Go语言高级编程" >Go语言高级编程</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/" title="Go语言高级编程" >Go语言高级编程</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -306,13 +306,13 @@ type StringHeader struct { Data uintptr Len int }  字符串结构由两个信�
 这种做法可以减少中间创建的临时切片
 copy append可以完成切片的添加 删除 插入操作……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-leetcode/" title="Golang--Leetcode" >Golang--Leetcode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/" title="Golang--Leetcode" >Golang--Leetcode</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -331,13 +331,13 @@ copy append可以完成切片的添加 删除 插入操作……
  Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
 func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-leetcode/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -366,7 +366,7 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
 &mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
 &mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">阅读全文</a></p>
                         </article>
                     
 

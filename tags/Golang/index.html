@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher-2019/">Gopher 2019 Testing Talk</a>
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">Gopher 2019 Testing Talk</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -93,15 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                go test -coverprofile cover.out go tool cover -html=cover.out -o cover.html  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher-2019/">阅读全文</a></p>
+                                这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
+下面是一些我觉得有借鉴价值的东西
+这里是如何查看一个coverage
+// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
+func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-module/">Golang Module</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/">Golang Module</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -136,14 +140,14 @@ export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是�
 如果想要查看一个程序的所有module依赖
 go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
 go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-module/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-mongodb/">Golang Mongodb</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">Golang Mongodb</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -161,14 +165,14 @@ go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bu
                                 简单收集一些基本操作,作为一个笔记查找
 参考官方文章
 package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-mongodb/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-sync-map/">Golang Sync Map</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/">Golang Sync Map</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -201,14 +205,14 @@ Youtu
   在这两种情况下，sync.Map相对于普通map加Mutex(只是一个比喻，在实现上有很大的区别)
 方法 func (m *Map) Delete(key interface{}) func (m *Map) Load(key interface{}) (value interface{}, ok bool) func (m *Map) LoadOrStore(key, value interface{}) (actual interface{}, loaded bool) func (m *Map) Range(f func(key, value interface{}) bool) func (m *Map) Store(key, value interface{})  最基本的一些存取删除等操作已经实现
 剖析 关于结构方面 type Map struct { mu Mutex // read contains the portion of the map's contents that are safe for // concurrent access (with or without mu held).……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-sync-map/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-slice/">Golang Slice底层</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-slice/">Golang Slice底层</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -252,14 +256,14 @@ type sliceHeader struct { Length int Capacity int ZerothElement *byte }   slice�
 给个例子吧
 这是一个二叉树所有根节点到叶子节点路径的程序
 type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-slice/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-slice/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/tenToSeventeen/">TenToSeventeen</a>
+                                    <a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">TenToSeventeen</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -275,14 +279,14 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
                             
                             <div class="post-content">
                                 代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/tenToSeventeen/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-GC/">Golang GC</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">Golang GC</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -319,14 +323,14 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
 2019.05.06 今天在看了一个视频
 在最后面讲到GC的问题的时候，发现GC的一个问题
  对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-GC/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/">Golang 依赖注入</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">Golang 依赖注入</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -345,14 +349,14 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
 没有DI 把所有创建变量放在New函数里面
 type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
 有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-dependency-injection/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-generic/">Golang 泛型</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">Golang 泛型</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -382,14 +386,14 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
 所以真香，还是用回多态吧，有机会再详细阅读一下草稿
 对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
 这里是Go2官方对这些修改的想法视频……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-generic/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/effective-go/">Effective Go</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/effective-go/">Effective Go</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -416,7 +420,7 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
 Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
 只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
 若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/effective-go/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/effective-go/">阅读全文</a></p>
                             </div>
                         </article>
                     

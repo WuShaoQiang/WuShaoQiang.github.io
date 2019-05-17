@@ -13,10 +13,10 @@
     
     <item>
       <title>Mongodb Installation And Config</title>
-      <link>https://wushaoqiang.github.io/posts/mongodb-installation-and-config/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/</link>
       <pubDate>Sat, 11 May 2019 19:39:42 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/mongodb-installation-and-config/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/</guid>
       <description>总结一下最近在配置MongoDB时遇到的坑吧
 首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
 嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
@@ -28,10 +28,10 @@
     
     <item>
       <title>Mongodb Role</title>
-      <link>https://wushaoqiang.github.io/posts/mongodb-role/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/</link>
       <pubDate>Sat, 11 May 2019 19:39:35 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/mongodb-role/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/</guid>
       <description>参照 User Management Methods
 build-in role
 这篇文章主要介绍一下关于role的概念,希望读者还是以官网为主,本文为辅
@@ -61,10 +61,10 @@ clusterAdmin 这是cluster的最高权限,结合了clusterManager,clusterMonitor
     
     <item>
       <title>Golang Mongodb</title>
-      <link>https://wushaoqiang.github.io/posts/golang-mongodb/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-mongodb/</link>
       <pubDate>Fri, 10 May 2019 21:17:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-mongodb/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-mongodb/</guid>
       <description>简单收集一些基本操作,作为一个笔记查找
 参考官方文章
 package main import ( &amp;quot;context&amp;quot; &amp;quot;fmt&amp;quot; &amp;quot;log&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/bson&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/mongo&amp;quot; &amp;quot;go.mongodb.org/mongo-driver/mongo/options&amp;quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&amp;quot;mongodb://localhost:27017&amp;quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.</description>
@@ -72,10 +72,10 @@ package main import ( &amp;quot;context&amp;quot; &amp;quot;fmt&amp;quot; &amp;q
     
     <item>
       <title>Mongodb Data Modeling Introduction</title>
-      <link>https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/</link>
       <pubDate>Fri, 10 May 2019 18:54:43 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/</guid>
       <description>原文
 Flexible Schema 不像SQL的数据库一样,Mongodb不需要我们准确定义一个数据格式的规范
 也就是说,一个collection里面的document不一定要每个字段都一样,我们也可以实时的更新document的字段(增加或减少)
@@ -93,10 +93,10 @@ Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩�
     
     <item>
       <title>Mongodb Schema Validation</title>
-      <link>https://wushaoqiang.github.io/posts/mongodb-schema-validation/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/</link>
       <pubDate>Fri, 10 May 2019 16:06:32 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/mongodb-schema-validation/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/</guid>
       <description>Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
 提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
 如果是还未创建的collection
@@ -112,10 +112,10 @@ db.createCollection(&amp;quot;students&amp;quot;, { validator: { $jsonSchema: { 
     
     <item>
       <title>Mongodb Command</title>
-      <link>https://wushaoqiang.github.io/posts/mongodb-command/</link>
+      <link>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/</link>
       <pubDate>Fri, 10 May 2019 00:03:44 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/mongodb-command/</guid>
+      <guid>https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/</guid>
       <description>关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &amp;quot;D&amp;quot; } ) // selects from the inventory collection all documents where the status equals &amp;quot;D&amp;quot; db.</description>
     </item>
     

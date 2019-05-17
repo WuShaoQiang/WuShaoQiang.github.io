@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Pipeline</title>
-      <link>https://wushaoqiang.github.io/posts/golang-pipeline/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-pipeline/</link>
       <pubDate>Sun, 21 Apr 2019 10:59:13 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-pipeline/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-pipeline/</guid>
       <description>根据官网博客学习Pipeline
 什么是Pipeline 管道其实就是一系列的Channel连接起来
  通过channel(可能不止一个)来接收数据

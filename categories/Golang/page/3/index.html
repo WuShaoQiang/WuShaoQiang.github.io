@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-validation/">Golang Validation</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-validation/">Golang Validation</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -104,14 +104,14 @@
   以上这些都返回*Result
 Result方法 我们拿上面一个返回*Result对象做例子
  valid.Required(name,&quot;name&quot;).Message(&quot;name不能为空&quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-validation/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-validation/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-blog/">Golang Build blog with gin</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">Golang Build blog with gin</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -133,14 +133,14 @@ Result方法 我们拿上面一个返回*Result对象做例子
  endless &mdash;服务器热启动
  swag &mdash;API文档
   ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-blog/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-os/">Golang标准库--os</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">Golang标准库--os</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -159,14 +159,14 @@ Result方法 我们拿上面一个返回*Result对象做例子
 bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
 // Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
 // Flags to OpenFile wrapping those of the underlying system.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-path-problem/">Golang Path Problem</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">Golang Path Problem</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -193,14 +193,14 @@ filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，
  go install Or go build 转换为二进制文件执行
  go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
   解决相对路径的最稳的方法 来自外国友人icza……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-path-problem/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-log/">Golang Log</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-log/">Golang Log</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -233,14 +233,14 @@ warning  Nobody needs a warning log level
  网上看到别人这样说，称panic,fatal应该属于违规操作
 stackoverflow上赞同较多的答案说
  You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-log/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-log/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">Golang Errandpanic</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">Golang Errandpanic</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -277,14 +277,14 @@ stackoverflow上赞同较多的答案说
  不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
  输入不应该引起函数错误
   错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-errandpanic/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-crawler/">Golang Crawler</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">Golang Crawler</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -304,14 +304,14 @@ goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 
  first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
  invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
   defer func () { if resp != nil { resp.Body.Close() } }()  单元测试 func TestCrawler(t *testing.T) { // keywords := []string{&quot;golang&quot;, &quot;java&quot;} keywords := &quot;golang,java&quot; refresh := &quot;on&quot; value := url.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-crawler/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-handle/">Golang Handle</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-handle/">Golang Handle</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -334,14 +334,14 @@ http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这�
 myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
 // HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
 // HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&quot;http: nil handler&quot;) } mux.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-handle/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-handle/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-goquery/">Golang goquery</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/">Golang goquery</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -368,14 +368,14 @@ doc.Find(&quot;div&quot;).Each(func(i int, s *goquery.Selection) { fmt.Println(i
  div p div嵌套的p标签，这里无论第几级都会被筛选出来
   属性可以和嵌套一起使用，例如div.class&gt;p&gt;li
 Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标签内的属性 doc.Find(&quot;ul&gt;li&gt;div.job-primary&gt;div&gt;h3&gt;a&quot;).Each(func(i int, s *goquery.Selection) { detail := s.Get(0).Attr[0].Val // fmt.Println(i, nextPage) jobs[i].Detail = detail })  我在这里踩过一个坑……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-goquery/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-request/">Golangstd Request</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">Golangstd Request</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -397,7 +397,7 @@ Request结构体 type Request struct { Method string URL *url.URL Proto string /
 Method 这就是一个请求的方法(如GET、POST)
 但是Go的HTTP客户端不支持发送方法为CONNECT的请求
 URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-request/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
                             </div>
                         </article>
                     

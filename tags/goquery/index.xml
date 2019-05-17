@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang goquery</title>
-      <link>https://wushaoqiang.github.io/posts/golang-goquery/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-goquery/</link>
       <pubDate>Mon, 08 Apr 2019 23:10:14 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-goquery/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-goquery/</guid>
       <description>goquery是一个开源的库，针对解析HTML
 今天在做爬虫的时候用到了一些功能，记录下来方便查阅
 创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&amp;quot;go query Error %s\n&amp;quot;, err) }  doc对象就包含了我们要解析的HTML主体

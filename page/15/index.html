@@ -68,7 +68,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-interface/" title="Golang Interface" >Golang Interface</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/" title="Golang Interface" >Golang Interface</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -95,13 +95,13 @@ func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  
 type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
 func (f *File) Read(b []byte) (n int, err error) { if err := f.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-interface/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-tips/" title="Golang Tips" >Golang Tips</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/" title="Golang Tips" >Golang Tips</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -119,13 +119,13 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
                                 关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
 关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-tips/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm-sort/" title="Algorithm 排序" >Algorithm 排序</a>
+                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/" title="Algorithm 排序" >Algorithm 排序</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -144,13 +144,13 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
 最好最坏的平均时间复杂度都为O(NlogN)
 代码 func HeapSortUp(a []int) []int { for i := len(a)/2 - 1; i &gt;= 0; i-- { adjustHeapUp(a, i, len(a)) } for j := len(a) - 1; j &gt; 0; j-- { a[0], a[j] = a[j], a[0] adjustHeapUp(a, 0, j) } return a } func adjustHeapUp(a []int, i int, length int) { tmp := a[i] for k := 2*i + 1; k &lt; length; k = 2*k + 1 { if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] { k++ } if a[k] &gt; tmp { a[i] = a[k] i = k } else { break } } a[i] = tmp }  思路  先将数组变换为一个大顶堆……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm-sort/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-gin/" title="Golang Gin" >Golang Gin</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/" title="Golang Gin" >Golang Gin</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -169,13 +169,13 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
 func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
 gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-gin/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-validation/" title="Golang Validation" >Golang Validation</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-validation/" title="Golang Validation" >Golang Validation</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -202,13 +202,13 @@ gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()�
 Result方法 我们拿上面一个返回*Result对象做例子
  valid.Required(name,&quot;name&quot;).Message(&quot;name不能为空&quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-validation/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-validation/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-blog/" title="Golang Build blog with gin" >Golang Build blog with gin</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/" title="Golang Build blog with gin" >Golang Build blog with gin</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -231,13 +231,13 @@ Result方法 我们拿上面一个返回*Result对象做例子
  swag &mdash;API文档
   ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-blog/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-os/" title="Golang标准库--os" >Golang标准库--os</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/" title="Golang标准库--os" >Golang标准库--os</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -257,13 +257,13 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
 // Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
 // Flags to OpenFile wrapping those of the underlying system.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-path-problem/" title="Golang Path Problem" >Golang Path Problem</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/" title="Golang Path Problem" >Golang Path Problem</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -291,13 +291,13 @@ filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，
  go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
   解决相对路径的最稳的方法 来自外国友人icza……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-path-problem/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
+                                    <a href="https://wushaoqiang.github.io/posts/others/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -316,13 +316,13 @@ filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，
 The bigger the interface, the weaker the abstraction &ndash;Rob Pike
  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/nice-sentences/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/nice-sentences/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/opinion/" title="Opinion" >Opinion</a>
+                                    <a href="https://wushaoqiang.github.io/posts/others/opinion/" title="Opinion" >Opinion</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -346,7 +346,7 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
  工具类型的文章，为了让自己能够在忘记怎么使用某一个工具时翻阅，属于一种笔记类型，不算文章
   ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/opinion/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/opinion/">阅读全文</a></p>
                         </article>
                     
 

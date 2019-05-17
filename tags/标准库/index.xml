@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang标准库--os</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-os/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-os/</link>
       <pubDate>Fri, 12 Apr 2019 20:24:48 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-os/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-os/</guid>
       <description>Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
 bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
 // Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
@@ -25,10 +25,10 @@ bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并�
     
     <item>
       <title>Golangstd Request</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-request/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-request/</link>
       <pubDate>Mon, 08 Apr 2019 11:37:38 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-request/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-request/</guid>
       <description>最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
 我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
 所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
@@ -40,10 +40,10 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     
     <item>
       <title>Golang标准库--http</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-net-http/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-net-http/</link>
       <pubDate>Tue, 19 Mar 2019 20:52:05 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-net-http/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-net-http/</guid>
       <description>这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
 Package http doc.go 先来看看官方对这个包的一个解释
 这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
@@ -53,10 +53,10 @@ Package http doc.go 先来看看官方对这个包的一个解释
     
     <item>
       <title>Golang标准库--Unicode</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-unicode/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-unicode/</link>
       <pubDate>Sun, 17 Mar 2019 02:06:01 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-unicode/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-unicode/</guid>
       <description>unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
 &amp;mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
  无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
@@ -74,29 +74,29 @@ Package http doc.go 先来看看官方对这个包的一个解释
     
     <item>
       <title>Golang标准库--String</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-string/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-string/</link>
       <pubDate>Sun, 17 Mar 2019 02:04:07 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-string/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-string/</guid>
       <description>目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp;amp; copyCheck() (b *Builder) String() string &amp;amp; (b *Builder) Len() int &amp;amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp;amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
 &amp;mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.</description>
     </item>
     
     <item>
       <title>Golang标准库--Bytes</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-bytes/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-bytes/</link>
       <pubDate>Sun, 17 Mar 2019 02:03:03 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-bytes/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-bytes/</guid>
       <description>目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.</description>
     </item>
     
     <item>
       <title>Golang标准库--Bufio</title>
-      <link>https://wushaoqiang.github.io/posts/golangstd-bufio/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golangstd-bufio/</link>
       <pubDate>Sun, 17 Mar 2019 01:59:52 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golangstd-bufio/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golangstd-bufio/</guid>
       <description>目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp;amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.</description>
     </item>
     

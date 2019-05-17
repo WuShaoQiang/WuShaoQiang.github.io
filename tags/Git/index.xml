@@ -13,10 +13,10 @@
     
     <item>
       <title>Learn Gitflow</title>
-      <link>https://wushaoqiang.github.io/posts/learn-gitflow/</link>
+      <link>https://wushaoqiang.github.io/posts/git/learn-gitflow/</link>
       <pubDate>Wed, 03 Apr 2019 23:27:50 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learn-gitflow/</guid>
+      <guid>https://wushaoqiang.github.io/posts/git/learn-gitflow/</guid>
       <description>gitflow是一种规范，适合大项目开发
 Github上开源了一个遵循这样规范的一个Git工具gitflow
 初始化一个git git flow init  然后会提醒一系列创建操作，类似
@@ -25,10 +25,10 @@ Which branch should be used for bringing forth production releases? Branch name 
     
     <item>
       <title>Git用法总结</title>
-      <link>https://wushaoqiang.github.io/posts/learn-git/</link>
+      <link>https://wushaoqiang.github.io/posts/git/learn-git/</link>
       <pubDate>Fri, 15 Mar 2019 18:02:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learn-git/</guid>
+      <guid>https://wushaoqiang.github.io/posts/git/learn-git/</guid>
       <description>这篇博客是笔者总结学习git的过程，不是一篇专业性很强的文章，主要是笔记
 主要参考廖雪峰的博客学习
 笔者之前对Git有错误的理解(因为之前没学过，也只是听过)，总以为Github就是Git，其实Github是Git出来后才被创建的，为开源项目免费提供Git存储。

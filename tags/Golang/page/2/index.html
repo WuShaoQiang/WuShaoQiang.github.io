@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/interview2/">Interview2</a>
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview2/">Interview2</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -116,14 +116,14 @@
 给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率 占时还不太清除这个
 Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
 所以查找pid有lsof -i:port和netstat -p |grep port……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview2/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview2/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-context/">Golang Context</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-context/">Golang Context</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -152,14 +152,14 @@ Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) 
 req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
  如果Request的context是nil，那么它会返回一个context.Background()
 var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-context/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-context/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/interview/">Interview</a>
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview/">Interview</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -198,14 +198,14 @@ go的优势  Go是Google工程师基于现实世界开发经验进行改进的�
 go struct能不能比较 如果是值类型，是可以比较的，比如
 p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Age: 1} if p1 == p2 { fmt.Println(&quot;same&quot;) }  这样是有输出的
 那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-pipeline/">Golang Pipeline</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-pipeline/">Golang Pipeline</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -226,14 +226,14 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
  处理数据
  用Channel向下传递数据(也可能不止一个)
   代码演示 package main import ( &quot;fmt&quot; &quot;sync&quot; ) func main() { // Set up a done channel that's shared by the whole pipeline, // and close that channel when this pipeline exits, as a signal // for all the goroutines we started to exit. done := make(chan struct{}) defer close(done) in := gen(done, 2, 3) // Distribute the sq work across two goroutines that both read from in.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-pipeline/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-pipeline/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-makevsnew/">Golang make vs new</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-makevsnew/">Golang make vs new</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -254,14 +254,14 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
  new也是返回指针，比如new(int)，返回一个int的指针，这个指针的内容是0
   初始化 两者都会初始化为“0”值
 总结 所以我觉得它们最大的区别还是返回值的区别，以及作用对象……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-makevsnew/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-makevsnew/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-map/">Golang Map</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-map/">Golang Map</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -294,14 +294,14 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
  用新的bucket
   和其它Map比较  Go map不能用指针指向单个value
  迭代的时候，go map是可以修改的……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-map/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-map/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-channel/">Golang Channel</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">Golang Channel</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -326,14 +326,14 @@ Channel特性  goroutine-safe
  buf
   Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
 How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-channel/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-interface/">Golang Interface</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">Golang Interface</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -359,14 +359,14 @@ func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  
 这里io.Reader是一个接口，接口里面只要一个函数
 type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
 func (f *File) Read(b []byte) (n int, err error) { if err := f.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-interface/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-tips/">Golang Tips</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">Golang Tips</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -383,14 +383,14 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
                             <div class="post-content">
                                 关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
 关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-tips/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-gin/">Golang Gin</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">Golang Gin</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -408,7 +408,7 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
                                  中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
 func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
 gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-gin/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">阅读全文</a></p>
                             </div>
                         </article>
                     

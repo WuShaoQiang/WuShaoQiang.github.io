@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Interface</title>
-      <link>https://wushaoqiang.github.io/posts/golang-interface/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-interface/</link>
       <pubDate>Sat, 20 Apr 2019 13:36:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-interface/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-interface/</guid>
       <description>在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
  concrete type(具体类型,int,string&amp;hellip;)
  abstract type(抽象类型 io.Writer,io.Reader&amp;hellip;)

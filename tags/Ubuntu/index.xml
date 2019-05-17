@@ -13,10 +13,10 @@
     
     <item>
       <title>Ubuntu apt</title>
-      <link>https://wushaoqiang.github.io/posts/linux-apt/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-apt/</link>
       <pubDate>Tue, 07 May 2019 11:00:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-apt/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-apt/</guid>
       <description> 这个总结一下我经常用到的关于apt的命令
 apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
 其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好

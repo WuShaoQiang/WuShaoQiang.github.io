@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Crawler</title>
-      <link>https://wushaoqiang.github.io/posts/golang-crawler/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-crawler/</link>
       <pubDate>Thu, 11 Apr 2019 17:35:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-crawler/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-crawler/</guid>
       <description>笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
 goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
  first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080

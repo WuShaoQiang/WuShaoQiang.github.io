@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher-2019/">Gopher 2019 Testing Talk</a>
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">Gopher 2019 Testing Talk</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -93,8 +93,12 @@
                             </div>
                             
                             <div class="post-content">
-                                go test -coverprofile cover.out go tool cover -html=cover.out -o cover.html  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher-2019/">阅读全文</a></p>
+                                这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
+下面是一些我觉得有借鉴价值的东西
+这里是如何查看一个coverage
+// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
+func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
                             </div>
                         </article>
                     

@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Interview2 | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Interview2 - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-04-25T22:05:12&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-04-25T22:05:12&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Interview2">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/interview/interview2/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Interview2</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年4月25日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="最大连续子数组和">最大连续子数组和</h3>
+
+<pre><code class="language-go">
+</code></pre>
+
+<h3 id="线程之间共享数据的方式">线程之间共享数据的方式</h3>
+
+<blockquote>
+<p>Go encourages the use of channels to pass references to data between goroutines</p>
+</blockquote>
+
+<p>这里应该用channel来达到通信</p>
+
+<p>在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同</p>
+
+<h3 id="进程和线程的区别">进程和线程的区别</h3>
+
+<p>进程：操作系统对一个正在运行的程序的一种抽象，一个系统上可以运行多个进程，这些进程在单核的处理器下一样可以显得好像的并发的一样，这是通过处理器在进程之间的切换实现的，这种交错执行的机制称为上下文切换</p>
+
+<p>线程：一个进程可以由多个线程的执行单元组成，每个线程都运行在进程的上下文中</p>
+
+<p>区别：</p>
+
+<ol>
+<li><p>进程在系统上运行，线程在进程上运行，因此进程是独立的地址空间、线程共享进程的地址空间</p></li>
+
+<li><p>线程比进程的开销要小</p></li>
+
+<li><p>线程一般来说比进程更高效</p></li>
+
+<li><p>线程之间的数据共享比进程的简单</p></li>
+
+<li><p>线程必须依赖在进程上执行</p></li>
+</ol>
+
+<h3 id="临界区是啥">临界区是啥</h3>
+
+<p>临界区从通俗层面来讲就是我们锁-解锁之间的代码，通常会写在程序(或者说资源)无法同时被使用的地方</p>
+
+<p>这个区域只能允许一个线程或进程进入，其它后来的需要等待解锁</p>
+
+<h3 id="死锁是啥-死锁产生的条件是什么">死锁是啥。死锁产生的条件是什么</h3>
+
+<p>在我理解里，线程A占用了资源C，这个时候线程A还要申请资源D(占用且申请)，但线程B这时占用着资源D，而且线程A无法将资源抢过来，所以现在线程A就在等待线程B释放资源D。线程B在这个时候也需要使用资源C，并且不得到就不离开(一直等待)，所以现在局面就是A在等B释放D，B在等A释放C(循环等待)，并且都不肯让资源(不可抢占)，并且资源CD都是只能有一个线程占有的(互斥)</p>
+
+<p>若干进程竞争有限资源，但顺序或者决策不当，使得大家都在无限循环等待，就形成了死锁</p>
+
+<ol>
+<li><p>互斥条件</p></li>
+
+<li><p>不可抢占条件</p></li>
+
+<li><p>占有且申请条件(这个的意思是在占有资源的情况下还要去申请别的资源)</p></li>
+
+<li><p>循环等待条件</p></li>
+</ol>
+
+<p>只要上述条件有一个不满足，就可以避免死锁</p>
+
+<h3 id="给出很多串信息-包含ip-url-info-等信息-info包含error等状态码-用linux命令统计出每个url对应的error概率">给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率</h3>
+
+<p>占时还不太清除这个</p>
+
+<h3 id="linux命令-如何杀死占用指定端口的进程">Linux命令 如何杀死占用指定端口的进程</h3>
+
+<p>这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程</p>
+
+<p>所以查找pid有<code>lsof -i:port</code>和<code>netstat -p |grep port</code></p>
+
+<p>杀死<code>kill -9 pid</code></p>
+
+<h3 id="http和https的区别-https的加密方式">http和https的区别 https的加密方式</h3>
+
+<p>http和https的本质区别在于这个连接是否有安全性的保证</p>
+
+<p>从OSI模型来讲，这两个协议都属于应用层</p>
+
+<p>在https没有诞生之前，http将数据打包进套接字，套接字传递给运输层</p>
+
+<p>现在https在http和套接字之间加了一个ssl套接字，所以流程中多了一个加密的过程</p>
+
+<p>我们再来看一下其它区别</p>
+
+<ol>
+<li><p>端口，http是80端口，https是443端口</p></li>
+
+<li><p>https可以做到加密传输，身份认证，而http是明文传输</p></li>
+</ol>
+
+<p>我们说到，主要改变是加入了ssl</p>
+
+<p>那么如何达到加密呢</p>
+
+<ol>
+<li><p>客户端发起https连接给服务器端</p></li>
+
+<li><p>服务器端将证书(里面包含公钥)传给客户端</p></li>
+
+<li><p>客户端(一般是浏览器)会验证这个证书的合法性</p></li>
+
+<li><p>一旦证书合法，就代表客户所请求的服务器是真的，并不是其它钓鱼网站伪造的，双方协商加密安全等级</p></li>
+
+<li><p>客户端用服务器的公钥加密一个主密钥，发送给服务器端</p></li>
+
+<li><p>服务器端接收到该主密钥会用自己的私钥解密得到客户端想要的通信秘钥</p></li>
+
+<li><p>双方就在此主密钥之上建立了安全的加密通道</p></li>
+</ol>
+
+<p>PS：其实不单单是主密钥这么简单，主密钥后面还要生成4个秘钥，但是我们主要理解如何建立这个安全的信道</p>
+
+<h3 id="tcp三次握手的状态变化">TCP三次握手的状态变化</h3>
+
+<p>第一次，客户端的请求报文中有SYN=1，并且带有自己的随机初始序号i</p>
+
+<p>第二次，服务器端的响应报文中有 SYN=1,ACK=i+1，并且带有自己的随机初始序号j</p>
+
+<p>第三次，客户端回应服务器，SYN置位0，ACK=j+1,序号这个时候为i+1</p>
+
+<h3 id="tcp四次挥手-time-wait出现在哪-为什么要有time-wait">TCP四次挥手 TIME_WAIT出现在哪 为什么要有TIME_WAIT</h3>
+
+<p>TIME_WAIT出现在最后客户端向服务器端发送ACK的时候</p>
+
+<p>假设最后客户端发送的ACK丢失，客户端还可以再次重传这个信号。因为服务器需要接收到这个ACK才关闭</p>
+
+<h3 id="写代码-读一个文件-找出出现次数最多的字符串">写代码：读一个文件 找出出现次数最多的字符串</h3>
+
+<h3 id="写代码-找出一个字符串的最长不重复子串">写代码：找出一个字符串的最长不重复子串</h3>
+
+<h3 id="http-1-x-2-0区别-帧-流-推送-头部压缩-安全性等等">http 1.X 2.0区别 帧 流 推送 头部压缩 安全性等等</h3>
+
+<h3 id="链表-奇位上升偶位下降-整合成升序链表">链表 奇位上升偶位下降 整合成升序链表</h3>
+
+<h3 id="lru实现-插入操作-描述数据结构如何变化-说双向链表加哈希-在双向链表上做lru-加哈希表是为了快速定位要移动的节点">LRU实现、插入操作、 描述数据结构如何变化 （说双向链表加哈希，在双向链表上做lru，加哈希表是为了快速定位要移动的节点）</h3>
+
+<h3 id="实现哈希表-冲突过多的时候如何解决-扩容">实现哈希表 冲突过多的时候如何解决 （扩容</h3>
+
+<h3 id="redis-zset-数据结构描述-之前看过黄建宏的redis设计与实现原理-强推-还有redis实战-答得还比较轻松-zset是一个字典加跳表-又详细描述-画-了下跳表">redis zset 数据结构描述 （之前看过黄建宏的redis设计与实现原理（强推，还有redis实战）,答得还比较轻松，zset是一个字典加跳表 又详细描述（画）了下跳表</h3>
+
+<h3 id="大数加法-链表-也很友好了">大数加法 链表 （也很友好了</h3>
+
+<h3 id="zset-除了用跳表-还可以用什么实现-想了想-可以红黑树-不过说完我就赶紧说-可是红黑树我不会实现-提前认怂-面试官就笑了-他说不用实现别怕">zset 除了用跳表 还可以用什么实现 （想了想 可以红黑树，不过说完我就赶紧说 可是红黑树我不会实现，提前认怂，面试官就笑了，他说不用实现别怕）</h3>
+
+<h3 id="如何用红黑树如何实现zrange-by-score-我第一反应是加个双向链表-但是没有想好到底怎么和红黑树连起来-后来面试官提示-可以在红黑树里加索引">如何用红黑树如何实现zrange by score （我第一反应是加个双向链表，但是没有想好到底怎么和红黑树连起来 。后来面试官提示，可以在红黑树里加索引）</h3>
+
+<h3 id="tcp-拔网线之后连接是否存在-为什么-记得tcp的长连接是有一个类似心跳检测的机制-忘了叫啥了-面试官问我心跳检测是在传输层吗还是应用层-我说应用层有心跳检测-但tcp那层也有类似的-后来回来看了下tcp的保活-跟我当时说的差不多-就是名词没想起来">Tcp: 拔网线之后连接是否存在 为什么  （记得tcp的长连接是有一个类似心跳检测的机制,忘了叫啥了，面试官问我心跳检测是在传输层吗还是应用层 ，我说应用层有心跳检测，但tcp那层也有类似的，后来回来看了下tcp的保活，跟我当时说的差不多，就是名词没想起来）</h3>
+
+<h3 id="联合索引-b-树是什么状态-画了一下-面试官反复问我高度什么的-我说高度没有影响-说了最左前缀">联合索引：b+树是什么状态 （画了一下，面试官反复问我高度什么的，我说高度没有影响，说了最左前缀 ）</h3>
+
+<h3 id="寻找中位数-堆">寻找中位数 （ 堆</h3>
+
+<h3 id="一棵树-寻找节点中最长路径-动规">一棵树 寻找节点中最长路径   （动规</h3>
+
+<h3 id="sql语句">sql语句</h3>
+
+<h3 id="操作系统如何识别tcp连接-问懵了-答的不好">操作系统如何识别tcp连接 （问懵了 答的不好</h3>
+
+<p>1.代码题。找数组中第k大的数。使用堆做了，然后问时间复杂度。
+2.代码题。给出一个元素不重复的排序数组，问v如果插入数组中是第几大。一开始直接使用lower_bound实现，然后问lower_bound和upper_bound的区别，回答了lower_bound是查找第一个大于等于v的数的位置，upper_bound是查找第一个大于v的数的位置。接着问能不能自己实现二分，然后就写了个二分。
+3.数据库问题。需要以字段(B,A)和B进行查询，问怎样建立索引。回答了建立(B,A)索引。问这样查询B可以使用索引吗。回答可以，因为最左前缀原则。</p>
+
+<p>1.问项目，答的一塌糊涂。
+2.作业调度的几种方式。
+3.代码题。疯子坐飞机问题（<a href="https://www.zhihu.com/question/35950050/answer/65272204）。一开始想不到，面试官指导我从2个人、3个人的情况出发去想。然后写了个递归，递归式为f(n)=(f(n-1)+...+f(2))/n。结束之后推了一下。。就是f(n)=1/2。">https://www.zhihu.com/question/35950050/answer/65272204）。一开始想不到，面试官指导我从2个人、3个人的情况出发去想。然后写了个递归，递归式为f(n)=(f(n-1)+...+f(2))/n。结束之后推了一下。。就是f(n)=1/2。</a>
+4.代码题。两个降序数组求第k大的数（我今天和第k大很有缘）。</p>
+
+<p>进程和线程
+进程调度
+单例模式（懒汉饿汉，手撸双重检查）
+Linux I/O多路复用
+进程同步方式
+手撸leetcode 939最小矩形（只会暴力差点暴毙）
+Stringbuffer空格改为%20，要求时间O(n)空间O(1)
+（StringBuffer的api忘了，瞎编一通。写了一通以后，面试官：你这有Bug。瞬间吓尿，最后自造api把逻辑写出来了）
+二面：
+没声音，花半小时调试机器
+项目简介（项目太菜，没兴趣）
+TCP三次连接四次挥手。详细说明
+二三次挥手能否合一（思索半天，不知道）
+TCP不确认会怎么样？（没懂，瞎答了超时重传和快重传）
+服务端确认的具体操作？（没懂，瞎答了设置SYN ACK)
+客户端不进行第三次握手会怎样？会有哪些计算机资源消耗？
+大量客户端不进行第三次握手会怎么样？如何防止？
+（心态爆炸，网络安全完全不会）
+红黑树详细，为什么用红黑树？（听闻头条曾面试手撸红黑树，还好这次没有），比红黑树更高效的结构？
+B+树，为什么用B+树，B+树查找历程？索引详细？
+Where a=xxx and b=xxx and c=xxx，abc都有索引，会如何进行？
+（不会，告辞）
+进程通信？
+HashMap？ConcurrentHashMap？ConcurrentHashMap的具体操作中如何实现线程安全？
+手撸：下三角矩阵由上到下最大和，并打印路径。时间复杂度？空间复杂度？（最后写出最优解了，就没让排bug测试）
+三面：
+项目，项目中最有挑战性的问题。（不感兴趣，面试官不懂Java）
+用的什么框架，介绍框架？框架优点？具体说明？（讲了下Spring的原理、优点、容器结构，getBean源码的总结，结果才知道他是做C++的，说了没太大用）
+你的技术栈（java后台开发，到这儿我以为他HR呢，结果……）
+C++结构体：
+Struct A有一个int一个char一个虚函数，求32位、64位下的大小计算（明知我是Java开发！你还问这个！）
+Linux下内存划分？程序运行在用户态下的内存划分？（不太明白，说了下JVM虚拟机内存和直接内存）
+Linux下Socket编程？（不会）
+文件I/O方式，I/O底层到底怎么运作的？大量数据写入和少量数据写入的时间差？磁盘的读写？（？？？怎么一直问）
+CPU、操作系统在I/O的作用？（答了各种方式下是否需要CPU，操作系统不知道）
+你觉得操作系统与I/O底层有关吗？（猜的有关，不同操作系统文件组织形式不同）
+Linux文件命令？
+操作系统内存寻址？文件定位？分页？为什么要分页？
+设计文件系统。（多层索引，HashMap索引+双链表）为什么这么设计？（O（1）时间复杂度）
+总结：操作系统四成，算法题三成，计算机网络二成，Java相关百分之一。建议大家转Linux C++，我简历完全没写，照样一路问。</p>
+
+<p>作者：无敌气质小山女
+链接：<a href="https://www.nowcoder.com/discuss/175720?type=2&amp;order=0&amp;pos=71&amp;page=1">https://www.nowcoder.com/discuss/175720?type=2&amp;order=0&amp;pos=71&amp;page=1</a>
+来源：牛客网</p>
+
+<p>一面</p>
+
+<p>比较完整的一面</p>
+
+<pre><code>MVC
+REST
+对多门编程语言的理解(Java、Python、C++)
+select poll epoll
+栈、堆的区别
+闭包变量的保存，栈/堆?
+项目
+讲项目里的AStar 算法
+算法：LRU实现(HashMap+链表)
+算法：0~9的环，顺逆时针随意走n步从0出发回到0，共几种走法（排列组合）
+浏览器输入URL到显示网页的过程（穷尽毕生所学，有多细讲多细）
+</code></pre>
+
+<p>面试官：没什么问题了，十分钟内会通知你结果。</p>
+
+<p>我：好的，谢谢（窃喜，一面答的还可以啊，应该有戏，lucky）
+二面</p>
+
+<p>记得的问题不多。。</p>
+
+<pre><code>写一下项目里的AStar 算法（图书馆要关了，怕时间不够，很急，就说讲思路可以吗，就没写了）
+算法：非递归实现中序遍历（伪代码大致写出了思路）
+算法：最大连续子数组
+最大连续子数组的算法原理（目测怕我背题）
+数据库学的怎么样(穷尽毕生所学高级查询、索引、事务balabala)
+</code></pre>
+
+<p>面试官：我没什么问题了</p>
+
+<p>(至此，我发现情况不妙，直接问能不能通过)</p>
+
+<p>面试官：我这边还得对比一下，其实你不是很能打动我，你觉得你的优势在哪？</p>
+
+<p>我：我自学能力贼强!</p>
+
+<p>面试官：怎么证明，举例</p>
+
+<p>我：（省略50字）</p>
+
+<p>面试官：你基础怎么样？操作系统、计网学的都能理解吗？</p>
+
+<p>我：当然啦，虽然忘的也快</p>
+
+<p>（10s后）</p>
+
+<p>面试官：那我让你通过吧</p>
+
+<p>我：非常感谢！
+三面</p>
+
+<p>记得的问题也不多。。。</p>
+
+<pre><code>面了两轮，感觉怎么样？（夸一顿前面的面试官，友善人好，毕竟二面面试官抬了我一手）
+前K大的数（最小堆）
+给别人讲解如何想到前K大的数的解法
+最小堆求前K大是最优解法吗？为什么？从数学论证的角度（？_？）
+讲讲项目
+项目里的用户认证？（Token）
+微信扫码登录过程（穷尽毕生所学，有多细讲多细）
+XSS/CSRF（脑海里检索30s后坦白我忘了、忘了、了）
+</code></pre>
+
+<p>作者：xiaojian157
+链接：<a href="https://www.nowcoder.com/discuss/156649">https://www.nowcoder.com/discuss/156649</a>
+来源：牛客网</p>
+
+<ol>
+<li><p>TCP三次握手 四次挥手？三次目的是什么？如果两次会有什么问题？</p></li>
+
+<li><p>TCP的拥塞控制？</p></li>
+
+<li><p>UDP了解过？和TCP区别？建不建连接是指的什么？</p></li>
+
+<li><p>Linux熟吗？</p></li>
+</ol>
+
+<p>5.文件系统？网络底层了解过吗？内存管理底层？</p>
+
+<ol>
+<li>代码跑起来需要几个内存块？各个地方存的什么？</li>
+</ol>
+
+<p>7.堆和栈？线程共享的是那一部分是哪一部分？</p>
+
+<ol>
+<li><p>Java里有几种锁？</p></li>
+
+<li><p>重入锁和不可重入锁有什么区别？重入锁指的是哪一部分是可重入的？哪一部分不可重入？</p></li>
+
+<li><p>我想每十个每十个使用线程？怎么用？</p></li>
+</ol>
+
+<p>11.信号量是什么机制？</p>
+
+<ol>
+<li><p>HashMap是什么数据结构？put和get的时候会触发哪些操作？CHM的分段锁怎么实现的？</p></li>
+
+<li><p>CAS怎么实现的？</p></li>
+
+<li><p>数据库有了解吗？Hash索引？有个场景，一个表，有两列A和B，有时用A查，有时用B查，有时一起查，怎么建索引？</p></li>
+
+<li><p>联合索引什么时候不会生效？</p></li>
+
+<li><p>For update语句用过吗？干什么的？加锁加到哪？什么级别的锁？</p></li>
+
+<li><p>Redis有几种数据结构？排序集合怎么实现的？跳表怎么实现的？</p></li>
+</ol>
+
+<p>18.有一个先递增后递减的序列，怎么找到他的最大值？可能重复？考虑一下复杂度？</p>
+
+<p>作者：JOJOdo
+链接：<a href="https://www.nowcoder.com/discuss/78988?type=2&amp;order=0&amp;pos=5&amp;page=1">https://www.nowcoder.com/discuss/78988?type=2&amp;order=0&amp;pos=5&amp;page=1</a>
+来源：牛客网</p>
+
+<p>滴滴（get offer）
+golang实习生
+一面：</p>
+
+<pre><code>自我介绍
+介绍下golang开发的项目
+golang和Java的区别
+进程、线程、协程的区别(回答的不够详细)
+如何使用go协程
+用过channel吗？在哪个场景使用
+设计一个支持线程并发Queue
+mysql怎么建立索引，在表已经创建好的背景下
+post和get的区别
+linux常用命令。如何查看进程情况，文本替换。
+git。新建分支.
+golang中一个map存放了大量数据，假设在多线程情况下，怎么保证这个map的数据安全，不可以对整个map加锁.
+有什么问我的吗。 
+</code></pre>
+
+<p>二面：</p>
+
+<pre><code>自我介绍
+拿了几个offer？？？
+讲下mysql索引的理解
+delete的时候没在索引列进行条件选择，进行哪种搜索？假设在delete事务中，另外一個事务开始读取，能读取到数据吗
+drop，delete，truncate
+python爬虫？？？生产者消费者，讲下理解。
+python单下划线和双下划线的作用和区别。
+一个8位的二进制数，求1的个数。
+还有什么问我的吗？ 
+</code></pre>
+
+<p>滴滴转岗内推一面（40min，过了很久才复盘，忘了不少）：</p>
+
+<pre><code>介绍一下在滴滴做了什么
+介绍一下倒排索引
+golang哪块比较熟
+有没有遇到什么比较难的难点
+做一道场景题，ip-zone-log，看log里面哪个地区出现最多 
+</code></pre>
+
+<p>滴滴转岗内推二面（35min）：</p>
+
+<pre><code>聊聊家常，在哪读书，哪里人，大学用什么语言，golang怎么样
+JVM的GC说一下 -&gt; 对象是怎么回收的？ -&gt; 怎么知道这个对象该不该回收 -&gt; 对象的分配方式 -&gt; Java的内存模型
+遇到过比较有意思的难点？那消息队列有考虑过性能吗？假设现在让你优化，怎么优化。
+除了这个难点还有其他比较geek的东西吗
+Ajax是什么东西？用来干嘛的？那是怎么将表单发送到服务器的
+那这个事件驱动做的什么？
+偏好于业务开发较多？
+有什么问题需要问我的？
+</code></pre>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/interview/interview/">Interview</a></li>
+        
+        <li><a href="/posts/golang/golang-context/">Golang Context</a></li>
+        
+        <li><a href="/posts/golang/golang-pipeline/">Golang Pipeline</a></li>
+        
+        <li><a href="/posts/golang/golang-makevsnew/">Golang make vs new</a></li>
+        
+        <li><a href="/posts/golang/golang-map/">Golang Map</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95">面试</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

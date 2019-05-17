@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Gin</title>
-      <link>https://wushaoqiang.github.io/posts/golang-gin/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-gin/</link>
       <pubDate>Sun, 14 Apr 2019 23:12:41 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-gin/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-gin/</guid>
       <description> 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
 func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
 gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&amp;quot;/api/v1&amp;quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 </description>
@@ -24,10 +24,10 @@ gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()�
     
     <item>
       <title>Golang Build blog with gin</title>
-      <link>https://wushaoqiang.github.io/posts/golang-blog/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-blog/</link>
       <pubDate>Sun, 14 Apr 2019 13:47:15 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-blog/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-blog/</guid>
       <description> Package  ini &amp;mdash;配置文件的读取
  com &amp;mdash;功能性
  validation &amp;mdash;做验证
@@ -39,10 +39,10 @@ gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()�
     
     <item>
       <title>Go琐碎笔记</title>
-      <link>https://wushaoqiang.github.io/posts/learningGo/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/learningGo/</link>
       <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learningGo/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/learningGo/</guid>
       <description>在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
 2019.2.16 go test -tags tagname
 构造数组可以先 make([]int,0)

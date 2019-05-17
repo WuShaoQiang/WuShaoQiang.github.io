@@ -13,10 +13,10 @@
     
     <item>
       <title>Hugo建博客</title>
-      <link>https://wushaoqiang.github.io/posts/learn-hugo/</link>
+      <link>https://wushaoqiang.github.io/posts/others/learn-hugo/</link>
       <pubDate>Sat, 16 Mar 2019 22:33:20 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learn-hugo/</guid>
+      <guid>https://wushaoqiang.github.io/posts/others/learn-hugo/</guid>
       <description>笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。
 所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人
 以下命令都是以我自己建博客的为例

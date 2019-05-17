@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Vscode Problem</title>
-      <link>https://wushaoqiang.github.io/posts/golang-vscode-problem/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/</link>
       <pubDate>Wed, 24 Apr 2019 20:56:13 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-vscode-problem/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/</guid>
       <description>今天Vscode用着用着，突然自动补全不能用了，不仅没有自动导入，也没有函数提示等
 突然觉得自己被打入地狱(没有自动补全就像手写代码一样，很不是滋味)
 在Google上找了别人的方法也都没用，最后瞎搞一下搞好了

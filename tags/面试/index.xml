@@ -13,19 +13,19 @@
     
     <item>
       <title>TenToSeventeen</title>
-      <link>https://wushaoqiang.github.io/posts/tenToSeventeen/</link>
+      <link>https://wushaoqiang.github.io/posts/others/tenToSeventeen/</link>
       <pubDate>Sun, 28 Apr 2019 16:25:41 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/tenToSeventeen/</guid>
+      <guid>https://wushaoqiang.github.io/posts/others/tenToSeventeen/</guid>
       <description>代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &amp;gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &amp;gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &amp;lt; 10: strs = append(strs, strconv.</description>
     </item>
     
     <item>
       <title>Interview2</title>
-      <link>https://wushaoqiang.github.io/posts/interview2/</link>
+      <link>https://wushaoqiang.github.io/posts/interview/interview2/</link>
       <pubDate>Thu, 25 Apr 2019 22:05:12 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/interview2/</guid>
+      <guid>https://wushaoqiang.github.io/posts/interview/interview2/</guid>
       <description>最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
  这里应该用channel来达到通信
 在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
@@ -53,10 +53,10 @@ Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为�
     
     <item>
       <title>Interview</title>
-      <link>https://wushaoqiang.github.io/posts/interview/</link>
+      <link>https://wushaoqiang.github.io/posts/interview/interview/</link>
       <pubDate>Wed, 24 Apr 2019 15:32:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/interview/</guid>
+      <guid>https://wushaoqiang.github.io/posts/interview/interview/</guid>
       <description>本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
 go的优势  Go是Google工程师基于现实世界开发经验进行改进的友好型语言
  简单明了

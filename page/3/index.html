@@ -68,7 +68,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-module/" title="Golang Module" >Golang Module</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/" title="Golang Module" >Golang Module</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -104,13 +104,13 @@ export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是�
 go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
 go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-module/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -129,13 +129,13 @@ go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bu
 参考官方文章
 package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-mongodb/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -164,13 +164,13 @@ Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使�
 如果是侧重全局数据的读取 &ndash;使用索引会增加性能
 Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -197,13 +197,13 @@ validationLevel 控制检查的程度 模式有两种:strict(default) and modera
  官网例子
 db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-schema-validation/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -220,13 +220,13 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
                             <div class="post-content">
                                 关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &quot;D&quot; } ) // selects from the inventory collection all documents where the status equals &quot;D&quot; db.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-command/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/" title="SQL vs NoSQL" >SQL vs NoSQL</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/" title="SQL vs NoSQL" >SQL vs NoSQL</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -258,7 +258,7 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
  缺点:对分布式不友好,并且一旦关系多了,会产生混乱
   NoSQL没有关系,全部都是直接存储……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">

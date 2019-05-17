@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-bible/">Go圣经读书笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">Go圣经读书笔记</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -100,14 +100,14 @@ func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep 
  func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
  func (s *Scanner) Text() string  返回scanner所在行的文本
 counts := make(map[string]int) input := bufio.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-bible/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-inaction/">Go语言实战</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">Go语言实战</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -128,14 +128,14 @@ counts := make(map[string]int) input := bufio.……
  Go语言自带垃圾回收器
  goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
   第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-inaction/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-highlevel/">Go语言高级编程</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">Go语言高级编程</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -162,7 +162,7 @@ type StringHeader struct { Data uintptr Len int }  字符串结构由两个信�
   切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
 这种做法可以减少中间创建的临时切片
 copy append可以完成切片的添加 删除 插入操作……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-highlevel/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">阅读全文</a></p>
                             </div>
                         </article>
                     

@@ -13,10 +13,10 @@
     
     <item>
       <title>DHCP 和 NAT</title>
-      <link>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</link>
+      <link>https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/</link>
       <pubDate>Mon, 22 Apr 2019 20:59:55 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/DHCP-and-NAT/</guid>
+      <guid>https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/</guid>
       <description>DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
 四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
  DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了

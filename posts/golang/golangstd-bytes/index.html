@@ -1,0 +1,3122 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Golang标准库--Bytes | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Golang标准库--Bytes - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-03-17T02:03:03&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-03-17T02:03:03&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Golang标准库--Bytes">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golang/golangstd-bytes/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Golang标准库--Bytes</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年3月17日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="目录">目录</h3>
+
+<pre><code>bytes
+
+    buffer.go
+        Buffer
+            结构体
+            const of readOp
+            (b *Buffer) Bytes() []byte
+            (b *Buffer) String() string
+            (b *Buffer) empty() bool
+            (b *Buffer) Len() int
+            (b *Buffer) Cap() int
+            (b *Buffer) Truncate(n int)
+            (b *Buffer) Reset()
+            (b *Buffer) tryGrowByReslice(n int) (int, bool)
+            (b *Buffer) grow(n int) int
+            (b *Buffer) Grow(n int)
+            (b *Buffer) Write(p []byte) (n int, err error)
+            (b *Buffer) WriteString(s string) (n int, err error)
+            makeSlice(n int) []byte
+            (b *Buffer) WriteTo(w io.Writer) (n int64, err error)
+            (b *Buffer) WriteByte(c byte) error
+            (b *Buffer) WriteRune(r rune) (n int, err error)
+            (b *Buffer) Read(p []byte) (n int, err error)
+            (b *Buffer) Next(n int) []byte
+            (b *Buffer) ReadByte() (byte, error)
+            (b *Buffer) ReadRune() (r rune, size int, err error)
+            (b *Buffer) UnreadRune() error
+            (b *Buffer) UnreadByte() error
+            (b *Buffer) ReadBytes(delim byte) (line []byte, err error)
+            (b *Buffer) readSlice(delim byte) (line []byte, err error)
+            (b *Buffer) ReadString(delim byte) (line string, err error)
+            NewBufferString(s string) *Buffer
+        总结一下
+    bytes.go
+        equalPortable(a, b []byte) bool
+        explode(s []byte, n int) [][]byte
+        Contains(b, subslice []byte) bool
+        ContainsAny(b []byte, chars string) bool
+        ContainsRune(b []byte, r rune) bool
+        indexBytePortable(s []byte, c byte) int
+        LastIndex(s, sep []byte) int
+        LastIndexByte(s []byte, c byte) int
+        IndexRune(s []byte, r rune) int
+        LastIndexAny(s []byte, chars string) int
+        genSplit(s, sep []byte, sepSave, n int) [][]byte
+        SplitN(s, sep []byte, n int) [][]byte
+        SplitAfterN(s, sep []byte, n int) [][]byte
+        Split(s, sep []byte) [][]byte
+        SplitAfter(s, sep []byte) [][]byte
+        小总结
+        Fields(s []byte) [][]byte
+        Join(s [][]byte, sep []byte) []byte
+        HasPrefix(s, prefix []byte) bool
+        HasSuffix(s, suffix []byte) bool
+        Map(mapping func(r rune) rune, s []byte) []byte
+        Repeat(b []byte, count int) []byte
+        ToUpper(s []byte) []byte
+        ToLower(s []byte) []byte
+        ToTitle(s []byte) []byte
+        ToUpperSpecial(c unicode.SpecialCase, s []byte) []byte
+        ToLowerSpecial(c unicode.SpecialCase, s []byte) []byte
+        ToTitleSpecial(c unicode.SpecialCase, s []byte) []byte
+        isSeparator(r rune) bool
+        Title(s []byte) []byte
+        TrimRightFunc(s []byte, f func(r rune) bool) []byte
+        TrimFunc(s []byte, f func(r rune) bool) []byte
+        TrimPrefix(s, prefix []byte) []byte
+        TrimSuffix(s, suffix []byte) []byte
+        IndexFunc(s []byte, f func(r rune) bool) int
+        LastIndexFunc(s []byte, f func(r rune) bool) int
+        indexFunc(s []byte, f func(r rune) bool, truth bool) int
+        lastIndexFunc(s []byte, f func(r rune) bool, truth bool) int
+        makeASCIISet(chars string) (as asciiSet, ok bool)
+        (as *asciiSet) contains(c byte) bool
+        makeCutsetFunc(cutset string) func(r rune) bool
+        Trim(s []byte, cutset string) []byte
+        TrimLeft(s []byte, cutset string) []byte
+        TrimRight(s []byte, cutset string) []byte
+        TrimSpace(s []byte) []byte
+        Runes(s []byte) []rune
+        Replace(s, old, new []byte, n int) []byte
+        Index(s, sep []byte) int
+        总结一下
+    reader.go
+        Reader
+        (r *Reader) Len() int
+        (r *Reader) Size() int64
+        (r *Reader) Read(b []byte)
+        (r *Reader) ReadAt(b []byte, off int64) (n int, err error)
+        (r *Reader) ReadByte() (byte, error)
+        (r *Reader) UnreadByte() error
+        (r *Reader) ReadRune() (ch rune, size int, err error)
+        (r *Reader) UnreadRune()
+        (r *Reader) Seek(offset int64, whence int) (int64, error)
+        (r *Reader) WriteTo(w io.Writer) (n int64, err error)
+        (r *Reader) Reset(b []byte)
+        NewReader(b []byte) *Reader
+        总结一下
+</code></pre>
+
+<h1 id="bytes">bytes</h1>
+
+<h2 id="buffer-go">buffer.go</h2>
+
+<h3 id="buffer">Buffer</h3>
+
+<blockquote>
+<p>Simple byte buffer for marshaling data</p>
+
+<p>简单的byte buffer，为了序列化数据</p>
+</blockquote>
+
+<h4 id="结构体">&mdash; 结构体</h4>
+
+<pre><code class="language-go">// A Buffer is a variable-sized buffer of bytes with Read and Write methods.
+// The zero value for Buffer is an empty buffer ready to use.
+type Buffer struct {
+	buf       []byte   // contents are the bytes buf[off : len(buf)]
+	off       int      // read at &amp;buf[off], write at &amp;buf[len(buf)]
+	bootstrap [64]byte // memory to hold first slice; helps small buffers avoid allocation.
+	lastRead  readOp   // last read operation, so that Unread* can work correctly.
+
+	// FIXME: it would be advisable to align Buffer to cachelines to avoid false
+	// sharing.
+}
+</code></pre>
+
+<p>我们首先搞清楚里面的定义</p>
+
+<ul>
+<li><p>很明显是存储内容的切片</p></li>
+
+<li><p>标志最后被读取的位置</p></li>
+
+<li><p>这个是为了临时给buf增加长度的。</p></li>
+
+<li><p>一个常量表示的标志位</p></li>
+</ul>
+
+<h4 id="const-of-readop">&mdash; const of readOp</h4>
+
+<pre><code class="language-go">// The readOp constants describe the last action performed on
+// the buffer, so that UnreadRune and UnreadByte can check for
+// invalid usage. opReadRuneX constants are chosen such that
+// converted to int they correspond to the rune size that was read.
+type readOp int8
+
+// Don't use iota for these, as the values need to correspond with the
+// names and comments, which is easier to see when being explicit.
+const (
+	opRead      readOp = -1 // Any other read operation.
+	opInvalid   readOp = 0  // Non-read operation.
+	opReadRune1 readOp = 1  // Read rune of size 1.
+	opReadRune2 readOp = 2  // Read rune of size 2.
+	opReadRune3 readOp = 3  // Read rune of size 3.
+	opReadRune4 readOp = 4  // Read rune of size 4.
+)
+</code></pre>
+
+<p>可以从英文中得到这里每个常量的意思依次是：</p>
+
+<ul>
+<li><p>读操作</p></li>
+
+<li><p>非读操作</p></li>
+
+<li><p>size为1的rune等</p></li>
+</ul>
+
+<h4 id="b-buffer-bytes-byte">&mdash; (b *Buffer) Bytes() []byte</h4>
+
+<pre><code class="language-go">// Bytes returns a slice of length b.Len() holding the unread portion of the buffer.
+// The slice is valid for use only until the next buffer modification (that is,
+// only until the next call to a method like Read, Write, Reset, or Truncate).
+// The slice aliases the buffer content at least until the next buffer modification,
+// so immediate changes to the slice will affect the result of future reads.
+func (b *Buffer) Bytes() []byte { return b.buf[b.off:] }
+
+</code></pre>
+
+<p>很明显，这是一个返回还<strong>未被读出来</strong>的数据的<strong>切片地址</strong>，所以如果改变了返回的切片里面的数据，未来读出来的数据也会被改变(<strong>这个并不是副本</strong>)</p>
+
+<p>我们可以通过一些例子来看看到底会不会因此改变读出来的数据</p>
+
+<pre><code class="language-go">func main() {
+	s := &quot;i am&quot;
+	b := bytes.NewBufferString(s)
+
+	bb := b.Bytes()
+	fmt.Println(bb)
+
+	bb[0] = byte(109)
+	fmt.Println(b.Bytes())
+
+	fmt.Println(b.String())
+}
+</code></pre>
+
+<p>结果</p>
+
+<pre><code>[105 32 97 109]
+[109 32 97 109]
+m am
+</code></pre>
+
+<p>很明显，我们确实因此改变了这个buffer的内容。所以<strong>切记</strong></p>
+
+<h4 id="b-buffer-string-string">&mdash; (b *Buffer) String() string</h4>
+
+<pre><code class="language-go">// String returns the contents of the unread portion of the buffer
+// as a string. If the Buffer is a nil pointer, it returns &quot;&lt;nil&gt;&quot;.
+//
+// To build strings more efficiently, see the strings.Builder type.
+func (b *Buffer) String() string {
+	if b == nil {
+		// Special case, useful in debugging.
+		return &quot;&lt;nil&gt;&quot;
+	}
+	return string(b.buf[b.off:])
+}
+</code></pre>
+
+<p>这个和<code>Byte</code>函数有一个很大的区别就是，这个返回的是一个副本(也就是新的内存空间)，所以改变它的返回值不会影响我们内部buffer的内容。</p>
+
+<p>做个小实验</p>
+
+<pre><code class="language-go">func main() {
+	s := &quot;i am&quot;
+	b := bytes.NewBufferString(s)
+
+	ss := b.String()
+	fmt.Println(ss)
+
+	bb := []byte(ss)
+
+	bb[0] = byte(109)
+	fmt.Println(b.Bytes())
+
+	fmt.Println(b.String())
+}
+
+</code></pre>
+
+<p>我们通过同样的方法修改返回值，得到的结果是</p>
+
+<pre><code>i am
+[105 32 97 109]
+i am
+</code></pre>
+
+<p>所以可以看出是没有改变再次读出来的数据，所以<strong>建议使用这种方法</strong></p>
+
+<h4 id="b-buffer-empty-bool">&mdash; (b *Buffer) empty() bool</h4>
+
+<pre><code class="language-go">// empty returns whether the unread portion of the buffer is empty.
+func (b *Buffer) empty() bool { return len(b.buf) &lt;= b.off }
+</code></pre>
+
+<p>这里是的empty表示的是： 是否还有未被读取的数据</p>
+
+<h4 id="b-buffer-len-int">&mdash; (b *Buffer) Len() int</h4>
+
+<pre><code class="language-go">// Len returns the number of bytes of the unread portion of the buffer;
+// b.Len() == len(b.Bytes()).
+func (b *Buffer) Len() int { return len(b.buf) - b.off }
+</code></pre>
+
+<p>这里返回的长度是指：还没被读取的数据的长度</p>
+
+<h4 id="b-buffer-cap-int">&mdash; (b *Buffer) Cap() int</h4>
+
+<pre><code class="language-go">// Cap returns the capacity of the buffer's underlying byte slice, that is, the
+// total space allocated for the buffer's data.
+func (b *Buffer) Cap() int { return cap(b.buf) }
+</code></pre>
+
+<p>这里返回的是buf的容量，我们知道，切片是有长度和容量一说的，返回的就是这里面的<strong>容量</strong>，并不是长度。</p>
+
+<h4 id="b-buffer-truncate-n-int">&mdash; (b *Buffer) Truncate(n int)</h4>
+
+<pre><code class="language-go">// Truncate discards all but the first n unread bytes from the buffer
+// but continues to use the same allocated storage.
+// It panics if n is negative or greater than the length of the buffer.
+func (b *Buffer) Truncate(n int) {
+	if n == 0 {
+		b.Reset()
+		return
+	}
+	b.lastRead = opInvalid
+	if n &lt; 0 || n &gt; b.Len() {
+		panic(&quot;bytes.Buffer: truncation out of range&quot;)
+	}
+	b.buf = b.buf[:b.off+n]
+}
+</code></pre>
+
+<p>这是一个截断函数，也就是传入的数字是多少就保留多少(所谓的保留是指未被读取过的)，剩下的就抛弃了</p>
+
+<p><strong>这里面用的是同一块内存</strong></p>
+
+<h4 id="b-buffer-reset">&mdash; (b *Buffer) Reset()</h4>
+
+<pre><code class="language-go">// Reset resets the buffer to be empty,
+// but it retains the underlying storage for use by future writes.
+// Reset is the same as Truncate(0).
+func (b *Buffer) Reset() {
+	b.buf = b.buf[:0]
+	b.off = 0
+	b.lastRead = opInvalid
+}
+</code></pre>
+
+<p>将缓冲清除，但是底层中还是保留了这个内存。</p>
+
+<p>什么叫保留了这个内存，我们可以看到代码里面只是将结构体的切片地址更改了，但是原来的内存地址里的数据还没有被覆盖。</p>
+
+<h4 id="b-buffer-trygrowbyreslice-n-int-int-bool">&mdash; (b *Buffer) tryGrowByReslice(n int) (int, bool)</h4>
+
+<pre><code class="language-go">// tryGrowByReslice is a inlineable version of grow for the fast-case where the
+// internal buffer only needs to be resliced.
+// It returns the index where bytes should be written and whether it succeeded.
+func (b *Buffer) tryGrowByReslice(n int) (int, bool) {
+	if l := len(b.buf); n &lt;= cap(b.buf)-l {
+		b.buf = b.buf[:l+n]
+		return l, true
+	}
+	return 0, false
+}
+</code></pre>
+
+<p>这是一个内部函数，意思是：当要为buffer扩容的时候，可以先看看这个buf能不能通过自己进行扩容，也就是因为切片的容量和长度在很多情况下是不相等的</p>
+
+<p>如果可以的话，就可以直接把数据搬过去，并且扩容。</p>
+
+<p>这个函数返回的是，可以在哪个位置进行写入，以及是否可以通过自己扩容。</p>
+
+<h4 id="b-buffer-grow-n-int-int">&mdash; (b *Buffer) grow(n int) int</h4>
+
+<pre><code class="language-go">// grow grows the buffer to guarantee space for n more bytes.
+// It returns the index where bytes should be written.
+// If the buffer can't grow it will panic with ErrTooLarge.
+func (b *Buffer) grow(n int) int {
+	m := b.Len()
+	// If buffer is empty, reset to recover space.
+	if m == 0 &amp;&amp; b.off != 0 {
+		b.Reset()
+	}
+	// Try to grow by means of a reslice.
+	if i, ok := b.tryGrowByReslice(n); ok {
+		return i
+	}
+	// Check if we can make use of bootstrap array.
+	if b.buf == nil &amp;&amp; n &lt;= len(b.bootstrap) {
+		b.buf = b.bootstrap[:n]
+		return 0
+	}
+	c := cap(b.buf)
+	if n &lt;= c/2-m {
+		// We can slide things down instead of allocating a new
+		// slice. We only need m+n &lt;= c to slide, but
+		// we instead let capacity get twice as large so we
+		// don't spend all our time copying.
+		copy(b.buf, b.buf[b.off:])
+	} else if c &gt; maxInt-c-n {
+		panic(ErrTooLarge)
+	} else {
+		// Not enough space anywhere, we need to allocate.
+		buf := makeSlice(2*c + n)
+		copy(buf, b.buf[b.off:])
+		b.buf = buf
+	}
+	// Restore b.off and len(b.buf).
+	b.off = 0
+	b.buf = b.buf[:m+n]
+	return m
+}
+</code></pre>
+
+<p>这也是个内部函数，传入的参数是我们需要的最小容量，它返回的是在哪个位置可以进行写入。</p>
+
+<p>从代码上看</p>
+
+<pre><code class="language-go">// If buffer is empty, reset to recover space.
+	if m == 0 &amp;&amp; b.off != 0 {
+		b.Reset()
+	}
+</code></pre>
+
+<p>这里是假设了<code>buf</code>是空的(也就是全部被读完了，然后就可以直接重置了</p>
+
+<pre><code class="language-go">// Try to grow by means of a reslice.
+	if i, ok := b.tryGrowByReslice(n); ok {
+		return i
+	}
+</code></pre>
+
+<p>尝试重组切片</p>
+
+<pre><code class="language-go">// Check if we can make use of bootstrap array.
+	if b.buf == nil &amp;&amp; n &lt;= len(b.bootstrap) {
+		b.buf = b.bootstrap[:n]
+		return 0
+	}
+</code></pre>
+
+<p>这个就是用了结构体的那个数组转换成了切片</p>
+
+<pre><code class="language-go">c := cap(b.buf)
+	if n &lt;= c/2-m {
+		// We can slide things down instead of allocating a new
+		// slice. We only need m+n &lt;= c to slide, but
+		// we instead let capacity get twice as large so we
+		// don't spend all our time copying.
+		copy(b.buf, b.buf[b.off:])
+	} else if c &gt; maxInt-c-n {
+		panic(ErrTooLarge)
+	} else {
+		// Not enough space anywhere, we need to allocate.
+		buf := makeSlice(2*c + n)
+		copy(buf, b.buf[b.off:])
+		b.buf = buf
+	}
+	// Restore b.off and len(b.buf).
+	b.off = 0
+	b.buf = b.buf[:m+n]
+	return m
+</code></pre>
+
+<p>这里为什么要判断<code>if n &lt;= c/2-m</code>呢，从解释上是说，如果没有两倍大的空间，我还不如直接扩容呢，就不用将时间浪费在数据之间的Copy上了，是为了时间成本上的设计。</p>
+
+<p>下面的就是扩容操作了。</p>
+
+<h4 id="b-buffer-grow-n-int">&mdash; (b *Buffer) Grow(n int)</h4>
+
+<pre><code class="language-go">// Grow grows the buffer's capacity, if necessary, to guarantee space for
+// another n bytes. After Grow(n), at least n bytes can be written to the
+// buffer without another allocation.
+// If n is negative, Grow will panic.
+// If the buffer can't grow it will panic with ErrTooLarge.
+func (b *Buffer) Grow(n int) {
+	if n &lt; 0 {
+		panic(&quot;bytes.Buffer.Grow: negative count&quot;)
+	}
+	m := b.grow(n)
+	b.buf = b.buf[:m]
+}
+</code></pre>
+
+<p>首先我们要知道，这个函数是为了增加buf的<strong>容量的！</strong>，而且这里是指增加的，不是总数。增加后就会至少有那么多位可以被写入了。</p>
+
+<p>可以从代码上看到这里的buf切片会往前移(也就是把被读过的数据埋了，但是数据还是在那的，需要重新写过才算是埋了)</p>
+
+<p>有些朋友可以说，这样直接重用一份内存不会因为先读后写出错吗</p>
+
+<p>我想说的是，只要按照标准库里面给的方法，它会非常清除哪些数据是有效的(通过标志)</p>
+
+<h4 id="b-buffer-write-p-byte-n-int-err-error">&mdash; (b *Buffer) Write(p []byte) (n int, err error)</h4>
+
+<pre><code class="language-go">// Write appends the contents of p to the buffer, growing the buffer as
+// needed. The return value n is the length of p; err is always nil. If the
+// buffer becomes too large, Write will panic with ErrTooLarge.
+func (b *Buffer) Write(p []byte) (n int, err error) {
+	b.lastRead = opInvalid
+	m, ok := b.tryGrowByReslice(len(p))
+	if !ok {
+		m = b.grow(len(p))
+	}
+	return copy(b.buf[m:], p), nil
+}
+</code></pre>
+
+<p>这个是写的入buf的操作，如果容量不够，它会自己增加。</p>
+
+<h4 id="b-buffer-writestring-s-string-n-int-err-error">&mdash; (b *Buffer) WriteString(s string) (n int, err error)</h4>
+
+<pre><code class="language-go">// WriteString appends the contents of s to the buffer, growing the buffer as
+// needed. The return value n is the length of s; err is always nil. If the
+// buffer becomes too large, WriteString will panic with ErrTooLarge.
+func (b *Buffer) WriteString(s string) (n int, err error) {
+	b.lastRead = opInvalid
+	m, ok := b.tryGrowByReslice(len(s))
+	if !ok {
+		m = b.grow(len(s))
+	}
+	return copy(b.buf[m:], s), nil
+}
+</code></pre>
+
+<p>同理，写入字符串，或者说是以字符串形式写入。</p>
+
+<p>有趣的是  这里可以直接将字符串copy到切片
+<code>copy(b.buf[m:], s)</code></p>
+
+<h4 id="toc_18">&mdash;</h4>
+
+<pre><code class="language-go">// MinRead is the minimum slice size passed to a Read call by
+// Buffer.ReadFrom. As long as the Buffer has at least MinRead bytes beyond
+// what is required to hold the contents of r, ReadFrom will not grow the
+// underlying buffer.
+const MinRead = 512
+</code></pre>
+
+<p>这个常数是在调用<code>ReadFrom</code>的时候会自动的为buf增加<code>MinRead</code>的容量</p>
+
+<h4 id="b-buffer-readfrom-r-io-reader-n-int64-err-error">&mdash; (b *Buffer) ReadFrom(r io.Reader) (n int64, err error)</h4>
+
+<pre><code class="language-go">// ReadFrom reads data from r until EOF and appends it to the buffer, growing
+// the buffer as needed. The return value n is the number of bytes read. Any
+// error except io.EOF encountered during the read is also returned. If the
+// buffer becomes too large, ReadFrom will panic with ErrTooLarge.
+func (b *Buffer) ReadFrom(r io.Reader) (n int64, err error) {
+	b.lastRead = opInvalid
+	for {
+		i := b.grow(MinRead)
+		b.buf = b.buf[:i]
+		m, e := r.Read(b.buf[i:cap(b.buf)])
+		if m &lt; 0 {
+			panic(errNegativeRead)
+		}
+
+		b.buf = b.buf[:i+m]
+		n += int64(m)
+		if e == io.EOF {
+			return n, nil // e is EOF, so return nil explicitly
+		}
+		if e != nil {
+			return n, e
+		}
+	}
+}
+</code></pre>
+
+<p>这个函数会将传入的Reader里面的所有数据都读完到buf里面(这个buf会自己增加容量)</p>
+
+<p>这个函数不会返回EOF，只会返回其它的错误。</p>
+
+<h4 id="makeslice-n-int-byte">&mdash; makeSlice(n int) []byte</h4>
+
+<pre><code class="language-go">// makeSlice allocates a slice of size n. If the allocation fails, it panics
+// with ErrTooLarge.
+func makeSlice(n int) []byte {
+	// If the make fails, give a known error.
+	defer func() {
+		if recover() != nil {
+			panic(ErrTooLarge)
+		}
+	}()
+	return make([]byte, n)
+}
+</code></pre>
+
+<p>内部函数，这个才是底层的扩容函数，这里直接返回一个被扩容的切片地址。</p>
+
+<h4 id="b-buffer-writeto-w-io-writer-n-int64-err-error">&mdash; (b *Buffer) WriteTo(w io.Writer) (n int64, err error)</h4>
+
+<pre><code class="language-go">// WriteTo writes data to w until the buffer is drained or an error occurs.
+// The return value n is the number of bytes written; it always fits into an
+// int, but it is int64 to match the io.WriterTo interface. Any error
+// encountered during the write is also returned.
+func (b *Buffer) WriteTo(w io.Writer) (n int64, err error) {
+	b.lastRead = opInvalid
+	if nBytes := b.Len(); nBytes &gt; 0 {
+		m, e := w.Write(b.buf[b.off:])
+		if m &gt; nBytes {
+			panic(&quot;bytes.Buffer.WriteTo: invalid Write count&quot;)
+		}
+		b.off += m
+		n = int64(m)
+		if e != nil {
+			return n, e
+		}
+		// all bytes should have been written, by definition of
+		// Write method in io.Writer
+		if m != nBytes {
+			return n, io.ErrShortWrite
+		}
+	}
+	// Buffer is now empty; reset.
+	b.Reset()
+	return n, nil
+}
+</code></pre>
+
+<p>这是和<code>ReadFrom</code>是对立的，这个是将buf所有数据都写入到传入的Writer接口上，并且会把buf重置</p>
+
+<h4 id="b-buffer-writebyte-c-byte-error">&mdash; (b *Buffer) WriteByte(c byte) error</h4>
+
+<pre><code class="language-go">// WriteByte appends the byte c to the buffer, growing the buffer as needed.
+// The returned error is always nil, but is included to match bufio.Writer's
+// WriteByte. If the buffer becomes too large, WriteByte will panic with
+// ErrTooLarge.
+func (b *Buffer) WriteByte(c byte) error {
+	b.lastRead = opInvalid
+	m, ok := b.tryGrowByReslice(1)
+	if !ok {
+		m = b.grow(1)
+	}
+	b.buf[m] = c
+	return nil
+}
+
+</code></pre>
+
+<p>写入一个字节到buf里</p>
+
+<h4 id="b-buffer-writerune-r-rune-n-int-err-error">&mdash; (b *Buffer) WriteRune(r rune) (n int, err error)</h4>
+
+<pre><code class="language-go">// WriteRune appends the UTF-8 encoding of Unicode code point r to the
+// buffer, returning its length and an error, which is always nil but is
+// included to match bufio.Writer's WriteRune. The buffer is grown as needed;
+// if it becomes too large, WriteRune will panic with ErrTooLarge.
+func (b *Buffer) WriteRune(r rune) (n int, err error) {
+	if r &lt; utf8.RuneSelf {
+		b.WriteByte(byte(r))
+		return 1, nil
+	}
+	b.lastRead = opInvalid
+	m, ok := b.tryGrowByReslice(utf8.UTFMax)
+	if !ok {
+		m = b.grow(utf8.UTFMax)
+	}
+	n = utf8.EncodeRune(b.buf[m:m+utf8.UTFMax], r)
+	b.buf = b.buf[:m+n]
+	return n, nil
+}
+</code></pre>
+
+<p>写入一个<code>rune</code>，并且会返回这个rune的大小，和返回错误</p>
+
+<h4 id="b-buffer-read-p-byte-n-int-err-error">&mdash; (b *Buffer) Read(p []byte) (n int, err error)</h4>
+
+<pre><code class="language-go">// Read reads the next len(p) bytes from the buffer or until the buffer
+// is drained. The return value n is the number of bytes read. If the
+// buffer has no data to return, err is io.EOF (unless len(p) is zero);
+// otherwise it is nil.
+func (b *Buffer) Read(p []byte) (n int, err error) {
+	b.lastRead = opInvalid
+	if b.empty() {
+		// Buffer is empty, reset to recover space.
+		b.Reset()
+		if len(p) == 0 {
+			return 0, nil
+		}
+		return 0, io.EOF
+	}
+	n = copy(p, b.buf[b.off:])
+	b.off += n
+	if n &gt; 0 {
+		b.lastRead = opRead
+	}
+	return n, nil
+}
+</code></pre>
+
+<p>这是一个将外部切片传入进函数里，得到buf数据的Read方法
+和上面的Write方法是类似的。</p>
+
+<p>如果buf里面没有数据，就会返回EOF</p>
+
+<h4 id="b-buffer-next-n-int-byte">&mdash; (b *Buffer) Next(n int) []byte</h4>
+
+<pre><code class="language-go">// Next returns a slice containing the next n bytes from the buffer,
+// advancing the buffer as if the bytes had been returned by Read.
+// If there are fewer than n bytes in the buffer, Next returns the entire buffer.
+// The slice is only valid until the next call to a read or write method.
+func (b *Buffer) Next(n int) []byte {
+	b.lastRead = opInvalid
+	m := b.Len()
+	if n &gt; m {
+		n = m
+	}
+	data := b.buf[b.off : b.off+n]
+	b.off += n
+	if n &gt; 0 {
+		b.lastRead = opRead
+	}
+	return data
+}
+</code></pre>
+
+<p>这个函数实现了直接读取我们需要的字节数量，其实和Read方法是差不多的，只是Read需要传入的是一个切片，而这里是返回切片。</p>
+
+<p>当传入的数量比buf的未读取数据长度还要大时，会直接返回整个buf</p>
+
+<h4 id="b-buffer-readbyte-byte-error">&mdash; (b *Buffer) ReadByte() (byte, error)</h4>
+
+<pre><code class="language-go">// ReadByte reads and returns the next byte from the buffer.
+// If no byte is available, it returns error io.EOF.
+func (b *Buffer) ReadByte() (byte, error) {
+	if b.empty() {
+		// Buffer is empty, reset to recover space.
+		b.Reset()
+		return 0, io.EOF
+	}
+	c := b.buf[b.off]
+	b.off++
+	b.lastRead = opRead
+	return c, nil
+}
+</code></pre>
+
+<p>读取一个字节</p>
+
+<p>如果buf为空，就返回EOF</p>
+
+<h4 id="b-buffer-readrune-r-rune-size-int-err-error">&mdash; (b *Buffer) ReadRune() (r rune, size int, err error)</h4>
+
+<pre><code class="language-go">// ReadRune reads and returns the next UTF-8-encoded
+// Unicode code point from the buffer.
+// If no bytes are available, the error returned is io.EOF.
+// If the bytes are an erroneous UTF-8 encoding, it
+// consumes one byte and returns U+FFFD, 1.
+func (b *Buffer) ReadRune() (r rune, size int, err error) {
+	if b.empty() {
+		// Buffer is empty, reset to recover space.
+		b.Reset()
+		return 0, 0, io.EOF
+	}
+	c := b.buf[b.off]
+	if c &lt; utf8.RuneSelf {
+		b.off++
+		b.lastRead = opReadRune1
+		return rune(c), 1, nil
+	}
+	r, n := utf8.DecodeRune(b.buf[b.off:])
+	b.off += n
+	b.lastRead = readOp(n)
+	return r, n, nil
+}
+</code></pre>
+
+<p>这函数读取一个<code>rune</code>，并且返回大小和错误。</p>
+
+<p>我们来总结一下有关<code>rune</code>，这里面如何判断数据是否是rune呢。</p>
+
+<p>用到了<code>if c &lt; utf8.RuneSelf</code>，也就是说，是Rune的一定不会小于<code>utf8.RuneSelf</code></p>
+
+<p>然后我们通过<code>utf8.DecodeRune(b.buf[b.off:])</code>就可以返回一个完整的Rune了。</p>
+
+<h4 id="b-buffer-unreadrune-error">&mdash; (b *Buffer) UnreadRune() error</h4>
+
+<pre><code class="language-go">// UnreadRune unreads the last rune returned by ReadRune.
+// If the most recent read or write operation on the buffer was
+// not a successful ReadRune, UnreadRune returns an error.  (In this regard
+// it is stricter than UnreadByte, which will unread the last byte
+// from any read operation.)
+func (b *Buffer) UnreadRune() error {
+	if b.lastRead &lt;= opInvalid {
+		return errors.New(&quot;bytes.Buffer: UnreadRune: previous operation was not a successful ReadRune&quot;)
+	}
+	if b.off &gt;= int(b.lastRead) {
+		b.off -= int(b.lastRead)
+	}
+	b.lastRead = opInvalid
+	return nil
+}
+</code></pre>
+
+<p>第一步先判断是否上一个步骤是读取<code>rune</code></p>
+
+<p>恢复一个读过的<code>rune</code>，其实只是把off这个位置给前移了。</p>
+
+<h4 id="b-buffer-unreadbyte-error">&mdash; (b *Buffer) UnreadByte() error</h4>
+
+<pre><code class="language-go">// UnreadByte unreads the last byte returned by the most recent successful
+// read operation that read at least one byte. If a write has happened since
+// the last read, if the last read returned an error, or if the read read zero
+// bytes, UnreadByte returns an error.
+func (b *Buffer) UnreadByte() error {
+	if b.lastRead == opInvalid {
+		return errors.New(&quot;bytes.Buffer: UnreadByte: previous operation was not a successful read&quot;)
+	}
+	b.lastRead = opInvalid
+	if b.off &gt; 0 {
+		b.off--
+	}
+	return nil
+}
+</code></pre>
+
+<p>也是先判断上一个操作是否是读取的操作</p>
+
+<p>也是将off的位置往前移了一位。</p>
+
+<h4 id="b-buffer-readbytes-delim-byte-line-byte-err-error">&mdash; (b *Buffer) ReadBytes(delim byte) (line []byte, err error)</h4>
+
+<pre><code class="language-go">// ReadBytes reads until the first occurrence of delim in the input,
+// returning a slice containing the data up to and including the delimiter.
+// If ReadBytes encounters an error before finding a delimiter,
+// it returns the data read before the error and the error itself (often io.EOF).
+// ReadBytes returns err != nil if and only if the returned data does not end in
+// delim.
+func (b *Buffer) ReadBytes(delim byte) (line []byte, err error) {
+	slice, err := b.readSlice(delim)
+	// return a copy of slice. The buffer's backing array may
+	// be overwritten by later calls.
+	line = append(line, slice...)
+	return line, err
+}
+</code></pre>
+
+<p>函数返回的是我们要找的<code>delim</code>第一个出现的一个切片</p>
+
+<p>这里其实有个很细节的操作，它将底层数据的指针，和返回的指针分离开了，也就是说不会因为对返回值操作而造成对buf里面的数值</p>
+
+<h4 id="b-buffer-readslice-delim-byte-line-byte-err-error">&mdash; (b *Buffer) readSlice(delim byte) (line []byte, err error)</h4>
+
+<pre><code class="language-go">// readSlice is like ReadBytes but returns a reference to internal buffer data.
+func (b *Buffer) readSlice(delim byte) (line []byte, err error) {
+	i := IndexByte(b.buf[b.off:], delim)
+	end := b.off + i + 1
+	if i &lt; 0 {
+		end = len(b.buf)
+		err = io.EOF
+	}
+	line = b.buf[b.off:end]
+	b.off = end
+	b.lastRead = opRead
+	return line, err
+}
+</code></pre>
+
+<p>这是一个寻找delim的内部函数，返回的是一个切片，而这个切片是和buf在同一内存空间的。</p>
+
+<h4 id="b-buffer-readstring-delim-byte-line-string-err-error">&mdash; (b *Buffer) ReadString(delim byte) (line string, err error)</h4>
+
+<pre><code class="language-go">// ReadString reads until the first occurrence of delim in the input,
+// returning a string containing the data up to and including the delimiter.
+// If ReadString encounters an error before finding a delimiter,
+// it returns the data read before the error and the error itself (often io.EOF).
+// ReadString returns err != nil if and only if the returned data does not end
+// in delim.
+func (b *Buffer) ReadString(delim byte) (line string, err error) {
+	slice, err := b.readSlice(delim)
+	return string(slice), err
+}
+</code></pre>
+
+<p>同理，是返回字符串的。</p>
+
+<h4 id="newbuffer-buf-byte-buffer">&mdash; NewBuffer(buf []byte) *Buffer</h4>
+
+<pre><code class="language-go">// NewBuffer creates and initializes a new Buffer using buf as its
+// initial contents. The new Buffer takes ownership of buf, and the
+// caller should not use buf after this call. NewBuffer is intended to
+// prepare a Buffer to read existing data. It can also be used to size
+// the internal buffer for writing. To do that, buf should have the
+// desired capacity but a length of zero.
+//
+// In most cases, new(Buffer) (or just declaring a Buffer variable) is
+// sufficient to initialize a Buffer.
+func NewBuffer(buf []byte) *Buffer { return &amp;Buffer{buf: buf} }
+</code></pre>
+
+<p>这里面告诉我们，如果我们的切片是作为这个函数的参数的，我们就不应该在后面继续使用它了。我们传入的切片容量应该是我们所期望的，不应该是0.</p>
+
+<h4 id="newbufferstring-s-string-buffer">&mdash; NewBufferString(s string) *Buffer</h4>
+
+<pre><code class="language-go">// NewBufferString creates and initializes a new Buffer using string s as its
+// initial contents. It is intended to prepare a buffer to read an existing
+// string.
+//
+// In most cases, new(Buffer) (or just declaring a Buffer variable) is
+// sufficient to initialize a Buffer.
+func NewBufferString(s string) *Buffer {
+	return &amp;Buffer{buf: []byte(s)}
+}
+</code></pre>
+
+<p>同理，只是传入了一个字符串。</p>
+
+<h3 id="总结一下">总结一下</h3>
+
+<p>主要是对<code>bytes.Buffer</code>的读写方法，和上面讲到的不同，上面主要是读取和写入</p>
+
+<h3 id="bytes-go">bytes.go</h3>
+
+<blockquote>
+<p>Package bytes implements functions for the manipulation of byte slices.It is analogous to the facilities of the strings package.</p>
+</blockquote>
+
+<p>这个包是为了操作byte的，和strings包很类似</p>
+
+<h4 id="equalportable-a-b-byte-bool">&mdash;  equalPortable(a, b []byte) bool</h4>
+
+<pre><code class="language-go">func equalPortable(a, b []byte) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, c := range a {
+		if c != b[i] {
+			return false
+		}
+	}
+	return true
+}
+</code></pre>
+
+<p>内部函数，这里是判断两个切片是否完全相同。</p>
+
+<h4 id="explode-s-byte-n-int-byte">&mdash;  explode(s []byte, n int) [][]byte</h4>
+
+<pre><code class="language-go">// explode splits s into a slice of UTF-8 sequences, one per Unicode code point (still slices of bytes),
+// up to a maximum of n byte slices. Invalid UTF-8 sequences are chopped into individual bytes.
+func explode(s []byte, n int) [][]byte {
+	if n &lt;= 0 {
+		n = len(s)
+	}
+	a := make([][]byte, n)
+	var size int
+	na := 0
+	for len(s) &gt; 0 {
+		if na+1 &gt;= n {
+			a[na] = s
+			na++
+			break
+		}
+		_, size = utf8.DecodeRune(s)
+		a[na] = s[0:size:size]
+		s = s[size:]
+		na++
+	}
+	return a[0:na]
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>这是一个内部函数</p>
+
+<p>传入一个切片，和需要把切片分隔的数量，一个个分隔。</p>
+
+<p>也就是这个函数会按参数来进行将一维切片的数据一个一个拆解出来分割成二维</p>
+
+<p>这个函数也会自动识别<code>byte</code>和<code>rune</code></p>
+
+<h4 id="count-s-sep-byte-int">&mdash;  Count(s, sep []byte) int</h4>
+
+<pre><code class="language-go">// Count counts the number of non-overlapping instances of sep in s.
+// If sep is an empty slice, Count returns 1 + the number of UTF-8-encoded code points in s.
+func Count(s, sep []byte) int {
+	// special case
+	if len(sep) == 0 {
+		return utf8.RuneCount(s) + 1
+	}
+	if len(sep) == 1 {
+		return bytealg.Count(s, sep[0])
+	}
+	n := 0
+	for {
+		i := Index(s, sep)
+		if i == -1 {
+			return n
+		}
+		n++
+		s = s[i+len(sep):]
+	}
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>这是一个计算一个切片里包含了多少个子切片</p>
+
+<p>如果传入的子切片是空的，那么它会返回UTF-8编码的字符个数</p>
+
+<p><strong>本来我以为这里</strong>
+<code>s = s[i+len(sep):]</code>
+会改变切片的数据，但实际上s是外部传进来的一个地址而已，我只是改变了一个参数，对外面的切片地址没有造成改变</p>
+
+<p>再说一遍，这里<strong>只是改变了切片的地址</strong></p>
+
+<h4 id="contains-b-subslice-byte-bool">&mdash;  Contains(b, subslice []byte) bool</h4>
+
+<pre><code class="language-go">// Contains reports whether subslice is within b.
+func Contains(b, subslice []byte) bool {
+	return Index(b, subslice) != -1
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>只是返回是否含有</p>
+
+<h4 id="containsany-b-byte-chars-string-bool">&mdash;  ContainsAny(b []byte, chars string) bool</h4>
+
+<pre><code class="language-go">// ContainsAny reports whether any of the UTF-8-encoded code points in chars are within b.
+func ContainsAny(b []byte, chars string) bool {
+	return IndexAny(b, chars) &gt;= 0
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>这个函数是指，只要chars内有任意一个<code>rune</code>或<code>byte</code>是在切片里面的就返回true</p>
+
+<p>如果返回false则代表，两者没有一个相同的<code>byte</code>或<code>rune</code></p>
+
+<h4 id="containsrune-b-byte-r-rune-bool">&mdash;  ContainsRune(b []byte, r rune) bool</h4>
+
+<pre><code class="language-go">// ContainsRune reports whether the rune is contained in the UTF-8-encoded byte slice b.
+func ContainsRune(b []byte, r rune) bool {
+	return IndexRune(b, r) &gt;= 0
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>是否包含有某个<code>rune</code></p>
+
+<h4 id="indexbyteportable-s-byte-c-byte-int">&mdash;  indexBytePortable(s []byte, c byte) int</h4>
+
+<pre><code class="language-go">func indexBytePortable(s []byte, c byte) int {
+	for i, b := range s {
+		if b == c {
+			return i
+		}
+	}
+	return -1
+}
+</code></pre>
+
+<p>这是一个内部函数，用来判断切片中是否有某个byte存在</p>
+
+<h4 id="lastindex-s-sep-byte-int">&mdash;  LastIndex(s, sep []byte) int</h4>
+
+<pre><code class="language-go">// LastIndex returns the index of the last instance of sep in s, or -1 if sep is not present in s.
+func LastIndex(s, sep []byte) int {
+	n := len(sep)
+	if n == 0 {
+		return len(s)
+	}
+	c := sep[0]
+	for i := len(s) - n; i &gt;= 0; i-- {
+		if s[i] == c &amp;&amp; (n == 1 || Equal(s[i:i+n], sep)) {
+			return i
+		}
+	}
+	return -1
+}
+</code></pre>
+
+<p>这函数返回子切片在主切片的最后索引</p>
+
+<p>从代码上可以看出，这个函数主要是寻找子切片的第一个和主切片相符合的byte，然后再通过<code>Equal</code>函数进行比较。</p>
+
+<p>并且这个函数的子切片可以是空，也可以是1个元素或者多个元素</p>
+
+<h4 id="lastindexbyte-s-byte-c-byte-int">&mdash;  LastIndexByte(s []byte, c byte) int</h4>
+
+<pre><code class="language-go">// LastIndexByte returns the index of the last instance of c in s, or -1 if c is not present in s.
+func LastIndexByte(s []byte, c byte) int {
+	for i := len(s) - 1; i &gt;= 0; i-- {
+		if s[i] == c {
+			return i
+		}
+	}
+	return -1
+}
+
+</code></pre>
+
+<p>很明显，这个函数是找byte在切片的最后索引。</p>
+
+<h4 id="indexrune-s-byte-r-rune-int">&mdash;  IndexRune(s []byte, r rune) int</h4>
+
+<pre><code class="language-go">// IndexRune interprets s as a sequence of UTF-8-encoded code points.
+// It returns the byte index of the first occurrence in s of the given rune.
+// It returns -1 if rune is not present in s.
+// If r is utf8.RuneError, it returns the first instance of any
+// invalid UTF-8 byte sequence.
+func IndexRune(s []byte, r rune) int {
+	switch {
+	case 0 &lt;= r &amp;&amp; r &lt; utf8.RuneSelf:
+		return IndexByte(s, byte(r))
+	case r == utf8.RuneError:
+		for i := 0; i &lt; len(s); {
+			r1, n := utf8.DecodeRune(s[i:])
+			if r1 == utf8.RuneError {
+				return i
+			}
+			i += n
+		}
+		return -1
+	case !utf8.ValidRune(r):
+		return -1
+	default:
+		var b [utf8.UTFMax]byte
+		n := utf8.EncodeRune(b[:], r)
+		return Index(s, b[:n])
+	}
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>函数会返回所需要找的<code>rune</code>的索引。</p>
+
+<p>当r为<code>RuneError</code>的时候，我们需要用<code>DecodeRune</code>来一个个检验，当切片是空，或者是无效的编码时，就会返回<code>RuneError</code>，和占用的字节。
+这样是将切片转换为rune来判断</p>
+
+<p>后面有一个将rune转换为切片的函数<code>EncodeRune</code>，这个函数会把传入的rune以byte的形式写入切片里。并且返回写了多少个字节</p>
+
+<p>还有一个<code>ValidRune</code>函数，这是一个判断rune是否有效。</p>
+
+<p>所以这个函数分成了几种情况
+- 传入的r只占一个字节，直接调用<code>IndexByte</code>函数
+- r为RuneError，需要用<code>DecodeRune</code>函数去逐个检验，不能直接对比
+- r无效，直接返回-1
+- 正常的rune，转换为切片，并调用<code>Index</code>函数</p>
+
+<h4 id="indexany-s-byte-chars-string-int">&mdash; IndexAny(s []byte, chars string) int</h4>
+
+<pre><code class="language-go">// IndexAny interprets s as a sequence of UTF-8-encoded Unicode code points.
+// It returns the byte index of the first occurrence in s of any of the Unicode
+// code points in chars. It returns -1 if chars is empty or if there is no code
+// point in common.
+func IndexAny(s []byte, chars string) int {
+	if chars == &quot;&quot; {
+		// Avoid scanning all of s.
+		return -1
+	}
+	if len(s) &gt; 8 {
+		if as, isASCII := makeASCIISet(chars); isASCII {
+			for i, c := range s {
+				if as.contains(c) {
+					return i
+				}
+			}
+			return -1
+		}
+	}
+	var width int
+	for i := 0; i &lt; len(s); i += width {
+		r := rune(s[i])
+		if r &lt; utf8.RuneSelf {
+			width = 1
+		} else {
+			r, width = utf8.DecodeRune(s[i:])
+		}
+		for _, ch := range chars {
+			if r == ch {
+				return i
+			}
+		}
+	}
+	return -1
+}
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>我们可以看到，Any结尾的函数都是以Unicode编码的。</p>
+
+<p>提醒一个点</p>
+
+<pre><code class="language-go">func main() {
+	s := &quot;我是谁&quot;
+
+	for index, single := range s {
+		fmt.Println(index, &quot; : &quot;, string(single))
+	}
+}
+</code></pre>
+
+<p>输出的是：</p>
+
+<pre><code>0  :  我
+3  :  是
+6  :  谁
+</code></pre>
+
+<p>对应程序，我们可以看到for range也会正确判断rune是否有效，所以for range会正确返回对应的是<code>byte</code>还是<code>rune</code></p>
+
+<p>这个函数返回字符串和切片的第一个相同的<code>rune</code>或<code>byte</code>的索引</p>
+
+<p>看例子理解吧：</p>
+
+<pre><code class="language-go">func main() {
+	a := []byte(&quot;123456789&quot;)
+	b := &quot;01&quot;
+
+	n := bytes.IndexAny(a, b)
+	fmt.Println(n)
+	fmt.Println(bytes.ContainsAny(a, b))
+}
+</code></pre>
+
+<p>得到：</p>
+
+<pre><code>0
+true
+</code></pre>
+
+<p>可以看出，两者之间只有1是共同拥有的byte，所以就返回1在切片中的索引。</p>
+
+<p>如果有多个相同，那么返回第一个相同的索引。</p>
+
+<h4 id="lastindexany-s-byte-chars-string-int">&mdash;  LastIndexAny(s []byte, chars string) int</h4>
+
+<pre><code class="language-go">// LastIndexAny interprets s as a sequence of UTF-8-encoded Unicode code
+// points. It returns the byte index of the last occurrence in s of any of
+// the Unicode code points in chars. It returns -1 if chars is empty or if
+// there is no code point in common.
+func LastIndexAny(s []byte, chars string) int {
+	if chars == &quot;&quot; {
+		// Avoid scanning all of s.
+		return -1
+	}
+	if len(s) &gt; 8 {
+		if as, isASCII := makeASCIISet(chars); isASCII {
+			for i := len(s) - 1; i &gt;= 0; i-- {
+				if as.contains(s[i]) {
+					return i
+				}
+			}
+			return -1
+		}
+	}
+	for i := len(s); i &gt; 0; {
+		r, size := utf8.DecodeLastRune(s[:i])
+		i -= size
+		for _, c := range chars {
+			if r == c {
+				return i
+			}
+		}
+	}
+	return -1
+}
+</code></pre>
+
+<p>方法和上一个函数基本一样，只是从后面开始匹配而已。</p>
+
+<h4 id="gensplit-s-sep-byte-sepsave-n-int-byte">&mdash;  genSplit(s, sep []byte, sepSave, n int) [][]byte</h4>
+
+<pre><code class="language-go">// Generic split: splits after each instance of sep,
+// including sepSave bytes of sep in the subslices.
+func genSplit(s, sep []byte, sepSave, n int) [][]byte {
+	if n == 0 {
+		return nil
+	}
+	if len(sep) == 0 {
+		return explode(s, n)
+	}
+	if n &lt; 0 {
+		n = Count(s, sep) + 1
+	}
+
+	a := make([][]byte, n)
+	n--
+	i := 0
+	for i &lt; n {
+		m := Index(s, sep)
+		if m &lt; 0 {
+			break
+		}
+		a[i] = s[: m+sepSave : m+sepSave]
+		s = s[m+len(sep):]
+		i++
+	}
+	a[i] = s
+	return a[:i+1]
+}
+</code></pre>
+
+<p>这是一个内部函数，主要用于将切片<code>Split</code></p>
+
+<p>下面的Split函数都要用到它</p>
+
+<h4 id="splitn-s-sep-byte-n-int-byte">&mdash;  SplitN(s, sep []byte, n int) [][]byte</h4>
+
+<pre><code class="language-go">// SplitN slices s into subslices separated by sep and returns a slice of
+// the subslices between those separators.
+// If sep is empty, SplitN splits after each UTF-8 sequence.
+// The count determines the number of subslices to return:
+//   n &gt; 0: at most n subslices; the last subslice will be the unsplit remainder.
+//   n == 0: the result is nil (zero subslices)
+//   n &lt; 0: all subslices
+func SplitN(s, sep []byte, n int) [][]byte { return genSplit(s, sep, 0, n) }
+</code></pre>
+
+<p>这里需要传入三个参数
+- 主切片
+- 筛选切片
+- 要把切片分割成多少个切片的数量</p>
+
+<p>如：</p>
+
+<pre><code class="language-go">func main() {
+	a := []byte(&quot;123456789&quot;)
+	fmt.Println(a[:2:2])
+	fmt.Println(a)
+
+	b := []byte(&quot;23&quot;)
+
+	fmt.Println(bytes.SplitN(a, b, -1))
+
+	fmt.Println(bytes.SplitAfterN(a, b, -1))
+
+	fmt.Println(bytes.Split(a, b))
+
+	fmt.Println(bytes.SplitAfter(a, b))
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code>[49 50]
+[49 50 51 52 53 54 55 56 57]
+[[49] [52 53 54 55 56 57]]
+[[49 50 51] [52 53 54 55 56 57]]
+[[49] [52 53 54 55 56 57]]
+[[49 50 51] [52 53 54 55 56 57]]
+</code></pre>
+
+<p>下面的函数也是用到这个例子</p>
+
+<h4 id="splitaftern-s-sep-byte-n-int-byte">&mdash;  SplitAfterN(s, sep []byte, n int) [][]byte</h4>
+
+<pre><code class="language-go">// SplitAfterN slices s into subslices after each instance of sep and
+// returns a slice of those subslices.
+// If sep is empty, SplitAfterN splits after each UTF-8 sequence.
+// The count determines the number of subslices to return:
+//   n &gt; 0: at most n subslices; the last subslice will be the unsplit remainder.
+//   n == 0: the result is nil (zero subslices)
+//   n &lt; 0: all subslices
+func SplitAfterN(s, sep []byte, n int) [][]byte {
+	return genSplit(s, sep, len(sep), n)
+}
+</code></pre>
+
+<p>这个函数和上面的<code>SplitN</code>差别在于，筛选切片字段是放在前面，还是后面，具体看上面的例子</p>
+
+<p>这个函数是这样的
+<code>123 | 456789</code></p>
+
+<p>而SplitN是：
+<code>1 | 23456789</code></p>
+
+<h4 id="split-s-sep-byte-byte">&mdash;  Split(s, sep []byte) [][]byte</h4>
+
+<pre><code class="language-go">// Split slices s into all subslices separated by sep and returns a slice of
+// the subslices between those separators.
+// If sep is empty, Split splits after each UTF-8 sequence.
+// It is equivalent to SplitN with a count of -1.
+func Split(s, sep []byte) [][]byte { return genSplit(s, sep, 0, -1) }
+</code></pre>
+
+<p>就是<code>SplitN</code>中最后一个参数为-1</p>
+
+<h4 id="splitafter-s-sep-byte-byte">&mdash;  SplitAfter(s, sep []byte) [][]byte</h4>
+
+<pre><code class="language-go">// SplitAfter slices s into all subslices after each instance of sep and
+// returns a slice of those subslices.
+// If sep is empty, SplitAfter splits after each UTF-8 sequence.
+// It is equivalent to SplitAfterN with a count of -1.
+func SplitAfter(s, sep []byte) [][]byte {
+	return genSplit(s, sep, len(sep), -1)
+}
+</code></pre>
+
+<p>也就是<code>SplitAfterN</code>最后一个参数为-1</p>
+
+<h3 id="小总结">小总结</h3>
+
+<p>关于一系列Split函数</p>
+
+<ul>
+<li><p>没有After的Split函数会把分隔符号去掉</p></li>
+
+<li><p>有After的Split函数不会去掉分隔符号</p></li>
+</ul>
+
+<p>例如：</p>
+
+<pre><code class="language-go">func main() {
+	a := []byte(&quot;12 3 45 67 89&quot;)
+
+	b := []byte(&quot;2&quot;)
+
+	fmt.Println(bytes.SplitN(a, b, -1))
+
+	fmt.Println(bytes.SplitAfterN(a, b, -1))
+}
+</code></pre>
+
+<p>结果是</p>
+
+<pre><code>[[49] [32 51 32 52 53 32 54 55 32 56 57]]
+[[49 50] [32 51 32 52 53 32 54 55 32 56 57]]
+</code></pre>
+
+<p>可以见到下面的会多出了一个byte，就是分隔的位置。</p>
+
+<h4 id="fields-s-byte-byte">&mdash;  Fields(s []byte) [][]byte</h4>
+
+<pre><code class="language-go">func Fields(s []byte) [][]byte {
+	// First count the fields.
+	// This is an exact count if s is ASCII, otherwise it is an approximation.
+	n := 0
+	wasSpace := 1
+	// setBits is used to track which bits are set in the bytes of s.
+	setBits := uint8(0)
+	for i := 0; i &lt; len(s); i++ {
+		r := s[i]
+		setBits |= r
+		isSpace := int(asciiSpace[r])
+		n += wasSpace &amp; ^isSpace
+		wasSpace = isSpace
+	}
+
+	if setBits &gt;= utf8.RuneSelf {
+		// Some runes in the input slice are not ASCII.
+		return FieldsFunc(s, unicode.IsSpace)
+	}
+
+	// ASCII fast path
+	a := make([][]byte, n)
+	na := 0
+	fieldStart := 0
+	i := 0
+	// Skip spaces in the front of the input.
+	for i &lt; len(s) &amp;&amp; asciiSpace[s[i]] != 0 {
+		i++
+	}
+	fieldStart = i
+	for i &lt; len(s) {
+		if asciiSpace[s[i]] == 0 {
+			i++
+			continue
+		}
+		a[na] = s[fieldStart:i:i]
+		na++
+		i++
+		// Skip spaces in between fields.
+		for i &lt; len(s) &amp;&amp; asciiSpace[s[i]] != 0 {
+			i++
+		}
+		fieldStart = i
+	}
+	if fieldStart &lt; len(s) { // Last field might end at EOF.
+		a[na] = s[fieldStart:len(s):len(s)]
+	}
+	return a
+}
+</code></pre>
+
+<p>这个函数是以空格来分隔的，暂时还没搞明白和Split的区别。</p>
+
+<h4 id="fieldsfunc-s-byte-f-func-rune-bool-byte">&mdash; FieldsFunc(s []byte, f func(rune) bool) [][]byte</h4>
+
+<pre><code class="language-go">// FieldsFunc interprets s as a sequence of UTF-8-encoded code points.
+// It splits the slice s at each run of code points c satisfying f(c) and
+// returns a slice of subslices of s. If all code points in s satisfy f(c), or
+// len(s) == 0, an empty slice is returned.
+// FieldsFunc makes no guarantees about the order in which it calls f(c).
+// If f does not return consistent results for a given c, FieldsFunc may crash.
+func FieldsFunc(s []byte, f func(rune) bool) [][]byte {
+	// A span is used to record a slice of s of the form s[start:end].
+	// The start index is inclusive and the end index is exclusive.
+	type span struct {
+		start int
+		end   int
+	}
+	spans := make([]span, 0, 32)
+
+	// Find the field start and end indices.
+	wasField := false
+	fromIndex := 0
+	for i := 0; i &lt; len(s); {
+		size := 1
+		r := rune(s[i])
+		if r &gt;= utf8.RuneSelf {
+			r, size = utf8.DecodeRune(s[i:])
+		}
+		if f(r) {
+			if wasField {
+				spans = append(spans, span{start: fromIndex, end: i})
+				wasField = false
+			}
+		} else {
+			if !wasField {
+				fromIndex = i
+				wasField = true
+			}
+		}
+		i += size
+	}
+
+	// Last field might end at EOF.
+	if wasField {
+		spans = append(spans, span{fromIndex, len(s)})
+	}
+
+	// Create subslices from recorded field indices.
+	a := make([][]byte, len(spans))
+	for i, span := range spans {
+		a[i] = s[span.start:span.end:span.end]
+	}
+
+	return a
+}
+</code></pre>
+
+<p>这个函数可以让我们自己定位需要什么样子的分隔</p>
+
+<p>比如我只要<code>rune</code>为数字，可以写</p>
+
+<pre><code class="language-go">bytes.FieldsFunc(a, func(r rune) bool {
+		return !unicode.IsNumber(r)
+	})
+</code></pre>
+
+<p><strong>注意</strong>，当匿名函数返回false才会把数据记录在切片里，返回true的时候表示分隔</p>
+
+<p>这要符合这个匿名函数的格式的，都可以作为它的参数。</p>
+
+<p>而Field函数正是 <code>FieldsFunc(s, unicode.IsSpace)</code></p>
+
+<h4 id="join-s-byte-sep-byte-byte">&mdash;  Join(s [][]byte, sep []byte) []byte</h4>
+
+<pre><code class="language-go">
+// Join concatenates the elements of s to create a new byte slice. The separator
+// sep is placed between elements in the resulting slice.
+func Join(s [][]byte, sep []byte) []byte {
+	if len(s) == 0 {
+		return []byte{}
+	}
+	if len(s) == 1 {
+		// Just return a copy.
+		return append([]byte(nil), s[0]...)
+	}
+	n := len(sep) * (len(s) - 1)
+	for _, v := range s {
+		n += len(v)
+	}
+
+	b := make([]byte, n)
+	bp := copy(b, s[0])
+	for _, v := range s[1:] {
+		bp += copy(b[bp:], sep)
+		bp += copy(b[bp:], v)
+	}
+	return b
+}
+</code></pre>
+
+<p>这个函数是将二维切片拼接成一维切片，并且连接部分可以用一个切片补充</p>
+
+<p>例如：</p>
+
+<pre><code class="language-go">	fmt.Println((bytes.Fields(a)))
+
+	fmt.Println(string(bytes.Join(bytes.Fields(a), b)))
+</code></pre>
+
+<p>这个就是先将a拆开，再合回来
+结果</p>
+
+<pre><code>[[49 50] [51] [52 53] [54 55] [56 57]]
+12 3 45 67 89
+</code></pre>
+
+<p>总之就是拼接。</p>
+
+<h4 id="hasprefix-s-prefix-byte-bool">&mdash;  HasPrefix(s, prefix []byte) bool</h4>
+
+<pre><code class="language-go">// HasPrefix tests whether the byte slice s begins with prefix.
+func HasPrefix(s, prefix []byte) bool {
+	return len(s) &gt;= len(prefix) &amp;&amp; Equal(s[0:len(prefix)], prefix)
+}
+</code></pre>
+
+<p>判断开头</p>
+
+<h4 id="hassuffix-s-suffix-byte-bool">&mdash;  HasSuffix(s, suffix []byte) bool</h4>
+
+<pre><code class="language-go">// HasSuffix tests whether the byte slice s ends with suffix.
+func HasSuffix(s, suffix []byte) bool {
+	return len(s) &gt;= len(suffix) &amp;&amp; Equal(s[len(s)-len(suffix):], suffix)
+}
+</code></pre>
+
+<p>判断结尾</p>
+
+<h4 id="map-mapping-func-r-rune-rune-s-byte-byte">&mdash;   Map(mapping func(r rune) rune, s []byte) []byte</h4>
+
+<pre><code class="language-go">// Map returns a copy of the byte slice s with all its characters modified
+// according to the mapping function. If mapping returns a negative value, the character is
+// dropped from the byte slice with no replacement. The characters in s and the
+// output are interpreted as UTF-8-encoded code points.
+func Map(mapping func(r rune) rune, s []byte) []byte {
+	// In the worst case, the slice can grow when mapped, making
+	// things unpleasant. But it's so rare we barge in assuming it's
+	// fine. It could also shrink but that falls out naturally.
+	maxbytes := len(s) // length of b
+	nbytes := 0        // number of bytes encoded in b
+	b := make([]byte, maxbytes)
+	for i := 0; i &lt; len(s); {
+		wid := 1
+		r := rune(s[i])
+		if r &gt;= utf8.RuneSelf {
+			r, wid = utf8.DecodeRune(s[i:])
+		}
+		r = mapping(r)
+		if r &gt;= 0 {
+			rl := utf8.RuneLen(r)
+			if rl &lt; 0 {
+				rl = len(string(utf8.RuneError))
+			}
+			if nbytes+rl &gt; maxbytes {
+				// Grow the buffer.
+				maxbytes = maxbytes*2 + utf8.UTFMax
+				nb := make([]byte, maxbytes)
+				copy(nb, b[0:nbytes])
+				b = nb
+			}
+			nbytes += utf8.EncodeRune(b[nbytes:maxbytes], r)
+		}
+		i += wid
+	}
+	return b[0:nbytes]
+}
+</code></pre>
+
+<p>根据代码的意思是，mapping这个函数就像一个修改器一样，每一个原始的<code>byte</code>或者<code>rune</code>都需要传入到mapping得到另一个值。</p>
+
+<p>这个可以做成一个凯撒加密之类的，将所有输入传到一个函数里面，输出另一个同样的数据结构</p>
+
+<p>但是这里输入和输出的切片不一定长度相等，因为rune的字节是会变化的。</p>
+
+<h4 id="repeat-b-byte-count-int-byte">&mdash;  Repeat(b []byte, count int) []byte</h4>
+
+<pre><code class="language-go">// Repeat returns a new byte slice consisting of count copies of b.
+//
+// It panics if count is negative or if
+// the result of (len(b) * count) overflows.
+func Repeat(b []byte, count int) []byte {
+	// Since we cannot return an error on overflow,
+	// we should panic if the repeat will generate
+	// an overflow.
+	// See Issue golang.org/issue/16237.
+	if count &lt; 0 {
+		panic(&quot;bytes: negative Repeat count&quot;)
+	} else if count &gt; 0 &amp;&amp; len(b)*count/count != len(b) {
+		panic(&quot;bytes: Repeat count causes overflow&quot;)
+	}
+
+	nb := make([]byte, len(b)*count)
+	bp := copy(nb, b)
+	for bp &lt; len(nb) {
+		copy(nb[bp:], nb[:bp])
+		bp *= 2
+	}
+	return nb
+}
+</code></pre>
+
+<p>这个就是将一个切片重复多次
+<code>123</code> &ndash;&gt; <code>123123123</code>这样</p>
+
+<p>当count为负数时，panic
+如果结果溢出了，panic</p>
+
+<h4 id="toupper-s-byte-byte">&mdash;  ToUpper(s []byte) []byte</h4>
+
+<pre><code class="language-go">// ToUpper treats s as UTF-8-encoded bytes and returns a copy with all the Unicode letters within it mapped to their upper case.
+func ToUpper(s []byte) []byte { return Map(unicode.ToUpper, s) }
+</code></pre>
+
+<p>这个就利用了Map函数，传入了<code>unicode.ToUpper</code>这个函数，返回大写的切片。</p>
+
+<h4 id="tolower-s-byte-byte">&mdash;  ToLower(s []byte) []byte</h4>
+
+<pre><code class="language-go">// ToLower treats s as UTF-8-encoded bytes and returns a copy with all the Unicode letters mapped to their lower case.
+func ToLower(s []byte) []byte { return Map(unicode.ToLower, s) }
+</code></pre>
+
+<p>同理，返回所有都小写的切片</p>
+
+<h4 id="totitle-s-byte-byte">&mdash;  ToTitle(s []byte) []byte</h4>
+
+<pre><code class="language-go">// ToTitle treats s as UTF-8-encoded bytes and returns a copy with all the Unicode letters mapped to their title case.
+func ToTitle(s []byte) []byte { return Map(unicode.ToTitle, s) }
+</code></pre>
+
+<p>很多时候搞不清楚它和<code>ToUpper</code>的区别</p>
+
+<h4 id="toupperspecial-c-unicode-specialcase-s-byte-byte">&mdash;  ToUpperSpecial(c unicode.SpecialCase, s []byte) []byte</h4>
+
+<pre><code class="language-go">// ToUpperSpecial treats s as UTF-8-encoded bytes and returns a copy with all the Unicode letters mapped to their
+// upper case, giving priority to the special casing rules.
+func ToUpperSpecial(c unicode.SpecialCase, s []byte) []byte {
+	return Map(func(r rune) rune { return c.ToUpper(r) }, s)
+}
+</code></pre>
+
+<p>将字符串s中所有字符按_case指定的映射转换成大写返回</p>
+
+<h4 id="tolowerspecial-c-unicode-specialcase-s-byte-byte">&mdash;   ToLowerSpecial(c unicode.SpecialCase, s []byte) []byte</h4>
+
+<pre><code class="language-go">// ToLowerSpecial treats s as UTF-8-encoded bytes and returns a copy with all the Unicode letters mapped to their
+// lower case, giving priority to the special casing rules.
+func ToLowerSpecial(c unicode.SpecialCase, s []byte) []byte {
+	return Map(func(r rune) rune { return c.ToLower(r) }, s)
+}
+</code></pre>
+
+<p>将字符串s中所有字符按_case指定的映射转换成小写返回</p>
+
+<h4 id="totitlespecial-c-unicode-specialcase-s-byte-byte">&mdash;   ToTitleSpecial(c unicode.SpecialCase, s []byte) []byte</h4>
+
+<pre><code class="language-go">// ToTitleSpecial treats s as UTF-8-encoded bytes and returns a copy with all the Unicode letters mapped to their
+// title case, giving priority to the special casing rules.
+func ToTitleSpecial(c unicode.SpecialCase, s []byte) []byte {
+	return Map(func(r rune) rune { return c.ToTitle(r) }, s)
+}
+</code></pre>
+
+<p>将字符串s中所有字符按_case指定的映射转换成Title返回</p>
+
+<h4 id="isseparator-r-rune-bool">&mdash;  isSeparator(r rune) bool</h4>
+
+<pre><code class="language-go">// isSeparator reports whether the rune could mark a word boundary.
+// TODO: update when package unicode captures more of the properties.
+func isSeparator(r rune) bool {
+	// ASCII alphanumerics and underscore are not separators
+	if r &lt;= 0x7F {
+		switch {
+		case '0' &lt;= r &amp;&amp; r &lt;= '9':
+			return false
+		case 'a' &lt;= r &amp;&amp; r &lt;= 'z':
+			return false
+		case 'A' &lt;= r &amp;&amp; r &lt;= 'Z':
+			return false
+		case r == '_':
+			return false
+		}
+		return true
+	}
+	// Letters and digits are not separators
+	if unicode.IsLetter(r) || unicode.IsDigit(r) {
+		return false
+	}
+	// Otherwise, all we can do for now is treat spaces as separators.
+	return unicode.IsSpace(r)
+}
+</code></pre>
+
+<p>函数说了，ASCII字母和数字以及下划线都不能作为分隔器，Unicode的字母和数字也不可以，所以最后只能返回到底是不是空格了。</p>
+
+<h4 id="title-s-byte-byte">&mdash;  Title(s []byte) []byte</h4>
+
+<pre><code class="language-go">// Title treats s as UTF-8-encoded bytes and returns a copy with all Unicode letters that begin
+// words mapped to their title case.
+//
+// BUG(rsc): The rule Title uses for word boundaries does not handle Unicode punctuation properly.
+func Title(s []byte) []byte {
+	// Use a closure here to remember state.
+	// Hackish but effective. Depends on Map scanning in order and calling
+	// the closure once per rune.
+	prev := ' '
+	return Map(
+		func(r rune) rune {
+			if isSeparator(prev) {
+				prev = r
+				return unicode.ToTitle(r)
+			}
+			prev = r
+			return r
+		},
+		s)
+}
+</code></pre>
+
+<p>我们可以看到，这个才是能够将开头大写的函数，因为它的原理是判断前一个字符是否是空格，如果是，则返回<code>ToTitle</code>，否则直接返回。</p>
+
+<p>也就是说我们可以这样做<code>fmt.Println(string(bytes.Title(bytes.ToLower([]byte(d)))))</code></p>
+
+<p>先将它们全部小写，再根据空格符号调整开头大写。</p>
+
+<p>所以我还是不知道<code>ToTitle</code>的作用是什么(除了大写)，这个也可以留到分析unicode代码的时候讲。</p>
+
+<h4 id="trimleftfunc-s-byte-f-func-r-rune-bool-byte">&mdash; TrimLeftFunc(s []byte, f func(r rune) bool) []byte</h4>
+
+<pre><code class="language-go">// TrimLeftFunc treats s as UTF-8-encoded bytes and returns a subslice of s by slicing off
+// all leading UTF-8-encoded code points c that satisfy f(c).
+func TrimLeftFunc(s []byte, f func(r rune) bool) []byte {
+	i := indexFunc(s, f, false)
+	if i == -1 {
+		return nil
+	}
+	return s[i:]
+}
+</code></pre>
+
+<p>这个函数有点类似FieldFunc函数，但这个不是把切片分成很多很多子切片，这个是直接去除某个元素的左边。</p>
+
+<p>就是什么时候参数<code>f</code>返回false时，函数就返回以<code>i</code>右边的切片。</p>
+
+<h4 id="trimrightfunc-s-byte-f-func-r-rune-bool-byte">&mdash;  TrimRightFunc(s []byte, f func(r rune) bool) []byte</h4>
+
+<pre><code class="language-go">// TrimRightFunc returns a subslice of s by slicing off all trailing
+// UTF-8-encoded code points c that satisfy f(c).
+func TrimRightFunc(s []byte, f func(r rune) bool) []byte {
+	i := lastIndexFunc(s, f, false)
+	if i &gt;= 0 &amp;&amp; s[i] &gt;= utf8.RuneSelf {
+		_, wid := utf8.DecodeRune(s[i:])
+		i += wid
+	} else {
+		i++
+	}
+	return s[0:i]
+}
+</code></pre>
+
+<p>函数是把右边消去</p>
+
+<p>一开始我以为最后一句<code>s[0:i]</code>会导致分隔元素消失</p>
+
+<p>用代码实验</p>
+
+<pre><code class="language-go">	d := []byte(&quot;HELLO 123World&quot;)
+
+	fmt.Println(string(bytes.TrimLeftFunc(d, func(r rune) bool {
+		return !unicode.IsDigit(r)
+	})))
+
+	fmt.Println(string(bytes.TrimRightFunc(d, func(r rune) bool {
+		return !unicode.IsDigit(r)
+	})))
+</code></pre>
+
+<p>结果：</p>
+
+<pre><code>123World
+HELLO 123
+</code></pre>
+
+<p>结果第二个并没有去掉3</p>
+
+<p>我再回头看了看，原来是函数验证了最后一个rune的大小，并且加了回去。</p>
+
+<h4 id="trimfunc-s-byte-f-func-r-rune-bool-byte">&mdash;  TrimFunc(s []byte, f func(r rune) bool) []byte</h4>
+
+<pre><code class="language-go">// TrimFunc returns a subslice of s by slicing off all leading and trailing
+// UTF-8-encoded code points c that satisfy f(c).
+func TrimFunc(s []byte, f func(r rune) bool) []byte {
+	return TrimRightFunc(TrimLeftFunc(s, f), f)
+}
+</code></pre>
+
+<p>从代码可知是调用了两边的消去函数，所以是消去两边</p>
+
+<h4 id="trimprefix-s-prefix-byte-byte">&mdash;  TrimPrefix(s, prefix []byte) []byte</h4>
+
+<pre><code class="language-go">// TrimPrefix returns s without the provided leading prefix string.
+// If s doesn't start with prefix, s is returned unchanged.
+func TrimPrefix(s, prefix []byte) []byte {
+	if HasPrefix(s, prefix) {
+		return s[len(prefix):]
+	}
+	return s
+}
+</code></pre>
+
+<p>去掉头部，如果头部不匹配，就返回原来的切片</p>
+
+<h4 id="trimsuffix-s-suffix-byte-byte">&mdash;  TrimSuffix(s, suffix []byte) []byte</h4>
+
+<pre><code class="language-go">// TrimSuffix returns s without the provided trailing suffix string.
+// If s doesn't end with suffix, s is returned unchanged.
+func TrimSuffix(s, suffix []byte) []byte {
+	if HasSuffix(s, suffix) {
+		return s[:len(s)-len(suffix)]
+	}
+	return s
+}
+</code></pre>
+
+<p>去除尾部，如果没有这样的尾部，就不变返回。</p>
+
+<h4 id="indexfunc-s-byte-f-func-r-rune-bool-int">&mdash;  IndexFunc(s []byte, f func(r rune) bool) int</h4>
+
+<pre><code class="language-go">// IndexFunc interprets s as a sequence of UTF-8-encoded code points.
+// It returns the byte index in s of the first Unicode
+// code point satisfying f(c), or -1 if none do.
+func IndexFunc(s []byte, f func(r rune) bool) int {
+	return indexFunc(s, f, true)
+}
+</code></pre>
+
+<p>要注意这里和我们之前看到的Trim函数有所不同，这里<code>indexFunc</code>最后一个参数是true。</p>
+
+<p>这函数是返回索引的</p>
+
+<h4 id="lastindexfunc-s-byte-f-func-r-rune-bool-int">&mdash;  LastIndexFunc(s []byte, f func(r rune) bool) int</h4>
+
+<pre><code class="language-go">// LastIndexFunc interprets s as a sequence of UTF-8-encoded code points.
+// It returns the byte index in s of the last Unicode
+// code point satisfying f(c), or -1 if none do.
+func LastIndexFunc(s []byte, f func(r rune) bool) int {
+	return lastIndexFunc(s, f, true)
+}
+</code></pre>
+
+<p>同理，这个是返回从后面开始的索引。</p>
+
+<h4 id="indexfunc-s-byte-f-func-r-rune-bool-truth-bool-int">&mdash;  indexFunc(s []byte, f func(r rune) bool, truth bool) int</h4>
+
+<pre><code class="language-go">// indexFunc is the same as IndexFunc except that if
+// truth==false, the sense of the predicate function is
+// inverted.
+func indexFunc(s []byte, f func(r rune) bool, truth bool) int {
+	start := 0
+	for start &lt; len(s) {
+		wid := 1
+		r := rune(s[start])
+		if r &gt;= utf8.RuneSelf {
+			r, wid = utf8.DecodeRune(s[start:])
+		}
+		if f(r) == truth {
+			return start
+		}
+		start += wid
+	}
+	return -1
+}
+</code></pre>
+
+<p>这个函数是内部函数</p>
+
+<p>作用就是寻找索引</p>
+
+<h4 id="lastindexfunc-s-byte-f-func-r-rune-bool-truth-bool-int">&mdash;  lastIndexFunc(s []byte, f func(r rune) bool, truth bool) int</h4>
+
+<pre><code class="language-go">// lastIndexFunc is the same as LastIndexFunc except that if
+// truth==false, the sense of the predicate function is
+// inverted.
+func lastIndexFunc(s []byte, f func(r rune) bool, truth bool) int {
+	for i := len(s); i &gt; 0; {
+		r, size := rune(s[i-1]), 1
+		if r &gt;= utf8.RuneSelf {
+			r, size = utf8.DecodeLastRune(s[0:i])
+		}
+		i -= size
+		if f(r) == truth {
+			return i
+		}
+	}
+	return -1
+}
+</code></pre>
+
+<p>函数是内部函数
+从后面开始寻找索引</p>
+
+<h4 id="makeasciiset-chars-string-as-asciiset-ok-bool">&mdash;  makeASCIISet(chars string) (as asciiSet, ok bool)</h4>
+
+<pre><code class="language-go">// asciiSet is a 32-byte value, where each bit represents the presence of a
+// given ASCII character in the set. The 128-bits of the lower 16 bytes,
+// starting with the least-significant bit of the lowest word to the
+// most-significant bit of the highest word, map to the full range of all
+// 128 ASCII characters. The 128-bits of the upper 16 bytes will be zeroed,
+// ensuring that any non-ASCII character will be reported as not in the set.
+type asciiSet [8]uint32
+
+// makeASCIISet creates a set of ASCII characters and reports whether all
+// characters in chars are ASCII.
+func makeASCIISet(chars string) (as asciiSet, ok bool) {
+	for i := 0; i &lt; len(chars); i++ {
+		c := chars[i]
+		if c &gt;= utf8.RuneSelf {
+			return as, false
+		}
+		as[c&gt;&gt;5] |= 1 &lt;&lt; uint(c&amp;31)
+	}
+	return as, true
+}
+</code></pre>
+
+<p>这个地方很有意思，这里用了一个<code>[8]int32</code>来代替了128个ASCII码的<strong>Set集</strong></p>
+
+<p>什么是Set集呢，也就是里面的内容是不可重复的。</p>
+
+<p>怎么代替呢</p>
+
+<p>这个数组一共占用了32个byte，也就是256个bit，这里用前128个bit，每一个bit代表一个ASCII码存不存在，比如空格的ASCII码是32，那么32这个索引的bit就为1</p>
+
+<p>举个例子：</p>
+
+<pre><code class="language-go">	fmt.Println(makeASCIISet(string(rune(200))))
+	fmt.Println(makeASCIISet(string(rune(127))))
+	fmt.Println(makeASCIISet(string(rune(32))))
+</code></pre>
+
+<p>这里面输出的是：</p>
+
+<pre><code>[0 0 0 0 0 0 0 0] false
+[0 0 0 2147483648 0 0 0 0] true
+[0 1 0 0 0 0 0 0] true
+</code></pre>
+
+<p>可以看到，当我们超出了0~127这个范围的时候，就会返回false</p>
+
+<p>当我们传入127的时候，相当于在数组的第四个元素的最高位的bit置1</p>
+
+<p>当我们传入空格(32)的时候，相当于在第二个元素的第一位bit置1</p>
+
+<p>由此可实现了一个Set。</p>
+
+<h4 id="as-asciiset-contains-c-byte-bool">&mdash;  (as *asciiSet) contains(c byte) bool</h4>
+
+<pre><code class="language-go">// contains reports whether c is inside the set.
+func (as *asciiSet) contains(c byte) bool {
+	return (as[c&gt;&gt;5] &amp; (1 &lt;&lt; uint(c&amp;31))) != 0
+}
+</code></pre>
+
+<p>返回一个byte是否在这个Set里面</p>
+
+<h4 id="makecutsetfunc-cutset-string-func-r-rune-bool">&mdash;   makeCutsetFunc(cutset string) func(r rune) bool</h4>
+
+<pre><code class="language-go">func makeCutsetFunc(cutset string) func(r rune) bool {
+	if len(cutset) == 1 &amp;&amp; cutset[0] &lt; utf8.RuneSelf {
+		return func(r rune) bool {
+			return r == rune(cutset[0])
+		}
+	}
+	if as, isASCII := makeASCIISet(cutset); isASCII {
+		return func(r rune) bool {
+			return r &lt; utf8.RuneSelf &amp;&amp; as.contains(byte(r))
+		}
+	}
+	return func(r rune) bool {
+		for _, c := range cutset {
+			if c == r {
+				return true
+			}
+		}
+		return false
+	}
+}
+</code></pre>
+
+<p>这个函数是为了给Trim系列的函数提供参数的。</p>
+
+<h4 id="trim-s-byte-cutset-string-byte">&mdash;  Trim(s []byte, cutset string) []byte</h4>
+
+<pre><code class="language-go">// Trim returns a subslice of s by slicing off all leading and
+// trailing UTF-8-encoded code points contained in cutset.
+func Trim(s []byte, cutset string) []byte {
+	return TrimFunc(s, makeCutsetFunc(cutset))
+}
+</code></pre>
+
+<p>这里就是前后剔除</p>
+
+<h4 id="trimleft-s-byte-cutset-string-byte">&mdash;  TrimLeft(s []byte, cutset string) []byte</h4>
+
+<pre><code class="language-go">// TrimLeft returns a subslice of s by slicing off all leading
+// UTF-8-encoded code points contained in cutset.
+func TrimLeft(s []byte, cutset string) []byte {
+	return TrimLeftFunc(s, makeCutsetFunc(cutset))
+}
+</code></pre>
+
+<p>剔除左边</p>
+
+<h4 id="trimright-s-byte-cutset-string-byte">&mdash;  TrimRight(s []byte, cutset string) []byte</h4>
+
+<pre><code class="language-go">// TrimRight returns a subslice of s by slicing off all trailing
+// UTF-8-encoded code points that are contained in cutset.
+func TrimRight(s []byte, cutset string) []byte {
+	return TrimRightFunc(s, makeCutsetFunc(cutset))
+}
+</code></pre>
+
+<p>剔除右边</p>
+
+<h4 id="trimspace-s-byte-byte">&mdash;  TrimSpace(s []byte) []byte</h4>
+
+<pre><code class="language-go">// TrimSpace returns a subslice of s by slicing off all leading and
+// trailing white space, as defined by Unicode.
+func TrimSpace(s []byte) []byte {
+	return TrimFunc(s, unicode.IsSpace)
+}
+</code></pre>
+
+<p>剔除左右两边的空格</p>
+
+<h4 id="runes-s-byte-rune">&mdash;  Runes(s []byte) []rune</h4>
+
+<pre><code class="language-go">// Runes interprets s as a sequence of UTF-8-encoded code points.
+// It returns a slice of runes (Unicode code points) equivalent to s.
+func Runes(s []byte) []rune {
+	t := make([]rune, utf8.RuneCount(s))
+	i := 0
+	for len(s) &gt; 0 {
+		r, l := utf8.DecodeRune(s)
+		t[i] = r
+		i++
+		s = s[l:]
+	}
+	return t
+}
+</code></pre>
+
+<p>将byte切片转换为rune切片。</p>
+
+<h4 id="replace-s-old-new-byte-n-int-byte">&mdash;  Replace(s, old, new []byte, n int) []byte</h4>
+
+<pre><code class="language-go">// Replace returns a copy of the slice s with the first n
+// non-overlapping instances of old replaced by new.
+// If old is empty, it matches at the beginning of the slice
+// and after each UTF-8 sequence, yielding up to k+1 replacements
+// for a k-rune slice.
+// If n &lt; 0, there is no limit on the number of replacements.
+func Replace(s, old, new []byte, n int) []byte {
+	m := 0
+	if n != 0 {
+		// Compute number of replacements.
+		m = Count(s, old)
+	}
+	if m == 0 {
+		// Just return a copy.
+		return append([]byte(nil), s...)
+	}
+	if n &lt; 0 || m &lt; n {
+		n = m
+	}
+
+	// Apply replacements to buffer.
+	t := make([]byte, len(s)+n*(len(new)-len(old)))
+	w := 0
+	start := 0
+	for i := 0; i &lt; n; i++ {
+		j := start
+		if len(old) == 0 {
+			if i &gt; 0 {
+				_, wid := utf8.DecodeRune(s[start:])
+				j += wid
+			}
+		} else {
+			j += Index(s[start:], old)
+		}
+		w += copy(t[w:], s[start:j])
+		w += copy(t[w:], new)
+		start = j + len(old)
+	}
+	w += copy(t[w:], s[start:])
+	return t[0:w]
+}
+</code></pre>
+
+<p>这个函数可以在s切片里把old切片这个片段替代成new切片的片段，并且可以控制数量</p>
+
+<p>如果n&lt;0 就表明所有old片段都要被替代。</p>
+
+<p>这个函数是返回了一个新建的内存空间，并不是原来的s。</p>
+
+<p><strong>支持rune</strong></p>
+
+<h4 id="equalfold-s-t-byte-bool">&mdash; EqualFold(s, t []byte) bool</h4>
+
+<pre><code class="language-go">// EqualFold reports whether s and t, interpreted as UTF-8 strings,
+// are equal under Unicode case-folding.
+func EqualFold(s, t []byte) bool {
+	for len(s) != 0 &amp;&amp; len(t) != 0 {
+		// Extract first rune from each.
+		var sr, tr rune
+		if s[0] &lt; utf8.RuneSelf {
+			sr, s = rune(s[0]), s[1:]
+		} else {
+			r, size := utf8.DecodeRune(s)
+			sr, s = r, s[size:]
+		}
+		if t[0] &lt; utf8.RuneSelf {
+			tr, t = rune(t[0]), t[1:]
+		} else {
+			r, size := utf8.DecodeRune(t)
+			tr, t = r, t[size:]
+		}
+
+		// If they match, keep going; if not, return false.
+
+		// Easy case.
+		if tr == sr {
+			continue
+		}
+
+		// Make sr &lt; tr to simplify what follows.
+		if tr &lt; sr {
+			tr, sr = sr, tr
+		}
+		// Fast check for ASCII.
+		if tr &lt; utf8.RuneSelf {
+			// ASCII only, sr/tr must be upper/lower case
+			if 'A' &lt;= sr &amp;&amp; sr &lt;= 'Z' &amp;&amp; tr == sr+'a'-'A' {
+				continue
+			}
+			return false
+		}
+
+		// General case. SimpleFold(x) returns the next equivalent rune &gt; x
+		// or wraps around to smaller values.
+		r := unicode.SimpleFold(sr)
+		for r != sr &amp;&amp; r &lt; tr {
+			r = unicode.SimpleFold(r)
+		}
+		if r == tr {
+			continue
+		}
+		return false
+	}
+
+	// One string is empty. Are both?
+	return len(s) == len(t)
+}
+
+</code></pre>
+
+<p><strong>支持rune</strong></p>
+
+<p>按照函数描述，函数返回的是  两个切片<strong>以UTF-8的编码</strong>的<strong>小写化</strong>来解释，是否会完全相等</p>
+
+<p>我们把代码拆开一下：</p>
+
+<p>首先是个大循环，循环直到某个切片的长度为0</p>
+
+<pre><code class="language-go">var sr, tr rune
+		if s[0] &lt; utf8.RuneSelf {
+			sr, s = rune(s[0]), s[1:]
+		} else {
+			r, size := utf8.DecodeRune(s)
+			sr, s = r, s[size:]
+		}
+		if t[0] &lt; utf8.RuneSelf {
+			tr, t = rune(t[0]), t[1:]
+		} else {
+			r, size := utf8.DecodeRune(t)
+			tr, t = r, t[size:]
+		}
+</code></pre>
+
+<p>这里是生成最近的一个<code>rune</code></p>
+
+<pre><code class="language-go">if tr == sr {
+			continue
+		}
+</code></pre>
+
+<p>做判断，如果相等就可以继续下一次循环。</p>
+
+<pre><code class="language-go">// Make sr &lt; tr to simplify what follows.
+		if tr &lt; sr {
+			tr, sr = sr, tr
+		}
+		// Fast check for ASCII.
+		if tr &lt; utf8.RuneSelf {
+			// ASCII only, sr/tr must be upper/lower case
+			if 'A' &lt;= sr &amp;&amp; sr &lt;= 'Z' &amp;&amp; tr == sr+'a'-'A' {
+				continue
+			}
+			return false
+		}
+</code></pre>
+
+<p>这里说为了简化下面程序，需要固定<code>tr &gt; sr</code></p>
+
+<p>并且校验了两个rune是否是因为ASCII码中字母的大小写而不同，如果是互为大小写，则进入下一次循环。</p>
+
+<pre><code class="language-go">// General case. SimpleFold(x) returns the next equivalent rune &gt; x
+		// or wraps around to smaller values.
+		r := unicode.SimpleFold(sr)
+		for r != sr &amp;&amp; r &lt; tr {
+			r = unicode.SimpleFold(r)
+		}
+		if r == tr {
+			continue
+		}
+		return false
+</code></pre>
+
+<p>这是一个将rune变化成等效的rune(被返还的rune会比之前的rune大)</p>
+
+<p>最后退出循环后，检验是否两个切片都空了</p>
+
+<pre><code class="language-go">// One string is empty. Are both?
+	return len(s) == len(t)
+</code></pre>
+
+<h4 id="index-s-sep-byte-int">&mdash;  Index(s, sep []byte) int</h4>
+
+<pre><code class="language-go">// Index returns the index of the first instance of sep in s, or -1 if sep is not present in s.
+func Index(s, sep []byte) int {
+	n := len(sep)
+	switch {
+	case n == 0:
+		return 0
+	case n == 1:
+		return IndexByte(s, sep[0])
+	case n == len(s):
+		if Equal(sep, s) {
+			return 0
+		}
+		return -1
+	case n &gt; len(s):
+		return -1
+	case n &lt;= bytealg.MaxLen:
+		// Use brute force when s and sep both are small
+		if len(s) &lt;= bytealg.MaxBruteForce {
+			return bytealg.Index(s, sep)
+		}
+		c := sep[0]
+		i := 0
+		t := s[:len(s)-n+1]
+		fails := 0
+		for i &lt; len(t) {
+			if t[i] != c {
+				// IndexByte is faster than bytealg.Index, so use it as long as
+				// we're not getting lots of false positives.
+				o := IndexByte(t[i:], c)
+				if o &lt; 0 {
+					return -1
+				}
+				i += o
+			}
+			if Equal(s[i:i+n], sep) {
+				return i
+			}
+			fails++
+			i++
+			// Switch to bytealg.Index when IndexByte produces too many false positives.
+			if fails &gt; bytealg.Cutover(i) {
+				r := bytealg.Index(s[i:], sep)
+				if r &gt;= 0 {
+					return r + i
+				}
+				return -1
+			}
+		}
+		return -1
+	}
+	c := sep[0]
+	i := 0
+	fails := 0
+	t := s[:len(s)-n+1]
+	for i &lt; len(t) {
+		if t[i] != c {
+			o := IndexByte(t[i:], c)
+			if o &lt; 0 {
+				break
+			}
+			i += o
+		}
+		if Equal(s[i:i+n], sep) {
+			return i
+		}
+		i++
+		fails++
+		if fails &gt;= 4+i&gt;&gt;4 &amp;&amp; i &lt; len(t) {
+			// Give up on IndexByte, it isn't skipping ahead
+			// far enough to be better than Rabin-Karp.
+			// Experiments (using IndexPeriodic) suggest
+			// the cutover is about 16 byte skips.
+			// TODO: if large prefixes of sep are matching
+			// we should cutover at even larger average skips,
+			// because Equal becomes that much more expensive.
+			// This code does not take that effect into account.
+			j := indexRabinKarp(s[i:], sep)
+			if j &lt; 0 {
+				return -1
+			}
+			return i + j
+		}
+	}
+	return -1
+}
+</code></pre>
+
+<p>根据函数可以知道这是一个寻找第一个出现索引值。</p>
+
+<p>那么这里的代码为什么这么多呢，因为在不同的情况下，不同的搜索索引函数有快有慢，这个函数帮我们把搜索索引函数整理在一起，并且选择较为效率的方法。这样用户就可以不用担心用哪个更快了。</p>
+
+<h3 id="总结一下-1">总结一下</h3>
+
+<ul>
+<li><p>这些代码都是对byte切片进行操作的，我们处理byte切片时可以用</p></li>
+
+<li><p>代码名字可读性较强</p></li>
+
+<li><p>要注意不能直接对二维切片字符串化</p></li>
+</ul>
+
+<h2 id="reader-go">reader.go</h2>
+
+<h4 id="reader">&mdash;  Reader</h4>
+
+<pre><code class="language-go">// A Reader implements the io.Reader, io.ReaderAt, io.WriterTo, io.Seeker,
+// io.ByteScanner, and io.RuneScanner interfaces by reading from
+// a byte slice.
+// Unlike a Buffer, a Reader is read-only and supports seeking.
+type Reader struct {
+	s        []byte
+	i        int64 // current reading index
+	prevRune int   // index of previous rune; or &lt; 0
+}
+</code></pre>
+
+<p>这个Reader包含了
+- 存储数据的切片
+- 读取索引
+- 上一个rune的索引</p>
+
+<p>不同buffer的是，这个Reader只能读，以及可以寻找。</p>
+
+<h4 id="r-reader-len-int">&mdash;  (r *Reader) Len() int</h4>
+
+<pre><code class="language-go">// Len returns the number of bytes of the unread portion of the
+// slice.
+func (r *Reader) Len() int {
+	if r.i &gt;= int64(len(r.s)) {
+		return 0
+	}
+	return int(int64(len(r.s)) - r.i)
+}
+</code></pre>
+
+<p>返回未读数据长度</p>
+
+<h4 id="r-reader-size-int64">&mdash;  (r *Reader) Size() int64</h4>
+
+<pre><code class="language-go">// Size returns the original length of the underlying byte slice.
+// Size is the number of bytes available for reading via ReadAt.
+// The returned value is always the same and is not affected by calls
+// to any other method.
+func (r *Reader) Size() int64 { return int64(len(r.s)) }
+</code></pre>
+
+<p>返回切片长度</p>
+
+<h4 id="r-reader-read-b-byte">&mdash;  (r *Reader) Read(b []byte)</h4>
+
+<pre><code class="language-go">// Read implements the io.Reader interface.
+func (r *Reader) Read(b []byte) (n int, err error) {
+	if r.i &gt;= int64(len(r.s)) {
+		return 0, io.EOF
+	}
+	r.prevRune = -1
+	n = copy(b, r.s[r.i:])
+	r.i += int64(n)
+	return
+}
+</code></pre>
+
+<p>实现io.Reader接口</p>
+
+<h4 id="r-reader-readat-b-byte-off-int64-n-int-err-error">&mdash;  (r *Reader) ReadAt(b []byte, off int64) (n int, err error)</h4>
+
+<pre><code class="language-go">// ReadAt implements the io.ReaderAt interface.
+func (r *Reader) ReadAt(b []byte, off int64) (n int, err error) {
+	// cannot modify state - see io.ReaderAt
+	if off &lt; 0 {
+		return 0, errors.New(&quot;bytes.Reader.ReadAt: negative offset&quot;)
+	}
+	if off &gt;= int64(len(r.s)) {
+		return 0, io.EOF
+	}
+	n = copy(b, r.s[off:])
+	if n &lt; len(b) {
+		err = io.EOF
+	}
+	return
+}
+</code></pre>
+
+<p>实现了io.ReaderAt</p>
+
+<p><strong>这个函数是不移动读取索引的！</strong></p>
+
+<h4 id="r-reader-readbyte-byte-error">&mdash;  (r *Reader) ReadByte() (byte, error)</h4>
+
+<pre><code class="language-go">// ReadByte implements the io.ByteReader interface.
+func (r *Reader) ReadByte() (byte, error) {
+	r.prevRune = -1
+	if r.i &gt;= int64(len(r.s)) {
+		return 0, io.EOF
+	}
+	b := r.s[r.i]
+	r.i++
+	return b, nil
+}
+</code></pre>
+
+<p>读取一个字节，改变索引位置</p>
+
+<h4 id="r-reader-unreadbyte-error">&mdash;  (r *Reader) UnreadByte() error</h4>
+
+<pre><code class="language-go">// UnreadByte complements ReadByte in implementing the io.ByteScanner interface.
+func (r *Reader) UnreadByte() error {
+	r.prevRune = -1
+	if r.i &lt;= 0 {
+		return errors.New(&quot;bytes.Reader.UnreadByte: at beginning of slice&quot;)
+	}
+	r.i--
+	return nil
+}
+</code></pre>
+
+<p>把索引往前挪一个byte，所以就恢复了一个byte(已读变成未读)</p>
+
+<h4 id="r-reader-readrune-ch-rune-size-int-err-error">&mdash;  (r *Reader) ReadRune() (ch rune, size int, err error)</h4>
+
+<pre><code class="language-go">// ReadRune implements the io.RuneReader interface.
+func (r *Reader) ReadRune() (ch rune, size int, err error) {
+	if r.i &gt;= int64(len(r.s)) {
+		r.prevRune = -1
+		return 0, 0, io.EOF
+	}
+	r.prevRune = int(r.i)
+	if c := r.s[r.i]; c &lt; utf8.RuneSelf {
+		r.i++
+		return rune(c), 1, nil
+	}
+	ch, size = utf8.DecodeRune(r.s[r.i:])
+	r.i += int64(size)
+	return
+}
+</code></pre>
+
+<p>读取一个rune，并返回其大小、</p>
+
+<h4 id="r-reader-unreadrune">&mdash;  (r *Reader) UnreadRune()</h4>
+
+<pre><code class="language-go">// UnreadRune complements ReadRune in implementing the io.RuneScanner interface.
+func (r *Reader) UnreadRune() error {
+	if r.prevRune &lt; 0 {
+		return errors.New(&quot;bytes.Reader.UnreadRune: previous operation was not ReadRune&quot;)
+	}
+	r.i = int64(r.prevRune)
+	r.prevRune = -1
+	return nil
+}
+</code></pre>
+
+<p>还原一个rune</p>
+
+<h4 id="r-reader-seek-offset-int64-whence-int-int64-error">&mdash;  (r *Reader) Seek(offset int64, whence int) (int64, error)</h4>
+
+<pre><code class="language-go">// Seek implements the io.Seeker interface.
+func (r *Reader) Seek(offset int64, whence int) (int64, error) {
+	r.prevRune = -1
+	var abs int64
+	switch whence {
+	case io.SeekStart:
+		abs = offset
+	case io.SeekCurrent:
+		abs = r.i + offset
+	case io.SeekEnd:
+		abs = int64(len(r.s)) + offset
+	default:
+		return 0, errors.New(&quot;bytes.Reader.Seek: invalid whence&quot;)
+	}
+	if abs &lt; 0 {
+		return 0, errors.New(&quot;bytes.Reader.Seek: negative position&quot;)
+	}
+	r.i = abs
+	return abs, nil
+}
+</code></pre>
+
+<p>这个函数就改变Reader的读取索引</p>
+
+<h4 id="r-reader-writeto-w-io-writer-n-int64-err-error">&mdash;  (r *Reader) WriteTo(w io.Writer) (n int64, err error)</h4>
+
+<pre><code class="language-go">// WriteTo implements the io.WriterTo interface.
+func (r *Reader) WriteTo(w io.Writer) (n int64, err error) {
+	r.prevRune = -1
+	if r.i &gt;= int64(len(r.s)) {
+		return 0, nil
+	}
+	b := r.s[r.i:]
+	m, err := w.Write(b)
+	if m &gt; len(b) {
+		panic(&quot;bytes.Reader.WriteTo: invalid Write count&quot;)
+	}
+	r.i += int64(m)
+	n = int64(m)
+	if m != len(b) &amp;&amp; err == nil {
+		err = io.ErrShortWrite
+	}
+	return
+}
+</code></pre>
+
+<p>写入到某个Writer接口里</p>
+
+<h4 id="r-reader-reset-b-byte">&mdash;  (r *Reader) Reset(b []byte)</h4>
+
+<pre><code class="language-go">// Reset resets the Reader to be reading from b.
+func (r *Reader) Reset(b []byte) { *r = Reader{b, 0, -1} }
+</code></pre>
+
+<p>这个函数其实可以用作给Reader换一个切片数据。</p>
+
+<h4 id="newreader-b-byte-reader">&mdash;  NewReader(b []byte) *Reader</h4>
+
+<pre><code class="language-go">// NewReader returns a new Reader reading from b.
+func NewReader(b []byte) *Reader { return &amp;Reader{b, 0, -1} }
+</code></pre>
+
+<p>这个函数初始化一个结构体</p>
+
+<h3 id="总结一下-2">总结一下</h3>
+
+<p>方法其实还是差不多，和buffer.Reader的差别在于，这是一个只读的Reader，里面的切片数据是我们提前有的。
+所以只是把切片放到了Reader里面。</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/golang/golangstd-bufio/">Golang标准库--Bufio</a></li>
+        
+        <li><a href="/posts/web-strcuture/">Web框架</a></li>
+        
+        <li><a href="/posts/others/learn-hugo/">Hugo建博客</a></li>
+        
+        <li><a href="/posts/golang/learningGo/">Go琐碎笔记</a></li>
+        
+        <li><a href="/posts/computer-network/internet-protocal/">网络协议基础</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93">标准库</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

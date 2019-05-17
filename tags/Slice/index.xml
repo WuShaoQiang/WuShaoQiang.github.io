@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Slice底层</title>
-      <link>https://wushaoqiang.github.io/posts/golang-slice/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-slice/</link>
       <pubDate>Sun, 05 May 2019 11:36:45 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-slice/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-slice/</guid>
       <description>参考 golang blog
 之前一直对slice有一定的误解
 误解  以为是引用传递

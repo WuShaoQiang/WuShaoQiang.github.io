@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Gorm</title>
-      <link>https://wushaoqiang.github.io/posts/golang-gorm/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-gorm/</link>
       <pubDate>Fri, 05 Apr 2019 20:37:11 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-gorm/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-gorm/</guid>
       <description>连接数据库 Mysql db, err := gorm.Open(&amp;quot;mysql&amp;quot;, &amp;quot;root:123456@tcp/test?charset=utf8&amp;amp;parseTime=True&amp;quot;) if err != nil { panic(&amp;quot;连接数据库失败&amp;quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
 db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
 比如db.CreateTable(&amp;amp;Product{})，在数据库表单里面会得到一个名字为products

@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm-binarysearch/">Algorithm 二分查找</a>
+                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/">Algorithm 二分查找</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -94,14 +94,14 @@
                             
                             <div class="post-content">
                                  递归式 func binarySearch(arr []int,left,right,target int) int{ if left &lt;= right { mid := (left + right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target{ return binarySearch(arr,left,mid-1,target) } if arr[mid] &lt; target{ return binarySearch(arr,mid+1,right,target) } } return -1 }  非递归式 func binarySearch(arr []int,target int) int{ left := 0 right := len(arr)-1 for left &lt;= right{ mid := (left+right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target { right = mid-1 }else{ left = mid+1 } } return -1 }  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm-binarysearch/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm-sort/">Algorithm 排序</a>
+                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/">Algorithm 排序</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -119,7 +119,7 @@
                                 排序时间复杂度 堆排序 参考dreamcatcher-cx博客
 最好最坏的平均时间复杂度都为O(NlogN)
 代码 func HeapSortUp(a []int) []int { for i := len(a)/2 - 1; i &gt;= 0; i-- { adjustHeapUp(a, i, len(a)) } for j := len(a) - 1; j &gt; 0; j-- { a[0], a[j] = a[j], a[0] adjustHeapUp(a, 0, j) } return a } func adjustHeapUp(a []int, i int, length int) { tmp := a[i] for k := 2*i + 1; k &lt; length; k = 2*k + 1 { if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] { k++ } if a[k] &gt; tmp { a[i] = a[k] i = k } else { break } } a[i] = tmp }  思路  先将数组变换为一个大顶堆……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm-sort/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/">阅读全文</a></p>
                             </div>
                         </article>
                     

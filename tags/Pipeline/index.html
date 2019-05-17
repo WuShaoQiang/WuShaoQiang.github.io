@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang-pipeline/">Golang Pipeline</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-pipeline/">Golang Pipeline</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -99,7 +99,7 @@
  处理数据
  用Channel向下传递数据(也可能不止一个)
   代码演示 package main import ( &quot;fmt&quot; &quot;sync&quot; ) func main() { // Set up a done channel that's shared by the whole pipeline, // and close that channel when this pipeline exits, as a signal // for all the goroutines we started to exit. done := make(chan struct{}) defer close(done) in := gen(done, 2, 3) // Distribute the sq work across two goroutines that both read from in.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang-pipeline/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-pipeline/">阅读全文</a></p>
                             </div>
                         </article>
                     

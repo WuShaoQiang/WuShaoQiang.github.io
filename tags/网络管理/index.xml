@@ -13,10 +13,10 @@
     
     <item>
       <title>Linux 网络管理</title>
-      <link>https://wushaoqiang.github.io/posts/linux-network-management/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-network-management/</link>
       <pubDate>Thu, 25 Apr 2019 20:29:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-network-management/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-network-management/</guid>
       <description>ping -c 发送一定数量的报文
 ifconfig 其中输出信息里
 enp0s31f6：以太网(有线)

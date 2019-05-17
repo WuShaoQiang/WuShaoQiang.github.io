@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Validation</title>
-      <link>https://wushaoqiang.github.io/posts/golang-validation/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-validation/</link>
       <pubDate>Sun, 14 Apr 2019 14:43:43 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-validation/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-validation/</guid>
       <description>Validation项目地址
 创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
  valid.Required(name,&amp;quot;name&amp;quot;)：检验变量不能为空，字符串不能为&amp;quot;&amp;quot;,后面的&amp;quot;name&amp;quot;是用来标识而已

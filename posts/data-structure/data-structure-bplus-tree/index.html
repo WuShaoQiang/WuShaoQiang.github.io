@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Data Structure Tree | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Data Structure Tree - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-05-13T21:21:24&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-05-13T21:21:24&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Data Structure Tree">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Data Structure Tree</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年5月13日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>为了搞明白关于数据库的一些索引结构开的一篇数据结构-树博客</p>
+
+<h3 id="前言">前言</h3>
+
+<p>这只是笔者的一些笔记和觉得不错的教学资源,分享一下</p>
+
+<p>推荐一个<a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">可视化的数据结构网站</a></p>
+
+<p>树是一个重要的数据结构,不仅要知道相关概念,建议在leetcode上刷上几十题</p>
+
+<h3 id="bst">BST</h3>
+
+<p>BST相信很多人都已经比较了解,不赘述了,说说会有哪些问题</p>
+
+<p>BST按照不同的插入顺序会有不同的形状,在极端的条件下会变成一个线性链表,这样查找的时间复杂度就变成了<code>O(logN)</code></p>
+
+<p>因为查找和插入都相对比较简单,这里就不说了,说说删除的思路</p>
+
+<ul>
+<li><p>二叉树删除某个叶子节点,就直接删除就好</p></li>
+
+<li><p>二叉树删除某个中间节点(包括root节点),则需要一定的操作(建议多在上面推荐的网站上多试几次,就明白了)</p></li>
+</ul>
+
+<p>以要被删除的节点A开始,把它当做root节点(也就是把子树先看做整个树,其它部分先不管)</p>
+
+<p>往左边找第一个节点B,如果左边不存在节点,直接用A的右节点去代替它</p>
+
+<p>找到左边第一个节点B后,找基于这个节点的最右节点C(也就是路径是一直往右边走的,不存在往左走一段后再往右)</p>
+
+<p>如果没有右边节点(一个右子树都没),则直接用刚才找到的节点B去代替它</p>
+
+<p>如果有右节点C(并且已经按照规则找到最右的),那么我们将用这个结点C去替代它</p>
+
+<p>如果这个结点C有左节点,那么节点C的父亲节点的右子树会指向C的左节点</p>
+
+<p>完!</p>
+
+<p>我相信看到这段文字心态是崩的,再建议一次,用上面的网站去得到图形化的结构</p>
+
+<h3 id="avl">AVL</h3>
+
+<p>参考<a href="https://www.youtube.com/watch?v=jDM6_TnYIqE">Youtube</a>学习</p>
+
+<p>又名(Balanced binary search tree)</p>
+
+<p>解决了上面BST的问题:容易因为插入顺序问题造成一棵树倾斜(这样就无法得到该有的查询速度)</p>
+
+<p>先解释一下什么叫平衡(Balanced)</p>
+
+<p>一颗平衡的数满足这个条件</p>
+
+<ul>
+<li>无论从哪个节点开始数,它的左子树深度和右子树深度的差值的绝对值小于1</li>
+</ul>
+
+<p>因为这个条件的限定,所以即使我们插入顺序比较极端,只要我们实现了AVL Tree,那么它就能自动帮我们平衡</p>
+
+<p>这里要提醒一点</p>
+
+<ul>
+<li>不是说以前的不平衡树放进去就能平衡,这是要重新一个个插入才能达到这样的效果</li>
+</ul>
+
+<p>所以说,如果以前的二叉树要转为AVL树,需要将二叉树的值重新插入一遍</p>
+
+<p><strong>这里再提醒一个点,我们所有的反转操作(rotation)都是只看三个节点</strong></p>
+
+<p>进入正题</p>
+
+<pre><code>1
+ \
+  2
+   \
+    3
+</code></pre>
+
+<p>这样的一个树就是不平衡的,因为从结点1看来,左子树的深度为0,右子树的深度为2,因此<code>|0-2|&lt;=1</code>不成立</p>
+
+<p>这种情况就是RR-imbalanced,需要做的操作叫RR-rotation(RR:Right of right)</p>
+
+<p>变成</p>
+
+<pre><code>    2
+   / \
+  1   3
+</code></pre>
+
+<p>再复杂一点就是这也(注意focus三个节点就好)</p>
+
+<pre><code>        6
+       / \
+      4   7
+     / \
+    2   5
+   / \
+  1   3
+</code></pre>
+
+<p>这里我要再说明一点</p>
+
+<ul>
+<li>找不平衡要从下面往上面找,也就从叶子节点网上找,只要找到了就要进行ratation</li>
+</ul>
+
+<p>很明显节点6开始出现不平衡,我们这个时候出现的情况的LLL(因为6-4-2-1),但是我们再次强调focus三个节点,也就是(6-4-2)</p>
+
+<p>所以其实是<code>LL</code>,我们要执行LL-rotation(和上面的RR-rotation是差不多的)</p>
+
+<p>变成</p>
+
+<pre><code>       4   
+     /  \
+    2    6
+   / \  / \
+  1   3 5  7
+</code></pre>
+
+<p>注意原本4的右节点应该还在4的右边,原本在4的左边的还在4的左边</p>
+
+<p>再简单说一下关于<code>LR-rotation</code>和<code>RL-rotation</code></p>
+
+<pre><code>    3
+   / 
+  1   
+   \
+    2
+</code></pre>
+
+<p>需要<code>LR-rotation</code></p>
+
+<p>把2直接替换掉3,3成为了2的右子节点</p>
+
+<p>如果有这个树没那么简单呢,其实一样的,只要你坚定<strong>只看三个节点</strong>,无论树多大,孩子节点有多少,都是和上面的差不多</p>
+
+<p>完!</p>
+
+<p>和BST相比,AVL要注意的东西稍微多了点</p>
+
+<h3 id="red-black-tree">Red-black Tree</h3>
+
+<p>红黑树是一种近似平衡的二叉查找树,关于平衡的定义在AVL那有描述,近似平衡在这里是指:确保任何一个节点的左右子树的高度差不会超过两者中较低那个的一倍</p>
+
+<p>要满足这些条件</p>
+
+<ul>
+<li><p>root节点是黑色的</p></li>
+
+<li><p>nil都为黑</p></li>
+
+<li><p>红色节点的孩子必须都是黑色,父节点必须是黑色的</p></li>
+
+<li><p>对于任意节点到nil节点,都含有数量相同的黑色节点个数</p></li>
+</ul>
+
+<p>关于时间复杂度</p>
+
+<ul>
+<li><p>查询O(logN)</p></li>
+
+<li><p>插入O(logN)</p></li>
+
+<li><p>删除O(logN)</p></li>
+</ul>
+
+<p>关于二叉树的左旋和右旋是和AVL的rotation差不多的,如果还不清晰,可以参照这篇<a href="https://www.cnblogs.com/CarpenterLee/p/5503882.html">博客</a>的图</p>
+
+<p>查询操作,因为红黑树也符合BST,所以查找就不说了</p>
+
+<p>插入操作(从空的开始)</p>
+
+<ul>
+<li><p>第一个插入一定是黑色的节点(看规则的第一条)</p></li>
+
+<li><p>后面插入全部是红色的,然后根据规则改颜色</p></li>
+</ul>
+
+<p>这规则也可以参照上面的博文</p>
+
+<h3 id="b-tree">B-Tree</h3>
+
+<p><a href="https://www.youtube.com/watch?v=aZjYr87r1b8">Youtu</a>教程</p>
+
+<p>MongoDB就是用B-Tree</p>
+
+<p>理论上B-Tree的时间复杂度是O(1)~O(logN)</p>
+
+<p>B-Tree每一个节点都有一个指向data的指针</p>
+
+<p>B-Tree 满足一下规则(规则枯燥,自己模拟吧)</p>
+
+<ul>
+<li><p>根节点至少两个children</p></li>
+
+<li><p>中间节点至少有k-1个元素和k个孩子</p></li>
+
+<li><p>叶子节点至少有k-1个元素</p></li>
+
+<li><p>叶子节点在同一个level</p></li>
+</ul>
+
+<p>这里的k符合<code>(m/2&lt;=k&lt;=m)</code></p>
+
+<p>B-Tree一开始是空的,是通过插入的数量增加了而达到层数增加,所以是要插入插满后才会扩展层</p>
+
+<p>上面那些节点至少有多少个元素其实是给删除操作用的</p>
+
+<p>B-Tree删除节点的一些原则</p>
+
+<ul>
+<li><p>如果某个节点空了,需要rotation(left-rotation或right-rotation)</p></li>
+
+<li><p>能够rotation的前提是,别的节点在rotation过后不会违反规则</p></li>
+
+<li><p>如果没有能够rotation,那就只能上一层(父节点)来补</p></li>
+</ul>
+
+<p>好处:</p>
+
+<ul>
+<li>时间复杂度最低都有O(logN),最好能够更快,因此对磁盘IO的读取次数会更少,因此单次读取会比B+Tree块</li>
+</ul>
+
+<p>缺点:</p>
+
+<ul>
+<li>相对B+Tree来说,对范围的一个查询性能较弱</li>
+</ul>
+
+<h3 id="b-tree-1">B+ Tree</h3>
+
+<p>B+Tree与B-Tree的不同是</p>
+
+<p>B+Tree的时间复杂度固定是<code>O(logN)</code></p>
+
+<p>B+Tree中间节点是没有指针的,只有叶子节点有指向数据的指针,并且叶子节点之间也有相互指向的指针</p>
+
+<p>好处:</p>
+
+<ul>
+<li><p>能够范围查询,这是B-Tree做不到的,因为B-Tree只能够每次查一个index,一个index包含一个指向数据的pointer</p></li>
+
+<li><p>时间稳定</p></li>
+</ul>
+
+<p>这是一篇关于<a href="http://www.cnblogs.com/kaleidoscope/p/9481991.html">MongoDB用B-Tree和Mysql用B+Tree的原因对比</a></p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/data-structure/data-structure/">Data Structure</a></li>
+        
+        <li><a href="/posts/gopher/gopher-2019/">Gopher 2019 Testing Talk</a></li>
+        
+        <li><a href="/posts/database/mongodb/mongodb-installation-and-config/">Mongodb Installation And Config</a></li>
+        
+        <li><a href="/posts/database/mongodb/mongodb-role/">Mongodb Role</a></li>
+        
+        <li><a href="/posts/golang/golang-module/">Golang Module</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

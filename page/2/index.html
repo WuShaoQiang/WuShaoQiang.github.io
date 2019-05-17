@@ -184,7 +184,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/good-resource/" title="Good Resource" >Good Resource</a>
+                                    <a href="https://wushaoqiang.github.io/posts/others/good-resource/" title="Good Resource" >Good Resource</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -215,13 +215,13 @@ legendtkl
  牛客网
   做简历  超级简历  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/good-resource/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/good-resource/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/data-structure-bplus-tree/" title="Data Structure Tree" >Data Structure Tree</a>
+                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/" title="Data Structure Tree" >Data Structure Tree</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -269,13 +269,13 @@ AVL 参考Youtube学习
  2 / \ 1 3  再复杂一点就是这也(注意focus三个节点就好)
  6 / \ 4 7 / \ 2 5 / \ 1 3  这里我要再说明一点……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure-bplus-tree/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher-2019/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -290,15 +290,19 @@ AVL 参考Youtube学习
                             </div>
                             
                             <div class="post-content">
-                                go test -coverprofile cover.out go tool cover -html=cover.out -o cover.html  ……
+                                这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
+下面是一些我觉得有借鉴价值的东西
+这里是如何查看一个coverage
+// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
+func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher-2019/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -321,13 +325,13 @@ AVL 参考Youtube学习
 这里是我初步的一个配置文件
 # mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-installation-and-config/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-role/" title="Mongodb Role" >Mongodb Role</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/" title="Mongodb Role" >Mongodb Role</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -368,7 +372,7 @@ Cluster Administration Roles 由于笔者对集群化了解还比较浅薄,这�
 clusterAdmin 这是cluster的最高权限,结合了clusterManager,clusterMonitor,hostManager,additionally dropDatabase action
 这是一个可以删库的权限,可见其权限很高了吧……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-role/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/">阅读全文</a></p>
                         </article>
                     
 

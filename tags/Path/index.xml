@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Path Problem</title>
-      <link>https://wushaoqiang.github.io/posts/golang-path-problem/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-path-problem/</link>
       <pubDate>Fri, 12 Apr 2019 17:28:21 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-path-problem/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-path-problem/</guid>
       <description>笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
 直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
 filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件

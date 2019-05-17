@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-installation-and-config/">Mongodb Installation And Config</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">Mongodb Installation And Config</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -100,14 +100,14 @@
 然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
 这里是我初步的一个配置文件
 # mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-installation-and-config/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-role/">Mongodb Role</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/">Mongodb Role</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -147,14 +147,14 @@ Cluster Administration Roles 由于笔者对集群化了解还比较浅薄,这�
 这些administration就不像之前那样是指定某一个数据库了,这是管理整个系统的role
 clusterAdmin 这是cluster的最高权限,结合了clusterManager,clusterMonitor,hostManager,additionally dropDatabase action
 这是一个可以删库的权限,可见其权限很高了吧……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-role/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/">Mongodb Data Modeling Introduction</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">Mongodb Data Modeling Introduction</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -182,14 +182,14 @@ References 这种就又是关系型了
 Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使用capped collection
 如果是侧重全局数据的读取 &ndash;使用索引会增加性能
 Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-data-modeling-introduction/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-schema-validation/">Mongodb Schema Validation</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">Mongodb Schema Validation</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -215,14 +215,14 @@ validationLevel 控制检查的程度 模式有两种:strict(default) and modera
  use the $jsonSchema operator in your validator expression.
  官网例子
 db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-schema-validation/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/mongodb-command/">Mongodb Command</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">Mongodb Command</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -238,14 +238,14 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
                             
                             <div class="post-content">
                                 关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &quot;D&quot; } ) // selects from the inventory collection all documents where the status equals &quot;D&quot; db.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/mongodb-command/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">SQL vs NoSQL</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">SQL vs NoSQL</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -276,7 +276,7 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
  优点:通过一个table将数据连接起来,没有过多的冗余数据
  缺点:对分布式不友好,并且一旦关系多了,会产生混乱
   NoSQL没有关系,全部都是直接存储……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/sql-vs-nosql/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">阅读全文</a></p>
                             </div>
                         </article>
                     

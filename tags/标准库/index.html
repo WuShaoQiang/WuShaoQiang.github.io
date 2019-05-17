@@ -78,7 +78,7 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-os/">Golang标准库--os</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">Golang标准库--os</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -97,14 +97,14 @@
 bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
 // Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
 // Flags to OpenFile wrapping those of the underlying system.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-os/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-request/">Golangstd Request</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">Golangstd Request</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -126,14 +126,14 @@ Request结构体 type Request struct { Method string URL *url.URL Proto string /
 Method 这就是一个请求的方法(如GET、POST)
 但是Go的HTTP客户端不支持发送方法为CONNECT的请求
 URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-request/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">Golang标准库--http</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/">Golang标准库--http</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -153,14 +153,14 @@ Package http doc.go 先来看看官方对这个包的一个解释
 这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
 这里还举了一些方法的例子
 // Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-net-http/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">Golang标准库--Unicode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">Golang标准库--Unicode</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -188,14 +188,14 @@ Package http doc.go 先来看看官方对这个包的一个解释
 &mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
 &mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
 &mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-unicode/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-string/">Golang标准库--String</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-string/">Golang标准库--String</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -212,14 +212,14 @@ Package http doc.go 先来看看官方对这个包的一个解释
                             <div class="post-content">
                                 目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
 &mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-string/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-string/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">Golang标准库--Bytes</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-bytes/">Golang标准库--Bytes</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -235,14 +235,14 @@ Package http doc.go 先来看看官方对这个包的一个解释
                             
                             <div class="post-content">
                                 目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bytes/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-bytes/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">Golang标准库--Bufio</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-bufio/">Golang标准库--Bufio</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -258,7 +258,7 @@ Package http doc.go 先来看看官方对这个包的一个解释
                             
                             <div class="post-content">
                                 目录 bufio bufio.go 常量 Reader 结构体 常量 NewReaderSize(rd io.Reader, size int) *Reader NewReader(rd io.Reader) *Reader (r *Reader) Size() int (b *Reader) Reset(r io.Reader) &amp; (b *Reader) reset(buf []byte, r io.Reader) (b *Reader) fill() (b *Reader) Peek(n int) ([]byte, error) (b *Reader) Discard(n int) (discarded int, err error) (b *Reader) Read(p []byte) (n int, err error) (b *Reader) ReadByte() (byte, error) (b *Reader) UnreadByte() (b *Reader) ReadRune() (r rune, size int, err error) (b *Reader) UnreadRune() error (b *Reader) Buffered() int (b *Reader) ReadSlice(delim byte) (line []byte, err error) (b *Reader) ReadLine() (line []byte, isPrefix bool, err error) (b *Reader) ReadBytes(delim byte) ([]byte, error) (b *Reader) ReadString(delim byte) (string, error) (b *Reader) WriteTo(w io.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golangstd-bufio/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-bufio/">阅读全文</a></p>
                             </div>
                         </article>
                     

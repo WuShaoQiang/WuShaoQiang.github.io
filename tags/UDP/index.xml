@@ -13,10 +13,10 @@
     
     <item>
       <title>UDP</title>
-      <link>https://wushaoqiang.github.io/posts/udp/</link>
+      <link>https://wushaoqiang.github.io/posts/computer-network/udp/</link>
       <pubDate>Mon, 22 Apr 2019 16:35:03 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/udp/</guid>
+      <guid>https://wushaoqiang.github.io/posts/computer-network/udp/</guid>
       <description>  UDP无连接建立
  不需要维护连接状态
  报文头比TCP小

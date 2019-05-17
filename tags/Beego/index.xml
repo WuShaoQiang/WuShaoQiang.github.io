@@ -13,10 +13,10 @@
     
     <item>
       <title>Go琐碎笔记</title>
-      <link>https://wushaoqiang.github.io/posts/learningGo/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/learningGo/</link>
       <pubDate>Thu, 14 Mar 2019 16:10:59 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/learningGo/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/learningGo/</guid>
       <description>在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
 2019.2.16 go test -tags tagname
 构造数组可以先 make([]int,0)

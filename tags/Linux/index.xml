@@ -13,10 +13,10 @@
     
     <item>
       <title>Ubuntu apt</title>
-      <link>https://wushaoqiang.github.io/posts/linux-apt/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-apt/</link>
       <pubDate>Tue, 07 May 2019 11:00:18 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-apt/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-apt/</guid>
       <description> 这个总结一下我经常用到的关于apt的命令
 apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
 其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好
@@ -27,10 +27,10 @@ apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有�
     
     <item>
       <title>Linux 网络管理</title>
-      <link>https://wushaoqiang.github.io/posts/linux-network-management/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-network-management/</link>
       <pubDate>Thu, 25 Apr 2019 20:29:02 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-network-management/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-network-management/</guid>
       <description>ping -c 发送一定数量的报文
 ifconfig 其中输出信息里
 enp0s31f6：以太网(有线)
@@ -49,10 +49,10 @@ netstat -r：显示路由
     
     <item>
       <title>Linux 进程管理</title>
-      <link>https://wushaoqiang.github.io/posts/linux-process-management/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-management/</link>
       <pubDate>Thu, 25 Apr 2019 17:04:19 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-process-management/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-management/</guid>
       <description>进程状态  R 正在运行或在运行队列
  D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
  S 中断，等待某个事件完成或者被信号唤醒
@@ -76,10 +76,10 @@ fg %num 将后台程序转移到前台</description>
     
     <item>
       <title>Linux命令笔记</title>
-      <link>https://wushaoqiang.github.io/posts/linux-note/</link>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-note/</link>
       <pubDate>Sun, 17 Mar 2019 01:52:15 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/linux-note/</guid>
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-note/</guid>
       <description>Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
 ifconfig 查看网络连接
 lsof -i:8000 查看端口8000占用情况

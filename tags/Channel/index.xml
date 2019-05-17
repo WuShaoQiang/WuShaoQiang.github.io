@@ -13,10 +13,10 @@
     
     <item>
       <title>Golang Channel</title>
-      <link>https://wushaoqiang.github.io/posts/golang-channel/</link>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-channel/</link>
       <pubDate>Sat, 20 Apr 2019 17:19:20 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/golang-channel/</guid>
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-channel/</guid>
       <description>这里就不再赘述重要性了
 Channel特性  goroutine-safe
  两个goroutine之间传递数据
