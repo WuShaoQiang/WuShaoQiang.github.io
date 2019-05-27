@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Basic on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Basic/</link>
+    <description>Recent content in Basic on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 May 2019 00:04:35 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Basic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HTML Basic</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/html-basic/</link>
+      <pubDate>Tue, 21 May 2019 00:04:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/html-basic/</guid>
+      <description> Tag &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;head&amp;gt;&amp;lt;head&amp;gt; 通常是放title、meta、link、script、style的地方 &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt; 网页的标题 &amp;lt;body&amp;gt;&amp;lt;/body&amp;gt; 网页的主体 &amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt; 标题h1-h6 &amp;lt;p&amp;gt;&amp;lt;\p&amp;gt; 段落 &amp;lt;hr&amp;gt; 分割线 &amp;lt;br&amp;gt; line break &amp;lt;pre&amp;gt;&amp;lt;/pre&amp;gt; 这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text)  Attr Some suggestions you should know:
+ HTML5 does not require lowercase attribute name, but everybody should use lowercase in HTML
+ HTML5 does not require quotes around attribute values, but everybody should quote attribute values
+  genaral style examples : style=&amp;quot;font-family:arial;color:red;font-size:20px;&amp;quot; style=&amp;quot;text-align:center&amp;quot; title: The value of the title attribute will be displayed as a tooltip when you mouse over the tag  a href: usaully a link  img src: image source location alt: when the image can not be displayed, it will show some text for an image  html html --&amp;gt; lang  input input --&amp;gt; diabled  Property style background-color color //font color font-family font-size text-align //horizontal text alignment  Text Formatting &amp;lt;b&amp;gt; - Bold text &amp;lt;strong&amp;gt; - Important text &amp;lt;i&amp;gt; - Italic text &amp;lt;em&amp;gt; - Emphasized text &amp;lt;mark&amp;gt; - Marked text &amp;lt;small&amp;gt; - Small text &amp;lt;del&amp;gt; - Deleted text &amp;lt;ins&amp;gt; - Inserted text &amp;lt;sub&amp;gt; - Subscript text &amp;lt;sup&amp;gt; - Superscript text  </description>
+    </item>
+    
+  </channel>
+</rss>

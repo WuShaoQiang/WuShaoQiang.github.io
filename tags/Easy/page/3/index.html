@@ -78,11 +78,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/">Leetcode 383</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-501/">Leetcode 501</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月15日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -93,19 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目  Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note. Note: You may assume that both strings contain only lowercase letters. canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true  我的解答 题目的意思是,右边的字符串能否凑成左边的字符串(每个字符只能用一次)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/">阅读全文</a></p>
+                                题目 给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。 假定 BST 有如下定义： 结点左子树中所含结点的值小于等于当前结点的值 结点右子树中所含结点的值大于等于当前结点的值 左子树和右子树都是二叉搜索树 例如： 给定 BST [1,null,2,2], 1 \ 2 / 2 返回[2]. 提示：如果众数超过1个，不需考虑输出顺序 进阶：你可以不使用额外的空间吗？（假设由递归产生的隐式调用栈的开销不被计算在内）  我的解答 // 执行用时 : 24 ms, 在Find Mode in Binary Search Tree的Go提交中击败了71.43% 的用户 // 内存消耗 : 6.5 MB, 在Find Mode in Binary Search Tree的Go提交中击败了23.53% 的用户 func findMode(root *TreeNode) []int { if root == nil { return nil } m := make(map[int]int) iteration(root, m) res := make(map[int][]int) max := 0 for k, v := range m { if max &lt;= v { max = v res[v] = append(res[v], k) } } return res[max] } func iteration(root *TreeNode, m map[int]int) { if root !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-501/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-371/">Leetcode 371</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/">Leetcode 437</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月15日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -116,21 +116,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. Example 1: Input: a = 1, b = 2 Output: 3 Example 2: Input: a = -2, b = 3 Output: 1  我的解答 这个题也是考验对二进制的熟悉
-我们来验算一下
-以下都是二进制 a = 100 b = 111 结果应该等于 1011 add = 100^111 = 011 carry = (100&amp;111)&lt;&lt;1 =1000 sum = add^carry  // 用&amp;来得到是否有进位，并且要右移1位 // 用^来得到不考虑进位的相加 // 然后进位和不考虑进位的结果再次执行同样的操作，直到没有进位 func getSum(a int, b int) int { res := 0 for { carry := (a &amp; b) &lt;&lt; 1 sum := a ^ b if carry&amp;sum == 0 { res = carry ^ sum break } a = carry b = sum } return res }  最优解答 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-371/">阅读全文</a></p>
+                                题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。 示例： root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8 10 / \ 5 -3 / \ \ 3 2 11 / \ \ 3 -2 1 返回 3。和等于 8 的路径有: 1. 5 -&gt; 3 2. 5 -&gt; 2 -&gt; 1 3. -3 -&gt; 11  我的解答 // 执行用时 : 20 ms, 在Path Sum III的Go提交中击败了87.72% 的用户 // 内存消耗 : 4.6 MB, 在Path Sum III的Go提交中击败了47.06% 的用户 func pathSum(root *TreeNode, sum int) int { if root == nil { return 0 } var count int iteration(root, sum, &amp;count) return count } func iteration(root *TreeNode, target int, count *int) { // 每一个不为nil的节点都作为开始节点 if root !……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-367/">Leetcode 367</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">Leetcode 414</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月15日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -141,20 +139,20 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a positive integer num, write a function which returns True if num is a perfect square else False. Note: Do not use any built-in library function such as sqrt. Example 1: Input: 16 Output: true Example 2: Input: 14 Output: false  我的解答 根据数学公式 1+3+&hellip;+(2n-1) = n**2
-func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for i := 1; i &lt;= num/2 &amp;&amp; total &lt; num; i++ { total += 2*i - 1 } return total == num }  最优解答 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-367/">阅读全文</a></p>
+                                题目 给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。 示例 1: 输入: [3, 2, 1] 输出: 1 解释: 第三大的数是 1. 示例 2: 输入: [1, 2] 输出: 2 解释: 第三大的数不存在, 所以返回最大的数 2 . 示例 3: 输入: [2, 2, 3, 1] 输出: 1 解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。 存在两个值为2的数，它们都排第二。  我的解答 用切片记录
+// 执行用时 : 16 ms, 在Third Maximum Number的Go提交中击败了27.08% 的用户 // 内存消耗 : 4 MB, 在Third Maximum Number的Go提交中击败了23.33% 的用户 func thirdMax(nums []int) int { max := make([]int, 3) for i := 0; i &lt; 3; i++ { max[i] = math.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-350/">Leetcode 350</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">Leetcode 412</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月15日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -165,19 +163,19 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two arrays, write a function to compute their intersection. Example 1: Input: nums1 = [1,2,2,1], nums2 = [2,2] Output: [2,2] Example 2: Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4] Output: [4,9] Note: Each element in the result should appear as many times as it shows in both arrays. The result can be in any order.  我的解答 func intersect(nums1 []int, nums2 []int) []int { res := make([]int, 0) m := make(map[int]int) for _, num1 := range nums1 { m[num1]++ } for _, num2 := range nums2 { if count, exist := m[num2]; exist &amp;&amp; count &gt; 0 { res = append(res, num2) m[num2]-- } } return res }  和上题区别在于,这里有数量的区别,所以要稍微改动就可以了……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-350/">阅读全文</a></p>
+                                题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &quot;1&quot;, &quot;2&quot;, &quot;Fizz&quot;, &quot;4&quot;, &quot;Buzz&quot;, &quot;Fizz&quot;, &quot;7&quot;, &quot;8&quot;, &quot;Fizz&quot;, &quot;Buzz&quot;, &quot;11&quot;, &quot;Fizz&quot;, &quot;13&quot;, &quot;14&quot;, &quot;FizzBuzz&quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &lt; n; i++ { if (i+1)%15 == 0 { res[i] = &quot;FizzBuzz&quot; } else if (i+1)%5 == 0 { res[i] = &quot;Buzz&quot; } else if (i+1)%3 == 0 { res[i] = &quot;Fizz&quot; } else { res[i] = strconv.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-349/">Leetcode 349</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">Leetcode 409</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月15日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -188,15 +186,15 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two arrays, write a function to compute their intersection. Example 1: Input: nums1 = [1,2,2,1], nums2 = [2,2] Output: [2] Example 2: Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4] Output: [9,4] Note: Each element in the result must be unique. The result can be in any order.  我的解答 func intersection(nums1 []int, nums2 []int) []int { res := make([]int, 0) m := make(map[int]bool) for _, num1 := range nums1 { m[num1] = true } for _, num2 := range nums2 { if use, exist := m[num2]; exist &amp;&amp; use { res = append(res, num2) m[num2] = false } } return res }  要注意这里只显示一次,所以要通过exist和use共同判断……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-349/">阅读全文</a></p>
+                                题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-345/">Leetcode 345</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">Leetcode 405</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -211,16 +209,15 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
                             </div>
                             
                             <div class="post-content">
-                                题目 Write a function that takes a string as input and reverse only the vowels of a string. Example 1: Input: &quot;hello&quot; Output: &quot;holle&quot; Example 2: Input: &quot;leetcode&quot; Output: &quot;leotcede&quot; Note: The vowels does not include the letter &quot;y&quot;.  我的解答 这个题目意思是,两个元音字母交换
-func reverseVowels(s string) string { b := []byte(s) // m := map[byte]bool{ // 'a': true, // 'e': true, // 'i': true, // 'o': true, // 'u': true, // 'A': true, // 'E': true, // 'I': true, // 'O': true, // 'U': true, // } i := 0 j := len(b) - 1 for { for ; i &lt; len(b); i++ { if isVowel(b[i]) { break } } for ; j &gt;= 0; j-- { if isVowel(b[j]) { break } } if i &gt;= j { break } b[i], b[j] = b[j], b[i] i++ j-- } return string(b) } func isVowel(b byte) bool { return b == 'a' || b == 'e' || b == 'i' || b == 'o' || b == 'u' || b == 'A' || b == 'E' || b == 'I' || b == 'O' || b == 'U' }  这个有点像快速排序那样,这里用函数好像会比较快……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-345/">阅读全文</a></p>
+                                题目  Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used. Note: All letters in hexadecimal (a-f) must be in lowercase. The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, the first character in the hexadecimal string will not be the zero character. The given number is guaranteed to fit within the range of a 32-bit signed integer.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-344/">Leetcode 344</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">Leetcode 404</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -235,16 +232,16 @@ func reverseVowels(s string) string { b := []byte(s) // m := map[byte]bool{ // '
                             </div>
                             
                             <div class="post-content">
-                                题目 Write a function that reverses a string. The input string is given as an array of characters char[]. Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory. You may assume all the characters consist of printable ascii characters. Example 1: Input: [&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;] Output: [&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;] Example 2: Input: [&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;] Output: [&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]  我的解答 这个好像就没什么难度了..
-func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j := 0, len(s)-1; i &lt; j; i, j = i+1, j-1 { tmp = s[i] s[i] = s[j] s[j] = tmp } }  最优解答 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-344/">阅读全文</a></p>
+                                题目 Find the sum of all left leaves in a given binary tree. Example: 3 / \ 9 20 / \ 15 7 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.  我的解答 这个题参考了一下别人的思路写出来
+func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } search(root, false, &amp;sum) return sum } func search(root *TreeNode, flag bool, sum *int) { if root == nil { return } if flag &amp;&amp; root.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-342/">Leetcode 342</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">Leetcode 400</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -259,18 +256,15 @@ func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j :=
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer (signed 32 bits), write a function to check whether it is a power of 4. Example 1: Input: 16 Output: true Example 2: Input: 5 Output: false Follow up: Could you solve it without loops/recursion?  我的解答 func isPowerOfFour(num int) bool { return num &gt; 0 &amp;&amp; 6148914691236517205&amp;num == num &amp;&amp; num&amp;(num-1) == 0 }   num要是整数
- 这一串数字是64位有符号int010101.....01,因为4的倍数在二进制中是隔开的10000(16),100(4),所以这个是验证num偶数bit是否都为0
- 验证了偶数bit都为0后,要验证是否只有一个位置1,其实就是验证是否是2的幂
-  最优解答 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-342/">阅读全文</a></p>
+                                题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-326/">Leetcode 326</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">Leetcode 389</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -285,16 +279,19 @@ func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j :=
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer, write a function to determine if it is a power of three. Example 1: Input: 27 Output: true Example 2: Input: 0 Output: false Example 3: Input: 9 Output: true Example 4: Input: 45 Output: false Follow up: Could you do it without using any loop / recursion?  我的解答 一般思路,不断整除3,但题目提示了,这道题不用循环也可以做出来
-func isPowerOfThree(n int) bool { return n &gt; 0 &amp;&amp; 4052555153018976267%n == 0 }  这个一长串的数字是我通过程序计算出来的64位有符号int类型中最大的3的幂,也就是说,只要是3的幂,都肯定会被这个最大的数给整除,因此表示为余数为0……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-326/">阅读全文</a></p>
+                                题目  Given two strings s and t which consist of only lowercase letters. String t is generated by random shuffling string s and then add one more letter at a random position. Find the letter that was added in t. Example: Input: s = &quot;abcd&quot; t = &quot;abcde&quot; Output: e Explanation: 'e' is the letter that was added.  我的解答 这道题我用了三种方法
+ 全部统计,因为只会有一个字符是奇数,所以那个就是新增
+ 用t-byte的总和减去s-byte的总和
+ 异或,最后剩下那个增加的
+  其中第三种方法最快……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-303/">Leetcode 303</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">Leetcode 387</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -309,9 +306,8 @@ func isPowerOfThree(n int) bool { return n &gt; 0 &amp;&amp; 4052555153018976267
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive. Example: Given nums = [-2, 0, 3, -5, 2, -1] sumRange(0, 2) -&gt; 1 sumRange(2, 5) -&gt; -1 sumRange(0, 5) -&gt; -3 Note: You may assume that the array does not change. There are many calls to sumRange function.  我的解答 题目重点在于
-You may assume that the array does not change.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-303/">阅读全文</a></p>
+                                题目  Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1. Examples: s = &quot;leetcode&quot; return 0. s = &quot;loveleetcode&quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-'a']++ } for idx, b := range s { if m[b-'a'] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -367,6 +363,10 @@ You may assume that the array does not change.……
         <a href="https://wushaoqiang.github.io/tags/Easy/page/10/">10</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Easy/page/11/">11</a>
+    </li>
+    
 
     
     <li class="next">
@@ -395,43 +395,43 @@ You may assume that the array does not change.……
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -456,6 +456,10 @@ You may assume that the array does not change.……
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -468,7 +472,7 @@ You may assume that the array does not change.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -524,6 +528,10 @@ You may assume that the array does not change.……
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -548,6 +556,8 @@ You may assume that the array does not change.……
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -559,6 +569,8 @@ You may assume that the array does not change.……
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -602,6 +614,8 @@ You may assume that the array does not change.……
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -613,6 +627,8 @@ You may assume that the array does not change.……
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     

@@ -68,347 +68,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/" title="SQL 基础" >SQL 基础</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-112/" title="Leetcode 112" >Leetcode 112</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者之前学了一些基础的Mysql的语法，现在进一步学习
-关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
-非关系型数据库有自己的一套语言
-只针对Mysql的SQL语句
-SELECT 选定要输出的列
-SELECT column_name,column_name FROM table_name;  将所有列输出
-SELECT * FROM table_name;  SELECT DISTINCT 如果一个列中包含了很多相同的，比如国家里面有很多人是中国的、日本的等等，我们指向查看有多少种的话，这样看起来很费劲
-介绍一个解决这种问题的命令
-和SELECT语法基本一样，只是这里不会输出相同的字段
-SELECT DISTINCT column_name,column_name FROM table_name;  WHERE WHERE子句用于提取那些满足指定标准的记录
-SELECT column_name,column_name FROM table_name WHERE column_name operator value;  例如，我要id大于3的user的id和name字段
-SELECT id,name FROM user WHERE id &gt; 3  这里提醒一点，当实例是文本字段需要加单引号，如果是数值字段，就像上面一样直接写就好
-WHERE的运算符 WHERE column_name operator value  这里的operator就是运算符的位置
-运算符有：
- =,&gt;,&gt;=,&lt;,&lt;= 这些就比较好理解了
- &lt;&gt; 不等于
- BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/" title="DHCP 和 NAT" >DHCP 和 NAT</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
-四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
- DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了
- 再次对准确地址发出请求
- DHCP响应
-  到这里交互就完成了
-NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，因为现在IPv4的资源已经枯竭，利用NAT能够使得大家共用一个对外的IP，而内部会有不同的IP(局域网内IP)
-比如我在学习请求百度这个网页，百度实际上看到的IP地址是我学校的IP地址，并且将内容返回给这个IP地址，学校再通过NAT转换表把东西转给我
-有些人也说道，NAT实质上很大阻碍了IPv6的发展……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/" title="IPv4 数据报格式与分片" >IPv4 数据报格式与分片</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                直接上图  版本号
- 首部长度：一般为20
- 服务类型：为了区分数据报，有点想女士优先这种
- 数据报长度(首部加数据，一般不超过1500字节)
- 标识、标志、片偏移：与IP数据报分片有关(别的篇幅讲)
- 寿命：每经过一台路由器，TTL减1，若为0的时候，这个数据报就要丢掉了
- 上层协议：6代表TCP；17代表UDP
- 首部校验和(检验IP数据报比特错误)
- 源和目的IP地址
- 选项(很少用)
- 数据(TCP or UDP报文段)
-  IP数据报分片 发送方与目的地路径上的每段链路可能使用不同的链路层协议，且每种协议可能具备不同的MTU
-比如以太网的MTU为1500
-所以在通过MTU比较小的链路段时，就需要分片了
-为了让目的主机执行重装任务，IPv4的设计者将标识、标志、片偏移字段放在IP数据报首部
-分别解释这三个字段 标识 发送主机在发送IP数据报的时候，通常会将它发送的每个数据报的标识号加1
-所以目的地址收到了很多片，这些片上标识号是同一个数字的，那么它们就是可以组合的
-标志 最后一个片的标志比特被设为0，表明已经接收到某个标识的最后一个片
-偏移量 毫无疑问，是为了将片重新组织回去的……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
-HTTP是一个无状态协议
-报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/udp/" title="UDP" >UDP</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                  UDP无连接建立
- 不需要维护连接状态
- 报文头比TCP小
- 能尽可能的快，没有速度限制
-  应用场景 对丢包不是很看重，对速度很敏感
- DNS
- SNMP
-  报文结构 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/udp/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/" title="TCP 流量控制" >TCP 流量控制</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                流量控制是为了匹配发送方和接收方的数据交换速度，如果发送方发的太快，接收方的缓存可能会溢出
-还要提醒一下流量控制和拥塞控制是两码事
-TCP通过让发送方维护一个称为接收窗口的变量来提供流量控制
-在接收方一定要满足
-LastByteRcvd - LastByteRead &lt;= RcvBuffer
-用rwnd表示还有多少空间可以用，所以rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)
-在TCP报文首部里有一个叫做接收窗口，这个就是接收者告诉发送者rwnd的
-在发送方，通过将未确认的数据量控制在值rwnd以内，就可以保证接收者不会缓存溢出了
-UDP是不提供流量控制的，所以UDP很有可能会出现缓存溢出……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/" title="TCP 拥塞控制" >TCP 拥塞控制</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 TCP必须使用端到端拥塞控制而不是网络辅助的拥塞控制
-TCP所采用的方法是让每一个发送方根据所感知到的网络拥塞程度来限制其能向连接发送流量的速率
-三个问题 我们如何知道网络开始拥塞？
-我们如何限制发送方发送速率
-当发送方感受到拥塞时，用什么算法去限制其发送速率
-如何知道网络拥塞 TCP是不会有一种特殊的包叫“我拥塞啦”
-接收到Ack 没有拥塞，可以提速
-没接收到Ack 可能拥塞，降速
-如何限制发送方速率 改变cwnd
-当一切顺利，cwnd增加；丢包，cwnd减少
-我们发送方被限制在min(rwnd,cwnd)
-LastByteSent - LastByteAcked &lt;= cwnd
-rwnd和cwnd是不同的，前者是表示接收方的buffer还有多少能用，后者是改变在网络上的容量
-用什么算法来限制速度 我们希望TCP能在不发生拥塞情况上利用最大的带宽
-所以发送方速率有点像三角波，上上下下，因为要尽可能利用带宽又不要制造拥塞
-慢启动 在包被收到的情况下 cwnd每次是之前的两倍1,2,4,8,16...，直到大于或等于阈值，切换到拥塞避免
-在包没有被收到的情况下 三次冗余Ack 进入快速恢复
-超时 阈值=cwnd/2
-把cwnd变为1
-阈值(threhold) 记录上一次拥塞时一半的cwnd
-拥塞避免 在包被接收到的情况下 线性增长，每次在所有分片的Ack被接收到的情况下(一个RTT)，增加一个MSS
-在包没有被接收到的情况下 三次冗余Ack 进入快速恢复
-超时 切换到慢启动
-快速恢复 每个冗余的Ack对cwnd增加一个MSS，当丢失报文段的Ack最终回到时，再减少一个MSS
-进入拥塞避免状态
-出现超时，进入慢启动
-出现丢包，cwnd设置为1，阈值设置为cwnd的一半
-总结一下 三次冗余ACK  阈值设置为cwnd/2
- cwnd设置为阈值(有快速恢复的情况下)
-  超时  阈值设置为cwnd/2
- cwnd设置为1(MSS)
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/" title="TCP 连接 --三次握手和四次挥手" >TCP 连接 --三次握手和四次挥手</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 首先这里所说的握手，是进程之间的握手
-三次握手 简单来说就是
-A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可以承载有效负荷  再细致点说就是
- 客户端应用程序发起一个TCP连接
- 发送报文里有SYN
- 收到来自服务器端的SYN&amp;ACK
- 再次向服务器端发送ACK
-  这里面总共有3次报文，所以为三次握手
-最大报文段长度&amp;最大传输单元 最大报文段长度(MSS):一般为1460
-最大传输单元(MTU):一般为1500
-之说以说一般，是因为一般来说TCP/IP的首部字段加起来是40字节
-1500-40=1460
-清除认识 当进程通过套接字把数据给到TCP的时候，数据就和进程没关系了，已经全权交给TCP了
-为什么不是两次握手？ 这是书本上的一个问题
-在我理解，握手其实是为了双方知道对方的初始序列号
- 客户端给服务器端发送初始序列号
- 服务器端收到了客户端的初始序列号，并且发送服务器端的初始序列号
-  如果客户端不产生第三次握手，那么服务器端不知道客户端到底拿到了初始序列号没
- 客户端看到回复后就知道服务器端拿到了自己的初始序列号，于是也和服务器端说明，已经拿到它的初始序列号了  四次挥手  客户端应用程序发起关闭连接
- 发送报文里包含FIN
- 服务器端发送一个ACK表示接收到了
- 服务器端再次发一个FIN
- 客户端给服务器端发一个ACK
- 等待一会，资源就释放了
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/" title="TCP --报文" >TCP --报文</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 之间写过一个关于《计算机网络(原书第六版)：自顶向下方法》的一部分笔记，当时没继续写下去是因为觉得一个篇幅太多了，决定分开写，这样可能可以更加详细点，也算是第二次的复习吧
-这篇主要讲报文
-先看看报文的格式
-首先，TCP是运输层的协议，IP是网络层的协议，一般运输层协议会确定端口号，网络层协议则确定IP地址
- 源/目的端口号
- 序号/确认号：是用来双方实现可靠传输的(下面详细讲)
- 接收窗口字段：用于流量控制(可能会在别的篇幅讲)
- 首部长度：由于有选项这个字段，使得TCP的首部长度是可以变化的，不过通常就是20字节
- 标志字段/紧急指针：标志字段包括确认字段有效、建立和拆除连接、紧急数据。紧急指针指向紧急数据
-  序号/确认号 一条TCP连接的双发均可随机地选择初始序号，可能是0和4294967295之间的任意值
-我们假设初始序号为0
-A --&gt; B Seq=42,ACK=79,data=1 B --&gt; A Seq=79,ACK=43,data=2 A --&gt; B Seq=43,ACK=80,data=3 ...  在我理解
-序号是标识我要发送给对方的数据
-确认号是标识我需要对方发送给我的数据
-所以上面场景就是
-A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/" title="Leetcode 20" >Leetcode 20</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
+                                2019年4月29日
                             </date>
                             
                             <div class="post-meta">
@@ -419,10 +83,247 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &quot;()&quot; 输出: true 示例 2: 输入: &quot;()[]{}&quot; 输出: true 示例 3: 输入: &quot;(]&quot; 输出: false 示例 4: 输入: &quot;([)]&quot; 输出: false 示例 5: 输入: &quot;{[]}&quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
-var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: &quot;]&quot;, &quot;{&quot;: &quot;}&quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !……
+                                题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-112/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-111/" title="Leetcode 111" >Leetcode 111</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-111/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/" title="Leetcode 110" >Leetcode 110</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/" title="TenToSeventeen" >TenToSeventeen</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/" title="Data Structure" >Data Structure</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 前段时间复习了一些数据结构，一直没来得及总结一下
+链表(双向) 单向链表和循环链表思路是差不多的
+结构体 type LinkListNode struct { Value interface{} Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/" title="Web请求历程" >Web请求历程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这几乎是做后端开发面试的时候必问的一道题，答案可以说得很简单，也可以是很复杂，当然面试官喜欢看到你对此有所深入，因此这篇文章就从头到尾详细的讲一遍这个历程
+参考 《计算机网络》
+1 当一台电脑将网线插上，网线的另一端是以太网的交换机(交换机能够知道连接它的机器的MAC地址，如果不清楚交换机是什么，建议自己搜一下，这里不做解释)
+首先，刚开始电脑是没有IP地址的，这个时候电脑会生成一个DHCP请求报文，这个报文是一个UDP报文，目的端口为67，源端口为68。这个UDP报文被装载到IP报文，有目的IP地址是255.255.255.255，因为电脑不知道可以从哪个IP请求到自己的IP地址，源IP地址是0.0.0.0。再次往下传递就到了链路层，我们这里假设用的是以太网，所以链路层会将网络层的数据包放置在以太网帧中，目的MAC地址为FF:FF:FF:FF:FF:FF，源MAC地址就是你电脑网卡的MAC地址了，这个我们不用关心。这个时候一个广播的报文就做好了
+报文被发送到交换机上，因为这是一个广播报文，因此在交换机上连接的所有设备都应该能收到这个报文，包括了DHCP服务器
+这里说多一句，现阶段，一般DHCP服务器集成在了路由器上，而这个路由器一般来说是我们的网关(至少在我这边是这样的)，具体如何查的，用wireshark抓包看看吧，抓到DHCP包你就知道了(记得先拔网线再插上)
+2 我们假设这个DHCP包已经完整到达了路由，这个路由生成了一个UDP-IP-以太网报文，这个时候数据报里包含了
+ 分配给电脑的IP
+ DNS服务器IP
+ 默认网关路由器IP
+ 网络掩码
+  这个数据包是具有一个准确的目的MAC地址的(也就是电脑的MAC，我们之前发送的报文里有记录)
+所以交换机能够将这个DHCP的响应报文发给电脑
+3 刚插上网线呢，就做了这么多东西了
+这个时候我们打开浏览器，输入网址域名
+这个时候我们需要得到这个域名的IP地址才能与其建立连接
+再次构造一个UDP报文，目的端口为53，源端口任意
+封装到IP数据包，源和目的IP地址在上面已经得到了，填上
+到了链路层需要两个MAC地址，好像我们只有自己的MAC地址，目的MAC地址未知
+这个时候电脑会生成一个ARP报文寻找默认网关的MAC地址(这个就不详细说了)
+关于DNS报文的所有要的东西都齐全了，发送DNS报文
+4 一般来说，常用的域名的IP都会存储在DNS缓存里，因此会比较快速
+关于更多的DNS相关的，不在这次范围内
+因此我们假设已经在某DNS服务器上拿到了DNS回答报文，这个报文就包括了我们要访问的URL的IP
+5 这个时候电脑以及具备和远程的服务器建立TCP连接了
+首先先是TCP的三次握手，三次握手在别的文章里讲到
+握手成功后，发送请求报文，经过互联网路由器的一系列转发到达了相应的服务器
+服务器收到了电脑发送的请求，并做出相应的处理，将结果写入响应报文，按照原来的TCP连接返回给电脑
+6 电脑的浏览器通过处理渲染以及加载就呈现出了看到的网页……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/" title="Leetcode 108" >Leetcode 108</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/" title="Leetcode 107" >Leetcode 107</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/" title="Leetcode 104" >Leetcode 104</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/" title="Leetcode 101" >Leetcode 101</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/">阅读全文</a></p>
                         </article>
                     
 
@@ -513,6 +414,18 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
         <a href="https://wushaoqiang.github.io/page/19/">19</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/20/">20</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/21/">21</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/22/">22</a>
+    </li>
+    
 
     
     <li class="next">
@@ -541,43 +454,43 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -602,6 +515,10 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -614,7 +531,7 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -670,6 +587,10 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -694,6 +615,8 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -705,6 +628,8 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -748,6 +673,8 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -759,6 +686,8 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     

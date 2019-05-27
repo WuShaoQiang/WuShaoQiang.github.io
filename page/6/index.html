@@ -68,34 +68,125 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/" title="Algorithm 二分查找" >Algorithm 二分查找</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/" title="Leetcode 409" >Leetcode 409</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月5日
+                                2019年5月15日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                 递归式 func binarySearch(arr []int,left,right,target int) int{ if left &lt;= right { mid := (left + right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target{ return binarySearch(arr,left,mid-1,target) } if arr[mid] &lt; target{ return binarySearch(arr,mid+1,right,target) } } return -1 }  非递归式 func binarySearch(arr []int,target int) int{ left := 0 right := len(arr)-1 for left &lt;= right{ mid := (left+right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target { right = mid-1 }else{ left = mid+1 } } return -1 }  ……
+                                题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-slice/" title="Golang Slice底层" >Golang Slice底层</a>
+                                    <a href="https://wushaoqiang.github.io/posts/others/good-resource/" title="Good Resource" >Good Resource</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月5日
+                                2019年5月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90">资源</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 下面的笔者觉得比较好的一些资源,大多是关于Go和计算机方面的,像stackoverflow这类型知名的就不说了
+数据结构 data structure visualzation
+大牛博客 飞雪无情
+Tony Bai
+legendtkl
+公众号  stormzhang
+ Go语言中文网
+ 纯洁的微笑
+ 架构师之路
+ Go中国
+  开源书籍 Effective Go
+书栈网
+算法题  leetcode
+ 牛客网
+  做简历  超级简历  开源资源  Gopherchina  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/good-resource/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/" title="Data Structure Tree" >Data Structure Tree</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                为了搞明白关于数据库的一些索引结构开的一篇数据结构-树博客
+前言 这只是笔者的一些笔记和觉得不错的教学资源,分享一下
+推荐一个可视化的数据结构网站
+树是一个重要的数据结构,不仅要知道相关概念,建议在leetcode上刷上几十题
+BST BST相信很多人都已经比较了解,不赘述了,说说会有哪些问题
+BST按照不同的插入顺序会有不同的形状,在极端的条件下会变成一个线性链表,这样查找的时间复杂度就变成了O(logN)
+因为查找和插入都相对比较简单,这里就不说了,说说删除的思路
+ 二叉树删除某个叶子节点,就直接删除就好
+ 二叉树删除某个中间节点(包括root节点),则需要一定的操作(建议多在上面推荐的网站上多试几次,就明白了)
+  以要被删除的节点A开始,把它当做root节点(也就是把子树先看做整个树,其它部分先不管)
+往左边找第一个节点B,如果左边不存在节点,直接用A的右节点去代替它
+找到左边第一个节点B后,找基于这个节点的最右节点C(也就是路径是一直往右边走的,不存在往左走一段后再往右)
+如果没有右边节点(一个右子树都没),则直接用刚才找到的节点B去代替它
+如果有右节点C(并且已经按照规则找到最右的),那么我们将用这个结点C去替代它
+如果这个结点C有左节点,那么节点C的父亲节点的右子树会指向C的左节点
+完!
+我相信看到这段文字心态是崩的,再建议一次,用上面的网站去得到图形化的结构
+AVL 参考Youtube学习
+又名(Balanced binary search tree)
+解决了上面BST的问题:容易因为插入顺序问题造成一棵树倾斜(这样就无法得到该有的查询速度)
+先解释一下什么叫平衡(Balanced)
+一颗平衡的数满足这个条件
+ 无论从哪个节点开始数,它的左子树深度和右子树深度的差值的绝对值小于1  因为这个条件的限定,所以即使我们插入顺序比较极端,只要我们实现了AVL Tree,那么它就能自动帮我们平衡
+这里要提醒一点
+ 不是说以前的不平衡树放进去就能平衡,这是要重新一个个插入才能达到这样的效果  所以说,如果以前的二叉树要转为AVL树,需要将二叉树的值重新插入一遍
+这里再提醒一个点,我们所有的反转操作(rotation)都是只看三个节点
+进入正题
+1 \ 2 \ 3  这样的一个树就是不平衡的,因为从结点1看来,左子树的深度为0,右子树的深度为2,因此|0-2|&lt;=1不成立
+这种情况就是RR-imbalanced,需要做的操作叫RR-rotation(RR:Right of right)
+变成
+ 2 / \ 1 3  再复杂一点就是这也(注意focus三个节点就好)
+ 6 / \ 4 7 / \ 2 5 / \ 1 3  这里我要再说明一点……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月13日
                             </date>
                             
                             <div class="post-meta">
@@ -106,223 +197,224 @@
                             </div>
                             
                             <div class="post-content">
-                                参考 golang blog
-之前一直对slice有一定的误解
-误解  以为是引用传递
- 以为子函数改变切片，主函数会跟着变
- 以为扩容只是简单的内存扩大
-  开始 我们可以把byte的slice比喻成
-type sliceHeader struct { Length int Capacity int ZerothElement *byte }   slice的传递是值传递，类似一个结构体的传递  这意味着，我们把一个slice传入到函数里，在主函数上的slice可能是不变的
-为什么说可能，我们来看一下情况
-值传递 发生扩容 这种情况下，切片所指向的数组发生变化，因此和原来的那块内存失去了联系
-长度发生改变 在子函数里面，切片长度发生改变并不会影响主函数切片的长度(值传递)
-同理容量也是
-唯一造成影响 所以唯一能够在子函数里面影响主函数切片的方法只有一种
-就是指向的数据数组，子函数修改了相同内存空间的数组，主函数切片也会跟着改变(只有不扩容的情况下才会维持同一个数组内存地址)
-小结 不要认为切片是引用传递(很多博客为了方便解释会这样说)，它们唯一能够达到这个效果的情况是共用同一个数组，只要对切片底层认识够深就不会被这个困惑
-记住切片是值传递
-切片指针传递 我们也可以传递一个切片的指针，这个时候类似于传入一个指向结构体的指针
-注意指针
-这个指针并不是说数组数据的指针，而是指向这个切片结构体的指针
-这个时候和上面的值传递就有很大的不同了
-长度、容量、数组指针发生改变 因为是指针传递，改变这个切片的任何东西都会影响到主函数的切片，因此无论是长度发生改变、扩容导致容量发生改变、扩容导致数组指针发生改变，主函数的切片都能看见这些改变
- 切片在扩容的时候，指针会发生改变(以前的数据会复制到新的内存上，新的内存能够存储更多数据)
- 在容量大于长度的时候，不会进行扩容
-  小结 对切片进行指针传递才是真正的引用传递，所有的改变都不会产生新的切片变量
-用途 一般来说我们都会选择使用值传递，我们只要看什么时候需要用指针传递
- 当你不清除一个切片到程序最后有多少个元素(也就是无法提前估计容量)，但是你又需要把所有结果放入这个切片，这个时候要用指针传递(这里说的是传入给函数参数)  为什么呢？
-由于切片扩容的时候，改变了数据的指向。值传递切片不会因为子函数改变了指向而改变指向(事实上我们需要改变指向)
-给个例子吧
-这是一个二叉树所有根节点到叶子节点路径的程序
-type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
+                                这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
+下面是一些我觉得有借鉴价值的东西
+这里是如何查看一个coverage
+// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
+func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-slice/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/" title="Leetcode 242" >Leetcode 242</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月11日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two strings s and t , write a function to determine if t is an anagram of s. Example 1: Input: s = &quot;anagram&quot;, t = &quot;nagaram&quot; Output: true Example 2: Input: s = &quot;rat&quot;, t = &quot;car&quot; Output: false Note: You may assume the string contains only lowercase alphabets. Follow up: What if the inputs contain unicode characters? How would you adapt your solution to such case?……
+                                总结一下最近在配置MongoDB时遇到的坑吧
+首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
+嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
+直接下载tar包 解压后,要将/bin添加到环境变量
+然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
+这里是我初步的一个配置文件
+# mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/" title="Leetcode 237" >Leetcode 237</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/" title="Mongodb Role" >Mongodb Role</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月11日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&gt; 1 -&gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.……
+                                参照 User Management Methods
+build-in role
+这篇文章主要介绍一下关于role的概念,希望读者还是以官网为主,本文为辅
+简介 毫无以为,设置role是为了方便管理权限问题,保证数据库的一个安全使用(不然谁都可以删库跑路那还怎么搞)
+所以这也算是一个很必要知道的东西
+本文只讨论build-in role,不讨论自己设计的role
+笔者会一一尝试每一个role
+首先 MongoDB对普通的数据库只能添加database user and database administration的role
+对admin数据库,则可以添加任何其它类型的role
+Database User Role read 简单来说就是只提供对某个数据库读的权利(细节可以上官网上看具体描述)
+例如db.collections.find()
+我们如何添加呢,这里简单讲一下,后面的都一样
+use admin //进入admin database db.createUser({user:&quot;%s&quot;,pwd:&quot;%s&quot;,roles:[{role:&quot;read&quot;,db:&quot;%s&quot;}]})  其中%s是大家自己选择的意思
+readWrite 同上多了写的权限
+Database Administration Roles dbAdmin 提供权限运行管理类的任务
+例如schema-related tasks,indexing and gathering statistics
+但是这个role不能够管理user and role management
+userAdmin 提供能够在当前database修改roles和users的权利
+注意:这样的一个权限代表着它是这个database的superuser,如果在admin database上设置了这种权限意味着间接提供了超级权限(可以看到集群的数据库了)
+所以用这个权限的时候要小心点
+dbOwner 这个就集成了readWrite,dbAdmin and userAdmin
+Cluster Administration Roles 由于笔者对集群化了解还比较浅薄,这里就直接做一些简单翻译
+这些administration就不像之前那样是指定某一个数据库了,这是管理整个系统的role
+clusterAdmin 这是cluster的最高权限,结合了clusterManager,clusterMonitor,hostManager,additionally dropDatabase action
+这是一个可以删库的权限,可见其权限很高了吧……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/" title="Leetcode 235" >Leetcode 235</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/" title="Golang Module" >Golang Module</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月10日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.……
+                                在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
+不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
+不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
+因为go module对版本有着严格的控制,因此如果我们按照同样的方法去github clone一份的话,就没有这么方便了
+爽的地方 可能这个我认为好的地方,也有人认为不好,就是它把所有的package存放在了$GOPATH/pkg/mod里面了,在以前,我基本都是直接go get到src上的,所以整个src的文件夹都是库
+这样一来,可以让src整洁很多吧
+当然还不止一些,如果当上面关系下载包的问题被解决了,也就意味着,下载别人的代码,即使本地不存在它的依赖,也可以一键运行了?
+如何解决下载问题 goproxy &ndash;最简单的方法
+通过他人做好的一个代理,之后对包的请求都会经过这个代理,但是无法下载私密仓库(也就是没有认证功能)
+athens &ndash;复杂点但全面的方法
+这个是微软大力支持的一个开源项目,规模和功能什么的都比上面的多,但是现在还没有v1版本
+对我来说,我更多的还是在github上下载公共仓库,所以,先用第一个吧
+好,万一哪天代理不好用了,那还有一种比较难受的方法
+在go.mod里面用replace替换下载的目的地
+一些简单介绍 要启用module模式,需要
+export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是方便了,但我感觉有也不错)
+如果打开了module模式,那么程序在寻找包的依赖就不再是在GOPATH/src上找了,而是在GOPATH/pkg/mod
+如果想要查看一个程序的所有module依赖
+go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
+go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/" title="Leetcode 234" >Leetcode 234</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月10日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a singly linked list, determine if it is a palindrome. Example 1: Input: 1-&gt;2 Output: false Example 2: Input: 1-&gt;2-&gt;2-&gt;1 Output: true Follow up: Could you do it in O(n) time and O(1) space?  我的解答 如果不限定空间复杂度
-func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &lt; l/2; i++ { if v[i] !……
+                                简单收集一些基本操作,作为一个笔记查找
+参考官方文章
+package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/" title="Leetcode 231" >Leetcode 231</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月10日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
-最优解答 无……
+                                原文
+Flexible Schema 不像SQL的数据库一样,Mongodb不需要我们准确定义一个数据格式的规范
+也就是说,一个collection里面的document不一定要每个字段都一样,我们也可以实时的更新document的字段(增加或减少)
+当然,有些时候为了让数据保持统一,Mongodb也可以让我们自定义collection的validation
+Document structure  how the application represents relationships between data
+ Embedded Data 这是官方推荐的一种数据结构
+ For many use cases in MongoDB, the denormalized data model is optimal.
+  This data model facilitates atomic operations.
+ 当一个写操作(insertOne or insertMany),对每一个document的修改都是atomic,但是并不是每一次改一个document
+References 这种就又是关系型了
+Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使用capped collection
+如果是侧重全局数据的读取 &ndash;使用索引会增加性能
+Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/" title="Leetcode 226" >Leetcode 226</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月10日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.……
+                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
+提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
+如果是还未创建的collection
+ use db.createCollection() with the validator option.
+ 如果是已经创建了的collection
+ use collMod command with the validator option.
+ 这里还提供了两个options
+validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
+ use the $jsonSchema operator in your validator expression.
+ 官网例子
+db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/" title="Leetcode 219" >Leetcode 219</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/" title="Leetcode 217" >Leetcode 217</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
                         </article>
                     
 
@@ -413,6 +505,18 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
         <a href="https://wushaoqiang.github.io/page/19/">19</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/20/">20</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/21/">21</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/22/">22</a>
+    </li>
+    
 
     
     <li class="next">
@@ -441,43 +545,43 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -502,6 +606,10 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -514,7 +622,7 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -570,6 +678,10 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -594,6 +706,8 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -605,6 +719,8 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -648,6 +764,8 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -659,6 +777,8 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     

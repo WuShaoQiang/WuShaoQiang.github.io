@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strings on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Strings/</link>
+    <description>Recent content in Strings on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 May 2019 21:44:51 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Strings/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Leetcode 561</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-561/</link>
+      <pubDate>Mon, 27 May 2019 21:44:51 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-561/</guid>
+      <description> 题目 我的解答 最优解答 难疑点&amp;amp;核心 </description>
+    </item>
+    
+    <item>
+      <title>Leetcode 925</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-925/</link>
+      <pubDate>Sun, 26 May 2019 21:54:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-925/</guid>
+      <description>题目 Your friend is typing his name into a keyboard. Sometimes, when typing a character c, the key might get long pressed, and the character will be typed 1 or more times. You examine the typed characters of the keyboard. Return True if it is possible that it was your friends name, with some characters (possibly none) being long pressed. Example 1: Input: name = &amp;quot;alex&amp;quot;, typed = &amp;quot;aaleex&amp;quot; Output: true Explanation: &#39;a&#39; and &#39;e&#39; in &#39;alex&#39; were long pressed.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 917</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-917/</link>
+      <pubDate>Sun, 26 May 2019 20:37:25 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-917/</guid>
+      <description>题目 Given a string S, return the &amp;quot;reversed&amp;quot; string where all characters that are not a letter stay in the same place, and all letters reverse their positions. Example 1: Input: &amp;quot;ab-cd&amp;quot; Output: &amp;quot;dc-ba&amp;quot; Example 2: Input: &amp;quot;a-bC-dEf-ghIj&amp;quot; Output: &amp;quot;j-Ih-gfE-dCba&amp;quot; Example 3: Input: &amp;quot;Test1ng-Leet=code-Q!&amp;quot; Output: &amp;quot;Qedo1ct-eeLg=ntse-T!&amp;quot; Note: S.length &amp;lt;= 100 33 &amp;lt;= S[i].ASCIIcode &amp;lt;= 122 S doesn&#39;t contain \ or &amp;quot;  我的解答 // Runtime: 0 ms, faster than 100.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 859</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-859/</link>
+      <pubDate>Sun, 26 May 2019 20:03:22 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-859/</guid>
+      <description>题目 Given two strings A and B of lowercase letters, return true if and only if we can swap two letters in A so that the result equals B. Example 1: Input: A = &amp;quot;ab&amp;quot;, B = &amp;quot;ba&amp;quot; Output: true Example 2: Input: A = &amp;quot;ab&amp;quot;, B = &amp;quot;ab&amp;quot; Output: false Example 3: Input: A = &amp;quot;aa&amp;quot;, B = &amp;quot;aa&amp;quot; Output: true Example 4: Input: A = &amp;quot;aaaaaaabc&amp;quot;, B = &amp;quot;aaaaaaacb&amp;quot; Output: true Example 5: Input: A = &amp;quot;&amp;quot;, B = &amp;quot;aa&amp;quot; Output: false Note: 0 &amp;lt;= A.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 819</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-819/</link>
+      <pubDate>Sun, 26 May 2019 19:37:16 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-819/</guid>
+      <description>题目 Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words. It is guaranteed there is at least one word that isn&#39;t banned, and that the answer is unique. Words in the list of banned words are given in lowercase, and free of punctuation. Words in the paragraph are not case sensitive. The answer is in lowercase.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 804</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-804/</link>
+      <pubDate>Sun, 26 May 2019 17:40:09 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-804/</guid>
+      <description>题目 International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows: &amp;quot;a&amp;quot; maps to &amp;quot;.-&amp;quot;, &amp;quot;b&amp;quot; maps to &amp;quot;-...&amp;quot;, &amp;quot;c&amp;quot; maps to &amp;quot;-.-.&amp;quot;, and so on. For convenience, the full table for the 26 letters of the English alphabet is given below: [&amp;quot;.-&amp;quot;,&amp;quot;-...&amp;quot;,&amp;quot;-.-.&amp;quot;,&amp;quot;-..&amp;quot;,&amp;quot;.&amp;quot;,&amp;quot;..-.&amp;quot;,&amp;quot;--.&amp;quot;,&amp;quot;....&amp;quot;,&amp;quot;..&amp;quot;,&amp;quot;.---&amp;quot;,&amp;quot;-.-&amp;quot;,&amp;quot;.-..&amp;quot;,&amp;quot;--&amp;quot;,&amp;quot;-.&amp;quot;,&amp;quot;---&amp;quot;,&amp;quot;.--.&amp;quot;,&amp;quot;--.-&amp;quot;,&amp;quot;.-.&amp;quot;,&amp;quot;...&amp;quot;,&amp;quot;-&amp;quot;,&amp;quot;..-&amp;quot;,&amp;quot;...-&amp;quot;,&amp;quot;.--&amp;quot;,&amp;quot;-..-&amp;quot;,&amp;quot;-.--&amp;quot;,&amp;quot;--..&amp;quot;] Now, given a list of words, each word can be written as a concatenation of the Morse code of each letter.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 788</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-788/</link>
+      <pubDate>Sun, 26 May 2019 17:08:31 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-788/</guid>
+      <description>题目 X is a good number if after rotating each digit individually by 180 degrees, we get a valid number that is different from X. Each digit must be rotated - we cannot choose to leave it alone. A number is valid if each digit remains a digit after rotation. 0, 1, and 8 rotate to themselves; 2 and 5 rotate to each other; 6 and 9 rotate to each other, and the rest of the numbers do not rotate to any other number and become invalid.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 709</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-709/</link>
+      <pubDate>Sun, 26 May 2019 16:56:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-709/</guid>
+      <description>题目 Implement function ToLowerCase() that has a string parameter str, and returns the same string in lowercase. Example 1: Input: &amp;quot;Hello&amp;quot; Output: &amp;quot;hello&amp;quot; Example 2: Input: &amp;quot;here&amp;quot; Output: &amp;quot;here&amp;quot; Example 3: Input: &amp;quot;LOVELY&amp;quot; Output: &amp;quot;lovely&amp;quot;  我的解答 // Runtime: 0 ms, faster than 100.00% of Go online submissions for To Lower Case. // Memory Usage: 1.9 MB, less than 56.74% of Go online submissions for To Lower Case. func toLowerCase(str string) string { dis := byte(32) b := []byte(str) for i := 0; i &amp;lt; len(b); i++ { if b[i] &amp;gt;= &#39;A&#39; &amp;amp;&amp;amp; b[i] &amp;lt;= &#39;Z&#39; { b[i] += dis } } return string(b) }  比较简单</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 696</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-696/</link>
+      <pubDate>Sun, 26 May 2019 16:25:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-696/</guid>
+      <description>题目 Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0&#39;s and 1&#39;s, and all the 0&#39;s and all the 1&#39;s in these substrings are grouped consecutively. Substrings that occur multiple times are counted the number of times they occur. Example 1: Input: &amp;quot;00110011&amp;quot; Output: 6 Explanation: There are 6 substrings that have equal number of consecutive 1&#39;s and 0&#39;s: &amp;quot;0011&amp;quot;, &amp;quot;01&amp;quot;, &amp;quot;1100&amp;quot;, &amp;quot;10&amp;quot;, &amp;quot;0011&amp;quot;, and &amp;quot;01&amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 686</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-686/</link>
+      <pubDate>Sun, 26 May 2019 10:44:40 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-686/</guid>
+      <description>题目 Given two strings A and B, find the minimum number of times A has to be repeated such that B is a substring of it. If no such solution, return -1. For example, with A = &amp;quot;abcd&amp;quot; and B = &amp;quot;cdabcdab&amp;quot;. Return 3, because by repeating A three times (“abcdabcdabcd”), B is a substring of it; and B is not a substring of A repeated two times (&amp;quot;abcdabcd&amp;quot;). Note: The length of A and B will be between 1 and 10000.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 680</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-680/</link>
+      <pubDate>Sun, 26 May 2019 10:12:36 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-680/</guid>
+      <description>题目  Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome. Example 1: Input: &amp;quot;aba&amp;quot; Output: True Example 2: Input: &amp;quot;abca&amp;quot; Output: True Explanation: You could delete the character &#39;c&#39;. Note: The string will only contain lowercase characters a-z. The maximum length of the string is 50000.  我的解答 // Runtime: 36 ms, faster than 6.57% of Go online submissions for Valid Palindrome II.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 657</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-657/</link>
+      <pubDate>Sun, 26 May 2019 10:01:22 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-657/</guid>
+      <description>题目 There is a robot starting at position (0, 0), the origin, on a 2D plane. Given a sequence of its moves, judge if this robot ends up at (0, 0) after it completes its moves. The move sequence is represented by a string, and the character moves[i] represents its ith move. Valid moves are R (right), L (left), U (up), and D (down). If the robot returns to the origin after it finishes all of its moves, return true.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 557</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-557/</link>
+      <pubDate>Sun, 26 May 2019 09:33:25 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-557/</guid>
+      <description>题目 Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order. Example 1: Input: &amp;quot;Let&#39;s take LeetCode contest&amp;quot; Output: &amp;quot;s&#39;teL ekat edoCteeL tsetnoc&amp;quot; Note: In the string, each word is separated by single space and there will not be any extra space in the string  我的解答 // Runtime: 8 ms, faster than 75.26% of Go online submissions for Reverse Words in a String III.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 551</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-551/</link>
+      <pubDate>Sun, 26 May 2019 00:12:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-551/</guid>
+      <description>题目 You are given a string representing an attendance record for a student. The record only contains the following three characters: &#39;A&#39; : Absent. &#39;L&#39; : Late. &#39;P&#39; : Present. A student could be rewarded if his attendance record doesn&#39;t contain more than one &#39;A&#39; (absent) or more than two continuous &#39;L&#39; (late). You need to return whether the student could be rewarded according to his attendance record. Example 1: Input: &amp;quot;PPALLP&amp;quot; Output: True Example 2: Input: &amp;quot;PPALLL&amp;quot; Output: False  我的解答 // Runtime: 0 ms, faster than 100.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 541</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-541/</link>
+      <pubDate>Sat, 25 May 2019 23:21:26 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-541/</guid>
+      <description>题目  Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original. Example: Input: s = &amp;quot;abcdefg&amp;quot;, k = 2 Output: &amp;quot;bacdfeg&amp;quot; Restrictions: The string consists of lower English letters only.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 521</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-521/</link>
+      <pubDate>Sat, 25 May 2019 23:00:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-521/</guid>
+      <description>题目 Given a group of two strings, you need to find the longest uncommon subsequence of this group of two strings. The longest uncommon subsequence is defined as the longest subsequence of one of these strings and this subsequence should not be any subsequence of the other strings. A subsequence is a sequence that can be derived from one sequence by deleting some characters without changing the order of the remaining elements.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 520</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-520/</link>
+      <pubDate>Sat, 25 May 2019 17:21:45 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-520/</guid>
+      <description>题目 Given a word, you need to judge whether the usage of capitals in it is right or not. We define the usage of capitals in a word to be right when one of the following cases holds: All letters in this word are capitals, like &amp;quot;USA&amp;quot;. All letters in this word are not capitals, like &amp;quot;leetcode&amp;quot;. Only the first letter in this word is capital, like &amp;quot;Google&amp;quot;. Otherwise, we define that this word doesn&#39;t use capitals in a right way.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 459</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-459/</link>
+      <pubDate>Sat, 25 May 2019 14:06:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-459/</guid>
+      <description>题目 Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000. Example 1: Input: &amp;quot;abab&amp;quot; Output: True Explanation: It&#39;s the substring &amp;quot;ab&amp;quot; twice. Example 2: Input: &amp;quot;aba&amp;quot; Output: False Example 3: Input: &amp;quot;abcabcabcabc&amp;quot; Output: True Explanation: It&#39;s the substring &amp;quot;abc&amp;quot; four times.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 443</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-443/</link>
+      <pubDate>Sun, 19 May 2019 21:17:45 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-443/</guid>
+      <description>题目 Given an array of characters, compress it in-place. The length after compression must always be smaller than or equal to the original array. Every element of the array should be a character (not int) of length 1. After you are done modifying the input array in-place, return the new length of the array. Follow up: Could you solve it using only O(1) extra space? Example 1: Input: [&amp;quot;a&amp;quot;,&amp;quot;a&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;c&amp;quot;] Output: Return 6, and the first 6 characters of the input array should be: [&amp;quot;a&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;b&amp;quot;,&amp;quot;2&amp;quot;,&amp;quot;c&amp;quot;,&amp;quot;3&amp;quot;] Explanation: &amp;quot;aa&amp;quot; is replaced by &amp;quot;a2&amp;quot;.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 434</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-434/</link>
+      <pubDate>Sun, 19 May 2019 20:48:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-434/</guid>
+      <description>题目 Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters. Please note that the string does not contain any non-printable characters. Example: Input: &amp;quot;Hello, my name is John&amp;quot; Output: 5  我的解答 // Runtime: 0 ms, faster than 100.00% of Go online submissions for Number of Segments in a String. // Memory Usage: 1.9 MB, less than 70.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode &#34;415&#34;</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-415/</link>
+      <pubDate>Sun, 19 May 2019 19:56:24 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-415/</guid>
+      <description>题目 Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2. Note: The length of both num1 and num2 is &amp;lt; 5100. Both num1 and num2 contains only digits 0-9. Both num1 and num2 does not contain any leading zero. You must not use any built-in BigInteger library or convert the inputs to integer directly.  我的解答 // Runtime: 0 ms, faster than 100.</description>
+    </item>
+    
+  </channel>
+</rss>

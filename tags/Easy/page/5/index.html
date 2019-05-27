@@ -78,11 +78,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/">Leetcode 234</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-292/">Leetcode 292</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -93,20 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a singly linked list, determine if it is a palindrome. Example 1: Input: 1-&gt;2 Output: false Example 2: Input: 1-&gt;2-&gt;2-&gt;1 Output: true Follow up: Could you do it in O(n) time and O(1) space?  我的解答 如果不限定空间复杂度
-func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &lt; l/2; i++ { if v[i] !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/">阅读全文</a></p>
+                                题目 You are playing the following Nim Game with your friend: There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. The one who removes the last stone will be the winner. You will take the first turn to remove the stones. Both of you are very clever and have optimal strategies for the game. Write a function to determine whether you can win the game given the number of stones in the heap.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-292/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">Leetcode 231</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-290/">Leetcode 290</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -117,20 +116,19 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
-最优解答 无……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">阅读全文</a></p>
+                                题目 Given a pattern and a string str, find if str follows the same pattern. Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str. Example 1: Input: pattern = &quot;abba&quot;, str = &quot;dog cat cat dog&quot; Output: true Example 2: Input:pattern = &quot;abba&quot;, str = &quot;dog cat cat fish&quot; Output: false Example 3: Input: pattern = &quot;aaaa&quot;, str = &quot;dog cat cat dog&quot; Output: false Example 4: Input: pattern = &quot;abba&quot;, str = &quot;dog dog dog dog&quot; Output: false Notes: You may assume pattern contains only lowercase letters, and str contains lowercase letters that may be separated by a single space.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-290/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">Leetcode 226</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-283/">Leetcode 283</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -141,19 +139,20 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             </div>
                             
                             <div class="post-content">
-                                题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
+                                题目 Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements. Example: Input: [0,1,0,3,12] Output: [1,3,12,0,0] Note: You must do this in-place without making a copy of the array. Minimize the total number of operations.  我的解答 同样,暴力法也可以做,只是速度非常慢,不建议
+// 将非零的直接往前移，剩下的全部写0 func moveZeroes(nums []int) { i := 0 for j := 0; j &lt; len(nums); j++ { if nums[j] == 0 { continue } nums[i] = nums[j] i++ } // for ; i &lt; len(nums); i++ { // nums[i] = 0 // } copy(nums[i:], make([]int, len(nums)-i)) }  因为我们只需要把非零的保留就已经不会缺失信息了,因此0是无关紧要的……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-283/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">Leetcode 219</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-268/">Leetcode 268</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -164,19 +163,20 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">阅读全文</a></p>
+                                题目 Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. Example 1: Input: [3,0,1] Output: 2 Example 2: Input: [9,6,4,2,3,5,7,0,1] Output: 8 Note: Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?  我的解答 这个之前在一个博客上见到过,所以思路很清晰
+func missingNumber(nums []int) int { total := 0 sum := 0 for i := 0; i &lt; len(nums); i++ { total += i sum += nums[i] } total += len(nums) return total - sum }  直接加起来再相减,得到的数字就是缺少的数字……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-268/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/">Leetcode 217</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-263/">Leetcode 263</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -187,19 +187,19 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/">阅读全文</a></p>
+                                题目 Write a program to check whether a given number is an ugly number. Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. Example 1: Input: 6 Output: true Explanation: 6 = 2 × 3 Example 2: Input: 8 Output: true Explanation: 8 = 2 × 2 × 2 Example 3: Input: 14 Output: false Explanation: 14 is not ugly since it includes another prime factor 7.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-263/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/">Leetcode 206</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-258/">Leetcode 258</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -210,20 +210,21 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             </div>
                             
                             <div class="post-content">
-                                题目 Reverse a singly linked list. Example: Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
-func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/">阅读全文</a></p>
+                                题目 Given a non-negative integer num, repeatedly add all its digits until the result has only one digit. Example: Input: 38 Output: 2 Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it. Follow up: Could you do it without any loop/recursion in O(1) runtime?  我的解答 这道题一开始我是用迭代去写的,运行效率太低,但是思路比较简单,读者可以自己尝试实现
+这里主要讲一下另一种快速的实现
+func addDigits(num int) int { if num &lt;= 9 { return num } if num%9 == 0 { return 9 } return num % 9 }  理论依据是 f(10*x+y) = f(9x+x+y) ?……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-258/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/">Leetcode 205</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/">Leetcode 257</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月4日
+                                2019年5月7日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -234,15 +235,15 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
                             </div>
                             
                             <div class="post-content">
-                                题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &quot;egg&quot;, t = &quot;add&quot; Output: true Example 2: Input: s = &quot;foo&quot;, t = &quot;bar&quot; Output: false Example 3: Input: s = &quot;paper&quot;, t = &quot;title&quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &lt; len(s); i++ { if b, exist := letterMap[s[i]]; !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/">阅读全文</a></p>
+                                题目 Given a binary tree, return all root-to-leaf paths. Note: A leaf is a node with no children. Example: Input: 1 / \ 2 3 \ 5 Output: [&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;] Explanation: All root-to-leaf paths are: 1-&gt;2-&gt;5, 1-&gt;3  我的解答 /** * Definition for a binary tree node. * type TreeNode struct { * Val int * Left *TreeNode * Right *TreeNode * } */ func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-204/">Leetcode 204</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/">Leetcode 242</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -257,16 +258,15 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
                             </div>
                             
                             <div class="post-content">
-                                题目 Count the number of prime numbers less than a non-negative number, n. Example: Input: 10 Output: 4 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.  我的解答 这题跟着评论区的思路做出来的&ndash;厄拉多塞筛法
-func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志哪些0～n-1已经被访问过 flag := make([]bool, n) //因为0,1不是素数，先减去 total := n - 2 // 只需要找n的根号前的素数 for i := 2; i*i &lt; n; i++ { // 访问过 if flag[i] { continue } // 没访问过，这个素数i的所有倍数(在n内)都不是素数，去除 for j := 2; i*j &lt; n; j++ { if !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-204/">阅读全文</a></p>
+                                题目 Given two strings s and t , write a function to determine if t is an anagram of s. Example 1: Input: s = &quot;anagram&quot;, t = &quot;nagaram&quot; Output: true Example 2: Input: s = &quot;rat&quot;, t = &quot;car&quot; Output: false Note: You may assume the string contains only lowercase alphabets. Follow up: What if the inputs contain unicode characters? How would you adapt your solution to such case?……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-203/">Leetcode 203</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/">Leetcode 237</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -281,15 +281,15 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
                             </div>
                             
                             <div class="post-content">
-                                题目 Remove all elements from a linked list of integers that have value val. Example: Input: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6 Output: 1-&gt;2-&gt;3-&gt;4-&gt;5  我的解答 func removeElements(head *ListNode, val int) *ListNode { for head != nil &amp;&amp; head.Val == val { head = head.Next } if head == nil { return head } tmp := head for tmp.Next != nil { if tmp.Next.Val == val { tmp.Next = tmp.Next.Next } else { tmp = tmp.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-203/">阅读全文</a></p>
+                                题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&gt; 1 -&gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-202/">Leetcode 202</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">Leetcode 235</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -304,8 +304,8 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
                             </div>
                             
                             <div class="post-content">
-                                题目 Write an algorithm to determine if a number is &quot;happy&quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-202/">阅读全文</a></p>
+                                题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -361,6 +361,10 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
         <a href="https://wushaoqiang.github.io/tags/Easy/page/10/">10</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Easy/page/11/">11</a>
+    </li>
+    
 
     
     <li class="next">
@@ -389,43 +393,43 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -450,6 +454,10 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -462,7 +470,7 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -518,6 +526,10 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -542,6 +554,8 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -553,6 +567,8 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -596,6 +612,8 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -607,6 +625,8 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     

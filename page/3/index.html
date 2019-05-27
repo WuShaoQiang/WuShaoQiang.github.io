@@ -68,207 +68,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/" title="Golang Module" >Golang Module</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-520/" title="Leetcode 520" >Leetcode 520</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
-不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
-不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
-因为go module对版本有着严格的控制,因此如果我们按照同样的方法去github clone一份的话,就没有这么方便了
-爽的地方 可能这个我认为好的地方,也有人认为不好,就是它把所有的package存放在了$GOPATH/pkg/mod里面了,在以前,我基本都是直接go get到src上的,所以整个src的文件夹都是库
-这样一来,可以让src整洁很多吧
-当然还不止一些,如果当上面关系下载包的问题被解决了,也就意味着,下载别人的代码,即使本地不存在它的依赖,也可以一键运行了?
-如何解决下载问题 goproxy &ndash;最简单的方法
-通过他人做好的一个代理,之后对包的请求都会经过这个代理,但是无法下载私密仓库(也就是没有认证功能)
-athens &ndash;复杂点但全面的方法
-这个是微软大力支持的一个开源项目,规模和功能什么的都比上面的多,但是现在还没有v1版本
-对我来说,我更多的还是在github上下载公共仓库,所以,先用第一个吧
-好,万一哪天代理不好用了,那还有一种比较难受的方法
-在go.mod里面用replace替换下载的目的地
-一些简单介绍 要启用module模式,需要
-export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是方便了,但我感觉有也不错)
-如果打开了module模式,那么程序在寻找包的依赖就不再是在GOPATH/src上找了,而是在GOPATH/pkg/mod
-如果想要查看一个程序的所有module依赖
-go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
-go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                简单收集一些基本操作,作为一个笔记查找
-参考官方文章
-package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                原文
-Flexible Schema 不像SQL的数据库一样,Mongodb不需要我们准确定义一个数据格式的规范
-也就是说,一个collection里面的document不一定要每个字段都一样,我们也可以实时的更新document的字段(增加或减少)
-当然,有些时候为了让数据保持统一,Mongodb也可以让我们自定义collection的validation
-Document structure  how the application represents relationships between data
- Embedded Data 这是官方推荐的一种数据结构
- For many use cases in MongoDB, the denormalized data model is optimal.
-  This data model facilitates atomic operations.
- 当一个写操作(insertOne or insertMany),对每一个document的修改都是atomic,但是并不是每一次改一个document
-References 这种就又是关系型了
-Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使用capped collection
-如果是侧重全局数据的读取 &ndash;使用索引会增加性能
-Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
-提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
-如果是还未创建的collection
- use db.createCollection() with the validator option.
- 如果是已经创建了的collection
- use collMod command with the validator option.
- 这里还提供了两个options
-validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
- use the $jsonSchema operator in your validator expression.
- 官网例子
-db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &quot;D&quot; } ) // selects from the inventory collection all documents where the status equals &quot;D&quot; db.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/" title="SQL vs NoSQL" >SQL vs NoSQL</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月9日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                花了点时间去了解了一下NoSQL,总结一下一些概念
-SQL: Strcuture Query Language
-NoSQL: Not Only SQL
-一些概念 ACID 这是关系型数据库遵循的法则
-A: Atomatic -all or nothing,要么全部完成,要么回滚什么都不做 C: Consistancy -一致性,系统就算是并发多个的,也必须如同串行事务一样 I: Isolation -用于竟态保护,并行安全,确保只有一个事务在使用系统 D: Durability -once executed, data is immediately saved  CAP 这是Eric Brewer说的,三个指标不可能同时做到,这就是CAP定理
-Consistency 一致性 Availablility 可用性 Partition tolerance 分区容错  在分布式服务上,必须要满足P,所以只剩下了C和A选
-最常见的是AP组合,一致性靠一个时间窗口达到
-因为NoSQL常用在分布式系统上,所以这个概念也非常重要
-SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能够往table里添加固定的结构数据
- 优点:开发者知道要往table里面添加什么值,已经清楚table里面有什么具体的field
- 缺点:随着业务需求,可能对结构会有所变化,变化麻烦
-  NoSQL没有固定的collection字段,collection下面是document(一般是json),document里面的数据可以拥有不同的字段
- 优点和缺点刚好和上面相反  关系(有利有弊) SQL通过table之间的关系来达到分布式数据
- 优点:通过一个table将数据连接起来,没有过多的冗余数据
- 缺点:对分布式不友好,并且一旦关系多了,会产生混乱
-  NoSQL没有关系,全部都是直接存储……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/" title="Leetcode 405" >Leetcode 405</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月25日
                             </date>
                             
                             <div class="post-meta">
@@ -279,19 +83,19 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
                             </div>
                             
                             <div class="post-content">
-                                题目  Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used. Note: All letters in hexadecimal (a-f) must be in lowercase. The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, the first character in the hexadecimal string will not be the zero character. The given number is guaranteed to fit within the range of a 32-bit signed integer.……
+                                题目 Given a word, you need to judge whether the usage of capitals in it is right or not. We define the usage of capitals in a word to be right when one of the following cases holds: All letters in this word are capitals, like &quot;USA&quot;. All letters in this word are not capitals, like &quot;leetcode&quot;. Only the first letter in this word is capital, like &quot;Google&quot;. Otherwise, we define that this word doesn't use capitals in a right way.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-520/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/" title="Leetcode 404" >Leetcode 404</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-459/" title="Leetcode 459" >Leetcode 459</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月25日
                             </date>
                             
                             <div class="post-meta">
@@ -302,20 +106,45 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
                             </div>
                             
                             <div class="post-content">
-                                题目 Find the sum of all left leaves in a given binary tree. Example: 3 / \ 9 20 / \ 15 7 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.  我的解答 这个题参考了一下别人的思路写出来
-func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } search(root, false, &amp;sum) return sum } func search(root *TreeNode, flag bool, sum *int) { if root == nil { return } if flag &amp;&amp; root.……
+                                题目 Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000. Example 1: Input: &quot;abab&quot; Output: True Explanation: It's the substring &quot;ab&quot; twice. Example 2: Input: &quot;aba&quot; Output: False Example 3: Input: &quot;abcabcabcabc&quot; Output: True Explanation: It's the substring &quot;abc&quot; four times.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-459/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/" title="Leetcode 400" >Leetcode 400</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/html-basic/" title="HTML Basic" >HTML Basic</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 Tag &lt;!DOCTYPE html&gt; &lt;html&gt;&lt;/html&gt; &lt;head&gt;&lt;head&gt; 通常是放title、meta、link、script、style的地方 &lt;title&gt;&lt;/title&gt; 网页的标题 &lt;body&gt;&lt;/body&gt; 网页的主体 &lt;h1&gt;&lt;/h1&gt; 标题h1-h6 &lt;p&gt;&lt;\p&gt; 段落 &lt;hr&gt; 分割线 &lt;br&gt; line break &lt;pre&gt;&lt;/pre&gt; 这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text)  Attr Some suggestions you should know:
+ HTML5 does not require lowercase attribute name, but everybody should use lowercase in HTML
+ HTML5 does not require quotes around attribute values, but everybody should quote attribute values
+  genaral style examples : style=&quot;font-family:arial;color:red;font-size:20px;&quot; style=&quot;text-align:center&quot; title: The value of the title attribute will be displayed as a tooltip when you mouse over the tag  a href: usaully a link  img src: image source location alt: when the image can not be displayed, it will show some text for an image  html html --&gt; lang  input input --&gt; diabled  Property style background-color color //font color font-family font-size text-align //horizontal text alignment  Text Formatting &lt;b&gt; - Bold text &lt;strong&gt; - Important text &lt;i&gt; - Italic text &lt;em&gt; - Emphasized text &lt;mark&gt; - Marked text &lt;small&gt; - Small text &lt;del&gt; - Deleted text &lt;ins&gt; - Inserted text &lt;sub&gt; - Subscript text &lt;sup&gt; - Superscript text  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/html-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-443/" title="Leetcode 443" >Leetcode 443</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta">
@@ -326,19 +155,19 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             </div>
                             
                             <div class="post-content">
-                                题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .……
+                                题目 Given an array of characters, compress it in-place. The length after compression must always be smaller than or equal to the original array. Every element of the array should be a character (not int) of length 1. After you are done modifying the input array in-place, return the new length of the array. Follow up: Could you solve it using only O(1) extra space? Example 1: Input: [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;] Output: Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;] Explanation: &quot;aa&quot; is replaced by &quot;a2&quot;.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-443/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/" title="Leetcode 389" >Leetcode 389</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-434/" title="Leetcode 434" >Leetcode 434</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta">
@@ -349,13 +178,124 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             </div>
                             
                             <div class="post-content">
-                                题目  Given two strings s and t which consist of only lowercase letters. String t is generated by random shuffling string s and then add one more letter at a random position. Find the letter that was added in t. Example: Input: s = &quot;abcd&quot; t = &quot;abcde&quot; Output: e Explanation: 'e' is the letter that was added.  我的解答 这道题我用了三种方法
- 全部统计,因为只会有一个字符是奇数,所以那个就是新增
- 用t-byte的总和减去s-byte的总和
- 异或,最后剩下那个增加的
-  其中第三种方法最快……
+                                题目 Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters. Please note that the string does not contain any non-printable characters. Example: Input: &quot;Hello, my name is John&quot; Output: 5  我的解答 // Runtime: 0 ms, faster than 100.00% of Go online submissions for Number of Segments in a String. // Memory Usage: 1.9 MB, less than 70.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-434/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-415/" title="Leetcode &#34;415&#34;" >Leetcode &#34;415&#34;</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2. Note: The length of both num1 and num2 is &lt; 5100. Both num1 and num2 contains only digits 0-9. Both num1 and num2 does not contain any leading zero. You must not use any built-in BigInteger library or convert the inputs to integer directly.  我的解答 // Runtime: 0 ms, faster than 100.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-415/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1022/" title="Leetcode 1022" >Leetcode 1022</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, each node has value 0 or 1. Each root-to-leaf path represents a binary number starting with the most significant bit. For example, if the path is 0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1, then this could represent 01101 in binary, which is 13. For all leaves in the tree, consider the numbers represented by the path from the root to that leaf. Return the sum of these numbers.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1022/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-993/" title="Leetcode 993" >Leetcode 993</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1. Two nodes of a binary tree are cousins if they have the same depth, but have different parents. We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree. Return true if and only if the nodes corresponding to the values x and y are cousins.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-993/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-965/" title="Leetcode 965" >Leetcode 965</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 A binary tree is univalued if every node in the tree has the same value. Return true if and only if the given tree is univalued. Example 1: Input: [1,1,1,1,1,null,1] Output: true Example 2: Input: [2,2,2,5,2] Output: false Note: The number of nodes in the given tree will be in the range [1, 100]. Each node's value will be an integer in the range [0, 99].  我的解答 // Runtime: 0 ms, faster than 100.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-965/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-938/" title="Leetcode 938" >Leetcode 938</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月19日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given the root node of a binary search tree, return the sum of values of all nodes with value between L and R (inclusive). The binary search tree is guaranteed to have unique values. Example 1: Input: root = [10,5,15,3,7,null,18], L = 7, R = 15 Output: 32 Example 2: Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10 Output: 23 Note: The number of nodes in the tree is at most 10000.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-938/">阅读全文</a></p>
                         </article>
                     
 
@@ -446,6 +386,18 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
         <a href="https://wushaoqiang.github.io/page/19/">19</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/20/">20</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/21/">21</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/22/">22</a>
+    </li>
+    
 
     
     <li class="next">
@@ -474,43 +426,43 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -535,6 +487,10 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -547,7 +503,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -603,6 +559,10 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -627,6 +587,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -638,6 +600,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -681,6 +645,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -692,6 +658,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     

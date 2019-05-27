@@ -78,11 +78,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/">Leetcode 669</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/">Leetcode 561</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月27日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -93,19 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目  Given a binary search tree and the lowest and highest boundaries as L and R, trim the tree so that all its elements lies in [L, R] (R &gt;= L). You might need to change the root of the tree, so the result should return the new root of the trimmed binary search tree. Example 1: Input: 1 / \ 0 2 L = 1 R = 2 Output: 1 \ 2 Example 2: Input: 3 / \ 0 4 \ 2 / 1 L = 1 R = 3 Output: 3 / 2 / 1  我的解答 // 执行用时 : 32 ms, 在Trim a Binary Search Tree的Go提交中击败了54.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/">阅读全文</a></p>
+                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/">Leetcode 653</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/">Leetcode 532</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月27日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -116,19 +116,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target. Example 1: Input: 5 / \ 3 6 / \ \ 2 4 7 Target = 9 Output: True Example 2: Input: 5 / \ 3 6 / \ \ 2 4 7 Target = 28 Output: False  我的解答 // 第一思路,换成数组,利用双边夹方法 func findTarget(root *TreeNode, k int) bool { if root == nil { return false } res := make([]int, 0) inOrder(root, &amp;res) // 确定首尾索引 head := 0 tail := len(res) - 1 for head &lt; tail { sum := res[head] + res[tail] if sum == k { return true } if sum &gt; k { tail-- } else { head++ } } return false } // 执行用时 : 40 ms, 在Two Sum IV - Input is a BST的Go提交中击败了98.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/">阅读全文</a></p>
+                                题目  Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j), where i and j are both numbers in the array and their absolute difference is k. Example 1: Input: [3, 1, 4, 1, 5], k = 2 Output: 2 Explanation: There are two 2-diff pairs in the array, (1, 3) and (3, 5).……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/">Leetcode 637</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/">Leetcode 509</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月27日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -139,19 +139,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组. 示例 1: 输入: 3 / \ 9 20 / \ 15 7 输出: [3, 14.5, 11] 解释: 第0层的平均值是 3, 第1层是 14.5, 第2层是 11. 因此返回 [3, 14.5, 11]. 注意： 节点值的范围在32位有符号整数范围内。  我的解答 // 执行用时 : 28 ms, 在Average of Levels in Binary Tree的Go提交中击败了97.44% 的用户 // 内存消耗 : 8.1 MB, 在Average of Levels in Binary Tree的Go提交中击败了9.09% 的用户 func averageOfLevels(root *TreeNode) []float64 { if root == nil { return nil } res := make([]float64, 0) // 将第一个点放入队列 quene := []*TreeNode{root} for { // 确定这一次遍历的个数 l := len(quene) sum := 0 // 因为下面有判断quene长度,因此这里不可能为0,所以不用怕除数为0 count := l // 当遍历个数用完的时候表明这一层遍历完了,应当退出循环重新确定下一层 for l &gt; 0 { tmp := quene[l-1] sum += tmp.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/">阅读全文</a></p>
+                                题目 The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is, F(0) = 0, F(1) = 1 F(N) = F(N - 1) + F(N - 2), for N &gt; 1. Given N, calculate F(N). Example 1: Input: 2 Output: 1 Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/">Leetcode 617</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/">Leetcode 485</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月27日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -162,19 +162,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。 你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点。 示例 1: 输入: Tree 1 Tree 2 1 2 / \ / \ 3 2 1 3 / \ \ 5 4 7 输出: 合并后的树: 3 / \ 4 5 / \ \ 5 4 7 注意: 合并必须从两个树的根节点开始。  我的解答 // 执行用时 : 44 ms, 在Merge Two Binary Trees的Go提交中击败了96.46% 的用户 // 内存消耗 : 8.6 MB, 在Merge Two Binary Trees的Go提交中击败了46.94% 的用户 // 第一个想法就是同时遍历两颗树(非递归做法) func mergeTrees(t1 *TreeNode, t2 *TreeNode) *TreeNode { if t1 == nil { return t2 } if t2 == nil { return t1 } // 都不为nil iteration(t1, t2) return t1 } func iteration(t1 *TreeNode, t2 *TreeNode) { // 如果两棵树对应节点都不为nil,直接在t1上的值改变 t1.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/">阅读全文</a></p>
+                                题目 Given a binary array, find the maximum number of consecutive 1s in this array. Example 1: Input: [1,1,0,1,1,1] Output: 3 Explanation: The first two digits or the last three digits are consecutive 1s. The maximum number of consecutive 1s is 3. Note: The input array will only contain 0 and 1. The length of input array is a positive integer and will not exceed 10,000  我的解答 // Runtime: 36 ms, faster than 96.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/">Leetcode 606</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/">Leetcode 448</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月27日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -185,20 +185,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 映射关系的空括号对。 示例 1: 输入: 二叉树: [1,2,3,4] 1 / \ 2 3 / 4 输出: &quot;1(2(4))(3)&quot; 解释: 原本将是“1(2(4)())(3())”， 在你省略所有不必要的空括号对之后， 它将是“1(2(4))(3)”。 示例 2: 输入: 二叉树: [1,2,3,null,4] 1 / \ 2 3 \ 4 输出: &quot;1(2()(4))(3)&quot; 解释: 和第一个示例相似， 除了我们不能省略第一个对括号来中断输入和输出之间的一对一映射关系。  我的解答 一个先序遍历的题目(题目都告诉你了),只是加上了一些感觉很难的括号,其实很简单,先看代码
-// 执行用时 : 40 ms, 在Construct String from Binary Tree的Go提交中击败了18.52% 的用户 // 内存消耗 : 8.8 MB, 在Construct String from Binary Tree的Go提交中击败了26.67% 的用户 func tree2str(t *TreeNode) string { if t == nil{ return &quot;&quot; } return createStr(t) } func createStr(t *TreeNode) string { if t.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/">阅读全文</a></p>
+                                题目 Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once. Find all the elements of [1, n] inclusive that do not appear in this array. Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space. Example: Input: [4,3,2,7,8,2,3,1] Output: [5,6]  我的解答 func findDisappearedNumbers(nums []int) []int { for i := 0; i &lt; len(nums); i++ { if nums[abs(nums[i])-1] &gt; 0 { nums[abs(nums[i])-1] *= -1 } } res := make([]int, 0) for i := 0; i &lt; len(nums); i++ { if nums[i] &gt; 0 { res = append(res, i+1) } } return res } func abs(x int) int { if x &lt; 0 { return -x } return x }  因为数的范围不会超过长度，因此可以用数来表示索引，如果数存在，那么相对应大小的索引置-1(因为数组里面不会有负数，所以可以用来区分)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/">Leetcode 572</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/">Leetcode 925</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月26日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -209,20 +208,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。 示例 1: 给定的树 s: 3 / \ 4 5 / \ 1 2 给定的树 t： 4 / \ 1 2 返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2: 给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2 返回 false。  我的解答 第一个实现
-// 执行用时 : 40 ms, 在Subtree of Another Tree的Go提交中击败了39.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/">阅读全文</a></p>
+                                题目 Your friend is typing his name into a keyboard. Sometimes, when typing a character c, the key might get long pressed, and the character will be typed 1 or more times. You examine the typed characters of the keyboard. Return True if it is possible that it was your friends name, with some characters (possibly none) being long pressed. Example 1: Input: name = &quot;alex&quot;, typed = &quot;aaleex&quot; Output: true Explanation: 'a' and 'e' in 'alex' were long pressed.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/">Leetcode 563</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/">Leetcode 917</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月26日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -233,20 +231,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个二叉树，计算整个树的坡度。 一个树的节点的坡度定义即为，该节点左子树的结点之和和右子树结点之和的差的绝对值。空结点的的坡度是0。 整个树的坡度就是其所有节点的坡度之和。 示例: 输入: 1 / \ 2 3 输出: 1 解释: 结点的坡度 2 : 0 结点的坡度 3 : 0 结点的坡度 1 : |2-3| = 1 树的坡度 : 0 + 0 + 1 = 1 注意: 任何子树的结点的和不会超过32位整数的范围。 坡度的值不会超过32位整数的范围。  我的解答 这道题和543题是基本一样的,只是将直径(与结点数值无关)转换为了与数值有关而已
-func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) return sum } func findWeight(root *TreeNode, sum *int) int { if root == nil { return 0 } left := findWeight(root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/">阅读全文</a></p>
+                                题目 Given a string S, return the &quot;reversed&quot; string where all characters that are not a letter stay in the same place, and all letters reverse their positions. Example 1: Input: &quot;ab-cd&quot; Output: &quot;dc-ba&quot; Example 2: Input: &quot;a-bC-dEf-ghIj&quot; Output: &quot;j-Ih-gfE-dCba&quot; Example 3: Input: &quot;Test1ng-Leet=code-Q!&quot; Output: &quot;Qedo1ct-eeLg=ntse-T!&quot; Note: S.length &lt;= 100 33 &lt;= S[i].ASCIIcode &lt;= 122 S doesn't contain \ or &quot;  我的解答 // Runtime: 0 ms, faster than 100.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/">Leetcode 543</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/">Leetcode 859</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月26日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -257,21 +254,19 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。 示例 : 给定二叉树 1 / \ 2 3 / \ 4 5 返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。 注意：两结点之间的路径长度是以它们之间边的数目表示。  我的解答 这里要注意了,不一定是要经过根节点才会有直径最大
-第一种方法
-// 执行用时 : 28 ms, 在Diameter of Binary Tree的Go提交中击败了11.54% 的用户 // 内存消耗 : 4.5 MB, 在Diameter of Binary Tree的Go提交中击败了95.83% 的用户 func diameterOfBinaryTree(root *TreeNode) int { if root == nil { return 0 } var max int iteration(root, &amp;max) return max } func iteration(root *TreeNode, max *int) { if root !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/">阅读全文</a></p>
+                                题目 Given two strings A and B of lowercase letters, return true if and only if we can swap two letters in A so that the result equals B. Example 1: Input: A = &quot;ab&quot;, B = &quot;ba&quot; Output: true Example 2: Input: A = &quot;ab&quot;, B = &quot;ab&quot; Output: false Example 3: Input: A = &quot;aa&quot;, B = &quot;aa&quot; Output: true Example 4: Input: A = &quot;aaaaaaabc&quot;, B = &quot;aaaaaaacb&quot; Output: true Example 5: Input: A = &quot;&quot;, B = &quot;aa&quot; Output: false Note: 0 &lt;= A.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/">Leetcode 538</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/">Leetcode 819</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月26日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -282,21 +277,19 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。 例如： 输入: 二叉搜索树: 5 / \ 2 13 输出: 转换为累加树: 18 / \ 20 13  我的解答 这个题主要在于发现它的规律,节点所有比自身大的节点到底有哪些
-用树的思想去做会比较麻烦
-// 执行用时 : 540 ms, 在Convert BST to Greater Tree的Go提交中击败了35.56% 的用户 // 内存消耗 : 41.9 MB, 在Convert BST to Greater Tree的Go提交中击败了100.00% 的用户 func convertBST(root *TreeNode) *TreeNode { if root == nil { return nil } orderByIn(root, nil) return root } func orderByIn(root *TreeNode, lastNode *TreeNode) { if root == nil { return } // 表明是有转折点的 // 有转折点的意思是这个节点在某个祖先节点的左子树上(所以要加上这个祖先节点) if lastNode !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/">阅读全文</a></p>
+                                题目 Given a paragraph and a list of banned words, return the most frequent word that is not in the list of banned words. It is guaranteed there is at least one word that isn't banned, and that the answer is unique. Words in the list of banned words are given in lowercase, and free of punctuation. Words in the paragraph are not case sensitive. The answer is in lowercase.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/">Leetcode 530</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/">Leetcode 804</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月26日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -307,9 +300,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个所有节点为非负值的二叉搜索树，求树中任意两节点的差的绝对值的最小值。 示例 : 输入: 1 \ 3 / 2 输出: 1 解释: 最小绝对差为1，其中 2 和 1 的差的绝对值为 1（或者 2 和 3）。 注意: 树中至少有2个节点。  我的解答 这题在做的时候犯困了,把最小值看成最大值,懵了很久
-// 执行用时 : 20 ms, 在Minimum Absolute Difference in BST的Go提交中击败了100.00% 的用户 // 内存消耗 : 6.4 MB, 在Minimum Absolute Difference in BST的Go提交中击败了85.71% 的用户 func getMinimumDifference(root *TreeNode) int { if root == nil { return 0 } res := make([]int, 0) orderByIn(root, &amp;res) // fmt.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/">阅读全文</a></p>
+                                题目 International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows: &quot;a&quot; maps to &quot;.-&quot;, &quot;b&quot; maps to &quot;-...&quot;, &quot;c&quot; maps to &quot;-.-.&quot;, and so on. For convenience, the full table for the 26 letters of the English alphabet is given below: [&quot;.-&quot;,&quot;-...&quot;,&quot;-.-.&quot;,&quot;-..&quot;,&quot;.&quot;,&quot;..-.&quot;,&quot;--.&quot;,&quot;....&quot;,&quot;..&quot;,&quot;.---&quot;,&quot;-.-&quot;,&quot;.-..&quot;,&quot;--&quot;,&quot;-.&quot;,&quot;---&quot;,&quot;.--.&quot;,&quot;--.-&quot;,&quot;.-.&quot;,&quot;...&quot;,&quot;-&quot;,&quot;..-&quot;,&quot;...-&quot;,&quot;.--&quot;,&quot;-..-&quot;,&quot;-.--&quot;,&quot;--..&quot;] Now, given a list of words, each word can be written as a concatenation of the Morse code of each letter.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -361,6 +353,22 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
         <a href="https://wushaoqiang.github.io/categories/Leetcode/page/10/">10</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/11/">11</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/12/">12</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/13/">13</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/14/">14</a>
+    </li>
+    
 
     
     <li class="next">
@@ -389,43 +397,43 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -450,6 +458,10 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -462,7 +474,7 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -518,6 +530,10 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -542,6 +558,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -553,6 +571,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -596,6 +616,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -607,6 +629,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     

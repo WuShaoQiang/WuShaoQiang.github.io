@@ -68,11 +68,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/" title="Golang Interface" >Golang Interface</a>
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-context/" title="Golang Context" >Golang Context</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月20日
+                                2019年4月24日
                             </date>
                             
                             <div class="post-meta">
@@ -83,29 +83,32 @@
                             </div>
                             
                             <div class="post-content">
-                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
- concrete type(具体类型,int,string&hellip;)
- abstract type(抽象类型 io.Writer,io.Reader&hellip;)
-  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
-抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
-具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
-func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
-func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
-这里io.Reader是一个接口，接口里面只要一个函数
-type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
-func (f *File) Read(b []byte) (n int, err error) { if err := f.……
+                                Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
+参考博客理解Go Context机制
+Golang的执行单元是goroutine，main也是一个goroutine
+上下文，上下则是存在上下层的传递，我们在编写Web后端的时候，接收到一个请求可能会执行一些列的goroutine(数据库，业务层处理)来达到并发效果
+这个时候，如果客户端那边取消了呢？如果我们在服务器端检测不到这个信号，那么我们服务器还是会继续服务，直到完成所有服务的时候，发现客户端已经不见了(资源就被浪费了)
+所以我们需要在每一个由Request产生的goroutine里面装一个监控，这个监控会告诉程序客户端是否还在等待返回，如果客户端离开，那么程序立即停止对客户端的服务
+Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) Done() &lt;-chan struct{} Err() error Value(key interface{}) interface{} }   Deadline会返回一个超时时间，Goroutine获得了超时时间后，例如可以对某些io操作设定超时时间。
+ Done方法返回一个信道（channel），当Context被撤销或过期时，该信道是关闭的，即它是一个表示Context是否已关闭的信号。
+ 当Done信道关闭后，Err方法表明Context被撤的原因。
+ Value可以让Goroutine共享一些数据，当然获得数据是协程安全的。但使用这些数据的时候要注意同步，比如返回了一个map，而这个map的读写则要加锁。
+  每当我们处理一个Request的时候，都应该从Request里拿一个Context
+req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
+ 如果Request的context是nil，那么它会返回一个context.Background()
+var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-context/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/" title="Golang Tips" >Golang Tips</a>
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview/" title="Interview" >Interview</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月18日
+                                2019年4月24日
                             </date>
                             
                             <div class="post-meta">
@@ -116,237 +119,236 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
                             </div>
                             
                             <div class="post-content">
-                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
-关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
+                                本文是笔者自己收集他人面经，顺便检查一下自己的知识状况，找目标进一步提升
+go的优势  Go是Google工程师基于现实世界开发经验进行改进的友好型语言
+ 简单明了
+ 容易学习
+ 简单的内置并发
+ 持有现代化标准库
+ 编译快
+ 格式被标准化
+ 较小内存占用
+ 部署独立
+ 支持vendor依赖
+ 兼容性好
+ 商业支持的开源
+  go的调度 这里应该指的是goroutine的调度模式
+读过Go Web编程那本书的人可能知道，go的并发是由线程、处理器、调度器和一个个的goroutine
+简单说一下运行的一些规则
+ 每一个线程里面有一个的协程，从微观角度来看是顺序执行的，但是从宏观角度来看，因为执行速度快，线程里的协程不断切换，因此可以看作是并行
+ 处理器主要就是用来执行goroutine的，它也维护了一个goroutine的队列，里面有在等待的goroutine
+ 只有线程和处理器结合起来才能构造一个goroutine执行环境
+ 调度器，当协程阻塞的时候，会保存上下文，直到下次可以恢复运行
+  这是一些比较浅显运行的规则，如果要深入goroutine的源码分析，推荐一篇文章
+go struct能不能比较 如果是值类型，是可以比较的，比如
+p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Age: 1} if p1 == p2 { fmt.Println(&quot;same&quot;) }  这样是有输出的
+那如果是嵌套呢？也是一样的，只要是具有可比性的，如string,int这些类型，都能直接比较。如果结构体含有引用类型，因为是地址，所以肯定不一样，给个例子……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/" title="Algorithm 排序" >Algorithm 排序</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月15日
+                                2019年4月24日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                排序时间复杂度 堆排序 参考dreamcatcher-cx博客
-最好最坏的平均时间复杂度都为O(NlogN)
-代码 func HeapSortUp(a []int) []int { for i := len(a)/2 - 1; i &gt;= 0; i-- { adjustHeapUp(a, i, len(a)) } for j := len(a) - 1; j &gt; 0; j-- { a[0], a[j] = a[j], a[0] adjustHeapUp(a, 0, j) } return a } func adjustHeapUp(a []int, i int, length int) { tmp := a[i] for k := 2*i + 1; k &lt; length; k = 2*k + 1 { if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] { k++ } if a[k] &gt; tmp { a[i] = a[k] i = k } else { break } } a[i] = tmp }  思路  先将数组变换为一个大顶堆……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/" title="Golang Gin" >Golang Gin</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
-func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
-gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-validation/" title="Golang Validation" >Golang Validation</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Validation项目地址
-创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
- valid.Required(name,&quot;name&quot;)：检验变量不能为空，字符串不能为&quot;&quot;,后面的&quot;name&quot;是用来标识而已
- valid.MaxSize(name,100,&quot;name&quot;)：最大长度
- valid.Range(state,0,1,&quot;state&quot;)：范围
- valid.HasErrors()：这个会返回布尔值，是否有不符合限定的内容
- valid.Errors：这个是一个Error数组，其中Error是这个包自带的，并不是标准库的error
- valid.Min(id,1,&quot;id&quot;)：id最小为1
-  以上这些都返回*Result
-Result方法 我们拿上面一个返回*Result对象做例子
- valid.Required(name,&quot;name&quot;).Message(&quot;name不能为空&quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-validation/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/" title="Golang Build blog with gin" >Golang Build blog with gin</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 Package  ini &mdash;配置文件的读取
- com &mdash;功能性
- validation &mdash;做验证
- jwt-go &mdash;Token
- endless &mdash;服务器热启动
- swag &mdash;API文档
+                                 我们现在接触较多的两种加密方式
+ 对称加密
+ 公钥加密
+  对称加密 利用一样的秘钥，在持有者双方进行加密和解密
+但是第一次建立连接并且传输秘钥的时候不安全(当然可以通过其它方式传输)
+速度快
+公钥加密 用对方的公钥加密，发送给对方，因为只要对方有自己的私钥，因此就算密文半路被拦截，也不会泄露信息
+安全性好，但速度慢
+结合 结合两种加密方式，创建一个既安全又快的连接
+ 利用对方公钥加密对称秘钥，发送给对方
+ 对方收到用自己秘钥解密，得到对称秘钥
+ 双方用对称秘钥进行接下来的通信
   ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/" title="Golang标准库--os" >Golang标准库--os</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/" title="Leetcode 83" >Leetcode 83</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月12日
+                                2019年4月23日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
-bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
-// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
-// Flags to OpenFile wrapping those of the underlying system.……
+                                题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
+最优解答 /** * Definition for singly-linked list.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/" title="Golang Path Problem" >Golang Path Problem</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/" title="Leetcode 70" >Leetcode 70</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月12日
+                                2019年4月23日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
-直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
-filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
-所谓前后是值文件夹的前后
-所以写在程序里面，你在这个目录执行成功了，你退一个目录就不行了，因为这个时候工作路径改变了
-笔者感觉这种方法不安全，或者我们写应用的时候指定要在某某目录执行，我有见过类似的项目
-同一目录下，package都为main，不能调用 如果我们有两个文件，package都为main，比如是这样的
--main.go | -file.go  main.go想调用file.go的函数，会返回未定义的错误
-有两种解决方法
- go install Or go build 转换为二进制文件执行
- go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
-  解决相对路径的最稳的方法 来自外国友人icza……
+                                题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/" title="Leetcode 69" >Leetcode 69</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月12日
+                                2019年4月23日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Favorite">Favorite</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                 Don&rsquo;t assume that you are right, just because nobody has proved you wrong
-The bigger the interface, the weaker the abstraction &ndash;Rob Pike
- ……
+                                题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
+最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &gt; x { i = (i + x/i) / 2 } return i }  数学公式……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/nice-sentences/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/opinion/" title="Opinion" >Opinion</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/" title="Leetcode 67" >Leetcode 67</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年4月12日
+                                2019年4月23日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Opinion">Opinion</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                 关于在百度搜索问题 笔者在很早就体会到一点，百度搜出来的东西，理论价值真的不高
-我开发遇到Bug第一时间去的都是google，基本第一页搞定我的问题
-我在安装东西，工具最基本的使用，我会百度，因为这些东西肯定一大堆人在写
-这也让我开始反思，写博客的人，应该以一种什么样的心态去写呢？
-下面我总结出了两个点
- 理论性较强的文章，应该多权威性的网站或者论坛(比如stackoverflow这类型的)，对比大家的意见，再结合自己对这些的想法和理解，写出一篇有深度的文章，而不仅仅停留在发现问题&ndash;解决问题&ndash;完事
- 工具类型的文章，为了让自己能够在忘记怎么使用某一个工具时翻阅，属于一种笔记类型，不算文章
-  ……
+                                题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &quot;11&quot;, b = &quot;1&quot; 输出: &quot;100&quot; 示例 2: 输入: a = &quot;1010&quot;, b = &quot;1011&quot; 输出: &quot;10101&quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &quot;&quot; if len(a) &gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &gt;= 0; i-- { if i &gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/opinion/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/" title="Leetcode 66" >Leetcode 66</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。 你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321。  我的解答 func plusOne(digits []int) []int { for i := len(digits) - 1; i &gt;= 0; i-- { if digits[i] != 9 { digits[i]++ return digits } digits[i] = 0 } digits = append([]int{1}, digits...) return digits }  比较简单
+最优解答 无
+难疑点&amp;核心 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-58/" title="Leetcode 58" >Leetcode 58</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 题目 给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。 如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例: 输入: &quot;Hello World&quot; 输出: 5  我的解答 func lengthOfLastWord(s string) int { if s == &quot;&quot; { return 0 } if !strings.Contains(s, &quot; &quot;) { return len(s) } s = strings.TrimSpace(s) lastSpaceIndex := strings.LastIndex(s, &quot; &quot;) return len(s) - lastSpaceIndex - 1 }  前面两个判断是为了能够快速判断简单情况
+要注意去掉头尾的空格，不然索引查找会出错
+这里也调用了标准库，可能在算法上不算合规
+最优解答 无
+难疑点&amp;核心  容易把头尾的空格忽略掉  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-58/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-53/" title="Leetcode 53" >Leetcode 53</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4], 输出: 6 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 进阶: 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。  我的解答 func maxSubArray(nums []int) int { if len(nums) == 0 { return 0 } if len(nums) == 1 { return nums[0] } total := nums[0] max := nums[0] for i := 1; i &lt; len(nums); i++ { if total &lt; 0 { total = 0 } total += nums[i] if max &lt; total { max = total } } return max }  暴力法的话，时间复杂度是O(N^2)，这里使用的方法时间复杂度O(N)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-53/">阅读全文</a></p>
                         </article>
                     
 
@@ -437,6 +439,18 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
         <a href="https://wushaoqiang.github.io/page/19/">19</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/20/">20</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/21/">21</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/22/">22</a>
+    </li>
+    
 
     
     <li class="next">
@@ -465,43 +479,43 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-669/" title="Leetcode 669">Leetcode 669</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653">Leetcode 653</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637">Leetcode 637</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617">Leetcode 617</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606">Leetcode 606</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572">Leetcode 572</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563">Leetcode 563</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543">Leetcode 543</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538">Leetcode 538</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530">Leetcode 530</a>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -526,6 +540,10 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     </li>
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
     </li>
     
@@ -538,7 +556,7 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(96)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
     </li>
     
     <li>
@@ -594,6 +612,10 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
@@ -618,6 +640,8 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
     <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
     
     <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
@@ -629,6 +653,8 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
     
     <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
     
     <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
     
@@ -672,6 +698,8 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
@@ -683,6 +711,8 @@ The bigger the interface, the weaker the abstraction &ndash;Rob Pike
     <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
     
     <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
     
