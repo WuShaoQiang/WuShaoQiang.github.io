@@ -6,10 +6,46 @@
     <description>Recent content in Easy on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 May 2019 21:44:51 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 23:03:57 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/easy/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 628</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-628/</link>
+      <pubDate>Wed, 29 May 2019 23:03:57 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-628/</guid>
+      <description>题目 Given an integer array, find three numbers whose product is maximum and output the maximum product. Example 1: Input: [1,2,3] Output: 6 Example 2: Input: [1,2,3,4] Output: 24 Note: The length of the given array will be in range [3,104] and all elements are in the range [-1000, 1000]. Multiplication of any three numbers in the input won&#39;t exceed the range of 32-bit signed integer.  我的解答 // Runtime: 36 ms, faster than 99.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 605</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-605/</link>
+      <pubDate>Wed, 29 May 2019 22:03:37 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-605/</guid>
+      <description>题目 Suppose you have a long flowerbed in which some of the plots are planted and some are not. However, flowers cannot be planted in adjacent plots - they would compete for water and both would die. Given a flowerbed (represented as an array containing 0 and 1, where 0 means empty and 1 means not empty), and a number n, return if n new flowers can be planted in it without violating the no-adjacent-flowers rule.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 581</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-581/</link>
+      <pubDate>Wed, 29 May 2019 20:33:58 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-581/</guid>
+      <description>题目 Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order, too. You need to find the shortest such subarray and output its length. Example 1: Input: [2, 6, 4, 8, 10, 9, 15] Output: 5 Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.</description>
+    </item>
+    
+    <item>
+      <title>Leetcode 566</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-566/</link>
+      <pubDate>Wed, 29 May 2019 20:28:21 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-566/</guid>
+      <description>题目 In MATLAB, there is a very useful function called &#39;reshape&#39;, which can reshape a matrix into a new one with different size but keep its original data. You&#39;re given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively. The reshaped matrix need to be filled with all the elements of the original matrix in the same row-traversing order as they were.</description>
+    </item>
     
     <item>
       <title>Leetcode 561</title>

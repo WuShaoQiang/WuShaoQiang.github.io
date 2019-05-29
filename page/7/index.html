@@ -68,6 +68,141 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/" title="Golang Module" >Golang Module</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
+不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
+不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
+因为go module对版本有着严格的控制,因此如果我们按照同样的方法去github clone一份的话,就没有这么方便了
+爽的地方 可能这个我认为好的地方,也有人认为不好,就是它把所有的package存放在了$GOPATH/pkg/mod里面了,在以前,我基本都是直接go get到src上的,所以整个src的文件夹都是库
+这样一来,可以让src整洁很多吧
+当然还不止一些,如果当上面关系下载包的问题被解决了,也就意味着,下载别人的代码,即使本地不存在它的依赖,也可以一键运行了?
+如何解决下载问题 goproxy &ndash;最简单的方法
+通过他人做好的一个代理,之后对包的请求都会经过这个代理,但是无法下载私密仓库(也就是没有认证功能)
+athens &ndash;复杂点但全面的方法
+这个是微软大力支持的一个开源项目,规模和功能什么的都比上面的多,但是现在还没有v1版本
+对我来说,我更多的还是在github上下载公共仓库,所以,先用第一个吧
+好,万一哪天代理不好用了,那还有一种比较难受的方法
+在go.mod里面用replace替换下载的目的地
+一些简单介绍 要启用module模式,需要
+export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是方便了,但我感觉有也不错)
+如果打开了module模式,那么程序在寻找包的依赖就不再是在GOPATH/src上找了,而是在GOPATH/pkg/mod
+如果想要查看一个程序的所有module依赖
+go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
+go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单收集一些基本操作,作为一个笔记查找
+参考官方文章
+package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                原文
+Flexible Schema 不像SQL的数据库一样,Mongodb不需要我们准确定义一个数据格式的规范
+也就是说,一个collection里面的document不一定要每个字段都一样,我们也可以实时的更新document的字段(增加或减少)
+当然,有些时候为了让数据保持统一,Mongodb也可以让我们自定义collection的validation
+Document structure  how the application represents relationships between data
+ Embedded Data 这是官方推荐的一种数据结构
+ For many use cases in MongoDB, the denormalized data model is optimal.
+  This data model facilitates atomic operations.
+ 当一个写操作(insertOne or insertMany),对每一个document的修改都是atomic,但是并不是每一次改一个document
+References 这种就又是关系型了
+Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使用capped collection
+如果是侧重全局数据的读取 &ndash;使用索引会增加性能
+Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
+提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
+如果是还未创建的collection
+ use db.createCollection() with the validator option.
+ 如果是已经创建了的collection
+ use collMod command with the validator option.
+ 这里还提供了两个options
+validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
+ use the $jsonSchema operator in your validator expression.
+ 官网例子
+db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
                                 </h1>
                             </header>
@@ -223,101 +358,6 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/" title="Leetcode 387" >Leetcode 387</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1. Examples: s = &quot;leetcode&quot; return 0. s = &quot;loveleetcode&quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-'a']++ } for idx, b := range s { if m[b-'a'] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/" title="Leetcode 383" >Leetcode 383</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note. Note: You may assume that both strings contain only lowercase letters. canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true  我的解答 题目的意思是,右边的字符串能否凑成左边的字符串(每个字符只能用一次)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-371/" title="Leetcode 371" >Leetcode 371</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. Example 1: Input: a = 1, b = 2 Output: 3 Example 2: Input: a = -2, b = 3 Output: 1  我的解答 这个题也是考验对二进制的熟悉
-我们来验算一下
-以下都是二进制 a = 100 b = 111 结果应该等于 1011 add = 100^111 = 011 carry = (100&amp;111)&lt;&lt;1 =1000 sum = add^carry  // 用&amp;来得到是否有进位，并且要右移1位 // 用^来得到不考虑进位的相加 // 然后进位和不考虑进位的结果再次执行同样的操作，直到没有进位 func getSum(a int, b int) int { res := 0 for { carry := (a &amp; b) &lt;&lt; 1 sum := a ^ b if carry&amp;sum == 0 { res = carry ^ sum break } a = carry b = sum } return res }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-371/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-367/" title="Leetcode 367" >Leetcode 367</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a positive integer num, write a function which returns True if num is a perfect square else False. Note: Do not use any built-in library function such as sqrt. Example 1: Input: 16 Output: true Example 2: Input: 14 Output: false  我的解答 根据数学公式 1+3+&hellip;+(2n-1) = n**2
-func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for i := 1; i &lt;= num/2 &amp;&amp; total &lt; num; i++ { total += 2*i - 1 } return total == num }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-367/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -418,6 +458,10 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
         <a href="https://wushaoqiang.github.io/page/22/">22</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/23/">23</a>
+    </li>
+    
 
     
     <li class="next">
@@ -446,6 +490,22 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/" title="Leetcode 628">Leetcode 628</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/" title="Leetcode 605">Leetcode 605</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/" title="Leetcode 581">Leetcode 581</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/" title="Leetcode 566">Leetcode 566</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
     </li>
     
@@ -467,22 +527,6 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917">Leetcode 917</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859">Leetcode 859</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819">Leetcode 819</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-804/" title="Leetcode 804">Leetcode 804</a>
     </li>
     
 </ul>
@@ -523,7 +567,7 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(131)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(135)</a>
     </li>
     
     <li>
