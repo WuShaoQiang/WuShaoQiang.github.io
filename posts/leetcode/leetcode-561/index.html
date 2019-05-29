@@ -95,11 +95,66 @@
 
 <h3 id="题目">题目</h3>
 
+<pre><code> Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
+
+Example 1:
+
+Input: [1,4,3,2]
+
+Output: 4
+Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4).
+
+Note:
+
+    n is a positive integer, which is in the range of [1, 10000].
+    All the integers in the array will be in the range of [-10000, 10000].
+</code></pre>
+
 <h3 id="我的解答">我的解答</h3>
+
+<pre><code class="language-go">// Runtime: 72 ms, faster than 77.63% of Go online submissions for Array Partition I.
+// Memory Usage: 6.7 MB, less than 92.98% of Go online submissions for Array Partition I.
+
+func arrayPairSum(nums []int) int {
+	sort.Ints(nums)
+	sum := 0
+	for i := len(nums) - 2; i &gt;= 0; i -= 2 {
+		sum += nums[i]
+	}
+	return sum
+}
+</code></pre>
 
 <h3 id="最优解答">最优解答</h3>
 
+<pre><code class="language-go">// Runtime: 40 ms, faster than 100.00% of Go online submissions for Array Partition I.
+// Memory Usage: 6.8 MB, less than 19.30% of Go online submissions for Array Partition I.
+
+func arrayPairSum(nums []int) int {
+    var buckets [20001]int8
+	for _, num := range nums {
+		buckets[num+10000]++
+	}
+
+	sum := 0
+	needAdd := true
+	for num, count := range buckets {
+		for count &gt; 0 {
+			if needAdd {
+				sum += num - 10000
+			}
+			needAdd = !needAdd
+			count--
+		}
+	}
+
+	return sum
+}
+</code></pre>
+
 <h3 id="难疑点-核心">难疑点&amp;核心</h3>
+
+<p>无</p>
 
                         </div>
 
@@ -112,15 +167,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/posts/leetcode/leetcode-532/">Leetcode 532</a></li>
+        
+        <li><a href="/posts/leetcode/leetcode-509/">Leetcode 509</a></li>
+        
+        <li><a href="/posts/leetcode/leetcode-485/">Leetcode 485</a></li>
+        
+        <li><a href="/posts/leetcode/leetcode-448/">Leetcode 448</a></li>
+        
         <li><a href="/posts/leetcode/leetcode-925/">Leetcode 925</a></li>
-        
-        <li><a href="/posts/leetcode/leetcode-917/">Leetcode 917</a></li>
-        
-        <li><a href="/posts/leetcode/leetcode-859/">Leetcode 859</a></li>
-        
-        <li><a href="/posts/leetcode/leetcode-819/">Leetcode 819</a></li>
-        
-        <li><a href="/posts/leetcode/leetcode-804/">Leetcode 804</a></li>
         
     </ul>
 </div>
@@ -134,7 +189,7 @@
                                 
                                 <li><a href="https://wushaoqiang.github.io/tags/easy">easy</a></li>
                                 
-                                <li><a href="https://wushaoqiang.github.io/tags/Strings">Strings</a></li>
+                                <li><a href="https://wushaoqiang.github.io/tags/Array">Array</a></li>
                                 
                             </ul>
                             

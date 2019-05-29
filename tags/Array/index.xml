@@ -6,10 +6,19 @@
     <description>Recent content in Array on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 May 2019 21:07:29 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 27 May 2019 21:44:51 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Array/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 561</title>
+      <link>https://wushaoqiang.github.io/posts/leetcode/leetcode-561/</link>
+      <pubDate>Mon, 27 May 2019 21:44:51 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/leetcode/leetcode-561/</guid>
+      <description>题目  Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible. Example 1: Input: [1,4,3,2] Output: 4 Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4). Note: n is a positive integer, which is in the range of [1, 10000].</description>
+    </item>
     
     <item>
       <title>Leetcode 532</title>
