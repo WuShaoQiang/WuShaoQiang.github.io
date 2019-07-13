@@ -6,10 +6,120 @@
     <description>Recent content in Basic on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 May 2019 00:04:35 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jul 2019 19:30:30 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Basic/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Css Flexble</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/css-flexble/</link>
+      <pubDate>Fri, 12 Jul 2019 19:30:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/css-flexble/</guid>
+      <description>今天来学习一下布局方式
+现在主流的布局方式flexbox
+Reference https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+Basic display: flex就将这个block变成了flexbox
+首先，我们要先搞明白container和item的关系
+一般来说item是最小的单位，也就是一个东西(比如：按键&amp;hellip;)
+container就是我们的block，这个就是在页面设计的时候考虑要如何放置我们的block，container是可以嵌套的
+Axis For rows, the main axis is a horizontal line and for columns it is a vertical line.
+首先要搞懂轴的概念
+轴的方向是和flex-direction相关联的
+根据参数我们可以很快确定轴的方向
+row //main 左到右 cross 上到下 column //main 上到下 cross 左到右 row-reverse //... column-reverse //...  比如flex-direction: row，那么就按照上面这个图的方向
+ 主方向为横向(也就是item的排列方向)
+ cross方向为纵向
+  我们后面说到的属性可能会和轴有联系
+而这篇文章也是假设了flex-direction: row
+flex-wrap 可选参数
+nowrap (default) //这个就是将所有item按一个方向排列并且不会，并且只有一行 wrap //这个相对上面就会进行换行 wrap-reverse //反转,就是和wrap反过来，从底部到顶部  可以看出这个和两个轴都有关系
+先在main轴排列，不过空间可以wrap到cross轴</description>
+    </item>
+    
+    <item>
+      <title>Javascript Data Structure</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/</link>
+      <pubDate>Tue, 09 Jul 2019 21:43:45 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/</guid>
+      <description>array method 内置的Array方法是普遍使用的
+push() unshift() pop() shift() splice() //第一个参数的index(包括),第二个参数是数量(表示删除多少个)  splice splice相对前几个方法稍微复杂一点，它的功能也相对强大
+当splice传入两个参数的时候
+function sumOfTen(arr) { // change code below this line arr.splice(4,2) arr.splice(2,1) arr.splice(0,1) console.log(arr) // change code above this line return arr.reduce((a, b) =&amp;gt; a + b); } // do not change code below this line console.log(sumOfTen([2, 5, 1, 5, 2, 1]));  注意
+当你删除了元素之后，索引就已经发生变化了，所以最好的方式就是重后面开始删除
+当传入三个参数的时候
+这和传入两个参数是完全不一样的
+三个参数就是先执行两个参数时的操作，也就是删除从某一个索引开始的n个数据，然后再从索引的位置插入一个数据
+function htmlColorNames(arr) { // change code below this line arr.</description>
+    </item>
+    
+    <item>
+      <title>Javascript Debugging</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-debugging/</link>
+      <pubDate>Tue, 09 Jul 2019 21:19:39 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-debugging/</guid>
+      <description>Bug一般分为三类
+语法错误 运行错误 逻辑错误  往往编辑器帮我们做好了语法错误的检测，因此这个是最简单的，后面两个就要我们自己掌握一些debug的技能去fix这些bugs
+log log是一个很好的debug方法，能够在不同阶段看到输出的内容有利于我们找出出错的环节
+console.log()  typeof 检测一个值的类型
+undefined --&amp;gt; undefined NaN --&amp;gt; Number null --&amp;gt; Object  false 在JavaScript里
+false 0 &amp;quot;&amp;quot; NaN undefined null  都被当做falsy，也就是在if判断语句和false作用一样的
+out of range 当数组越界的时候，JavaScript返回的是undefined</description>
+    </item>
+    
+    <item>
+      <title>Javascript Regexp</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-regexp/</link>
+      <pubDate>Mon, 08 Jul 2019 22:46:16 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-regexp/</guid>
+      <description>这一篇是讲正则表达式(Regular Expression)
+Test method 全匹配
+let waldoIsHiding = &amp;quot;Somewhere Waldo is hiding in this text.&amp;quot;; let waldoRegex = /Waldo/; // Change this line let result = waldoRegex.test(waldoIsHiding); console.log(result) //true  全匹配是大小写敏感的
+多可能性
+let petString = &amp;quot;James has a pet cat.&amp;quot;; let petRegex = /dog|cat|bird|fish/; // Change this line let result = petRegex.test(petString);  这样就是一个或关系
+忽略大小写
+let myString = &amp;quot;freeCodeCamp&amp;quot;; let fccRegex = /freeCodeCamp/i; // Change this line let result = fccRegex.</description>
+    </item>
+    
+    <item>
+      <title>Javascript ES6</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-ES6/</link>
+      <pubDate>Sun, 07 Jul 2019 16:28:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-ES6/</guid>
+      <description>let vs var 在ES6之前还没有let
+var是有一些很严重的缺点的，比如
+可以重复定义同名的变量而不会抛错 经常想定义一个局部变量，变成了一个全局变量，也就是shadow和我们平时熟悉的方式不一样  所以我们在定义变量的时候就用let，因为let就是修复了var的一些缺点，和平时的用法一样
+const 这个和let差不多，只是只能赋值一次(定义的时候就要赋值)
+并且建议const用全部大写的格式
+开发建议是：如果变量是不会重新赋值的，那么最好是使用const，除非是预测到要重新赋值就用let
+在这里还要强调的一点，赋值是值这个变量的赋值，如
+const s = [5,6,7] s = [1,2] //出错，重新赋值 s[2] = 10 //可行，这个不是对s的重新赋值  同理的还有Object、function
+Object freeze 可以防止一个Object的属性被修改
+Object.freeze(object_name);  Arrow functions () =&amp;gt; {} () =&amp;gt; value //如果是直接返回数据，这个是简化的写法 (arg1,arg2) =&amp;gt; {}  filter map reduce A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.</description>
+    </item>
+    
+    <item>
+      <title>Javascript Basic</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-basic/</link>
+      <pubDate>Wed, 03 Jul 2019 20:35:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-basic/</guid>
+      <description>数组的方法 push 插入数据到数组的后面 pop 取出数组的最后一个数据 shift 取出数组的第一个数据 unshift 插入数据到数组的前面  JS的数组里面的元素是可以不相同的
+作用域 当变量没有用var等关键字声明时，这个变量是全局变量，这个可能会导致一些问题
+function func(){ funcVar = 1 }  等于号 比较符有两个==和===
+在JS里面
+1 == &#39;1&#39; //true 1 === &#39;1&#39; //false  ==会在类型不同进行自动转换
+===不会进行类型转换
+同理!=和!==也是一样
+比较符 &amp;gt; &amp;lt; &amp;gt;= &amp;lt;=
+这些当类型不同时，也会进行类型转换
+Switch function caseInSwitch(val) { var answer = &amp;quot;&amp;quot;; // Only change code below this line switch(val){ case 1: answer = &amp;quot;alpha&amp;quot;; break; case 2: answer = &amp;quot;beta&amp;quot;; break; case 3: answer = &amp;quot;gamma&amp;quot;; break; case 4: answer = &amp;quot;delta&amp;quot;; break; } // Only change code above this line return answer; }  需要注意的是，这里的比较是用===，而且要注意，如果不写break，会继续匹配下去</description>
+    </item>
     
     <item>
       <title>HTML Basic</title>
@@ -17,10 +127,9 @@
       <pubDate>Tue, 21 May 2019 00:04:35 +0800</pubDate>
       
       <guid>https://wushaoqiang.github.io/posts/front-end/html-basic/</guid>
-      <description> Tag &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;head&amp;gt;&amp;lt;head&amp;gt; 通常是放title、meta、link、script、style的地方 &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt; 网页的标题 &amp;lt;body&amp;gt;&amp;lt;/body&amp;gt; 网页的主体 &amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt; 标题h1-h6 &amp;lt;p&amp;gt;&amp;lt;\p&amp;gt; 段落 &amp;lt;hr&amp;gt; 分割线 &amp;lt;br&amp;gt; line break &amp;lt;pre&amp;gt;&amp;lt;/pre&amp;gt; 这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text)  Attr Some suggestions you should know:
+      <description>Tag &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt;&amp;lt;/html&amp;gt; &amp;lt;head&amp;gt;&amp;lt;head&amp;gt; 通常是放title、meta、link、script、style的地方 &amp;lt;link&amp;gt; refer to an external CSS file &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt; 网页的标题 &amp;lt;body&amp;gt;&amp;lt;/body&amp;gt; 网页的主体 &amp;lt;h1&amp;gt;&amp;lt;/h1&amp;gt; 标题h1-h6 &amp;lt;p&amp;gt;&amp;lt;\p&amp;gt; 段落 &amp;lt;hr&amp;gt; 分割线 &amp;lt;br&amp;gt; line break &amp;lt;pre&amp;gt;&amp;lt;/pre&amp;gt; 这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text) &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt; container for element &amp;lt;span&amp;gt; container for text &amp;lt;iframe&amp;gt; display a web page within a web page  Attr Some suggestions you should know:
  HTML5 does not require lowercase attribute name, but everybody should use lowercase in HTML
- HTML5 does not require quotes around attribute values, but everybody should quote attribute values
-  genaral style examples : style=&amp;quot;font-family:arial;color:red;font-size:20px;&amp;quot; style=&amp;quot;text-align:center&amp;quot; title: The value of the title attribute will be displayed as a tooltip when you mouse over the tag  a href: usaully a link  img src: image source location alt: when the image can not be displayed, it will show some text for an image  html html --&amp;gt; lang  input input --&amp;gt; diabled  Property style background-color color //font color font-family font-size text-align //horizontal text alignment  Text Formatting &amp;lt;b&amp;gt; - Bold text &amp;lt;strong&amp;gt; - Important text &amp;lt;i&amp;gt; - Italic text &amp;lt;em&amp;gt; - Emphasized text &amp;lt;mark&amp;gt; - Marked text &amp;lt;small&amp;gt; - Small text &amp;lt;del&amp;gt; - Deleted text &amp;lt;ins&amp;gt; - Inserted text &amp;lt;sub&amp;gt; - Subscript text &amp;lt;sup&amp;gt; - Superscript text  </description>
+ HTML5 does not require quotes around attribute values, but everybody should quote attribute values</description>
     </item>
     
   </channel>

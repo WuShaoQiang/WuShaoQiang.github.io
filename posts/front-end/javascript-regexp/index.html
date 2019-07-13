@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Javascript Regexp | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Javascript Regexp - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-07-08T22:46:16&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-07-08T22:46:16&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Javascript Regexp">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Javascript Regexp</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年7月8日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>这一篇是讲正则表达式(Regular Expression)</p>
+
+<h4 id="test-method">Test method</h4>
+
+<p><strong>全匹配</strong></p>
+
+<pre><code class="language-js">let waldoIsHiding = &quot;Somewhere Waldo is hiding in this text.&quot;;
+let waldoRegex = /Waldo/; // Change this line
+let result = waldoRegex.test(waldoIsHiding);
+console.log(result) //true
+</code></pre>
+
+<p>全匹配是大小写敏感的</p>
+
+<p><strong>多可能性</strong></p>
+
+<pre><code class="language-js">let petString = &quot;James has a pet cat.&quot;;
+let petRegex = /dog|cat|bird|fish/; // Change this line
+let result = petRegex.test(petString);
+</code></pre>
+
+<p>这样就是一个或关系</p>
+
+<p><strong>忽略大小写</strong></p>
+
+<pre><code class="language-js">let myString = &quot;freeCodeCamp&quot;;
+let fccRegex = /freeCodeCamp/i; // Change this line
+let result = fccRegex.test(myString);
+</code></pre>
+
+<p>后面加一个i，表示<code>ignoreCase</code></p>
+
+<h4 id="match-method">Match method</h4>
+
+<p>之前的<code>test</code>方法是用</p>
+
+<pre><code class="language-js">regex.test(str)
+</code></pre>
+
+<p>现在这种是</p>
+
+<pre><code class="language-js">str.match(regex)
+</code></pre>
+
+<p>并且返回的值也不一样了，这个<code>match</code>返回的是字符串</p>
+
+<pre><code class="language-js">let extractStr = &quot;Extract the word 'coding' from this string coding coding.&quot;;
+let codingRegex = /coding/; // Change this line
+let result = extractStr.match(codingRegex); // Change this line
+console.log(result) //coding
+</code></pre>
+
+<p>可以看到这里只匹配了一个</p>
+
+<p><strong>全局匹配</strong></p>
+
+<p>全局匹配就是把所有符合的都输出</p>
+
+<pre><code class="language-js">let twinkleStar = &quot;Twinkle, twinkle, little star twiNkle&quot;;
+let starRegex = /Twinkle/ig; // Change this line
+let result = twinkleStar.match(starRegex); // Change this line
+console.log(result) //Twinkle,twinkle,twiNkle
+</code></pre>
+
+<p>这里我还忽略了大小写，全局匹配<code>g</code>代表着global</p>
+
+<h4 id="match-vs-test">match vs test</h4>
+
+<p>这两种在构建regex时候是同样的，唯一不同的在于输出结果，所以下面讲到的性质适用于两者</p>
+
+<h4 id="wildcard-period">Wildcard period</h4>
+
+<p><strong>匹配任何字符</strong></p>
+
+<p><code>.</code>是可以匹配任何字符的写法</p>
+
+<pre><code class="language-js">let exampleStr = &quot;Let's have fun with regular expressions!&quot;;
+let unRegex = /.un/; // Change this line
+let result = unRegex.test(exampleStr);
+</code></pre>
+
+<p>这个例子的regex可以匹配任何<code>*un</code></p>
+
+<h4 id="character-classes">Character classes</h4>
+
+<p>当我们想要匹配某个字符的多种情况，比如<code>big，bug，bag</code>，但是我们不想要<code>bog</code>，这个时候就不能用<code>.</code>来匹配了</p>
+
+<pre><code class="language-js">let quoteSample = &quot;Beware of bugs in the above code; I have only proved it correct, not tried it.&quot;;
+let vowelRegex = /[aeiou]/gi; // Change this line
+let result = quoteSample.match(vowelRegex) // Change this line
+console.log(result)
+</code></pre>
+
+<p>这个会找到句子里面的所有元音字母</p>
+
+<p>但是这种写法不好的地方就是，如果需要匹配的字母多，那regex会非常长</p>
+
+<p><strong>连续字母匹配</strong></p>
+
+<pre><code class="language-js">let quoteSample = &quot;The quick brown fox jumps over the lazy dog.&quot;;
+let alphabetRegex = /[a-z]/ig; // Change this line
+let result = quoteSample.match(alphabetRegex); // Change this line
+console.log(result)
+</code></pre>
+
+<p>当然数字也可以这样写，如果要一起写就是<code>[a-z0-9]</code></p>
+
+<p><strong>不想匹配某些字符</strong></p>
+
+<pre><code class="language-js">let quoteSample = &quot;3 blind mice.&quot;;
+let myRegex = /[^aeiou0-9]/ig; // Change this line
+let result = quoteSample.match(myRegex); // Change this line
+console.log(result) // ,b,l,n,d, ,m,c,.
+</code></pre>
+
+<p>将某些字符排除在外用<code>^</code>，注意的是，空格或者标点符号等都会被筛选出来</p>
+
+<h4 id="occur-time-s">Occur time(s)</h4>
+
+<p>我们要匹配一个字符<strong>一次</strong>或多次出现，可以用这样的形式</p>
+
+<pre><code class="language-js">let difficultSpelling = &quot;Mississippi&quot;;
+let myRegex = /s+/g; // Change this line
+let result = difficultSpelling.match(myRegex); //ss,ss
+</code></pre>
+
+<p>要注意不要写成<code>[s+]</code>，在class里只会匹配一个字符，应该写成<code>[s]+</code></p>
+
+<p>上面的例子<code>myRegex</code>可以改成<code>/[sp]+/g</code>，返回的result就多了<code>pp</code></p>
+
+<p>如果匹配一个字符零次或者多次出现，用<code>*</code></p>
+
+<p>用法和<code>+</code>差不多</p>
+
+<h4 id="lazy-matching">Lazy Matching</h4>
+
+<p>默认在<code>greedy</code>模式下，会匹配最长的结果</p>
+
+<p>比如</p>
+
+<pre><code class="language-js">let text = &quot;&lt;h1&gt;Winter is coming&lt;/h1&gt;&quot;;
+let myRegex = /&lt;.*&gt;/; // Change this line
+let result = text.match(myRegex);
+console.log(result) //&lt;h1&gt;Winter is coming&lt;/h1&gt;
+</code></pre>
+
+<p>可以看到结果并不是两个<code>h1</code>tag</p>
+
+<p>这个时候要用<code>lazy</code>模式，就会匹配最短符合的</p>
+
+<pre><code class="language-js">let text = &quot;&lt;h1&gt;Winter is coming&lt;/h1&gt;&quot;;
+let myRegex = /&lt;.*?&gt;/; // Change this line
+let result = text.match(myRegex);
+console.log(result)
+</code></pre>
+
+<p>就是加个<code>?</code></p>
+
+<h4 id="match-beginning">Match Beginning</h4>
+
+<p>前面我们在<code>[]</code>中用到过<code>^</code>,代表<code>非</code></p>
+
+<p>如果不在<code>[]</code>里用，那意思就是开头</p>
+
+<pre><code class="language-js">let rickyAndCal = &quot;Cal and Ricky both like racing.&quot;;
+let calRegex = /^Cal/; // Change this line
+let result = calRegex.test(rickyAndCal);
+</code></pre>
+
+<p>这里就匹配开头为Cal的string，所以结果为<code>true</code></p>
+
+<p>可以理解为<code>^</code>是一个开头标志位</p>
+
+<h4 id="match-ending">Match Ending</h4>
+
+<p>既然<code>^</code>是开头标志位，那么肯定有一个结尾标志位</p>
+
+<p><code>$</code>就是用来标志结尾的</p>
+
+<pre><code class="language-js">let caboose = &quot;The last car on a train is the caboose&quot;;
+let lastRegex = /caboose$/; // Change this line
+let result = lastRegex.test(caboose);
+</code></pre>
+
+<h4 id="number-of-characters">Number of characters</h4>
+
+<p>按照上面所说，我们可以用<code>+</code>和<code>*</code>来分别指定一些数量的限定，但这两个只是特殊的用例，比如我们要指定某一个字符要出现两次或者以上，那么上面的表达式不可以很好的满足</p>
+
+<p><code>{2,}</code>出现两次或两次以上</p>
+
+<p><code>{2,3}</code>出现两到三次</p>
+
+<p><code>{2}</code>正好出现两次</p>
+
+<h4 id="whitespace">Whitespace</h4>
+
+<p><code>\s</code> = <code>[ \r\t\f\n\v]</code></p>
+
+<p><code>\S</code> = <code>[^ \r\t\f\n\v]</code></p>
+
+<p>要注意<code>[]</code>里面是有一个空格的</p>
+
+<h4 id="check-for-all-or-none">Check for All or None</h4>
+
+<p>上面我们提到<code>?</code>可以用来<code>Lazy Matching</code>，还有一个用法是</p>
+
+<pre><code class="language-js">let favWord = &quot;favorite&quot;;
+let favRegex = /favou?rite/; // Change this line
+let result = favRegex.test(favWord);
+</code></pre>
+
+<p>在这里，无论是<code>favourite</code>还是<code>favorite</code>都会认为是Matched的</p>
+
+<h4 id="positive-and-negative-lookahead">Positive and Negative Lookahead</h4>
+
+<p>这个有点像是一种判断语句</p>
+
+<p>看看例子</p>
+
+<pre><code class="language-js">let password = &quot;abc123&quot;;
+let checkPass = /(?=\w{3,6})(?=\D*\d)/;
+checkPass.test(password); // Returns true
+</code></pre>
+
+<p>正则表达式解释为：有3~6个字符，并且是非数字开头，而且string里面应该有至少一个数字</p>
+
+<p>有没有感觉就是几个判断语句</p>
+
+<p>再来看一个例子</p>
+
+<pre><code class="language-js">let sampleWord = &quot;astronaut&quot;;
+let pwRegex = /(?=\w{6,})(?=\D*\d{2,})/; // Change this line
+let result = pwRegex.test(sampleWord);
+console.log(result)
+</code></pre>
+
+<p>我们以判断语句的角度来分析</p>
+
+<ul>
+<li><p>首先字符串要有6个字符或者以上</p></li>
+
+<li><p>开头不可以是数字</p></li>
+
+<li><p>必须要有连续的两个数字或以上</p></li>
+</ul>
+
+<p>可以看出运用判断语句来分析是比较好理解的</p>
+
+<h4 id="group">Group</h4>
+
+<p>假设我们的字段是非常重复的，那正则可能是差不多的，如果每次都复制-粘贴，正则会很难看(因为很长)</p>
+
+<p>所以当重复的东西多了，可以使用group</p>
+
+<p>group是用括号括起来的，序号是从1开始</p>
+
+<pre><code class="language-js">let repeatNum = &quot;42 42 42&quot;;
+let reRegex = /^(\d+)\s\1\s\1$/; // Change this line
+let result = reRegex.test(repeatNum);
+console.log(result)
+</code></pre>
+
+<p>这一段正则拓展开来就是</p>
+
+<pre><code class="language-js">let reRegex = /^\d+\s\d+\s\d+$/;
+</code></pre>
+
+<p>如果group再长一点，不断复制就会很恶心了</p>
+
+<p><strong>注意</strong></p>
+
+<p>我们是用序号从1开始来标识group</p>
+
+<h4 id="replace">Replace</h4>
+
+<p>我们前面看见了两个JS的string内置方法<code>test</code>和<code>match</code></p>
+
+<p><code>test</code>主要用来判断是否match，强调是是否匹配</p>
+
+<p><code>match</code>主要是得到match的数量</p>
+
+<p>而<code>replace</code>顾名思义就是在查找的基础上加了替换功能</p>
+
+<p><code>replace</code>的第一个参数是正则，第二个是需要替换的值</p>
+
+<pre><code class="language-js">let huhText = &quot;This sandwich is good.&quot;;
+let fixRegex = /good/; // Change this line
+let replaceText = &quot;bad&quot;; // Change this line
+let result = huhText.replace(fixRegex, replaceText);
+</code></pre>
+
+<p>good被替换成bad</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/front-end/javascript-ES6/">Javascript ES6</a></li>
+        
+        <li><a href="/posts/front-end/javascript-basic/">Javascript Basic</a></li>
+        
+        <li><a href="/posts/front-end/html-basic/">HTML Basic</a></li>
+        
+        <li><a href="/posts/linux/linux-bash-awk/">Linux Bash Awk</a></li>
+        
+        <li><a href="/posts/linux/linux-bash-test/">Linux Bash Test</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/JS">JS</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Front-end">Front-end</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Basic">Basic</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note">Linux Bash Basic Note</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash">Linux Bash</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(7)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

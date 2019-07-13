@@ -98,6 +98,7 @@
 <pre><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;&lt;/html&gt;   
 &lt;head&gt;&lt;head&gt;    通常是放title、meta、link、script、style的地方
+&lt;link&gt;          refer to an external CSS file
 &lt;title&gt;&lt;/title&gt; 网页的标题
 &lt;body&gt;&lt;/body&gt;   网页的主体
 &lt;h1&gt;&lt;/h1&gt;       标题h1-h6
@@ -105,7 +106,9 @@
 &lt;hr&gt;            分割线
 &lt;br&gt;            line break
 &lt;pre&gt;&lt;/pre&gt;     这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text)
-
+&lt;div&gt;&lt;/div&gt;     container for element
+&lt;span&gt;          container for text
+&lt;iframe&gt;        display a web page within a web page
 </code></pre>
 
 <h3 id="attr">Attr</h3>
@@ -118,7 +121,7 @@
 <li><p>HTML5 does not require quotes around attribute values, but everybody should quote attribute values</p></li>
 </ul>
 
-<h4 id="genaral">genaral</h4>
+<h4 id="general">general</h4>
 
 <pre><code>style examples :
 style=&quot;font-family:arial;color:red;font-size:20px;&quot;
@@ -126,11 +129,19 @@ style=&quot;text-align:center&quot;
 
 title: The value of the title attribute will be 
 displayed as a tooltip when you mouse over the tag
+
+id: the unique string to identification
+
+class: usually for CSS class
 </code></pre>
 
 <h4 id="a">a</h4>
 
-<pre><code>href: usaully a link
+<pre><code>href: usually a link
+- if link is a local id such as: #my_form, 
+it will jump to specific parts of a Web page
+
+target: specifies where to open the linked document
 </code></pre>
 
 <h4 id="img">img</h4>
@@ -143,12 +154,19 @@ it will show some text for an image
 
 <h4 id="html">html</h4>
 
-<pre><code>html --&gt; lang
+<pre><code>
+lang        //important
 </code></pre>
 
 <h4 id="input">input</h4>
 
-<pre><code>input --&gt; diabled
+<pre><code>
+disabled    //disable input
+</code></pre>
+
+<h4 id="iframe">iframe</h4>
+
+<pre><code>src
 </code></pre>
 
 <h3 id="property">Property</h3>
@@ -156,10 +174,22 @@ it will show some text for an image
 <h4 id="style">style</h4>
 
 <pre><code>background-color
+background-image    //style=&quot;background-image:url('clouds.jpg');&quot;
 color               //font color
 font-family
 font-size
 text-align          //horizontal text alignment
+border
+padding             //space inside the border
+margin              //space outside the border
+</code></pre>
+
+<h4 id="target">target</h4>
+
+<pre><code>_blank      //new window/tab
+_self       //same window/tab(default)
+_parent     //
+_top        //
 </code></pre>
 
 <h3 id="text-formatting">Text Formatting</h3>
@@ -174,6 +204,52 @@ text-align          //horizontal text alignment
 &lt;ins&gt; - Inserted text
 &lt;sub&gt; - Subscript text
 &lt;sup&gt; - Superscript text
+</code></pre>
+
+<h3 id="color">Color</h3>
+
+<p>You can specify a color by using</p>
+
+<pre><code>color name (e.g. blue)
+RGB values (e.g. rgb(255,0,0))
+HEX values (e.g. #ff0000)
+HSL values (e.g. hsl(9,100%,64%))
+RGBA    //alpha
+HSLA    //alpha
+</code></pre>
+
+<h3 id="relative-path">Relative Path</h3>
+
+<p>It is best practice to use relative files path</p>
+
+<pre><code>&lt;img src=&quot;picture.jpg&quot;&gt; 	
+picture.jpg is located in the same folder as the current page
+
+&lt;img src=&quot;images/picture.jpg&quot;&gt; 	
+picture.jpg is located in the images folder in the current folder
+
+&lt;img src=&quot;/images/picture.jpg&quot;&gt; 	
+picture.jpg is located in the images folder at the root of the current web
+
+&lt;img src=&quot;../picture.jpg&quot;&gt; 	
+picture.jpg is located in the folder one level up from the current folder
+</code></pre>
+
+<h3 id="picture">Picture</h3>
+
+<pre><code>picture is more flexible when specifying image resource
+
+picture element contains a number of &lt;source&gt;
+
+each &lt;source&gt; element have attributes describing when their image is most suitable
+
+example:
+
+ &lt;picture&gt;
+  &lt;source media=&quot;(min-width: 650px)&quot; srcset=&quot;img_pink_flowers.jpg&quot;&gt;
+  &lt;source media=&quot;(min-width: 465px)&quot; srcset=&quot;img_white_flower.jpg&quot;&gt;
+  &lt;img src=&quot;img_orange_flowers.jpg&quot; alt=&quot;Flowers&quot; style=&quot;width:auto;&quot;&gt;
+&lt;/picture&gt; 
 </code></pre>
 
                         </div>
@@ -247,43 +323,43 @@ text-align          //horizontal text alignment
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/" title="Leetcode 628">Leetcode 628</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/" title="Leetcode 605">Leetcode 605</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/" title="Leetcode 581">Leetcode 581</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/" title="Leetcode 566">Leetcode 566</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note">Linux Bash Basic Note</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash">Linux Bash</a>
     </li>
     
 </ul>
@@ -308,7 +384,7 @@ text-align          //horizontal text alignment
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(7)</a>
     </li>
     
     <li>
@@ -324,11 +400,11 @@ text-align          //horizontal text alignment
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(135)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
     </li>
     
     <li>
@@ -352,7 +428,7 @@ text-align          //horizontal text alignment
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
     </li>
     
     <li>
@@ -382,11 +458,15 @@ text-align          //horizontal text alignment
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     
@@ -433,6 +513,8 @@ text-align          //horizontal text alignment
     <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
     
     <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     

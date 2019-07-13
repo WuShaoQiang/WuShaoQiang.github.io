@@ -78,11 +78,11 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/">Leetcode 437</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-520/">Leetcode 520</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月25日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -93,19 +93,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。 示例： root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8 10 / \ 5 -3 / \ \ 3 2 11 / \ \ 3 -2 1 返回 3。和等于 8 的路径有: 1. 5 -&gt; 3 2. 5 -&gt; 2 -&gt; 1 3. -3 -&gt; 11  我的解答 // 执行用时 : 20 ms, 在Path Sum III的Go提交中击败了87.72% 的用户 // 内存消耗 : 4.6 MB, 在Path Sum III的Go提交中击败了47.06% 的用户 func pathSum(root *TreeNode, sum int) int { if root == nil { return 0 } var count int iteration(root, sum, &amp;count) return count } func iteration(root *TreeNode, target int, count *int) { // 每一个不为nil的节点都作为开始节点 if root !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/">阅读全文</a></p>
+                                题目 Given a word, you need to judge whether the usage of capitals in it is right or not. We define the usage of capitals in a word to be right when one of the following cases holds: All letters in this word are capitals, like &quot;USA&quot;. All letters in this word are not capitals, like &quot;leetcode&quot;. Only the first letter in this word is capital, like &quot;Google&quot;. Otherwise, we define that this word doesn't use capitals in a right way.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-520/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">Leetcode 414</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-459/">Leetcode 459</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月25日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -116,20 +116,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。 示例 1: 输入: [3, 2, 1] 输出: 1 解释: 第三大的数是 1. 示例 2: 输入: [1, 2] 输出: 2 解释: 第三大的数不存在, 所以返回最大的数 2 . 示例 3: 输入: [2, 2, 3, 1] 输出: 1 解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。 存在两个值为2的数，它们都排第二。  我的解答 用切片记录
-// 执行用时 : 16 ms, 在Third Maximum Number的Go提交中击败了27.08% 的用户 // 内存消耗 : 4 MB, 在Third Maximum Number的Go提交中击败了23.33% 的用户 func thirdMax(nums []int) int { max := make([]int, 3) for i := 0; i &lt; 3; i++ { max[i] = math.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">阅读全文</a></p>
+                                题目 Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000. Example 1: Input: &quot;abab&quot; Output: True Explanation: It's the substring &quot;ab&quot; twice. Example 2: Input: &quot;aba&quot; Output: False Example 3: Input: &quot;abcabcabcabc&quot; Output: True Explanation: It's the substring &quot;abc&quot; four times.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-459/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">Leetcode 412</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-443/">Leetcode 443</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -140,19 +139,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &quot;1&quot;, &quot;2&quot;, &quot;Fizz&quot;, &quot;4&quot;, &quot;Buzz&quot;, &quot;Fizz&quot;, &quot;7&quot;, &quot;8&quot;, &quot;Fizz&quot;, &quot;Buzz&quot;, &quot;11&quot;, &quot;Fizz&quot;, &quot;13&quot;, &quot;14&quot;, &quot;FizzBuzz&quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &lt; n; i++ { if (i+1)%15 == 0 { res[i] = &quot;FizzBuzz&quot; } else if (i+1)%5 == 0 { res[i] = &quot;Buzz&quot; } else if (i+1)%3 == 0 { res[i] = &quot;Fizz&quot; } else { res[i] = strconv.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">阅读全文</a></p>
+                                题目 Given an array of characters, compress it in-place. The length after compression must always be smaller than or equal to the original array. Every element of the array should be a character (not int) of length 1. After you are done modifying the input array in-place, return the new length of the array. Follow up: Could you solve it using only O(1) extra space? Example 1: Input: [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;] Output: Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;] Explanation: &quot;aa&quot; is replaced by &quot;a2&quot;.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-443/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">Leetcode 409</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-434/">Leetcode 434</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月15日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -163,19 +162,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
+                                题目 Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters. Please note that the string does not contain any non-printable characters. Example: Input: &quot;Hello, my name is John&quot; Output: 5  我的解答 // Runtime: 0 ms, faster than 100.00% of Go online submissions for Number of Segments in a String. // Memory Usage: 1.9 MB, less than 70.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-434/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">Leetcode 405</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-415/">Leetcode &#34;415&#34;</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -186,19 +185,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目  Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used. Note: All letters in hexadecimal (a-f) must be in lowercase. The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, the first character in the hexadecimal string will not be the zero character. The given number is guaranteed to fit within the range of a 32-bit signed integer.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">阅读全文</a></p>
+                                题目 Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2. Note: The length of both num1 and num2 is &lt; 5100. Both num1 and num2 contains only digits 0-9. Both num1 and num2 does not contain any leading zero. You must not use any built-in BigInteger library or convert the inputs to integer directly.  我的解答 // Runtime: 0 ms, faster than 100.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-415/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">Leetcode 404</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1022/">Leetcode 1022</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -209,20 +208,19 @@
                             </div>
                             
                             <div class="post-content">
-                                题目 Find the sum of all left leaves in a given binary tree. Example: 3 / \ 9 20 / \ 15 7 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.  我的解答 这个题参考了一下别人的思路写出来
-func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } search(root, false, &amp;sum) return sum } func search(root *TreeNode, flag bool, sum *int) { if root == nil { return } if flag &amp;&amp; root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
+                                题目 Given a binary tree, each node has value 0 or 1. Each root-to-leaf path represents a binary number starting with the most significant bit. For example, if the path is 0 -&gt; 1 -&gt; 1 -&gt; 0 -&gt; 1, then this could represent 01101 in binary, which is 13. For all leaves in the tree, consider the numbers represented by the path from the root to that leaf. Return the sum of these numbers.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1022/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">Leetcode 400</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-993/">Leetcode 993</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -233,19 +231,19 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             </div>
                             
                             <div class="post-content">
-                                题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">阅读全文</a></p>
+                                题目 In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1. Two nodes of a binary tree are cousins if they have the same depth, but have different parents. We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree. Return true if and only if the nodes corresponding to the values x and y are cousins.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-993/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">Leetcode 389</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-965/">Leetcode 965</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -256,23 +254,19 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             </div>
                             
                             <div class="post-content">
-                                题目  Given two strings s and t which consist of only lowercase letters. String t is generated by random shuffling string s and then add one more letter at a random position. Find the letter that was added in t. Example: Input: s = &quot;abcd&quot; t = &quot;abcde&quot; Output: e Explanation: 'e' is the letter that was added.  我的解答 这道题我用了三种方法
- 全部统计,因为只会有一个字符是奇数,所以那个就是新增
- 用t-byte的总和减去s-byte的总和
- 异或,最后剩下那个增加的
-  其中第三种方法最快……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">阅读全文</a></p>
+                                题目 A binary tree is univalued if every node in the tree has the same value. Return true if and only if the given tree is univalued. Example 1: Input: [1,1,1,1,1,null,1] Output: true Example 2: Input: [2,2,2,5,2] Output: false Note: The number of nodes in the given tree will be in the range [1, 100]. Each node's value will be an integer in the range [0, 99].  我的解答 // Runtime: 0 ms, faster than 100.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-965/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">Leetcode 387</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-938/">Leetcode 938</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -283,19 +277,19 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             </div>
                             
                             <div class="post-content">
-                                题目  Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1. Examples: s = &quot;leetcode&quot; return 0. s = &quot;loveleetcode&quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-'a']++ } for idx, b := range s { if m[b-'a'] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">阅读全文</a></p>
+                                题目 Given the root node of a binary search tree, return the sum of values of all nodes with value between L and R (inclusive). The binary search tree is guaranteed to have unique values. Example 1: Input: root = [10,5,15,3,7,null,18], L = 7, R = 15 Output: 32 Example 2: Input: root = [10,5,15,3,7,13,18,1,null,6], L = 6, R = 10 Output: 23 Note: The number of nodes in the tree is at most 10000.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-938/">阅读全文</a></p>
                             </div>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/">Leetcode 383</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-897/">Leetcode 897</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月7日
+                                2019年5月19日
                             </date>
                             
                             <div class="post-meta meta-category">
@@ -306,8 +300,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             </div>
                             
                             <div class="post-content">
-                                题目  Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note. Note: You may assume that both strings contain only lowercase letters. canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true  我的解答 题目的意思是,右边的字符串能否凑成左边的字符串(每个字符只能用一次)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/">阅读全文</a></p>
+                                题目 Given a tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only 1 right child. Example 1: Input: [5,3,6,2,4,null,8,1,null,null,null,7,9] 5 / \ 3 6 / \ \ 2 4 8 / / \ 1 7 9 Output: [1,null,2,null,3,null,4,null,5,null,6,null,7,null,8,null,9] 1 \ 2 \ 3 \ 4 \ 5 \ 6 \ 7 \ 8 \ 9 Note: The number of nodes in the given tree will be between 1 and 100.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-897/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -379,6 +373,18 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
         <a href="https://wushaoqiang.github.io/categories/Leetcode/page/14/">14</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/15/">15</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/16/">16</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/page/17/">17</a>
+    </li>
+    
 
     
     <li class="next">
@@ -407,43 +413,43 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/" title="Leetcode 628">Leetcode 628</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/" title="Leetcode 605">Leetcode 605</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/" title="Leetcode 581">Leetcode 581</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/" title="Leetcode 566">Leetcode 566</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note">Linux Bash Basic Note</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash">Linux Bash</a>
     </li>
     
 </ul>
@@ -468,7 +474,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(7)</a>
     </li>
     
     <li>
@@ -484,11 +490,11 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(135)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
     </li>
     
     <li>
@@ -512,7 +518,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
     </li>
     
     <li>
@@ -542,11 +548,15 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     
@@ -593,6 +603,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
     
     <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     

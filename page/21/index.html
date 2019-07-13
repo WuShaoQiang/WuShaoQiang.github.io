@@ -68,305 +68,319 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/" title="Questions Network" >Questions Network</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月26日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/questions">questions</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
-IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
-A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。
-Session 在mega项目里遇到一个问题
-首先，我访问服务器，服务器将会返回一个Session给我，那么我在这个网页游走都可以用这个Session，没毛病
-现在我Logout，这个时候服务器调用函数将Session的期限变为-1，也就是将Session过期
-这个时候我把之前服务器给我的Session自己存起来，用Postman构造一个请求，并且附上这个Session(其实是通过Cookie传)，这个时候服务器不会因为将Session期限改为-1而不认识这个Session
-所以这个现象表明所谓的清除只是服务器给浏览器发送的Cookie期限设置为-1，然后浏览器看到Cookie已经过期了，因此就不用了
-这样也就验证了，一个用户在服务器上只有一个Session id？
-resp.Body resp, err := http.DefaultClient.Do(req) if err != nil { log.Fatalf(&quot;Do Error %s\n&quot;, err) } defer resp.Body.Close() body, err := ioutil.ReadAll(resp.Body) if err != nil { log.Fatalf(&quot;ReadAll Error %s\n&quot;, err) } // fmt.Println(string(body)) file, err := os.Create(path + keyword + &quot;.html&quot;) if err != nil { log.Fatalf(&quot;Create File Error %s\n&quot;, err) } defer file.Close() _, err = file.……
+                                 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
+HTTP是一个无状态协议
+报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/" title="Golang标准库--http" >Golang标准库--http</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/udp/" title="UDP" >UDP</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月19日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
-Package http doc.go 先来看看官方对这个包的一个解释
-这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
-这里还举了一些方法的例子
-// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
+                                  UDP无连接建立
+ 不需要维护连接状态
+ 报文头比TCP小
+ 能尽可能的快，没有速度限制
+  应用场景 对丢包不是很看重，对速度很敏感
+ DNS
+ SNMP
+  报文结构 ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/udp/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/definition/" title="一些名词的定义" >一些名词的定义</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/" title="TCP 流量控制" >TCP 流量控制</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月19日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Definition">Definition</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                这里是为了记录一些常用名词的定义，大多参照百度百科和Wiki
-句柄 句柄是一种特殊的智能指针 。当一个应用程序要引用其他系统（如数据库、操作系统）所管理的内存块或对象时，就要使用句柄
-在Golang里面，我们使用函数打开一个文件得到的就是一个文件句柄(打开的文件就是操作系统所管理的内存块)
-在Golang里面，我们使用数据库的驱动连接数据库时，返回的也是一个句柄，这个返回值只是一个对象，并不是一个连接
-Redis  redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set &ndash;有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。
- TLS  传输层安全性协议（英语：Transport Layer Security，缩写作TLS），及其前身安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。
-安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。 该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。
- Cookie&amp;Session Cookie Cookie是客户端保持状态
-Cookie的内容主要包括：名字，值，过期时间，路径和域
-若不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，关闭浏览器窗口，cookie就消失。这种生命期为浏览器会话期的cookie被称为会话cookie
-Session Session是服务器端保持状态
-一个用户在服务器上拥有唯一的一个session Id
-如果一个用户不断在请求同一个东西或者行为异常(爬虫？)，则可以对这个用户进行相应操作
-Session能够记录用户的动作，比如淘宝能够记录你购物车有多少东西
-Difference 我们拿淘宝作例子
-我们登录淘宝不用账号密码的时候用的就是Cookie
-但是我们在挑选商品加入购物车，淘宝的服务器也在记录我们的动作信息(比如添加商品)，这个时候用的是Session
-所以我们可以用Session来跟踪用户的动作。
-安全性 Session会比Cookie安全，因为Cookie可能会被欺骗(Cookie在一定程度上就算是你的用户名和密码，被人获取后，别人就可以用你的身份来做事了)……
+                                流量控制是为了匹配发送方和接收方的数据交换速度，如果发送方发的太快，接收方的缓存可能会溢出
+还要提醒一下流量控制和拥塞控制是两码事
+TCP通过让发送方维护一个称为接收窗口的变量来提供流量控制
+在接收方一定要满足
+LastByteRcvd - LastByteRead &lt;= RcvBuffer
+用rwnd表示还有多少空间可以用，所以rwnd = RcvBuffer - (LastByteRcvd - LastByteRead)
+在TCP报文首部里有一个叫做接收窗口，这个就是接收者告诉发送者rwnd的
+在发送方，通过将未确认的数据量控制在值rwnd以内，就可以保证接收者不会缓存溢出了
+UDP是不提供流量控制的，所以UDP很有可能会出现缓存溢出……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/definition/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-flow-control/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-exercism/" title="Golang Exercism" >Golang Exercism</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/" title="TCP 拥塞控制" >TCP 拥塞控制</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                Exercism &ndash; Bob 我的方法：(总之非常愚蠢就是了)
-func Hey(remark string) string { // Write some code here to pass the test suite. // Then remove all the stock comments. // They're here to help you get started but they only clutter a finished solution. // If you leave them in, reviewers may protest! if strings.EqualFold(remark, &quot;&quot;) { return &quot;Fine. Be that way!&quot; } whitespace := true for _, item := range []byte(remark) { if !……
+                                 TCP必须使用端到端拥塞控制而不是网络辅助的拥塞控制
+TCP所采用的方法是让每一个发送方根据所感知到的网络拥塞程度来限制其能向连接发送流量的速率
+三个问题 我们如何知道网络开始拥塞？
+我们如何限制发送方发送速率
+当发送方感受到拥塞时，用什么算法去限制其发送速率
+如何知道网络拥塞 TCP是不会有一种特殊的包叫“我拥塞啦”
+接收到Ack 没有拥塞，可以提速
+没接收到Ack 可能拥塞，降速
+如何限制发送方速率 改变cwnd
+当一切顺利，cwnd增加；丢包，cwnd减少
+我们发送方被限制在min(rwnd,cwnd)
+LastByteSent - LastByteAcked &lt;= cwnd
+rwnd和cwnd是不同的，前者是表示接收方的buffer还有多少能用，后者是改变在网络上的容量
+用什么算法来限制速度 我们希望TCP能在不发生拥塞情况上利用最大的带宽
+所以发送方速率有点像三角波，上上下下，因为要尽可能利用带宽又不要制造拥塞
+慢启动 在包被收到的情况下 cwnd每次是之前的两倍1,2,4,8,16...，直到大于或等于阈值，切换到拥塞避免
+在包没有被收到的情况下 三次冗余Ack 进入快速恢复
+超时 阈值=cwnd/2
+把cwnd变为1
+阈值(threhold) 记录上一次拥塞时一半的cwnd
+拥塞避免 在包被接收到的情况下 线性增长，每次在所有分片的Ack被接收到的情况下(一个RTT)，增加一个MSS
+在包没有被接收到的情况下 三次冗余Ack 进入快速恢复
+超时 切换到慢启动
+快速恢复 每个冗余的Ack对cwnd增加一个MSS，当丢失报文段的Ack最终回到时，再减少一个MSS
+进入拥塞避免状态
+出现超时，进入慢启动
+出现丢包，cwnd设置为1，阈值设置为cwnd的一半
+总结一下 三次冗余ACK  阈值设置为cwnd/2
+ cwnd设置为阈值(有快速恢复的情况下)
+  超时  阈值设置为cwnd/2
+ cwnd设置为1(MSS)
+  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-exercism/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-congestion-control/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/" title="Mysql学习笔记" >Mysql学习笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/" title="TCP 连接 --三次握手和四次挥手" >TCP 连接 --三次握手和四次挥手</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                安装 sudo apt-get install mysql-server mysql-client
-查询是否安装了： sudo netstat -tap grep mysql
-安装成功
-tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有叫输入密码
-登录 打开debian.cnf文件： sudo nano /etc/mysql/debian.cnf
-# Automatically generated for Debian scripts. DO NOT TOUCH! [client] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock [mysql_upgrade] host = localhost user = debian-sys-maint password = x7McPCywm2p7SsnZ socket = /var/run/mysqld/mysqld.sock  这里面有一个叫debian-sys-maint的user
-登录debian-sys-maint： mysql -u debian-sys-maint -p……
+                                 首先这里所说的握手，是进程之间的握手
+三次握手 简单来说就是
+A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可以承载有效负荷  再细致点说就是
+ 客户端应用程序发起一个TCP连接
+ 发送报文里有SYN
+ 收到来自服务器端的SYN&amp;ACK
+ 再次向服务器端发送ACK
+  这里面总共有3次报文，所以为三次握手
+最大报文段长度&amp;最大传输单元 最大报文段长度(MSS):一般为1460
+最大传输单元(MTU):一般为1500
+之说以说一般，是因为一般来说TCP/IP的首部字段加起来是40字节
+1500-40=1460
+清除认识 当进程通过套接字把数据给到TCP的时候，数据就和进程没关系了，已经全权交给TCP了
+为什么不是两次握手？ 这是书本上的一个问题
+在我理解，握手其实是为了双方知道对方的初始序列号
+ 客户端给服务器端发送初始序列号
+ 服务器端收到了客户端的初始序列号，并且发送服务器端的初始序列号
+  如果客户端不产生第三次握手，那么服务器端不知道客户端到底拿到了初始序列号没
+ 客户端看到回复后就知道服务器端拿到了自己的初始序列号，于是也和服务器端说明，已经拿到它的初始序列号了  四次挥手  客户端应用程序发起关闭连接
+ 发送报文里包含FIN
+ 服务器端发送一个ACK表示接收到了
+ 服务器端再次发一个FIN
+ 客户端给服务器端发一个ACK
+ 等待一会，资源就释放了
+  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-bible/" title="Go圣经读书笔记" >Go圣经读书笔记</a>
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/" title="TCP --报文" >TCP --报文</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
-func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
-输出/tmp/go-build115927302/b001/exe/main 123
-查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
- func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
- func (s *Scanner) Text() string  返回scanner所在行的文本
-counts := make(map[string]int) input := bufio.……
+                                 之间写过一个关于《计算机网络(原书第六版)：自顶向下方法》的一部分笔记，当时没继续写下去是因为觉得一个篇幅太多了，决定分开写，这样可能可以更加详细点，也算是第二次的复习吧
+这篇主要讲报文
+先看看报文的格式
+首先，TCP是运输层的协议，IP是网络层的协议，一般运输层协议会确定端口号，网络层协议则确定IP地址
+ 源/目的端口号
+ 序号/确认号：是用来双方实现可靠传输的(下面详细讲)
+ 接收窗口字段：用于流量控制(可能会在别的篇幅讲)
+ 首部长度：由于有选项这个字段，使得TCP的首部长度是可以变化的，不过通常就是20字节
+ 标志字段/紧急指针：标志字段包括确认字段有效、建立和拆除连接、紧急数据。紧急指针指向紧急数据
+  序号/确认号 一条TCP连接的双发均可随机地选择初始序号，可能是0和4294967295之间的任意值
+我们假设初始序号为0
+A --&gt; B Seq=42,ACK=79,data=1 B --&gt; A Seq=79,ACK=43,data=2 A --&gt; B Seq=43,ACK=80,data=3 ...  在我理解
+序号是标识我要发送给对方的数据
+确认号是标识我需要对方发送给我的数据
+所以上面场景就是
+A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/" title="Go语言实战" >Go语言实战</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/" title="Leetcode 20" >Leetcode 20</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                Go语言优点：
- Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
- Go语言内置并发机制，对并发有着更好的性能
- Go语言自带垃圾回收器
- goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
-  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
+                                题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &quot;()&quot; 输出: true 示例 2: 输入: &quot;()[]{}&quot; 输出: true 示例 3: 输入: &quot;(]&quot; 输出: false 示例 4: 输入: &quot;([)]&quot; 输出: false 示例 5: 输入: &quot;{[]}&quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
+var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: &quot;]&quot;, &quot;{&quot;: &quot;}&quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/" title="Go语言高级编程" >Go语言高级编程</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-14/" title="Leetcode 14" >Leetcode 14</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
-这篇文章是开源的，欢迎大家去阅读
-本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
-第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
- Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
- 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
-  字符串  字符串的元素不可修改，是一个只读的字节数组
- 字符串虽然不是切片，但是支持切片操作
-type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
-  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
-这种做法可以减少中间创建的临时切片
-copy append可以完成切片的添加 删除 插入操作……
+                                题目 编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 &quot;&quot;。 示例 1: 输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;] 输出: &quot;fl&quot; 示例 2: 输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;] 输出: &quot;&quot; 解释: 输入不存在公共前缀。 说明: 所有输入只包含小写字母 a-z 。  我的解答 func longestCommonPrefix(strs []string) string { if len(strs) == 0 { return &quot;&quot; } if len(strs) == 1 { return strs[0] } shortestLen := len(strs[0]) for _, str := range strs { if len(str) &lt; shortestLen { shortestLen = len(str) } } var finalStr string for i := 0; i &lt; shortestLen; i++ { tmp := strs[0][i] for j := 1; j &lt; len(strs); j++ { if tmp !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-14/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/" title="Golang--Leetcode" >Golang--Leetcode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/" title="Leetcode 13" >Leetcode 13</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                此文章为做题时发现的不足
- Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
-func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
+                                题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &quot;III&quot; 输出: 3 示例 2: 输入: &quot;IV&quot; 输出: 4 示例 3: 输入: &quot;IX&quot; 输出: 9 示例 4: 输入: &quot;LVIII&quot; 输出: 58 解释: L = 50, V= 5, III = 3.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/" title="Leetcode 9" >Leetcode 9</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年3月17日
+                                2019年4月22日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
-&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
- 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
-&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
-&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
-如果p是空的，那么会返回RuneError,0
-如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
-&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
-&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
-&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
-&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
-&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
-&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
+                                题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/">阅读全文</a></p>
                         </article>
                     
 
@@ -473,6 +487,18 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
         <a href="https://wushaoqiang.github.io/page/23/">23</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/24/">24</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/25/">25</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/26/">26</a>
+    </li>
+    
 
     
     <li class="next">
@@ -501,43 +527,43 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/" title="Leetcode 628">Leetcode 628</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/" title="Leetcode 605">Leetcode 605</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/" title="Leetcode 581">Leetcode 581</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/" title="Leetcode 566">Leetcode 566</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note">Linux Bash Basic Note</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash">Linux Bash</a>
     </li>
     
 </ul>
@@ -562,7 +588,7 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(7)</a>
     </li>
     
     <li>
@@ -578,11 +604,11 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(135)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
     </li>
     
     <li>
@@ -606,7 +632,7 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
     </li>
     
     <li>
@@ -636,11 +662,15 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     
@@ -687,6 +717,8 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
     
     <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     

@@ -68,231 +68,335 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/" title="Leetcode 628" >Leetcode 628</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble" >Css Flexble</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月29日
+                                2019年7月12日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer array, find three numbers whose product is maximum and output the maximum product. Example 1: Input: [1,2,3] Output: 6 Example 2: Input: [1,2,3,4] Output: 24 Note: The length of the given array will be in range [3,104] and all elements are in the range [-1000, 1000]. Multiplication of any three numbers in the input won't exceed the range of 32-bit signed integer.  我的解答 // Runtime: 36 ms, faster than 99.……
+                                今天来学习一下布局方式
+现在主流的布局方式flexbox
+Reference https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+Basic display: flex就将这个block变成了flexbox
+首先，我们要先搞明白container和item的关系
+一般来说item是最小的单位，也就是一个东西(比如：按键&hellip;)
+container就是我们的block，这个就是在页面设计的时候考虑要如何放置我们的block，container是可以嵌套的
+Axis For rows, the main axis is a horizontal line and for columns it is a vertical line.
+首先要搞懂轴的概念
+轴的方向是和flex-direction相关联的
+根据参数我们可以很快确定轴的方向
+row //main 左到右 cross 上到下 column //main 上到下 cross 左到右 row-reverse //... column-reverse //...  比如flex-direction: row，那么就按照上面这个图的方向
+ 主方向为横向(也就是item的排列方向)
+ cross方向为纵向
+  我们后面说到的属性可能会和轴有联系
+而这篇文章也是假设了flex-direction: row
+flex-wrap 可选参数
+nowrap (default) //这个就是将所有item按一个方向排列并且不会，并且只有一行 wrap //这个相对上面就会进行换行 wrap-reverse //反转,就是和wrap反过来，从底部到顶部  可以看出这个和两个轴都有关系
+先在main轴排列，不过空间可以wrap到cross轴……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/" title="Leetcode 605" >Leetcode 605</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure" >Javascript Data Structure</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月29日
+                                2019年7月9日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Suppose you have a long flowerbed in which some of the plots are planted and some are not. However, flowers cannot be planted in adjacent plots - they would compete for water and both would die. Given a flowerbed (represented as an array containing 0 and 1, where 0 means empty and 1 means not empty), and a number n, return if n new flowers can be planted in it without violating the no-adjacent-flowers rule.……
+                                array method 内置的Array方法是普遍使用的
+push() unshift() pop() shift() splice() //第一个参数的index(包括),第二个参数是数量(表示删除多少个)  splice splice相对前几个方法稍微复杂一点，它的功能也相对强大
+当splice传入两个参数的时候
+function sumOfTen(arr) { // change code below this line arr.splice(4,2) arr.splice(2,1) arr.splice(0,1) console.log(arr) // change code above this line return arr.reduce((a, b) =&gt; a + b); } // do not change code below this line console.log(sumOfTen([2, 5, 1, 5, 2, 1]));  注意
+当你删除了元素之后，索引就已经发生变化了，所以最好的方式就是重后面开始删除
+当传入三个参数的时候
+这和传入两个参数是完全不一样的
+三个参数就是先执行两个参数时的操作，也就是删除从某一个索引开始的n个数据，然后再从索引的位置插入一个数据
+function htmlColorNames(arr) { // change code below this line arr.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/" title="Leetcode 581" >Leetcode 581</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging" >Javascript Debugging</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月29日
+                                2019年7月9日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order, too. You need to find the shortest such subarray and output its length. Example 1: Input: [2, 6, 4, 8, 10, 9, 15] Output: 5 Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.……
+                                Bug一般分为三类
+语法错误 运行错误 逻辑错误  往往编辑器帮我们做好了语法错误的检测，因此这个是最简单的，后面两个就要我们自己掌握一些debug的技能去fix这些bugs
+log log是一个很好的debug方法，能够在不同阶段看到输出的内容有利于我们找出出错的环节
+console.log()  typeof 检测一个值的类型
+undefined --&gt; undefined NaN --&gt; Number null --&gt; Object  false 在JavaScript里
+false 0 &quot;&quot; NaN undefined null  都被当做falsy，也就是在if判断语句和false作用一样的
+out of range 当数组越界的时候，JavaScript返回的是undefined……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/" title="Leetcode 566" >Leetcode 566</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp" >Javascript Regexp</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月29日
+                                2019年7月8日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 In MATLAB, there is a very useful function called 'reshape', which can reshape a matrix into a new one with different size but keep its original data. You're given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively. The reshaped matrix need to be filled with all the elements of the original matrix in the same row-traversing order as they were.……
+                                这一篇是讲正则表达式(Regular Expression)
+Test method 全匹配
+let waldoIsHiding = &quot;Somewhere Waldo is hiding in this text.&quot;; let waldoRegex = /Waldo/; // Change this line let result = waldoRegex.test(waldoIsHiding); console.log(result) //true  全匹配是大小写敏感的
+多可能性
+let petString = &quot;James has a pet cat.&quot;; let petRegex = /dog|cat|bird|fish/; // Change this line let result = petRegex.test(petString);  这样就是一个或关系
+忽略大小写
+let myString = &quot;freeCodeCamp&quot;; let fccRegex = /freeCodeCamp/i; // Change this line let result = fccRegex.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561" >Leetcode 561</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6" >Javascript ES6</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月27日
+                                2019年7月7日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目  Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible. Example 1: Input: [1,4,3,2] Output: 4 Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4). Note: n is a positive integer, which is in the range of [1, 10000].……
+                                let vs var 在ES6之前还没有let
+var是有一些很严重的缺点的，比如
+可以重复定义同名的变量而不会抛错 经常想定义一个局部变量，变成了一个全局变量，也就是shadow和我们平时熟悉的方式不一样  所以我们在定义变量的时候就用let，因为let就是修复了var的一些缺点，和平时的用法一样
+const 这个和let差不多，只是只能赋值一次(定义的时候就要赋值)
+并且建议const用全部大写的格式
+开发建议是：如果变量是不会重新赋值的，那么最好是使用const，除非是预测到要重新赋值就用let
+在这里还要强调的一点，赋值是值这个变量的赋值，如
+const s = [5,6,7] s = [1,2] //出错，重新赋值 s[2] = 10 //可行，这个不是对s的重新赋值  同理的还有Object、function
+Object freeze 可以防止一个Object的属性被修改
+Object.freeze(object_name);  Arrow functions () =&gt; {} () =&gt; value //如果是直接返回数据，这个是简化的写法 (arg1,arg2) =&gt; {}  filter map reduce A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532" >Leetcode 532</a>
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic" >Javascript Basic</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月27日
+                                2019年7月3日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目  Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j), where i and j are both numbers in the array and their absolute difference is k. Example 1: Input: [3, 1, 4, 1, 5], k = 2 Output: 2 Explanation: There are two 2-diff pairs in the array, (1, 3) and (3, 5).……
+                                数组的方法 push 插入数据到数组的后面 pop 取出数组的最后一个数据 shift 取出数组的第一个数据 unshift 插入数据到数组的前面  JS的数组里面的元素是可以不相同的
+作用域 当变量没有用var等关键字声明时，这个变量是全局变量，这个可能会导致一些问题
+function func(){ funcVar = 1 }  等于号 比较符有两个==和===
+在JS里面
+1 == '1' //true 1 === '1' //false  ==会在类型不同进行自动转换
+===不会进行类型转换
+同理!=和!==也是一样
+比较符 &gt; &lt; &gt;= &lt;=
+这些当类型不同时，也会进行类型转换
+Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change code below this line switch(val){ case 1: answer = &quot;alpha&quot;; break; case 2: answer = &quot;beta&quot;; break; case 3: answer = &quot;gamma&quot;; break; case 4: answer = &quot;delta&quot;; break; } // Only change code above this line return answer; }  需要注意的是，这里的比较是用===，而且要注意，如果不写break，会继续匹配下去……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509" >Leetcode 509</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk" >Linux Bash Awk</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月27日
+                                2019年6月9日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is, F(0) = 0, F(1) = 1 F(N) = F(N - 1) + F(N - 2), for N &gt; 1. Given N, calculate F(N). Example 1: Input: 2 Output: 1 Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.……
+                                awk的一些用法
+常见模式 awk '/reg/' 'BEGIN{} condition {condition action} END{}' filename  其中
+ /reg/ 是一个正则的匹配
+ condition 是判断条件
+ action 就是要执行的操作
+ BEGIN 开始前的操作
+ END 结束后的操作
+  对文件 awk '{print $1}' test.txt  对管道 df -h | awk '{print $1}'  这里面的$1是指第一部分，默认分隔符是空格(制表符)
+echo &quot;This is a test&quot; | awk '{print $1}'  输出的是This
+如果想要的分隔符不是默认的，可以使用-F
+例如
+echo &quot;This,is,a,test&quot; | awk '{print $1}' #输出 This,is,a,test echo &quot;This,is,a,test&quot; | awk -F ',' '{print $1}' #输出 This  更多高级的用法 先说说内置的变量……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485" >Leetcode 485</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test" >Linux Bash Test</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月27日
+                                2019年6月9日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given a binary array, find the maximum number of consecutive 1s in this array. Example 1: Input: [1,1,0,1,1,1] Output: 3 Explanation: The first two digits or the last three digits are consecutive 1s. The maximum number of consecutive 1s is 3. Note: The input array will only contain 0 and 1. The length of input array is a positive integer and will not exceed 10,000  我的解答 // Runtime: 36 ms, faster than 96.……
+                                 test命令是bash中一个重要的判断命令
+虽然我们在其它编程语言上习惯使用if判断语句去实施判断，但也有必要了解一下这一种的判断手段
+if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上面那种结合if条件判断的和原有的差不多，所以我们一般常用的是[]
+例子
+[ -e ./test.txt ] &amp;&amp; echo &quot;exist&quot; || echo &quot;doesn't exist&quot;  这里就是存在就会输出exist，不存在就会输出后面的那个
+而且这还适用于
+ 文件类型判断
+ 文件权限
+ 两文件之间
+ 整数之间
+ 字符串之间
+ 多重条件(也就是AND和OR还有NOT)
+  ……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448" >Leetcode 448</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note" >Linux Bash Basic Note</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月27日
+                                2019年6月9日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once. Find all the elements of [1, n] inclusive that do not appear in this array. Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space. Example: Input: [4,3,2,7,8,2,3,1] Output: [5,6]  我的解答 func findDisappearedNumbers(nums []int) []int { for i := 0; i &lt; len(nums); i++ { if nums[abs(nums[i])-1] &gt; 0 { nums[abs(nums[i])-1] *= -1 } } res := make([]int, 0) for i := 0; i &lt; len(nums); i++ { if nums[i] &gt; 0 { res = append(res, i+1) } } return res } func abs(x int) int { if x &lt; 0 { return -x } return x }  因为数的范围不会超过长度，因此可以用数来表示索引，如果数存在，那么相对应大小的索引置-1(因为数组里面不会有负数，所以可以用来区分)……
+                                记录一些笔记
+参考 https://www.jianshu.com/p/e1c8e5bfa45e
+变量 注意变量赋值别加空格
+变量命名只能用字母、数字和下划线，且数字不能在开头
+ readonly 只读变量，用法和read类似
+ unset 可以删除变量，但不可删除只读变量
+  本质上来说，bash里面都是字符串，只有当变量是纯数字的时候才是所谓的数字类型
+局部和全局 这里要特别注意，普通变量默认是全局变量
+所以要想在函数中定义局部变量，需要加local声明
+local var1  环境变量 这个就和linux上的一些环境是一样的
+特殊变量 $0 当前脚本的文件名 $1,$2... 传递给脚本或函数的参数,按顺序的 $# 传递给脚本或函数的参数个数 $* 传递给脚本或函数的所有参数 $? 上个命令的退出状态，或函数的返回值 $$ 当前Shell进程ID  转义字符 echo默认是不转移字符的，但printf是会转义的
+转义字符的含义和其它编程语言基本一样
+命令替换 我们可以将命令的输出存储起来
+比如存储一个日期
+date=`date`  注意，这个是反引号
+运算符 shell脚本的运算符好像和其它编程语言有很大的差异，它主要是用flag形式
+关于数字的 -eq -ne -gt -lt -ge -le  关于布尔值 ! not -o or -a and  所以像其它编程语言可能会用 &amp;&amp; || 这些符号
+关于字符串 == !……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925" >Leetcode 925</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash" >Linux Bash</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
-                                2019年5月26日
+                                2019年6月9日
                             </date>
                             
                             <div class="post-meta">
                                 <span>|</span>
                                 
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
                                 
                             </div>
                             
                             <div class="post-content">
-                                题目 Your friend is typing his name into a keyboard. Sometimes, when typing a character c, the key might get long pressed, and the character will be typed 1 or more times. You examine the typed characters of the keyboard. Return True if it is possible that it was your friends name, with some characters (possibly none) being long pressed. Example 1: Input: name = &quot;alex&quot;, typed = &quot;aaleex&quot; Output: true Explanation: 'a' and 'e' in 'alex' were long pressed.……
+                                给自己定的一些规范 因为shell的语法太灵活，有许多语法是不唯一的，导致我很纠结，下面结合他人的实战经历，规定自己一套规范，以后写shell尽量按照这样的规范来
+用printf函数，在format-string上加引号 给所有变量加上花括号 ${VAR} 运算符尽量使用flag形式(字符串不能用这个形式) 判断只用[]  需要特别注意的一些点 关于字符串 单引号‘’会原样输出字符串，对里面的变量引用都是没用的，转义字符也没用 双引号可以引用变量和转义字符  初学例子
+开头指定解释器
+#!/bin/bash  这里记一些用过的语法
+取奇数
+for i in {1.99..2} do echo $i done  读取stdin
+read name echo &quot;Welcome $name&quot;  读取并输出运算后结果
+read x read y echo $((x+y)) echo $((x-y)) echo $((x*y)) echo $((x/y))  读取并比较
+read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (($X&lt;$Y)); then echo &quot;X is less than Y&quot;; else echo &quot;X is equal to Y&quot;; fi  字符串的比较……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash/">阅读全文</a></p>
                         </article>
                     
 
@@ -395,6 +499,18 @@
         <a href="https://wushaoqiang.github.io/page/23/">23</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/24/">24</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/25/">25</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/page/26/">26</a>
+    </li>
+    
 
     
     <li class="next">
@@ -423,43 +539,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-628/" title="Leetcode 628">Leetcode 628</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-605/" title="Leetcode 605">Leetcode 605</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-581/" title="Leetcode 581">Leetcode 581</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-566/" title="Leetcode 566">Leetcode 566</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-561/" title="Leetcode 561">Leetcode 561</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-532/" title="Leetcode 532">Leetcode 532</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509">Leetcode 509</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485">Leetcode 485</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448">Leetcode 448</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note">Linux Bash Basic Note</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925">Leetcode 925</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash">Linux Bash</a>
     </li>
     
 </ul>
@@ -484,7 +600,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(1)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(7)</a>
     </li>
     
     <li>
@@ -500,11 +616,11 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(135)</a>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(4)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
     </li>
     
     <li>
@@ -528,7 +644,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
     </li>
     
     <li>
@@ -558,11 +674,15 @@
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     
@@ -609,6 +729,8 @@
     <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
     
     <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
     
     <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
     

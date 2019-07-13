@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CSS on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/CSS/</link>
+    <description>Recent content in CSS on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 12 Jul 2019 19:30:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/CSS/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Css Flexble</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/css-flexble/</link>
+      <pubDate>Fri, 12 Jul 2019 19:30:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/css-flexble/</guid>
+      <description>今天来学习一下布局方式
+现在主流的布局方式flexbox
+Reference https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+Basic display: flex就将这个block变成了flexbox
+首先，我们要先搞明白container和item的关系
+一般来说item是最小的单位，也就是一个东西(比如：按键&amp;hellip;)
+container就是我们的block，这个就是在页面设计的时候考虑要如何放置我们的block，container是可以嵌套的
+Axis For rows, the main axis is a horizontal line and for columns it is a vertical line.
+首先要搞懂轴的概念
+轴的方向是和flex-direction相关联的
+根据参数我们可以很快确定轴的方向
+row //main 左到右 cross 上到下 column //main 上到下 cross 左到右 row-reverse //... column-reverse //...  比如flex-direction: row，那么就按照上面这个图的方向
+ 主方向为横向(也就是item的排列方向)
+ cross方向为纵向
+  我们后面说到的属性可能会和轴有联系
+而这篇文章也是假设了flex-direction: row
+flex-wrap 可选参数
+nowrap (default) //这个就是将所有item按一个方向排列并且不会，并且只有一行 wrap //这个相对上面就会进行换行 wrap-reverse //反转,就是和wrap反过来，从底部到顶部  可以看出这个和两个轴都有关系
+先在main轴排列，不过空间可以wrap到cross轴</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bash on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Bash/</link>
+    <description>Recent content in Bash on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 09 Jun 2019 22:44:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux Bash Awk</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-bash-awk/</link>
+      <pubDate>Sun, 09 Jun 2019 22:44:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-bash-awk/</guid>
+      <description>awk的一些用法
+常见模式 awk &#39;/reg/&#39; &#39;BEGIN{} condition {condition action} END{}&#39; filename  其中
+ /reg/ 是一个正则的匹配
+ condition 是判断条件
+ action 就是要执行的操作
+ BEGIN 开始前的操作
+ END 结束后的操作
+  对文件 awk &#39;{print $1}&#39; test.txt  对管道 df -h | awk &#39;{print $1}&#39;  这里面的$1是指第一部分，默认分隔符是空格(制表符)
+echo &amp;quot;This is a test&amp;quot; | awk &#39;{print $1}&#39;  输出的是This
+如果想要的分隔符不是默认的，可以使用-F
+例如
+echo &amp;quot;This,is,a,test&amp;quot; | awk &#39;{print $1}&#39; #输出 This,is,a,test echo &amp;quot;This,is,a,test&amp;quot; | awk -F &#39;,&#39; &#39;{print $1}&#39; #输出 This  更多高级的用法 先说说内置的变量</description>
+    </item>
+    
+    <item>
+      <title>Linux Bash Test</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-bash-test/</link>
+      <pubDate>Sun, 09 Jun 2019 21:51:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-bash-test/</guid>
+      <description> test命令是bash中一个重要的判断命令
+虽然我们在其它编程语言上习惯使用if判断语句去实施判断，但也有必要了解一下这一种的判断手段
+if + test if test -e ./test.txt; then echo &amp;quot;exist&amp;quot;; fi  [ ] 因为上面那种结合if条件判断的和原有的差不多，所以我们一般常用的是[]
+例子
+[ -e ./test.txt ] &amp;amp;&amp;amp; echo &amp;quot;exist&amp;quot; || echo &amp;quot;doesn&#39;t exist&amp;quot;  这里就是存在就会输出exist，不存在就会输出后面的那个
+而且这还适用于
+ 文件类型判断
+ 文件权限
+ 两文件之间
+ 整数之间
+ 字符串之间
+ 多重条件(也就是AND和OR还有NOT)
+  </description>
+    </item>
+    
+    <item>
+      <title>Linux Bash Basic Note</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/</link>
+      <pubDate>Sun, 09 Jun 2019 18:55:28 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/</guid>
+      <description>记录一些笔记
+参考 https://www.jianshu.com/p/e1c8e5bfa45e
+变量 注意变量赋值别加空格
+变量命名只能用字母、数字和下划线，且数字不能在开头
+ readonly 只读变量，用法和read类似
+ unset 可以删除变量，但不可删除只读变量
+  本质上来说，bash里面都是字符串，只有当变量是纯数字的时候才是所谓的数字类型
+局部和全局 这里要特别注意，普通变量默认是全局变量
+所以要想在函数中定义局部变量，需要加local声明
+local var1  环境变量 这个就和linux上的一些环境是一样的
+特殊变量 $0 当前脚本的文件名 $1,$2... 传递给脚本或函数的参数,按顺序的 $# 传递给脚本或函数的参数个数 $* 传递给脚本或函数的所有参数 $? 上个命令的退出状态，或函数的返回值 $$ 当前Shell进程ID  转义字符 echo默认是不转移字符的，但printf是会转义的
+转义字符的含义和其它编程语言基本一样
+命令替换 我们可以将命令的输出存储起来
+比如存储一个日期
+date=`date`  注意，这个是反引号
+运算符 shell脚本的运算符好像和其它编程语言有很大的差异，它主要是用flag形式
+关于数字的 -eq -ne -gt -lt -ge -le  关于布尔值 ! not -o or -a and  所以像其它编程语言可能会用 &amp;amp;&amp;amp; || 这些符号
+关于字符串 == !</description>
+    </item>
+    
+    <item>
+      <title>Linux Bash</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-bash/</link>
+      <pubDate>Sun, 09 Jun 2019 15:56:26 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-bash/</guid>
+      <description>给自己定的一些规范 因为shell的语法太灵活，有许多语法是不唯一的，导致我很纠结，下面结合他人的实战经历，规定自己一套规范，以后写shell尽量按照这样的规范来
+用printf函数，在format-string上加引号 给所有变量加上花括号 ${VAR} 运算符尽量使用flag形式(字符串不能用这个形式) 判断只用[]  需要特别注意的一些点 关于字符串 单引号‘’会原样输出字符串，对里面的变量引用都是没用的，转义字符也没用 双引号可以引用变量和转义字符  初学例子
+开头指定解释器
+#!/bin/bash  这里记一些用过的语法
+取奇数
+for i in {1.99..2} do echo $i done  读取stdin
+read name echo &amp;quot;Welcome $name&amp;quot;  读取并输出运算后结果
+read x read y echo $((x+y)) echo $((x-y)) echo $((x*y)) echo $((x/y))  读取并比较
+read X read Y if (($X&amp;gt;$Y)); then echo &amp;quot;X is greater than Y&amp;quot;; elif (($X&amp;lt;$Y)); then echo &amp;quot;X is less than Y&amp;quot;; else echo &amp;quot;X is equal to Y&amp;quot;; fi  字符串的比较</description>
+    </item>
+    
+  </channel>
+</rss>
