@@ -68,6 +68,69 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic" >CSS Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                主要记录一下CSS的基本语法
+以标签来选择 以标签来选择可能并不是很好的选择，一旦项目规模大，这种是不好管理的
+后代选择器 div strong //这个是指凡是在div下面的strong标签，都会起作用 要注意 后代并不是单单指一代 子代选择器 div&gt;strong //这个和后代选择器很大的不同就是这个只会选择子代 相邻兄弟选择器 div&gt; p+h1 //二者有共同的父元素  id、class选择器 id
+#pro{ }  class
+.important{ }  也可以组合一些，下面给一些例子
+.important.warning{ }  这个属性要在class=&quot;important warning&quot;同时拥有这两个属性才可以有这里面的样式
+或者
+.important p{ }  属性选择器 选择属性
+a[href]{ color: red; }  只改变有href属性的a标签……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic" >CSS3 Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                主要针对CSS3
+本篇是笔记，因此覆盖会不全面
+####Reference
+w3school
+border div { border:2px solid #ffffff; border-radius:25px; -moz-border-radius:25px; /* Old Firefox */ }  border控制边界的大小，形状和颜色
+border-radius控制着边框的弯曲的半径，随着数字越大，边框会越弯
+transition div { width:100px; height:100px; background:yellow; transition:width 10s; -moz-transition:width 2s; /* Firefox 4 */ -webkit-transition:width 10s; /* Safari and Chrome */ -o-transition:width 2s; /* Opera */ } div:hover { width:300px; }  这个的效果就是在div上悬停，就会将div的宽度在一定时间内切换到另一个指定的宽度
+可以看到，需要在transition那里声明哪个属性变化
+如果要有多个属性变化(比如 width和height都变)
+div { width:100px; height:100px; background:yellow; transition:width 2s, height 2s; -moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */ -webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */ -o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */ } div:hover { width:200px; height:200px; transform:rotate(180deg); -moz-transform:rotate(180deg); /* Firefox 4 */ -webkit-transform:rotate(180deg); /* Safari and Chrome */ -o-transform:rotate(180deg); /* Opera */ }  可以看到只是简单的用逗号隔开就可以了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble" >Css Flexble</a>
                                 </h1>
                             </header>
@@ -328,77 +391,6 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note" >Linux Bash Basic Note</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                记录一些笔记
-参考 https://www.jianshu.com/p/e1c8e5bfa45e
-变量 注意变量赋值别加空格
-变量命名只能用字母、数字和下划线，且数字不能在开头
- readonly 只读变量，用法和read类似
- unset 可以删除变量，但不可删除只读变量
-  本质上来说，bash里面都是字符串，只有当变量是纯数字的时候才是所谓的数字类型
-局部和全局 这里要特别注意，普通变量默认是全局变量
-所以要想在函数中定义局部变量，需要加local声明
-local var1  环境变量 这个就和linux上的一些环境是一样的
-特殊变量 $0 当前脚本的文件名 $1,$2... 传递给脚本或函数的参数,按顺序的 $# 传递给脚本或函数的参数个数 $* 传递给脚本或函数的所有参数 $? 上个命令的退出状态，或函数的返回值 $$ 当前Shell进程ID  转义字符 echo默认是不转移字符的，但printf是会转义的
-转义字符的含义和其它编程语言基本一样
-命令替换 我们可以将命令的输出存储起来
-比如存储一个日期
-date=`date`  注意，这个是反引号
-运算符 shell脚本的运算符好像和其它编程语言有很大的差异，它主要是用flag形式
-关于数字的 -eq -ne -gt -lt -ge -le  关于布尔值 ! not -o or -a and  所以像其它编程语言可能会用 &amp;&amp; || 这些符号
-关于字符串 == !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash" >Linux Bash</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                给自己定的一些规范 因为shell的语法太灵活，有许多语法是不唯一的，导致我很纠结，下面结合他人的实战经历，规定自己一套规范，以后写shell尽量按照这样的规范来
-用printf函数，在format-string上加引号 给所有变量加上花括号 ${VAR} 运算符尽量使用flag形式(字符串不能用这个形式) 判断只用[]  需要特别注意的一些点 关于字符串 单引号‘’会原样输出字符串，对里面的变量引用都是没用的，转义字符也没用 双引号可以引用变量和转义字符  初学例子
-开头指定解释器
-#!/bin/bash  这里记一些用过的语法
-取奇数
-for i in {1.99..2} do echo $i done  读取stdin
-read name echo &quot;Welcome $name&quot;  读取并输出运算后结果
-read x read y echo $((x+y)) echo $((x-y)) echo $((x*y)) echo $((x/y))  读取并比较
-read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (($X&lt;$Y)); then echo &quot;X is less than Y&quot;; else echo &quot;X is equal to Y&quot;; fi  字符串的比较……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -539,6 +531,14 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
     </li>
     
@@ -570,14 +570,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
         <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note">Linux Bash Basic Note</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash">Linux Bash</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -600,7 +592,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(7)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(9)</a>
     </li>
     
     <li>
@@ -683,6 +675,8 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
     <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
     
     <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
     

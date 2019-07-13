@@ -6,10 +6,45 @@
     <description>Recent content in Front-end on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jul 2019 19:30:30 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 13:46:54 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Front-end/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSS Basic</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/css-basic/</link>
+      <pubDate>Sat, 13 Jul 2019 13:46:54 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/css-basic/</guid>
+      <description>主要记录一下CSS的基本语法
+以标签来选择 以标签来选择可能并不是很好的选择，一旦项目规模大，这种是不好管理的
+后代选择器 div strong //这个是指凡是在div下面的strong标签，都会起作用 要注意 后代并不是单单指一代 子代选择器 div&amp;gt;strong //这个和后代选择器很大的不同就是这个只会选择子代 相邻兄弟选择器 div&amp;gt; p+h1 //二者有共同的父元素  id、class选择器 id
+#pro{ }  class
+.important{ }  也可以组合一些，下面给一些例子
+.important.warning{ }  这个属性要在class=&amp;quot;important warning&amp;quot;同时拥有这两个属性才可以有这里面的样式
+或者
+.important p{ }  属性选择器 选择属性
+a[href]{ color: red; }  只改变有href属性的a标签</description>
+    </item>
+    
+    <item>
+      <title>CSS3 Basic</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/css3-basic/</link>
+      <pubDate>Sat, 13 Jul 2019 13:02:09 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/css3-basic/</guid>
+      <description>主要针对CSS3
+本篇是笔记，因此覆盖会不全面
+####Reference
+w3school
+border div { border:2px solid #ffffff; border-radius:25px; -moz-border-radius:25px; /* Old Firefox */ }  border控制边界的大小，形状和颜色
+border-radius控制着边框的弯曲的半径，随着数字越大，边框会越弯
+transition div { width:100px; height:100px; background:yellow; transition:width 10s; -moz-transition:width 2s; /* Firefox 4 */ -webkit-transition:width 10s; /* Safari and Chrome */ -o-transition:width 2s; /* Opera */ } div:hover { width:300px; }  这个的效果就是在div上悬停，就会将div的宽度在一定时间内切换到另一个指定的宽度
+可以看到，需要在transition那里声明哪个属性变化
+如果要有多个属性变化(比如 width和height都变)
+div { width:100px; height:100px; background:yellow; transition:width 2s, height 2s; -moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */ -webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */ -o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */ } div:hover { width:200px; height:200px; transform:rotate(180deg); -moz-transform:rotate(180deg); /* Firefox 4 */ -webkit-transform:rotate(180deg); /* Safari and Chrome */ -o-transform:rotate(180deg); /* Opera */ }  可以看到只是简单的用逗号隔开就可以了</description>
+    </item>
     
     <item>
       <title>Css Flexble</title>

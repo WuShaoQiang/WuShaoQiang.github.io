@@ -6,10 +6,27 @@
     <description>Recent content in CSS on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jul 2019 19:30:30 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 13:46:54 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/CSS/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSS Basic</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/css-basic/</link>
+      <pubDate>Sat, 13 Jul 2019 13:46:54 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/css-basic/</guid>
+      <description>主要记录一下CSS的基本语法
+以标签来选择 以标签来选择可能并不是很好的选择，一旦项目规模大，这种是不好管理的
+后代选择器 div strong //这个是指凡是在div下面的strong标签，都会起作用 要注意 后代并不是单单指一代 子代选择器 div&amp;gt;strong //这个和后代选择器很大的不同就是这个只会选择子代 相邻兄弟选择器 div&amp;gt; p+h1 //二者有共同的父元素  id、class选择器 id
+#pro{ }  class
+.important{ }  也可以组合一些，下面给一些例子
+.important.warning{ }  这个属性要在class=&amp;quot;important warning&amp;quot;同时拥有这两个属性才可以有这里面的样式
+或者
+.important p{ }  属性选择器 选择属性
+a[href]{ color: red; }  只改变有href属性的a标签</description>
+    </item>
     
     <item>
       <title>Css Flexble</title>
