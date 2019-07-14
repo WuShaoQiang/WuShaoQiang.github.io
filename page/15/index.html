@@ -68,6 +68,30 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/" title="Leetcode 206" >Leetcode 206</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Reverse a singly linked list. Example: Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
+func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/" title="Leetcode 205" >Leetcode 205</a>
                                 </h1>
                             </header>
@@ -274,29 +298,6 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/" title="Leetcode 171" >Leetcode 171</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a column title as appear in an Excel sheet, return its corresponding column number. For example: A -&gt; 1 B -&gt; 2 C -&gt; 3 ... Z -&gt; 26 AA -&gt; 27 AB -&gt; 28 ... Example 1: Input: &quot;A&quot; Output: 1 Example 2: Input: &quot;AB&quot; Output: 28 Example 3: Input: &quot;ZY&quot; Output: 701  我的解答 func titleToNumber(s string) int { result := 0 tmp := 1 for i := len(s) - 1; i &gt;= 0; i-- { num := int(s[i] - 64) result += (num * tmp) tmp = tmp * 26 } return result }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -413,6 +414,10 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
         <a href="https://wushaoqiang.github.io/page/26/">26</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/27/">27</a>
+    </li>
+    
 
     
     <li class="next">
@@ -441,6 +446,10 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
     </li>
     
@@ -449,7 +458,7 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
     </li>
     
     <li>
@@ -476,10 +485,6 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
         <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -502,7 +507,7 @@ func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt;
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(10)</a>
     </li>
     
     <li>

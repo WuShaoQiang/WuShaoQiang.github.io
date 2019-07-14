@@ -68,6 +68,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/" title="Leetcode 67" >Leetcode 67</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &quot;11&quot;, b = &quot;1&quot; 输出: &quot;100&quot; 示例 2: 输入: a = &quot;1010&quot;, b = &quot;1011&quot; 输出: &quot;10101&quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &quot;&quot; if len(a) &gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &gt;= 0; i-- { if i &gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/" title="Leetcode 66" >Leetcode 66</a>
                                 </h1>
                             </header>
@@ -289,45 +312,6 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/" title="SQL 基础" >SQL 基础</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者之前学了一些基础的Mysql的语法，现在进一步学习
-关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
-非关系型数据库有自己的一套语言
-只针对Mysql的SQL语句
-SELECT 选定要输出的列
-SELECT column_name,column_name FROM table_name;  将所有列输出
-SELECT * FROM table_name;  SELECT DISTINCT 如果一个列中包含了很多相同的，比如国家里面有很多人是中国的、日本的等等，我们指向查看有多少种的话，这样看起来很费劲
-介绍一个解决这种问题的命令
-和SELECT语法基本一样，只是这里不会输出相同的字段
-SELECT DISTINCT column_name,column_name FROM table_name;  WHERE WHERE子句用于提取那些满足指定标准的记录
-SELECT column_name,column_name FROM table_name WHERE column_name operator value;  例如，我要id大于3的user的id和name字段
-SELECT id,name FROM user WHERE id &gt; 3  这里提醒一点，当实例是文本字段需要加单引号，如果是数值字段，就像上面一样直接写就好
-WHERE的运算符 WHERE column_name operator value  这里的operator就是运算符的位置
-运算符有：
- =,&gt;,&gt;=,&lt;,&lt;= 这些就比较好理解了
- &lt;&gt; 不等于
- BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -444,6 +428,10 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
         <a href="https://wushaoqiang.github.io/page/26/">26</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/27/">27</a>
+    </li>
+    
 
     
     <li class="next">
@@ -472,6 +460,10 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
     </li>
     
@@ -480,7 +472,7 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="Css Flexble">Css Flexble</a>
+        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
     </li>
     
     <li>
@@ -507,10 +499,6 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
         <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test">Linux Bash Test</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -533,7 +521,7 @@ WHERE的运算符 WHERE column_name operator value  这里的operator就是运�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(10)</a>
     </li>
     
     <li>

@@ -6,10 +6,40 @@
     <description>Recent content in Basic on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Jul 2019 13:46:54 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Jul 2019 15:01:30 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Basic/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSS Basic Property</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/css-basic-property/</link>
+      <pubDate>Sat, 13 Jul 2019 15:01:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/css-basic-property/</guid>
+      <description>最基本的一些属性
+text-align 文本对齐方式
+ justify 对齐文本容器的左右两边
+ center 每一行左右间距一样
+ right
+ left
+  width 指定容器大小，可以接受不同的单位
+常见单位：
+ px 像素
+ % 百分比
+ em 根据父元素的倍数
+ rem 根据根元素的倍数
+ vh view-high
+ vw view-width
+ max/min
+  刚开始学习前端会不知道这个百分比是以什么为基准的
+宽度会相对于父元素的宽度 高度会相对与父元素的高度 字体大小会相对父元素字体大小 边界是相对自身的  一些标签  strong 加粗
+ u 下划线
+ em 斜体
+ s 横线(画在字体中间)
+ hr 水平线(无close tag)
+  box-shadow  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order.</description>
+    </item>
     
     <item>
       <title>CSS Basic</title>
@@ -47,7 +77,7 @@ div { width:100px; height:100px; background:yellow; transition:width 2s, height 
     </item>
     
     <item>
-      <title>Css Flexble</title>
+      <title>CSS Flexble</title>
       <link>https://wushaoqiang.github.io/posts/front-end/css-flexble/</link>
       <pubDate>Fri, 12 Jul 2019 19:30:30 +0800</pubDate>
       
