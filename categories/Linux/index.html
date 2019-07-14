@@ -78,6 +78,43 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">Linux Ps</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月14日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 ps命令有几种标准，这里只用UNIX版本的
+Background 首先了解一些概念
+ PID 进程ID
+ PPID 父进程ID
+ PGID 进程所在GroupID
+ SID 进程所在会话(Session)ID
+  一般来说，SID就是我们的shell
+一个SID管理多个PGID
+一个PGID管理很多PID
+既然是管理，那就会有leader角色，那么如何知道谁是leader
+PID == PGID的就是group leader
+PID == SID的就是session leader
+Flag Selection
+-A -e 全部进程 -a 全部进程处理session leader -C 命令名字 -g group -u user -p pid -t tty  Format
+-o pid,ppid,tty,time 选择输出某些字段 -F 全部字段(带字段名字 -f不带字段名字) --forest 树状形式输出  ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/">Linux Bash Awk</a>
                                 </h1>
                             </header>
@@ -385,6 +422,10 @@ update 能够看到电脑持续开机时间……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
     </li>
     
@@ -418,10 +459,6 @@ update 能够看到电脑持续开机时间……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
 </ul>
@@ -466,7 +503,7 @@ update 能够看到电脑持续开机时间……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
     </li>
     
     <li>

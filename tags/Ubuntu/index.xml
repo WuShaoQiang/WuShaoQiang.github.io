@@ -6,10 +6,33 @@
     <description>Recent content in Ubuntu on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Jun 2019 22:44:43 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jul 2019 22:11:55 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Ubuntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Ps</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-ps/</link>
+      <pubDate>Sun, 14 Jul 2019 22:11:55 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-ps/</guid>
+      <description> ps命令有几种标准，这里只用UNIX版本的
+Background 首先了解一些概念
+ PID 进程ID
+ PPID 父进程ID
+ PGID 进程所在GroupID
+ SID 进程所在会话(Session)ID
+  一般来说，SID就是我们的shell
+一个SID管理多个PGID
+一个PGID管理很多PID
+既然是管理，那就会有leader角色，那么如何知道谁是leader
+PID == PGID的就是group leader
+PID == SID的就是session leader
+Flag Selection
+-A -e 全部进程 -a 全部进程处理session leader -C 命令名字 -g group -u user -p pid -t tty  Format
+-o pid,ppid,tty,time 选择输出某些字段 -F 全部字段(带字段名字 -f不带字段名字) --forest 树状形式输出  </description>
+    </item>
     
     <item>
       <title>Linux Bash Awk</title>

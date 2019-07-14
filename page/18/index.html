@@ -68,6 +68,57 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/" title="Web请求历程" >Web请求历程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这几乎是做后端开发面试的时候必问的一道题，答案可以说得很简单，也可以是很复杂，当然面试官喜欢看到你对此有所深入，因此这篇文章就从头到尾详细的讲一遍这个历程
+参考 《计算机网络》
+1 当一台电脑将网线插上，网线的另一端是以太网的交换机(交换机能够知道连接它的机器的MAC地址，如果不清楚交换机是什么，建议自己搜一下，这里不做解释)
+首先，刚开始电脑是没有IP地址的，这个时候电脑会生成一个DHCP请求报文，这个报文是一个UDP报文，目的端口为67，源端口为68。这个UDP报文被装载到IP报文，有目的IP地址是255.255.255.255，因为电脑不知道可以从哪个IP请求到自己的IP地址，源IP地址是0.0.0.0。再次往下传递就到了链路层，我们这里假设用的是以太网，所以链路层会将网络层的数据包放置在以太网帧中，目的MAC地址为FF:FF:FF:FF:FF:FF，源MAC地址就是你电脑网卡的MAC地址了，这个我们不用关心。这个时候一个广播的报文就做好了
+报文被发送到交换机上，因为这是一个广播报文，因此在交换机上连接的所有设备都应该能收到这个报文，包括了DHCP服务器
+这里说多一句，现阶段，一般DHCP服务器集成在了路由器上，而这个路由器一般来说是我们的网关(至少在我这边是这样的)，具体如何查的，用wireshark抓包看看吧，抓到DHCP包你就知道了(记得先拔网线再插上)
+2 我们假设这个DHCP包已经完整到达了路由，这个路由生成了一个UDP-IP-以太网报文，这个时候数据报里包含了
+ 分配给电脑的IP
+ DNS服务器IP
+ 默认网关路由器IP
+ 网络掩码
+  这个数据包是具有一个准确的目的MAC地址的(也就是电脑的MAC，我们之前发送的报文里有记录)
+所以交换机能够将这个DHCP的响应报文发给电脑
+3 刚插上网线呢，就做了这么多东西了
+这个时候我们打开浏览器，输入网址域名
+这个时候我们需要得到这个域名的IP地址才能与其建立连接
+再次构造一个UDP报文，目的端口为53，源端口任意
+封装到IP数据包，源和目的IP地址在上面已经得到了，填上
+到了链路层需要两个MAC地址，好像我们只有自己的MAC地址，目的MAC地址未知
+这个时候电脑会生成一个ARP报文寻找默认网关的MAC地址(这个就不详细说了)
+关于DNS报文的所有要的东西都齐全了，发送DNS报文
+4 一般来说，常用的域名的IP都会存储在DNS缓存里，因此会比较快速
+关于更多的DNS相关的，不在这次范围内
+因此我们假设已经在某DNS服务器上拿到了DNS回答报文，这个报文就包括了我们要访问的URL的IP
+5 这个时候电脑以及具备和远程的服务器建立TCP连接了
+首先先是TCP的三次握手，三次握手在别的文章里讲到
+握手成功后，发送请求报文，经过互联网路由器的一系列转发到达了相应的服务器
+服务器收到了电脑发送的请求，并做出相应的处理，将结果写入响应报文，按照原来的TCP连接返回给电脑
+6 电脑的浏览器通过处理渲染以及加载就呈现出了看到的网页……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/" title="Leetcode 108" >Leetcode 108</a>
                                 </h1>
                             </header>
@@ -311,40 +362,6 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/effective-go/" title="Effective Go" >Effective Go</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                参考Effective Go中英双语版
- It&rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
- Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)
-所以我们今天来谈谈代码规范吧，这里只记录了我自己有时候会忽略的点，有一些规范我以及掌握并且时刻用在编写Golang程序上了，因此不记录，想看完整的请阅读上面的开源书本
-格式化 Go的gofmt为我们做好了，所以安装这个程序，在保存的时候就可以自动帮你调整代码布局
-注释 行注释更为常用，而块注释则主要用作包的注释
-每个包都应包含一段包注释，即放置在包子句前的一个块注释。对于包含多个文件的包， 包注释只需出现在其中的任一文件中即可。包注释应在整体上对该包进行介绍，并提供包的相关信息。 它将出现在 godoc 页面中的最上面，并为紧随其后的内容建立详细的文档。
-每个可导出（首字母大写）的名称都应该有文档注释。
-命名 我记得有一个叫go-lint会检查这个
-Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
-只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
-若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/effective-go/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -493,6 +510,10 @@ Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
     </li>
     
@@ -526,10 +547,6 @@ Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
 </ul>
@@ -574,7 +591,7 @@ Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
     </li>
     
     <li>

@@ -68,6 +68,33 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mega/" title="Golang Mega" >Golang Mega</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月1日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                不积跬步无以至千里，不积小流无以成江海
+ 本文是博主在学习基础记录的笔记
+2019-04-01到2019-04-04，后面会自己DIY一些内容上去(想做成一个小小的技术论坛)
+先来总体看一下整个项目的目录吧
+. ├── cmd │ └── db_init │ └── main.go ├── config │ └── g.go ├── config.yml ├── controller │ ├── g.go │ ├── home.go │ ├── middle.go │ └── utils.go ├── main.go ├── model │ ├── g.go │ ├── post.go │ ├── user.go │ └── utils.go ├── templates │ ├── 404.html │ ├── _base.html │ ├── content │ │ ├── explore.html │ │ ├── index.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mega/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/" title="Questions Network" >Questions Network</a>
                                 </h1>
                             </header>
@@ -334,41 +361,6 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
-&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
- 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
-&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
-&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
-如果p是空的，那么会返回RuneError,0
-如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
-&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
-&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
-&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
-&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
-&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
-&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -517,6 +509,10 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
     </li>
     
@@ -550,10 +546,6 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
 </ul>
@@ -598,7 +590,7 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
     </li>
     
     <li>

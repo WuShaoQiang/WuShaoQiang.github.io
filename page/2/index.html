@@ -68,6 +68,40 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk" >Linux Bash Awk</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年6月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                awk的一些用法
+常见模式 awk '/reg/' 'BEGIN{} condition {condition action} END{}' filename  其中
+ /reg/ 是一个正则的匹配
+ condition 是判断条件
+ action 就是要执行的操作
+ BEGIN 开始前的操作
+ END 结束后的操作
+  对文件 awk '{print $1}' test.txt  对管道 df -h | awk '{print $1}'  这里面的$1是指第一部分，默认分隔符是空格(制表符)
+echo &quot;This is a test&quot; | awk '{print $1}'  输出的是This
+如果想要的分隔符不是默认的，可以使用-F
+例如
+echo &quot;This,is,a,test&quot; | awk '{print $1}' #输出 This,is,a,test echo &quot;This,is,a,test&quot; | awk -F ',' '{print $1}' #输出 This  更多高级的用法 先说说内置的变量……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test" >Linux Bash Test</a>
                                 </h1>
                             </header>
@@ -309,29 +343,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-941/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-922/" title="Leetcode 922" >Leetcode 922</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-922/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -480,6 +491,10 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
     </li>
     
@@ -513,10 +528,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
 </ul>
@@ -561,7 +572,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
     </li>
     
     <li>

@@ -68,6 +68,30 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/" title="Leetcode 69" >Leetcode 69</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
+最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &gt; x { i = (i + x/i) / 2 } return i }  数学公式……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/" title="Leetcode 67" >Leetcode 67</a>
                                 </h1>
                             </header>
@@ -280,38 +304,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-21/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/" title="SQL 进阶" >SQL 进阶</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                只针对Mysql的SQL语句
-##创建TABLE
-CREATE TABLE user ( id int PRIMARY KEY, username varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL );  约束也可以这样写
-CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255) NOT NULL City varchar(255) DEFAULT 'Sandnes' UNIQUE(username) PRIMARY KEY(id) FOREIGN KEY (P_id) REFERENCES Persons(P_id) )  约束  NOT NULL
- UNIQUE
- PRIMARY KEY(NOT NULL和UNIQUE的结合)
- FOREIGN KEY:保证一个表中的数据匹配另一个表中的值的参照完整性
- CHECK
- DEFAULT 默认值，在没有赋值的情况下就是默认值
-  NOT NULL 强制不接受NULL，如果不向该字段添加值，就无法插入新纪录或者更新记录……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -460,6 +452,10 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
     </li>
     
@@ -493,10 +489,6 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk">Linux Bash Awk</a>
     </li>
     
 </ul>
@@ -541,7 +533,7 @@ CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(8)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
     </li>
     
     <li>
