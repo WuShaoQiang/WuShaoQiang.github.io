@@ -68,6 +68,122 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-note/" title="Linux命令笔记" >Linux命令笔记</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
+ifconfig 查看网络连接
+lsof -i:8000 查看端口8000占用情况
+kill -9 PID 把某个PID的进程结束了，kill还有许多flag，1:挂起， 2:中断 ，3:退出
+mkdir -p /1/2/3/4 可以一次创建多层文件夹
+pkill -f &lt;name&gt; 可以直接kill掉一个已知名字的进程
+把脚本放进/etc/init.d/里面就可以自启动
+chown user:group &lt;file&gt; 改变文件持有
+磁盘 du -hsc &lt;path&gt; 查看路径占用磁盘大小
+ncdu 更友好的查看磁盘占用情况的一个命令，需要安装
+df -h查看磁盘占用情况
+别名 alias &lt;name&gt;=&quot;&lt;command&gt;&quot; 用别名调用命令(适用于长命令)，如果需要持久化的话，需要写入.bashrc
+查找文件 find &lt;path&gt; -name &quot;*.log&quot; 寻找在路径里面结尾为.log的文件，同理，想要查找一类文件可以用这个命令
+find &lt;path&gt; ! -name &quot;*.log&quot; 与上面刚好相反
+find -mtime &lt;number&gt;这个命令还可以根据修改时间
+匹配 grep -r &quot;error&quot; &lt;path or file&gt; 会打印出所有含有error的字段
+查看CPU&amp;内存占用情况 top 这个命令对界面不太友好
+htop 这个对阅读更加友好
+update 能够看到电脑持续开机时间……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-note/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/others/learn-hugo/" title="Hugo建博客" >Hugo建博客</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月16日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Hugo">Hugo</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者用的是Hugo来搭建个人博客，表示Hugo实在太强，而且可扩展性很高，这也代表文档也很长。。。
+所以笔者收录一些比较常用的作为笔记，也希望能够帮到别人
+以下命令都是以我自己建博客的为例
+创建一个网站 hugo new site blog 这个命令会在目录里创建一个新的blog目录
+这个blog目录包含以下：
+ archetypes/ content/ data/ layouts/ static/ themes/ config.toml  archetypes/ 这里一开始会有一个default文件，后面再讲有什么用，先看看文件
+--- title: &quot;{{ replace .Name &quot;-&quot; &quot; &quot; | title }}&quot; date: {{ .Date }} draft: true ---  content/ 这里就是博客的主要内容的根目录，我们创建的博客文章就应该放在这个文件夹里(不是直接)
+创建一个博客文章hugo new posts/learn-hugo.md，创建完后会发现文件在content/posts/learn-hugo.md
+打开文件看一下，可以发现创建的新文件里面是有内容的
+--- title: &quot;Learn Hugo&quot; date: 2019-03-16T22:33:20+08:00 draft: true ---  这就和我们上面说到的archetypes/default.md有关，这里可以自动填充一些信息，方便我们写博客
+theme/ 这里是放置博客主题的文件夹，Hugo有很多开源的主题，可以去官网找找看，笔者用的是飞雪无情这位博主开源出来的Maupassant，笔者刚开始也按照这位博主的配置方法来配置博客，等后面对Hugo的配置了解更加深入时，再尝试配置。Maupassant的仓库地址，大家还可以顺手点个星，表示支持
+具体如何安装也很简单，可以参照github的使用方法
+config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
+## 这个是我们主页的地址 baseURL = &quot;https://wushaoqiang.github.io&quot; languageCode = &quot;en-us&quot; ## 博客的标题(不是某篇文章，是整个博客) title = &quot;Gavin's Blog&quot; ## 这里就是设定你要的主题，而且主题必须要下载到theme/目录 theme = &quot;maupassant&quot; ## 保持分类的原始名字（false会做转小写处理） preserveTaxonomyNames = true ## 是否禁止URL Path转小写 disablePathToLower = true ## 这个会配置每一篇文章最后面的Copyright的作者名字 ## © 2019 Gavin's Blog By Gavin [author] name = &quot;Gavin&quot; [params] author = &quot;Gavin&quot; ## 这是一个副标题，在主标题的下方 subtitle = &quot;Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记&quot; keywords = &quot;Golang,Gavin,Blog&quot; ## 这个是对阅读量的计数 busuanzi = true ## 这个是为了开评论区 [params.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/learn-hugo/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/git/learn-git/" title="Git用法总结" >Git用法总结</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇博客是笔者总结学习git的过程，不是一篇专业性很强的文章，主要是笔记
+主要参考廖雪峰的博客学习
+笔者之前对Git有错误的理解(因为之前没学过，也只是听过)，总以为Github就是Git，其实Github是Git出来后才被创建的，为开源项目免费提供Git存储。
+无Github,纯属本地的Git &mdash; 那么什么是Git呢？ Git是目前世界上最先进的分布式版本控制系统
+分布式：Git和其它集中式版本控制系统最大的区别，Git也可以有一个24小时开机的服务器来充当中央服务器，但这个服务器仅仅是为了让大家方便交换各自修改的。
+版本控制：因为我们的代码要不断的完善，所以就有版本之分啦。
+就算是我们自己在电脑上开发，也可以为自己代码创建版本库，用来记录修改和方便管理。
+&mdash; 创建版本库 在想要创建版本库的文件夹里面，输入命令
+git init  就可以看到文件夹里面多了一个隐藏的文件夹.git
+添加文件到我们新建的版本库里面用
+//将某一个文件添加进缓冲区 git add &lt;file&gt; //将.git文件夹 所在的文件 里所有的文件添加进缓冲区 //所以不管你是在某一个子文件夹用这个命令，执行效果是一样的 git add -A //这个就是将缓冲区的提交到版本库里，并且携带提交信息 //(强烈推荐要写message，这样可以提醒那个时候修改了什么) git commit -m &lt;message&gt;  我们可以把代码所在区域分成
+ 工作区 缓冲区 当前分支  理解这几个工作区域会有助于理解命令的作用。
+工作区：我们自己电脑编辑代码的地方
+缓冲区：就是我们把修改过的文件放到一个区域装着，如果后面我又对这个文件做修改了，就可以继续往里面添加(同文件覆盖)
+当前分支：就是我们使用commit后将缓冲区的文件提交上去的地方
+&mdash; 查看状态 git status  这个命令会告诉我们哪些被修改过的文件被添加到了缓冲去，哪些被修改的文件没有。
+On branch master Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded. (use &quot;git pull&quot; to update your local branch) Untracked files (use &quot;git add &lt;file&gt;.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/git/learn-git/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/learningGo/" title="Go琐碎笔记" >Go琐碎笔记</a>
                                 </h1>
                             </header>
@@ -242,6 +358,22 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/" title="Linux Read File">Linux Read File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/" title="Linux File System Basic Command">Linux File System Basic Command</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission">Linux Permission</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
     </li>
     
@@ -263,22 +395,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
 </ul>
@@ -323,7 +439,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
     </li>
     
     <li>

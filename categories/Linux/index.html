@@ -78,6 +78,114 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/">Linux Search File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, I shared about how to read file content, and the most useful command
+Today, I will make a little cover about searching file
+which I do use a lot which to find binary file
+which ls //output /bin/ls  It is a simple command to help us searching the binary file
+locate locate is a powerful search command which is using database searching
+locate filename //search included filename locate -i filename //ignore case locate -r regexp //use regular expression to search  As we can see the commands above there, we can also do any search with it……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/">Linux Read File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, I talked about how to operate file like copy, move or remove
+Today, let&rsquo;s see how many ways do we have to read file content, I will introduce some basic and useful commands
+cat cat filename will print all the content at once, so it is helpful when you just simply want to print the file content
+cat -n filename // show the line number  but if the file is large(like 100M+), you may not want to use this.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">Linux File System Basic Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Basic Command Last time, I shared about permission
+Today the topic is Basic Command of File System
+I am gonna give you some simple command you can use in your daily working situation
+cd //enter a directory pwd //show the work directory(Print Working Directory)  mkdir
+mkdir -m // set directory permission when create mkdir -p // If parent directory doesn't exist, it will help you create when you add -p flag  rmdir……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">Linux Permission</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I am gonna talk about linux permission which is very basic for linux user.
+Basically, we have three different role in linux
+Owner Group Other  It is easy to understand what they mean.
+ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
+-rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">Linux Ps</a>
                                 </h1>
                             </header>
@@ -280,127 +388,29 @@ apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有�
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/">Linux 网络管理</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                ping -c 发送一定数量的报文
-ifconfig 其中输出信息里
-enp0s31f6：以太网(有线)
-lo：回传
-wlp4s0：无线网
-tcpdump 这是一个类似wireshark抓包的命令,需要权限
--c：指定抓取包的数量
--i：指定接口(上面说到有3个接口)
-port：指定端口
-netstat -r：显示路由
--i：显示接口
--n：显示IP
--t：tcp
--u：udp……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/">Linux 进程管理</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                进程状态  R 正在运行或在运行队列
- D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
- S 中断，等待某个事件完成或者被信号唤醒
- Z 僵死，进程已经终止但其父进程没有用wait()或在waitpid()来释放它
- T 停止，可能是收到控制信号，也可能是被跟踪
-  相关命令 ps,pstree,top(htop),jobs,kill，nice，nohup
-Crtl+c:终结进程
-Ctrl+z:暂停进程
-ps(Process Status) ps 只会给当前终端中运行的进程
-ps -a Select all processes except both session leaders (see getsid(2)) and processes not associated with a terminal.
-ps -u root显示root用户的process，这里root也可以是别的用户名
-ps -l 相对ps，会显示父PID等信息
-ps aux 显示所有process
-ps -ef 详细显示所有process
-pstree pstree 进程树
-pstree -p 显示PID
-pstree (username) 显示用户的进程
-jobs jobs 查看后台运行的进程
-fg %num 将后台程序转移到前台……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-note/">Linux命令笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Command 这里只是笔者对Linux常用命令的笔记，方便自己查询
-ifconfig 查看网络连接
-lsof -i:8000 查看端口8000占用情况
-kill -9 PID 把某个PID的进程结束了，kill还有许多flag，1:挂起， 2:中断 ，3:退出
-mkdir -p /1/2/3/4 可以一次创建多层文件夹
-pkill -f &lt;name&gt; 可以直接kill掉一个已知名字的进程
-把脚本放进/etc/init.d/里面就可以自启动
-chown user:group &lt;file&gt; 改变文件持有
-磁盘 du -hsc &lt;path&gt; 查看路径占用磁盘大小
-ncdu 更友好的查看磁盘占用情况的一个命令，需要安装
-df -h查看磁盘占用情况
-别名 alias &lt;name&gt;=&quot;&lt;command&gt;&quot; 用别名调用命令(适用于长命令)，如果需要持久化的话，需要写入.bashrc
-查找文件 find &lt;path&gt; -name &quot;*.log&quot; 寻找在路径里面结尾为.log的文件，同理，想要查找一类文件可以用这个命令
-find &lt;path&gt; ! -name &quot;*.log&quot; 与上面刚好相反
-find -mtime &lt;number&gt;这个命令还可以根据修改时间
-匹配 grep -r &quot;error&quot; &lt;path or file&gt; 会打印出所有含有error的字段
-查看CPU&amp;内存占用情况 top 这个命令对界面不太友好
-htop 这个对阅读更加友好
-update 能够看到电脑持续开机时间……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-note/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://wushaoqiang.github.io/categories/Linux/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/Linux/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/categories/Linux/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -420,6 +430,22 @@ update 能够看到电脑持续开机时间……
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/" title="Linux Read File">Linux Read File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/" title="Linux File System Basic Command">Linux File System Basic Command</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission">Linux Permission</a>
+    </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
@@ -443,22 +469,6 @@ update 能够看到电脑持续开机时间……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
 </ul>
@@ -503,7 +513,7 @@ update 能够看到电脑持续开机时间……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
     </li>
     
     <li>

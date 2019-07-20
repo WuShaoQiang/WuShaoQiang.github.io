@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-search-file/</loc>
+    <lastmod>2019-07-20T15:14:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-read-file/</loc>
+    <lastmod>2019-07-20T14:31:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/</loc>
+    <lastmod>2019-07-20T11:39:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-permission/</loc>
+    <lastmod>2019-07-20T10:31:23+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/linux/linux-ps/</loc>
     <lastmod>2019-07-14T22:11:55+08:00</lastmod>
   </url>
@@ -1333,7 +1353,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Basic/</loc>
-    <lastmod>2019-07-13T15:01:30+08:00</lastmod>
+    <lastmod>2019-07-20T15:14:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1410,14 +1430,14 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/easy/</loc>
-    <lastmod>2019-06-08T12:34:43+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/Easy/</loc>
+    <lastmod>2019-05-19T08:45:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/Easy/</loc>
-    <lastmod>2019-05-19T08:45:24+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/easy/</loc>
+    <lastmod>2019-06-08T12:34:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1465,7 +1485,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-07-14T22:11:55+08:00</lastmod>
+    <lastmod>2019-07-20T15:14:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1603,13 +1623,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Linux/</loc>
-    <lastmod>2019-07-14T22:11:55+08:00</lastmod>
+    <lastmod>2019-07-20T15:14:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Linux/</loc>
-    <lastmod>2019-07-14T22:11:55+08:00</lastmod>
+    <lastmod>2019-07-20T15:14:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1693,7 +1713,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-07-14T22:11:55+08:00</lastmod>
+    <lastmod>2019-07-20T15:14:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   

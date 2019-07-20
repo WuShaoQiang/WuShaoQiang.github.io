@@ -6,10 +6,62 @@
     <description>Recent content in Linux on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jul 2019 22:11:55 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jul 2019 15:14:46 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Search File</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-search-file/</link>
+      <pubDate>Sat, 20 Jul 2019 15:14:46 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-search-file/</guid>
+      <description>Last time, I shared about how to read file content, and the most useful command
+Today, I will make a little cover about searching file
+which I do use a lot which to find binary file
+which ls //output /bin/ls  It is a simple command to help us searching the binary file
+locate locate is a powerful search command which is using database searching
+locate filename //search included filename locate -i filename //ignore case locate -r regexp //use regular expression to search  As we can see the commands above there, we can also do any search with it</description>
+    </item>
+    
+    <item>
+      <title>Linux Read File</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-read-file/</link>
+      <pubDate>Sat, 20 Jul 2019 14:31:21 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-read-file/</guid>
+      <description>Last time, I talked about how to operate file like copy, move or remove
+Today, let&amp;rsquo;s see how many ways do we have to read file content, I will introduce some basic and useful commands
+cat cat filename will print all the content at once, so it is helpful when you just simply want to print the file content
+cat -n filename // show the line number  but if the file is large(like 100M+), you may not want to use this.</description>
+    </item>
+    
+    <item>
+      <title>Linux File System Basic Command</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/</link>
+      <pubDate>Sat, 20 Jul 2019 11:39:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/</guid>
+      <description>Basic Command Last time, I shared about permission
+Today the topic is Basic Command of File System
+I am gonna give you some simple command you can use in your daily working situation
+cd //enter a directory pwd //show the work directory(Print Working Directory)  mkdir
+mkdir -m // set directory permission when create mkdir -p // If parent directory doesn&#39;t exist, it will help you create when you add -p flag  rmdir</description>
+    </item>
+    
+    <item>
+      <title>Linux Permission</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-permission/</link>
+      <pubDate>Sat, 20 Jul 2019 10:31:23 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-permission/</guid>
+      <description>Today, I am gonna talk about linux permission which is very basic for linux user.
+Basically, we have three different role in linux
+Owner Group Other  It is easy to understand what they mean.
+ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
+-rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space</description>
+    </item>
     
     <item>
       <title>Linux Ps</title>

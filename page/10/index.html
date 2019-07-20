@@ -68,6 +68,104 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572" >Leetcode 572</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。 示例 1: 给定的树 s: 3 / \ 4 5 / \ 1 2 给定的树 t： 4 / \ 1 2 返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2: 给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2 返回 false。  我的解答 第一个实现
+// 执行用时 : 40 ms, 在Subtree of Another Tree的Go提交中击败了39.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563" >Leetcode 563</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个二叉树，计算整个树的坡度。 一个树的节点的坡度定义即为，该节点左子树的结点之和和右子树结点之和的差的绝对值。空结点的的坡度是0。 整个树的坡度就是其所有节点的坡度之和。 示例: 输入: 1 / \ 2 3 输出: 1 解释: 结点的坡度 2 : 0 结点的坡度 3 : 0 结点的坡度 1 : |2-3| = 1 树的坡度 : 0 + 0 + 1 = 1 注意: 任何子树的结点的和不会超过32位整数的范围。 坡度的值不会超过32位整数的范围。  我的解答 这道题和543题是基本一样的,只是将直径(与结点数值无关)转换为了与数值有关而已
+func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) return sum } func findWeight(root *TreeNode, sum *int) int { if root == nil { return 0 } left := findWeight(root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/" title="Leetcode 543" >Leetcode 543</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。 示例 : 给定二叉树 1 / \ 2 3 / \ 4 5 返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。 注意：两结点之间的路径长度是以它们之间边的数目表示。  我的解答 这里要注意了,不一定是要经过根节点才会有直径最大
+第一种方法
+// 执行用时 : 28 ms, 在Diameter of Binary Tree的Go提交中击败了11.54% 的用户 // 内存消耗 : 4.5 MB, 在Diameter of Binary Tree的Go提交中击败了95.83% 的用户 func diameterOfBinaryTree(root *TreeNode) int { if root == nil { return 0 } var max int iteration(root, &amp;max) return max } func iteration(root *TreeNode, max *int) { if root !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-543/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538" >Leetcode 538</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。 例如： 输入: 二叉搜索树: 5 / \ 2 13 输出: 转换为累加树: 18 / \ 20 13  我的解答 这个题主要在于发现它的规律,节点所有比自身大的节点到底有哪些
+用树的思想去做会比较麻烦
+// 执行用时 : 540 ms, 在Convert BST to Greater Tree的Go提交中击败了35.56% 的用户 // 内存消耗 : 41.9 MB, 在Convert BST to Greater Tree的Go提交中击败了100.00% 的用户 func convertBST(root *TreeNode) *TreeNode { if root == nil { return nil } orderByIn(root, nil) return root } func orderByIn(root *TreeNode, lastNode *TreeNode) { if root == nil { return } // 表明是有转折点的 // 有转折点的意思是这个节点在某个祖先节点的左子树上(所以要加上这个祖先节点) if lastNode !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530" >Leetcode 530</a>
                                 </h1>
                             </header>
@@ -203,153 +301,6 @@
                                 题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/good-resource/" title="Good Resource" >Good Resource</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90">资源</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 下面的笔者觉得比较好的一些资源,大多是关于Go和计算机方面的,像stackoverflow这类型知名的就不说了
-数据结构 data structure visualzation
-大牛博客 飞雪无情
-Tony Bai
-legendtkl
-公众号  stormzhang
- Go语言中文网
- 纯洁的微笑
- 架构师之路
- Go中国
-  开源书籍 Effective Go
-书栈网
-算法题  leetcode
- 牛客网
-  做简历  超级简历  开源资源  Gopherchina  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/good-resource/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/" title="Data Structure Tree" >Data Structure Tree</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                为了搞明白关于数据库的一些索引结构开的一篇数据结构-树博客
-前言 这只是笔者的一些笔记和觉得不错的教学资源,分享一下
-推荐一个可视化的数据结构网站
-树是一个重要的数据结构,不仅要知道相关概念,建议在leetcode上刷上几十题
-BST BST相信很多人都已经比较了解,不赘述了,说说会有哪些问题
-BST按照不同的插入顺序会有不同的形状,在极端的条件下会变成一个线性链表,这样查找的时间复杂度就变成了O(logN)
-因为查找和插入都相对比较简单,这里就不说了,说说删除的思路
- 二叉树删除某个叶子节点,就直接删除就好
- 二叉树删除某个中间节点(包括root节点),则需要一定的操作(建议多在上面推荐的网站上多试几次,就明白了)
-  以要被删除的节点A开始,把它当做root节点(也就是把子树先看做整个树,其它部分先不管)
-往左边找第一个节点B,如果左边不存在节点,直接用A的右节点去代替它
-找到左边第一个节点B后,找基于这个节点的最右节点C(也就是路径是一直往右边走的,不存在往左走一段后再往右)
-如果没有右边节点(一个右子树都没),则直接用刚才找到的节点B去代替它
-如果有右节点C(并且已经按照规则找到最右的),那么我们将用这个结点C去替代它
-如果这个结点C有左节点,那么节点C的父亲节点的右子树会指向C的左节点
-完!
-我相信看到这段文字心态是崩的,再建议一次,用上面的网站去得到图形化的结构
-AVL 参考Youtube学习
-又名(Balanced binary search tree)
-解决了上面BST的问题:容易因为插入顺序问题造成一棵树倾斜(这样就无法得到该有的查询速度)
-先解释一下什么叫平衡(Balanced)
-一颗平衡的数满足这个条件
- 无论从哪个节点开始数,它的左子树深度和右子树深度的差值的绝对值小于1  因为这个条件的限定,所以即使我们插入顺序比较极端,只要我们实现了AVL Tree,那么它就能自动帮我们平衡
-这里要提醒一点
- 不是说以前的不平衡树放进去就能平衡,这是要重新一个个插入才能达到这样的效果  所以说,如果以前的二叉树要转为AVL树,需要将二叉树的值重新插入一遍
-这里再提醒一个点,我们所有的反转操作(rotation)都是只看三个节点
-进入正题
-1 \ 2 \ 3  这样的一个树就是不平衡的,因为从结点1看来,左子树的深度为0,右子树的深度为2,因此|0-2|&lt;=1不成立
-这种情况就是RR-imbalanced,需要做的操作叫RR-rotation(RR:Right of right)
-变成
- 2 / \ 1 3  再复杂一点就是这也(注意focus三个节点就好)
- 6 / \ 4 7 / \ 2 5 / \ 1 3  这里我要再说明一点……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
-下面是一些我觉得有借鉴价值的东西
-这里是如何查看一个coverage
-// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
-func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                总结一下最近在配置MongoDB时遇到的坑吧
-首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
-嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
-直接下载tar包 解压后,要将/bin添加到环境变量
-然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
-这里是我初步的一个配置文件
-# mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
                         </article>
                     
 
@@ -500,6 +451,22 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/" title="Linux Read File">Linux Read File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/" title="Linux File System Basic Command">Linux File System Basic Command</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission">Linux Permission</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
     </li>
     
@@ -521,22 +488,6 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging">Javascript Debugging</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp">Javascript Regexp</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6">Javascript ES6</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic">Javascript Basic</a>
     </li>
     
 </ul>
@@ -581,7 +532,7 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
     </li>
     
     <li>
