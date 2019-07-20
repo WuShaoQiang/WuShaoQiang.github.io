@@ -68,6 +68,52 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/" title="Leetcode 412" >Leetcode 412</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &quot;1&quot;, &quot;2&quot;, &quot;Fizz&quot;, &quot;4&quot;, &quot;Buzz&quot;, &quot;Fizz&quot;, &quot;7&quot;, &quot;8&quot;, &quot;Fizz&quot;, &quot;Buzz&quot;, &quot;11&quot;, &quot;Fizz&quot;, &quot;13&quot;, &quot;14&quot;, &quot;FizzBuzz&quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &lt; n; i++ { if (i+1)%15 == 0 { res[i] = &quot;FizzBuzz&quot; } else if (i+1)%5 == 0 { res[i] = &quot;Buzz&quot; } else if (i+1)%3 == 0 { res[i] = &quot;Fizz&quot; } else { res[i] = strconv.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/" title="Leetcode 409" >Leetcode 409</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/others/good-resource/" title="Good Resource" >Good Resource</a>
                                 </h1>
                             </header>
@@ -361,62 +407,6 @@ Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
-提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
-如果是还未创建的collection
- use db.createCollection() with the validator option.
- 如果是已经创建了的collection
- use collMod command with the validator option.
- 这里还提供了两个options
-validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
- use the $jsonSchema operator in your validator expression.
- 官网例子
-db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &quot;D&quot; } ) // selects from the inventory collection all documents where the status equals &quot;D&quot; db.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -565,6 +555,14 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
     </li>
     
@@ -594,14 +592,6 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
 </ul>
@@ -646,7 +636,7 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
     </li>
     
     <li>

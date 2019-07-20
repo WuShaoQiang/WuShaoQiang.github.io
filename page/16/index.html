@@ -68,6 +68,52 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-203/" title="Leetcode 203" >Leetcode 203</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Remove all elements from a linked list of integers that have value val. Example: Input: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6 Output: 1-&gt;2-&gt;3-&gt;4-&gt;5  我的解答 func removeElements(head *ListNode, val int) *ListNode { for head != nil &amp;&amp; head.Val == val { head = head.Next } if head == nil { return head } tmp := head for tmp.Next != nil { if tmp.Next.Val == val { tmp.Next = tmp.Next.Next } else { tmp = tmp.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-203/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-202/" title="Leetcode 202" >Leetcode 202</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Write an algorithm to determine if a number is &quot;happy&quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-202/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-198/" title="Leetcode 198" >Leetcode 198</a>
                                 </h1>
                             </header>
@@ -262,52 +308,6 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-169/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-168/" title="Leetcode 168" >Leetcode 168</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1 -&gt; A 2 -&gt; B 3 -&gt; C ... 26 -&gt; Z 27 -&gt; AA 28 -&gt; AB ... Example 1: Input: 1 Output: &quot;A&quot; Example 2: Input: 28 Output: &quot;AB&quot; Example 3: Input: 701 Output: &quot;ZY&quot;  我的解答 func convertToTitle(n int) string { if n &lt;= 0 { return &quot;&quot; } len := 0 tmp := n for tmp/26 &gt; 0 { len++ tmp = tmp / 26 } strs := make([]string, len+1) for n &gt; 0 { n-- strs[len] = string((n % 26) + 'A') n = n / 26 len-- } return strings.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-168/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-167/" title="Leetcode 167" >Leetcode 167</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Note: Your returned answers (both index1 and index2) are not zero-based. You may assume that each input would have exactly one solution and you may not use the same element twice.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-167/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -456,6 +456,14 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
     </li>
     
@@ -485,14 +493,6 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
 </ul>
@@ -537,7 +537,7 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
     </li>
     
     <li>

@@ -6,10 +6,39 @@
     <description>Recent content on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jul 2019 15:14:46 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jul 2019 21:12:36 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Link</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-link/</link>
+      <pubDate>Sat, 20 Jul 2019 21:12:36 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-link/</guid>
+      <description>We have already talked about disk management, now we have a pretty simple topic&amp;ndash;link
+Link is one of the file types in linux including hard link and symbol link
+Let&amp;rsquo;s get into them
+hard link Remember inode?
+when we type ls -l, the second field is the inode number which means how many file(s) is using the same inode.
+Right, hard link file is using the same inode, and inode including the file information like permission, block number.</description>
+    </item>
+    
+    <item>
+      <title>Linux Disk Manage</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-disk-manage/</link>
+      <pubDate>Sat, 20 Jul 2019 16:20:50 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-disk-manage/</guid>
+      <description>Now, let&amp;rsquo;s get into the disk management of linux
+Concept There are some concepts you should know about linux file system
+Why we need to operate format before OS can use it?
+Because different Operate System may use different file system, like FAT, NTFS, Ext2 etc.
+After we know there are so many different file system, let&amp;rsquo;s talk about linux file system.
+Here are some concepts:
+ superblock: superblock will store file system information(like inode number, block number, etc.</description>
+    </item>
     
     <item>
       <title>Linux Search File</title>

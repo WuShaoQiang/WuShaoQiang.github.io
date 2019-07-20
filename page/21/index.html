@@ -68,6 +68,52 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-53/" title="Leetcode 53" >Leetcode 53</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例: 输入: [-2,1,-3,4,-1,2,1,-5,4], 输出: 6 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。 进阶: 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。  我的解答 func maxSubArray(nums []int) int { if len(nums) == 0 { return 0 } if len(nums) == 1 { return nums[0] } total := nums[0] max := nums[0] for i := 1; i &lt; len(nums); i++ { if total &lt; 0 { total = 0 } total += nums[i] if max &lt; total { max = total } } return max }  暴力法的话，时间复杂度是O(N^2)，这里使用的方法时间复杂度O(N)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-53/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-35/" title="Leetcode 35" >Leetcode 35</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。 你可以假设数组中无重复元素。 示例 1: 输入: [1,3,5,6], 5 输出: 2 示例 2: 输入: [1,3,5,6], 2 输出: 1 示例 3: 输入: [1,3,5,6], 7 输出: 4 示例 4: 输入: [1,3,5,6], 0 输出: 0  我的解答 func searchInsert(nums []int, target int) int { isFound, idx := binarySearch(nums, 0, len(nums)-1, target) if isFound { return idx } if nums[idx] &gt; target { return idx } else { return idx + 1 } } func binarySearch(nums []int, left, right, target int) (found bool, idx int) { if left &lt; right { mid := (left + right) / 2 if nums[mid] == target { return true, mid } else if nums[mid] &gt; target { return binarySearch(nums, left, mid-1, target) } else { return binarySearch(nums, mid+1, right, target) } } else if nums[left] == target { return true, left } else { return false, left } }  因为是个有序的数组，因此可以不用暴力搜索，这里使用比较简单的二分法，找到索引(就算没有相等的，也找到最后一个查找的索引)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-35/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-28/" title="Leetcode 28" >Leetcode 28</a>
                                 </h1>
                             </header>
@@ -302,61 +348,6 @@ NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 客户向它的套接字接口发送HTTP请求报文和向它的套接字接口接收HTTP响应报文
-HTTP是一个无状态协议
-报文格式 响应报文格式 常见状态码 //Success 200 OK ：表示请求成功 201 Created ：表示请求成功且新建了资源 202 Accepted ：请求成功，但还没创建资源 //Redirection 301 Moved Permanently ：永久转移，服务器会自动转到新的位置 302 Found ：暂时转移，下次还是用这个URI 304 Not Modified ：服务端已经执行了GET，但文件未变化 //Client Error 400 Bad Request ：报文中存在语法错误 401 Unauthorized ：未认证 403 Forbidden ：对请求资源的访问被服务器拒绝了 404 Not Found ：无法找到指定的资源 //Server Error 500 Internal Server Error :服务器端在执行请求时发生了错误 503 Service Unavailable :服务器暂时处于超负载或正在进行停机维护  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/udp/" title="UDP" >UDP</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                  UDP无连接建立
- 不需要维护连接状态
- 报文头比TCP小
- 能尽可能的快，没有速度限制
-  应用场景 对丢包不是很看重，对速度很敏感
- DNS
- SNMP
-  报文结构 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/udp/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -505,6 +496,14 @@ HTTP是一个无状态协议
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
     </li>
     
@@ -534,14 +533,6 @@ HTTP是一个无状态协议
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
 </ul>
@@ -586,7 +577,7 @@ HTTP是一个无状态协议
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
     </li>
     
     <li>

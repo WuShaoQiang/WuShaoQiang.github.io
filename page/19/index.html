@@ -68,6 +68,52 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/" title="Leetcode 101" >Leetcode 101</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/" title="Leetcode 100" >Leetcode 100</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/" title="Leetcode 88" >Leetcode 88</a>
                                 </h1>
                             </header>
@@ -351,71 +397,6 @@ fg %num 将后台程序转移到前台……
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/" title="Golang Vscode Problem" >Golang Vscode Problem</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Vscode">Vscode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                今天Vscode用着用着，突然自动补全不能用了，不仅没有自动导入，也没有函数提示等
-突然觉得自己被打入地狱(没有自动补全就像手写代码一样，很不是滋味)
-在Google上找了别人的方法也都没用，最后瞎搞一下搞好了
-方法 删掉gocode
-go get github.com/nsf/gocode,这是一个老版本的gocode，现在已经被新的替代了
-这个时候vscode会提示你下载推荐版本的gocode，按下载就可以了
-疑问 我也曾经重试下载最新版gocode，但是没用，不知道为什么直接在vscode更新就有用……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-context/" title="Golang Context" >Golang Context</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
-参考博客理解Go Context机制
-Golang的执行单元是goroutine，main也是一个goroutine
-上下文，上下则是存在上下层的传递，我们在编写Web后端的时候，接收到一个请求可能会执行一些列的goroutine(数据库，业务层处理)来达到并发效果
-这个时候，如果客户端那边取消了呢？如果我们在服务器端检测不到这个信号，那么我们服务器还是会继续服务，直到完成所有服务的时候，发现客户端已经不见了(资源就被浪费了)
-所以我们需要在每一个由Request产生的goroutine里面装一个监控，这个监控会告诉程序客户端是否还在等待返回，如果客户端离开，那么程序立即停止对客户端的服务
-Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) Done() &lt;-chan struct{} Err() error Value(key interface{}) interface{} }   Deadline会返回一个超时时间，Goroutine获得了超时时间后，例如可以对某些io操作设定超时时间。
- Done方法返回一个信道（channel），当Context被撤销或过期时，该信道是关闭的，即它是一个表示Context是否已关闭的信号。
- 当Done信道关闭后，Err方法表明Context被撤的原因。
- Value可以让Goroutine共享一些数据，当然获得数据是协程安全的。但使用这些数据的时候要注意同步，比如返回了一个map，而这个map的读写则要加锁。
-  每当我们处理一个Request的时候，都应该从Request里拿一个Context
-req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
- 如果Request的context是nil，那么它会返回一个context.Background()
-var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-context/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -564,6 +545,14 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
     </li>
     
@@ -593,14 +582,6 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
 </ul>
@@ -645,7 +626,7 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
     </li>
     
     <li>

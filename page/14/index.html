@@ -68,6 +68,54 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-283/" title="Leetcode 283" >Leetcode 283</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements. Example: Input: [0,1,0,3,12] Output: [1,3,12,0,0] Note: You must do this in-place without making a copy of the array. Minimize the total number of operations.  我的解答 同样,暴力法也可以做,只是速度非常慢,不建议
+// 将非零的直接往前移，剩下的全部写0 func moveZeroes(nums []int) { i := 0 for j := 0; j &lt; len(nums); j++ { if nums[j] == 0 { continue } nums[i] = nums[j] i++ } // for ; i &lt; len(nums); i++ { // nums[i] = 0 // } copy(nums[i:], make([]int, len(nums)-i)) }  因为我们只需要把非零的保留就已经不会缺失信息了,因此0是无关紧要的……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-283/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-268/" title="Leetcode 268" >Leetcode 268</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array. Example 1: Input: [3,0,1] Output: 2 Example 2: Input: [9,6,4,2,3,5,7,0,1] Output: 8 Note: Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?  我的解答 这个之前在一个博客上见到过,所以思路很清晰
+func missingNumber(nums []int) int { total := 0 sum := 0 for i := 0; i &lt; len(nums); i++ { total += i sum += nums[i] } total += len(nums) return total - sum }  直接加起来再相减,得到的数字就是缺少的数字……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-268/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-263/" title="Leetcode 263" >Leetcode 263</a>
                                 </h1>
                             </header>
@@ -301,52 +349,6 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/" title="Leetcode 237" >Leetcode 237</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&gt; 1 -&gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/" title="Leetcode 235" >Leetcode 235</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -495,6 +497,14 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
     </li>
     
@@ -524,14 +534,6 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble">CSS Flexble</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure">Javascript Data Structure</a>
     </li>
     
 </ul>
@@ -576,7 +578,7 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
     </li>
     
     <li>
