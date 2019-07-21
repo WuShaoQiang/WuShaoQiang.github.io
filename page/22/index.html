@@ -68,6 +68,117 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/" title="SQL 基础" >SQL 基础</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者之前学了一些基础的Mysql的语法，现在进一步学习
+关系型数据库用的语言标准就是SQL，只是不同的数据库有自己的拓展，所以学SQL标准可以说是一举多得吧
+非关系型数据库有自己的一套语言
+只针对Mysql的SQL语句
+SELECT 选定要输出的列
+SELECT column_name,column_name FROM table_name;  将所有列输出
+SELECT * FROM table_name;  SELECT DISTINCT 如果一个列中包含了很多相同的，比如国家里面有很多人是中国的、日本的等等，我们指向查看有多少种的话，这样看起来很费劲
+介绍一个解决这种问题的命令
+和SELECT语法基本一样，只是这里不会输出相同的字段
+SELECT DISTINCT column_name,column_name FROM table_name;  WHERE WHERE子句用于提取那些满足指定标准的记录
+SELECT column_name,column_name FROM table_name WHERE column_name operator value;  例如，我要id大于3的user的id和name字段
+SELECT id,name FROM user WHERE id &gt; 3  这里提醒一点，当实例是文本字段需要加单引号，如果是数值字段，就像上面一样直接写就好
+WHERE的运算符 WHERE column_name operator value  这里的operator就是运算符的位置
+运算符有：
+ =,&gt;,&gt;=,&lt;,&lt;= 这些就比较好理解了
+ &lt;&gt; 不等于
+ BETWEEN 在某个范围，用法WHERE column_name BETWEEN value1 AND value2……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/" title="DHCP 和 NAT" >DHCP 和 NAT</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                DHCP(动态主机配置协议) 我们在上网的时候，其实是向某一个ISP请求一个IP地址，这个IP地址是临时的，到期是要被回收的
+四个步骤  让DHCP服务器发现客户端：客户端创建一个请求报文，请求端口号为67，但这个时候它连自己的IP地址都不知道(因为还没分配)，就用0.0.0.0:68来代替，但是它也不知道目标地址，所以用广播地址255.255.255.255:67
+ DHCP服务器提供：DHCP收到了请求，做出响应，目标地址仍然使用255.255.255.255:68(这里端口号为68.因为客户68端口是接收这个包的)，这个时候客户端已经知道DHCP的位置了
+ 再次对准确地址发出请求
+ DHCP响应
+  到这里交互就完成了
+NAT(网络地址转换) 这个是普遍使用在学校，家庭，公司等，因为现在IPv4的资源已经枯竭，利用NAT能够使得大家共用一个对外的IP，而内部会有不同的IP(局域网内IP)
+比如我在学习请求百度这个网页，百度实际上看到的IP地址是我学校的IP地址，并且将内容返回给这个IP地址，学校再通过NAT转换表把东西转给我
+有些人也说道，NAT实质上很大阻碍了IPv6的发展……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/" title="IPv4 数据报格式与分片" >IPv4 数据报格式与分片</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                直接上图  版本号
+ 首部长度：一般为20
+ 服务类型：为了区分数据报，有点想女士优先这种
+ 数据报长度(首部加数据，一般不超过1500字节)
+ 标识、标志、片偏移：与IP数据报分片有关(别的篇幅讲)
+ 寿命：每经过一台路由器，TTL减1，若为0的时候，这个数据报就要丢掉了
+ 上层协议：6代表TCP；17代表UDP
+ 首部校验和(检验IP数据报比特错误)
+ 源和目的IP地址
+ 选项(很少用)
+ 数据(TCP or UDP报文段)
+  IP数据报分片 发送方与目的地路径上的每段链路可能使用不同的链路层协议，且每种协议可能具备不同的MTU
+比如以太网的MTU为1500
+所以在通过MTU比较小的链路段时，就需要分片了
+为了让目的主机执行重装任务，IPv4的设计者将标识、标志、片偏移字段放在IP数据报首部
+分别解释这三个字段 标识 发送主机在发送IP数据报的时候，通常会将它发送的每个数据报的标识号加1
+所以目的地址收到了很多片，这些片上标识号是同一个数字的，那么它们就是可以组合的
+标志 最后一个片的标志比特被设为0，表明已经接收到某个标识的最后一个片
+偏移量 毫无疑问，是为了将片重新组织回去的……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
                                 </h1>
                             </header>
@@ -314,75 +425,6 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-14/" title="Leetcode 14" >Leetcode 14</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 &quot;&quot;。 示例 1: 输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;] 输出: &quot;fl&quot; 示例 2: 输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;] 输出: &quot;&quot; 解释: 输入不存在公共前缀。 说明: 所有输入只包含小写字母 a-z 。  我的解答 func longestCommonPrefix(strs []string) string { if len(strs) == 0 { return &quot;&quot; } if len(strs) == 1 { return strs[0] } shortestLen := len(strs[0]) for _, str := range strs { if len(str) &lt; shortestLen { shortestLen = len(str) } } var finalStr string for i := 0; i &lt; shortestLen; i++ { tmp := strs[0][i] for j := 1; j &lt; len(strs); j++ { if tmp !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-14/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/" title="Leetcode 13" >Leetcode 13</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &quot;III&quot; 输出: 3 示例 2: 输入: &quot;IV&quot; 输出: 4 示例 3: 输入: &quot;IX&quot; 输出: 9 示例 4: 输入: &quot;LVIII&quot; 输出: 58 解释: L = 50, V= 5, III = 3.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/" title="Leetcode 9" >Leetcode 9</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -503,6 +545,10 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
         <a href="https://wushaoqiang.github.io/page/27/">27</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/28/">28</a>
+    </li>
+    
 
     
     <li class="next">
@@ -531,6 +577,18 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
     </li>
     
@@ -556,18 +614,6 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
     </li>
     
 </ul>
@@ -612,7 +658,7 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(18)</a>
     </li>
     
     <li>

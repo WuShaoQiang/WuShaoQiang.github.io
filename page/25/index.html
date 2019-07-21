@@ -68,6 +68,117 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-log/" title="Golang Log" >Golang Log</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者上面总结了一下网上关于错误处理和异常处理的资料，发现不知道什么时候要记录一个信息，什么时候不应该，再去找找别人的经验，总结到这篇博客。当然，笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库
+我们做后台开发，无论有什么语言，都有相应的一套日志记录系统，并且日志记录的信息可能是一些小小的问题，也可能是一些大问题，这个时候就要分级处理了，很多人(包括我之前)都对分级这个界限划分的认识模糊，不知道什么时候该用什么级别的信息
+在很多时候，log给我们提供的级别种类非常多，例如info、warning、debug、error等等，其实我对这些有些难以区分
+在一些论坛上，大家也为这些发表意见，都有各自的道理，我把我觉得有道理的记录下来，以后我就会按照这样的一套标准(并非所有人的标准)来实现我的日志记录
+先讲标准，在来简单分析一下第三方库的使用
+warning  Nobody needs a warning log level
+ 警告是什么意思？出错了吗，还是没出错，不知道，有点模棱两可的感觉
+所以要么是正常的信息输出(INFO)，要么就是错误
+其实笔者后来觉得，warning可以在下面情况使用
+ 对，是出错了，但是经过我们的错误处理，在合适的尝试次数中成功了，这样我们可以给出警告，告诉开发者，这里曾经出过错  fatal 首先，在Go里面，Fatal是会调用os.Exit(1)的
+这代表着什么样的结果(灾难)呢
+ 在其它线程的defer没有得到调用(比如一个文件的关闭在defer里，这样这个文件就未关闭，程序就挂了)
+ 缓冲区没有刷新(flush)，我们都知道，缓冲区要刷新，数据才能真正流入到我们想它到达的地方
+ 临时文件或者文件夹不会被移除(程序可能会生成临时文件，这是我们在结果中不想要的东西)
+   It is commonly accepted that libraries should not use panic, but if calling log.Fatal has the same effect, surely this should also be outlawed.
+ 网上看到别人这样说，称panic,fatal应该属于违规操作
+stackoverflow上赞同较多的答案说
+ You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-log/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/" title="Golang Errandpanic" >Golang Errandpanic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
+ but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
+ defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/" title="Golang Crawler" >Golang Crawler</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
+goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
+ first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
+ invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
+  defer func () { if resp != nil { resp.Body.Close() } }()  单元测试 func TestCrawler(t *testing.T) { // keywords := []string{&quot;golang&quot;, &quot;java&quot;} keywords := &quot;golang,java&quot; refresh := &quot;on&quot; value := url.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-handle/" title="Golang Handle" >Golang Handle</a>
                                 </h1>
                             </header>
@@ -274,106 +385,6 @@ Which branch should be used for bringing forth production releases? Branch name 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mega/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/" title="Questions Network" >Questions Network</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/questions">questions</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
-IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
-A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。
-Session 在mega项目里遇到一个问题
-首先，我访问服务器，服务器将会返回一个Session给我，那么我在这个网页游走都可以用这个Session，没毛病
-现在我Logout，这个时候服务器调用函数将Session的期限变为-1，也就是将Session过期
-这个时候我把之前服务器给我的Session自己存起来，用Postman构造一个请求，并且附上这个Session(其实是通过Cookie传)，这个时候服务器不会因为将Session期限改为-1而不认识这个Session
-所以这个现象表明所谓的清除只是服务器给浏览器发送的Cookie期限设置为-1，然后浏览器看到Cookie已经过期了，因此就不用了
-这样也就验证了，一个用户在服务器上只有一个Session id？
-resp.Body resp, err := http.DefaultClient.Do(req) if err != nil { log.Fatalf(&quot;Do Error %s\n&quot;, err) } defer resp.Body.Close() body, err := ioutil.ReadAll(resp.Body) if err != nil { log.Fatalf(&quot;ReadAll Error %s\n&quot;, err) } // fmt.Println(string(body)) file, err := os.Create(path + keyword + &quot;.html&quot;) if err != nil { log.Fatalf(&quot;Create File Error %s\n&quot;, err) } defer file.Close() _, err = file.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/" title="Golang标准库--http" >Golang标准库--http</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月19日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
-Package http doc.go 先来看看官方对这个包的一个解释
-这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
-这里还举了一些方法的例子
-// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/definition/" title="一些名词的定义" >一些名词的定义</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月19日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Definition">Definition</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这里是为了记录一些常用名词的定义，大多参照百度百科和Wiki
-句柄 句柄是一种特殊的智能指针 。当一个应用程序要引用其他系统（如数据库、操作系统）所管理的内存块或对象时，就要使用句柄
-在Golang里面，我们使用函数打开一个文件得到的就是一个文件句柄(打开的文件就是操作系统所管理的内存块)
-在Golang里面，我们使用数据库的驱动连接数据库时，返回的也是一个句柄，这个返回值只是一个对象，并不是一个连接
-Redis  redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set &ndash;有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。
- TLS  传输层安全性协议（英语：Transport Layer Security，缩写作TLS），及其前身安全套接层（Secure Sockets Layer，缩写作SSL）是一种安全协议，目的是为互联网通信提供安全及数据完整性保障。
-安全传输层协议（TLS）用于在两个通信应用程序之间提供保密性和数据完整性。 该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。
- Cookie&amp;Session Cookie Cookie是客户端保持状态
-Cookie的内容主要包括：名字，值，过期时间，路径和域
-若不设置过期时间，则表示这个cookie的生命期为浏览器会话期间，关闭浏览器窗口，cookie就消失。这种生命期为浏览器会话期的cookie被称为会话cookie
-Session Session是服务器端保持状态
-一个用户在服务器上拥有唯一的一个session Id
-如果一个用户不断在请求同一个东西或者行为异常(爬虫？)，则可以对这个用户进行相应操作
-Session能够记录用户的动作，比如淘宝能够记录你购物车有多少东西
-Difference 我们拿淘宝作例子
-我们登录淘宝不用账号密码的时候用的就是Cookie
-但是我们在挑选商品加入购物车，淘宝的服务器也在记录我们的动作信息(比如添加商品)，这个时候用的是Session
-所以我们可以用Session来跟踪用户的动作。
-安全性 Session会比Cookie安全，因为Cookie可能会被欺骗(Cookie在一定程度上就算是你的用户名和密码，被人获取后，别人就可以用你的身份来做事了)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/definition/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -494,6 +505,10 @@ Difference 我们拿淘宝作例子
         <a href="https://wushaoqiang.github.io/page/27/">27</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/28/">28</a>
+    </li>
+    
 
     
     <li class="next">
@@ -522,6 +537,18 @@ Difference 我们拿淘宝作例子
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
     </li>
     
@@ -547,18 +574,6 @@ Difference 我们拿淘宝作例子
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
     </li>
     
 </ul>
@@ -603,7 +618,7 @@ Difference 我们拿淘宝作例子
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(18)</a>
     </li>
     
     <li>

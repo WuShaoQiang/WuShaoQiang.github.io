@@ -68,6 +68,75 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-122/" title="Leetcode 122" >Leetcode 122</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  我的解答 func maxProfit(prices []int) int { buy := 0 sell := 0 profit := 0 n := len(prices) for { for buy &lt; n-1 &amp;&amp; prices[buy+1] &lt;= prices[buy] { buy++ } sell = buy for sell &lt; n-1 &amp;&amp; prices[sell+1] &gt; prices[sell] { sell++ } if sell == buy { return profit } profit += prices[sell] - prices[buy] buy = sell } }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-122/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/" title="Leetcode 121" >Leetcode 121</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-119/" title="Leetcode 119" >Leetcode 119</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle. Note that the row index starts from 0. In Pascal's triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-119/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-118/" title="Leetcode 118" >Leetcode 118</a>
                                 </h1>
                             </header>
@@ -256,76 +325,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/" title="Leetcode 108" >Leetcode 108</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/" title="Leetcode 107" >Leetcode 107</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
-最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/" title="Leetcode 104" >Leetcode 104</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -446,6 +445,10 @@
         <a href="https://wushaoqiang.github.io/page/27/">27</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/28/">28</a>
+    </li>
+    
 
     
     <li class="next">
@@ -474,6 +477,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
     </li>
     
@@ -499,18 +514,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
     </li>
     
 </ul>
@@ -555,7 +558,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(18)</a>
     </li>
     
     <li>

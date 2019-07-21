@@ -68,6 +68,128 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview2/" title="Interview2" >Interview2</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
+ 这里应该用channel来达到通信
+在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
+进程和线程的区别 进程：操作系统对一个正在运行的程序的一种抽象，一个系统上可以运行多个进程，这些进程在单核的处理器下一样可以显得好像的并发的一样，这是通过处理器在进程之间的切换实现的，这种交错执行的机制称为上下文切换
+线程：一个进程可以由多个线程的执行单元组成，每个线程都运行在进程的上下文中
+区别：
+ 进程在系统上运行，线程在进程上运行，因此进程是独立的地址空间、线程共享进程的地址空间
+ 线程比进程的开销要小
+ 线程一般来说比进程更高效
+ 线程之间的数据共享比进程的简单
+ 线程必须依赖在进程上执行
+  临界区是啥 临界区从通俗层面来讲就是我们锁-解锁之间的代码，通常会写在程序(或者说资源)无法同时被使用的地方
+这个区域只能允许一个线程或进程进入，其它后来的需要等待解锁
+死锁是啥。死锁产生的条件是什么 在我理解里，线程A占用了资源C，这个时候线程A还要申请资源D(占用且申请)，但线程B这时占用着资源D，而且线程A无法将资源抢过来，所以现在线程A就在等待线程B释放资源D。线程B在这个时候也需要使用资源C，并且不得到就不离开(一直等待)，所以现在局面就是A在等B释放D，B在等A释放C(循环等待)，并且都不肯让资源(不可抢占)，并且资源CD都是只能有一个线程占有的(互斥)
+若干进程竞争有限资源，但顺序或者决策不当，使得大家都在无限循环等待，就形成了死锁
+ 互斥条件
+ 不可抢占条件
+ 占有且申请条件(这个的意思是在占有资源的情况下还要去申请别的资源)
+ 循环等待条件
+  只要上述条件有一个不满足，就可以避免死锁
+给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率 占时还不太清除这个
+Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
+所以查找pid有lsof -i:port和netstat -p |grep port……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview2/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/" title="Linux 网络管理" >Linux 网络管理</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                ping -c 发送一定数量的报文
+ifconfig 其中输出信息里
+enp0s31f6：以太网(有线)
+lo：回传
+wlp4s0：无线网
+tcpdump 这是一个类似wireshark抓包的命令,需要权限
+-c：指定抓取包的数量
+-i：指定接口(上面说到有3个接口)
+port：指定端口
+netstat -r：显示路由
+-i：显示接口
+-n：显示IP
+-t：tcp
+-u：udp……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/" title="Linux 进程管理" >Linux 进程管理</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                进程状态  R 正在运行或在运行队列
+ D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
+ S 中断，等待某个事件完成或者被信号唤醒
+ Z 僵死，进程已经终止但其父进程没有用wait()或在waitpid()来释放它
+ T 停止，可能是收到控制信号，也可能是被跟踪
+  相关命令 ps,pstree,top(htop),jobs,kill，nice，nohup
+Crtl+c:终结进程
+Ctrl+z:暂停进程
+ps(Process Status) ps 只会给当前终端中运行的进程
+ps -a Select all processes except both session leaders (see getsid(2)) and processes not associated with a terminal.
+ps -u root显示root用户的process，这里root也可以是别的用户名
+ps -l 相对ps，会显示父PID等信息
+ps aux 显示所有process
+ps -ef 详细显示所有process
+pstree pstree 进程树
+pstree -p 显示PID
+pstree (username) 显示用户的进程
+jobs jobs 查看后台运行的进程
+fg %num 将后台程序转移到前台……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/" title="Golang Vscode Problem" >Golang Vscode Problem</a>
                                 </h1>
                             </header>
@@ -282,81 +404,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/" title="Leetcode 67" >Leetcode 67</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &quot;11&quot;, b = &quot;1&quot; 输出: &quot;100&quot; 示例 2: 输入: a = &quot;1010&quot;, b = &quot;1011&quot; 输出: &quot;10101&quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &quot;&quot; if len(a) &gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &gt;= 0; i-- { if i &gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/" title="Leetcode 66" >Leetcode 66</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。 你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321。  我的解答 func plusOne(digits []int) []int { for i := len(digits) - 1; i &gt;= 0; i-- { if digits[i] != 9 { digits[i]++ return digits } digits[i] = 0 } digits = append([]int{1}, digits...) return digits }  比较简单
-最优解答 无
-难疑点&amp;核心 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-58/" title="Leetcode 58" >Leetcode 58</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。 如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例: 输入: &quot;Hello World&quot; 输出: 5  我的解答 func lengthOfLastWord(s string) int { if s == &quot;&quot; { return 0 } if !strings.Contains(s, &quot; &quot;) { return len(s) } s = strings.TrimSpace(s) lastSpaceIndex := strings.LastIndex(s, &quot; &quot;) return len(s) - lastSpaceIndex - 1 }  前面两个判断是为了能够快速判断简单情况
-要注意去掉头尾的空格，不然索引查找会出错
-这里也调用了标准库，可能在算法上不算合规
-最优解答 无
-难疑点&amp;核心  容易把头尾的空格忽略掉  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-58/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -477,6 +524,10 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
         <a href="https://wushaoqiang.github.io/page/27/">27</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/28/">28</a>
+    </li>
+    
 
     
     <li class="next">
@@ -505,6 +556,18 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
     </li>
     
@@ -530,18 +593,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property">CSS Basic Property</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic">CSS Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic">CSS3 Basic</a>
     </li>
     
 </ul>
@@ -586,7 +637,7 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(15)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(18)</a>
     </li>
     
     <li>
