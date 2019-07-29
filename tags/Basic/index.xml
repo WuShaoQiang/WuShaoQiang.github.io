@@ -6,10 +6,116 @@
     <description>Recent content in Basic on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Jul 2019 14:03:46 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jul 2019 10:36:10 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Basic/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Javascript Array</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-array/</link>
+      <pubDate>Sun, 28 Jul 2019 10:36:10 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-array/</guid>
+      <description>Reference 阮一峰
+数组的创建 假设我们创建一个数组
+var arr = new Array(10)  其实这个数组是没有key的，但是我们却能够用下标访问，并且可以越界
+Object.keys(arr) //[] arr[0] //undefined arr[100] //undefined  一般来说不推荐这种创建数组的方式
+var arr1 = [undefined,undefined] Object.keys(arr1) //[&amp;quot;0&amp;quot;,&amp;quot;1&amp;quot;]  静态方法 Array.isArray()
+因为typeof对于数组智能返回一个object
+所以我们可以用Array.isArray()来判断这个是否为数组
+从这里我们可以看到，array也是一个对象
+所以会有接下来的方法
+valueOf() &amp;amp;&amp;amp; toString()
+valueOf 会把数据结构原封不懂的输出
+typeof arr.valueOf() //object Array.isArray(arr.valueOf()) //true  说明它又是输出一个数组呀
+那么toString就不同了，这个会把元素一个个拆分，然后用逗号隔开组成一个string
+//数组 [1, 2, 3, Array(3), &amp;quot;aa&amp;quot;] //toString结果 &amp;quot;1,2,3,4,5,6,aa&amp;quot;  push() pop() shift() unshift()
+push和unshift都是往数组增加元素
+pop和shift都是减少数组元素
+push和pop都是在针对数组后面的元素
+shift和unshift都是针对数组前面的元素
+join()
+这个会返回一个字符串，默认用逗号分隔，也可以传入分隔符
+如果是undefined或者null会被转换为空字符串
+concat
+concat是数组的加法，可以将在原数组的基础上加上传入的参数，返回一个新的数组，原数组不变
+要注意的是
+如果数组成员包含对象，concat方法返回的是一个浅拷贝，也就是新数组拷贝的是对象的引用</description>
+    </item>
+    
+    <item>
+      <title>Javascript Object</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/javascript-object/</link>
+      <pubDate>Sat, 27 Jul 2019 14:44:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/javascript-object/</guid>
+      <description>本篇笔记是学习阮一峰老师的ES6
+关于对象 Javascript所有对象都继承自Object
+所以一般对象有两种方法集：
+ Object本身的方法
+ 对象实例的方法
+  Object() 我们可以使用Object()来强制类型转换，将任意值转换为一个对象
+我们可以分为三种情况
+ 空对象
+ Object()
+ Object(null)
+ Object(undefined)
+  需要转换
+ Number
+ String
+ Boolean
+  不需要转换
+ Array
+ Object
+ Function
+   不需要转换的可以有Object(...) === Object(...) //true
+但是Object(undefined) === Object(undefined) //false
+静态方法 Object.keys() Object.getOwnPropertyNames()  这两者的区别在于Object.getOwnPropertyNames能够返回不可枚举的属性名
+什么叫不可枚举的属性名呢?
+类似一个数组包含了两个元素let a = [11,22],那么Object.keys返回的就是[&amp;quot;0&amp;quot;,&amp;quot;1&amp;quot;],而另一个方法返回的是[&amp;quot;0&amp;quot;,&amp;quot;1&amp;quot;,&amp;quot;length&amp;quot;]
+这里面的length就是一个不可枚举的属性名
+不过我们一般情况下是不希望将不可枚举的属性名抽取出来的，所以我们一般是用Object.keys()
+Object.prototype.getOwnPropertyDescriptor
+这个方法只能够用于自身的属性，作用是给出某个属性的详细信息(属性描述对象)
+{ value: 123, //值 writable: false, //是否可写 enumerable: true, //是否可遍历(是否可以用Object.</description>
+    </item>
+    
+    <item>
+      <title>Typescript Basic Primitive</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/</link>
+      <pubDate>Tue, 23 Jul 2019 22:41:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/</guid>
+      <description>I am using Typescript about 2 weeks on my team&amp;rsquo;s project until now.
+But I am very new on front-end, and I have never learned Javascript or Typescript before. So, I decided to learn from open-source-tutorial.
+I planed to spend a week or two weeks to learn the basic syntax about JS and TS, so I will write some blogs to record the process and make a summary at the end.</description>
+    </item>
+    
+    <item>
+      <title>Linux Account</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-account/</link>
+      <pubDate>Mon, 22 Jul 2019 20:55:48 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-account/</guid>
+      <description>Today, I want to login my Ubuntu as root. But, I don&amp;rsquo;t even remember I have set a password for root.
+Fortunately, I learned some skills about how to manage accounts in linux, so I figure it out very quickly, I hope this experience can be helpful for you if you have the same(similar) problems
+UID and GID When you login in a linux system, you must have a user and its password.</description>
+    </item>
+    
+    <item>
+      <title>Linux How to Identify Command</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/</link>
+      <pubDate>Mon, 22 Jul 2019 20:12:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/</guid>
+      <description>Today, I want to talk about a small topic &amp;ndash; how to identify a command
+Specifically, If you want to know where are these commands from, there are three possibilities:
+ builtin
+ alias
+ file(external)
+  Let&amp;rsquo;s try it type cd // Of course, cd is a builtin command &amp;gt; cd is a shell builtin type ll &amp;gt; ll is aliased to `ls -alhF&#39; type mongod &amp;gt; mongod is /usr/local/mongodb/bin/mongod  Basically you don&amp;rsquo;t need to add any flags</description>
+    </item>
     
     <item>
       <title>Linux Windows File</title>

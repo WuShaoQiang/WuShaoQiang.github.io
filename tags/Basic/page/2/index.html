@@ -78,6 +78,158 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/">Linux Search File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, I shared about how to read file content, and the most useful command
+Today, I will make a little cover about searching file
+which I do use a lot which to find binary file
+which ls //output /bin/ls  It is a simple command to help us searching the binary file
+locate locate is a powerful search command which is using database searching
+locate filename //search included filename locate -i filename //ignore case locate -r regexp //use regular expression to search  As we can see the commands above there, we can also do any search with it……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/">Linux Read File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, I talked about how to operate file like copy, move or remove
+Today, let&rsquo;s see how many ways do we have to read file content, I will introduce some basic and useful commands
+cat cat filename will print all the content at once, so it is helpful when you just simply want to print the file content
+cat -n filename // show the line number  but if the file is large(like 100M+), you may not want to use this.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">Linux File System Basic Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Basic Command Last time, I shared about permission
+Today the topic is Basic Command of File System
+I am gonna give you some simple command you can use in your daily working situation
+cd //enter a directory pwd //show the work directory(Print Working Directory)  mkdir
+mkdir -m // set directory permission when create mkdir -p // If parent directory doesn't exist, it will help you create when you add -p flag  rmdir……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">Linux Permission</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I am gonna talk about linux permission which is very basic for linux user.
+Basically, we have three different role in linux
+Owner Group Other  It is easy to understand what they mean.
+ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
+-rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/">CSS Basic Property</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月13日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最基本的一些属性
+text-align 文本对齐方式
+ justify 对齐文本容器的左右两边
+ center 每一行左右间距一样
+ right
+ left
+  width 指定容器大小，可以接受不同的单位
+常见单位：
+ px 像素
+ % 百分比
+ em 根据父元素的倍数
+ rem 根据根元素的倍数
+ vh view-high
+ vw view-width
+ max/min
+  刚开始学习前端会不知道这个百分比是以什么为基准的
+宽度会相对于父元素的宽度 高度会相对与父元素的高度 字体大小会相对父元素字体大小 边界是相对自身的  一些标签  strong 加粗
+ u 下划线
+ em 斜体
+ s 横线(画在字体中间)
+ hr 水平线(无close tag)
+  box-shadow  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/">CSS Basic</a>
                                 </h1>
                             </header>
@@ -239,124 +391,6 @@ out of range 当数组越界的时候，JavaScript返回的是undefined……
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/">Javascript Regexp</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月8日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这一篇是讲正则表达式(Regular Expression)
-Test method 全匹配
-let waldoIsHiding = &quot;Somewhere Waldo is hiding in this text.&quot;; let waldoRegex = /Waldo/; // Change this line let result = waldoRegex.test(waldoIsHiding); console.log(result) //true  全匹配是大小写敏感的
-多可能性
-let petString = &quot;James has a pet cat.&quot;; let petRegex = /dog|cat|bird|fish/; // Change this line let result = petRegex.test(petString);  这样就是一个或关系
-忽略大小写
-let myString = &quot;freeCodeCamp&quot;; let fccRegex = /freeCodeCamp/i; // Change this line let result = fccRegex.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/">Javascript ES6</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月7日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                let vs var 在ES6之前还没有let
-var是有一些很严重的缺点的，比如
-可以重复定义同名的变量而不会抛错 经常想定义一个局部变量，变成了一个全局变量，也就是shadow和我们平时熟悉的方式不一样  所以我们在定义变量的时候就用let，因为let就是修复了var的一些缺点，和平时的用法一样
-const 这个和let差不多，只是只能赋值一次(定义的时候就要赋值)
-并且建议const用全部大写的格式
-开发建议是：如果变量是不会重新赋值的，那么最好是使用const，除非是预测到要重新赋值就用let
-在这里还要强调的一点，赋值是值这个变量的赋值，如
-const s = [5,6,7] s = [1,2] //出错，重新赋值 s[2] = 10 //可行，这个不是对s的重新赋值  同理的还有Object、function
-Object freeze 可以防止一个Object的属性被修改
-Object.freeze(object_name);  Arrow functions () =&gt; {} () =&gt; value //如果是直接返回数据，这个是简化的写法 (arg1,arg2) =&gt; {}  filter map reduce A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/">Javascript Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月3日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                数组的方法 push 插入数据到数组的后面 pop 取出数组的最后一个数据 shift 取出数组的第一个数据 unshift 插入数据到数组的前面  JS的数组里面的元素是可以不相同的
-作用域 当变量没有用var等关键字声明时，这个变量是全局变量，这个可能会导致一些问题
-function func(){ funcVar = 1 }  等于号 比较符有两个==和===
-在JS里面
-1 == '1' //true 1 === '1' //false  ==会在类型不同进行自动转换
-===不会进行类型转换
-同理!=和!==也是一样
-比较符 &gt; &lt; &gt;= &lt;=
-这些当类型不同时，也会进行类型转换
-Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change code below this line switch(val){ case 1: answer = &quot;alpha&quot;; break; case 2: answer = &quot;beta&quot;; break; case 3: answer = &quot;gamma&quot;; break; case 4: answer = &quot;delta&quot;; break; } // Only change code above this line return answer; }  需要注意的是，这里的比较是用===，而且要注意，如果不写break，会继续匹配下去……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/html-basic/">HTML Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月21日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Tag &lt;!DOCTYPE html&gt; &lt;html&gt;&lt;/html&gt; &lt;head&gt;&lt;head&gt; 通常是放title、meta、link、script、style的地方 &lt;link&gt; refer to an external CSS file &lt;title&gt;&lt;/title&gt; 网页的标题 &lt;body&gt;&lt;/body&gt; 网页的主体 &lt;h1&gt;&lt;/h1&gt; 标题h1-h6 &lt;p&gt;&lt;\p&gt; 段落 &lt;hr&gt; 分割线 &lt;br&gt; line break &lt;pre&gt;&lt;/pre&gt; 这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text) &lt;div&gt;&lt;/div&gt; container for element &lt;span&gt; container for text &lt;iframe&gt; display a web page within a web page  Attr Some suggestions you should know:
- HTML5 does not require lowercase attribute name, but everybody should use lowercase in HTML
- HTML5 does not require quotes around attribute values, but everybody should quote attribute values……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/html-basic/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -377,7 +411,15 @@ Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change co
         <a href="https://wushaoqiang.github.io/tags/Basic/page/2/">2</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Basic/page/3/">3</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/tags/Basic/page/3/">下一页</a>
+    </li>
     
 </ol>
 
@@ -401,6 +443,26 @@ Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change co
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
     </li>
     
@@ -418,26 +480,6 @@ Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change co
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File">Linux Search File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/" title="Linux Read File">Linux Read File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/" title="Linux File System Basic Command">Linux File System Basic Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission">Linux Permission</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps">Linux Ps</a>
     </li>
     
 </ul>
@@ -462,7 +504,7 @@ Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change co
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(10)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
     </li>
     
     <li>
@@ -482,7 +524,7 @@ Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change co
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(18)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
     </li>
     
     <li>
@@ -631,6 +673,8 @@ Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change co
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
     

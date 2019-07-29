@@ -6,10 +6,35 @@
     <description>Recent content in Linux on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Jul 2019 14:03:46 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jul 2019 20:55:48 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Account</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-account/</link>
+      <pubDate>Mon, 22 Jul 2019 20:55:48 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-account/</guid>
+      <description>Today, I want to login my Ubuntu as root. But, I don&amp;rsquo;t even remember I have set a password for root.
+Fortunately, I learned some skills about how to manage accounts in linux, so I figure it out very quickly, I hope this experience can be helpful for you if you have the same(similar) problems
+UID and GID When you login in a linux system, you must have a user and its password.</description>
+    </item>
+    
+    <item>
+      <title>Linux How to Identify Command</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/</link>
+      <pubDate>Mon, 22 Jul 2019 20:12:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/</guid>
+      <description>Today, I want to talk about a small topic &amp;ndash; how to identify a command
+Specifically, If you want to know where are these commands from, there are three possibilities:
+ builtin
+ alias
+ file(external)
+  Let&amp;rsquo;s try it type cd // Of course, cd is a builtin command &amp;gt; cd is a shell builtin type ll &amp;gt; ll is aliased to `ls -alhF&#39; type mongod &amp;gt; mongod is /usr/local/mongodb/bin/mongod  Basically you don&amp;rsquo;t need to add any flags</description>
+    </item>
     
     <item>
       <title>Linux Windows File</title>

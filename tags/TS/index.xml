@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TS on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/TS/</link>
+    <description>Recent content in TS on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Jul 2019 22:41:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/TS/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Typescript Basic Primitive</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/</link>
+      <pubDate>Tue, 23 Jul 2019 22:41:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/</guid>
+      <description>I am using Typescript about 2 weeks on my team&amp;rsquo;s project until now.
+But I am very new on front-end, and I have never learned Javascript or Typescript before. So, I decided to learn from open-source-tutorial.
+I planed to spend a week or two weeks to learn the basic syntax about JS and TS, so I will write some blogs to record the process and make a summary at the end.</description>
+    </item>
+    
+  </channel>
+</rss>

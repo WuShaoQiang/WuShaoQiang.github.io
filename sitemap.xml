@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/front-end/javascript-array/</loc>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/front-end/javascript-object/</loc>
+    <lastmod>2019-07-27T14:44:02+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/</loc>
+    <lastmod>2019-07-23T22:41:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-account/</loc>
+    <lastmod>2019-07-22T20:55:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/</loc>
+    <lastmod>2019-07-22T20:12:30+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/linux/linux-windows-file/</loc>
     <lastmod>2019-07-21T14:03:46+08:00</lastmod>
   </url>
@@ -1378,7 +1403,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Basic/</loc>
-    <lastmod>2019-07-21T14:03:46+08:00</lastmod>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1492,13 +1517,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Front-end/</loc>
-    <lastmod>2019-07-13T15:01:30+08:00</lastmod>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Front-end/</loc>
-    <lastmod>2019-07-13T15:01:30+08:00</lastmod>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1510,7 +1535,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-07-21T14:03:46+08:00</lastmod>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1624,7 +1649,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/JS/</loc>
-    <lastmod>2019-07-09T21:43:45+08:00</lastmod>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1648,13 +1673,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Linux/</loc>
-    <lastmod>2019-07-21T14:03:46+08:00</lastmod>
+    <lastmod>2019-07-22T20:55:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Linux/</loc>
-    <lastmod>2019-07-21T14:03:46+08:00</lastmod>
+    <lastmod>2019-07-22T20:55:48+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1738,7 +1763,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-07-21T14:03:46+08:00</lastmod>
+    <lastmod>2019-07-28T10:36:10+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1805,6 +1830,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/tags/TCP/</loc>
     <lastmod>2019-04-22T15:17:17+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/TS/</loc>
+    <lastmod>2019-07-23T22:41:52+08:00</lastmod>
     <priority>0</priority>
   </url>
   
