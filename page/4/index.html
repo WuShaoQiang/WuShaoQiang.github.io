@@ -68,6 +68,83 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash" >Linux Bash</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年6月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                给自己定的一些规范 因为shell的语法太灵活，有许多语法是不唯一的，导致我很纠结，下面结合他人的实战经历，规定自己一套规范，以后写shell尽量按照这样的规范来
+用printf函数，在format-string上加引号 给所有变量加上花括号 ${VAR} 运算符尽量使用flag形式(字符串不能用这个形式) 判断只用[]  需要特别注意的一些点 关于字符串 单引号‘’会原样输出字符串，对里面的变量引用都是没用的，转义字符也没用 双引号可以引用变量和转义字符  初学例子
+开头指定解释器
+#!/bin/bash  这里记一些用过的语法
+取奇数
+for i in {1.99..2} do echo $i done  读取stdin
+read name echo &quot;Welcome $name&quot;  读取并输出运算后结果
+read x read y echo $((x+y)) echo $((x-y)) echo $((x*y)) echo $((x/y))  读取并比较
+read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (($X&lt;$Y)); then echo &quot;X is less than Y&quot;; else echo &quot;X is equal to Y&quot;; fi  字符串的比较……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1013/" title="Leetcode 1013" >Leetcode 1013</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年6月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1013/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1010/" title="Leetcode 1010" >Leetcode 1010</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年6月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1010/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-989/" title="Leetcode 989" >Leetcode 989</a>
                                 </h1>
                             </header>
@@ -226,75 +303,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-905/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-896/" title="Leetcode 896" >Leetcode 896</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-896/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-888/" title="Leetcode 888" >Leetcode 888</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-888/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-867/" title="Leetcode 867" >Leetcode 867</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-867/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -447,6 +455,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
@@ -472,18 +492,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
     </li>
     
 </ul>
@@ -516,7 +524,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
     </li>
     
     <li>
@@ -565,6 +573,10 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
     </li>
     
     <li>
@@ -745,6 +757,8 @@
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     

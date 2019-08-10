@@ -6,10 +6,115 @@
     <description>Recent content on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Jul 2019 10:36:10 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2019 23:08:56 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gopher 2016 Solid Design</title>
+      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/</link>
+      <pubDate>Thu, 08 Aug 2019 23:08:56 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/</guid>
+      <description>前几天有写过一些设计原则与设计模式
+两者之间，设计原则给了我较深的体会，真的是慢慢理解前人的思想，以及对代码质量的要求
+今天抽空看了Dave在2016 Gopher UK讲的SOLID Go Design
+觉得刚好和前面学习的设计原则产生了完美结合
+SOLID 首先解释一下每一个字母的意义
+ S: 单一职责原则(Single Responsibility)
+ O: 开放封闭原则(Open For Extension, Close For Modification)
+ L: 里氏替换原则(Liskov)
+ I: 接口隔离原则(Interface Segregation Principle)
+ D: 依赖倒置原则(Dependency Inversion Principle)
+  Go 因为之前写过某些原则，就不重复说了，有兴趣可以看前面讲设计原则的blog
+这里主要看L和I
+里氏替换原则 这里它所描述的是，子类可以替换掉父类而不受影响，因为子类可以继承复用父类，具体是什么上网搜一下也很容易找到更清晰的解释
+这里重点还是将里氏替换原则和Go结合起来
+我们知道，Go是没有class的，只有组合，所以在这里，里氏替换原则可以变成
+某一个接口可以被所有实现了这个接口的对象所替代
+很简单的例子就是io.Reader,我们可以用任何实现了该接口的实例去替代这个接口
+相当于，接口对应着父类，而实现了这个接口的结构体对应着子类
+接口隔离原则 这在Go里面也是一个非常重要和常用的原则
+受益于Go的鸭子类型，我们在思考一个功能的时候，不需要知道它具体的细节，我们只用清楚输入和输出即可实现这个功能
+这里的实现，只是一个接口，我们并不关心具体的实现，这就是接口隔离
+对外界来说，我只暴露接口，这个接口也许有多个具体的实现实例，这些实例只是通过不同的方法达到了同一个目的
+这个时候，外界想要使用这个接口的功能，只需要将依赖注入就能够任意选择具体实现实例了
+如果没有想要的具体实例，我们还可以根据接口自己实现一个，而且不会改变任何其它代码，只要将自己的实现注入到接口，接口就能够按照某个实例去工作了
+接口隔离是软件设计非常重要的一环，它让软件内部耦合度降低，扩展性更优
+Dave Dave在讲完SOLID设计原则后，提出了一些对Gopher们的请求，尤其是设计
+Dave希望Go更加的侧重设计，用好的设计去解决实在的问题
+My Thought About Design 设计并非想象中那么神奇，我更觉得它是一种思路的转变，也许有人更喜欢把一些实现写死，而非用接口去解耦(也确实是因为改动机会不大)，但也有人觉得留有余地是好的选择，都有各自的道理吧
+各有优缺点
+接口确实将结构与结构之间隔离开了，并且更加好定义职责(还有一系列好处)
+但是接口让程序的中间层变多，使得代码的逻辑会经常在不同地方穿梭(不够依赖现代编辑器，这个难度不大)
+那到底要不要写接口呢？
+我的想法是，在设计的时候，对于不稳定的部分，强烈推荐用接口
+在有多个实现的时候，必须要有接口</description>
+    </item>
+    
+    <item>
+      <title>Design Pattern Basic</title>
+      <link>https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/</link>
+      <pubDate>Sun, 04 Aug 2019 16:35:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/</guid>
+      <description>简单的记录一下最近遇到的设计模式，希望能够多点吸取一些软件设计上的经验
+简单工厂模式 简单工厂模式和工厂模式还不一样，简单工厂模式和工厂模式的很主要的区别在于是否违反了开放-封闭原则。
+在简单工厂里，Fac是一个类，它按照条件来产生不同的实体工厂，比如很简单的运算
+type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac struct { } func (fac OperatorFac) CreateOperator(op string) Operator { switch op { case &amp;quot;+&amp;quot;: return AddOperate{} case &amp;quot;-&amp;quot;: return SubOperate{} } } type AddOperate struct { } func (addOp AddOperate) GetResult(num1 int, num2 int) int { return num1 + num2 } type SubOperate struct { } func (subOp AddOperate) GetResult(num1 int, num2 int) int { return num1 - num2 } func main() { fac := OperatorFac{} op := fac.</description>
+    </item>
+    
+    <item>
+      <title>Design Principle Basic</title>
+      <link>https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/</link>
+      <pubDate>Sun, 04 Aug 2019 14:40:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/</guid>
+      <description>这几天阅读了一份代码，让我对设计模式有了很大兴趣，看到别人写的代码如此优雅，自己对代码的追求也跟着提高了
+写一个代码，不仅是要把当前的业务实现了，还要注意代码的整洁性，可读性，高可维护性等(我暂时就只知道这些了)
+而设计模式是为了我们整体代码的一个高可维护性，无论是对项目的设计，还是对某一个具体的功能实现，都有着很大的作用
+下面我就想简单的介绍一下我最近接触到的设计原则，并且结合&amp;lt;&amp;lt;大话设计模式&amp;gt;&amp;gt;这本书来进行稍微系统的理解
+单一职责原则 从程序角度来解释
+ 就一个类而言，应该仅有一个引起它变化的原因
+软件设计真正要做的许多内容，就是发现职责并把那些职责相互分离。
+如果你能够想到多于一个的动机去改变一个类，那么这个类就具有多于一个的职责
+ 举个栗子
+如果一个类，包含了一件物体的移动，又包含了这个物体的增加和删除，这个类所承担的职责过多了，把这些职责耦合在一起，可能会导致：当一个职责发生变化时，会影响另一个职责
+那么它理论上是可以拆分成两个类的
+单一职责原则是一个比较普遍被接收的原则，它有助于程序员针对某一个非常具体的一类功能进行开发
+不仅类有单一职责的原则，函数其实也是可以做到单一职责的
+无论是什么样的项目，都应该遵守这一原则，有助于提高维护性，扩展性以及可读性
+开发-封闭原则  软件实体(类、模块、函数)应该是可扩展，但是不可修改
+ 对于扩展是开放的，对于修改是封闭的，这句话让我感觉就是在说接口这个概念
+比如说，我要实现一个server和client的通信方式，我就用这个通信方式来让双方交流数据
+一开始定的方案是用HTTP请求来实现API，实现好了，发现速度太慢，这时候要换一种通信方式，这个时候如果修改除了通信方式之外的代码，就违背了开放-封闭原则了
+按照这个原则，模块是可扩展的，也就是说我只是换一个通信方式，但是对于server和client应该是无感知的，或者低感知的，也就是说我的业务逻辑应该不受影响
+这个时候这种可能需要改变的地方(类)，我们应该将它抽象出来，成为一个接口，而HTTP、RPC等通信示例只是实现了这个接口，对通信层之上的业务层等应该是无感知的
+用生活的例子来说就是，老板让我买一个鼠标，他不管我在哪个平台买，不关心我买的方式
+与单一职责的对比
+刚开始接触设计模式，都会觉得每一个设计模式或者原则都在描述差不多的东西，因此作对比就能突出它们的不同，以及应用场景
+可以看见上面的例子，我们只是想换一个通信方式，利用开放-封闭原则，我们知道将通信方式抽象成一个接口，利用不同的通信示例来实现接口就好
+单一职责，这里的通信接口确实是只负责通信，并且也只有要通信的时候才会被触发，它的动机是唯一的，因此就算我们实现了不同的示例方法，它的动机依旧唯一，所以也没有违背单一职责
+依赖倒置原则 依赖倒置的原则
+ 高层模块不应该依赖底层模块，两个都应该依赖抽象(接口)
+ 抽象不应该依赖细节，细节应该依赖抽象(这里的细节可以理解为实例)
+  一个软件的架构很多时候就是为了把一些接口定义好，让不同开发人员依赖这个接口来编程，这样互相之间就不用知道对方的具体实现了，哪怕有一边突然要换一个实现方式，另外一边也不用改变(只要接口不变)
+所以设计一个稳定的接口是软件设计的关键一步
+所以面向对象编程变成了面向接口编程
+在编程上，应该尽可能的让各个组成部分面向抽象编程，而不是面向细节
+一个很好理解的例子 一部电脑，如果显然是内存的问题，那么就应该和CPU等其它硬件没有关系，只要替换内存，电脑便能继续工作，这就是单一职责，互不影响。
+再比如说，如果内存不够，只需要往内存插槽里添加内存条即可，这就是开放-封闭原则，我们只是扩展了，并没有修改原来的东西
+无论是主板还是CPU、内存等都是针对接口设计的，我们不能因为买了联想的电脑，就不能用三星的固态了吧
+这是不合理的，我们也经常说到兼容性问题，这个问题的原因可能就是接口不是完全吻合，出现了不兼容。
+所以只要某某品牌的内存实现了某一个接口，那么它理论上是可以在所有符合该内存插槽接口的主板上使用的，这种就是依赖倒置，依赖的并不是这个内存条，而是这个接口，这个接口是抽象的，所以我并不关心某个公司内存条具体是如何实现的
+迪米特法则 这个法则其实很简单
+ 如果两个类不必直接通信，那么这两个类就不应当发生直接的相互作用，如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用
+ 一般在软件设计的时候都会有层次架构，层层渐进。
+哪个很简单的例子，我们一般直接在应用层调用底层的数据库操作的，一般我们都会封装一个model层，专门来实现与数据库的操作
+一句话概括就是：能不暴露出去的尽量不暴露，也就是说尽量不公开让别人调用
+原理还是耦合度，暴露的越少，那么和别的组件耦合就会越松，程序相对好维护</description>
+    </item>
     
     <item>
       <title>Javascript Array</title>
@@ -1335,10 +1440,10 @@ AVL 参考Youtube学习
     
     <item>
       <title>Gopher 2019 Testing Talk</title>
-      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2019/</link>
+      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/</link>
       <pubDate>Mon, 13 May 2019 09:59:56 +0800</pubDate>
       
-      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2019/</guid>
+      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/</guid>
       <description>这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
 下面是一些我觉得有借鉴价值的东西
 这里是如何查看一个coverage

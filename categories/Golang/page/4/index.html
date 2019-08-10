@@ -78,6 +78,35 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">Golangstd Request</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月8日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
+我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
+所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
+Request结构体 type Request struct { Method string URL *url.URL Proto string // &quot;HTTP/1.0&quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
+Method 这就是一个请求的方法(如GET、POST)
+但是Go的HTTP客户端不支持发送方法为CONNECT的请求
+URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/">Golang Gorm</a>
                                 </h1>
                             </header>
@@ -332,41 +361,6 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">Golang标准库--Unicode</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
-&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
- 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
-&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
-&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
-如果p是空的，那么会返回RuneError,0
-如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
-&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
-&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
-&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
-&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
-&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
-&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -427,6 +421,18 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
@@ -452,18 +458,6 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
     </li>
     
 </ul>
@@ -496,7 +490,7 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
     </li>
     
     <li>
@@ -545,6 +539,10 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
     </li>
     
     <li>
@@ -725,6 +723,8 @@ func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     

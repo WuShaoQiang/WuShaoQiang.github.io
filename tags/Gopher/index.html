@@ -78,7 +78,63 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">Gopher 2019 Testing Talk</a>
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/">Gopher 2016 Solid Design</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月8日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                前几天有写过一些设计原则与设计模式
+两者之间，设计原则给了我较深的体会，真的是慢慢理解前人的思想，以及对代码质量的要求
+今天抽空看了Dave在2016 Gopher UK讲的SOLID Go Design
+觉得刚好和前面学习的设计原则产生了完美结合
+SOLID 首先解释一下每一个字母的意义
+ S: 单一职责原则(Single Responsibility)
+ O: 开放封闭原则(Open For Extension, Close For Modification)
+ L: 里氏替换原则(Liskov)
+ I: 接口隔离原则(Interface Segregation Principle)
+ D: 依赖倒置原则(Dependency Inversion Principle)
+  Go 因为之前写过某些原则，就不重复说了，有兴趣可以看前面讲设计原则的blog
+这里主要看L和I
+里氏替换原则 这里它所描述的是，子类可以替换掉父类而不受影响，因为子类可以继承复用父类，具体是什么上网搜一下也很容易找到更清晰的解释
+这里重点还是将里氏替换原则和Go结合起来
+我们知道，Go是没有class的，只有组合，所以在这里，里氏替换原则可以变成
+某一个接口可以被所有实现了这个接口的对象所替代
+很简单的例子就是io.Reader,我们可以用任何实现了该接口的实例去替代这个接口
+相当于，接口对应着父类，而实现了这个接口的结构体对应着子类
+接口隔离原则 这在Go里面也是一个非常重要和常用的原则
+受益于Go的鸭子类型，我们在思考一个功能的时候，不需要知道它具体的细节，我们只用清楚输入和输出即可实现这个功能
+这里的实现，只是一个接口，我们并不关心具体的实现，这就是接口隔离
+对外界来说，我只暴露接口，这个接口也许有多个具体的实现实例，这些实例只是通过不同的方法达到了同一个目的
+这个时候，外界想要使用这个接口的功能，只需要将依赖注入就能够任意选择具体实现实例了
+如果没有想要的具体实例，我们还可以根据接口自己实现一个，而且不会改变任何其它代码，只要将自己的实现注入到接口，接口就能够按照某个实例去工作了
+接口隔离是软件设计非常重要的一环，它让软件内部耦合度降低，扩展性更优
+Dave Dave在讲完SOLID设计原则后，提出了一些对Gopher们的请求，尤其是设计
+Dave希望Go更加的侧重设计，用好的设计去解决实在的问题
+My Thought About Design 设计并非想象中那么神奇，我更觉得它是一种思路的转变，也许有人更喜欢把一些实现写死，而非用接口去解耦(也确实是因为改动机会不大)，但也有人觉得留有余地是好的选择，都有各自的道理吧
+各有优缺点
+接口确实将结构与结构之间隔离开了，并且更加好定义职责(还有一系列好处)
+但是接口让程序的中间层变多，使得代码的逻辑会经常在不同地方穿梭(不够依赖现代编辑器，这个难度不大)
+那到底要不要写接口呢？
+我的想法是，在设计的时候，对于不稳定的部分，强烈推荐用接口
+在有多个实现的时候，必须要有接口……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/">Gopher 2019 Testing Talk</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -98,7 +154,7 @@
 这里是如何查看一个coverage
 // 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
 func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/">阅读全文</a></p>
                             </div>
                         </article>
                     
@@ -126,6 +182,18 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
@@ -151,18 +219,6 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
     </li>
     
 </ul>
@@ -195,7 +251,7 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
     </li>
     
     <li>
@@ -244,6 +300,10 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
     </li>
     
     <li>
@@ -424,6 +484,8 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     

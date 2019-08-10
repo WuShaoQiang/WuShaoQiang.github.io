@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>设计模式 | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="设计模式 - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="设计模式">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.xml" title="Gavin's Blog" />
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+                    <h3 class="archive-title">
+                        分类
+                        <span class="keyword">设计模式</span>
+                        中的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/">Design Pattern Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月4日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单的记录一下最近遇到的设计模式，希望能够多点吸取一些软件设计上的经验
+简单工厂模式 简单工厂模式和工厂模式还不一样，简单工厂模式和工厂模式的很主要的区别在于是否违反了开放-封闭原则。
+在简单工厂里，Fac是一个类，它按照条件来产生不同的实体工厂，比如很简单的运算
+type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac struct { } func (fac OperatorFac) CreateOperator(op string) Operator { switch op { case &quot;+&quot;: return AddOperate{} case &quot;-&quot;: return SubOperate{} } } type AddOperate struct { } func (addOp AddOperate) GetResult(num1 int, num2 int) int { return num1 + num2 } type SubOperate struct { } func (subOp AddOperate) GetResult(num1 int, num2 int) int { return num1 - num2 } func main() { fac := OperatorFac{} op := fac.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/">Design Principle Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月4日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这几天阅读了一份代码，让我对设计模式有了很大兴趣，看到别人写的代码如此优雅，自己对代码的追求也跟着提高了
+写一个代码，不仅是要把当前的业务实现了，还要注意代码的整洁性，可读性，高可维护性等(我暂时就只知道这些了)
+而设计模式是为了我们整体代码的一个高可维护性，无论是对项目的设计，还是对某一个具体的功能实现，都有着很大的作用
+下面我就想简单的介绍一下我最近接触到的设计原则，并且结合&lt;&lt;大话设计模式&gt;&gt;这本书来进行稍微系统的理解
+单一职责原则 从程序角度来解释
+ 就一个类而言，应该仅有一个引起它变化的原因
+软件设计真正要做的许多内容，就是发现职责并把那些职责相互分离。
+如果你能够想到多于一个的动机去改变一个类，那么这个类就具有多于一个的职责
+ 举个栗子
+如果一个类，包含了一件物体的移动，又包含了这个物体的增加和删除，这个类所承担的职责过多了，把这些职责耦合在一起，可能会导致：当一个职责发生变化时，会影响另一个职责
+那么它理论上是可以拆分成两个类的
+单一职责原则是一个比较普遍被接收的原则，它有助于程序员针对某一个非常具体的一类功能进行开发
+不仅类有单一职责的原则，函数其实也是可以做到单一职责的
+无论是什么样的项目，都应该遵守这一原则，有助于提高维护性，扩展性以及可读性
+开发-封闭原则  软件实体(类、模块、函数)应该是可扩展，但是不可修改
+ 对于扩展是开放的，对于修改是封闭的，这句话让我感觉就是在说接口这个概念
+比如说，我要实现一个server和client的通信方式，我就用这个通信方式来让双方交流数据
+一开始定的方案是用HTTP请求来实现API，实现好了，发现速度太慢，这时候要换一种通信方式，这个时候如果修改除了通信方式之外的代码，就违背了开放-封闭原则了
+按照这个原则，模块是可扩展的，也就是说我只是换一个通信方式，但是对于server和client应该是无感知的，或者低感知的，也就是说我的业务逻辑应该不受影响
+这个时候这种可能需要改变的地方(类)，我们应该将它抽象出来，成为一个接口，而HTTP、RPC等通信示例只是实现了这个接口，对通信层之上的业务层等应该是无感知的
+用生活的例子来说就是，老板让我买一个鼠标，他不管我在哪个平台买，不关心我买的方式
+与单一职责的对比
+刚开始接触设计模式，都会觉得每一个设计模式或者原则都在描述差不多的东西，因此作对比就能突出它们的不同，以及应用场景
+可以看见上面的例子，我们只是想换一个通信方式，利用开放-封闭原则，我们知道将通信方式抽象成一个接口，利用不同的通信示例来实现接口就好
+单一职责，这里的通信接口确实是只负责通信，并且也只有要通信的时候才会被触发，它的动机是唯一的，因此就算我们实现了不同的示例方法，它的动机依旧唯一，所以也没有违背单一职责
+依赖倒置原则 依赖倒置的原则
+ 高层模块不应该依赖底层模块，两个都应该依赖抽象(接口)
+ 抽象不应该依赖细节，细节应该依赖抽象(这里的细节可以理解为实例)
+  一个软件的架构很多时候就是为了把一些接口定义好，让不同开发人员依赖这个接口来编程，这样互相之间就不用知道对方的具体实现了，哪怕有一边突然要换一个实现方式，另外一边也不用改变(只要接口不变)
+所以设计一个稳定的接口是软件设计的关键一步
+所以面向对象编程变成了面向接口编程
+在编程上，应该尽可能的让各个组成部分面向抽象编程，而不是面向细节
+一个很好理解的例子 一部电脑，如果显然是内存的问题，那么就应该和CPU等其它硬件没有关系，只要替换内存，电脑便能继续工作，这就是单一职责，互不影响。
+再比如说，如果内存不够，只需要往内存插槽里添加内存条即可，这就是开放-封闭原则，我们只是扩展了，并没有修改原来的东西
+无论是主板还是CPU、内存等都是针对接口设计的，我们不能因为买了联想的电脑，就不能用三星的固态了吧
+这是不合理的，我们也经常说到兼容性问题，这个问题的原因可能就是接口不是完全吻合，出现了不兼容。
+所以只要某某品牌的内存实现了某一个接口，那么它理论上是可以在所有符合该内存插槽接口的主板上使用的，这种就是依赖倒置，依赖的并不是这个内存条，而是这个接口，这个接口是抽象的，所以我并不关心某个公司内存条具体是如何实现的
+迪米特法则 这个法则其实很简单
+ 如果两个类不必直接通信，那么这两个类就不应当发生直接的相互作用，如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用
+ 一般在软件设计的时候都会有层次架构，层层渐进。
+哪个很简单的例子，我们一般直接在应用层调用底层的数据库操作的，一般我们都会封装一个model层，专门来实现与数据库的操作
+一句话概括就是：能不暴露出去的尽量不暴露，也就是说尽量不公开让别人调用
+原理还是耦合度，暴露的越少，那么和别的组件耦合就会越松，程序相对好维护……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+
+                    
+
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+
+</body>
+</html>

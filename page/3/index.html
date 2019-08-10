@@ -68,6 +68,110 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic" >CSS3 Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                主要针对CSS3
+本篇是笔记，因此覆盖会不全面
+####Reference
+w3school
+border div { border:2px solid #ffffff; border-radius:25px; -moz-border-radius:25px; /* Old Firefox */ }  border控制边界的大小，形状和颜色
+border-radius控制着边框的弯曲的半径，随着数字越大，边框会越弯
+transition div { width:100px; height:100px; background:yellow; transition:width 10s; -moz-transition:width 2s; /* Firefox 4 */ -webkit-transition:width 10s; /* Safari and Chrome */ -o-transition:width 2s; /* Opera */ } div:hover { width:300px; }  这个的效果就是在div上悬停，就会将div的宽度在一定时间内切换到另一个指定的宽度
+可以看到，需要在transition那里声明哪个属性变化
+如果要有多个属性变化(比如 width和height都变)
+div { width:100px; height:100px; background:yellow; transition:width 2s, height 2s; -moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */ -webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */ -o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */ } div:hover { width:200px; height:200px; transform:rotate(180deg); -moz-transform:rotate(180deg); /* Firefox 4 */ -webkit-transform:rotate(180deg); /* Safari and Chrome */ -o-transform:rotate(180deg); /* Opera */ }  可以看到只是简单的用逗号隔开就可以了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble" >CSS Flexble</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                今天来学习一下布局方式
+现在主流的布局方式flexbox
+Reference https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+Basic display: flex就将这个block变成了flexbox
+首先，我们要先搞明白container和item的关系
+一般来说item是最小的单位，也就是一个东西(比如：按键&hellip;)
+container就是我们的block，这个就是在页面设计的时候考虑要如何放置我们的block，container是可以嵌套的
+Axis For rows, the main axis is a horizontal line and for columns it is a vertical line.
+首先要搞懂轴的概念
+轴的方向是和flex-direction相关联的
+根据参数我们可以很快确定轴的方向
+row //main 左到右 cross 上到下 column //main 上到下 cross 左到右 row-reverse //... column-reverse //...  比如flex-direction: row，那么就按照上面这个图的方向
+ 主方向为横向(也就是item的排列方向)
+ cross方向为纵向
+  我们后面说到的属性可能会和轴有联系
+而这篇文章也是假设了flex-direction: row
+flex-wrap 可选参数
+nowrap (default) //这个就是将所有item按一个方向排列并且不会，并且只有一行 wrap //这个相对上面就会进行换行 wrap-reverse //反转,就是和wrap反过来，从底部到顶部  可以看出这个和两个轴都有关系
+先在main轴排列，不过空间可以wrap到cross轴……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure" >Javascript Data Structure</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                array method 内置的Array方法是普遍使用的
+push() unshift() pop() shift() splice() //第一个参数的index(包括),第二个参数是数量(表示删除多少个)  splice splice相对前几个方法稍微复杂一点，它的功能也相对强大
+当splice传入两个参数的时候
+function sumOfTen(arr) { // change code below this line arr.splice(4,2) arr.splice(2,1) arr.splice(0,1) console.log(arr) // change code above this line return arr.reduce((a, b) =&gt; a + b); } // do not change code below this line console.log(sumOfTen([2, 5, 1, 5, 2, 1]));  注意
+当你删除了元素之后，索引就已经发生变化了，所以最好的方式就是重后面开始删除
+当传入三个参数的时候
+这和传入两个参数是完全不一样的
+三个参数就是先执行两个参数时的操作，也就是删除从某一个索引开始的n个数据，然后再从索引的位置插入一个数据
+function htmlColorNames(arr) { // change code below this line arr.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging" >Javascript Debugging</a>
                                 </h1>
                             </header>
@@ -296,83 +400,6 @@ date=`date`  注意，这个是反引号
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/" title="Linux Bash" >Linux Bash</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                给自己定的一些规范 因为shell的语法太灵活，有许多语法是不唯一的，导致我很纠结，下面结合他人的实战经历，规定自己一套规范，以后写shell尽量按照这样的规范来
-用printf函数，在format-string上加引号 给所有变量加上花括号 ${VAR} 运算符尽量使用flag形式(字符串不能用这个形式) 判断只用[]  需要特别注意的一些点 关于字符串 单引号‘’会原样输出字符串，对里面的变量引用都是没用的，转义字符也没用 双引号可以引用变量和转义字符  初学例子
-开头指定解释器
-#!/bin/bash  这里记一些用过的语法
-取奇数
-for i in {1.99..2} do echo $i done  读取stdin
-read name echo &quot;Welcome $name&quot;  读取并输出运算后结果
-read x read y echo $((x+y)) echo $((x-y)) echo $((x*y)) echo $((x/y))  读取并比较
-read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (($X&lt;$Y)); then echo &quot;X is less than Y&quot;; else echo &quot;X is equal to Y&quot;; fi  字符串的比较……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1013/" title="Leetcode 1013" >Leetcode 1013</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1013/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1010/" title="Leetcode 1010" >Leetcode 1010</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1010/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -525,6 +552,18 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
@@ -550,18 +589,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
     </li>
     
 </ul>
@@ -594,7 +621,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
     </li>
     
     <li>
@@ -643,6 +670,10 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
     </li>
     
     <li>
@@ -823,6 +854,8 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     

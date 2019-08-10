@@ -68,6 +68,75 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/" title="Leetcode 242" >Leetcode 242</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two strings s and t , write a function to determine if t is an anagram of s. Example 1: Input: s = &quot;anagram&quot;, t = &quot;nagaram&quot; Output: true Example 2: Input: s = &quot;rat&quot;, t = &quot;car&quot; Output: false Note: You may assume the string contains only lowercase alphabets. Follow up: What if the inputs contain unicode characters? How would you adapt your solution to such case?……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/" title="Leetcode 237" >Leetcode 237</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Write a function to delete a node (except the tail) in a singly linked list, given only access to that node. Given linked list -- head = [4,5,1,9], which looks like following: Example 1: Input: head = [4,5,1,9], node = 5 Output: [4,1,9] Explanation: You are given the second node with value 5, the linked list should become 4 -&gt; 1 -&gt; 9 after calling your function. Example 2: Input: head = [4,5,1,9], node = 1 Output: [4,5,9] Explanation: You are given the third node with value 1, the linked list should become 4 -&gt; 5 -&gt; 9 after calling your function.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-237/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/" title="Leetcode 235" >Leetcode 235</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST. According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).” Given binary search tree: root = [6,2,8,0,4,7,9,null,null,3,5] Example 1: Input: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8 Output: 6 Explanation: The LCA of nodes 2 and 8 is 6.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/" title="Leetcode 234" >Leetcode 234</a>
                                 </h1>
                             </header>
@@ -229,76 +298,6 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-204/" title="Leetcode 204" >Leetcode 204</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Count the number of prime numbers less than a non-negative number, n. Example: Input: 10 Output: 4 Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.  我的解答 这题跟着评论区的思路做出来的&ndash;厄拉多塞筛法
-func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志哪些0～n-1已经被访问过 flag := make([]bool, n) //因为0,1不是素数，先减去 total := n - 2 // 只需要找n的根号前的素数 for i := 2; i*i &lt; n; i++ { // 访问过 if flag[i] { continue } // 没访问过，这个素数i的所有倍数(在n内)都不是素数，去除 for j := 2; i*j &lt; n; j++ { if !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-204/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-203/" title="Leetcode 203" >Leetcode 203</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Remove all elements from a linked list of integers that have value val. Example: Input: 1-&gt;2-&gt;6-&gt;3-&gt;4-&gt;5-&gt;6, val = 6 Output: 1-&gt;2-&gt;3-&gt;4-&gt;5  我的解答 func removeElements(head *ListNode, val int) *ListNode { for head != nil &amp;&amp; head.Val == val { head = head.Next } if head == nil { return head } tmp := head for tmp.Next != nil { if tmp.Next.Val == val { tmp.Next = tmp.Next.Next } else { tmp = tmp.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-203/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-202/" title="Leetcode 202" >Leetcode 202</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Write an algorithm to determine if a number is &quot;happy&quot;. A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-202/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -451,6 +450,18 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
@@ -476,18 +487,6 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
     </li>
     
 </ul>
@@ -520,7 +519,7 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
     </li>
     
     <li>
@@ -569,6 +568,10 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
     </li>
     
     <li>
@@ -749,6 +752,8 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     

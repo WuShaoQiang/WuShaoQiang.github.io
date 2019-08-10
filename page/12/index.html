@@ -68,6 +68,76 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/" title="Leetcode 414" >Leetcode 414</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。 示例 1: 输入: [3, 2, 1] 输出: 1 解释: 第三大的数是 1. 示例 2: 输入: [1, 2] 输出: 2 解释: 第三大的数不存在, 所以返回最大的数 2 . 示例 3: 输入: [2, 2, 3, 1] 输出: 1 解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。 存在两个值为2的数，它们都排第二。  我的解答 用切片记录
+// 执行用时 : 16 ms, 在Third Maximum Number的Go提交中击败了27.08% 的用户 // 内存消耗 : 4 MB, 在Third Maximum Number的Go提交中击败了23.33% 的用户 func thirdMax(nums []int) int { max := make([]int, 3) for i := 0; i &lt; 3; i++ { max[i] = math.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/" title="Leetcode 412" >Leetcode 412</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &quot;1&quot;, &quot;2&quot;, &quot;Fizz&quot;, &quot;4&quot;, &quot;Buzz&quot;, &quot;Fizz&quot;, &quot;7&quot;, &quot;8&quot;, &quot;Fizz&quot;, &quot;Buzz&quot;, &quot;11&quot;, &quot;Fizz&quot;, &quot;13&quot;, &quot;14&quot;, &quot;FizzBuzz&quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &lt; n; i++ { if (i+1)%15 == 0 { res[i] = &quot;FizzBuzz&quot; } else if (i+1)%5 == 0 { res[i] = &quot;Buzz&quot; } else if (i+1)%3 == 0 { res[i] = &quot;Fizz&quot; } else { res[i] = strconv.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/" title="Leetcode 409" >Leetcode 409</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/others/good-resource/" title="Good Resource" >Good Resource</a>
                                 </h1>
                             </header>
@@ -159,7 +229,7 @@ AVL 参考Youtube学习
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -180,7 +250,7 @@ AVL 参考Youtube学习
 // 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
 func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
                             </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019/">阅读全文</a></p>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/">阅读全文</a></p>
                         </article>
                     
                         <article class="post">
@@ -324,97 +394,6 @@ go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bu
 package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                原文
-Flexible Schema 不像SQL的数据库一样,Mongodb不需要我们准确定义一个数据格式的规范
-也就是说,一个collection里面的document不一定要每个字段都一样,我们也可以实时的更新document的字段(增加或减少)
-当然,有些时候为了让数据保持统一,Mongodb也可以让我们自定义collection的validation
-Document structure  how the application represents relationships between data
- Embedded Data 这是官方推荐的一种数据结构
- For many use cases in MongoDB, the denormalized data model is optimal.
-  This data model facilitates atomic operations.
- 当一个写操作(insertOne or insertMany),对每一个document的修改都是atomic,但是并不是每一次改一个document
-References 这种就又是关系型了
-Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使用capped collection
-如果是侧重全局数据的读取 &ndash;使用索引会增加性能
-Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/" title="Mongodb Schema Validation" >Mongodb Schema Validation</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
-提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
-如果是还未创建的collection
- use db.createCollection() with the validator option.
- 如果是已经创建了的collection
- use collMod command with the validator option.
- 这里还提供了两个options
-validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
- use the $jsonSchema operator in your validator expression.
- 官网例子
-db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/" title="Mongodb Command" >Mongodb Command</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &quot;D&quot; } ) // selects from the inventory collection all documents where the status equals &quot;D&quot; db.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">阅读全文</a></p>
                         </article>
                     
 
@@ -569,6 +548,18 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
@@ -594,18 +585,6 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression">Linux Compression</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link">Linux Link</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage">Linux Disk Manage</a>
     </li>
     
 </ul>
@@ -638,7 +617,7 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(45)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
     </li>
     
     <li>
@@ -687,6 +666,10 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
     </li>
     
     <li>
@@ -867,6 +850,8 @@ db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
     
