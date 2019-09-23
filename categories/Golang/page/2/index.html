@@ -78,6 +78,113 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">Golang GC</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
+参考  legendtkl
+ Golang UK Conference 2017 | Will Sewell &amp; Jim Fisher - Golang&rsquo;s Realtime GC in Theory and Practice
+  算法模型 三色标记算法(Mark-and-sweep)
+三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
+ 这个算法实现广度优先(BF)
+ 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
+ 这个重复选取直到没有灰色的对象为止
+  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
+ 黑色：已经遍历过这个对象的所有对象
+ 灰色：这个对象所指向的对象还没有被遍历过
+ 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
+  结束阶段里，按算法所解释的，是不会再有灰色了，只有
+ 黑色：有用的数据
+ 白色：已经不可能到达的数据(垃圾，会被清理)
+  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
+ 执行我们前面所说的模型里的循环
+ 在处理完循环后，清理所有白色标记的对象
+  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现
+2019.05.06 今天在看了一个视频
+在最后面讲到GC的问题的时候，发现GC的一个问题
+ 对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">Golang 依赖注入</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月26日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
+没有DI 把所有创建变量放在New函数里面
+type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
+有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">Golang 泛型</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月26日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
+泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
+比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
+type LinkListNode struct { Value int Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  如果我们还要写一个字符串的链表，这个时候将Value的类型改成string就行了，其它不用变，如果我们还要..balabala，可能就要定义上百个结构体了，到时候代码全是结构体
+有些同学说，用接口不就可以了吗？用接口不就无法实现类型的判断了吗，万一程序哪个地方本应该收到int，却收了一个string，然后程序boom
+关于网上很多网友使用interface来达到所谓的泛型，我是越看越像多态呀，并且还是达不到泛型所能提供的类型保护啊，虽然算法确实可以复用了(有些)
+泛型的目的是减少代码的重复性，也就是增加重用性，还能够确定数据类型，比如Java中的一个例子
+class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } public void setValue(T v) { this.value = v; } }  T我可以是字符串，也可以是整数等，或者是自己定义的结构体。但是一旦定下来，创建了的变量类型就不能变了
+所以我说了那么多。。怎么实现啊
+实现 Go2草稿中有提到这个话题Go 2 Draft Designs
+目前只是一个草稿，并且是由Gopher们共同推进的一个话题，所以说现在Go内置里面还未实现泛型
+笔者也去看了一些关于泛型的讨论，到最后都还是建议不要在现阶段写泛型程序，因为Go有一个很本质的特点，就是简单写、简单读，如果通过一些自己的&rdquo;创造&rdquo;而造成别人阅读代码困难，那是得不偿失
+所以真香，还是用回多态吧，有机会再详细阅读一下草稿
+对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
+这里是Go2官方对这些修改的想法视频……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/effective-go/">Effective Go</a>
                                 </h1>
                             </header>
@@ -332,95 +439,6 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">Golang Channel</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这里就不再赘述重要性了
-Channel特性  goroutine-safe
- 两个goroutine之间传递数据
- FIFO
- cause goroutine to block and unblock
-  What is the inside of channel  mutex
- send-index and recieve index
- buf
-  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
-How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">Golang Interface</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
- concrete type(具体类型,int,string&hellip;)
- abstract type(抽象类型 io.Writer,io.Reader&hellip;)
-  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
-抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
-具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
-func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
-func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
-这里io.Reader是一个接口，接口里面只要一个函数
-type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
-func (f *File) Read(b []byte) (n int, err error) { if err := f.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">Golang Tips</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月18日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
-关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -481,6 +499,30 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -496,30 +538,6 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -530,11 +548,19 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -550,7 +576,7 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -616,6 +642,8 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -625,6 +653,8 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -647,6 +677,8 @@ func (f *File) Read(b []byte) (n int, err error) { if err := f.……
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

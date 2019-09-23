@@ -68,6 +68,146 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/" title="Leetcode 231" >Leetcode 231</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
+最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/" title="Leetcode 226" >Leetcode 226</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/" title="Leetcode 219" >Leetcode 219</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/" title="Leetcode 217" >Leetcode 217</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/" title="Leetcode 206" >Leetcode 206</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Reverse a singly linked list. Example: Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
+func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/" title="Leetcode 205" >Leetcode 205</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月4日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &quot;egg&quot;, t = &quot;add&quot; Output: true Example 2: Input: s = &quot;foo&quot;, t = &quot;bar&quot; Output: false Example 3: Input: s = &quot;paper&quot;, t = &quot;title&quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &lt; len(s); i++ { if b, exist := letterMap[s[i]]; !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-204/" title="Leetcode 204" >Leetcode 204</a>
                                 </h1>
                             </header>
@@ -156,157 +296,6 @@ func countPrimes(n int) int { // 简单判断 if n &lt; 3 { return 0 } // 标志
                                 题目 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night. Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-198/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-191/" title="Leetcode 191" >Leetcode 191</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Example 1: Input: 00000000000000000000000000001011 Output: 3 Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits. Example 2: Input: 00000000000000000000000010000000 Output: 1 Explanation: The input binary string 00000000000000000000000010000000 has a total of one '1' bit. Example 3: Input: 11111111111111111111111111111101 Output: 31 Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one '1' bits. Note: Note that in some languages such as Java, there is no unsigned integer type.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-191/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-190/" title="Leetcode 190" >Leetcode 190</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Reverse bits of a given 32 bits unsigned integer. Example 1: Input: 00000010100101000001111010011100 Output: 00111001011110000010100101000000 Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000. Example 2: Input: 11111111111111111111111111111101 Output: 10111111111111111111111111111111 Explanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10101111110010110010011101101001. Note: Note that in some languages such as Java, there is no unsigned integer type.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-190/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-189/" title="Leetcode 189" >Leetcode 189</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array, rotate the array to the right by k steps, where k is non-negative. Example 1: Input: [1,2,3,4,5,6,7] and k = 3 Output: [5,6,7,1,2,3,4] Explanation: rotate 1 steps to the right: [7,1,2,3,4,5,6] rotate 2 steps to the right: [6,7,1,2,3,4,5] rotate 3 steps to the right: [5,6,7,1,2,3,4] Example 2: Input: [-1,-100,3,99] and k = 2 Output: [3,99,-1,-100] Explanation: rotate 1 steps to the right: [99,-1,-100,3] rotate 2 steps to the right: [3,99,-1,-100] Note: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-189/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/" title="Leetcode 172" >Leetcode 172</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an integer n, return the number of trailing zeroes in n!. Example 1: Input: 3 Output: 0 Explanation: 3! = 6, no trailing zero. Example 2: Input: 5 Output: 1 Explanation: 5! = 120, one trailing zero. Note: Your solution should be in logarithmic time complexity.  我的解答 看了些提示才做出来
-func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt; 0 { len++ tmp = tmp * 5 } for i := 0; i &lt; len; i++ { count += (n / tmp) tmp = tmp / 5 } return count }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/" title="Leetcode 171" >Leetcode 171</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a column title as appear in an Excel sheet, return its corresponding column number. For example: A -&gt; 1 B -&gt; 2 C -&gt; 3 ... Z -&gt; 26 AA -&gt; 27 AB -&gt; 28 ... Example 1: Input: &quot;A&quot; Output: 1 Example 2: Input: &quot;AB&quot; Output: 28 Example 3: Input: &quot;ZY&quot; Output: 701  我的解答 func titleToNumber(s string) int { result := 0 tmp := 1 for i := len(s) - 1; i &gt;= 0; i-- { num := int(s[i] - 64) result += (num * tmp) tmp = tmp * 26 } return result }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-system/computer-system/" title="计算机系统" >计算机系统</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月30日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80">计算机基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最近复习了一遍计算机网络、数据结构等书，过了快一个星期了，可以开始看看《深入理解计算机系统》了，很多人不推荐一开始就啃这本书，吸收会比较慢，可以先看一些公开课
-这里推荐B站的公开课
-配套课件
-第二章 溢出 整数注意溢出，浮点数注意大数吃小数(虽然也要注意溢出，但是大数吃小数情况更加容易出现)
-大数吃小数的例子
-func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c) //不会吃 fmt.Println(a - (b + c)) //会吃 }  性能与底层bit 二维数组，一行一行扫描比一列列扫描性能要好
-无符号和有符号的数字需要小心分析它底层的bit，举例子
-无符号：1 1 1 1 --&gt; 2^3+2^2+2^1+2^0 = 15 有符号：1 1 1 1 --&gt; -2^3+2^2+2^1+2^0 = -1  ###大小端
-大端法：最高有效字节在最前面的方式
-比如0x01234567,在内存的表示是
-01 23 45 67  小端法：最低有效字节在最前面的方式
-比如0x01234567,在内存的表示是
-67 45 23 01  一般操作系统用的都是小端法……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-system/computer-system/">阅读全文</a></p>
                         </article>
                     
 
@@ -433,6 +422,10 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -461,6 +454,30 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -476,30 +493,6 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -510,11 +503,19 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -530,7 +531,7 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -596,6 +597,8 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -605,6 +608,8 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -627,6 +632,8 @@ func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c)
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

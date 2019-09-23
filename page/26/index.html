@@ -68,6 +68,205 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/" title="Golang标准库--os" >Golang标准库--os</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
+bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
+// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
+// Flags to OpenFile wrapping those of the underlying system.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/" title="Golang Path Problem" >Golang Path Problem</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
+直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
+filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
+所谓前后是值文件夹的前后
+所以写在程序里面，你在这个目录执行成功了，你退一个目录就不行了，因为这个时候工作路径改变了
+笔者感觉这种方法不安全，或者我们写应用的时候指定要在某某目录执行，我有见过类似的项目
+同一目录下，package都为main，不能调用 如果我们有两个文件，package都为main，比如是这样的
+-main.go | -file.go  main.go想调用file.go的函数，会返回未定义的错误
+有两种解决方法
+ go install Or go build 转换为二进制文件执行
+ go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
+  解决相对路径的最稳的方法 来自外国友人icza……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/others/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Favorite">Favorite</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 Don&rsquo;t assume that you are right, just because nobody has proved you wrong
+The bigger the interface, the weaker the abstraction &ndash;Rob Pike
+ ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/nice-sentences/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/others/opinion/" title="Opinion" >Opinion</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Opinion">Opinion</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 关于在百度搜索问题 笔者在很早就体会到一点，百度搜出来的东西，理论价值真的不高
+我开发遇到Bug第一时间去的都是google，基本第一页搞定我的问题
+我在安装东西，工具最基本的使用，我会百度，因为这些东西肯定一大堆人在写
+这也让我开始反思，写博客的人，应该以一种什么样的心态去写呢？
+下面我总结出了两个点
+ 理论性较强的文章，应该多权威性的网站或者论坛(比如stackoverflow这类型的)，对比大家的意见，再结合自己对这些的想法和理解，写出一篇有深度的文章，而不仅仅停留在发现问题&ndash;解决问题&ndash;完事
+ 工具类型的文章，为了让自己能够在忘记怎么使用某一个工具时翻阅，属于一种笔记类型，不算文章
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/opinion/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-log/" title="Golang Log" >Golang Log</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者上面总结了一下网上关于错误处理和异常处理的资料，发现不知道什么时候要记录一个信息，什么时候不应该，再去找找别人的经验，总结到这篇博客。当然，笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库
+我们做后台开发，无论有什么语言，都有相应的一套日志记录系统，并且日志记录的信息可能是一些小小的问题，也可能是一些大问题，这个时候就要分级处理了，很多人(包括我之前)都对分级这个界限划分的认识模糊，不知道什么时候该用什么级别的信息
+在很多时候，log给我们提供的级别种类非常多，例如info、warning、debug、error等等，其实我对这些有些难以区分
+在一些论坛上，大家也为这些发表意见，都有各自的道理，我把我觉得有道理的记录下来，以后我就会按照这样的一套标准(并非所有人的标准)来实现我的日志记录
+先讲标准，在来简单分析一下第三方库的使用
+warning  Nobody needs a warning log level
+ 警告是什么意思？出错了吗，还是没出错，不知道，有点模棱两可的感觉
+所以要么是正常的信息输出(INFO)，要么就是错误
+其实笔者后来觉得，warning可以在下面情况使用
+ 对，是出错了，但是经过我们的错误处理，在合适的尝试次数中成功了，这样我们可以给出警告，告诉开发者，这里曾经出过错  fatal 首先，在Go里面，Fatal是会调用os.Exit(1)的
+这代表着什么样的结果(灾难)呢
+ 在其它线程的defer没有得到调用(比如一个文件的关闭在defer里，这样这个文件就未关闭，程序就挂了)
+ 缓冲区没有刷新(flush)，我们都知道，缓冲区要刷新，数据才能真正流入到我们想它到达的地方
+ 临时文件或者文件夹不会被移除(程序可能会生成临时文件，这是我们在结果中不想要的东西)
+   It is commonly accepted that libraries should not use panic, but if calling log.Fatal has the same effect, surely this should also be outlawed.
+ 网上看到别人这样说，称panic,fatal应该属于违规操作
+stackoverflow上赞同较多的答案说
+ You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-log/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/" title="Golang Errandpanic" >Golang Errandpanic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
+ but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
+ defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/" title="Golang Crawler" >Golang Crawler</a>
                                 </h1>
                             </header>
@@ -183,181 +382,6 @@ Method 这就是一个请求的方法(如GET、POST)
 URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/" title="Golang Gorm" >Golang Gorm</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                连接数据库 Mysql db, err := gorm.Open(&quot;mysql&quot;, &quot;root:123456@tcp/test?charset=utf8&amp;parseTime=True&quot;) if err != nil { panic(&quot;连接数据库失败&quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
-db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
-比如db.CreateTable(&amp;Product{})，在数据库表单里面会得到一个名字为products
-所以一般都会加上这个函数
-创建Table db.CreateTable(&amp;Product{})  创建多个table
-db.CreateTable(&amp;Product{},&amp;User{})  删除Table 关于删除，有两个
-db.DropTableIfExist(interface{}) db.DropTable(interface{})  这里可以传入字符串，也可以传入一个结构体
-接着上面的例子
-db.DropTableIfExist(&quot;product&quot;) db.DropTableIfExist(&amp;Product{})  删除Column 删除Column是要指定Table，所以不能这样
-db.DropColumn(&quot;created_at&quot;)  要定位Table，则需要
-db.Model(&amp;Product).DropColumn(&quot;created_at&quot;)  创建数据 db.Create(&amp;Product{Code: &quot;L1213&quot;, Price: 1002})  查询数据 // 最后一个符合条件，默认id最后的那个 // Get last record, order by primary key db.Last(&amp;user) //// SELECT * FROM users ORDER BY id DESC LIMIT 1; // 将所有符合条件的返回，这里要传一个结构体数组 // Get all records db.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-viper/" title="Golang Viper" >Golang Viper</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Github
- Viper is a complete configuration solution for Go applications
- 这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用
-Reading Config Files  a single Viper instance only supports a single configuration file
- 一个Viper对象只能对应一个配置文件，是一个一一对应的映射关系
-但是我们在搜索配置文件的时候，可以设置多个路径，如果没有设置路径，则当前程序的目录上寻找，所以我们要设置好路径
-这是Github上的一个例子
-viper.SetConfigName(&quot;config&quot;) // name of config file (without extension) viper.AddConfigPath(&quot;/etc/appname/&quot;) // path to look for the config file in viper.AddConfigPath(&quot;$HOME/.appname&quot;) // call multiple times to add many search paths viper.AddConfigPath(&quot;.&quot;) // optionally look for config in the working directory err := viper.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-viper/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/git/learn-gitflow/" title="Learn Gitflow" >Learn Gitflow</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月3日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                gitflow是一种规范，适合大项目开发
-Github上开源了一个遵循这样规范的一个Git工具gitflow
-初始化一个git git flow init  然后会提醒一系列创建操作，类似
-Which branch should be used for bringing forth production releases? Branch name for production releases: [master] Which branch should be used for integration of the &quot;next release&quot;? Branch name for &quot;next release&quot; development: [develop] How to name your supporting branch prefixes? Feature branches? [feature/] Bugfix branches? [bugfix/] Release branches? [release/] Hotfix branches? [hotfix/] Support branches? [support/] Version tag prefix? [] Hooks and filters directory?……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/git/learn-gitflow/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mega/" title="Golang Mega" >Golang Mega</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月1日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                不积跬步无以至千里，不积小流无以成江海
- 本文是博主在学习基础记录的笔记
-2019-04-01到2019-04-04，后面会自己DIY一些内容上去(想做成一个小小的技术论坛)
-先来总体看一下整个项目的目录吧
-. ├── cmd │ └── db_init │ └── main.go ├── config │ └── g.go ├── config.yml ├── controller │ ├── g.go │ ├── home.go │ ├── middle.go │ └── utils.go ├── main.go ├── model │ ├── g.go │ ├── post.go │ ├── user.go │ └── utils.go ├── templates │ ├── 404.html │ ├── _base.html │ ├── content │ │ ├── explore.html │ │ ├── index.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mega/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/" title="Questions Network" >Questions Network</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/questions">questions</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章是要记录在学习网络基础相关知识的时候遇到的问题与解答
-IP Q: 为什么我电脑的IP(172.29.15.243)可以访问外面的网络
-A: 我们知道某些专用网络的地址在外部是访问不到的，比如学校内部网不可以直接从外部访问，要通过VPN。我们之所以能够用专用网络分配给我们的地址访问外部网络，是因为我们在访问因特网时，IP地址会被NAT转换。
-Session 在mega项目里遇到一个问题
-首先，我访问服务器，服务器将会返回一个Session给我，那么我在这个网页游走都可以用这个Session，没毛病
-现在我Logout，这个时候服务器调用函数将Session的期限变为-1，也就是将Session过期
-这个时候我把之前服务器给我的Session自己存起来，用Postman构造一个请求，并且附上这个Session(其实是通过Cookie传)，这个时候服务器不会因为将Session期限改为-1而不认识这个Session
-所以这个现象表明所谓的清除只是服务器给浏览器发送的Cookie期限设置为-1，然后浏览器看到Cookie已经过期了，因此就不用了
-这样也就验证了，一个用户在服务器上只有一个Session id？
-resp.Body resp, err := http.DefaultClient.Do(req) if err != nil { log.Fatalf(&quot;Do Error %s\n&quot;, err) } defer resp.Body.Close() body, err := ioutil.ReadAll(resp.Body) if err != nil { log.Fatalf(&quot;ReadAll Error %s\n&quot;, err) } // fmt.Println(string(body)) file, err := os.Create(path + keyword + &quot;.html&quot;) if err != nil { log.Fatalf(&quot;Create File Error %s\n&quot;, err) } defer file.Close() _, err = file.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/questions-network/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/" title="Golang标准库--http" >Golang标准库--http</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月19日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇文章是为了探索Golang中net/http包的实现，笔者暂时只会把主要脉络摸清，具体某些实现逻辑暂不考究，是一篇比较基础的源码阅读文章。
-Package http doc.go 先来看看官方对这个包的一个解释
-这里说到，这个包是为HTTP提供客户端和服务器端的实现的。
-这里还举了一些方法的例子
-// Copyright 2011 The Go Authors. All rights reserved. // Use of this source code is governed by a BSD-style // license that can be found in the LICENSE file. /* Package http provides HTTP client and server implementations. Get, Head, Post, and PostForm make HTTP (or HTTPS) requests: resp, err := http.Get(&quot;http://example.com/&quot;) ... resp, err := http.Post(&quot;http://example.com/upload&quot;, &quot;image/jpeg&quot;, &amp;buf) ... resp, err := http.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-net-http/">阅读全文</a></p>
                         </article>
                     
 
@@ -484,6 +508,10 @@ Package http doc.go 先来看看官方对这个包的一个解释
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -512,6 +540,30 @@ Package http doc.go 先来看看官方对这个包的一个解释
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -527,30 +579,6 @@ Package http doc.go 先来看看官方对这个包的一个解释
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -561,11 +589,19 @@ Package http doc.go 先来看看官方对这个包的一个解释
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -581,7 +617,7 @@ Package http doc.go 先来看看官方对这个包的一个解释
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -647,6 +683,8 @@ Package http doc.go 先来看看官方对这个包的一个解释
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -656,6 +694,8 @@ Package http doc.go 先来看看官方对这个包的一个解释
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -678,6 +718,8 @@ Package http doc.go 先来看看官方对这个包的一个解释
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

@@ -78,6 +78,93 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">Go语言实战</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Go语言优点：
+ Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
+ Go语言内置并发机制，对并发有着更好的性能
+ Go语言自带垃圾回收器
+ goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
+  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">Go语言高级编程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
+这篇文章是开源的，欢迎大家去阅读
+本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
+第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
+ Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
+ 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
+  字符串  字符串的元素不可修改，是一个只读的字节数组
+ 字符串虽然不是切片，但是支持切片操作
+type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
+  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
+这种做法可以减少中间创建的临时切片
+copy append可以完成切片的添加 删除 插入操作……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/">Golang--Leetcode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                此文章为做题时发现的不足
+ Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
+func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">Golang标准库--Unicode</a>
                                 </h1>
                             </header>
@@ -333,6 +420,30 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -348,30 +459,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -382,11 +469,19 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -402,7 +497,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -468,6 +563,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -477,6 +574,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -499,6 +598,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

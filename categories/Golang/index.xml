@@ -6,10 +6,67 @@
     <description>Recent content in Golang on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Aug 2019 23:08:56 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Aug 2019 09:38:20 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Gopher 2019 Micro Integration Test</title>
+      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/</link>
+      <pubDate>Sun, 11 Aug 2019 09:38:20 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/</guid>
+      <description> 这是19年Sg GopherCon上的视频
+源代码
+里面讲了微服务的测试
+种类 测试主要有三种
+ E2E
+ Integration
+ UT
+  E2E的缺点 </description>
+    </item>
+    
+    <item>
+      <title>Gopher 2018 Asyn Network</title>
+      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/</link>
+      <pubDate>Sat, 10 Aug 2019 17:56:40 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/</guid>
+      <description>Reference Video is here
+src is here
+In this post, I wanna summary a few tips I learned from Filippo Valsorda
+How to receive a connection l, err := net.Listen(&amp;quot;tcp&amp;quot;,&amp;quot;localhost:8989&amp;quot;) if err != nil { log.Fatal(err) } for { conn, err := l.Accept() if err != nil { log.Fatal(err) } go serveConn(conn) }  If you don&amp;rsquo;t serve the connection as a goroutine, it will block and can&amp;rsquo;t receive an another connection before current connection is broken</description>
+    </item>
+    
+    <item>
+      <title>Gopher 2019 Stack and Heap</title>
+      <link>https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/</link>
+      <pubDate>Sat, 10 Aug 2019 14:39:04 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/</guid>
+      <description>最近在多多回顾之前的Gopher大会视频，下面分享的主题是在2019 GopherCon Sg上由Jacob Walker带来的Understanding Allocations: The Stack and the Heap
+这篇blog post只是为了总结
+Stack 在Go里，每一个goroutine都有一个自己的stack，因此我们如何在goroutine之间传达stack的数据？
+当然是用channel(推荐)或者全局变量(不推荐，且需要加锁)
+但是这篇post主题不是这个，所以不加深讨论了
+可能会有人有疑问，我只有一个main函数方法，没有起goroutine怎么办。可以这么理解，其实main函数本身就是一个goroutine
+Heap 如果变量不存储在stack上，那么就是存储在了heap上
+heap原则上不属于任何一个goroutine拥有，大家都可以对这里的变量进行引用
+存储在heap上的变量会受到GC的管理(也就是垃圾回收)
+Attention 其实在编写程序，我们更注重的是正确性，清晰性，可读性等
+唯独我们真正需要Improve performance的时候，才需要考虑性能问题
+什么时候要提升性能呢
+ 用benchmark证明程序确确实实没有达到需求的速度  Optimize for correctness first, not performance
+How do we know where the variable is stored? 我们不知道，只有编译器知道，所以我们需要问编译器
+go build -gcflags &amp;quot;-m&amp;quot;  但是我们可以根据一些通行的规则大概判断
+Detail 我再简单的说说Go里面的stack
+Go stack会分成两部分，一部分是valid，另一部分是invalid
+从字面上也很容易看出，valid的内存才是真正有用的，可以被调用的.
+我们不应该触碰到invalid内存里的东西，因为那是不安全的
+什么时候是valid的呢
+func main() { a := 1 b := 1 c := sum(a,b) } func sum(x,y) int { return x+y }  一个很简单的程序</description>
+    </item>
     
     <item>
       <title>Gopher 2016 Solid Design</title>

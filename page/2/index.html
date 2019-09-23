@@ -68,6 +68,189 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object" >Javascript Object</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                本篇笔记是学习阮一峰老师的ES6
+关于对象 Javascript所有对象都继承自Object
+所以一般对象有两种方法集：
+ Object本身的方法
+ 对象实例的方法
+  Object() 我们可以使用Object()来强制类型转换，将任意值转换为一个对象
+我们可以分为三种情况
+ 空对象
+ Object()
+ Object(null)
+ Object(undefined)
+  需要转换
+ Number
+ String
+ Boolean
+  不需要转换
+ Array
+ Object
+ Function
+   不需要转换的可以有Object(...) === Object(...) //true
+但是Object(undefined) === Object(undefined) //false
+静态方法 Object.keys() Object.getOwnPropertyNames()  这两者的区别在于Object.getOwnPropertyNames能够返回不可枚举的属性名
+什么叫不可枚举的属性名呢?
+类似一个数组包含了两个元素let a = [11,22],那么Object.keys返回的就是[&quot;0&quot;,&quot;1&quot;],而另一个方法返回的是[&quot;0&quot;,&quot;1&quot;,&quot;length&quot;]
+这里面的length就是一个不可枚举的属性名
+不过我们一般情况下是不希望将不可枚举的属性名抽取出来的，所以我们一般是用Object.keys()
+Object.prototype.getOwnPropertyDescriptor
+这个方法只能够用于自身的属性，作用是给出某个属性的详细信息(属性描述对象)
+{ value: 123, //值 writable: false, //是否可写 enumerable: true, //是否可遍历(是否可以用Object.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive" >Typescript Basic Primitive</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                I am using Typescript about 2 weeks on my team&rsquo;s project until now.
+But I am very new on front-end, and I have never learned Javascript or Typescript before. So, I decided to learn from open-source-tutorial.
+I planed to spend a week or two weeks to learn the basic syntax about JS and TS, so I will write some blogs to record the process and make a summary at the end.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account" >Linux Account</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to login my Ubuntu as root. But, I don&rsquo;t even remember I have set a password for root.
+Fortunately, I learned some skills about how to manage accounts in linux, so I figure it out very quickly, I hope this experience can be helpful for you if you have the same(similar) problems
+UID and GID When you login in a linux system, you must have a user and its password.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-account/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command" >Linux How to Identify Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to talk about a small topic &ndash; how to identify a command
+Specifically, If you want to know where are these commands from, there are three possibilities:
+ builtin
+ alias
+ file(external)
+  Let&rsquo;s try it type cd // Of course, cd is a builtin command &gt; cd is a shell builtin type ll &gt; ll is aliased to `ls -alhF' type mongod &gt; mongod is /usr/local/mongodb/bin/mongod  Basically you don&rsquo;t need to add any flags……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File" >Linux Windows File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                In linux, [Enter] =&gt; LF
+But in windows, [Enter] =&gt; CRLF
+So, if we cp a shell script file from windows to linux, we may not be able to run it because of the line break character is different
+we need a tool to transform between windows(DOS) and linux(UNIX)
+dos2unix [-kn] file [newfile] unix2dox [-kn] file [newfile] unix2mac [-kn] file [newfile]   k: keep modified date
+ n: create new file……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic" >Linux Vim Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, we talked about linux compression
+This time, I am gonna talk about basic usage about vim
+vim is a highly recommended editor in UNIX-Like system, so it is necessary to learn that
+To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScode) or IDE to develop software, I use vim only when I just want to edit a config file or just couple lines of code which is not worth opening a editor(or IDE)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression" >Linux Compression</a>
                                 </h1>
                             </header>
@@ -173,198 +356,6 @@ locate locate is a powerful search command which is using database searching
 locate filename //search included filename locate -i filename //ignore case locate -r regexp //use regular expression to search  As we can see the commands above there, we can also do any search with it……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/" title="Linux Read File" >Linux Read File</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Last time, I talked about how to operate file like copy, move or remove
-Today, let&rsquo;s see how many ways do we have to read file content, I will introduce some basic and useful commands
-cat cat filename will print all the content at once, so it is helpful when you just simply want to print the file content
-cat -n filename // show the line number  but if the file is large(like 100M+), you may not want to use this.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/" title="Linux File System Basic Command" >Linux File System Basic Command</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Basic Command Last time, I shared about permission
-Today the topic is Basic Command of File System
-I am gonna give you some simple command you can use in your daily working situation
-cd //enter a directory pwd //show the work directory(Print Working Directory)  mkdir
-mkdir -m // set directory permission when create mkdir -p // If parent directory doesn't exist, it will help you create when you add -p flag  rmdir……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission" >Linux Permission</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Today, I am gonna talk about linux permission which is very basic for linux user.
-Basically, we have three different role in linux
-Owner Group Other  It is easy to understand what they mean.
-ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
--rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps" >Linux Ps</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 ps命令有几种标准，这里只用UNIX版本的
-Background 首先了解一些概念
- PID 进程ID
- PPID 父进程ID
- PGID 进程所在GroupID
- SID 进程所在会话(Session)ID
-  一般来说，SID就是我们的shell
-一个SID管理多个PGID
-一个PGID管理很多PID
-既然是管理，那就会有leader角色，那么如何知道谁是leader
-PID == PGID的就是group leader
-PID == SID的就是session leader
-Flag Selection
--A -e 全部进程 -a 全部进程处理session leader -C 命令名字 -g group -u user -p pid -t tty  Format
--o pid,ppid,tty,time 选择输出某些字段 -F 全部字段(带字段名字 -f不带字段名字) --forest 树状形式输出  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property" >CSS Basic Property</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最基本的一些属性
-text-align 文本对齐方式
- justify 对齐文本容器的左右两边
- center 每一行左右间距一样
- right
- left
-  width 指定容器大小，可以接受不同的单位
-常见单位：
- px 像素
- % 百分比
- em 根据父元素的倍数
- rem 根据根元素的倍数
- vh view-high
- vw view-width
- max/min
-  刚开始学习前端会不知道这个百分比是以什么为基准的
-宽度会相对于父元素的宽度 高度会相对与父元素的高度 字体大小会相对父元素字体大小 边界是相对自身的  一些标签  strong 加粗
- u 下划线
- em 斜体
- s 横线(画在字体中间)
- hr 水平线(无close tag)
-  box-shadow  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic" >CSS Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                主要记录一下CSS的基本语法
-以标签来选择 以标签来选择可能并不是很好的选择，一旦项目规模大，这种是不好管理的
-后代选择器 div strong //这个是指凡是在div下面的strong标签，都会起作用 要注意 后代并不是单单指一代 子代选择器 div&gt;strong //这个和后代选择器很大的不同就是这个只会选择子代 相邻兄弟选择器 div&gt; p+h1 //二者有共同的父元素  id、class选择器 id
-#pro{ }  class
-.important{ }  也可以组合一些，下面给一些例子
-.important.warning{ }  这个属性要在class=&quot;important warning&quot;同时拥有这两个属性才可以有这里面的样式
-或者
-.important p{ }  属性选择器 选择属性
-a[href]{ color: red; }  只改变有href属性的a标签……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic/">阅读全文</a></p>
                         </article>
                     
 
@@ -491,6 +482,10 @@ a[href]{ color: red; }  只改变有href属性的a标签……
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -519,6 +514,30 @@ a[href]{ color: red; }  只改变有href属性的a标签……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -534,30 +553,6 @@ a[href]{ color: red; }  只改变有href属性的a标签……
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -568,11 +563,19 @@ a[href]{ color: red; }  只改变有href属性的a标签……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -588,7 +591,7 @@ a[href]{ color: red; }  只改变有href属性的a标签……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -654,6 +657,8 @@ a[href]{ color: red; }  只改变有href属性的a标签……
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -663,6 +668,8 @@ a[href]{ color: red; }  只改变有href属性的a标签……
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -685,6 +692,8 @@ a[href]{ color: red; }  只改变有href属性的a标签……
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

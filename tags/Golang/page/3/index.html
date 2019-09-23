@@ -78,6 +78,95 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">Golang Channel</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这里就不再赘述重要性了
+Channel特性  goroutine-safe
+ 两个goroutine之间传递数据
+ FIFO
+ cause goroutine to block and unblock
+  What is the inside of channel  mutex
+ send-index and recieve index
+ buf
+  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
+How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">Golang Interface</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
+ concrete type(具体类型,int,string&hellip;)
+ abstract type(抽象类型 io.Writer,io.Reader&hellip;)
+  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
+抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
+具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
+func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
+func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
+这里io.Reader是一个接口，接口里面只要一个函数
+type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
+func (f *File) Read(b []byte) (n int, err error) { if err := f.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">Golang Tips</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月18日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
+关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">Golang Gin</a>
                                 </h1>
                             </header>
@@ -306,97 +395,6 @@ stackoverflow上赞同较多的答案说
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">Golang Crawler</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
-goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
- first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
- invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
-  defer func () { if resp != nil { resp.Body.Close() } }()  单元测试 func TestCrawler(t *testing.T) { // keywords := []string{&quot;golang&quot;, &quot;java&quot;} keywords := &quot;golang,java&quot; refresh := &quot;on&quot; value := url.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-handle/">Golang Handle</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                本文主要解释Golang中http-handler几个容易混淆的概念
-HandleFunc 源代码
-在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
-http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
-当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
-myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
-// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
-// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&quot;http: nil handler&quot;) } mux.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-handle/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/">Golang goquery</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月8日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                goquery是一个开源的库，针对解析HTML
-今天在做爬虫的时候用到了一些功能，记录下来方便查阅
-创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&quot;go query Error %s\n&quot;, err) }  doc对象就包含了我们要解析的HTML主体
-一般我们这样用，Find()里面的字符串就是我们要填写的规则
-doc.Find(&quot;div&quot;).Each(func(i int, s *goquery.Selection) { fmt.Println(i,s.Text()) })  规则 我们可以根据HTML的源码分析对应的属性id，class等等
- div#id #id是某个div的id属性，筛选出此id的div标签
- div.class .class 同理，是class属性
- div[class],div[lang] 这个也是属性的筛选
- div&gt;p div嵌套的p标签，这里规定只有一级标签，一级以后的p标签不会被筛选出来
- div p div嵌套的p标签，这里无论第几级都会被筛选出来
-  属性可以和嵌套一起使用，例如div.class&gt;p&gt;li
-Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标签内的属性 doc.Find(&quot;ul&gt;li&gt;div.job-primary&gt;div&gt;h3&gt;a&quot;).Each(func(i int, s *goquery.Selection) { detail := s.Get(0).Attr[0].Val // fmt.Println(i, nextPage) jobs[i].Detail = detail })  我在这里踩过一个坑……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -457,6 +455,30 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -472,30 +494,6 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -506,11 +504,19 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -526,7 +532,7 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -592,6 +598,8 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -601,6 +609,8 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -623,6 +633,8 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

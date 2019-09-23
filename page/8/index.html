@@ -68,6 +68,144 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/" title="Leetcode 509" >Leetcode 509</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is, F(0) = 0, F(1) = 1 F(N) = F(N - 1) + F(N - 2), for N &gt; 1. Given N, calculate F(N). Example 1: Input: 2 Output: 1 Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-509/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/" title="Leetcode 485" >Leetcode 485</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary array, find the maximum number of consecutive 1s in this array. Example 1: Input: [1,1,0,1,1,1] Output: 3 Explanation: The first two digits or the last three digits are consecutive 1s. The maximum number of consecutive 1s is 3. Note: The input array will only contain 0 and 1. The length of input array is a positive integer and will not exceed 10,000  我的解答 // Runtime: 36 ms, faster than 96.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-485/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/" title="Leetcode 448" >Leetcode 448</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once. Find all the elements of [1, n] inclusive that do not appear in this array. Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space. Example: Input: [4,3,2,7,8,2,3,1] Output: [5,6]  我的解答 func findDisappearedNumbers(nums []int) []int { for i := 0; i &lt; len(nums); i++ { if nums[abs(nums[i])-1] &gt; 0 { nums[abs(nums[i])-1] *= -1 } } res := make([]int, 0) for i := 0; i &lt; len(nums); i++ { if nums[i] &gt; 0 { res = append(res, i+1) } } return res } func abs(x int) int { if x &lt; 0 { return -x } return x }  因为数的范围不会超过长度，因此可以用数来表示索引，如果数存在，那么相对应大小的索引置-1(因为数组里面不会有负数，所以可以用来区分)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-448/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/" title="Leetcode 925" >Leetcode 925</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Your friend is typing his name into a keyboard. Sometimes, when typing a character c, the key might get long pressed, and the character will be typed 1 or more times. You examine the typed characters of the keyboard. Return True if it is possible that it was your friends name, with some characters (possibly none) being long pressed. Example 1: Input: name = &quot;alex&quot;, typed = &quot;aaleex&quot; Output: true Explanation: 'a' and 'e' in 'alex' were long pressed.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-925/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/" title="Leetcode 917" >Leetcode 917</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a string S, return the &quot;reversed&quot; string where all characters that are not a letter stay in the same place, and all letters reverse their positions. Example 1: Input: &quot;ab-cd&quot; Output: &quot;dc-ba&quot; Example 2: Input: &quot;a-bC-dEf-ghIj&quot; Output: &quot;j-Ih-gfE-dCba&quot; Example 3: Input: &quot;Test1ng-Leet=code-Q!&quot; Output: &quot;Qedo1ct-eeLg=ntse-T!&quot; Note: S.length &lt;= 100 33 &lt;= S[i].ASCIIcode &lt;= 122 S doesn't contain \ or &quot;  我的解答 // Runtime: 0 ms, faster than 100.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-917/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/" title="Leetcode 859" >Leetcode 859</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two strings A and B of lowercase letters, return true if and only if we can swap two letters in A so that the result equals B. Example 1: Input: A = &quot;ab&quot;, B = &quot;ba&quot; Output: true Example 2: Input: A = &quot;ab&quot;, B = &quot;ab&quot; Output: false Example 3: Input: A = &quot;aa&quot;, B = &quot;aa&quot; Output: true Example 4: Input: A = &quot;aaaaaaabc&quot;, B = &quot;aaaaaaacb&quot; Output: true Example 5: Input: A = &quot;&quot;, B = &quot;aa&quot; Output: false Note: 0 &lt;= A.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-859/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-819/" title="Leetcode 819" >Leetcode 819</a>
                                 </h1>
                             </header>
@@ -155,144 +293,6 @@
                                 题目 Implement function ToLowerCase() that has a string parameter str, and returns the same string in lowercase. Example 1: Input: &quot;Hello&quot; Output: &quot;hello&quot; Example 2: Input: &quot;here&quot; Output: &quot;here&quot; Example 3: Input: &quot;LOVELY&quot; Output: &quot;lovely&quot;  我的解答 // Runtime: 0 ms, faster than 100.00% of Go online submissions for To Lower Case. // Memory Usage: 1.9 MB, less than 56.74% of Go online submissions for To Lower Case. func toLowerCase(str string) string { dis := byte(32) b := []byte(str) for i := 0; i &lt; len(b); i++ { if b[i] &gt;= 'A' &amp;&amp; b[i] &lt;= 'Z' { b[i] += dis } } return string(b) }  比较简单……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-709/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-696/" title="Leetcode 696" >Leetcode 696</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0's and 1's, and all the 0's and all the 1's in these substrings are grouped consecutively. Substrings that occur multiple times are counted the number of times they occur. Example 1: Input: &quot;00110011&quot; Output: 6 Explanation: There are 6 substrings that have equal number of consecutive 1's and 0's: &quot;0011&quot;, &quot;01&quot;, &quot;1100&quot;, &quot;10&quot;, &quot;0011&quot;, and &quot;01&quot;.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-696/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-686/" title="Leetcode 686" >Leetcode 686</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given two strings A and B, find the minimum number of times A has to be repeated such that B is a substring of it. If no such solution, return -1. For example, with A = &quot;abcd&quot; and B = &quot;cdabcdab&quot;. Return 3, because by repeating A three times (“abcdabcdabcd”), B is a substring of it; and B is not a substring of A repeated two times (&quot;abcdabcd&quot;). Note: The length of A and B will be between 1 and 10000.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-686/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-680/" title="Leetcode 680" >Leetcode 680</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome. Example 1: Input: &quot;aba&quot; Output: True Example 2: Input: &quot;abca&quot; Output: True Explanation: You could delete the character 'c'. Note: The string will only contain lowercase characters a-z. The maximum length of the string is 50000.  我的解答 // Runtime: 36 ms, faster than 6.57% of Go online submissions for Valid Palindrome II.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-680/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-657/" title="Leetcode 657" >Leetcode 657</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 There is a robot starting at position (0, 0), the origin, on a 2D plane. Given a sequence of its moves, judge if this robot ends up at (0, 0) after it completes its moves. The move sequence is represented by a string, and the character moves[i] represents its ith move. Valid moves are R (right), L (left), U (up), and D (down). If the robot returns to the origin after it finishes all of its moves, return true.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-657/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-557/" title="Leetcode 557" >Leetcode 557</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order. Example 1: Input: &quot;Let's take LeetCode contest&quot; Output: &quot;s'teL ekat edoCteeL tsetnoc&quot; Note: In the string, each word is separated by single space and there will not be any extra space in the string  我的解答 // Runtime: 8 ms, faster than 75.26% of Go online submissions for Reverse Words in a String III.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-557/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-551/" title="Leetcode 551" >Leetcode 551</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 You are given a string representing an attendance record for a student. The record only contains the following three characters: 'A' : Absent. 'L' : Late. 'P' : Present. A student could be rewarded if his attendance record doesn't contain more than one 'A' (absent) or more than two continuous 'L' (late). You need to return whether the student could be rewarded according to his attendance record. Example 1: Input: &quot;PPALLP&quot; Output: True Example 2: Input: &quot;PPALLL&quot; Output: False  我的解答 // Runtime: 0 ms, faster than 100.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-551/">阅读全文</a></p>
                         </article>
                     
 
@@ -419,6 +419,10 @@
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -447,6 +451,30 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -462,30 +490,6 @@
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -496,11 +500,19 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -516,7 +528,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -582,6 +594,8 @@
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -591,6 +605,8 @@
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -613,6 +629,8 @@
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

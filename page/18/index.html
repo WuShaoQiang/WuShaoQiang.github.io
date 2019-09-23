@@ -68,6 +68,157 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-191/" title="Leetcode 191" >Leetcode 191</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Example 1: Input: 00000000000000000000000000001011 Output: 3 Explanation: The input binary string 00000000000000000000000000001011 has a total of three '1' bits. Example 2: Input: 00000000000000000000000010000000 Output: 1 Explanation: The input binary string 00000000000000000000000010000000 has a total of one '1' bit. Example 3: Input: 11111111111111111111111111111101 Output: 31 Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one '1' bits. Note: Note that in some languages such as Java, there is no unsigned integer type.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-191/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-190/" title="Leetcode 190" >Leetcode 190</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Reverse bits of a given 32 bits unsigned integer. Example 1: Input: 00000010100101000001111010011100 Output: 00111001011110000010100101000000 Explanation: The input binary string 00000010100101000001111010011100 represents the unsigned integer 43261596, so return 964176192 which its binary representation is 00111001011110000010100101000000. Example 2: Input: 11111111111111111111111111111101 Output: 10111111111111111111111111111111 Explanation: The input binary string 11111111111111111111111111111101 represents the unsigned integer 4294967293, so return 3221225471 which its binary representation is 10101111110010110010011101101001. Note: Note that in some languages such as Java, there is no unsigned integer type.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-190/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-189/" title="Leetcode 189" >Leetcode 189</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array, rotate the array to the right by k steps, where k is non-negative. Example 1: Input: [1,2,3,4,5,6,7] and k = 3 Output: [5,6,7,1,2,3,4] Explanation: rotate 1 steps to the right: [7,1,2,3,4,5,6] rotate 2 steps to the right: [6,7,1,2,3,4,5] rotate 3 steps to the right: [5,6,7,1,2,3,4] Example 2: Input: [-1,-100,3,99] and k = 2 Output: [3,99,-1,-100] Explanation: rotate 1 steps to the right: [99,-1,-100,3] rotate 2 steps to the right: [3,99,-1,-100] Note: Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-189/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/" title="Leetcode 172" >Leetcode 172</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an integer n, return the number of trailing zeroes in n!. Example 1: Input: 3 Output: 0 Explanation: 3! = 6, no trailing zero. Example 2: Input: 5 Output: 1 Explanation: 5! = 120, one trailing zero. Note: Your solution should be in logarithmic time complexity.  我的解答 看了些提示才做出来
+func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt; 0 { len++ tmp = tmp * 5 } for i := 0; i &lt; len; i++ { count += (n / tmp) tmp = tmp / 5 } return count }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/" title="Leetcode 171" >Leetcode 171</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a column title as appear in an Excel sheet, return its corresponding column number. For example: A -&gt; 1 B -&gt; 2 C -&gt; 3 ... Z -&gt; 26 AA -&gt; 27 AB -&gt; 28 ... Example 1: Input: &quot;A&quot; Output: 1 Example 2: Input: &quot;AB&quot; Output: 28 Example 3: Input: &quot;ZY&quot; Output: 701  我的解答 func titleToNumber(s string) int { result := 0 tmp := 1 for i := len(s) - 1; i &gt;= 0; i-- { num := int(s[i] - 64) result += (num * tmp) tmp = tmp * 26 } return result }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-system/computer-system/" title="计算机系统" >计算机系统</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80">计算机基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近复习了一遍计算机网络、数据结构等书，过了快一个星期了，可以开始看看《深入理解计算机系统》了，很多人不推荐一开始就啃这本书，吸收会比较慢，可以先看一些公开课
+这里推荐B站的公开课
+配套课件
+第二章 溢出 整数注意溢出，浮点数注意大数吃小数(虽然也要注意溢出，但是大数吃小数情况更加容易出现)
+大数吃小数的例子
+func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c) //不会吃 fmt.Println(a - (b + c)) //会吃 }  性能与底层bit 二维数组，一行一行扫描比一列列扫描性能要好
+无符号和有符号的数字需要小心分析它底层的bit，举例子
+无符号：1 1 1 1 --&gt; 2^3+2^2+2^1+2^0 = 15 有符号：1 1 1 1 --&gt; -2^3+2^2+2^1+2^0 = -1  ###大小端
+大端法：最高有效字节在最前面的方式
+比如0x01234567,在内存的表示是
+01 23 45 67  小端法：最低有效字节在最前面的方式
+比如0x01234567,在内存的表示是
+67 45 23 01  一般操作系统用的都是小端法……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-system/computer-system/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-169/" title="Leetcode 169" >Leetcode 169</a>
                                 </h1>
                             </header>
@@ -155,145 +306,6 @@
                                 题目 Write a program to find the node at which the intersection of two singly linked lists begins. For example, the following two linked lists: begin to intersect at node c1. Example 1: Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3 Output: Reference of the node with value = 8 Input Explanation: The intersected node's value is 8 (note that this must not be 0 if the two lists intersect).……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-160/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-155/" title="Leetcode 155" >Leetcode 155</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. push(x) -- Push element x onto stack. pop() -- Removes the element on top of the stack. top() -- Get the top element. getMin() -- Retrieve the minimum element in the stack. Example: MinStack minStack = new MinStack(); minStack.push(-2); minStack.push(0); minStack.push(-3); minStack.getMin(); --&gt; Returns -3. minStack.pop(); minStack.top(); --&gt; Returns 0. minStack.getMin(); --&gt; Returns -2.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-155/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-141/" title="Leetcode 141" >Leetcode 141</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a linked list, determine if it has a cycle in it. To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list. Example 1: Input: head = [3,2,0,-4], pos = 1 Output: true Explanation: There is a cycle in the linked list, where tail connects to the second node.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-141/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-136/" title="Leetcode 136" >Leetcode 136</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a non-empty array of integers, every element appears twice except for one. Find that single one. Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? Example 1: Input: [2,2,1] Output: 1 Example 2: Input: [4,1,2,1,2] Output: 4  我的解答 没想出来，看了评论区才知道
-最优解答 func singleNumber(nums []int) int { for i := len(nums) - 1; i &gt; 0; i-- { nums[i-1] = nums[i-1] ^ nums[i] } return nums[0] }  难疑点&amp;核心 因为题目说了，只有一个数字是不会出现两次，其它数字都出现两次……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-136/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-125/" title="Leetcode 125" >Leetcode 125</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。 说明：本题中，我们将空字符串定义为有效的回文串。 示例 1: 输入: &quot;A man, a plan, a canal: Panama&quot; 输出: true 示例 2: 输入: &quot;race a car&quot; 输出: false  我的解答 func isPalindrome(s string) bool { s = strings.Join(filter(s), &quot;&quot;) n := len(s) for i := 0; i &lt; n/2; i++ { if s[i] != s[n-1-i] { return false } } return true } func filter(s string) []string { return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-125/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-122/" title="Leetcode 122" >Leetcode 122</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  我的解答 func maxProfit(prices []int) int { buy := 0 sell := 0 profit := 0 n := len(prices) for { for buy &lt; n-1 &amp;&amp; prices[buy+1] &lt;= prices[buy] { buy++ } sell = buy for sell &lt; n-1 &amp;&amp; prices[sell+1] &gt; prices[sell] { sell++ } if sell == buy { return profit } profit += prices[sell] - prices[buy] buy = sell } }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-122/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/" title="Leetcode 121" >Leetcode 121</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/">阅读全文</a></p>
                         </article>
                     
 
@@ -420,6 +432,10 @@
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -448,6 +464,30 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -463,30 +503,6 @@
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -497,11 +513,19 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -517,7 +541,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -583,6 +607,8 @@
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -592,6 +618,8 @@
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -614,6 +642,8 @@
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

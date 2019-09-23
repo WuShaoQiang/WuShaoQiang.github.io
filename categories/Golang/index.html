@@ -78,6 +78,105 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/">Gopher 2019 Micro Integration Test</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 这是19年Sg GopherCon上的视频
+源代码
+里面讲了微服务的测试
+种类 测试主要有三种
+ E2E
+ Integration
+ UT
+  E2E的缺点 ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/">Gopher 2018 Asyn Network</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月10日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Reference Video is here
+src is here
+In this post, I wanna summary a few tips I learned from Filippo Valsorda
+How to receive a connection l, err := net.Listen(&quot;tcp&quot;,&quot;localhost:8989&quot;) if err != nil { log.Fatal(err) } for { conn, err := l.Accept() if err != nil { log.Fatal(err) } go serveConn(conn) }  If you don&rsquo;t serve the connection as a goroutine, it will block and can&rsquo;t receive an another connection before current connection is broken……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/">Gopher 2019 Stack and Heap</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年8月10日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近在多多回顾之前的Gopher大会视频，下面分享的主题是在2019 GopherCon Sg上由Jacob Walker带来的Understanding Allocations: The Stack and the Heap
+这篇blog post只是为了总结
+Stack 在Go里，每一个goroutine都有一个自己的stack，因此我们如何在goroutine之间传达stack的数据？
+当然是用channel(推荐)或者全局变量(不推荐，且需要加锁)
+但是这篇post主题不是这个，所以不加深讨论了
+可能会有人有疑问，我只有一个main函数方法，没有起goroutine怎么办。可以这么理解，其实main函数本身就是一个goroutine
+Heap 如果变量不存储在stack上，那么就是存储在了heap上
+heap原则上不属于任何一个goroutine拥有，大家都可以对这里的变量进行引用
+存储在heap上的变量会受到GC的管理(也就是垃圾回收)
+Attention 其实在编写程序，我们更注重的是正确性，清晰性，可读性等
+唯独我们真正需要Improve performance的时候，才需要考虑性能问题
+什么时候要提升性能呢
+ 用benchmark证明程序确确实实没有达到需求的速度  Optimize for correctness first, not performance
+How do we know where the variable is stored? 我们不知道，只有编译器知道，所以我们需要问编译器
+go build -gcflags &quot;-m&quot;  但是我们可以根据一些通行的规则大概判断
+Detail 我再简单的说说Go里面的stack
+Go stack会分成两部分，一部分是valid，另一部分是invalid
+从字面上也很容易看出，valid的内存才是真正有用的，可以被调用的.
+我们不应该触碰到invalid内存里的东西，因为那是不安全的
+什么时候是valid的呢
+func main() { a := 1 b := 1 c := sum(a,b) } func sum(x,y) int { return x+y }  一个很简单的程序……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/">Gopher 2016 Solid Design</a>
                                 </h1>
                             </header>
@@ -339,113 +438,6 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">Golang GC</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
-参考  legendtkl
- Golang UK Conference 2017 | Will Sewell &amp; Jim Fisher - Golang&rsquo;s Realtime GC in Theory and Practice
-  算法模型 三色标记算法(Mark-and-sweep)
-三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
- 这个算法实现广度优先(BF)
- 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
- 这个重复选取直到没有灰色的对象为止
-  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
- 黑色：已经遍历过这个对象的所有对象
- 灰色：这个对象所指向的对象还没有被遍历过
- 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
-  结束阶段里，按算法所解释的，是不会再有灰色了，只有
- 黑色：有用的数据
- 白色：已经不可能到达的数据(垃圾，会被清理)
-  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
- 执行我们前面所说的模型里的循环
- 在处理完循环后，清理所有白色标记的对象
-  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现
-2019.05.06 今天在看了一个视频
-在最后面讲到GC的问题的时候，发现GC的一个问题
- 对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">Golang 依赖注入</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月26日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
-没有DI 把所有创建变量放在New函数里面
-type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
-有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">Golang 泛型</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月26日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
-泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
-比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
-type LinkListNode struct { Value int Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  如果我们还要写一个字符串的链表，这个时候将Value的类型改成string就行了，其它不用变，如果我们还要..balabala，可能就要定义上百个结构体了，到时候代码全是结构体
-有些同学说，用接口不就可以了吗？用接口不就无法实现类型的判断了吗，万一程序哪个地方本应该收到int，却收了一个string，然后程序boom
-关于网上很多网友使用interface来达到所谓的泛型，我是越看越像多态呀，并且还是达不到泛型所能提供的类型保护啊，虽然算法确实可以复用了(有些)
-泛型的目的是减少代码的重复性，也就是增加重用性，还能够确定数据类型，比如Java中的一个例子
-class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } public void setValue(T v) { this.value = v; } }  T我可以是字符串，也可以是整数等，或者是自己定义的结构体。但是一旦定下来，创建了的变量类型就不能变了
-所以我说了那么多。。怎么实现啊
-实现 Go2草稿中有提到这个话题Go 2 Draft Designs
-目前只是一个草稿，并且是由Gopher们共同推进的一个话题，所以说现在Go内置里面还未实现泛型
-笔者也去看了一些关于泛型的讨论，到最后都还是建议不要在现阶段写泛型程序，因为Go有一个很本质的特点，就是简单写、简单读，如果通过一些自己的&rdquo;创造&rdquo;而造成别人阅读代码困难，那是得不偿失
-所以真香，还是用回多态吧，有机会再详细阅读一下草稿
-对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
-这里是Go2官方对这些修改的想法视频……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -502,6 +494,30 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -517,30 +533,6 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -551,11 +543,19 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -571,7 +571,7 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -637,6 +637,8 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -646,6 +648,8 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -668,6 +672,8 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

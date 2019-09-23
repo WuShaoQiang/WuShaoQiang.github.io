@@ -68,6 +68,228 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/" title="Golang GC" >Golang GC</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
+参考  legendtkl
+ Golang UK Conference 2017 | Will Sewell &amp; Jim Fisher - Golang&rsquo;s Realtime GC in Theory and Practice
+  算法模型 三色标记算法(Mark-and-sweep)
+三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
+ 这个算法实现广度优先(BF)
+ 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
+ 这个重复选取直到没有灰色的对象为止
+  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
+ 黑色：已经遍历过这个对象的所有对象
+ 灰色：这个对象所指向的对象还没有被遍历过
+ 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
+  结束阶段里，按算法所解释的，是不会再有灰色了，只有
+ 黑色：有用的数据
+ 白色：已经不可能到达的数据(垃圾，会被清理)
+  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
+ 执行我们前面所说的模型里的循环
+ 在处理完循环后，清理所有白色标记的对象
+  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现
+2019.05.06 今天在看了一个视频
+在最后面讲到GC的问题的时候，发现GC的一个问题
+ 对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/" title="Golang 依赖注入" >Golang 依赖注入</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
+没有DI 把所有创建变量放在New函数里面
+type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
+有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/" title="Golang 泛型" >Golang 泛型</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
+泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
+比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
+type LinkListNode struct { Value int Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  如果我们还要写一个字符串的链表，这个时候将Value的类型改成string就行了，其它不用变，如果我们还要..balabala，可能就要定义上百个结构体了，到时候代码全是结构体
+有些同学说，用接口不就可以了吗？用接口不就无法实现类型的判断了吗，万一程序哪个地方本应该收到int，却收了一个string，然后程序boom
+关于网上很多网友使用interface来达到所谓的泛型，我是越看越像多态呀，并且还是达不到泛型所能提供的类型保护啊，虽然算法确实可以复用了(有些)
+泛型的目的是减少代码的重复性，也就是增加重用性，还能够确定数据类型，比如Java中的一个例子
+class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } public void setValue(T v) { this.value = v; } }  T我可以是字符串，也可以是整数等，或者是自己定义的结构体。但是一旦定下来，创建了的变量类型就不能变了
+所以我说了那么多。。怎么实现啊
+实现 Go2草稿中有提到这个话题Go 2 Draft Designs
+目前只是一个草稿，并且是由Gopher们共同推进的一个话题，所以说现在Go内置里面还未实现泛型
+笔者也去看了一些关于泛型的讨论，到最后都还是建议不要在现阶段写泛型程序，因为Go有一个很本质的特点，就是简单写、简单读，如果通过一些自己的&rdquo;创造&rdquo;而造成别人阅读代码困难，那是得不偿失
+所以真香，还是用回多态吧，有机会再详细阅读一下草稿
+对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
+这里是Go2官方对这些修改的想法视频……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/effective-go/" title="Effective Go" >Effective Go</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                参考Effective Go中英双语版
+ It&rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
+ Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)
+所以我们今天来谈谈代码规范吧，这里只记录了我自己有时候会忽略的点，有一些规范我以及掌握并且时刻用在编写Golang程序上了，因此不记录，想看完整的请阅读上面的开源书本
+格式化 Go的gofmt为我们做好了，所以安装这个程序，在保存的时候就可以自动帮你调整代码布局
+注释 行注释更为常用，而块注释则主要用作包的注释
+每个包都应包含一段包注释，即放置在包子句前的一个块注释。对于包含多个文件的包， 包注释只需出现在其中的任一文件中即可。包注释应在整体上对该包进行介绍，并提供包的相关信息。 它将出现在 godoc 页面中的最上面，并为紧随其后的内容建立详细的文档。
+每个可导出（首字母大写）的名称都应该有文档注释。
+命名 我记得有一个叫go-lint会检查这个
+Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
+只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
+若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/effective-go/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview2/" title="Interview2" >Interview2</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
+ 这里应该用channel来达到通信
+在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
+进程和线程的区别 进程：操作系统对一个正在运行的程序的一种抽象，一个系统上可以运行多个进程，这些进程在单核的处理器下一样可以显得好像的并发的一样，这是通过处理器在进程之间的切换实现的，这种交错执行的机制称为上下文切换
+线程：一个进程可以由多个线程的执行单元组成，每个线程都运行在进程的上下文中
+区别：
+ 进程在系统上运行，线程在进程上运行，因此进程是独立的地址空间、线程共享进程的地址空间
+ 线程比进程的开销要小
+ 线程一般来说比进程更高效
+ 线程之间的数据共享比进程的简单
+ 线程必须依赖在进程上执行
+  临界区是啥 临界区从通俗层面来讲就是我们锁-解锁之间的代码，通常会写在程序(或者说资源)无法同时被使用的地方
+这个区域只能允许一个线程或进程进入，其它后来的需要等待解锁
+死锁是啥。死锁产生的条件是什么 在我理解里，线程A占用了资源C，这个时候线程A还要申请资源D(占用且申请)，但线程B这时占用着资源D，而且线程A无法将资源抢过来，所以现在线程A就在等待线程B释放资源D。线程B在这个时候也需要使用资源C，并且不得到就不离开(一直等待)，所以现在局面就是A在等B释放D，B在等A释放C(循环等待)，并且都不肯让资源(不可抢占)，并且资源CD都是只能有一个线程占有的(互斥)
+若干进程竞争有限资源，但顺序或者决策不当，使得大家都在无限循环等待，就形成了死锁
+ 互斥条件
+ 不可抢占条件
+ 占有且申请条件(这个的意思是在占有资源的情况下还要去申请别的资源)
+ 循环等待条件
+  只要上述条件有一个不满足，就可以避免死锁
+给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率 占时还不太清除这个
+Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
+所以查找pid有lsof -i:port和netstat -p |grep port……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview2/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/" title="Linux 网络管理" >Linux 网络管理</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月25日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                ping -c 发送一定数量的报文
+ifconfig 其中输出信息里
+enp0s31f6：以太网(有线)
+lo：回传
+wlp4s0：无线网
+tcpdump 这是一个类似wireshark抓包的命令,需要权限
+-c：指定抓取包的数量
+-i：指定接口(上面说到有3个接口)
+port：指定端口
+netstat -r：显示路由
+-i：显示接口
+-n：显示IP
+-t：tcp
+-u：udp……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/" title="Linux 进程管理" >Linux 进程管理</a>
                                 </h1>
                             </header>
@@ -217,160 +439,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 我们现在接触较多的两种加密方式
- 对称加密
- 公钥加密
-  对称加密 利用一样的秘钥，在持有者双方进行加密和解密
-但是第一次建立连接并且传输秘钥的时候不安全(当然可以通过其它方式传输)
-速度快
-公钥加密 用对方的公钥加密，发送给对方，因为只要对方有自己的私钥，因此就算密文半路被拦截，也不会泄露信息
-安全性好，但速度慢
-结合 结合两种加密方式，创建一个既安全又快的连接
- 利用对方公钥加密对称秘钥，发送给对方
- 对方收到用自己秘钥解密，得到对称秘钥
- 双方用对称秘钥进行接下来的通信
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/" title="Leetcode 83" >Leetcode 83</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
-最优解答 /** * Definition for singly-linked list.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/" title="Leetcode 70" >Leetcode 70</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。 每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？ 注意：给定 n 是一个正整数。 示例 1： 输入： 2 输出： 2 解释： 有两种方法可以爬到楼顶。 1. 1 阶 + 1 阶 2. 2 阶 示例 2： 输入： 3 输出： 3 解释： 有三种方法可以爬到楼顶。 1. 1 阶 + 1 阶 + 1 阶 2. 1 阶 + 2 阶 3. 2 阶 + 1 阶  我的解答 func climbStairs(n int) int { if n == 1 || n == 2 { return n } count2 := n / 2 result := 0 for ; count2 &gt;= 0; count2-- { result += calc(n-count2, count2) } return result } //注意float的运算可能会出现一些.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/" title="Leetcode 69" >Leetcode 69</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 实现 int sqrt(int x) 函数。 计算并返回 x 的平方根，其中 x 是非负整数。 由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。 示例 1: 输入: 4 输出: 2 示例 2: 输入: 8 输出: 2 说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。  我的解答 func mySqrt(x int) int { return int(math.Floor(math.Sqrt(float64(x)))) }  向下取整
-最优解答 func mySqrt(x int) int { if x == 0 || x == 1 { return x } i := x / 2.0 for i*i &gt; x { i = (i + x/i) / 2 } return i }  数学公式……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-69/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/" title="Leetcode 67" >Leetcode 67</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定两个二进制字符串，返回他们的和（用二进制表示）。 输入为非空字符串且只包含数字 1 和 0。 示例 1: 输入: a = &quot;11&quot;, b = &quot;1&quot; 输出: &quot;100&quot; 示例 2: 输入: a = &quot;1010&quot;, b = &quot;1011&quot; 输出: &quot;10101&quot;  我的解答 func addBinary(a string, b string) string { lengthLonger, lengthShorter := 0, 0 tmp := &quot;&quot; if len(a) &gt; len(b) { lengthLonger = len(a) lengthShorter = len(b) } else { lengthLonger = len(b) lengthShorter = len(a) tmp = b b = a a = tmp } resultArray := make([]int, lengthLonger+1) carry := 0 for i := lengthLonger; i &gt;= 0; i-- { if i &gt; (lengthLonger - lengthShorter) { currentA, _ := strconv.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-67/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/" title="Leetcode 66" >Leetcode 66</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。 最高位数字存放在数组的首位， 数组中每个元素只存储一个数字。 你可以假设除了整数 0 之外，这个整数不会以零开头。 示例 1: 输入: [1,2,3] 输出: [1,2,4] 解释: 输入数组表示数字 123。 示例 2: 输入: [4,3,2,1] 输出: [4,3,2,2] 解释: 输入数组表示数字 4321。  我的解答 func plusOne(digits []int) []int { for i := len(digits) - 1; i &gt;= 0; i-- { if digits[i] != 9 { digits[i]++ return digits } digits[i] = 0 } digits = append([]int{1}, digits...) return digits }  比较简单
-最优解答 无
-难疑点&amp;核心 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-66/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -495,6 +563,10 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -523,6 +595,30 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -538,30 +634,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -572,11 +644,19 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -592,7 +672,7 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -658,6 +738,8 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -667,6 +749,8 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -689,6 +773,8 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     

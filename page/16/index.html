@@ -68,6 +68,196 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-258/" title="Leetcode 258" >Leetcode 258</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-negative integer num, repeatedly add all its digits until the result has only one digit. Example: Input: 38 Output: 2 Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it. Follow up: Could you do it without any loop/recursion in O(1) runtime?  我的解答 这道题一开始我是用迭代去写的,运行效率太低,但是思路比较简单,读者可以自己尝试实现
+这里主要讲一下另一种快速的实现
+func addDigits(num int) int { if num &lt;= 9 { return num } if num%9 == 0 { return 9 } return num % 9 }  理论依据是 f(10*x+y) = f(9x+x+y) ?……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-258/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/" title="Leetcode 257" >Leetcode 257</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, return all root-to-leaf paths. Note: A leaf is a node with no children. Example: Input: 1 / \ 2 3 \ 5 Output: [&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;] Explanation: All root-to-leaf paths are: 1-&gt;2-&gt;5, 1-&gt;3  我的解答 /** * Definition for a binary tree node. * type TreeNode struct { * Val int * Left *TreeNode * Right *TreeNode * } */ func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-apt/" title="Ubuntu apt" >Ubuntu apt</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 这个总结一下我经常用到的关于apt的命令
+apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
+其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好
+因此对于新入门的来说，建议使用apt
+当然，apt-get并没有被遗弃，也有很多人在用
+常用命令 更新仓库 sudo apt update 更新本地可更新的 sudo apt upgrade 一键更新 sudo apt update &amp;&amp; sudo apt upgrade -y 安装，如果pkg本身就已经安装，这个就是更新操作了 sudo apt install &lt;pkg&gt; 如果安装的包存在，不要更新，如果不存在，就安装 sudo apt install &lt;pkg&gt; --no-upgrade 如果包存在就更新，不存在也不安装 sudo apt install &lt;pkg&gt; --only-upgrade 指定版本安装 sudo apt install &lt;pkg&gt;=&lt;version&gt; 删除(不包括配置文件) sudo apt remove &lt;pkg&gt; 彻底删除(包括配置文件) sudo apt purge &lt;pkg&gt; 显示出这个term所有的package apt search &lt;term&gt; 这个可以显示pkg详细信息 apt show &lt;pkg&gt; 显示已安装的pkg apt list --installed 自动清除(清除那些没有用的pkg) sudo apt autoremove  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-apt/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/" title="Golang Sync Map" >Golang Sync Map</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月6日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Sync.Map简介 Sync.Map就像是map[interface{}]interface{}，只是省去了开发人员关于map在并发时的安全调度设计
+用空间换时间
+Map的线程问题 今天被问到
+golang的map是线程安全的吗，我呆了一下，觉得它不是(没有仔细验证过)，其实答案也确实
+map不是线程安全的
+如果有两个goroutine，一个向map写，一个向map读，会发生panic
+所以在这里讨论一下有关map和它的线程安全问题
+在Go1.9的时候，官方推出了sync.map
+Youtu
+在这说一下，不是所有情况sync.Map都是好用的，官方建议大多数情况下还是用Go的原生map，需要了解其底层以及开发的业务需求和它本身的特性(在某些情况下比较好用,后面提)
+推出这个的原因 在我们多线程的应用里，访问同一个map需要加锁，这样导致的结果是
+ 本应该是并行的程序(假设几个内核在运行这个进程)，因为加锁问题，它们只能排队运行。这造成的就是时间复杂度从O(1)-&gt;O(N)  这个sync.map实际上是拥有两个map，一个是read-only,一个是read-write
+我们参照官方文档来进行一个初步了解
+适用场景  当我们的map只需要写入一次，然后会被多次读取的时候
+ 当有多个goroutine读，写，覆盖的操作
+  在这两种情况下，sync.Map相对于普通map加Mutex(只是一个比喻，在实现上有很大的区别)
+方法 func (m *Map) Delete(key interface{}) func (m *Map) Load(key interface{}) (value interface{}, ok bool) func (m *Map) LoadOrStore(key, value interface{}) (actual interface{}, loaded bool) func (m *Map) Range(f func(key, value interface{}) bool) func (m *Map) Store(key, value interface{})  最基本的一些存取删除等操作已经实现
+剖析 关于结构方面 type Map struct { mu Mutex // read contains the portion of the map's contents that are safe for // concurrent access (with or without mu held).……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/" title="Algorithm 二分查找" >Algorithm 二分查找</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 递归式 func binarySearch(arr []int,left,right,target int) int{ if left &lt;= right { mid := (left + right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target{ return binarySearch(arr,left,mid-1,target) } if arr[mid] &lt; target{ return binarySearch(arr,mid+1,right,target) } } return -1 }  非递归式 func binarySearch(arr []int,target int) int{ left := 0 right := len(arr)-1 for left &lt;= right{ mid := (left+right)/2 if arr[mid] == target{ return mid } if arr[mid] &gt; target { right = mid-1 }else{ left = mid+1 } } return -1 }  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-binarysearch/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-slice/" title="Golang Slice底层" >Golang Slice底层</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                参考 golang blog
+之前一直对slice有一定的误解
+误解  以为是引用传递
+ 以为子函数改变切片，主函数会跟着变
+ 以为扩容只是简单的内存扩大
+  开始 我们可以把byte的slice比喻成
+type sliceHeader struct { Length int Capacity int ZerothElement *byte }   slice的传递是值传递，类似一个结构体的传递  这意味着，我们把一个slice传入到函数里，在主函数上的slice可能是不变的
+为什么说可能，我们来看一下情况
+值传递 发生扩容 这种情况下，切片所指向的数组发生变化，因此和原来的那块内存失去了联系
+长度发生改变 在子函数里面，切片长度发生改变并不会影响主函数切片的长度(值传递)
+同理容量也是
+唯一造成影响 所以唯一能够在子函数里面影响主函数切片的方法只有一种
+就是指向的数据数组，子函数修改了相同内存空间的数组，主函数切片也会跟着改变(只有不扩容的情况下才会维持同一个数组内存地址)
+小结 不要认为切片是引用传递(很多博客为了方便解释会这样说)，它们唯一能够达到这个效果的情况是共用同一个数组，只要对切片底层认识够深就不会被这个困惑
+记住切片是值传递
+切片指针传递 我们也可以传递一个切片的指针，这个时候类似于传入一个指向结构体的指针
+注意指针
+这个指针并不是说数组数据的指针，而是指向这个切片结构体的指针
+这个时候和上面的值传递就有很大的不同了
+长度、容量、数组指针发生改变 因为是指针传递，改变这个切片的任何东西都会影响到主函数的切片，因此无论是长度发生改变、扩容导致容量发生改变、扩容导致数组指针发生改变，主函数的切片都能看见这些改变
+ 切片在扩容的时候，指针会发生改变(以前的数据会复制到新的内存上，新的内存能够存储更多数据)
+ 在容量大于长度的时候，不会进行扩容
+  小结 对切片进行指针传递才是真正的引用传递，所有的改变都不会产生新的切片变量
+用途 一般来说我们都会选择使用值传递，我们只要看什么时候需要用指针传递
+ 当你不清除一个切片到程序最后有多少个元素(也就是无法提前估计容量)，但是你又需要把所有结果放入这个切片，这个时候要用指针传递(这里说的是传入给函数参数)  为什么呢？
+由于切片扩容的时候，改变了数据的指向。值传递切片不会因为子函数改变了指向而改变指向(事实上我们需要改变指向)
+给个例子吧
+这是一个二叉树所有根节点到叶子节点路径的程序
+type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-slice/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-242/" title="Leetcode 242" >Leetcode 242</a>
                                 </h1>
                             </header>
@@ -156,146 +346,6 @@
 func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &lt; l/2; i++ { if v[i] !……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/" title="Leetcode 231" >Leetcode 231</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
-最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/" title="Leetcode 226" >Leetcode 226</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/" title="Leetcode 219" >Leetcode 219</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/" title="Leetcode 217" >Leetcode 217</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of integers, find if the array contains any duplicates. Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct. Example 1: Input: [1,2,3,1] Output: true Example 2: Input: [1,2,3,4] Output: false Example 3: Input: [1,1,1,3,3,4,3,2,4,2] Output: true  我的解答 func containsDuplicate(nums []int) bool { isExist := make(map[int]bool,len(nums)) for _, num := range nums { if _, exist := isExist[num]; exist { return true } isExist[num] = true } return false }  这题比较简单，唯一要注意的点是，提前分配好空间，会有速度提升……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-217/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/" title="Leetcode 206" >Leetcode 206</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Reverse a singly linked list. Example: Input: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL Output: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?  我的解答 覆盖了迭代和递归的解法
-func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // curr := head // return reverse(nil, curr) return reverse(head) } // func reverse(parent, curr *ListNode) *ListNode { // if curr.Next == nil { // curr.Next = parent // return curr // } // result := reverse(curr, curr.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-206/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/" title="Leetcode 205" >Leetcode 205</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given two strings s and t, determine if they are isomorphic. Two strings are isomorphic if the characters in s can be replaced to get t. All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself. Example 1: Input: s = &quot;egg&quot;, t = &quot;add&quot; Output: true Example 2: Input: s = &quot;foo&quot;, t = &quot;bar&quot; Output: false Example 3: Input: s = &quot;paper&quot;, t = &quot;title&quot; Output: true  我的解答 func isIsomorphic(s string, t string) bool { beUsed := make(map[byte]bool) letterMap := make(map[byte]byte) for i := 0; i &lt; len(s); i++ { if b, exist := letterMap[s[i]]; !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-205/">阅读全文</a></p>
                         </article>
                     
 
@@ -422,6 +472,10 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
         <a href="https://wushaoqiang.github.io/page/28/">28</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/29/">29</a>
+    </li>
+    
 
     
     <li class="next">
@@ -450,6 +504,30 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
     </li>
     
@@ -465,30 +543,6 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
         <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object">Javascript Object</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive">Typescript Basic Primitive</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account">Linux Account</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command">Linux How to Identify Command</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File">Linux Windows File</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic">Linux Vim Basic</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -499,11 +553,19 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
     </li>
     
     <li>
@@ -519,7 +581,7 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(46)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
     </li>
     
     <li>
@@ -585,6 +647,8 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
     
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
     <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
     
     <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
@@ -594,6 +658,8 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
     <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
     
@@ -616,6 +682,8 @@ func reverseList(head *ListNode) *ListNode { if head == nil { return nil } // cu
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
