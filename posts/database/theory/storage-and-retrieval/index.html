@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Storage and Retrieval | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Storage and Retrieval - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-09-28T10:42:09&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-09-28T10:42:09&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Storage and Retrieval">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Storage and Retrieval</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年9月28日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>数据库简单理解，就为了两件事情：存储和读取</p>
+
+<p>So, Let&rsquo;s keep that simple</p>
+
+<h3 id="index">Index</h3>
+
+<p>索引是与我们主要的数据分开的，我们可以创建索引，删除索引，这都不会影响我们的主要数据</p>
+
+<p>索引最初的目的是为了加快查询操作。但由于有除了主要数据之外的索引数据，因此我们在写入数据库的时候
+就要维护多份数据(既要写入我们的主要数据，还要写入相应的索引数据，或者维护索引)，所以一般情况下加索引会
+对写的性能有所影响</p>
+
+<p>所以，我们需要根据应用场景来决定是否加索引，这也是开发者应该知道的一些概念</p>
+
+<p>下面简单介绍一下索引种类以及原理</p>
+
+<h4 id="hash-indexes">Hash Indexes</h4>
+
+<p>其实和我们平时用编程语言里的哈希表有点类似</p>
+
+<p>在Go里，是一个叫做<code>map</code>的数据结构</p>
+
+<pre><code>Go map 如何读写 
+
+接收到一个Key
+
+对key进行Hash
+
+通过Hash找到是哪一个bucket
+
+取Hash的前8Bit做一个快速比较
+
+找到bucket的内存(可以进行读写了)
+</code></pre>
+
+<p>我们可以简单将这个索引比作成一个offset，每一个offset都是某一个数据相对某一个内存的偏移量，这样我们就可以直接读取到该数据，而不用从头开始查找了。这是一个append-only的形式，在这种形式下，我们只需要关注最近的那个offset即可，在数据越来越大的时候，我们可以通过合并，将失效的数据删除</p>
+
+<p>Append-Only咋一眼看去很浪费空间，但它也有独特的优点值得关注：</p>
+
+<ol>
+<li><p>相对于随机读写(也就是in-place)，它具有更好的性能</p></li>
+
+<li><p>更好处理恢复</p></li>
+</ol>
+
+<p>但是随着时间推移，这个索引变得越来越大，以至于要存入硬盘中，这样，索引相应的性能就会受到很大的影响</p>
+
+<p>并且Hash Index对取一批数据的操作是很不友好的</p>
+
+<h4 id="sstables-and-lsm-trees">SSTables and LSM-Trees</h4>
+
+<p>SSTables = Sorted String Tables</p>
+
+<p>SSTables相对上面说的Hash有很大的优势，不过我们先看一下它需要满足的条件</p>
+
+<p>在上面我们可以看到k-v是直接加进来的，对SSTables，我们规定这些</p>
+
+<ol>
+<li><p>k-v是按照key排序的</p></li>
+
+<li><p>每一个key在merge之后的segment都只出现一次</p></li>
+</ol>
+
+<p>思考一下，每一个segment都是内部有序的，当我们要合并segment的时候，像什么算法？</p>
+
+<p>我们要清楚知道，每一个segment是有顺序产生的，也就是说相同的key在不同的segment里面也是可以区分先后的</p>
+
+<p>在这种有序的情况下，我们还可以解决上面Hash Index的一个内存爆满问题</p>
+
+<p>因为我是有序的，所以我不一定要知道某一个具体key的内存地址，我可以知道在它附近的key，并且根据排序来找到我想要的key，这样我们就可以极大减少存储在内存里的索引</p>
+
+<p>由于是有序的，我们可以针对一些连续的扫描做很大的优化</p>
+
+<p><strong>说了这么多，都只是介绍，那具体怎么实现呢？</strong></p>
+
+<p>回想一下它需要的第一个条件&ndash;有序</p>
+
+<p>我们都知道，现在有平衡树可以帮我们做到这一点</p>
+
+<ul>
+<li><p>RB-Tree</p></li>
+
+<li><p>AVL-Tree</p></li>
+</ul>
+
+<p>然后归并算法可以帮我们解决segment合并的问题</p>
+
+<p>我们来具体看看它如何work吧</p>
+
+<ol>
+<li><p>首先有一个写操作过来了，将它加入到内存中的平衡树</p></li>
+
+<li><p>当内存的数据超过一个阈值的时候，就将其写入Disk，然后等待下一个写操作来构建新的平衡树</p></li>
+
+<li><p>当读操作过来的时候，首先检查内存里的数据，因为内存的是最新的，然后再按照新旧顺序检查segment</p></li>
+
+<li><p>在后台里，我们还需要有一个专门的合并程序，能够将老的segment进行合并，并且删掉一些没用的信息，以保持数据不会爆炸增长</p></li>
+</ol>
+
+<p>但是这里还是有一个问题，因为我们最近的数据是在内存里的，宕机之后内存数据丢失怎么办</p>
+
+<p>这个时候我们可以采用log-recovery的机制来进行恢复，每次写操作都先append进这个log file，然后再操作，操作完了就可以删了</p>
+
+<p>LSM-Tree就是这样来的 Log-Structure-Merge-Tree</p>
+
+<p>前面就是描述log，后面就是描述SSTables的合并方式</p>
+
+<h4 id="performance">Performance</h4>
+
+<p>在上面所介绍的数据库引擎中，有一种极端的情况就是，当读取一个根本不存在的key，那么按照上面所说的操作，它会遍历所有segment，要是segment非常多，那么这样的性能是不能够被接受的</p>
+
+<p>所以一般来说会使用Bloom filter，它会告诉这个key是否存在这个数据库里，如果没有，我们就不用进入遍历了</p>
+
+<h4 id="b-tree">B-Tree</h4>
+
+<p>上面我们说的Index是基于Log-Structure的，其实最广泛用的结构类型是B-Tree</p>
+
+<p>让我们来对比一下B-Tree和SSTables</p>
+
+<p>同样的，B-Tree也能够维护有序</p>
+
+<p>但是log-structured index是将数据分成segment存储，并且存储的size是不一定的</p>
+
+<p>B-Tree是将存储单位改成固定的，一般就是一个Block(4KB)，通过不断的向下索引，取到叶子节点的值，所以B-Tree要么存的是下一个数据的指向，要么就是数据</p>
+
+<p>关于如何维护B-Tree可以自己查找一下相关原理</p>
+
+<p>还有一点非常不一样的是，B-Tree是modify in-place的</p>
+
+<p>在修改数据，或者添加数据的时候，可能会引起整一个树比较大的变动，如果在变动的过程中宕机了，那么就会出问题，因此还需要给这个结构添加一个redo-log</p>
+
+<p>由于B-Tree是一个修改的过程，而LSM-Tree是一个append过程，因此在硬件层面上，TSM-Tree的数据在硬盘中会更加集中，而B-Tree则很难维持有序集中</p>
+
+<h4 id="compare">Compare</h4>
+
+<p>上面大概介绍了一些它们相关的一些特性，可以总结出</p>
+
+<p>理论上</p>
+
+<ul>
+<li><p>LSM-Tree对写比较友好，而B-Tree对查找有很大的优势</p></li>
+
+<li><p>LSM对磁盘利用也比较好，因为它会是不是整理，而B-Tree在修改的过程中可能会因为原来的内存不够而重新开一块，这样原来那块内存就产生了分片</p></li>
+
+<li><p>但是LSM的查询时间有可能会非常长，因为数据可能存放在很久之前的segment，所以B-Tree在这方面是比较稳定的</p></li>
+
+<li><p>如果太多的写入，导致segment不断的增长，而merge比增长速度还要慢，这样磁盘会在一定时间内被填满</p></li>
+</ul>
+
+<p>上面仅限于理论上，具体性能如何，必须结合workload来进行benchmark测试</p>
+
+<p>这两种索引的引擎算是比较热门的两种了吧</p>
+
+<p>其实还有很多其它的引擎，等我有时间再好好理解</p>
+
+<h3 id="transaction-processing-or-analytics">Transaction Processing or Analytics</h3>
+
+<p>首先认识两个词</p>
+
+<p>OLTP (Online Transaction Processing)</p>
+
+<p>OLAP (Online Analytic Processing)</p>
+
+<p>现在大多数的大公司都会利用自己丰富的数据资源去产生许多价值</p>
+
+<p>所以一般来说它们都会有自己的一个或多个数据中心，这些数据中心只用来做大数据分析或者一些别的事情，但一般不是对外服务的，它们会部署独立的一套专门服务OLTP的</p>
+
+<p>这样做的原因是，OLTP和OLAP它们的特性有非常大的区别</p>
+
+<p>OLTP</p>
+
+<ul>
+<li><p>查询比较少</p></li>
+
+<li><p>查询是随机的</p></li>
+
+<li><p>一般需要的数据是最新的</p></li>
+
+<li><p>数据库的大小一般在tb级别</p></li>
+</ul>
+
+<p>OLAP</p>
+
+<ul>
+<li><p>一次性查询的数据量很大</p></li>
+
+<li><p>查询一般是有规律的(某个年龄段，某个时间段等)</p></li>
+
+<li><p>不要求数据最新</p></li>
+
+<li><p>数据库一般在pb级别左右</p></li>
+</ul>
+
+<p>我们从这里可以看到，如果大公司将两个系统合并在一起，在处理OLAP的时候，OLTP会非常的慢，因为有一个大的查询任务在占用资源，导致响应不稳定。</p>
+
+<p>但是还是要根据情况来，有时候用户量不大的时候，一般也是把两个做到一起的</p>
+
+<p>那么一般来说，数据都是先到OLTP的系统的，OLTP系统会按照提前设定的策略给OLAP系统输入数据，可能在这个工程中，数据的格式等会发生变化</p>
+
+<p>有一个有趣的问题，如果我只想把100w行数据中的age字段取出来，应该怎么做？</p>
+
+<p>我可以把100w行取出来，然后拿出来就可以了。但假设字段有很多，你可能只用到了一点点的数据，这个操作性价比就不好了。所以有一种做法叫做Column-Oriented， 假设我是把age字段都存在一个连续的文件里，那么这个就很好操作了</p>
+
+<h4 id="summary">Summary</h4>
+
+<p>其实还有很多细节想写，但是怕太长了，先到这总结一下吧</p>
+
+<p>之前所说的一些索引或者Column-Oriented等都是针对某一个特定系统的优化，主要有两个系统： OLTP和OLAP</p>
+
+<p>它们的特性有非常大的不同</p>
+
+<p>对于OLTP，主要说了两个存储引擎</p>
+
+<ul>
+<li><p>Log-Structured</p></li>
+
+<li><p>Update-In-Place</p></li>
+</ul>
+
+<p>以及针对OLAP优化的 Column-Oriented Storage</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/database/theory/data-model-and-query-language/">Data Model and Query Language</a></li>
+        
+        <li><a href="/posts/database/theory/foundations-of-data-system/">Foundations of Data System</a></li>
+        
+        <li><a href="/posts/database/mongodb/mongodb-replica-set-deployment/">Mongodb Replica Set Deployment</a></li>
+        
+        <li><a href="/posts/database/mongodb/mongodb-installation-and-config/">Mongodb Installation And Config</a></li>
+        
+        <li><a href="/posts/database/mongodb/mongodb-role/">Mongodb Role</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval">Storage and Retrieval</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language">Data Model and Query Language</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System">Foundations of Data System</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(17)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

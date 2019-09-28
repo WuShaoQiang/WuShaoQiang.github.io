@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Transaction | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Transaction - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-09-28T19:47:36&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-09-28T19:47:36&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Transaction">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/database/theory/transaction/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Transaction</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年9月28日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>事务这个词估计做软件开发的都不会陌生，我们可以简单的理解为：事务是一件事，要么成功，要么失败，而失败是全部失败，并不是局部失败</p>
+
+<p>事务这么流行的原因就是，它帮助软件开发者解决了很多难办的事情：</p>
+
+<ul>
+<li><p>数据库可能会在任意时间因为软件或者硬件问题直接挂掉(可能这个时候正在执行一些写操作)</p></li>
+
+<li><p>应用也可能会在任意时间宕机</p></li>
+
+<li><p>网络通信是不可靠的</p></li>
+
+<li><p>可能在高并发下，数据库会发生冲突</p></li>
+</ul>
+
+<p>等等，这些事情，如果每一个都要想相应的解决方法，是需要大量的时间以及研究大量的算法，并且需要大量的测试集去验证这些算法实现是有用的</p>
+
+<p>事务是为了将这些事情变得简单点，当出现任何不希望出现的状况，我可以选择抛弃这个操作，然后告诉用户，这个操作失败了。最起码，它在操作失败这件事情上，它是正确的</p>
+
+<p>一般来说，事务会集合多个操作(Insert, Update, Delete)，变成一个操作，提交到数据库里，数据库会帮这些打包的操作看作是一个整体，因此操作到一半的时候发生错误，就会发生回滚，把之前的操作都抹去</p>
+
+<p>那么是否用事务就能解决一切复杂的事情呢？</p>
+
+<p>事务不是完美的，就像一直提到的，在数据库设计这一块，都是有的有舍，并没有完美的东西，因此我们也要很好的了解事务的优缺点。</p>
+
+<h3 id="acid">ACID</h3>
+
+<p>相信大家对这个词也是不陌生的，但是其实笔者一开始将里面的各个意思理解错了，现在从先来理解一边</p>
+
+<h4 id="atomicity">Atomicity</h4>
+
+<p>这里的中文虽然叫原子性，但是它和我们平常理解的原子性不一样，它这里并不是描述一个并发的过程</p>
+
+<p>这里是指，一系列的操作被打包成一个事务，如果这个事务具有Atomicity，那么它要么被commit，要么被abort，这也保证了这个事务不会修改一部分数据后失败，能够让client放心的去做retry了</p>
+
+<p>所以可以看出，这个Atomicity并不是在描述原子性，而是在描述操作的abortability，是否拥有abort操作</p>
+
+<h4 id="consistency">Consistency</h4>
+
+<p>Consistency在这里是指一个好的状态，这个好的状态是指你的数据应该不违反规则。</p>
+
+<p>但是在数据库层面，是不知道数据是否有效，所以这就需要开发者在应用的代码上写好事务的Consistency</p>
+
+<h4 id="isolation">Isolation</h4>
+
+<p>这个才是真正和并发相关的特性，隔离机制，后面也会详细讲讲各种隔离机制，以及它们的优缺点</p>
+
+<p>我们在这里，可以简单的认为，我们可以利用隔离机制，将并发的事务一个个进行执行，这样就能够防止RACE发生，这种隔离机制叫serializable isolation但是，一个个执行是多么的低效，完完全全舍弃了并发的优势，所以下面我们会介绍许多没有如此强保证的隔离机制</p>
+
+<h4 id="durability">Durability</h4>
+
+<p>持久化是数据库最根本的目的，一个拥有Durability的事务意味着数据能够被写入到硬盘，这里也运用到了之前所说的log或者一些其它方式来记录操作，这样可以在数据库重启后能够自己恢复</p>
+
+<h3 id="weak-isolation-levels">Weak Isolation Levels</h3>
+
+<p>因为性能问题，很多软件并不想用像serialzable isolation这种最高级别隔离的机制，因为这样的数据库很可能会在整个系统中称为瓶颈。</p>
+
+<h4 id="read-commited">Read Commited</h4>
+
+<p>最基础的一个隔离机制，它能够给我们保证：</p>
+
+<ol>
+<li><p>所有读取的数据都是经过committed的</p></li>
+
+<li><p>写入数据库的时候，你只能够重写以及committed的数据</p></li>
+</ol>
+
+<p>但是多个事务在操作多个对象的时候，有可能会因为执行顺序不一样导致，事务之间读取到对方committed后的值</p>
+
+<p>如何实现这个隔离机制呢</p>
+
+<p>一般来说，会有一个row-level lock，每一个写操作都会请求对应行的lock，一个lock也只能被一个事务获取并且一直到它committed或者aborted才释放</p>
+
+<p>那读取数据呢？简单点的我们可以也持有lock，但是我们知道，持有lock的代价是很大的，万一读操作很久，或者写操作很久，整个系统的性能就会受到影响，因此我们需要更好的方法去让读尽可能的不用获取lock</p>
+
+<p>一个方法就是，数据库会帮忙记住lock之前的值，如果读取的时候发现是locked了，那么就那之前的值</p>
+
+<h4 id="snapshot-isolation">Snapshot Isolation</h4>
+
+<p>其功能和其名字差不多，Snapshot Isolation的做法就是这个事务读取的数据是从一个快照里面读取的，当然，这个快照是不会被改变的，所以所有的事务都只能看见某一个时间点之前的老数据。</p>
+
+<p>当我们在备份的时候， 我们可能不想在备份的时候，数据还在被修改，状态还是不稳定。所以这个隔离让我们不用担心这些问题。这个隔离机制在很多时候帮助我们很多，我们不用担心它有各种奇怪的问题，因为它已经是固定的了</p>
+
+<p>其实Snapshot的实现机制和Read Committed差不多，也是通过lock来控制写入操作，然后读是不用锁的</p>
+
+<blockquote>
+<p>readers never block writers, and writers never block readers.</p>
+</blockquote>
+
+<p>Read Committed只会保留两个版本的值</p>
+
+<p>而Snapshot Isolation会用MVCC(multi-version concurrency control)</p>
+
+<p>数据库提供的Snapshot包含一下特性：</p>
+
+<ol>
+<li><p>在事务开始的时候，会记录所有还在运行的事务，这些运行的事务的所有写操作都会被忽略</p></li>
+
+<li><p>所有aborted的事务都忽略</p></li>
+
+<li><p>所有事务ID在后面的操作都被忽略</p></li>
+
+<li><p>其它所有的都可见</p></li>
+</ol>
+
+<p>其实还有很多，我暂时不细讲了</p>
+
+<h3 id="two-phase-locking-2pl">Two-Phase Locking(2PL)</h3>
+
+<p>这种隔离要比Snapshot要强</p>
+
+<p>它的隔离是这样的：读可以一起读，但是写是排斥的</p>
+
+<p>当有多个事务在读，有一个事务想写的时候，这个写事务要等读事务读完才能执行，同理，有写事务的时候，任何事务都要在这个事务之后执行</p>
+
+<p>这里面有两种锁：share-lock，exclusive-lock</p>
+
+<p>读的时候拿的是share-lock，写的时候拿的是exclusive-lock</p>
+
+<h3 id="serializable-snapshot-isolation-ssi">Serializable Snapshot Isolation(SSI)</h3>
+
+<p>SSI号称能够达到Serializable Isolation的效果，性能只比Snapshot Isolation差一点</p>
+
+<p>我下次再仔细研究一下</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/database/theory/partition/">Partition</a></li>
+        
+        <li><a href="/posts/database/theory/replication-other/">Replication Other Pattern</a></li>
+        
+        <li><a href="/posts/database/theory/replication-one-leader/">Replication One Leader</a></li>
+        
+        <li><a href="/posts/database/theory/storage-and-retrieval/">Storage and Retrieval</a></li>
+        
+        <li><a href="/posts/database/theory/data-model-and-query-language/">Data Model and Query Language</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval">Storage and Retrieval</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language">Data Model and Query Language</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System">Foundations of Data System</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(17)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

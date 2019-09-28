@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/transaction/</loc>
+    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/partition/</loc>
+    <lastmod>2019-09-28T16:30:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/replication-other/</loc>
+    <lastmod>2019-09-28T16:20:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/</loc>
+    <lastmod>2019-09-28T15:00:54+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/</loc>
+    <lastmod>2019-09-28T10:42:09+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/</loc>
+    <lastmod>2019-09-27T23:41:42+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/</loc>
+    <lastmod>2019-09-27T22:18:53+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/english/greeting/</loc>
     <lastmod>2019-09-14T21:09:40+08:00</lastmod>
   </url>
@@ -1543,14 +1578,14 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/Easy/</loc>
-    <lastmod>2019-05-19T08:45:24+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/easy/</loc>
+    <lastmod>2019-06-08T12:34:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/easy/</loc>
-    <lastmod>2019-06-08T12:34:43+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/Easy/</loc>
+    <lastmod>2019-05-19T08:45:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1610,7 +1645,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-09-14T21:09:40+08:00</lastmod>
+    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1838,7 +1873,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-09-14T21:09:40+08:00</lastmod>
+    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2016,13 +2051,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-05-30T20:05:21+08:00</lastmod>
+    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-05-30T20:05:21+08:00</lastmod>
+    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   

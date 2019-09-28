@@ -68,6 +68,174 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/" title="Leetcode 20" >Leetcode 20</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。 有效字符串需满足： 左括号必须用相同类型的右括号闭合。 左括号必须以正确的顺序闭合。 注意空字符串可被认为是有效字符串。 示例 1: 输入: &quot;()&quot; 输出: true 示例 2: 输入: &quot;()[]{}&quot; 输出: true 示例 3: 输入: &quot;(]&quot; 输出: false 示例 4: 输入: &quot;([)]&quot; 输出: false 示例 5: 输入: &quot;{[]}&quot; 输出: true  我的解答 笔者在做这道题的时候想的稍微复杂了点，用了递归的方法做，但速度什么的非常慢，所以不值得参考，只能说一路摸坑吧
+var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: &quot;]&quot;, &quot;{&quot;: &quot;}&quot;} ) func isValid(s string) bool { if len(s) == 0 { return true } if (len(s)+2)%2 != 0 { return false } if len(s) == 2 { return string(s[1]) == relation[string(s[0])] } // l := len(s) for { idx := getLastIndex(s) if idx == -1 { return false } if !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-20/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-14/" title="Leetcode 14" >Leetcode 14</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 编写一个函数来查找字符串数组中的最长公共前缀。 如果不存在公共前缀，返回空字符串 &quot;&quot;。 示例 1: 输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;] 输出: &quot;fl&quot; 示例 2: 输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;] 输出: &quot;&quot; 解释: 输入不存在公共前缀。 说明: 所有输入只包含小写字母 a-z 。  我的解答 func longestCommonPrefix(strs []string) string { if len(strs) == 0 { return &quot;&quot; } if len(strs) == 1 { return strs[0] } shortestLen := len(strs[0]) for _, str := range strs { if len(str) &lt; shortestLen { shortestLen = len(str) } } var finalStr string for i := 0; i &lt; shortestLen; i++ { tmp := strs[0][i] for j := 1; j &lt; len(strs); j++ { if tmp !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-14/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/" title="Leetcode 13" >Leetcode 13</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。 字符 数值 I 1 V 5 X 10 L 50 C 100 D 500 M 1000 例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做 XXVII, 即为 XX + V + II 。 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况： I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。 X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。 示例 1: 输入: &quot;III&quot; 输出: 3 示例 2: 输入: &quot;IV&quot; 输出: 4 示例 3: 输入: &quot;IX&quot; 输出: 9 示例 4: 输入: &quot;LVIII&quot; 输出: 58 解释: L = 50, V= 5, III = 3.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/" title="Leetcode 9" >Leetcode 9</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1/" title="Leetcode 1" >Leetcode 1</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+示例:
+给定 nums = [2, 7, 11, 15], target = 9 因为 nums[0] + nums[1] = 2 + 7 = 9 所以返回 [0, 1]  我的解答 func twoSum(nums []int, target int) []int { myMap := make(map[int]int) for idx,num := range nums{ myMap[num] = idx } for idx,num := range nums{ tmp := target - num if pos,exist := myMap[tmp]; exist{ if idx &gt; pos{ return []int{pos,idx} } else if idx &lt; pos{ return []int{idx,pos} }else{ continue } } } return nil }  方法是通过map来达到快速查找，而不像暴力法需要每次都遍历整个数组……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-7/" title="Leetcode 7" >Leetcode 7</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。 示例 1: 输入: 123 输出: 321 示例 2: 输入: -123 输出: -321 示例 3: 输入: 120 输出: 21 注意: 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−2^31, 2^31 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。  我的解答 func reverse(x int) int { var rev int for x != 0 { lastNum := x % 10 x = x / 10 if rev &gt; math.MaxInt32/10 || rev == math.MaxInt32/10 &amp;&amp; lastNum &gt; 7 { return 0 } if rev &lt; math.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-7/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-before-start/" title="Leetcode 开篇" >Leetcode 开篇</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 不积跬步无以至千里，不积小流无以成江海
+ 作为Leetcode的开篇作，在这里希望自己能够坚持每天code一两道题(视难度而定)
+以后博客应该是以这样的方式呈现
+### 题目 ### 我的解答 ### 最优解答 ### 难疑点&amp;核心  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-before-start/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-pipeline/" title="Golang Pipeline" >Golang Pipeline</a>
                                 </h1>
                             </header>
@@ -159,207 +327,6 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
  迭代的时候，go map是可以修改的……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-map/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-channel/" title="Golang Channel" >Golang Channel</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这里就不再赘述重要性了
-Channel特性  goroutine-safe
- 两个goroutine之间传递数据
- FIFO
- cause goroutine to block and unblock
-  What is the inside of channel  mutex
- send-index and recieve index
- buf
-  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
-How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/" title="Golang Interface" >Golang Interface</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
- concrete type(具体类型,int,string&hellip;)
- abstract type(抽象类型 io.Writer,io.Reader&hellip;)
-  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
-抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
-具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
-func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
-func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
-这里io.Reader是一个接口，接口里面只要一个函数
-type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
-func (f *File) Read(b []byte) (n int, err error) { if err := f.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/" title="Golang Tips" >Golang Tips</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月18日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
-关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/" title="Algorithm 排序" >Algorithm 排序</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                排序时间复杂度 堆排序 参考dreamcatcher-cx博客
-最好最坏的平均时间复杂度都为O(NlogN)
-代码 func HeapSortUp(a []int) []int { for i := len(a)/2 - 1; i &gt;= 0; i-- { adjustHeapUp(a, i, len(a)) } for j := len(a) - 1; j &gt; 0; j-- { a[0], a[j] = a[j], a[0] adjustHeapUp(a, 0, j) } return a } func adjustHeapUp(a []int, i int, length int) { tmp := a[i] for k := 2*i + 1; k &lt; length; k = 2*k + 1 { if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] { k++ } if a[k] &gt; tmp { a[i] = a[k] i = k } else { break } } a[i] = tmp }  思路  先将数组变换为一个大顶堆……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/" title="Golang Gin" >Golang Gin</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
-func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
-gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-validation/" title="Golang Validation" >Golang Validation</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Validation项目地址
-创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
- valid.Required(name,&quot;name&quot;)：检验变量不能为空，字符串不能为&quot;&quot;,后面的&quot;name&quot;是用来标识而已
- valid.MaxSize(name,100,&quot;name&quot;)：最大长度
- valid.Range(state,0,1,&quot;state&quot;)：范围
- valid.HasErrors()：这个会返回布尔值，是否有不符合限定的内容
- valid.Errors：这个是一个Error数组，其中Error是这个包自带的，并不是标准库的error
- valid.Min(id,1,&quot;id&quot;)：id最小为1
-  以上这些都返回*Result
-Result方法 我们拿上面一个返回*Result对象做例子
- valid.Required(name,&quot;name&quot;).Message(&quot;name不能为空&quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-validation/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/" title="Golang Build blog with gin" >Golang Build blog with gin</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 Package  ini &mdash;配置文件的读取
- com &mdash;功能性
- validation &mdash;做验证
- jwt-go &mdash;Token
- endless &mdash;服务器热启动
- swag &mdash;API文档
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
                         </article>
                     
 
@@ -490,6 +457,10 @@ Result方法 我们拿上面一个返回*Result对象做例子
         <a href="https://wushaoqiang.github.io/page/29/">29</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/30/">30</a>
+    </li>
+    
 
     
     <li class="next">
@@ -518,6 +489,34 @@ Result方法 我们拿上面一个返回*Result对象做例子
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval">Storage and Retrieval</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language">Data Model and Query Language</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System">Foundations of Data System</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
     </li>
     
@@ -527,34 +526,6 @@ Result方法 我们拿上面一个返回*Result对象做例子
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
 </ul>
@@ -631,7 +602,7 @@ Result方法 我们拿上面一个返回*Result对象做例子
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(17)</a>
     </li>
     
     <li>

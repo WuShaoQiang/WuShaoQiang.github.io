@@ -68,6 +68,180 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/" title="Leetcode 172" >Leetcode 172</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an integer n, return the number of trailing zeroes in n!. Example 1: Input: 3 Output: 0 Explanation: 3! = 6, no trailing zero. Example 2: Input: 5 Output: 1 Explanation: 5! = 120, one trailing zero. Note: Your solution should be in logarithmic time complexity.  我的解答 看了些提示才做出来
+func trailingZeroes(n int) int { count := 0 tmp := 1 len := 0 for n/(tmp*5) &gt; 0 { len++ tmp = tmp * 5 } for i := 0; i &lt; len; i++ { count += (n / tmp) tmp = tmp / 5 } return count }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-172/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/" title="Leetcode 171" >Leetcode 171</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a column title as appear in an Excel sheet, return its corresponding column number. For example: A -&gt; 1 B -&gt; 2 C -&gt; 3 ... Z -&gt; 26 AA -&gt; 27 AB -&gt; 28 ... Example 1: Input: &quot;A&quot; Output: 1 Example 2: Input: &quot;AB&quot; Output: 28 Example 3: Input: &quot;ZY&quot; Output: 701  我的解答 func titleToNumber(s string) int { result := 0 tmp := 1 for i := len(s) - 1; i &gt;= 0; i-- { num := int(s[i] - 64) result += (num * tmp) tmp = tmp * 26 } return result }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-171/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-system/computer-system/" title="计算机系统" >计算机系统</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月30日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80">计算机基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近复习了一遍计算机网络、数据结构等书，过了快一个星期了，可以开始看看《深入理解计算机系统》了，很多人不推荐一开始就啃这本书，吸收会比较慢，可以先看一些公开课
+这里推荐B站的公开课
+配套课件
+第二章 溢出 整数注意溢出，浮点数注意大数吃小数(虽然也要注意溢出，但是大数吃小数情况更加容易出现)
+大数吃小数的例子
+func main() { a := 1000000000000000.0 b := a c := 0.001 fmt.Println((a - b) + c) //不会吃 fmt.Println(a - (b + c)) //会吃 }  性能与底层bit 二维数组，一行一行扫描比一列列扫描性能要好
+无符号和有符号的数字需要小心分析它底层的bit，举例子
+无符号：1 1 1 1 --&gt; 2^3+2^2+2^1+2^0 = 15 有符号：1 1 1 1 --&gt; -2^3+2^2+2^1+2^0 = -1  ###大小端
+大端法：最高有效字节在最前面的方式
+比如0x01234567,在内存的表示是
+01 23 45 67  小端法：最低有效字节在最前面的方式
+比如0x01234567,在内存的表示是
+67 45 23 01  一般操作系统用的都是小端法……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-system/computer-system/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-169/" title="Leetcode 169" >Leetcode 169</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. You may assume that the array is non-empty and the majority element always exist in the array. Example 1: Input: [3,2,3] Output: 3 Example 2: Input: [2,2,1,1,1,2,2] Output: 2  我的解答 func majorityElement(nums []int) int { insertSort(nums) return nums[len(nums)/2] } func insertSort(nums []int) { for i := 1; i &lt; len(nums); i++ { tmp := nums[i] j := i - 1 for ; j &gt;= 0 &amp;&amp; tmp &lt; nums[j]; j-- { nums[j+1] = nums[j] } nums[j+1] = tmp } }  最优解答 func majorityElement(nums []int) int { if len(nums) &lt; 1 { return 0 } count, flag := 1, nums[0] for i := 1; i &lt; len(nums); i++ { if count &lt; 1 { count = 1 flag = nums[i] continue } if flag == nums[i] { count++ } else { count-- } } return flag }  难疑点&amp;核心 因题目特殊性，题目规定众数要超过数量的一半……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-169/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-168/" title="Leetcode 168" >Leetcode 168</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a positive integer, return its corresponding column title as appear in an Excel sheet. For example: 1 -&gt; A 2 -&gt; B 3 -&gt; C ... 26 -&gt; Z 27 -&gt; AA 28 -&gt; AB ... Example 1: Input: 1 Output: &quot;A&quot; Example 2: Input: 28 Output: &quot;AB&quot; Example 3: Input: 701 Output: &quot;ZY&quot;  我的解答 func convertToTitle(n int) string { if n &lt;= 0 { return &quot;&quot; } len := 0 tmp := n for tmp/26 &gt; 0 { len++ tmp = tmp / 26 } strs := make([]string, len+1) for n &gt; 0 { n-- strs[len] = string((n % 26) + 'A') n = n / 26 len-- } return strings.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-168/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-167/" title="Leetcode 167" >Leetcode 167</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Note: Your returned answers (both index1 and index2) are not zero-based. You may assume that each input would have exactly one solution and you may not use the same element twice.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-167/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-160/" title="Leetcode 160" >Leetcode 160</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Write a program to find the node at which the intersection of two singly linked lists begins. For example, the following two linked lists: begin to intersect at node c1. Example 1: Input: intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3 Output: Reference of the node with value = 8 Input Explanation: The intersected node's value is 8 (note that this must not be 0 if the two lists intersect).……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-160/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-155/" title="Leetcode 155" >Leetcode 155</a>
                                 </h1>
                             </header>
@@ -133,167 +307,6 @@
 最优解答 func singleNumber(nums []int) int { for i := len(nums) - 1; i &gt; 0; i-- { nums[i-1] = nums[i-1] ^ nums[i] } return nums[0] }  难疑点&amp;核心 因为题目说了，只有一个数字是不会出现两次，其它数字都出现两次……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-136/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-125/" title="Leetcode 125" >Leetcode 125</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。 说明：本题中，我们将空字符串定义为有效的回文串。 示例 1: 输入: &quot;A man, a plan, a canal: Panama&quot; 输出: true 示例 2: 输入: &quot;race a car&quot; 输出: false  我的解答 func isPalindrome(s string) bool { s = strings.Join(filter(s), &quot;&quot;) n := len(s) for i := 0; i &lt; n/2; i++ { if s[i] != s[n-1-i] { return false } } return true } func filter(s string) []string { return strings.FieldsFunc(strings.ToLower(s), func(r rune) bool { return !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-125/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-122/" title="Leetcode 122" >Leetcode 122</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。 示例 2: 输入: [1,2,3,4,5] 输出: 4 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。 示例 3: 输入: [7,6,4,3,1] 输出: 0 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。  我的解答 func maxProfit(prices []int) int { buy := 0 sell := 0 profit := 0 n := len(prices) for { for buy &lt; n-1 &amp;&amp; prices[buy+1] &lt;= prices[buy] { buy++ } sell = buy for sell &lt; n-1 &amp;&amp; prices[sell+1] &gt; prices[sell] { sell++ } if sell == buy { return profit } profit += prices[sell] - prices[buy] buy = sell } }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-122/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/" title="Leetcode 121" >Leetcode 121</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-119/" title="Leetcode 119" >Leetcode 119</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle. Note that the row index starts from 0. In Pascal's triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-119/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-118/" title="Leetcode 118" >Leetcode 118</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a non-negative integer numRows, generate the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it.  我的解答 func generate(numRows int) [][]int { if numRows == 0 { return nil } result := make([][]int, numRows) for i := 0; i &lt; numRows; i++ { result[i] = make([]int, i+1) result[i][0] = 1 result[i][i] = 1 for j := 1; j &lt; i; j++ { result[i][j] = result[i-1][j-1] + result[i-1][j] } } return result }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-118/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-112/" title="Leetcode 112" >Leetcode 112</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-112/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-111/" title="Leetcode 111" >Leetcode 111</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-111/">阅读全文</a></p>
                         </article>
                     
 
@@ -424,6 +437,10 @@
         <a href="https://wushaoqiang.github.io/page/29/">29</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/30/">30</a>
+    </li>
+    
 
     
     <li class="next">
@@ -452,6 +469,34 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval">Storage and Retrieval</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language">Data Model and Query Language</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System">Foundations of Data System</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
     </li>
     
@@ -461,34 +506,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test">Gopher 2019 Micro Integration Test</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network">Gopher 2018 Asyn Network</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap">Gopher 2019 Stack and Heap</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design">Gopher 2016 Solid Design</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic">Design Pattern Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic">Design Principle Basic</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array">Javascript Array</a>
     </li>
     
 </ul>
@@ -565,7 +582,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(10)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(17)</a>
     </li>
     
     <li>
