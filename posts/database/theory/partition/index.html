@@ -163,16 +163,6 @@
 
 <p>因为document-based的索引是分开在各个partition的，所以查询的时候有可能要遍历所有的partition，而term-based因为某些索引集中在一个partition，所以很快能够找到索引值</p>
 
-<h3 id="summary">Summary</h3>
-
-<p>主要介绍了Partition和Replication的区别和用法</p>
-
-<p>然后简单说了一些partition进行分片用的方法以及它们的优劣势</p>
-
-<p>还简单描述了一下Secondary Indexes，并且对比了两种的优缺点</p>
-
-<p>可以发现，每一个不同的方法都有自身的优劣势，因此还是那句话，选择最符合应用的才是最好的</p>
-
 <h3 id="rebalancing-partitions">Rebalancing Partitions</h3>
 
 <p>我们无论是新增节点还是删除节点，都需要做这件事情</p>
@@ -192,6 +182,18 @@
 <p>dynamic的意思是partition的动态产生和销毁，当一个节点加入集群的时候，它会像上面所描述一样，去偷一些partition过来变成自己的，主要的不同是，这里的partition数量我们不用提前知道是多少，因为它是动态生成和销毁的</p>
 
 <p>动态生成和销毁是根据partition的大小来决定的</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>主要介绍了Partition和Replication的区别和用法</p>
+
+<p>然后简单说了一些partition进行分片用的方法以及它们的优劣势</p>
+
+<p>还简单描述了一下Secondary Indexes，并且对比了两种的优缺点</p>
+
+<p>也简单描述了一下rebalance的几种方法</p>
+
+<p>可以发现，每一个不同的方法都有自身的优劣势，因此还是那句话，选择最符合应用的才是最好的</p>
 
                         </div>
 

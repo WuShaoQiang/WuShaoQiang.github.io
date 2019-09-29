@@ -165,11 +165,10 @@ Partitioning and Secondary Indexes Secondary Indexes不能唯一标识一个实�
 在对一个数据进行更新的时候，document-based只需要修改被更新的partition里的索引，而term-based则可能需要修改多个partition里面的索引
 在读的时候，term-based理论上会有更好的性能
 因为document-based的索引是分开在各个partition的，所以查询的时候有可能要遍历所有的partition，而term-based因为某些索引集中在一个partition，所以很快能够找到索引值
-Summary 主要介绍了Partition和Replication的区别和用法
-然后简单说了一些partition进行分片用的方法以及它们的优劣势
-还简单描述了一下Secondary Indexes，并且对比了两种的优缺点
-可以发现，每一个不同的方法都有自身的优劣势，因此还是那句话，选择最符合应用的才是最好的
-Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要做这件事情……
+Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要做这件事情
+有一个方法可能大家都听过&ndash;mod
+这个方法会导致节点变动时，里面的数据会大量变动，并不是一个好的选择
+下面介绍一种方法fixed number of partitions……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/partition/">阅读全文</a></p>
                         </article>
