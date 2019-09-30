@@ -68,6 +68,30 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-136/" title="Leetcode 136" >Leetcode 136</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-empty array of integers, every element appears twice except for one. Find that single one. Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory? Example 1: Input: [2,2,1] Output: 1 Example 2: Input: [4,1,2,1,2] Output: 4  我的解答 没想出来，看了评论区才知道
+最优解答 func singleNumber(nums []int) int { for i := len(nums) - 1; i &gt; 0; i-- { nums[i-1] = nums[i-1] ^ nums[i] } return nums[0] }  难疑点&amp;核心 因为题目说了，只有一个数字是不会出现两次，其它数字都出现两次……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-136/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-125/" title="Leetcode 125" >Leetcode 125</a>
                                 </h1>
                             </header>
@@ -272,31 +296,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/" title="Data Structure" >Data Structure</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 前段时间复习了一些数据结构，一直没来得及总结一下
-链表(双向) 单向链表和循环链表思路是差不多的
-结构体 type LinkListNode struct { Value interface{} Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -457,6 +456,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -490,10 +493,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -578,7 +577,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>

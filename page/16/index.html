@@ -68,6 +68,32 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-342/" title="Leetcode 342" >Leetcode 342</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an integer (signed 32 bits), write a function to check whether it is a power of 4. Example 1: Input: 16 Output: true Example 2: Input: 5 Output: false Follow up: Could you solve it without loops/recursion?  我的解答 func isPowerOfFour(num int) bool { return num &gt; 0 &amp;&amp; 6148914691236517205&amp;num == num &amp;&amp; num&amp;(num-1) == 0 }   num要是整数
+ 这一串数字是64位有符号int010101.....01,因为4的倍数在二进制中是隔开的10000(16),100(4),所以这个是验证num偶数bit是否都为0
+ 验证了偶数bit都为0后,要验证是否只有一个位置1,其实就是验证是否是2的幂
+  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-342/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-326/" title="Leetcode 326" >Leetcode 326</a>
                                 </h1>
                             </header>
@@ -278,34 +304,6 @@ func addDigits(num int) int { if num &lt;= 9 { return num } if num%9 == 0 { retu
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-apt/" title="Ubuntu apt" >Ubuntu apt</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 这个总结一下我经常用到的关于apt的命令
-apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
-其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好
-因此对于新入门的来说，建议使用apt
-当然，apt-get并没有被遗弃，也有很多人在用
-常用命令 更新仓库 sudo apt update 更新本地可更新的 sudo apt upgrade 一键更新 sudo apt update &amp;&amp; sudo apt upgrade -y 安装，如果pkg本身就已经安装，这个就是更新操作了 sudo apt install &lt;pkg&gt; 如果安装的包存在，不要更新，如果不存在，就安装 sudo apt install &lt;pkg&gt; --no-upgrade 如果包存在就更新，不存在也不安装 sudo apt install &lt;pkg&gt; --only-upgrade 指定版本安装 sudo apt install &lt;pkg&gt;=&lt;version&gt; 删除(不包括配置文件) sudo apt remove &lt;pkg&gt; 彻底删除(包括配置文件) sudo apt purge &lt;pkg&gt; 显示出这个term所有的package apt search &lt;term&gt; 这个可以显示pkg详细信息 apt show &lt;pkg&gt; 显示已安装的pkg apt list --installed 自动清除(清除那些没有用的pkg) sudo apt autoremove  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-apt/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -466,6 +464,10 @@ apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -499,10 +501,6 @@ apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -587,7 +585,7 @@ apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>

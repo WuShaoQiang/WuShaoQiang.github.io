@@ -6,10 +6,38 @@
     <description>Recent content in 网络基础 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Apr 2019 10:19:02 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Sep 2019 15:23:25 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TCP vs UDP</title>
+      <link>https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/</link>
+      <pubDate>Sun, 29 Sep 2019 15:23:25 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/</guid>
+      <description>TCP和UDP的区别这个问题已经遇到过很多次了，有简简单单的回答，也有绞尽脑汁去想，今天来详细总结一下区别吧
+面向连接 TCP是面向连接的，也就是说TCP在连接上会有许多事情做，包括拥塞控制，流量控制，超时，重传，确认，序号等等。事情越多，负担就越多，并且对应的报文也比UDP报文要大
+关于拥塞控制和流量控制，可以看我别的blog
+UDP是没有连接的，我们只需要将数据传递给UDP，因此理论上UDP可支持的并发数要比TCP要高，UDP就会打包好数据传到网络层(IP)。反过来想，UDP这种“无法无天”的传输可能会造成很多不可靠问题。
+ UDP没有序号，因此会产生包的乱序问题
+ UDP没有流量控制，发太快可能会导致溢出，溢出的包可能因此就不见了
+  连接状态 由于TCP是面向连接的，所以会有连接状态
+发起连接 在还未连接的时候，客户端的状态为CLOSED，服务器端为LISTEN
+ 当客户端给服务器端发起一个SYN包的时候，客户端的状态变为SYS_SEND
+ 服务器端接收到，发一个SYN+ACK包，服务器端的状态变为SYS_RECV
+ 客户端接收到，并且会发一个ACK包，客户端状态变为ESTABLISH
+ 服务器端收到后也会变为ESTABLISH
+  结束连接 初始状态，客户端和服务器端都为ESTABLISH
+ 假设客户端发了一个FIN包过去，这个时候客户端状态为FIN_WAIT1
+ 服务器收到了这个包，并且发送一个ACK包，服务端状态为CLOSE_WAIT
+ 服务器主动发一个FIN包，状态改为LAST_ACK
+ 客户端收到服务器的包，并且发送一个ACK包，将状态改为TIME_WAIT
+ 服务器收到ACK后进入CLOSED状态
+ 等待一段时间后没收到包，客户端也进入CLOSED
+  这里为什么要等待一段时间呢？ 主要是要看最后面客户端给服务端的ACK是否到了，如果中间网络出了问题，服务器端没有收到这个ACK，那么它将会重发FIN，这个时候客户端还能够重新处理这个FIN</description>
+    </item>
     
     <item>
       <title>Web请求历程</title>

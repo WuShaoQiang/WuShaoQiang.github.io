@@ -68,6 +68,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-21/" title="Leetcode 21" >Leetcode 21</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 示例： 输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4 输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4  我的解答 /** * Definition for singly-linked list. * type ListNode struct { * Val int * Next *ListNode * } */ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode { l4 := &amp;ListNode{} l3 := &amp;ListNode{} l4.Next = l3 for l1 != nil || l2 != nil { if l1 == nil { return l2 } if l2 == nil { return l1 } if l1.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-21/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/" title="SQL 进阶" >SQL 进阶</a>
                                 </h1>
                             </header>
@@ -395,44 +418,6 @@ A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/" title="TCP --报文" >TCP --报文</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 之间写过一个关于《计算机网络(原书第六版)：自顶向下方法》的一部分笔记，当时没继续写下去是因为觉得一个篇幅太多了，决定分开写，这样可能可以更加详细点，也算是第二次的复习吧
-这篇主要讲报文
-先看看报文的格式
-首先，TCP是运输层的协议，IP是网络层的协议，一般运输层协议会确定端口号，网络层协议则确定IP地址
- 源/目的端口号
- 序号/确认号：是用来双方实现可靠传输的(下面详细讲)
- 接收窗口字段：用于流量控制(可能会在别的篇幅讲)
- 首部长度：由于有选项这个字段，使得TCP的首部长度是可以变化的，不过通常就是20字节
- 标志字段/紧急指针：标志字段包括确认字段有效、建立和拆除连接、紧急数据。紧急指针指向紧急数据
-  序号/确认号 一条TCP连接的双发均可随机地选择初始序号，可能是0和4294967295之间的任意值
-我们假设初始序号为0
-A --&gt; B Seq=42,ACK=79,data=1 B --&gt; A Seq=79,ACK=43,data=2 A --&gt; B Seq=43,ACK=80,data=3 ...  在我理解
-序号是标识我要发送给对方的数据
-确认号是标识我需要对方发送给我的数据
-所以上面场景就是
-A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -593,6 +578,10 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -626,10 +615,6 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -714,7 +699,7 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>

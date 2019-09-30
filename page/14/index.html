@@ -68,6 +68,35 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                总结一下最近在配置MongoDB时遇到的坑吧
+首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
+嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
+直接下载tar包 解压后,要将/bin添加到环境变量
+然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
+这里是我初步的一个配置文件
+# mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/" title="Mongodb Role" >Mongodb Role</a>
                                 </h1>
                             </header>
@@ -355,29 +384,6 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/" title="Leetcode 400" >Leetcode 400</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -538,6 +544,10 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -571,10 +581,6 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -659,7 +665,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>

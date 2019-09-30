@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/</loc>
+    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/database/theory/transaction/</loc>
     <lastmod>2019-09-28T19:47:36+08:00</lastmod>
   </url>
@@ -1645,7 +1650,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
+    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1873,7 +1878,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
+    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1939,7 +1944,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/TCP/</loc>
-    <lastmod>2019-04-22T15:17:17+08:00</lastmod>
+    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1957,7 +1962,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/UDP/</loc>
-    <lastmod>2019-04-22T16:35:03+08:00</lastmod>
+    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2093,7 +2098,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2019-04-28T10:19:02+08:00</lastmod>
+    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
     <priority>0</priority>
   </url>
   

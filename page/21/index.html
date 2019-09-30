@@ -68,6 +68,31 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/" title="Data Structure" >Data Structure</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 前段时间复习了一些数据结构，一直没来得及总结一下
+链表(双向) 单向链表和循环链表思路是差不多的
+结构体 type LinkListNode struct { Value interface{} Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/" title="Web请求历程" >Web请求历程</a>
                                 </h1>
                             </header>
@@ -325,43 +350,6 @@ type Person struct{ name string age int } type Student struct{ person *Person } 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/" title="Golang 泛型" >Golang 泛型</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
-泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
-比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
-type LinkListNode struct { Value int Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  如果我们还要写一个字符串的链表，这个时候将Value的类型改成string就行了，其它不用变，如果我们还要..balabala，可能就要定义上百个结构体了，到时候代码全是结构体
-有些同学说，用接口不就可以了吗？用接口不就无法实现类型的判断了吗，万一程序哪个地方本应该收到int，却收了一个string，然后程序boom
-关于网上很多网友使用interface来达到所谓的泛型，我是越看越像多态呀，并且还是达不到泛型所能提供的类型保护啊，虽然算法确实可以复用了(有些)
-泛型的目的是减少代码的重复性，也就是增加重用性，还能够确定数据类型，比如Java中的一个例子
-class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } public void setValue(T v) { this.value = v; } }  T我可以是字符串，也可以是整数等，或者是自己定义的结构体。但是一旦定下来，创建了的变量类型就不能变了
-所以我说了那么多。。怎么实现啊
-实现 Go2草稿中有提到这个话题Go 2 Draft Designs
-目前只是一个草稿，并且是由Gopher们共同推进的一个话题，所以说现在Go内置里面还未实现泛型
-笔者也去看了一些关于泛型的讨论，到最后都还是建议不要在现阶段写泛型程序，因为Go有一个很本质的特点，就是简单写、简单读，如果通过一些自己的&rdquo;创造&rdquo;而造成别人阅读代码困难，那是得不偿失
-所以真香，还是用回多态吧，有机会再详细阅读一下草稿
-对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
-这里是Go2官方对这些修改的想法视频……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -522,6 +510,10 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -555,10 +547,6 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -643,7 +631,7 @@ class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } p
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>

@@ -68,6 +68,34 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-apt/" title="Ubuntu apt" >Ubuntu apt</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 这个总结一下我经常用到的关于apt的命令
+apt vs apt-get 这个问题其实也在一开始困扰了我很久，网上有人使用apt，有人使用apt-get，那到底用哪个？
+其实apt的后来推出的版本，越来越多人已经被它对人阅读的友好给征服了，apt-get输出的信息给人看起来比较不友好
+因此对于新入门的来说，建议使用apt
+当然，apt-get并没有被遗弃，也有很多人在用
+常用命令 更新仓库 sudo apt update 更新本地可更新的 sudo apt upgrade 一键更新 sudo apt update &amp;&amp; sudo apt upgrade -y 安装，如果pkg本身就已经安装，这个就是更新操作了 sudo apt install &lt;pkg&gt; 如果安装的包存在，不要更新，如果不存在，就安装 sudo apt install &lt;pkg&gt; --no-upgrade 如果包存在就更新，不存在也不安装 sudo apt install &lt;pkg&gt; --only-upgrade 指定版本安装 sudo apt install &lt;pkg&gt;=&lt;version&gt; 删除(不包括配置文件) sudo apt remove &lt;pkg&gt; 彻底删除(包括配置文件) sudo apt purge &lt;pkg&gt; 显示出这个term所有的package apt search &lt;term&gt; 这个可以显示pkg详细信息 apt show &lt;pkg&gt; 显示已安装的pkg apt list --installed 自动清除(清除那些没有用的pkg) sudo apt autoremove  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-apt/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-sync-map/" title="Golang Sync Map" >Golang Sync Map</a>
                                 </h1>
                             </header>
@@ -319,29 +347,6 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/" title="Leetcode 219" >Leetcode 219</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k. Example 1: Input: nums = [1,2,3,1], k = 3 Output: true Example 2: Input: nums = [1,0,1,1], k = 1 Output: true Example 3: Input: nums = [1,2,3,1,2,3], k = 2 Output: false  我的解答 这个题目可以用暴力法做，只是速度究极慢……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-219/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -502,6 +507,10 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -535,10 +544,6 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -623,7 +628,7 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>

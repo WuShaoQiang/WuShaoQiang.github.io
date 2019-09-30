@@ -68,6 +68,31 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/" title="Leetcode 538" >Leetcode 538</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个二叉搜索树（Binary Search Tree），把它转换成为累加树（Greater Tree)，使得每个节点的值是原来的节点值加上所有大于它的节点值之和。 例如： 输入: 二叉搜索树: 5 / \ 2 13 输出: 转换为累加树: 18 / \ 20 13  我的解答 这个题主要在于发现它的规律,节点所有比自身大的节点到底有哪些
+用树的思想去做会比较麻烦
+// 执行用时 : 540 ms, 在Convert BST to Greater Tree的Go提交中击败了35.56% 的用户 // 内存消耗 : 41.9 MB, 在Convert BST to Greater Tree的Go提交中击败了100.00% 的用户 func convertBST(root *TreeNode) *TreeNode { if root == nil { return nil } orderByIn(root, nil) return root } func orderByIn(root *TreeNode, lastNode *TreeNode) { if root == nil { return } // 表明是有转折点的 // 有转折点的意思是这个节点在某个祖先节点的左子树上(所以要加上这个祖先节点) if lastNode !……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-538/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-530/" title="Leetcode 530" >Leetcode 530</a>
                                 </h1>
                             </header>
@@ -323,35 +348,6 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                总结一下最近在配置MongoDB时遇到的坑吧
-首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
-嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
-直接下载tar包 解压后,要将/bin添加到环境变量
-然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
-这里是我初步的一个配置文件
-# mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -512,6 +508,10 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
     </li>
     
@@ -545,10 +545,6 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction">Self Introduction</a>
     </li>
     
 </ul>
@@ -633,7 +629,7 @@ func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } t
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(9)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
     </li>
     
     <li>
