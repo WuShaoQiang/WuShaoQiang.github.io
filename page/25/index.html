@@ -68,6 +68,47 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/" title="IPv4 数据报格式与分片" >IPv4 数据报格式与分片</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                直接上图  版本号
+ 首部长度：一般为20
+ 服务类型：为了区分数据报，有点想女士优先这种
+ 数据报长度(首部加数据，一般不超过1500字节)
+ 标识、标志、片偏移：与IP数据报分片有关(别的篇幅讲)
+ 寿命：每经过一台路由器，TTL减1，若为0的时候，这个数据报就要丢掉了
+ 上层协议：6代表TCP；17代表UDP
+ 首部校验和(检验IP数据报比特错误)
+ 源和目的IP地址
+ 选项(很少用)
+ 数据(TCP or UDP报文段)
+  IP数据报分片 发送方与目的地路径上的每段链路可能使用不同的链路层协议，且每种协议可能具备不同的MTU
+比如以太网的MTU为1500
+所以在通过MTU比较小的链路段时，就需要分片了
+为了让目的主机执行重装任务，IPv4的设计者将标识、标志、片偏移字段放在IP数据报首部
+分别解释这三个字段 标识 发送主机在发送IP数据报的时候，通常会将它发送的每个数据报的标识号加1
+所以目的地址收到了很多片，这些片上标识号是同一个数字的，那么它们就是可以组合的
+标志 最后一个片的标志比特被设为0，表明已经接收到某个标识的最后一个片
+偏移量 毫无疑问，是为了将片重新组织回去的……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/ip-message-field/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/http-message-field/" title="HTTP 报文" >HTTP 报文</a>
                                 </h1>
                             </header>
@@ -360,29 +401,6 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-13/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/" title="Leetcode 9" >Leetcode 9</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。 示例 1: 输入: 121 输出: true 示例 2: 输入: -121 输出: false 解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。 示例 3: 输入: 10 输出: false 解释: 从右向左读, 为 01 。因此它不是一个回文数。 进阶: 你能不将整数转为字符串来解决这个问题吗？  我的解答 func isPalindrome(x int) bool { str := strconv.Itoa(x) for i := 0; i &lt; len(str)/2; i++ { if str[i] != str[len(str)-1-i] { return false } } return true }  转换为字符串进行比较就简单很多了,直接头尾比较，时间复杂度为O(N/2),N为字符串长度……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-9/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -543,6 +561,10 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
     </li>
     
@@ -576,10 +598,6 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
     </li>
     
 </ul>
@@ -644,7 +662,7 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
     </li>
     
     <li>
@@ -685,6 +703,8 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
     
     <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
@@ -761,6 +781,8 @@ var ( relation = map[string]string{&quot;(&quot;: &quot;)&quot;, &quot;[&quot;: 
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     

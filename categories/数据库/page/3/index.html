@@ -78,6 +78,38 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">SQL 进阶</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                只针对Mysql的SQL语句
+##创建TABLE
+CREATE TABLE user ( id int PRIMARY KEY, username varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL );  约束也可以这样写
+CREATE TABLE user ( id int, username varchar(255) NOT NULL, password varchar(255) NOT NULL City varchar(255) DEFAULT 'Sandnes' UNIQUE(username) PRIMARY KEY(id) FOREIGN KEY (P_id) REFERENCES Persons(P_id) )  约束  NOT NULL
+ UNIQUE
+ PRIMARY KEY(NOT NULL和UNIQUE的结合)
+ FOREIGN KEY:保证一个表中的数据匹配另一个表中的值的参照完整性
+ CHECK
+ DEFAULT 默认值，在没有赋值的情况下就是默认值
+  NOT NULL 强制不接受NULL，如果不向该字段添加值，就无法插入新纪录或者更新记录……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-basic/">SQL 基础</a>
                                 </h1>
                             </header>
@@ -191,6 +223,10 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
     </li>
     
@@ -224,10 +260,6 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
     </li>
     
 </ul>
@@ -292,7 +324,7 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
     </li>
     
     <li>
@@ -333,6 +365,8 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
     
     <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
@@ -409,6 +443,8 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     

@@ -68,6 +68,57 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader" >Replication One Leader</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在之前的blog里，我也有大概说过关于单点故障等场景，但是大多数描述都是假设运行在单机上的
+在这blog里，我们关心的系统是由多个节点组成的
+Replication可以简单理解为副本集模式，它能够在多个节点上拥有同样的数据
+Why We Need Multi Machines 之前有讲过一些点：
+ 高可用
+ 高扩展
+ 以及单点容忍
+ 低延迟，低延迟可能是因为集群的方式处理请求更快，也可能是物理主机理用户距离比较近
+ 提高读取性能
+  One Leader and Followers 在MongoDB里，你可能会发现它们叫PRIMARYandSECONDARY，意思都是一样
+One Leader可以说是没那么复杂的一种模式
+它们的运作模式也比较简单
+在多台机器上运行同一个进程，这不同的进程就组成了一个cluster，cluster里面有且仅有一个Leader Leader是所有写操作的入口，当Leader在写入本地的时候，它也会将自己的Replication Log或者Change Stream(可以抽象成Leader给Followers发的写请求)发给集群上的Followers，这样Followers就能够更新自己的数据，和Leader保持一致
+而读操作可以从Leader上读，也可以在Followers上读。不同的是，Leader上的数据一定是最新的，而Followers上的数据有可能还没同步过来(在异步的通信方式下)，就像上面说的，同步是通过请求来的，谁也不能确保通信不出问题
+Synchronous Versus Asynchronous Replication 同步和异步拥有很大不同的特性
+同步意味着数据需要存入到每一个节点上，这个操作才算完成。如果其中一个节点因为网络问题，连接不上，那么整个系统就hang在这里不动了。所以一般情况下，我们不会选择同步的方式来处理数据
+异步意味着持久性会受到影响，为什么呢？设想当写操作还在Leader上的时候，Leader挂了，这个时候数据就完全丢失了，因为当前集群上没有一个节点拥有该份数据。
+半同步，我们折中一下双方的优劣，可以得到半同步，我们假设大部分节点都是正常的，这样只要有一定数量的节点收到了数据并且写入，那么我们就可以认为该数据已经得到了备份，这个时候Leader可以告诉外界，这个数据被存储好了
+Setting Up New Followers 有时候为了更好的服务，需要增加节点
+这个时候节点是没有任何数据的，我们需要让这个节点也能够处于服务状态的话，就必须通过复制数据给到这个节点
+How?
+传统的想法，直接拷贝文件行不行？
+ 是不行的，当这个系统是在运行状态，可能有很多中间的状态以及一些文件还是不完整的时候，我们直接拷贝文件很有可能这个文件都无法被解析。所以如果要这样做，可能需要将服务先关了，这样可以防止以上情况。但这又违反了系统的可用性，总不能加个节点就要关服拷贝吧  正确而又比较优雅的做法是利用隔离机制
+ 有一种隔离机制可以产生出一个快照(Snapshot)，这个快照一旦产生出来就不会改变了，因此新的节点完全可以按照这个快照来构建，然后Leader也不会因为这个新节点加入而停止服务。当新节点完成了快照的恢复，它就会向Leader拿Replication Log，也就是快照之后的数据更新，这样慢慢一步步赶上进度，最终可以像其它节点一样工作了。  Failover 在Followers节点挂了的时候，我们不会用这个词。这个词是描述一个cluster的Leader挂了
+当发生failover，我们应该要有相应的failover机制，一般情况下包含这几步
+ 确定Leader真的挂了，因为许多不可控因素，一般情况下判断一个服务是否挂了，可以用超时来判断，如果超时，那么就算进程没有挂，在对方的角度看来，它就是挂了
+ 当大多数的节点都判断Leader挂了(防止只是follower和Leader断开连接)，那么就开始挑选新的Leader，这里面应该有一个挑选算法，简单点就是投票机制，票数最多的节点当Leader。当然，每个Follower的票权也可以配置成不一样的。
+ 重新配置整个集群，使用新的Leader代替旧的Leader，旧的Leader就算后面重新连接，也需要Step Down成为一个Follower
+  不够，Failover没有想象中的那么简单，它会在一个高并发的系统上引发很多问题，我这里先不打算说太多(分布式系统的奇怪东西太多了)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval" >Storage and Retrieval</a>
                                 </h1>
                             </header>
@@ -400,62 +451,6 @@ func main() { a := 1 b := 1 c := sum(a,b) } func sum(x,y) int { return x+y }  �
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design" >Gopher 2016 Solid Design</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                前几天有写过一些设计原则与设计模式
-两者之间，设计原则给了我较深的体会，真的是慢慢理解前人的思想，以及对代码质量的要求
-今天抽空看了Dave在2016 Gopher UK讲的SOLID Go Design
-觉得刚好和前面学习的设计原则产生了完美结合
-SOLID 首先解释一下每一个字母的意义
- S: 单一职责原则(Single Responsibility)
- O: 开放封闭原则(Open For Extension, Close For Modification)
- L: 里氏替换原则(Liskov)
- I: 接口隔离原则(Interface Segregation Principle)
- D: 依赖倒置原则(Dependency Inversion Principle)
-  Go 因为之前写过某些原则，就不重复说了，有兴趣可以看前面讲设计原则的blog
-这里主要看L和I
-里氏替换原则 这里它所描述的是，子类可以替换掉父类而不受影响，因为子类可以继承复用父类，具体是什么上网搜一下也很容易找到更清晰的解释
-这里重点还是将里氏替换原则和Go结合起来
-我们知道，Go是没有class的，只有组合，所以在这里，里氏替换原则可以变成
-某一个接口可以被所有实现了这个接口的对象所替代
-很简单的例子就是io.Reader,我们可以用任何实现了该接口的实例去替代这个接口
-相当于，接口对应着父类，而实现了这个接口的结构体对应着子类
-接口隔离原则 这在Go里面也是一个非常重要和常用的原则
-受益于Go的鸭子类型，我们在思考一个功能的时候，不需要知道它具体的细节，我们只用清楚输入和输出即可实现这个功能
-这里的实现，只是一个接口，我们并不关心具体的实现，这就是接口隔离
-对外界来说，我只暴露接口，这个接口也许有多个具体的实现实例，这些实例只是通过不同的方法达到了同一个目的
-这个时候，外界想要使用这个接口的功能，只需要将依赖注入就能够任意选择具体实现实例了
-如果没有想要的具体实例，我们还可以根据接口自己实现一个，而且不会改变任何其它代码，只要将自己的实现注入到接口，接口就能够按照某个实例去工作了
-接口隔离是软件设计非常重要的一环，它让软件内部耦合度降低，扩展性更优
-Dave Dave在讲完SOLID设计原则后，提出了一些对Gopher们的请求，尤其是设计
-Dave希望Go更加的侧重设计，用好的设计去解决实在的问题
-My Thought About Design 设计并非想象中那么神奇，我更觉得它是一种思路的转变，也许有人更喜欢把一些实现写死，而非用接口去解耦(也确实是因为改动机会不大)，但也有人觉得留有余地是好的选择，都有各自的道理吧
-各有优缺点
-接口确实将结构与结构之间隔离开了，并且更加好定义职责(还有一系列好处)
-但是接口让程序的中间层变多，使得代码的逻辑会经常在不同地方穿梭(不够依赖现代编辑器，这个难度不大)
-那到底要不要写接口呢？
-我的想法是，在设计的时候，对于不稳定的部分，强烈推荐用接口
-在有多个实现的时候，必须要有接口……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -616,6 +611,10 @@ My Thought About Design 设计并非想象中那么神奇，我更觉得它是�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
     </li>
     
@@ -649,10 +648,6 @@ My Thought About Design 设计并非想象中那么神奇，我更觉得它是�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
     </li>
     
 </ul>
@@ -717,7 +712,7 @@ My Thought About Design 设计并非想象中那么神奇，我更觉得它是�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
     </li>
     
     <li>
@@ -758,6 +753,8 @@ My Thought About Design 设计并非想象中那么神奇，我更觉得它是�
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
     
     <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
@@ -834,6 +831,8 @@ My Thought About Design 设计并非想象中那么神奇，我更觉得它是�
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     

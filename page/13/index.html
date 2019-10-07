@@ -68,6 +68,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637" >Leetcode 637</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组. 示例 1: 输入: 3 / \ 9 20 / \ 15 7 输出: [3, 14.5, 11] 解释: 第0层的平均值是 3, 第1层是 14.5, 第2层是 11. 因此返回 [3, 14.5, 11]. 注意： 节点值的范围在32位有符号整数范围内。  我的解答 // 执行用时 : 28 ms, 在Average of Levels in Binary Tree的Go提交中击败了97.44% 的用户 // 内存消耗 : 8.1 MB, 在Average of Levels in Binary Tree的Go提交中击败了9.09% 的用户 func averageOfLevels(root *TreeNode) []float64 { if root == nil { return nil } res := make([]float64, 0) // 将第一个点放入队列 quene := []*TreeNode{root} for { // 确定这一次遍历的个数 l := len(quene) sum := 0 // 因为下面有判断quene长度,因此这里不可能为0,所以不用怕除数为0 count := l // 当遍历个数用完的时候表明这一层遍历完了,应当退出循环重新确定下一层 for l &gt; 0 { tmp := quene[l-1] sum += tmp.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617" >Leetcode 617</a>
                                 </h1>
                             </header>
@@ -280,30 +303,6 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/" title="Leetcode 414" >Leetcode 414</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。 示例 1: 输入: [3, 2, 1] 输出: 1 解释: 第三大的数是 1. 示例 2: 输入: [1, 2] 输出: 2 解释: 第三大的数不存在, 所以返回最大的数 2 . 示例 3: 输入: [2, 2, 3, 1] 输出: 1 解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。 存在两个值为2的数，它们都排第二。  我的解答 用切片记录
-// 执行用时 : 16 ms, 在Third Maximum Number的Go提交中击败了27.08% 的用户 // 内存消耗 : 4 MB, 在Third Maximum Number的Go提交中击败了23.33% 的用户 func thirdMax(nums []int) int { max := make([]int, 3) for i := 0; i &lt; 3; i++ { max[i] = math.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -464,6 +463,10 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
     </li>
     
@@ -497,10 +500,6 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
     </li>
     
 </ul>
@@ -565,7 +564,7 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
     </li>
     
     <li>
@@ -606,6 +605,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
     
     <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
@@ -682,6 +683,8 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     

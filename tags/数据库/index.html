@@ -78,6 +78,45 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/">BigTable Summary</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                国庆放假前几天，去翻阅了一下有关分布式存储的论文，其中有
+ Google BigTable
+ Google Spanner
+ Raft
+  不得不说，Google大法好
+BigTable  Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size
+ BigTable还结合了GFS，Chubby以及SSTable
+先了解一些名词  tablet server 一个tablet server可以管理多个tablet
+ tablet 是管理数据的最小单位
+ table 一个table可以由多个tablet组成，或者说一个table可以分割成多个tablet
+  它的数据模型 BigTable用了三个索引来标识一个数据
+ Row
+ Column
+ Timestamp
+  (row:string, column:string, time:int64) -&gt; string
+Row BigTable会根据Row Key对数据进行排序，所以在同一个tablet上的数据都是有序的。所以相对Hash这种存储方式，有序能够方便范围性的Scan
+Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩。……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/">Leader Election</a>
                                 </h1>
                             </header>
@@ -451,58 +490,6 @@ How?
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/">Storage and Retrieval</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                数据库简单理解，就为了两件事情：存储和读取
-So, Let&rsquo;s keep that simple
-Index 索引是与我们主要的数据分开的，我们可以创建索引，删除索引，这都不会影响我们的主要数据
-索引最初的目的是为了加快查询操作。但由于有除了主要数据之外的索引数据，因此我们在写入数据库的时候 就要维护多份数据(既要写入我们的主要数据，还要写入相应的索引数据，或者维护索引)，所以一般情况下加索引会 对写的性能有所影响
-所以，我们需要根据应用场景来决定是否加索引，这也是开发者应该知道的一些概念
-下面简单介绍一下索引种类以及原理
-Hash Indexes 其实和我们平时用编程语言里的哈希表有点类似
-在Go里，是一个叫做map的数据结构
-Go map 如何读写 接收到一个Key 对key进行Hash 通过Hash找到是哪一个bucket 取Hash的前8Bit做一个快速比较 找到bucket的内存(可以进行读写了)  我们可以简单将这个索引比作成一个offset，每一个offset都是某一个数据相对某一个内存的偏移量，这样我们就可以直接读取到该数据，而不用从头开始查找了。这是一个append-only的形式，在这种形式下，我们只需要关注最近的那个offset即可，在数据越来越大的时候，我们可以通过合并，将失效的数据删除
-Append-Only咋一眼看去很浪费空间，但它也有独特的优点值得关注：
- 相对于随机读写(也就是in-place)，它具有更好的性能
- 更好处理恢复
-  但是随着时间推移，这个索引变得越来越大，以至于要存入硬盘中，这样，索引相应的性能就会受到很大的影响
-并且Hash Index对取一批数据的操作是很不友好的
-SSTables and LSM-Trees SSTables = Sorted String Tables
-SSTables相对上面说的Hash有很大的优势，不过我们先看一下它需要满足的条件
-在上面我们可以看到k-v是直接加进来的，对SSTables，我们规定这些
- k-v是按照key排序的
- 每一个key在merge之后的segment都只出现一次
-  思考一下，每一个segment都是内部有序的，当我们要合并segment的时候，像什么算法？
-我们要清楚知道，每一个segment是有顺序产生的，也就是说相同的key在不同的segment里面也是可以区分先后的
-在这种有序的情况下，我们还可以解决上面Hash Index的一个内存爆满问题
-因为我是有序的，所以我不一定要知道某一个具体key的内存地址，我可以知道在它附近的key，并且根据排序来找到我想要的key，这样我们就可以极大减少存储在内存里的索引
-由于是有序的，我们可以针对一些连续的扫描做很大的优化
-说了这么多，都只是介绍，那具体怎么实现呢？
-回想一下它需要的第一个条件&ndash;有序
-我们都知道，现在有平衡树可以帮我们做到这一点
- RB-Tree
- AVL-Tree
-  然后归并算法可以帮我们解决segment合并的问题……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -551,6 +538,10 @@ SSTables相对上面说的Hash有很大的优势，不过我们先看一下它�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
     </li>
     
@@ -584,10 +575,6 @@ SSTables相对上面说的Hash有很大的优势，不过我们先看一下它�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
     </li>
     
 </ul>
@@ -652,7 +639,7 @@ SSTables相对上面说的Hash有很大的优势，不过我们先看一下它�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
     </li>
     
     <li>
@@ -693,6 +680,8 @@ SSTables相对上面说的Hash有很大的优势，不过我们先看一下它�
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
     
     <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
@@ -769,6 +758,8 @@ SSTables相对上面说的Hash有很大的优势，不过我们先看一下它�
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     

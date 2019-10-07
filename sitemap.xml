@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/</loc>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/database/raft/leader-election/</loc>
     <lastmod>2019-10-06T14:48:50+08:00</lastmod>
   </url>
@@ -1536,6 +1541,12 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/tags/BigTable/</loc>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/tags/BinaryTree/</loc>
     <lastmod>2019-05-05T18:24:12+08:00</lastmod>
     <priority>0</priority>
@@ -1675,7 +1686,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1890,6 +1901,12 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/tags/Paper/</loc>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/tags/Path/</loc>
     <lastmod>2019-04-12T17:28:21+08:00</lastmod>
     <priority>0</priority>
@@ -1903,7 +1920,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2069,13 +2086,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
+    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   

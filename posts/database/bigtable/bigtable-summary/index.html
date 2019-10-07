@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>BigTable Summary | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="BigTable Summary - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-10-07T14:09:32&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-10-07T14:09:32&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="BigTable Summary">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">BigTable Summary</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年10月7日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>国庆放假前几天，去翻阅了一下有关分布式存储的论文，其中有</p>
+
+<ul>
+<li><p>Google BigTable</p></li>
+
+<li><p>Google Spanner</p></li>
+
+<li><p>Raft</p></li>
+</ul>
+
+<p>不得不说，Google大法好</p>
+
+<h3 id="bigtable">BigTable</h3>
+
+<blockquote>
+<p>Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size</p>
+</blockquote>
+
+<p>BigTable还结合了GFS，Chubby以及SSTable</p>
+
+<h4 id="先了解一些名词">先了解一些名词</h4>
+
+<ul>
+<li><p>tablet server 一个tablet server可以管理多个tablet</p></li>
+
+<li><p>tablet 是管理数据的最小单位</p></li>
+
+<li><p>table 一个table可以由多个tablet组成，或者说一个table可以分割成多个tablet</p></li>
+</ul>
+
+<h4 id="它的数据模型">它的数据模型</h4>
+
+<p>BigTable用了三个索引来标识一个数据</p>
+
+<ol>
+<li><p>Row</p></li>
+
+<li><p>Column</p></li>
+
+<li><p>Timestamp</p></li>
+</ol>
+
+<p><code>(row:string, column:string, time:int64) -&gt; string</code></p>
+
+<h5 id="row">Row</h5>
+
+<p>BigTable会根据Row Key对数据进行排序，所以在同一个tablet上的数据都是有序的。所以相对Hash这种存储方式，有序能够方便范围性的Scan</p>
+
+<h5 id="column-and-column-family">Column and Column Family</h5>
+
+<p>一般来说Column Family包含多个Column，一个Column可以由<code>family:qualifier</code>来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩。</p>
+
+<ul>
+<li><p>Column Family是提供用户管理数据权限的最小单位。</p></li>
+
+<li><p>在BigTable里，必须要先创建Column Family，再添加Column</p></li>
+</ul>
+
+<h5 id="timestamp">Timestamp</h5>
+
+<p>时间戳是要具有唯一性的，它的作用是为了维持多个版本的数据。具体维持多少个版本或者维持多久是可以配置的</p>
+
+<p>也就是说，相同的Row和Column可能会有不同版本的数据</p>
+
+<p>为了让最新的数据最快被读到，BigTable按照降序把新的数据放在了前面</p>
+
+<h4 id="角色">角色</h4>
+
+<p>在BigTable的系统里，主要有三个重要的的角色(组件)</p>
+
+<ol>
+<li><p>client server</p></li>
+
+<li><p>master</p></li>
+
+<li><p>tablet server</p></li>
+</ol>
+
+<p>这里其实和TiDB的基础架构有点像</p>
+
+<ul>
+<li><p>client server &ndash;&gt; TiDB Server</p></li>
+
+<li><p>master &ndash;&gt; PD</p></li>
+
+<li><p>tablet server &ndash;&gt; TiKV</p></li>
+</ul>
+
+<p>在这个系统中，master的主要作用有</p>
+
+<ul>
+<li><p>管理整个系统中的tablet server，包括新的server加入或者旧的server退出</p></li>
+
+<li><p>将未分配的tablet分配给tablet server，以及回收没人管的tablet</p></li>
+
+<li><p>对现有的tablet server进行负载均衡，也就是说master给tablet server分配的tablet要均衡。</p></li>
+
+<li><p>还负责记录一些元信息(包括Table创建等)</p></li>
+</ul>
+
+<p>那么client server的主要作用就是</p>
+
+<ul>
+<li><p>处理来自外部的请求，并且根据请求直接和tablet server进行交互</p></li>
+
+<li><p>将处理结果返回给外部请求发起者</p></li>
+</ul>
+
+<p>tablet server的作用就是</p>
+
+<ul>
+<li><p>处理来自client server和master的请求(包括查询或者加入新的tablet请求)</p></li>
+
+<li><p>告知master哪些tablet我将不负责，好让master重新分配</p></li>
+</ul>
+
+<h4 id="如何定位tablet">如何定位Tablet</h4>
+
+<p>在这里，BigTable运用了B+ Tree，用三层索引指向来一步步追踪到某一个tablet</p>
+
+<p>因为client server是和tablet server直接进行交互的，因此client server会将这些定位信息进行缓存</p>
+
+<p>如果这个缓存信息不准确了，它会向上查找，然后再向下查找</p>
+
+<h4 id="集群如何运作">集群如何运作</h4>
+
+<p>我们知道，master是管理和分配资源的，tablet server其实算是一个劳动者，管好已经被分配给自己的资源。</p>
+
+<p>master和tablet server如何感知到对方呢？</p>
+
+<p>BigTable用了Chubby来实现master和tablet server互相感知</p>
+
+<p>tablet server如果是有效的，它会和Chubby通信，并且会持有一个特定唯一目录的互斥锁，master会监控它的父目录(这里可以想象成一个层级关系，master在tablet server的上一级)。</p>
+
+<p>这个时候master会尝试获取它目录下面的锁，在tablet server有效的时候，这个锁是无法获取的，因此master知道这个tablet server是正常的</p>
+
+<p>当tablet server不正常时(宕机或者网络故障等)，这个时候Chubby会发现这个tablet server一直没有过来续这个锁的租约(lease)，这个时候这个锁被释放了</p>
+
+<p>master拿到了这个锁后就会认为这个tablet server不可用了(就算再次可用也没办法了，锁被拿了)，因此这个时候master就会让这个tablet server正确下线(通过删除属于这个tablet server的目录)，把它所负责的tablet转交给别的正常的tablet server，实现高可用</p>
+
+<p>tablet server在检测到这个目录消失后会自行关闭</p>
+
+<h5 id="master失效">master失效</h5>
+
+<p>上面我们说了tablet server的失效，master会做出相应的处理确保数据的可用性</p>
+
+<p>那么master失效是如何处理呢</p>
+
+<p>还是锁的处理，master和Chubby也会有连接关系(租户关系)，当master发生timeout，这个锁就会被释放，新的master起来的时候会去尝试获得这个锁，因为锁的机制，我们可以确保整个集群里面只有一个master</p>
+
+<p>假设新的master上位，它是需要收集集群的信息的</p>
+
+<p>因此它会扫描Chubby的锁的占用情况来获取有效的tablet server，并且和tablet server通信，来获取tablet信息，并且表明自己是新的master(因为tablet server也会主动和master通信)</p>
+
+<p>这里其实还有一些特殊情况，这里不详细说，有兴趣的可以直接阅读Paper</p>
+
+<h4 id="读写">读写</h4>
+
+<p>上面大概描述了一下BigTable的组成和运作，现在来看一下它是如何读写的</p>
+
+<p>BigTable的写方式是和LSM-Tree差不多，都是采用了Append-Only的方式，然后再merge来消除冗余数据</p>
+
+<p>这样做的好处就是继承了LSM-Tree的优点</p>
+
+<ul>
+<li><p>有序</p></li>
+
+<li><p>磁盘利用率高</p></li>
+</ul>
+
+<p>读的操作过来时，会先写log，以保证这个操作会被执行</p>
+
+<p>这里会有一个MemTable，和SSTable不同的是，它是放在内存上的，因此在MemTable排序和写入是非常快的。</p>
+
+<p>这里会用<code>Mirror Compaction</code>将内存的值写入到磁盘上</p>
+
+<p>对应的会有<code>Merging Compaction</code>来防止SSTable的无线增长</p>
+
+<p>熟悉LSM-Tree的同学都知道这样的数据结构是对写友好，对读可能不那么友好(相对B-Tree)</p>
+
+<p>BigTable对相应的读操作做了一定的优化</p>
+
+<ol>
+<li><p>对Column进行优化，上面我们说到，tablet的排序方式是按照Row Key来排序的，写入磁盘的时候也是按照这个顺序的(方便Row Scan)，但是像OLAP这样的系统，它可能更需要的是某一个Column。因此，BigTable运行client对Column Family进行Locality Group，在本地多生成一份SSTable来存储这个Column Family，提高查询的效率。<strong>还记得</strong>Column Family一般都是同类型的，所以我们也可以对其进行压缩。</p></li>
+
+<li><p>第二种优化就是利用缓存了。主要是Scan Cache和Block Cache，Block Cache就是在缓存里存储了一些Block(SSTable被分为多个block进行压缩)。Scan Cache存储的是tablet location。对于热门访问的数据有比较好的优化</p></li>
+
+<li><p>Bloom Filter是一个防止无效查询的算法，代价还是内存。由于LSM-Tree正常情况下需要遍历所有的数据才能确定一个数据是否存在。加入了Bloom Filter能够减少无效查询对整个系统负担</p></li>
+
+<li><p>commit log的是以tablet server为单位的，一个tablet server拥有多个tablet，因此commit log可能会乱七八糟。这样带来的问题是，当这个tablet server下线的时候，它原来的tablet需要打散分配到不同的其它的tablet server，这个时候commit log就很令人头疼。为了解决这个问题。在重新分配的时候，master会对commit log进行排序，这样新的tablet server就只用读取它所负责的那部分log就好了</p></li>
+</ol>
+
+<h4 id="思考">思考</h4>
+
+<p>Paper里面提到了一些错误处理，包括master，tablet server。</p>
+
+<p>我们也很容易发现，client server是独立的，所以这个server就像是一个proxy，因此它的宕机可能对整个系统的影响比较小</p>
+
+<p>Chubby也是BigTable关键一环，如何保证Chubby的可用性呢？难道也是使用多副本(One Leader)的方式吗？Paper里并没有详细说。不过按照Chubby扮演的角色中，是需要具备强一致性的，因此One Leader的可能性比较大。</p>
+
+<p>如果Chubby不可以用，那么整个系统就不可用了吗？按照Paper的说法，master和tablet server都非常依赖Chubby的可用性</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/database/raft/leader-election/">Leader Election</a></li>
+        
+        <li><a href="/posts/database/raft/tips/">Tips</a></li>
+        
+        <li><a href="/posts/database/raft/safety-argument/">Safety Argument</a></li>
+        
+        <li><a href="/posts/database/tidb/tidb-server-source-sql-core-layer/">TiDB Server源码分析 SQL Core Layer</a></li>
+        
+        <li><a href="/posts/database/tidb/tidb-server/">TiDB Server源码分析 Protocol Layer</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/BigTable">BigTable</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Paper">Paper</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Raft/">Raft</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TiDB/">TiDB</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

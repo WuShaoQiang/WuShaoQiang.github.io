@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Paper on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Paper/</link>
+    <description>Recent content in Paper on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 07 Oct 2019 14:09:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Paper/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BigTable Summary</title>
+      <link>https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/</link>
+      <pubDate>Mon, 07 Oct 2019 14:09:32 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/</guid>
+      <description>国庆放假前几天，去翻阅了一下有关分布式存储的论文，其中有
+ Google BigTable
+ Google Spanner
+ Raft
+  不得不说，Google大法好
+BigTable  Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size
+ BigTable还结合了GFS，Chubby以及SSTable
+先了解一些名词  tablet server 一个tablet server可以管理多个tablet
+ tablet 是管理数据的最小单位
+ table 一个table可以由多个tablet组成，或者说一个table可以分割成多个tablet
+  它的数据模型 BigTable用了三个索引来标识一个数据
+ Row
+ Column
+ Timestamp
+  (row:string, column:string, time:int64) -&amp;gt; string
+Row BigTable会根据Row Key对数据进行排序，所以在同一个tablet上的数据都是有序的。所以相对Hash这种存储方式，有序能够方便范围性的Scan
+Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩。</description>
+    </item>
+    
+  </channel>
+</rss>

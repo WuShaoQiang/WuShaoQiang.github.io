@@ -68,6 +68,31 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-371/" title="Leetcode 371" >Leetcode 371</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. Example 1: Input: a = 1, b = 2 Output: 3 Example 2: Input: a = -2, b = 3 Output: 1  我的解答 这个题也是考验对二进制的熟悉
+我们来验算一下
+以下都是二进制 a = 100 b = 111 结果应该等于 1011 add = 100^111 = 011 carry = (100&amp;111)&lt;&lt;1 =1000 sum = add^carry  // 用&amp;来得到是否有进位，并且要右移1位 // 用^来得到不考虑进位的相加 // 然后进位和不考虑进位的结果再次执行同样的操作，直到没有进位 func getSum(a int, b int) int { res := 0 for { carry := (a &amp; b) &lt;&lt; 1 sum := a ^ b if carry&amp;sum == 0 { res = carry ^ sum break } a = carry b = sum } return res }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-371/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-367/" title="Leetcode 367" >Leetcode 367</a>
                                 </h1>
                             </header>
@@ -280,29 +305,6 @@ You may assume that the array does not change.……
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-292/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-290/" title="Leetcode 290" >Leetcode 290</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a pattern and a string str, find if str follows the same pattern. Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in str. Example 1: Input: pattern = &quot;abba&quot;, str = &quot;dog cat cat dog&quot; Output: true Example 2: Input:pattern = &quot;abba&quot;, str = &quot;dog cat cat fish&quot; Output: false Example 3: Input: pattern = &quot;aaaa&quot;, str = &quot;dog cat cat dog&quot; Output: false Example 4: Input: pattern = &quot;abba&quot;, str = &quot;dog dog dog dog&quot; Output: false Notes: You may assume pattern contains only lowercase letters, and str contains lowercase letters that may be separated by a single space.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-290/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -463,6 +465,10 @@ You may assume that the array does not change.……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
     </li>
     
@@ -496,10 +502,6 @@ You may assume that the array does not change.……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
     </li>
     
 </ul>
@@ -564,7 +566,7 @@ You may assume that the array does not change.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
     </li>
     
     <li>
@@ -605,6 +607,8 @@ You may assume that the array does not change.……
     <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
     
     <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
     
     <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
     
@@ -681,6 +685,8 @@ You may assume that the array does not change.……
     <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
     
     <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
     
     <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
     
