@@ -1,0 +1,1136 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>TiDB Server源码分析 Protocol Layer | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="TiDB Server源码分析 Protocol Layer - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-10-03T15:53:09&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-10-03T15:53:09&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="TiDB Server源码分析 Protocol Layer">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">TiDB Server源码分析 Protocol Layer</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年10月3日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<h3 id="简单介绍">简单介绍</h3>
+
+<p>最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图</p>
+
+<p><img src="https://pingcap.com/images/blog-cn/tidb-source-code-reading-2/2.png" alt="tidb-server" /></p>
+
+<p>因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧</p>
+
+<h3 id="怎么入手">怎么入手</h3>
+
+<p>TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边<code>Protocol Layer</code></p>
+
+<p>我们可以简单的从<code>tidb-server/main.go</code>来入手，来简单了解一下基本组成</p>
+
+<p>为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍</p>
+
+<pre><code class="language-go">func main() {
+    // 解析命令行
+	flag.Parse()
+    // 如果带有version，则只是输出version
+	if *version {
+		fmt.Println(printer.GetTiDBInfo())
+		os.Exit(0)
+	}
+    // (可忽略)这里是注册store，会分别注册&quot;tikv&quot;和&quot;mock-tikv&quot;
+	registerStores()
+    // (可忽略)这个是和prometheus相关的
+	registerMetrics()
+    // (可忽略) 配置，我们暂时可以考虑默认
+	configWarning := loadConfig()
+	overrideConfig()
+	if err := cfg.Valid(); err != nil {
+		fmt.Fprintln(os.Stderr, &quot;invalid config&quot;, err)
+		os.Exit(1)
+	}
+	if *configCheck {
+		fmt.Println(&quot;config check successful&quot;)
+		os.Exit(0)
+	}
+    // (可忽略) 都只是一些配置
+	setGlobalVars()
+	setCPUAffinity()
+	setupLog()
+	// If configStrict had been specified, and there had been an error, the server would already
+	// have exited by now. If configWarning is not an empty string, write it to the log now that
+	// it's been properly set up.
+	if configWarning != &quot;&quot; {
+		log.Warn(configWarning)
+	}
+	setupTracing() // Should before createServer and after setup config.
+	printInfo()
+	setupBinlogClient()
+	setupMetrics()
+	createStoreAndDomain()
+    // 这里创建了server实例
+	createServer()
+    // 监听外部信号
+	signal.SetupSignalHandler(serverShutdown)
+    // 启动server
+	runServer()
+	cleanup()
+	syncLog()
+}
+</code></pre>
+
+<p>我们简单理解为三步</p>
+
+<ul>
+<li><p>解析命令行</p></li>
+
+<li><p>创建server</p></li>
+
+<li><p>启动server</p></li>
+</ul>
+
+<p>所以我们下一步看看这个server是如何创建的</p>
+
+<h3 id="创建server">创建Server</h3>
+
+<pre><code class="language-go">func createServer() {
+	driver := server.NewTiDBDriver(storage)
+	var err error
+	svr, err = server.NewServer(cfg, driver)
+	...
+}
+</code></pre>
+
+<p>这里是main.go的一个函数，我把后面的省略了(以后默认把暂时不影响的部分去掉)</p>
+
+<p>这里有两个东西</p>
+
+<ol>
+<li><p>Driver</p></li>
+
+<li><p>Server</p></li>
+</ol>
+
+<h4 id="driver是什么">Driver是什么</h4>
+
+<p>Driver是一个接口，这个接口比较简单</p>
+
+<pre><code class="language-go">// IDriver opens IContext.
+type IDriver interface {
+	// OpenCtx opens an IContext with connection id, client capability, collation, dbname and optionally the tls state.
+	OpenCtx(connID uint64, capability uint32, collation uint8, dbname string, tlsState *tls.ConnectionState) (QueryCtx, error)
+}
+</code></pre>
+
+<p>通俗的将，这个Driver是我们<code>Protocol Layer</code>到右边的一个通道，所以我们也暂时可以不考虑这个部分</p>
+
+<h3 id="server">Server</h3>
+
+<p>进入NewServer函数，我们来到了<code>server/server.go</code>，这里面包含了TiDB-Server的构建、启动和关闭</p>
+
+<p>先来看看Server这个结构体的组成</p>
+
+<pre><code class="language-go">type Server struct {
+	cfg               *config.Config
+	tlsConfig         *tls.Config
+	driver            IDriver
+	listener          net.Listener
+	socket            net.Listener
+	rwlock            sync.RWMutex
+	concurrentLimiter *TokenLimiter
+	clients           map[uint32]*clientConn
+	capability        uint32
+
+	// stopListenerCh is used when a critical error occurred, we don't want to exit the process, because there may be
+	// a supervisor automatically restart it, then new client connection will be created, but we can't server it.
+	// So we just stop the listener and store to force clients to chose other TiDB servers.
+	stopListenerCh chan struct{}
+	statusServer   *http.Server
+}
+</code></pre>
+
+<p>我来大概解释一下字段的意思</p>
+
+<ul>
+<li><p>cfg：配置文件</p></li>
+
+<li><p>tlsConfig：这里是支持加密连接的</p></li>
+
+<li><p>driver：与SQL层的连接入口</p></li>
+
+<li><p>listener：TCP的监听者</p></li>
+
+<li><p>socket：也是一个监听者，是通过Unix</p></li>
+
+<li><p>concurrentLimiter： 为了限制数量做的令牌模式</p></li>
+
+<li><p>clients： 用connectID标识的client</p></li>
+
+<li><p>capability： 服务可提供的功能(详情要参照MySQL的内部文档)</p></li>
+
+<li><p>statusServer： 可以暂时不管，是一个为外部监测开的一个服务</p></li>
+</ul>
+
+<p>我们着重看tlsConfig, listener, clients</p>
+
+<h4 id="new-and-run">New and Run</h4>
+
+<p><strong>New</strong></p>
+
+<pre><code class="language-go">// NewServer creates a new Server.
+func NewServer(cfg *config.Config, driver IDriver) (*Server, error) {
+    // 简单构造一个实例
+	s := &amp;Server{
+		cfg:               cfg,
+		driver:            driver,
+		concurrentLimiter: NewTokenLimiter(cfg.TokenLimit),
+		clients:           make(map[uint32]*clientConn),
+		stopListenerCh:    make(chan struct{}, 1),
+	}
+    // 如果指定使用TLS，则会load相关，并且对s.tlsConfig赋值
+	s.loadTLSCertificates()
+
+	s.capability = defaultCapability
+    // 如果支持SSL，则加在capability上
+	if s.tlsConfig != nil {
+		s.capability |= mysql.ClientSSL
+	}
+
+	var err error
+
+    // 指定TCP
+	if s.cfg.Host != &quot;&quot; &amp;&amp; s.cfg.Port != 0 {
+		addr := fmt.Sprintf(&quot;%s:%d&quot;, s.cfg.Host, s.cfg.Port)
+		if s.listener, err = net.Listen(&quot;tcp&quot;, addr); err == nil {
+			logutil.BgLogger().Info(&quot;server is running MySQL protocol&quot;, zap.String(&quot;addr&quot;, addr))
+            // 转发Unix连接给TCP
+			if cfg.Socket != &quot;&quot; {
+				if s.socket, err = net.Listen(&quot;unix&quot;, s.cfg.Socket); err == nil {
+					logutil.BgLogger().Info(&quot;server redirecting&quot;, zap.String(&quot;from&quot;, s.cfg.Socket), zap.String(&quot;to&quot;, addr))
+					go s.forwardUnixSocketToTCP()
+				}
+			}
+		}   //这里就只是Unix连接，因为没有配置文件没有host和port
+	} else if cfg.Socket != &quot;&quot; {
+		if s.listener, err = net.Listen(&quot;unix&quot;, cfg.Socket); err == nil {
+			logutil.BgLogger().Info(&quot;server is running MySQL protocol&quot;, zap.String(&quot;socket&quot;, cfg.Socket))
+		}
+	} else {
+		err = errors.New(&quot;Server not configured to listen on either -socket or -host and -port&quot;)
+	}
+
+	if cfg.ProxyProtocol.Networks != &quot;&quot; {
+		// 先省略
+	}
+
+	if err != nil {
+		return nil, errors.Trace(err)
+	}
+
+	// Init rand seed for randomBuf()
+	rand.Seed(time.Now().UTC().UnixNano())
+	return s, nil
+}
+</code></pre>
+
+<p>我们可以总结出来，New做了这几件事情</p>
+
+<ul>
+<li><p>初始化</p></li>
+
+<li><p>检查是否指定SSL连接</p></li>
+
+<li><p>指定TCP或Unix接听者</p></li>
+</ul>
+
+<p>所以说，New主要是为下一步Run做好了连接方式以及变量的初始化</p>
+
+<p><strong>Run</strong></p>
+
+<pre><code class="language-go">// Run runs the server.
+func (s *Server) Run() error {
+    // 忽略了一些...
+	for {
+        // 这里是整个TiDB-Server接收连接的地方，所以我们可以认为这里是连接的唯一入口
+		conn, err := s.listener.Accept()
+		if err != nil {
+			// 错误处理
+		}
+        // 这里是接收来自stopListenerCh的信号
+		if s.shouldStopListener() {
+			// stop
+		}
+
+        // 这里通过外部的连接来创建一个clientConn
+		clientConn := s.newConn(conn)
+
+		// 省略了插件部分
+
+        // 开启一个goroutine去服务这个conn
+		go s.onConn(clientConn)
+	}
+	// 退出循环表明不再接收服务
+}
+</code></pre>
+
+<p>忽略了一些细节，以及错误处理的逻辑，Run的主要逻辑还是非常简单的</p>
+
+<ol>
+<li><p>Accept()监听连接</p></li>
+
+<li><p>创建一个我们自己的clientConn，也就是对每一个来的conn做一个包装</p></li>
+
+<li><p>用goroutine去服务这个clientConn</p></li>
+</ol>
+
+<h3 id="从server的角度到clientconn的角度">从server的角度到clientConn的角度</h3>
+
+<p>我们从上面的<code>New and Run</code>可以观察到，起一个监听的服务还是比较简单的，但是我们在接收到了一个连接后，要对这个连接做我们自己的业务才是主要的任务</p>
+
+<p>我们先来看看<code>s.onConn</code></p>
+
+<pre><code class="language-go">// onConn runs in its own goroutine, handles queries from this connection.
+func (s *Server) onConn(conn *clientConn) {
+    ctx := logutil.WithConnID(context.Background(), conn.connectionID)
+	if err := conn.handshake(ctx); err != nil {
+        // 省略错误处理
+	}
+	// 省略...
+
+    // 我们需要将clientConn记录到server的map里
+	s.rwlock.Lock()
+	s.clients[conn.connectionID] = conn
+	connections := len(s.clients)
+	s.rwlock.Unlock()
+	
+    // 省略plugin
+
+    // 服务这个client主要的逻辑在Run
+	conn.Run(ctx)
+
+	// 省略plugin
+}
+</code></pre>
+
+<p>我们可以看到，onConn无非在Server中做了三件事</p>
+
+<ol>
+<li><p>和客户端握手</p></li>
+
+<li><p>记录到自己的map里</p></li>
+
+<li><p>将对conn的服务真正的Run起来</p></li>
+</ol>
+
+<h4 id="handshake">handshake</h4>
+
+<p>这里，当我们服务器包装好了conn，准备开始接收和处理请求之前，需要握手操作，这里涉及到了<a href="https://dev.mysql.com/doc/internals/en/initial-handshake.html">MySQL Initial Handshake</a></p>
+
+<p><strong>这里提及一下</strong>，因为这是Protocol Layer，所以基本很多都是要参照MySQL内部文档的，不然可能你连为什么要这么写都不知道</p>
+
+<p>我们就以这个为例子</p>
+
+<pre><code class="language-go">// handshake works like TCP handshake, but in a higher level, it first writes initial packet to client,
+// during handshake, client and server negotiate compatible features and do authentication.
+// After handshake, client can send sql query to server.
+func (cc *clientConn) handshake(ctx context.Context) error {
+	if err := cc.writeInitialHandshake(); err != nil {
+		return err
+	}
+	if err := cc.readOptionalSSLRequestAndHandshakeResponse(ctx); err != nil {
+		// 省略错误处理
+	}
+	data := cc.alloc.AllocWithLen(4, 32)
+	data = append(data, mysql.OKHeader)
+	data = append(data, 0, 0)
+	if cc.capability&amp;mysql.ClientProtocol41 &gt; 0 {
+		data = dumpUint16(data, mysql.ServerStatusAutocommit)
+		data = append(data, 0, 0)
+	}
+
+	err := cc.writePacket(data)
+	cc.pkt.sequence = 0
+	if err != nil {
+		return err
+	}
+
+	return cc.flush()
+}
+</code></pre>
+
+<p>在解释这段代码之前，先看一下MySQL给的<strong>SSL Handshake</strong>文档</p>
+
+<pre><code>14.2.1.2 SSL Handshake
+1. server sending Initial Handshake Packet
+
+2. client replying with SSL Connection Request Packet
+
+3. the ususal SSL exchange leading to establishing SSL connection
+
+4. client sends Handshake Response Packet
+</code></pre>
+
+<p>代码中就是实现了这四部，我们来一一对照起来</p>
+
+<p><strong>Sending Initial Handshake Packet</strong></p>
+
+<p>这一部分实现就是函数<code>cc.writeInitialHandshake()</code></p>
+
+<p>走进去看看</p>
+
+<pre><code class="language-go">// writeInitialHandshake sends server version, connection ID, server capability, collation, server status
+// and auth salt to the client.
+func (cc *clientConn) writeInitialHandshake() error {
+	data := make([]byte, 4, 128)
+
+	// min version 10
+	data = append(data, 10)
+	// server version[00]
+	data = append(data, mysql.ServerVersion...)
+	data = append(data, 0)
+	// connection id
+	data = append(data, byte(cc.connectionID), byte(cc.connectionID&gt;&gt;8), byte(cc.connectionID&gt;&gt;16), byte(cc.connectionID&gt;&gt;24))
+	// auth-plugin-data-part-1
+	data = append(data, cc.salt[0:8]...)
+	// filler [00]
+	data = append(data, 0)
+	// capability flag lower 2 bytes, using default capability here
+	data = append(data, byte(cc.server.capability), byte(cc.server.capability&gt;&gt;8))
+	// charset
+	if cc.collation == 0 {
+		cc.collation = uint8(mysql.DefaultCollationID)
+	}
+	data = append(data, cc.collation)
+	// status
+	data = dumpUint16(data, mysql.ServerStatusAutocommit)
+	// below 13 byte may not be used
+	// capability flag upper 2 bytes, using default capability here
+	data = append(data, byte(cc.server.capability&gt;&gt;16), byte(cc.server.capability&gt;&gt;24))
+	// length of auth-plugin-data
+	data = append(data, byte(len(cc.salt)+1))
+	// reserved 10 [00]
+	data = append(data, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	// auth-plugin-data-part-2
+	data = append(data, cc.salt[8:]...)
+	data = append(data, 0)
+	// auth-plugin name
+	data = append(data, []byte(&quot;mysql_native_password&quot;)...)
+	data = append(data, 0)
+	err := cc.writePacket(data)
+	if err != nil {
+		return err
+	}
+	return cc.flush()
+}
+</code></pre>
+
+<p>在来看一下MySQL给的Initial Handshake Packet</p>
+
+<pre><code>1              [0a] protocol version
+string[NUL]    server version
+4              connection id
+string[8]      auth-plugin-data-part-1
+1              [00] filler
+2              capability flags (lower 2 bytes)
+  if more data in the packet:
+1              character set
+2              status flags
+2              capability flags (upper 2 bytes)
+  if capabilities &amp; CLIENT_PLUGIN_AUTH {
+1              length of auth-plugin-data
+  } else {
+1              [00]
+  }
+string[10]     reserved (all [00])
+  if capabilities &amp; CLIENT_SECURE_CONNECTION {
+string[$len]   auth-plugin-data-part-2 ($len=MAX(13, length of auth-plugin-data - 8))
+  if capabilities &amp; CLIENT_PLUGIN_AUTH {
+string[NUL]    auth-plugin name
+  }
+</code></pre>
+
+<p>你可以看到，代码里的数据和官方的packet是一一对应的，所以说，想要兼容MySQL，就必须按照MySQL的协议来和客户端沟通，所以TiDB在这一层基本就是按照这个协议来编写Protocol Layer的，无论是Handshake还是数据的解析和发送，都是按照协议来</p>
+
+<p><strong>这里我不会一步一步的介绍协议，当然我也有一个个对比过，发现主要还是理解大意好，毕竟协议文档就在那里，没必要一个个看</strong></p>
+
+<p>下面那个函数<code>cc.readOptionalSSLRequestAndHandshakeResponse(ctx)</code>就是实现了后三步，先不深入进去了。</p>
+
+<hr />
+
+<p>关于New就先不介绍了，比较简单，我们先进入这个<code>conn.go#Run()</code></p>
+
+<p>这个时候我们已经从server.go到conn.go了</p>
+
+<h4 id="conn-run">conn.Run</h4>
+
+<pre><code class="language-go">// Run reads client query and writes query result to client in for loop, if there is a panic during query handling,
+// it will be recovered and log the panic error.
+// This function returns and the connection is closed if there is an IO error or there is a panic.
+func (cc *clientConn) Run(ctx context.Context) {
+	const size = 4096
+
+    //根据前面的我们知道，每一个conn.Run都要起一个goroutine，因此这里的recover是针对一个clientConn
+	defer func() {
+		r := recover()
+		if r != nil {
+			// 省略了recover做的事情
+		}
+        // 如果clientConn没关，就关了它
+		if atomic.LoadInt32(&amp;cc.status) != connStatusShutdown {
+			err := cc.Close()
+			terror.Log(err)
+		}
+	}()
+	// Usually, client connection status changes between [dispatching] &lt;=&gt; [reading].
+	// When some event happens, server may notify this client connection by setting
+	// the status to special values, for example: kill or graceful shutdown.
+	// The client connection would detect the events when it fails to change status
+	// by CAS operation, it would then take some actions accordingly.
+
+    // 上面注释也说的很明白了
+    // CAS == Compare And Swap
+	for {
+        // 如果不是Dispatch状态，则直接返回(可能是外部对这个conn的State做了改变)
+		if !atomic.CompareAndSwapInt32(&amp;cc.status, connStatusDispatching, connStatusReading) {
+			return
+		}
+
+		// close connection when idle time is more than wait_timout
+		waitTimeout := cc.getSessionVarsWaitTimeout(ctx)
+		cc.pkt.setReadTimeout(time.Duration(waitTimeout) * time.Second)
+		start := time.Now()
+		data, err := cc.readPacket()
+		if err != nil {
+            // 省略错误处理
+			return
+		}
+
+        // 转换状态使用原子操作
+		if !atomic.CompareAndSwapInt32(&amp;cc.status, connStatusReading, connStatusDispatching) {
+			return
+		}
+
+		startTime := time.Now()
+        // 将请求输入到dispatch进行处理，这里面包含了从Protocol到Session的数据传输
+		if err = cc.dispatch(ctx, data); err != nil {
+            // 错误处理
+        }
+        // 将sequence置0，这个非常重要
+		cc.pkt.sequence = 0
+	}
+}
+</code></pre>
+
+<p>从这上面的简单分析，我们可以知道conn.Run主要是做一件事情</p>
+
+<p>从Dispatching到Reading表明在读取数据包，从Reading到Dispatching就是正在处理或者闲置状态</p>
+
+<p>通过这两种状态的转换达到这个goroutine一直在接收client的数据包以及处理它的数据包</p>
+
+<p>这里面非常重要的一个函数是<code>dispatch</code>它包含了真正的处理逻辑，我们后面会说到</p>
+
+<h4 id="conn的角色">conn的角色</h4>
+
+<p>我想在这里总结一下，从server收到了一个conn，然后构建一个clientConn，这个clientConn会先和client握手沟通，然后建立连接，之后通过状态来接收请求和处理请求。</p>
+
+<p>我们可以看到clientConn相当于每一个client连接的实例，这个实例只对一个连接负责。而Server是负责监听连接然后构造出对这个连接负责的clientConn</p>
+
+<h3 id="最后一道门">最后一道门</h3>
+
+<p>在Protocol Layer这一层上，最后一道门就是和Session Context交换数据的门，因为这以blog不会涉及到Session的概念，我们可以从架构图上可以看到它和Protocol Layer的关系</p>
+
+<p><strong>dispatch</strong>函数就是这一最后一道门</p>
+
+<p>具体代码也比较简单，我就不贴那么多了</p>
+
+<pre><code class="language-go">// dispatch handles client request based on command which is the first byte of the data.
+// It also gets a token from server which is used to limit the concurrently handling clients.
+// The most frequently used command is ComQuery.
+func (cc *clientConn) dispatch(ctx context.Context, data []byte) error {
+    // 这个可以根据MySQL Protocol的介绍来得出结论
+	cmd := data[0]
+	data = data[1:]
+	cc.lastCmd = string(hack.String(data))
+    // 只有拿到Token才有权利执行，不然就阻塞
+	token := cc.server.getToken()
+	//  省略...
+
+	switch cmd {
+	case mysql.ComPing, mysql.ComStmtClose, mysql.ComStmtSendLongData, mysql.ComStmtReset,
+		mysql.ComSetOption, mysql.ComChangeUser:
+		cc.ctx.SetProcessInfo(&quot;&quot;, t, cmd, 0)
+	case mysql.ComInitDB:
+		cc.ctx.SetProcessInfo(&quot;use &quot;+dataStr, t, cmd, 0)
+	}
+
+	switch cmd {
+	case mysql.ComSleep:
+		// TODO: According to mysql document, this command is supposed to be used only internally.
+		// So it's just a temp fix, not sure if it's done right.
+		// Investigate this command and write test case later.
+		return nil
+	case mysql.ComQuit:
+		return io.EOF
+	case mysql.ComQuery: // Most frequently used command.
+		// For issue 1989
+		// Input payload may end with byte '\0', we didn't find related mysql document about it, but mysql
+		// implementation accept that case. So trim the last '\0' here as if the payload an EOF string.
+		// See http://dev.mysql.com/doc/internals/en/com-query.html
+		if len(data) &gt; 0 &amp;&amp; data[len(data)-1] == 0 {
+			data = data[:len(data)-1]
+			dataStr = string(hack.String(data))
+		}
+		return cc.handleQuery(ctx, dataStr)
+	// 省略了case...
+	default:
+		return mysql.NewErrf(mysql.ErrUnknown, &quot;command %d not supported now&quot;, cmd)
+	}
+}
+</code></pre>
+
+<p>我们可以看到，dispatch是将收到的包进行分配不同的处理逻辑，主要是按照<code>cmd</code>来，像case mysql.ComQuery，那么数据就会被传到相应的<code>handleQuery</code></p>
+
+<h3 id="感受">感受</h3>
+
+<p>写到最后，顺便分享一下看TiDB源码的感受，TiDB的模块非常多，需要分开看。得益于架构的清晰和模块的分层，使得每一个模块看起来不会特别的困难，所以读者如果想要看TiDB的源码，可以参考TiDB的官方blog，里面有一些分类总结</p>
+
+<p>其实我零零碎碎也看了两天，第一天的时候过于针对细节，导致其实看完细节也不能很好理解，也算是浪费了一些时间。后面选择从大的角度来看，稍微结合细节(比如和MySQL协议结合，弄懂一个就好了)，这样既不会只看到表明，也不会因为细节太多丢失了主体</p>
+
+<p>所以建议是</p>
+
+<ul>
+<li><p>一个模块一个模块来看</p></li>
+
+<li><p>尽量按照最简单的思路走(因为实在有太多的错误处理，如果细看会绕晕的)</p></li>
+
+<li><p>不要过分追求细节，会很容易看不懂</p></li>
+
+<li><p>不要过分丢失细节，看完发现思路还是那个架构图，这样就失去了看源码的目的了</p></li>
+</ul>
+
+<h3 id="后序">后序</h3>
+
+<p>国庆还有几天，打算再写多一篇吧，希望能够大概cover右边的主要逻辑</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/database/theory/transaction/">Transaction</a></li>
+        
+        <li><a href="/posts/database/theory/partition/">Partition</a></li>
+        
+        <li><a href="/posts/database/theory/replication-other/">Replication Other Pattern</a></li>
+        
+        <li><a href="/posts/database/theory/replication-one-leader/">Replication One Leader</a></li>
+        
+        <li><a href="/posts/database/theory/storage-and-retrieval/">Storage and Retrieval</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/TiDB">TiDB</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Raft/">Raft</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TiDB/">TiDB</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

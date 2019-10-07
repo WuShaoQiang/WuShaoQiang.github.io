@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/database/raft/leader-election/</loc>
+    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/raft/tips/</loc>
+    <lastmod>2019-10-05T20:25:51+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/raft/safety-argument/</loc>
+    <lastmod>2019-10-05T19:11:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/</loc>
+    <lastmod>2019-10-03T19:54:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/tidb/tidb-server/</loc>
+    <lastmod>2019-10-03T15:53:09+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/</loc>
     <lastmod>2019-09-29T15:23:25+08:00</lastmod>
   </url>
@@ -1650,7 +1675,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
+    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1878,19 +1903,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://wushaoqiang.github.io/tags/protocal/</loc>
-    <lastmod>2019-03-17T01:58:00+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://wushaoqiang.github.io/categories/protocal/</loc>
-    <lastmod>2019-03-17T01:58:00+08:00</lastmod>
+    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1901,8 +1914,8 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/categories/questions/</loc>
-    <lastmod>2019-03-26T17:27:44+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/Raft/</loc>
+    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1957,6 +1970,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/tags/</loc>
     <lastmod>2019-09-14T21:09:40+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/TiDB/</loc>
+    <lastmod>2019-10-03T19:54:52+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2033,12 +2052,6 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/</loc>
-    <lastmod>2019-04-24T11:03:38+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2019-04-18T22:56:20+08:00</lastmod>
     <priority>0</priority>
@@ -2056,13 +2069,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
+    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-09-28T19:47:36+08:00</lastmod>
+    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2093,6 +2106,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
     <lastmod>2019-04-28T10:19:02+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2019-03-17T01:58:00+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -171,6 +171,41 @@ UDP是没有连接的，我们只需要将数据传递给UDP，因此理论上UD
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">关于加密 --基础</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 我们现在接触较多的两种加密方式
+ 对称加密
+ 公钥加密
+  对称加密 利用一样的秘钥，在持有者双方进行加密和解密
+但是第一次建立连接并且传输秘钥的时候不安全(当然可以通过其它方式传输)
+速度快
+公钥加密 用对方的公钥加密，发送给对方，因为只要对方有自己的私钥，因此就算密文半路被拦截，也不会泄露信息
+安全性好，但速度慢
+结合 结合两种加密方式，创建一个既安全又快的连接
+ 利用对方公钥加密对称秘钥，发送给对方
+ 对方收到用自己秘钥解密，得到对称秘钥
+ 双方用对称秘钥进行接下来的通信
+  ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/DHCP-and-NAT/">DHCP 和 NAT</a>
                                 </h1>
                             </header>
@@ -427,47 +462,29 @@ A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">TCP --报文</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月22日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 之间写过一个关于《计算机网络(原书第六版)：自顶向下方法》的一部分笔记，当时没继续写下去是因为觉得一个篇幅太多了，决定分开写，这样可能可以更加详细点，也算是第二次的复习吧
-这篇主要讲报文
-先看看报文的格式
-首先，TCP是运输层的协议，IP是网络层的协议，一般运输层协议会确定端口号，网络层协议则确定IP地址
- 源/目的端口号
- 序号/确认号：是用来双方实现可靠传输的(下面详细讲)
- 接收窗口字段：用于流量控制(可能会在别的篇幅讲)
- 首部长度：由于有选项这个字段，使得TCP的首部长度是可以变化的，不过通常就是20字节
- 标志字段/紧急指针：标志字段包括确认字段有效、建立和拆除连接、紧急数据。紧急指针指向紧急数据
-  序号/确认号 一条TCP连接的双发均可随机地选择初始序号，可能是0和4294967295之间的任意值
-我们假设初始序号为0
-A --&gt; B Seq=42,ACK=79,data=1 B --&gt; A Seq=79,ACK=43,data=2 A --&gt; B Seq=43,ACK=80,data=3 ...  在我理解
-序号是标识我要发送给对方的数据
-确认号是标识我需要对方发送给我的数据
-所以上面场景就是
-A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的数据，并且返回A所要的序号为79的数据，并且B还想要A序号为43的数据 以此类推...  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -489,6 +506,26 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
     </li>
     
@@ -506,26 +543,6 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval">Storage and Retrieval</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language">Data Model and Query Language</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System">Foundations of Data System</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
     </li>
     
 </ul>
@@ -590,19 +607,7 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(17)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
     </li>
     
     <li>
@@ -610,7 +615,7 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
     </li>
     
     <li>
@@ -724,6 +729,8 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     
     <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Raft/">Raft</a>
+    
     <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
@@ -739,6 +746,8 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TiDB/">TiDB</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
     
@@ -768,8 +777,6 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     
     <a href="https://wushaoqiang.github.io/tags/new/">new</a>
     
-    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
-    
     <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
@@ -797,6 +804,8 @@ A给B发序号为42的数据，并且向B要序号为79的数据 B收到了A的�
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
     

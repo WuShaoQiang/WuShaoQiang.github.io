@@ -6,10 +6,125 @@
     <description>Recent content on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Sep 2019 15:23:25 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2019 14:48:50 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leader Election</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/leader-election/</link>
+      <pubDate>Sun, 06 Oct 2019 14:48:50 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/leader-election/</guid>
+      <description>在这里总结一些Leader Election的Case，通过例子来理解Raft的Leader Election或许会更有印象
+下面用到的term是指任期值，index是最后一个committed log的位置
+大家的Term和Index都相同 当大家的term和index都相同的时候，某一个Follower长时间未收到Leader的心跳发生timeout，就会变成candidate，并且term = currentTerm + 1， 这个时候这个candidate就会号召大家为它投票
+投票是按照两个依据来选择是否投票的
+ 投票请求(RPC)带来的term一定要大于currentTerm，这样节点才知道这是新的一轮投票了
+ 满足上面条件后，还需要检测请求带来的lastLogIndex以及lastLogTerm以确保candidate拥有比自己新或者和自己一样的状态
+  主要满足这两个条件，拥有投票权的节点就会给这个candidate投票
+投票是需要majority节点同意的
+在我们假设term和index都相同的前提下，发起选举，那么就会有谁先发起谁就非常大概率当Leader
+Term相同，Index不一样 我们假设有两个candidate在竞选Leader，candidate1.index &amp;lt; candidate2.index
+也就是说candidate2拥有更加新的状态，我们来模拟一下竞选过程
+candidate1和candidate2都会向所有节点发起投票请求(RPC)，candidate自己是给自己投票的
+那么其它节点如何判断呢？
+其实还是上面的那两个依据，不记得请往上面翻一翻
+term相同，那么它们都会比currentTerm大(通过)
+第二个是比较index，由于Raft会保证committed会在majority上，因此candidate1肯定会被majority拒绝(可能会得到一小部分未更新的节点的投票)
+所以candidate2会得到majority的投票，因此成为Leader
+结论就是term值一样的candidate，index新的会赢
+Term不一样，Index相同 这种情况是term大的会赢
+假设candidate1.term &amp;lt; candidate2.term
+这一部分我的理解可能不一定正确
+因为对于所有server来说，接收到请求里的term要比自己的term大，都会变为Follower，因此我觉得candidate1 在接收到 candidate2的term时，会转换为Follower，这个时候candidate1就像是被迫离场一样
+Term不一样，Index不一样 这里假设Leader.term &amp;lt; Candidate.term 但是 Leader.index &amp;gt; candidate.index
+这个时候Leader收到了比自己term大的term，因此转换为Follower
+但是因为candidate的index不是最新的，因此它不能够得到majority的投票，因此它会再次超时并且sleep一段时间
+这个时候之前的Leader term已经是追上了，因此参加选举，这个时候满足选举投票的两个条件，因此再次成为Leader，并且宣布自己是Leader，所以之前的candidate看到有人宣布了Leader，就会放弃选举，变成Follower
+不严谨 以上只是读者自己在看Raft Paper以及一些参考的理解，不一定是严谨的，有疑惑的地方还是参照更加官方的资料</description>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/tips/</link>
+      <pubDate>Sat, 05 Oct 2019 20:25:51 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/tips/</guid>
+      <description>大概情况 今天看了Raft Paper，这是第一遍，我觉得自己还是有很多地方没有理解到位的(尽管我看了将近五个小时)
+所以先是记录一下tips，后面重新回来看的时候再追加一下细节(或者还可以结合一下源码)，在raft官网上有相应的源码实现
+tips 整体来理解Raft 当Leader接收到来自client的非读请求时，它会先记录在自己的log里面，然后再并发传递给Followers Server，一旦传递给了majority，那么每一个Server都会将log里面的东西放到state machine去执行，结果也将返回给client
+先理解一些专有名词  term是描述一个版本号的，越大代表版本越新
+ log entry就是我们要保证一致性的信息，整个算法核心就是如何让每一个节点上的log entry一致
+ index是索引，节点上面存的log entry都是具有唯一标识的，这个标识就是由term和index来组成，这里可以简单理解为log entry所在的位置
+ AppendEntries RPC代表Leader向Followers发送log entry(也可能是心跳)的RPC调用
+  一些规则 对所有server来说
+ 自身的commitIndex &amp;gt; lastApplied，那么就会lastApplied++，然后加入到state machine里
+ 只要接收到的term比自己的currentTerm大，那么就更新currentTerm，并且转换为Follower
+  对于Follower来说
+ 要处理来自Leader和Candidate的请求
+ 如果因为没有收到AppendEntries而发生timeout或者给某一个candidate投票了，都会转换为candidate
+  对于Candidate来说：
+ 在选举期间：
+ currentTerm++
+ 给自己投票
+ 重置election timer
+ 给其它server发生RequestVote请求
+  如果接收到了来自majority的投票，成为Leader
+ 如果收到了来自新Leader的AppendEntries，成为Follower
+ 如果过了election timeout的时间，开始新一轮竞选
+  对于Leader来说：
+ 如果是赢得竞选，则发生空的AppendEntries(心跳)来告知其它server，并且持续发送心跳来维护自己Leader地位</description>
+    </item>
+    
+    <item>
+      <title>Safety Argument</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/safety-argument/</link>
+      <pubDate>Sat, 05 Oct 2019 19:11:27 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/safety-argument/</guid>
+      <description>起因 笔者在看Raft Paper的时候，遇到一个比较有意思的证明过程，不过这个证明过程对上下文有着紧密关系，因此在这里想用简单点的逻辑进行描述
+这个证明有意思的在于，它通过引出矛盾来证明这个结论是正确的，也算是一种反证法吧
+Let&amp;rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥有最新的committed
+假设一下 这里假设有两个Leader，分别为Old Leader，New Leader。
+我们假设New Leader在被选举出来的时候并没有最新的committed，什么意思呢，也就是说Old Leader在Crash之前已经commit了一个log，但是这个log并没有在New Leader里
+我们知道，要commit一个log需要majority的followers同意。然后，选举一个新的Leader也是需要majority的candidates同意的。这就给出一个结论
+因为两者都需要超过半数的节点同意，因此它们肯定有交集的节点
+ 注：这里用节点是因为不同的场景会有不同的角色，所以统一称为节点  引出矛盾 交集的节点做了两件事情(按顺序)
+ 接收到了Old Leader宕机之前的log，并且是committed
+ 给New Leader投票
+  我们知道，选举的时候是有限制的，只有拥有最新committed log的节点才有被选举权，所以给New Leader投票说明New Leader在还没成为Leader之前是有这个committed log的(和前面假设冲突)
+或者说，New Leader拥有比这个投票者所知道的更加新的committed log，换句话说，New Leader在之前就已经有更新版本的committed log，但是按照原则，创建这个最新版本log的Leader应该是拥有Old Leader的全部committed log的，所以按道理New Leader也应该要有这个log(所以还是和假设冲突)
+结论 所以说，New Leader保证是会拥有Old Leader的所有committed log</description>
+    </item>
+    
+    <item>
+      <title>TiDB Server源码分析 SQL Core Layer</title>
+      <link>https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/</link>
+      <pubDate>Thu, 03 Oct 2019 19:54:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/</guid>
+      <description>还是架构 还是先放一张架构图，当思路不清晰的时候，看一看架构图能够帮我们整理思路
+回想一下 上一篇blog是介绍了Protocol Layer，这一层整体思路还是比较简单，只是兼容MySQL协议会产生很多相应的函数方法
+应该还记得，在上一篇blog，我有提到Driver这个词，并且看到了它的接口只有一个函数OpenCtx(...)...，从结构图上来将，我们需要将SQL传入到Session Context里面，而OpenCtx就是帮我们从Protocol Layer打开到SQL Core Layer的通道，然后再通过这个通道将数据传入进去。打开后会返回QueryCtx接口，这个接口是我们执行SQL的唯一入口，也就是Protocol Layer到SQL Core Layer的唯一入口
+什么时候打开通道 通过编辑器可以发现，server/driver.go里的IDriver接口只在一个函数上有调用
+func (cc *clientConn) openSessionAndDoAuth(authData []byte) error { var tlsStatePtr *tls.ConnectionState // 如果是SSL连接，就取出这个连接的状态 if cc.tlsConn != nil { tlsState := cc.tlsConn.ConnectionState() tlsStatePtr = &amp;amp;tlsState } var err error // 打开通道，这里将返回的QueryCtx给到clientConn，它以后就用这个Ctx和SQL Core Layer进行交互 cc.ctx, err = cc.server.driver.OpenCtx(uint64(cc.connectionID), cc.capability, cc.collation, cc.dbname, tlsStatePtr) if err != nil { return err } // 忽略验证过程 return nil }  这个函数也只有两个地方会调用到</description>
+    </item>
+    
+    <item>
+      <title>TiDB Server源码分析 Protocol Layer</title>
+      <link>https://wushaoqiang.github.io/posts/database/tidb/tidb-server/</link>
+      <pubDate>Thu, 03 Oct 2019 15:53:09 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/tidb/tidb-server/</guid>
+      <description>简单介绍 最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图
+因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧
+怎么入手 TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边Protocol Layer
+我们可以简单的从tidb-server/main.go来入手，来简单了解一下基本组成
+为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍
+func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是输出version if *version { fmt.Println(printer.GetTiDBInfo()) os.Exit(0) } // (可忽略)这里是注册store，会分别注册&amp;quot;tikv&amp;quot;和&amp;quot;mock-tikv&amp;quot; registerStores() // (可忽略)这个是和prometheus相关的 registerMetrics() // (可忽略) 配置，我们暂时可以考虑默认 configWarning := loadConfig() overrideConfig() if err := cfg.Valid(); err != nil { fmt.Fprintln(os.Stderr, &amp;quot;invalid config&amp;quot;, err) os.Exit(1) } if *configCheck { fmt.Println(&amp;quot;config check successful&amp;quot;) os.Exit(0) } // (可忽略) 都只是一些配置 setGlobalVars() setCPUAffinity() setupLog() // If configStrict had been specified, and there had been an error, the server would already // have exited by now.</description>
+    </item>
     
     <item>
       <title>TCP vs UDP</title>

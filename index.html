@@ -68,6 +68,191 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election" >Leader Election</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月6日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在这里总结一些Leader Election的Case，通过例子来理解Raft的Leader Election或许会更有印象
+下面用到的term是指任期值，index是最后一个committed log的位置
+大家的Term和Index都相同 当大家的term和index都相同的时候，某一个Follower长时间未收到Leader的心跳发生timeout，就会变成candidate，并且term = currentTerm + 1， 这个时候这个candidate就会号召大家为它投票
+投票是按照两个依据来选择是否投票的
+ 投票请求(RPC)带来的term一定要大于currentTerm，这样节点才知道这是新的一轮投票了
+ 满足上面条件后，还需要检测请求带来的lastLogIndex以及lastLogTerm以确保candidate拥有比自己新或者和自己一样的状态
+  主要满足这两个条件，拥有投票权的节点就会给这个candidate投票
+投票是需要majority节点同意的
+在我们假设term和index都相同的前提下，发起选举，那么就会有谁先发起谁就非常大概率当Leader
+Term相同，Index不一样 我们假设有两个candidate在竞选Leader，candidate1.index &lt; candidate2.index
+也就是说candidate2拥有更加新的状态，我们来模拟一下竞选过程
+candidate1和candidate2都会向所有节点发起投票请求(RPC)，candidate自己是给自己投票的
+那么其它节点如何判断呢？
+其实还是上面的那两个依据，不记得请往上面翻一翻
+term相同，那么它们都会比currentTerm大(通过)
+第二个是比较index，由于Raft会保证committed会在majority上，因此candidate1肯定会被majority拒绝(可能会得到一小部分未更新的节点的投票)
+所以candidate2会得到majority的投票，因此成为Leader
+结论就是term值一样的candidate，index新的会赢
+Term不一样，Index相同 这种情况是term大的会赢
+假设candidate1.term &lt; candidate2.term
+这一部分我的理解可能不一定正确
+因为对于所有server来说，接收到请求里的term要比自己的term大，都会变为Follower，因此我觉得candidate1 在接收到 candidate2的term时，会转换为Follower，这个时候candidate1就像是被迫离场一样
+Term不一样，Index不一样 这里假设Leader.term &lt; Candidate.term 但是 Leader.index &gt; candidate.index
+这个时候Leader收到了比自己term大的term，因此转换为Follower
+但是因为candidate的index不是最新的，因此它不能够得到majority的投票，因此它会再次超时并且sleep一段时间
+这个时候之前的Leader term已经是追上了，因此参加选举，这个时候满足选举投票的两个条件，因此再次成为Leader，并且宣布自己是Leader，所以之前的candidate看到有人宣布了Leader，就会放弃选举，变成Follower
+不严谨 以上只是读者自己在看Raft Paper以及一些参考的理解，不一定是严谨的，有疑惑的地方还是参照更加官方的资料……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips" >Tips</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                大概情况 今天看了Raft Paper，这是第一遍，我觉得自己还是有很多地方没有理解到位的(尽管我看了将近五个小时)
+所以先是记录一下tips，后面重新回来看的时候再追加一下细节(或者还可以结合一下源码)，在raft官网上有相应的源码实现
+tips 整体来理解Raft 当Leader接收到来自client的非读请求时，它会先记录在自己的log里面，然后再并发传递给Followers Server，一旦传递给了majority，那么每一个Server都会将log里面的东西放到state machine去执行，结果也将返回给client
+先理解一些专有名词  term是描述一个版本号的，越大代表版本越新
+ log entry就是我们要保证一致性的信息，整个算法核心就是如何让每一个节点上的log entry一致
+ index是索引，节点上面存的log entry都是具有唯一标识的，这个标识就是由term和index来组成，这里可以简单理解为log entry所在的位置
+ AppendEntries RPC代表Leader向Followers发送log entry(也可能是心跳)的RPC调用
+  一些规则 对所有server来说
+ 自身的commitIndex &gt; lastApplied，那么就会lastApplied++，然后加入到state machine里
+ 只要接收到的term比自己的currentTerm大，那么就更新currentTerm，并且转换为Follower
+  对于Follower来说
+ 要处理来自Leader和Candidate的请求
+ 如果因为没有收到AppendEntries而发生timeout或者给某一个candidate投票了，都会转换为candidate
+  对于Candidate来说：
+ 在选举期间：
+ currentTerm++
+ 给自己投票
+ 重置election timer
+ 给其它server发生RequestVote请求
+  如果接收到了来自majority的投票，成为Leader
+ 如果收到了来自新Leader的AppendEntries，成为Follower
+ 如果过了election timeout的时间，开始新一轮竞选
+  对于Leader来说：
+ 如果是赢得竞选，则发生空的AppendEntries(心跳)来告知其它server，并且持续发送心跳来维护自己Leader地位……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/tips/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument" >Safety Argument</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                起因 笔者在看Raft Paper的时候，遇到一个比较有意思的证明过程，不过这个证明过程对上下文有着紧密关系，因此在这里想用简单点的逻辑进行描述
+这个证明有意思的在于，它通过引出矛盾来证明这个结论是正确的，也算是一种反证法吧
+Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥有最新的committed
+假设一下 这里假设有两个Leader，分别为Old Leader，New Leader。
+我们假设New Leader在被选举出来的时候并没有最新的committed，什么意思呢，也就是说Old Leader在Crash之前已经commit了一个log，但是这个log并没有在New Leader里
+我们知道，要commit一个log需要majority的followers同意。然后，选举一个新的Leader也是需要majority的candidates同意的。这就给出一个结论
+因为两者都需要超过半数的节点同意，因此它们肯定有交集的节点
+ 注：这里用节点是因为不同的场景会有不同的角色，所以统一称为节点  引出矛盾 交集的节点做了两件事情(按顺序)
+ 接收到了Old Leader宕机之前的log，并且是committed
+ 给New Leader投票
+  我们知道，选举的时候是有限制的，只有拥有最新committed log的节点才有被选举权，所以给New Leader投票说明New Leader在还没成为Leader之前是有这个committed log的(和前面假设冲突)
+或者说，New Leader拥有比这个投票者所知道的更加新的committed log，换句话说，New Leader在之前就已经有更新版本的committed log，但是按照原则，创建这个最新版本log的Leader应该是拥有Old Leader的全部committed log的，所以按道理New Leader也应该要有这个log(所以还是和假设冲突)
+结论 所以说，New Leader保证是会拥有Old Leader的所有committed log……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer" >TiDB Server源码分析 SQL Core Layer</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                还是架构 还是先放一张架构图，当思路不清晰的时候，看一看架构图能够帮我们整理思路
+回想一下 上一篇blog是介绍了Protocol Layer，这一层整体思路还是比较简单，只是兼容MySQL协议会产生很多相应的函数方法
+应该还记得，在上一篇blog，我有提到Driver这个词，并且看到了它的接口只有一个函数OpenCtx(...)...，从结构图上来将，我们需要将SQL传入到Session Context里面，而OpenCtx就是帮我们从Protocol Layer打开到SQL Core Layer的通道，然后再通过这个通道将数据传入进去。打开后会返回QueryCtx接口，这个接口是我们执行SQL的唯一入口，也就是Protocol Layer到SQL Core Layer的唯一入口
+什么时候打开通道 通过编辑器可以发现，server/driver.go里的IDriver接口只在一个函数上有调用
+func (cc *clientConn) openSessionAndDoAuth(authData []byte) error { var tlsStatePtr *tls.ConnectionState // 如果是SSL连接，就取出这个连接的状态 if cc.tlsConn != nil { tlsState := cc.tlsConn.ConnectionState() tlsStatePtr = &amp;tlsState } var err error // 打开通道，这里将返回的QueryCtx给到clientConn，它以后就用这个Ctx和SQL Core Layer进行交互 cc.ctx, err = cc.server.driver.OpenCtx(uint64(cc.connectionID), cc.capability, cc.collation, cc.dbname, tlsStatePtr) if err != nil { return err } // 忽略验证过程 return nil }  这个函数也只有两个地方会调用到……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer" >TiDB Server源码分析 Protocol Layer</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单介绍 最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图
+因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧
+怎么入手 TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边Protocol Layer
+我们可以简单的从tidb-server/main.go来入手，来简单了解一下基本组成
+为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍
+func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是输出version if *version { fmt.Println(printer.GetTiDBInfo()) os.Exit(0) } // (可忽略)这里是注册store，会分别注册&quot;tikv&quot;和&quot;mock-tikv&quot; registerStores() // (可忽略)这个是和prometheus相关的 registerMetrics() // (可忽略) 配置，我们暂时可以考虑默认 configWarning := loadConfig() overrideConfig() if err := cfg.Valid(); err != nil { fmt.Fprintln(os.Stderr, &quot;invalid config&quot;, err) os.Exit(1) } if *configCheck { fmt.Println(&quot;config check successful&quot;) os.Exit(0) } // (可忽略) 都只是一些配置 setGlobalVars() setCPUAffinity() setupLog() // If configStrict had been specified, and there had been an error, the server would already // have exited by now.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP" >TCP vs UDP</a>
                                 </h1>
                             </header>
@@ -298,211 +483,6 @@ How?
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval" >Storage and Retrieval</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                数据库简单理解，就为了两件事情：存储和读取
-So, Let&rsquo;s keep that simple
-Index 索引是与我们主要的数据分开的，我们可以创建索引，删除索引，这都不会影响我们的主要数据
-索引最初的目的是为了加快查询操作。但由于有除了主要数据之外的索引数据，因此我们在写入数据库的时候 就要维护多份数据(既要写入我们的主要数据，还要写入相应的索引数据，或者维护索引)，所以一般情况下加索引会 对写的性能有所影响
-所以，我们需要根据应用场景来决定是否加索引，这也是开发者应该知道的一些概念
-下面简单介绍一下索引种类以及原理
-Hash Indexes 其实和我们平时用编程语言里的哈希表有点类似
-在Go里，是一个叫做map的数据结构
-Go map 如何读写 接收到一个Key 对key进行Hash 通过Hash找到是哪一个bucket 取Hash的前8Bit做一个快速比较 找到bucket的内存(可以进行读写了)  我们可以简单将这个索引比作成一个offset，每一个offset都是某一个数据相对某一个内存的偏移量，这样我们就可以直接读取到该数据，而不用从头开始查找了。这是一个append-only的形式，在这种形式下，我们只需要关注最近的那个offset即可，在数据越来越大的时候，我们可以通过合并，将失效的数据删除
-Append-Only咋一眼看去很浪费空间，但它也有独特的优点值得关注：
- 相对于随机读写(也就是in-place)，它具有更好的性能
- 更好处理恢复
-  但是随着时间推移，这个索引变得越来越大，以至于要存入硬盘中，这样，索引相应的性能就会受到很大的影响
-并且Hash Index对取一批数据的操作是很不友好的
-SSTables and LSM-Trees SSTables = Sorted String Tables
-SSTables相对上面说的Hash有很大的优势，不过我们先看一下它需要满足的条件
-在上面我们可以看到k-v是直接加进来的，对SSTables，我们规定这些
- k-v是按照key排序的
- 每一个key在merge之后的segment都只出现一次
-  思考一下，每一个segment都是内部有序的，当我们要合并segment的时候，像什么算法？
-我们要清楚知道，每一个segment是有顺序产生的，也就是说相同的key在不同的segment里面也是可以区分先后的
-在这种有序的情况下，我们还可以解决上面Hash Index的一个内存爆满问题
-因为我是有序的，所以我不一定要知道某一个具体key的内存地址，我可以知道在它附近的key，并且根据排序来找到我想要的key，这样我们就可以极大减少存储在内存里的索引
-由于是有序的，我们可以针对一些连续的扫描做很大的优化
-说了这么多，都只是介绍，那具体怎么实现呢？
-回想一下它需要的第一个条件&ndash;有序
-我们都知道，现在有平衡树可以帮我们做到这一点
- RB-Tree
- AVL-Tree
-  然后归并算法可以帮我们解决segment合并的问题……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language" >Data Model and Query Language</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Different Between SQL and NoSQL 我们到目前为止，市面上主流的数据库还是环绕着关系型数据库和非关系型数据库，当然也还有别的，但是我们主要对这两个进行对比
- 关系型数据库，发展到今天已经是数据库的一号大哥了，它相对NoSQL的优点有：   Many-to-One
- Many-to-Many
- 利用外键优势
- 冗余少
-  这里所说的Many-to-*， 其实就是一个外键的引用，在写入数据库的时候，只需要写入外键的唯一标识(一般是某某ID)就能够在读取的时候，通过Join来得到完整的数据。这样做有一点好处就是，当某一个被多出指向的值需要改变的时候，只需要在哪个table里面改，而外面用的ID还是不变的。这在NoSQL里面是需要遍历update一次的，当数据量非常大的时候，这个操作很可能就会有奇怪的问题出现。
- 非关系型数据库，是一个比较年轻，又很火的数据库，它主要是有以下优点：   读取快
- 弹性的数据结构
- 数据之间不会互相影响
- 易横向扩展
-  非关系型数据库会更加适用于一些读多写少的场景，它读取快是因为它不用像关系型数据库这样去跨表查询，所有数据都在一个document上。但是这也带来一些缺点：重复数据反复出现造成冗余；批量修改的时候需要update多个document；如果只是需要document的某一个字段，可能也要load整个document(现在已经有数据库支持projection了)
-并且，我们在使用的时候可以发现，关系型数据库对数据结构是严格把控进入的(strict write)，而非关系型数据库则是读取解析到程序的时候严格把控的(strict read)
-还是那句话，根据应用场景进行选择，到底哪个更加贴合实际
-引用书里的一句话
- It&rsquo;s not possible to say in general which data model leads to simpler application code; it depends on the kinds of relationships that exist between data items
- 现在的又出现了NewSQL，是将很多SQL和NoSQL的优点集合在一起，既有SQL的查询特性，又有NoSQL的横向扩展特性……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System" >Foundations of Data System</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                我们要知道，不同的数据库系统拥有着不同的特性，因此在不同的应用场景下会根据应用所需的特性来选择数据库系统，这也是开发者对数据库必须要了解的地方
-这一blog主要是覆盖三个方面
- Reliability
- Scalability
- Maintainability
-  Reliability 一般来说，我们希望我们的软件
- 正确执行我们所期望的
- 就算user操作失误，也能一定程度上容忍
- 性能在合适的压力下是好的
- 系统可以防止外界未授权侵入
-  下面我想先解释一下两个经常搞混的名词
- Fault，这个词是用来描述整个系统中的某一个部件(模块)出现了问题。当然，如果系统就只是一个模块，那么也就等价于Failure了，但是当今众多系统中，基本都由多个模块组成。
- Failure，这个词是用来描述整个系统出了问题，说明系统不可用了
-  所以我们要打造的是一个Fault-tolerance的系统，以防止单个模块出问题影响整个系统
-用具体的例子说模块出问题就是，将某一个进程杀掉，看看整个系统有没有因此而不工作了(设想中是要工作的)
-Hardware Fault 硬件出错，其中包括
- 内存满了
- 断电
- 磁盘损坏
-  &hellip;
-只要是电子原件，都会有坏的可能
-所以，如果软件对可用性要求非常苛刻，那么将服务部署在多台机器上是必不可少的，这也是常说的避免单点故障。而且，多台机器部署，在对服务进行升级的时候，可以控制在对外无感知的情况下升级。也就是帮天上的飞机换轮胎
-但是，硬件错误，一般只会是单个出错，同时出错的概率是非常低的(自然灾害除外)，所以一般来说，系统应该能够容忍少部分机器进入宕机的状态
-Software Fault 是人写的软件，都会有Bug。还记得一句话
- 你以为Hello World就不会有Bug了吗，等什么时候链接器，编译器出现Bug了，就连Hello World这样的程序也跑不过
- 所以在设计一个系统的时候，绝对不能假设某一个模块是没问题的，哪怕它的代码再少
-那我们应该怎么做可以最大程度减少Failure的可能性呢：
- 设计这个系统的时候需要有容忍性的设计
- 测试，必不可少的
- 隔离，也就是一个模块的Fault不应该引起其它模块的Fault
- 容忍宕机重启操作
- 有观测整个系统的Monitor(可能是一些Web，或者命令行)
-  &hellip;等等……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting" >Greeting</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/"></a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Formal greeting Good &hellip;
-And your name is &hellip;
-Very nice to meet you
-My name&rsquo;s &hellip;
-Welcome to &hellip; (Welcome is not formal)
-How are you today (How are you is nature)
-Very well, thank you.
-I am fine, thank for asking
-Neutral Informal Introduce others Let me introduce my colleague, &hellip; (formal) May I introduce my colleague, &hellip; (formal)
-This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/greeting/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown" >Introduce Your Hometown</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/English">English</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 tips How to describe your hometown, follow these points will help you get there
- Introducing your hometown briefly
- Adding background and details about your hometown
- Talking about what you like or dislike about it
- Talking about how it&rsquo;s changed over time
-  Briefly I like in a __ (city, town, village...)  Background and details Like or dislike history and changes ____ has changed a lot in the last 20 years ____ is almost unrecognisible compared to 20 years ago it hasn't changed much in the last 20 years  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/hometown/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -659,6 +639,26 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
     </li>
     
@@ -676,26 +676,6 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader">Replication One Leader</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval">Storage and Retrieval</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language">Data Model and Query Language</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System">Foundations of Data System</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting">Greeting</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown">Introduce Your Hometown</a>
     </li>
     
 </ul>
@@ -760,19 +740,7 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/protocal/">protocal(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/questions/">questions(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学(1)</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(17)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(22)</a>
     </li>
     
     <li>
@@ -780,7 +748,7 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(10)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
     </li>
     
     <li>
@@ -894,6 +862,8 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     
     <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Raft/">Raft</a>
+    
     <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
     
     <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
@@ -909,6 +879,8 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
     
     <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TiDB/">TiDB</a>
     
     <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
     
@@ -938,8 +910,6 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     
     <a href="https://wushaoqiang.github.io/tags/new/">new</a>
     
-    <a href="https://wushaoqiang.github.io/tags/protocal/">protocal</a>
-    
     <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
@@ -967,6 +937,8 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
     

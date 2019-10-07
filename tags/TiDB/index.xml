@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TiDB on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/TiDB/</link>
+    <description>Recent content in TiDB on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 03 Oct 2019 19:54:52 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/TiDB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>TiDB Server源码分析 SQL Core Layer</title>
+      <link>https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/</link>
+      <pubDate>Thu, 03 Oct 2019 19:54:52 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/</guid>
+      <description>还是架构 还是先放一张架构图，当思路不清晰的时候，看一看架构图能够帮我们整理思路
+回想一下 上一篇blog是介绍了Protocol Layer，这一层整体思路还是比较简单，只是兼容MySQL协议会产生很多相应的函数方法
+应该还记得，在上一篇blog，我有提到Driver这个词，并且看到了它的接口只有一个函数OpenCtx(...)...，从结构图上来将，我们需要将SQL传入到Session Context里面，而OpenCtx就是帮我们从Protocol Layer打开到SQL Core Layer的通道，然后再通过这个通道将数据传入进去。打开后会返回QueryCtx接口，这个接口是我们执行SQL的唯一入口，也就是Protocol Layer到SQL Core Layer的唯一入口
+什么时候打开通道 通过编辑器可以发现，server/driver.go里的IDriver接口只在一个函数上有调用
+func (cc *clientConn) openSessionAndDoAuth(authData []byte) error { var tlsStatePtr *tls.ConnectionState // 如果是SSL连接，就取出这个连接的状态 if cc.tlsConn != nil { tlsState := cc.tlsConn.ConnectionState() tlsStatePtr = &amp;amp;tlsState } var err error // 打开通道，这里将返回的QueryCtx给到clientConn，它以后就用这个Ctx和SQL Core Layer进行交互 cc.ctx, err = cc.server.driver.OpenCtx(uint64(cc.connectionID), cc.capability, cc.collation, cc.dbname, tlsStatePtr) if err != nil { return err } // 忽略验证过程 return nil }  这个函数也只有两个地方会调用到</description>
+    </item>
+    
+    <item>
+      <title>TiDB Server源码分析 Protocol Layer</title>
+      <link>https://wushaoqiang.github.io/posts/database/tidb/tidb-server/</link>
+      <pubDate>Thu, 03 Oct 2019 15:53:09 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/tidb/tidb-server/</guid>
+      <description>简单介绍 最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图
+因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧
+怎么入手 TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边Protocol Layer
+我们可以简单的从tidb-server/main.go来入手，来简单了解一下基本组成
+为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍
+func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是输出version if *version { fmt.Println(printer.GetTiDBInfo()) os.Exit(0) } // (可忽略)这里是注册store，会分别注册&amp;quot;tikv&amp;quot;和&amp;quot;mock-tikv&amp;quot; registerStores() // (可忽略)这个是和prometheus相关的 registerMetrics() // (可忽略) 配置，我们暂时可以考虑默认 configWarning := loadConfig() overrideConfig() if err := cfg.Valid(); err != nil { fmt.Fprintln(os.Stderr, &amp;quot;invalid config&amp;quot;, err) os.Exit(1) } if *configCheck { fmt.Println(&amp;quot;config check successful&amp;quot;) os.Exit(0) } // (可忽略) 都只是一些配置 setGlobalVars() setCPUAffinity() setupLog() // If configStrict had been specified, and there had been an error, the server would already // have exited by now.</description>
+    </item>
+    
+  </channel>
+</rss>
