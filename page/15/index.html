@@ -68,6 +68,149 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                总结一下最近在配置MongoDB时遇到的坑吧
+首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
+嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
+直接下载tar包 解压后,要将/bin添加到环境变量
+然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
+这里是我初步的一个配置文件
+# mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/" title="Mongodb Role" >Mongodb Role</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                参照 User Management Methods
+build-in role
+这篇文章主要介绍一下关于role的概念,希望读者还是以官网为主,本文为辅
+简介 毫无以为,设置role是为了方便管理权限问题,保证数据库的一个安全使用(不然谁都可以删库跑路那还怎么搞)
+所以这也算是一个很必要知道的东西
+本文只讨论build-in role,不讨论自己设计的role
+笔者会一一尝试每一个role
+首先 MongoDB对普通的数据库只能添加database user and database administration的role
+对admin数据库,则可以添加任何其它类型的role
+Database User Role read 简单来说就是只提供对某个数据库读的权利(细节可以上官网上看具体描述)
+例如db.collections.find()
+我们如何添加呢,这里简单讲一下,后面的都一样
+use admin //进入admin database db.createUser({user:&quot;%s&quot;,pwd:&quot;%s&quot;,roles:[{role:&quot;read&quot;,db:&quot;%s&quot;}]})  其中%s是大家自己选择的意思
+readWrite 同上多了写的权限
+Database Administration Roles dbAdmin 提供权限运行管理类的任务
+例如schema-related tasks,indexing and gathering statistics
+但是这个role不能够管理user and role management
+userAdmin 提供能够在当前database修改roles和users的权利
+注意:这样的一个权限代表着它是这个database的superuser,如果在admin database上设置了这种权限意味着间接提供了超级权限(可以看到集群的数据库了)
+所以用这个权限的时候要小心点
+dbOwner 这个就集成了readWrite,dbAdmin and userAdmin
+Cluster Administration Roles 由于笔者对集群化了解还比较浅薄,这里就直接做一些简单翻译
+这些administration就不像之前那样是指定某一个数据库了,这是管理整个系统的role
+clusterAdmin 这是cluster的最高权限,结合了clusterManager,clusterMonitor,hostManager,additionally dropDatabase action
+这是一个可以删库的权限,可见其权限很高了吧……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/" title="Golang Module" >Golang Module</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
+不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
+不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
+因为go module对版本有着严格的控制,因此如果我们按照同样的方法去github clone一份的话,就没有这么方便了
+爽的地方 可能这个我认为好的地方,也有人认为不好,就是它把所有的package存放在了$GOPATH/pkg/mod里面了,在以前,我基本都是直接go get到src上的,所以整个src的文件夹都是库
+这样一来,可以让src整洁很多吧
+当然还不止一些,如果当上面关系下载包的问题被解决了,也就意味着,下载别人的代码,即使本地不存在它的依赖,也可以一键运行了?
+如何解决下载问题 goproxy &ndash;最简单的方法
+通过他人做好的一个代理,之后对包的请求都会经过这个代理,但是无法下载私密仓库(也就是没有认证功能)
+athens &ndash;复杂点但全面的方法
+这个是微软大力支持的一个开源项目,规模和功能什么的都比上面的多,但是现在还没有v1版本
+对我来说,我更多的还是在github上下载公共仓库,所以,先用第一个吧
+好,万一哪天代理不好用了,那还有一种比较难受的方法
+在go.mod里面用replace替换下载的目的地
+一些简单介绍 要启用module模式,需要
+export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是方便了,但我感觉有也不错)
+如果打开了module模式,那么程序在寻找包的依赖就不再是在GOPATH/src上找了,而是在GOPATH/pkg/mod
+如果想要查看一个程序的所有module依赖
+go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
+go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单收集一些基本操作,作为一个笔记查找
+参考官方文章
+package main import ( &quot;context&quot; &quot;fmt&quot; &quot;log&quot; &quot;go.mongodb.org/mongo-driver/bson&quot; &quot;go.mongodb.org/mongo-driver/mongo&quot; &quot;go.mongodb.org/mongo-driver/mongo/options&quot; ) // You will be using this Trainer type later in the program type Trainer struct { Name string Age int City string } func main() { // Rest of the code will go here // Set client options clientOptions := options.Client().ApplyURI(&quot;mongodb://localhost:27017&quot;) // Connect to MongoDB client, err := mongo.Connect(context.TODO(), clientOptions) if err != nil { log.Fatal(err) } // Check the connection err = client.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/" title="Mongodb Data Modeling Introduction" >Mongodb Data Modeling Introduction</a>
                                 </h1>
                             </header>
@@ -241,102 +384,6 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/" title="Leetcode 400" >Leetcode 400</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/" title="Leetcode 389" >Leetcode 389</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given two strings s and t which consist of only lowercase letters. String t is generated by random shuffling string s and then add one more letter at a random position. Find the letter that was added in t. Example: Input: s = &quot;abcd&quot; t = &quot;abcde&quot; Output: e Explanation: 'e' is the letter that was added.  我的解答 这道题我用了三种方法
- 全部统计,因为只会有一个字符是奇数,所以那个就是新增
- 用t-byte的总和减去s-byte的总和
- 异或,最后剩下那个增加的
-  其中第三种方法最快……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/" title="Leetcode 387" >Leetcode 387</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1. Examples: s = &quot;leetcode&quot; return 0. s = &quot;loveleetcode&quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-'a']++ } for idx, b := range s { if m[b-'a'] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/" title="Leetcode 383" >Leetcode 383</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note. Note: You may assume that both strings contain only lowercase letters. canConstruct(&quot;a&quot;, &quot;b&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;ab&quot;) -&gt; false canConstruct(&quot;aa&quot;, &quot;aab&quot;) -&gt; true  我的解答 题目的意思是,右边的字符串能否凑成左边的字符串(每个字符只能用一次)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-383/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -469,6 +516,10 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
         <a href="https://wushaoqiang.github.io/page/30/">30</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/31/">31</a>
+    </li>
+    
 
     
     <li class="next">
@@ -497,6 +548,22 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -518,22 +585,6 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -598,7 +649,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -735,6 +786,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     

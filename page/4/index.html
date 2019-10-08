@@ -68,6 +68,113 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account" >Linux Account</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to login my Ubuntu as root. But, I don&rsquo;t even remember I have set a password for root.
+Fortunately, I learned some skills about how to manage accounts in linux, so I figure it out very quickly, I hope this experience can be helpful for you if you have the same(similar) problems
+UID and GID When you login in a linux system, you must have a user and its password.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-account/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command" >Linux How to Identify Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to talk about a small topic &ndash; how to identify a command
+Specifically, If you want to know where are these commands from, there are three possibilities:
+ builtin
+ alias
+ file(external)
+  Let&rsquo;s try it type cd // Of course, cd is a builtin command &gt; cd is a shell builtin type ll &gt; ll is aliased to `ls -alhF' type mongod &gt; mongod is /usr/local/mongodb/bin/mongod  Basically you don&rsquo;t need to add any flags……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File" >Linux Windows File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                In linux, [Enter] =&gt; LF
+But in windows, [Enter] =&gt; CRLF
+So, if we cp a shell script file from windows to linux, we may not be able to run it because of the line break character is different
+we need a tool to transform between windows(DOS) and linux(UNIX)
+dos2unix [-kn] file [newfile] unix2dox [-kn] file [newfile] unix2mac [-kn] file [newfile]   k: keep modified date
+ n: create new file……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic" >Linux Vim Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, we talked about linux compression
+This time, I am gonna talk about basic usage about vim
+vim is a highly recommended editor in UNIX-Like system, so it is necessary to learn that
+To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScode) or IDE to develop software, I use vim only when I just want to edit a config file or just couple lines of code which is not worth opening a editor(or IDE)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression" >Linux Compression</a>
                                 </h1>
                             </header>
@@ -228,145 +335,6 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission" >Linux Permission</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Today, I am gonna talk about linux permission which is very basic for linux user.
-Basically, we have three different role in linux
-Owner Group Other  It is easy to understand what they mean.
-ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
--rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps" >Linux Ps</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 ps命令有几种标准，这里只用UNIX版本的
-Background 首先了解一些概念
- PID 进程ID
- PPID 父进程ID
- PGID 进程所在GroupID
- SID 进程所在会话(Session)ID
-  一般来说，SID就是我们的shell
-一个SID管理多个PGID
-一个PGID管理很多PID
-既然是管理，那就会有leader角色，那么如何知道谁是leader
-PID == PGID的就是group leader
-PID == SID的就是session leader
-Flag Selection
--A -e 全部进程 -a 全部进程处理session leader -C 命令名字 -g group -u user -p pid -t tty  Format
--o pid,ppid,tty,time 选择输出某些字段 -F 全部字段(带字段名字 -f不带字段名字) --forest 树状形式输出  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property" >CSS Basic Property</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最基本的一些属性
-text-align 文本对齐方式
- justify 对齐文本容器的左右两边
- center 每一行左右间距一样
- right
- left
-  width 指定容器大小，可以接受不同的单位
-常见单位：
- px 像素
- % 百分比
- em 根据父元素的倍数
- rem 根据根元素的倍数
- vh view-high
- vw view-width
- max/min
-  刚开始学习前端会不知道这个百分比是以什么为基准的
-宽度会相对于父元素的宽度 高度会相对与父元素的高度 字体大小会相对父元素字体大小 边界是相对自身的  一些标签  strong 加粗
- u 下划线
- em 斜体
- s 横线(画在字体中间)
- hr 水平线(无close tag)
-  box-shadow  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic" >CSS Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                主要记录一下CSS的基本语法
-以标签来选择 以标签来选择可能并不是很好的选择，一旦项目规模大，这种是不好管理的
-后代选择器 div strong //这个是指凡是在div下面的strong标签，都会起作用 要注意 后代并不是单单指一代 子代选择器 div&gt;strong //这个和后代选择器很大的不同就是这个只会选择子代 相邻兄弟选择器 div&gt; p+h1 //二者有共同的父元素  id、class选择器 id
-#pro{ }  class
-.important{ }  也可以组合一些，下面给一些例子
-.important.warning{ }  这个属性要在class=&quot;important warning&quot;同时拥有这两个属性才可以有这里面的样式
-或者
-.important p{ }  属性选择器 选择属性
-a[href]{ color: red; }  只改变有href属性的a标签……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -499,6 +467,10 @@ a[href]{ color: red; }  只改变有href属性的a标签……
         <a href="https://wushaoqiang.github.io/page/30/">30</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/31/">31</a>
+    </li>
+    
 
     
     <li class="next">
@@ -527,6 +499,22 @@ a[href]{ color: red; }  只改变有href属性的a标签……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -548,22 +536,6 @@ a[href]{ color: red; }  只改变有href属性的a标签……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -628,7 +600,7 @@ a[href]{ color: red; }  只改变有href属性的a标签……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -765,6 +737,8 @@ a[href]{ color: red; }  只改变有href属性的a标签……
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     

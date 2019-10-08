@@ -143,7 +143,7 @@
 
 <h5 id="column-and-column-family">Column and Column Family</h5>
 
-<p>一般来说Column Family包含多个Column，一个Column可以由<code>family:qualifier</code>来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩。</p>
+<p>一般来说Column Family包含多个Column，一个Column可以由<code>family:qualifier</code>来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩(压缩在下面优化的时候说到)。</p>
 
 <ul>
 <li><p>Column Family是提供用户管理数据权限的最小单位。</p></li>
@@ -196,7 +196,7 @@
 <p>那么client server的主要作用就是</p>
 
 <ul>
-<li><p>处理来自外部的请求，并且根据请求直接和tablet server进行交互</p></li>
+<li><p>处理来自外部的请求，并且根据请求直接和tablet server进行交互(如果不知道tablet的位置，则需要和master交互)</p></li>
 
 <li><p>将处理结果返回给外部请求发起者</p></li>
 </ul>
@@ -366,6 +366,22 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -387,22 +403,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -467,7 +467,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -604,6 +604,8 @@
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     

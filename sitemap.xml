@@ -3,6 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/</loc>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/week-isolation/</loc>
+    <lastmod>2019-10-07T22:06:20+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/</loc>
+    <lastmod>2019-10-07T20:58:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/</loc>
+    <lastmod>2019-10-07T19:03:35+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/</loc>
     <lastmod>2019-10-07T14:09:32+08:00</lastmod>
   </url>
@@ -1686,7 +1706,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1902,7 +1922,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Paper/</loc>
-    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1920,7 +1940,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1963,6 +1983,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/tags/Sort/</loc>
     <lastmod>2019-04-15T20:03:27+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/Spanner/</loc>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2086,13 +2112,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-10-07T14:09:32+08:00</lastmod>
+    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   

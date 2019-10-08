@@ -68,6 +68,113 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/" title="Golang--Leetcode" >Golang--Leetcode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                此文章为做题时发现的不足
+ Go语言中的结构体直接赋值是==值传递==，如果要用引用传递，需要这样struct1 := &amp;struct2，也就是要使用取地址符号。但是如果本来struct2就是一个指针，那么就可以直接赋值了。 go func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode { Head := ListNode{} curr := &amp;Head  &mdash;-  给定一个字符串，找出其中不含有重复字符的最长子串的长度方法 - 穷举法：
+func lengthOfLongestSubstring(s string) int { var max = 0 for i := 0; i &lt; len(s); i++ { m := make(map[string]bool) for j := i; j &lt; len(s); j++ { if _, ok := m[s[j:j+1]]; !ok { m[s[j:j+1]] = true if j == len(s)-1 { if max &lt; j-i+1 { max = j - i + 1 } } } else { if max &lt; j-i { max = j - i } break } } } return max }   另一个方法： ```go func lengthOfLongestSubstring(s string) int { var max = 0 i := 0 m := make(map[string]int) for j := 0; j &lt; len(s); j++ {  	if _, ok := m[s[j:j+1]]; ok {……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-leetcode/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/" title="Golang标准库--Unicode" >Golang标准库--Unicode</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                unicode package utf8 utf8.go 这里就不详细分析源码了，只说函数的作用
+&mdash; FullRune(p []byte) bool  FullRune报告p中的字节是否以一个rune的完整UTF-8编码开始。
+ 无效的编码被认为是完整的rune，因为它将转换为宽度为1的错误符文rune。
+&mdash; FullRuneInString(s string) bool 和FullRune一样，只是传入了字符串
+&mdash; DecodeRune(p []byte) (r rune, size int) 这个函数将切片p中第一个rune返回，并且返回这个rune的大小。
+如果p是空的，那么会返回RuneError,0
+如果切片中的编码是无效的，那么会返回RuneError,1,对应上一个函数，当编码无效时依然返回true
+&mdash; DecodeRuneInString(s string) (r rune, size int) 同上，只是参数变成了字符串
+&mdash; func DecodeLastRune(p []byte) (r rune, size int) 只是从后面开始了，功能一样。
+&mdash; DecodeLastRuneInString(s string) (r rune, size int) 如上，参数换了字符串
+&mdash; RuneLen(r rune) int 返回一个rune的长度，也就是其大小
+&mdash; EncodeRune(p []byte, r rune) int 这个就是将rune写入到byte切片上
+&mdash; RuneCount(p []byte) int 返回整个切片里面rune的个数……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-unicode/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-string/" title="Golang标准库--String" >Golang标准库--String</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 strings builder.go Builder 结构体 noescape(p unsafe.Pointer) unsafe.Pointer &amp; copyCheck() (b *Builder) String() string &amp; (b *Builder) Len() int &amp; (b *Builder) Reset() (b *Builder) Grow(n int) 关于Write的方法 reader.go Reader 结构体 (r *Reader) Len() int &amp; (r *Reader) Size() int64 关于读的方法 (r *Reader) UnreadRune() error (r *Reader) Seek(offset int64, whence int) (int64, error) strings.go  strings builder.go Builder 相当于bytes里面的buffer，并且方法也差不多。但是buffer更加全面
+&mdash; 结构体 // A Builder is used to efficiently build a string using Write methods.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-string/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-bytes/" title="Golang标准库--Bytes" >Golang标准库--Bytes</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                目录 bytes buffer.go Buffer 结构体 const of readOp (b *Buffer) Bytes() []byte (b *Buffer) String() string (b *Buffer) empty() bool (b *Buffer) Len() int (b *Buffer) Cap() int (b *Buffer) Truncate(n int) (b *Buffer) Reset() (b *Buffer) tryGrowByReslice(n int) (int, bool) (b *Buffer) grow(n int) int (b *Buffer) Grow(n int) (b *Buffer) Write(p []byte) (n int, err error) (b *Buffer) WriteString(s string) (n int, err error) makeSlice(n int) []byte (b *Buffer) WriteTo(w io.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-bytes/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golangstd-bufio/" title="Golang标准库--Bufio" >Golang标准库--Bufio</a>
                                 </h1>
                             </header>
@@ -249,78 +356,6 @@ config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/learn-hugo/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/git/learn-git/" title="Git用法总结" >Git用法总结</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Git">Git</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这篇博客是笔者总结学习git的过程，不是一篇专业性很强的文章，主要是笔记
-主要参考廖雪峰的博客学习
-笔者之前对Git有错误的理解(因为之前没学过，也只是听过)，总以为Github就是Git，其实Github是Git出来后才被创建的，为开源项目免费提供Git存储。
-无Github,纯属本地的Git &mdash; 那么什么是Git呢？ Git是目前世界上最先进的分布式版本控制系统
-分布式：Git和其它集中式版本控制系统最大的区别，Git也可以有一个24小时开机的服务器来充当中央服务器，但这个服务器仅仅是为了让大家方便交换各自修改的。
-版本控制：因为我们的代码要不断的完善，所以就有版本之分啦。
-就算是我们自己在电脑上开发，也可以为自己代码创建版本库，用来记录修改和方便管理。
-&mdash; 创建版本库 在想要创建版本库的文件夹里面，输入命令
-git init  就可以看到文件夹里面多了一个隐藏的文件夹.git
-添加文件到我们新建的版本库里面用
-//将某一个文件添加进缓冲区 git add &lt;file&gt; //将.git文件夹 所在的文件 里所有的文件添加进缓冲区 //所以不管你是在某一个子文件夹用这个命令，执行效果是一样的 git add -A //这个就是将缓冲区的提交到版本库里，并且携带提交信息 //(强烈推荐要写message，这样可以提醒那个时候修改了什么) git commit -m &lt;message&gt;  我们可以把代码所在区域分成
- 工作区 缓冲区 当前分支  理解这几个工作区域会有助于理解命令的作用。
-工作区：我们自己电脑编辑代码的地方
-缓冲区：就是我们把修改过的文件放到一个区域装着，如果后面我又对这个文件做修改了，就可以继续往里面添加(同文件覆盖)
-当前分支：就是我们使用commit后将缓冲区的文件提交上去的地方
-&mdash; 查看状态 git status  这个命令会告诉我们哪些被修改过的文件被添加到了缓冲去，哪些被修改的文件没有。
-On branch master Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded. (use &quot;git pull&quot; to update your local branch) Untracked files (use &quot;git add &lt;file&gt;.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/git/learn-git/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/learningGo/" title="Go琐碎笔记" >Go琐碎笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在test文件要是以_test.go结尾，或者是在文件开头加上// +build (tag) 其中tag是自己定的，然后测试的时候在Terminal输入
-2019.2.16 go test -tags tagname
-构造数组可以先 make([]int,0)
-然后 再使用函数：func append(slice []Type, elems ...Type) []Type
-unicode.IsLetter(r rune) bool是判断是否为字母，而不是ASCII
-res, ok := map[...] 中的ok变量可以用来判断key是否存在
-[]rune可以直接转换为字符串string([]rune)
-2019.2.17 谨记！ ： 切片和Map在函数传递都是指针传递(引用)
-func normalize(cleartext string) string { var b strings.Builder for _, r := range cleartext { if unicode.IsLetter(r) || unicode.IsDigit(r) { b.WriteRune(unicode.ToLower(r)) } } return b.String() }  b.WriteRune(unicode.ToLower(r)) :可以用这种方式代替append()
-norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入到[1]*形成的在右侧填充空格
-|类型 |默认值 | |int | 0 | |string|“” | | bool | false |  定义一个常量：const name type = value value是必须要有的 枚举：Go没有枚举，用const构造，有两种方法(参考这里的)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/learningGo/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -453,7 +488,15 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
         <a href="https://wushaoqiang.github.io/page/30/">30</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/31/">31</a>
+    </li>
+    
 
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/page/31/">下一页</a>
+    </li>
     
 </ol>
 
@@ -477,6 +520,22 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -498,22 +557,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -578,7 +621,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -715,6 +758,8 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     

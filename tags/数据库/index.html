@@ -78,6 +78,184 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/">Spanner Summary</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月8日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                近些日子，有来来回回看一些关于Database的论文，也都是一些非常经典的论文。
+有关Spanner的论文可以直接在Google上获得，这里想根据自己所看所想做些笔记，记录一些思路
+并且这个blog只会将一些复杂的东西尽量简单化，重在理解，想要深入细节还需参考Paper
+先说总结 在Paper的总结中说到
+ One aspect of our design stands out: the linchpin(核心) of Spanner&rsquo;s feature set is TrueTime.
+ Spanner这个系统是和时钟强绑定在一起的。
+在我们日常的分布式系统里面，时钟是不可靠的，因为时钟有可能会发生回退，振荡等不稳定现象，并且在分布式下，可能会由于地域问题，取得的时间也可能有所偏差(取得的时间戳可能来自不同的源)。
+因此在一般的分布式系统下，我们不会去依赖时钟
+Spanner依赖这个时钟意味着Google需要完全保证时钟的稳定性(出错概率无限接近0)，这在后面会稍微提及一下
+介绍一下 这里只介绍Spanner较为突出的点
+ 全球性分布式
+ 可控的数据分布
+ 强一致性(一般系统可能是最终一致性)
+ 类SQL
+ 强大的Transaction
+  我们一般接触的分布式可能是全国性的，Spanner做Global-Distributed的原因可能是为了容忍国家战乱和自然灾害这些因素吧
+可控的数据分布指的是，Spanner能够控制数据具体存放在哪个地方，这样能够更好的实现Locality，减少延迟。并且它还能把经常在一起访问的数据放在同一个地方，提高性能
+为了解决BigTable的一致性问题(BigTable只提供最终一致性)，Spanner使用了2PC(Two-Phase-Commit)，来保证强一致性。由于2PC会有比较大的开销，不过Spanner还是坚持用2PC，把开销留给使用者来考虑(少用这样的事务就能减少开销)
+类SQL，也是为了解决大家对BigTable数据查询的需求，Spanner需要提供像SQL这样的结构化查询语句(和SQL有些不一样)
+对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/">Week Isolation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                之前在写Transaction的时候有简单介绍过一些Isolation
+对于事务来说，Isolation是一个很重要的性质，随着应用的高并发，数据库对冲突的处理显得尤为重要，这blog里面简单说一些Week Isolation
+Week Isolation之所以Week是相对Serializability而言
+因为Serializability能够将并发处理转换为串行处理
+Read Committed 它保证了两点
+ 只读committed data
+ 只覆盖committed data
+  也就是No dirty read, No dirty write
+先来介绍一下脏读(dirty read)和脏写(dirty write)
+在并发的情况下，有可能会有许多事务在并行的执行，如果一个Tx(事务)读到了另一个还没有committed(或者abort)的Tx就称之为Dirty Read。
+同理，覆盖了还未committed data就称为Dirty Write
+我们要防止这两种情况出现可以使用Read Committed这种Isolation
+它主要采取了下面的措施
+ 对于脏写，采用了Row-Lock，在要写这个Row的时候，先获取Lock再执行操作，操作完(committed或者abort)就释放，理解起来也比较简单
+ 对于脏读，为了提高性能，避免了Lock的方式，因为读取可能会涉及大量的Row(一个很大的Scan)，因此用了Version的概念。如果一个事务正在执行写操作，那么会有一个Old Value和一个New Value，其中Old Value是已经committed过了的，所以返回Old Value。等到写操作committed或者aborted，就只剩下一个committed的value
+  不足的地方 由于读的是可以和写并发进行的，因此在执行Compare and Set操作的时候，会发生问题
+因为Compare的时候是读，这个时候如果是符合条件的，那么就会执行写操作。如果有一个并行的写操作正在修改Compare的条件导致Compare不符合写入的条件，但是由于读的时候和写的时候不是一个时刻，因此会产生问题。
+书中举了个例子帮助理解
+ 医生A和B必须要有一个人值班，这个时候两个医生都不想值班，他们需要通过网上的系统进行申请，医生A在申请的时候，系统看到剩余人数是2，因此批准A不值班。同一个时刻，医生B执行操作的时候也看到剩余人数是2，因此也批准。这个时候两个医生都申请成功了，这就违反了值班的原则
+ 优点 很明显，这个Isolation的优点是性能好，能够并行执行Read和Write
+很多数据库默认的Isolation也是这个
+Snapshot Isolation 这也是一个比较热门，应用比较广泛的一个Isolation
+前面介绍的Read Committed给我们提供了很多很好的功能，但是在某些特定场景下还是会发生问题
+我们知道，上一个Isolation的读写是并发执行的，当我们想要备份一个大的数据库文件的时候，我们的读操作会执行很久，这个时候它如果还在继续接收写操作，可能我们保存的数据库文件就会有问题。通常来说我们希望存下来的备份文件是某一个时刻固有的
+同理，我们在分析某一个时刻之前的数据时，可能会query很多数据，但我们只想看到这个时刻之前的数据
+这个时候Snapshot Isolation可以解决这类问题
+每当一个Tx开始的时候，它会保存一份当前时刻数据库的快照，所有的读操作都会在这个快照里面，这个快照是肯定不会被修改的
+实现 和Read Committed类似，Write也是用了Lock来避免冲突……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/">Column Oriented Storage</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                背景 现在大多数的Database都是Row Oriented，因为Row Oriented对OLTP系统的操作友好
+但是对于OLAP系统，常常是需要查询上百万条数据，因此Row Oriented的数据库会因为要Load大量数据导致大量的IO
+但其实很多的数据可能都是没有用到的，只是为了用一两个Column(Field)而把所有都导入到内存并不是一个好买卖
+不仅如此，把全部数据Load到内存上，还需要对其进行过滤，因此在计算资源上也会有一定的开销
+因此诞生了Column Oriented。
+不同 与Row Oriented不同的是，数据库会把列的数据在硬件上存的更相近，这样在读取的时候会明显块很多(Row Oriented是按Row来存到硬盘上)
+其实Column Oriented也很简单，把Column存在一个文件上，Scan的时候就不用都扫描了
+其它优势 在除了少读取无用数据之外，还有一些其它的优势值得我们认识
+压缩 在一般情况下，一个Column的数据类型都是一样的，而且有很多时候内容也是非常相近的，这个时候是压缩最容易得到有效利用的时候(理论上，越相近的数据压缩越好)
+有一种对比较好的压缩方法叫Bitmap，这里我不打算讲这个，有兴趣的可以查阅相关资料
+更好的利用CPU缓存 如果是按照Row来读取数据，CPU的数据缓存可能有大部分都是存储我们不用到的数据
+相反，当数据的有效率提升了，CPU的缓存利用率也会大大提升，因此可以加快处理速度
+排序 为了再进一步提高读取的性能，我们还可以针对Column做排序
+一般来说我们可以指定一两个索引进行排序，以至于指定哪个需要根据业务需求来决定
+比如业务经常会按照时间来分析一些数据，那么我会在date字段上做排序，这样我在取数据的时候就非常快速
+有可能我的业务需要按照不同的排序，这个时候也有一个参考的方法
+通过Replication，在每一个副本集上按照不同的排序方式进行存放，然后按照业务需求去取对应的副本集……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/">2PC and 2PL</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月7日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                2PC == Two Phase Commit
+2PL == Two Phase Lock
+两者是完全不一样的东西
+目的 2PC的目的是为了达到多节点的Consensus
+2PL的目的是一种Isolation，防止并发的冲突
+简单讲讲 今天看到2PC，在名词上和之前看到的2PL有点相像，为了区分开来，我觉得还是有必要简单总结一下
+2PL
+Two Phase Lock包含两种Lock
+ Shared Lock
+ Exclusive Lock
+  在多个线程并发读取某一个数据的时候，它们申请的都是Shared Lock，也就是说Shared Lock是能够共存的
+Exclusive Lock是写的时候申请获取的Lock，它能够把所有操作都排除在外，必须要得到释放后，后面的操作才能执行
+因此2PL是一种Isolation，这是一种强保证的Isolation
+2PC
+Two Phase Commit是解决多节点事务共识提出来的方案
+简单描述就是，当事务被提交到多个节点，会有一个中心化的Coordinator来决定这个事务是commit还是abort
+在接收到一个外界提交的事务后
+ Coordinate会给这个事务一个唯一的id
+ Coordinate会将这个事务发给所有的节点
+ 当这个事务准备要commit的时候，Coordinate会先发一个Prepare请求，询问所有节点是否准备好commit
+ 只有收到所有节点的肯定回复，这个时候Coordinate才会进入第二阶段，给所有节点发送commit命令，这样所有节点都一定会commit，以此来保证共识
+  这只是一个正常commit的流程
+在分布式系统中还要充分考虑很多意外情况，因此2PC并没有这么简单
+不过有一个非常重要的点，一旦Coordinate决定这个事务要commit，那么这个事务就一定要被commit，无论中间出了什么差错。所以这是不可逆转的决定，也只有这样才能保证节点的一致性
+简单总结 这里除了是让我分清楚2PC和2PL是完全不一样的东西之外，还大概阐述了一下它们的作用以及目的……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/">BigTable Summary</a>
                                 </h1>
                             </header>
@@ -109,7 +287,7 @@ BigTable  Bigtable is a distributed storage system for managing structured data 
  Timestamp
   (row:string, column:string, time:int64) -&gt; string
 Row BigTable会根据Row Key对数据进行排序，所以在同一个tablet上的数据都是有序的。所以相对Hash这种存储方式，有序能够方便范围性的Scan
-Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩。……
+Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩(压缩在下面优化的时候说到)。……
                                 <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/">阅读全文</a></p>
                             </div>
                         </article>
@@ -299,197 +477,6 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/">Transaction</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                事务这个词估计做软件开发的都不会陌生，我们可以简单的理解为：事务是一件事，要么成功，要么失败，而失败是全部失败，并不是局部失败
-事务这么流行的原因就是，它帮助软件开发者解决了很多难办的事情：
- 数据库可能会在任意时间因为软件或者硬件问题直接挂掉(可能这个时候正在执行一些写操作)
- 应用也可能会在任意时间宕机
- 网络通信是不可靠的
- 可能在高并发下，数据库会发生冲突
-  等等，这些事情，如果每一个都要想相应的解决方法，是需要大量的时间以及研究大量的算法，并且需要大量的测试集去验证这些算法实现是有用的
-事务是为了将这些事情变得简单点，当出现任何不希望出现的状况，我可以选择抛弃这个操作，然后告诉用户，这个操作失败了。最起码，它在操作失败这件事情上，它是正确的
-一般来说，事务会集合多个操作(Insert, Update, Delete)，变成一个操作，提交到数据库里，数据库会帮这些打包的操作看作是一个整体，因此操作到一半的时候发生错误，就会发生回滚，把之前的操作都抹去
-那么是否用事务就能解决一切复杂的事情呢？
-事务不是完美的，就像一直提到的，在数据库设计这一块，都是有的有舍，并没有完美的东西，因此我们也要很好的了解事务的优缺点。
-ACID 相信大家对这个词也是不陌生的，但是其实笔者一开始将里面的各个意思理解错了，现在从先来理解一边
-Atomicity 这里的中文虽然叫原子性，但是它和我们平常理解的原子性不一样，它这里并不是描述一个并发的过程
-这里是指，一系列的操作被打包成一个事务，如果这个事务具有Atomicity，那么它要么被commit，要么被abort，这也保证了这个事务不会修改一部分数据后失败，能够让client放心的去做retry了
-所以可以看出，这个Atomicity并不是在描述原子性，而是在描述操作的abortability，是否拥有abort操作
-Consistency Consistency在这里是指一个好的状态，这个好的状态是指你的数据应该不违反规则。
-但是在数据库层面，是不知道数据是否有效，所以这就需要开发者在应用的代码上写好事务的Consistency
-Isolation 这个才是真正和并发相关的特性，隔离机制，后面也会详细讲讲各种隔离机制，以及它们的优缺点
-我们在这里，可以简单的认为，我们可以利用隔离机制，将并发的事务一个个进行执行，这样就能够防止RACE发生，这种隔离机制叫serializable isolation但是，一个个执行是多么的低效，完完全全舍弃了并发的优势，所以下面我们会介绍许多没有如此强保证的隔离机制
-Durability 持久化是数据库最根本的目的，一个拥有Durability的事务意味着数据能够被写入到硬盘，这里也运用到了之前所说的log或者一些其它方式来记录操作，这样可以在数据库重启后能够自己恢复
-Weak Isolation Levels 因为性能问题，很多软件并不想用像serialzable isolation这种最高级别隔离的机制，因为这样的数据库很可能会在整个系统中称为瓶颈。
-Read Commited 最基础的一个隔离机制，它能够给我们保证：
- 所有读取的数据都是经过committed的
- 写入数据库的时候，你只能够重写以及committed的数据
-  但是多个事务在操作多个对象的时候，有可能会因为执行顺序不一样导致，事务之间读取到对方committed后的值
-如何实现这个隔离机制呢
-一般来说，会有一个row-level lock，每一个写操作都会请求对应行的lock，一个lock也只能被一个事务获取并且一直到它committed或者aborted才释放
-那读取数据呢？简单点的我们可以也持有lock，但是我们知道，持有lock的代价是很大的，万一读操作很久，或者写操作很久，整个系统的性能就会受到影响，因此我们需要更好的方法去让读尽可能的不用获取lock
-一个方法就是，数据库会帮忙记住lock之前的值，如果读取的时候发现是locked了，那么就那之前的值
-Snapshot Isolation 其功能和其名字差不多，Snapshot Isolation的做法就是这个事务读取的数据是从一个快照里面读取的，当然，这个快照是不会被改变的，所以所有的事务都只能看见某一个时间点之前的老数据。
-当我们在备份的时候， 我们可能不想在备份的时候，数据还在被修改，状态还是不稳定。所以这个隔离让我们不用担心这些问题。这个隔离机制在很多时候帮助我们很多，我们不用担心它有各种奇怪的问题，因为它已经是固定的了
-其实Snapshot的实现机制和Read Committed差不多，也是通过lock来控制写入操作，然后读是不用锁的
- readers never block writers, and writers never block readers.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/transaction/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/partition/">Partition</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Partition And Replication 之前在学习Replication的时候，我们可以简单理解为副本集，也就是数据的复制
-但是如果数据量很大，然后还复制几分，那不就上天了。Partition提供一种叫分片的方法，能够有效的将数据分隔存储在不同的节点
-顺便说一下，默认的partition每个节点上的数据就只有该节点有，其它节点是没有的，也就是说，数据很可能会因为某一个结点不可用而导致该部分数据不可读取
-这个时候我们可以选择将Replication和Partition结合起来用，你可能会问这样的一个问题：那数据不是还是复制了好几份了吗?
-在Replication里，数据可以认为是相等的，假设我有5个节点，每个节点5TB的数据，总共25TB
-在Partition和Replication结合起来用，会有多少呢？我们来算一下
-首先，我们有5TB的数据，分片成5份，每一份1TB，每一份再通过Replication来复制到另外两个节点，所以每一份数据实际上有3份，也就是15TB。
-这里的巧妙之处在于，你并不用每台机器都要有，备份只需要根据你集群的大小来选择合适的备份数量即可
-How to partitioning the data 我们分片要有依据，如果随便存储，那么到时候不知道往哪查找了
-我们可以像字典一样，用某一个key的区间作为一个partition，用区间作为区分有一些优点：
- 有序，这样在查找的时候，可以按照区间大小一次性取出大量数据(还记得LSM-Tree)
- 每个partition的区间大小可以自己指定
-  但是也有一些缺点：
- 分片有可能严重倾斜，有一些节点已经Overload，而别的节点却很闲  Partitioning by Hash of Key 为了解决Hot Spot问题，我们可以采用随机性较强的哈希函数对每一个key进行一次Hash，再进行分片，这样在大概率上是平均分配给每个节点的
-虽然解决了一些问题，但是上面的有序性就被破坏了
-我们知道，数据被分散了情况下，读取就会变得越来越麻烦，可能一次查询，就要用到许多的partition，所以也是有很多缺点
-Partitioning and Secondary Indexes Secondary Indexes不能唯一标识一个实例，它可以是一个颜色，一个城市等等，许多人可能都生活在一个城市，所以一个城市并不能标识哪个人
-这里主要有两种方法将数据库分片，并且是带上Secondary Indexes的
- document-based partitioning
- term-based partitioning
-  这两种不同的Secondary Indexes主要的区别在于，document-based只的对它当前节点的数据进行索引
-而term-based是对整个集群的索引
-我们来看一下它们在读写方面的优劣情况
-在写的时候，document-based理论上会有更好的性能
-在对一个数据进行更新的时候，document-based只需要修改被更新的partition里的索引，而term-based则可能需要修改多个partition里面的索引
-在读的时候，term-based理论上会有更好的性能
-因为document-based的索引是分开在各个partition的，所以查询的时候有可能要遍历所有的partition，而term-based因为某些索引集中在一个partition，所以很快能够找到索引值
-Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要做这件事情
-有一个方法可能大家都听过&ndash;mod
-这个方法会导致节点变动时，里面的数据会大量变动，并不是一个好的选择
-下面介绍一种方法fixed number of partitions……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/partition/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/">Replication Other Pattern</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在之前，我着重介绍了一下One Leader的这种Replication模式，其实还有
- Multi Leader
- Leaderless
-  后面会写专门的blog去介绍一下这两种情况
-现在先简单的了解一下
-Multi-Leader这种模式，它可以往Leader上发起写操作，也就是多个节点都可以发生写操作，然后再广播给其它Leader和Followers
-Leaderless这种模式，写是写到多个几点上，读也是从多个节点上读，然后通过一些机制取出比较新的数据(也就是排除旧数据)
-Multi-Leader咋一听好像相对One-Leader这种模式有更好的写性能，好像看起来是这样的，但是关于冲突方面的奇奇怪怪的问题非常多，也非常难。因此也有很多劣势
-Leaderless也是，因为可以多个地方写，那么就会有并发的冲突，如何解决这些冲突就变得很重要了
-因此One Leader目前看来还是最多人用的一个，因为它不用太多考虑并发冲突问题……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/">Replication One Leader</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在之前的blog里，我也有大概说过关于单点故障等场景，但是大多数描述都是假设运行在单机上的
-在这blog里，我们关心的系统是由多个节点组成的
-Replication可以简单理解为副本集模式，它能够在多个节点上拥有同样的数据
-Why We Need Multi Machines 之前有讲过一些点：
- 高可用
- 高扩展
- 以及单点容忍
- 低延迟，低延迟可能是因为集群的方式处理请求更快，也可能是物理主机理用户距离比较近
- 提高读取性能
-  One Leader and Followers 在MongoDB里，你可能会发现它们叫PRIMARYandSECONDARY，意思都是一样
-One Leader可以说是没那么复杂的一种模式
-它们的运作模式也比较简单
-在多台机器上运行同一个进程，这不同的进程就组成了一个cluster，cluster里面有且仅有一个Leader Leader是所有写操作的入口，当Leader在写入本地的时候，它也会将自己的Replication Log或者Change Stream(可以抽象成Leader给Followers发的写请求)发给集群上的Followers，这样Followers就能够更新自己的数据，和Leader保持一致
-而读操作可以从Leader上读，也可以在Followers上读。不同的是，Leader上的数据一定是最新的，而Followers上的数据有可能还没同步过来(在异步的通信方式下)，就像上面说的，同步是通过请求来的，谁也不能确保通信不出问题
-Synchronous Versus Asynchronous Replication 同步和异步拥有很大不同的特性
-同步意味着数据需要存入到每一个节点上，这个操作才算完成。如果其中一个节点因为网络问题，连接不上，那么整个系统就hang在这里不动了。所以一般情况下，我们不会选择同步的方式来处理数据
-异步意味着持久性会受到影响，为什么呢？设想当写操作还在Leader上的时候，Leader挂了，这个时候数据就完全丢失了，因为当前集群上没有一个节点拥有该份数据。
-半同步，我们折中一下双方的优劣，可以得到半同步，我们假设大部分节点都是正常的，这样只要有一定数量的节点收到了数据并且写入，那么我们就可以认为该数据已经得到了备份，这个时候Leader可以告诉外界，这个数据被存储好了
-Setting Up New Followers 有时候为了更好的服务，需要增加节点
-这个时候节点是没有任何数据的，我们需要让这个节点也能够处于服务状态的话，就必须通过复制数据给到这个节点
-How?
-传统的想法，直接拷贝文件行不行？
- 是不行的，当这个系统是在运行状态，可能有很多中间的状态以及一些文件还是不完整的时候，我们直接拷贝文件很有可能这个文件都无法被解析。所以如果要这样做，可能需要将服务先关了，这样可以防止以上情况。但这又违反了系统的可用性，总不能加个节点就要关服拷贝吧  正确而又比较优雅的做法是利用隔离机制
- 有一种隔离机制可以产生出一个快照(Snapshot)，这个快照一旦产生出来就不会改变了，因此新的节点完全可以按照这个快照来构建，然后Leader也不会因为这个新节点加入而停止服务。当新节点完成了快照的恢复，它就会向Leader拿Replication Log，也就是快照之后的数据更新，这样慢慢一步步赶上进度，最终可以像其它节点一样工作了。  Failover 在Followers节点挂了的时候，我们不会用这个词。这个词是描述一个cluster的Leader挂了
-当发生failover，我们应该要有相应的failover机制，一般情况下包含这几步
- 确定Leader真的挂了，因为许多不可控因素，一般情况下判断一个服务是否挂了，可以用超时来判断，如果超时，那么就算进程没有挂，在对方的角度看来，它就是挂了
- 当大多数的节点都判断Leader挂了(防止只是follower和Leader断开连接)，那么就开始挑选新的Leader，这里面应该有一个挑选算法，简单点就是投票机制，票数最多的节点当Leader。当然，每个Follower的票权也可以配置成不一样的。
- 重新配置整个集群，使用新的Leader代替旧的Leader，旧的Leader就算后面重新连接，也需要Step Down成为一个Follower
-  不够，Failover没有想象中的那么简单，它会在一个高并发的系统上引发很多问题，我这里先不打算说太多(分布式系统的奇怪东西太多了)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -538,6 +525,22 @@ How?
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -559,22 +562,6 @@ How?
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -639,7 +626,7 @@ How?
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -776,6 +763,8 @@ How?
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     

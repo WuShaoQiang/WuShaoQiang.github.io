@@ -68,6 +68,135 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-map/" title="Golang Map" >Golang Map</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Construct: m:=map[key]value{}
+ Insert: m[k] = v
+ Lookup: v = m[k]
+ Delete: delete(m,k)
+ lterate: for k,v := range m
+ Size: len(m)
+  Key不能为 maps,slices,funcs. 因为它们不可比较
+Map底层 map header
+len lg(#buckets) bucket array hash seed  流程  接收到一个key
+ 对key进行hash
+ 通过hash找到是哪一个bucket
+ 取hash前8bit作为extra(作为快速检查)
+ 找到bucket的内存(对不同的类型，大小会有不同)
+  扩容  新创建一个两倍的空间
+ 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
+ 用新的bucket
+  和其它Map比较  Go map不能用指针指向单个value
+ 迭代的时候，go map是可以修改的……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-map/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-channel/" title="Golang Channel" >Golang Channel</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这里就不再赘述重要性了
+Channel特性  goroutine-safe
+ 两个goroutine之间传递数据
+ FIFO
+ cause goroutine to block and unblock
+  What is the inside of channel  mutex
+ send-index and recieve index
+ buf
+  Create a channel ch := make(chan int,3) //buffered chan ch := make(chan int) //sync chan  ch is a pointer
+How it work Send  When it is going to send data to the channel, it will acquire the lock because it is going to modify.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-channel/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-interface/" title="Golang Interface" >Golang Interface</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在说接口之前，我们先说一下类型，类型在Go语言里面可以大致分为
+ concrete type(具体类型,int,string&hellip;)
+ abstract type(抽象类型 io.Writer,io.Reader&hellip;)
+  具体类型我们知道它到底长什么样子，比如说int64，我们知道它在底层有8个字节
+抽象类型我们不知道或者说我们不关注它长什么样，但我们知道它的用处，比如io.Writer是用来写的
+具体化谈Interface 举个非常简单的例子，我们在读文件的时候，可能会这样做
+func main() { f, err := os.Open(&quot;abc.txt&quot;) if err != nil { fmt.Println(err) } byte, _ := ioutil.ReadAll(f) fmt.Println(string(byte)) }  看一下ioutil.ReadAll()
+func ReadAll(r io.Reader) ([]byte, error) { return readAll(r, bytes.MinRead) }  这里需要传入的是一个io.Reader接口，为什么*File类型传入一样可以呢
+这里io.Reader是一个接口，接口里面只要一个函数
+type Reader interface { Read(p []byte) (n int, err error) }  而*File里面也实现了这个接口的函数
+func (f *File) Read(b []byte) (n int, err error) { if err := f.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-interface/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/" title="Golang Tips" >Golang Tips</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月18日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
+关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/" title="Algorithm 排序" >Algorithm 排序</a>
                                 </h1>
                             </header>
@@ -237,145 +366,6 @@ filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Favorite">Favorite</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 Don&rsquo;t assume that you are right, just because nobody has proved you wrong
-The bigger the interface, the weaker the abstraction &ndash;Rob Pike
- ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/nice-sentences/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/opinion/" title="Opinion" >Opinion</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Opinion">Opinion</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 关于在百度搜索问题 笔者在很早就体会到一点，百度搜出来的东西，理论价值真的不高
-我开发遇到Bug第一时间去的都是google，基本第一页搞定我的问题
-我在安装东西，工具最基本的使用，我会百度，因为这些东西肯定一大堆人在写
-这也让我开始反思，写博客的人，应该以一种什么样的心态去写呢？
-下面我总结出了两个点
- 理论性较强的文章，应该多权威性的网站或者论坛(比如stackoverflow这类型的)，对比大家的意见，再结合自己对这些的想法和理解，写出一篇有深度的文章，而不仅仅停留在发现问题&ndash;解决问题&ndash;完事
- 工具类型的文章，为了让自己能够在忘记怎么使用某一个工具时翻阅，属于一种笔记类型，不算文章
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/opinion/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-log/" title="Golang Log" >Golang Log</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者上面总结了一下网上关于错误处理和异常处理的资料，发现不知道什么时候要记录一个信息，什么时候不应该，再去找找别人的经验，总结到这篇博客。当然，笔者对标准库的log的接口表示有点少，而且输出的信息看起来有点累(虽然很多人喜欢标准库的log，但这里不讨论这个)，我将尝试着用用第三方库
-我们做后台开发，无论有什么语言，都有相应的一套日志记录系统，并且日志记录的信息可能是一些小小的问题，也可能是一些大问题，这个时候就要分级处理了，很多人(包括我之前)都对分级这个界限划分的认识模糊，不知道什么时候该用什么级别的信息
-在很多时候，log给我们提供的级别种类非常多，例如info、warning、debug、error等等，其实我对这些有些难以区分
-在一些论坛上，大家也为这些发表意见，都有各自的道理，我把我觉得有道理的记录下来，以后我就会按照这样的一套标准(并非所有人的标准)来实现我的日志记录
-先讲标准，在来简单分析一下第三方库的使用
-warning  Nobody needs a warning log level
- 警告是什么意思？出错了吗，还是没出错，不知道，有点模棱两可的感觉
-所以要么是正常的信息输出(INFO)，要么就是错误
-其实笔者后来觉得，warning可以在下面情况使用
- 对，是出错了，但是经过我们的错误处理，在合适的尝试次数中成功了，这样我们可以给出警告，告诉开发者，这里曾经出过错  fatal 首先，在Go里面，Fatal是会调用os.Exit(1)的
-这代表着什么样的结果(灾难)呢
- 在其它线程的defer没有得到调用(比如一个文件的关闭在defer里，这样这个文件就未关闭，程序就挂了)
- 缓冲区没有刷新(flush)，我们都知道，缓冲区要刷新，数据才能真正流入到我们想它到达的地方
- 临时文件或者文件夹不会被移除(程序可能会生成临时文件，这是我们在结果中不想要的东西)
-   It is commonly accepted that libraries should not use panic, but if calling log.Fatal has the same effect, surely this should also be outlawed.
- 网上看到别人这样说，称panic,fatal应该属于违规操作
-stackoverflow上赞同较多的答案说
- You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-log/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/" title="Golang Errandpanic" >Golang Errandpanic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
-本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
-直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
-错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
-异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
- but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
- defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
-... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
-并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
-如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
-同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
- 一般设计，如果输入有误，则返回错误
- 异常设计，如果输入有误，直接抛出异常
-  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
-其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
-凡事要有规则 异常处理的作用域
- 空指针引用
- 下标越界
- 除数为0
- 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
- 输入不应该引起函数错误
-  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -508,6 +498,10 @@ stackoverflow上赞同较多的答案说
         <a href="https://wushaoqiang.github.io/page/30/">30</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/31/">31</a>
+    </li>
+    
 
     
     <li class="next">
@@ -536,6 +530,22 @@ stackoverflow上赞同较多的答案说
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -557,22 +567,6 @@ stackoverflow上赞同较多的答案说
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -637,7 +631,7 @@ stackoverflow上赞同较多的答案说
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -774,6 +768,8 @@ stackoverflow上赞同较多的答案说
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     

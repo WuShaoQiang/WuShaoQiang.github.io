@@ -6,10 +6,132 @@
     <description>Recent content on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Oct 2019 14:09:32 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 08 Oct 2019 18:58:01 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Spanner Summary</title>
+      <link>https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/</link>
+      <pubDate>Tue, 08 Oct 2019 18:58:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/</guid>
+      <description>近些日子，有来来回回看一些关于Database的论文，也都是一些非常经典的论文。
+有关Spanner的论文可以直接在Google上获得，这里想根据自己所看所想做些笔记，记录一些思路
+并且这个blog只会将一些复杂的东西尽量简单化，重在理解，想要深入细节还需参考Paper
+先说总结 在Paper的总结中说到
+ One aspect of our design stands out: the linchpin(核心) of Spanner&amp;rsquo;s feature set is TrueTime.
+ Spanner这个系统是和时钟强绑定在一起的。
+在我们日常的分布式系统里面，时钟是不可靠的，因为时钟有可能会发生回退，振荡等不稳定现象，并且在分布式下，可能会由于地域问题，取得的时间也可能有所偏差(取得的时间戳可能来自不同的源)。
+因此在一般的分布式系统下，我们不会去依赖时钟
+Spanner依赖这个时钟意味着Google需要完全保证时钟的稳定性(出错概率无限接近0)，这在后面会稍微提及一下
+介绍一下 这里只介绍Spanner较为突出的点
+ 全球性分布式
+ 可控的数据分布
+ 强一致性(一般系统可能是最终一致性)
+ 类SQL
+ 强大的Transaction
+  我们一般接触的分布式可能是全国性的，Spanner做Global-Distributed的原因可能是为了容忍国家战乱和自然灾害这些因素吧
+可控的数据分布指的是，Spanner能够控制数据具体存放在哪个地方，这样能够更好的实现Locality，减少延迟。并且它还能把经常在一起访问的数据放在同一个地方，提高性能
+为了解决BigTable的一致性问题(BigTable只提供最终一致性)，Spanner使用了2PC(Two-Phase-Commit)，来保证强一致性。由于2PC会有比较大的开销，不过Spanner还是坚持用2PC，把开销留给使用者来考虑(少用这样的事务就能减少开销)
+类SQL，也是为了解决大家对BigTable数据查询的需求，Spanner需要提供像SQL这样的结构化查询语句(和SQL有些不一样)
+对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大</description>
+    </item>
+    
+    <item>
+      <title>Week Isolation</title>
+      <link>https://wushaoqiang.github.io/posts/database/theory/week-isolation/</link>
+      <pubDate>Mon, 07 Oct 2019 22:06:20 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/theory/week-isolation/</guid>
+      <description>之前在写Transaction的时候有简单介绍过一些Isolation
+对于事务来说，Isolation是一个很重要的性质，随着应用的高并发，数据库对冲突的处理显得尤为重要，这blog里面简单说一些Week Isolation
+Week Isolation之所以Week是相对Serializability而言
+因为Serializability能够将并发处理转换为串行处理
+Read Committed 它保证了两点
+ 只读committed data
+ 只覆盖committed data
+  也就是No dirty read, No dirty write
+先来介绍一下脏读(dirty read)和脏写(dirty write)
+在并发的情况下，有可能会有许多事务在并行的执行，如果一个Tx(事务)读到了另一个还没有committed(或者abort)的Tx就称之为Dirty Read。
+同理，覆盖了还未committed data就称为Dirty Write
+我们要防止这两种情况出现可以使用Read Committed这种Isolation
+它主要采取了下面的措施
+ 对于脏写，采用了Row-Lock，在要写这个Row的时候，先获取Lock再执行操作，操作完(committed或者abort)就释放，理解起来也比较简单
+ 对于脏读，为了提高性能，避免了Lock的方式，因为读取可能会涉及大量的Row(一个很大的Scan)，因此用了Version的概念。如果一个事务正在执行写操作，那么会有一个Old Value和一个New Value，其中Old Value是已经committed过了的，所以返回Old Value。等到写操作committed或者aborted，就只剩下一个committed的value
+  不足的地方 由于读的是可以和写并发进行的，因此在执行Compare and Set操作的时候，会发生问题
+因为Compare的时候是读，这个时候如果是符合条件的，那么就会执行写操作。如果有一个并行的写操作正在修改Compare的条件导致Compare不符合写入的条件，但是由于读的时候和写的时候不是一个时刻，因此会产生问题。
+书中举了个例子帮助理解
+ 医生A和B必须要有一个人值班，这个时候两个医生都不想值班，他们需要通过网上的系统进行申请，医生A在申请的时候，系统看到剩余人数是2，因此批准A不值班。同一个时刻，医生B执行操作的时候也看到剩余人数是2，因此也批准。这个时候两个医生都申请成功了，这就违反了值班的原则
+ 优点 很明显，这个Isolation的优点是性能好，能够并行执行Read和Write
+很多数据库默认的Isolation也是这个
+Snapshot Isolation 这也是一个比较热门，应用比较广泛的一个Isolation
+前面介绍的Read Committed给我们提供了很多很好的功能，但是在某些特定场景下还是会发生问题
+我们知道，上一个Isolation的读写是并发执行的，当我们想要备份一个大的数据库文件的时候，我们的读操作会执行很久，这个时候它如果还在继续接收写操作，可能我们保存的数据库文件就会有问题。通常来说我们希望存下来的备份文件是某一个时刻固有的
+同理，我们在分析某一个时刻之前的数据时，可能会query很多数据，但我们只想看到这个时刻之前的数据
+这个时候Snapshot Isolation可以解决这类问题
+每当一个Tx开始的时候，它会保存一份当前时刻数据库的快照，所有的读操作都会在这个快照里面，这个快照是肯定不会被修改的
+实现 和Read Committed类似，Write也是用了Lock来避免冲突</description>
+    </item>
+    
+    <item>
+      <title>Column Oriented Storage</title>
+      <link>https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/</link>
+      <pubDate>Mon, 07 Oct 2019 20:58:43 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/</guid>
+      <description>背景 现在大多数的Database都是Row Oriented，因为Row Oriented对OLTP系统的操作友好
+但是对于OLAP系统，常常是需要查询上百万条数据，因此Row Oriented的数据库会因为要Load大量数据导致大量的IO
+但其实很多的数据可能都是没有用到的，只是为了用一两个Column(Field)而把所有都导入到内存并不是一个好买卖
+不仅如此，把全部数据Load到内存上，还需要对其进行过滤，因此在计算资源上也会有一定的开销
+因此诞生了Column Oriented。
+不同 与Row Oriented不同的是，数据库会把列的数据在硬件上存的更相近，这样在读取的时候会明显块很多(Row Oriented是按Row来存到硬盘上)
+其实Column Oriented也很简单，把Column存在一个文件上，Scan的时候就不用都扫描了
+其它优势 在除了少读取无用数据之外，还有一些其它的优势值得我们认识
+压缩 在一般情况下，一个Column的数据类型都是一样的，而且有很多时候内容也是非常相近的，这个时候是压缩最容易得到有效利用的时候(理论上，越相近的数据压缩越好)
+有一种对比较好的压缩方法叫Bitmap，这里我不打算讲这个，有兴趣的可以查阅相关资料
+更好的利用CPU缓存 如果是按照Row来读取数据，CPU的数据缓存可能有大部分都是存储我们不用到的数据
+相反，当数据的有效率提升了，CPU的缓存利用率也会大大提升，因此可以加快处理速度
+排序 为了再进一步提高读取的性能，我们还可以针对Column做排序
+一般来说我们可以指定一两个索引进行排序，以至于指定哪个需要根据业务需求来决定
+比如业务经常会按照时间来分析一些数据，那么我会在date字段上做排序，这样我在取数据的时候就非常快速
+有可能我的业务需要按照不同的排序，这个时候也有一个参考的方法
+通过Replication，在每一个副本集上按照不同的排序方式进行存放，然后按照业务需求去取对应的副本集</description>
+    </item>
+    
+    <item>
+      <title>2PC and 2PL</title>
+      <link>https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/</link>
+      <pubDate>Mon, 07 Oct 2019 19:03:35 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/</guid>
+      <description>2PC == Two Phase Commit
+2PL == Two Phase Lock
+两者是完全不一样的东西
+目的 2PC的目的是为了达到多节点的Consensus
+2PL的目的是一种Isolation，防止并发的冲突
+简单讲讲 今天看到2PC，在名词上和之前看到的2PL有点相像，为了区分开来，我觉得还是有必要简单总结一下
+2PL
+Two Phase Lock包含两种Lock
+ Shared Lock
+ Exclusive Lock
+  在多个线程并发读取某一个数据的时候，它们申请的都是Shared Lock，也就是说Shared Lock是能够共存的
+Exclusive Lock是写的时候申请获取的Lock，它能够把所有操作都排除在外，必须要得到释放后，后面的操作才能执行
+因此2PL是一种Isolation，这是一种强保证的Isolation
+2PC
+Two Phase Commit是解决多节点事务共识提出来的方案
+简单描述就是，当事务被提交到多个节点，会有一个中心化的Coordinator来决定这个事务是commit还是abort
+在接收到一个外界提交的事务后
+ Coordinate会给这个事务一个唯一的id
+ Coordinate会将这个事务发给所有的节点
+ 当这个事务准备要commit的时候，Coordinate会先发一个Prepare请求，询问所有节点是否准备好commit
+ 只有收到所有节点的肯定回复，这个时候Coordinate才会进入第二阶段，给所有节点发送commit命令，这样所有节点都一定会commit，以此来保证共识
+  这只是一个正常commit的流程
+在分布式系统中还要充分考虑很多意外情况，因此2PC并没有这么简单
+不过有一个非常重要的点，一旦Coordinate决定这个事务要commit，那么这个事务就一定要被commit，无论中间出了什么差错。所以这是不可逆转的决定，也只有这样才能保证节点的一致性
+简单总结 这里除了是让我分清楚2PC和2PL是完全不一样的东西之外，还大概阐述了一下它们的作用以及目的</description>
+    </item>
     
     <item>
       <title>BigTable Summary</title>
@@ -33,7 +155,7 @@ BigTable  Bigtable is a distributed storage system for managing structured data 
  Timestamp
   (row:string, column:string, time:int64) -&amp;gt; string
 Row BigTable会根据Row Key对数据进行排序，所以在同一个tablet上的数据都是有序的。所以相对Hash这种存储方式，有序能够方便范围性的Scan
-Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩。</description>
+Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩(压缩在下面优化的时候说到)。</description>
     </item>
     
     <item>

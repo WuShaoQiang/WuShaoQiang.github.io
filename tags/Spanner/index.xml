@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spanner on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Spanner/</link>
+    <description>Recent content in Spanner on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Oct 2019 18:58:01 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Spanner/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spanner Summary</title>
+      <link>https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/</link>
+      <pubDate>Tue, 08 Oct 2019 18:58:01 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/</guid>
+      <description>近些日子，有来来回回看一些关于Database的论文，也都是一些非常经典的论文。
+有关Spanner的论文可以直接在Google上获得，这里想根据自己所看所想做些笔记，记录一些思路
+并且这个blog只会将一些复杂的东西尽量简单化，重在理解，想要深入细节还需参考Paper
+先说总结 在Paper的总结中说到
+ One aspect of our design stands out: the linchpin(核心) of Spanner&amp;rsquo;s feature set is TrueTime.
+ Spanner这个系统是和时钟强绑定在一起的。
+在我们日常的分布式系统里面，时钟是不可靠的，因为时钟有可能会发生回退，振荡等不稳定现象，并且在分布式下，可能会由于地域问题，取得的时间也可能有所偏差(取得的时间戳可能来自不同的源)。
+因此在一般的分布式系统下，我们不会去依赖时钟
+Spanner依赖这个时钟意味着Google需要完全保证时钟的稳定性(出错概率无限接近0)，这在后面会稍微提及一下
+介绍一下 这里只介绍Spanner较为突出的点
+ 全球性分布式
+ 可控的数据分布
+ 强一致性(一般系统可能是最终一致性)
+ 类SQL
+ 强大的Transaction
+  我们一般接触的分布式可能是全国性的，Spanner做Global-Distributed的原因可能是为了容忍国家战乱和自然灾害这些因素吧
+可控的数据分布指的是，Spanner能够控制数据具体存放在哪个地方，这样能够更好的实现Locality，减少延迟。并且它还能把经常在一起访问的数据放在同一个地方，提高性能
+为了解决BigTable的一致性问题(BigTable只提供最终一致性)，Spanner使用了2PC(Two-Phase-Commit)，来保证强一致性。由于2PC会有比较大的开销，不过Spanner还是坚持用2PC，把开销留给使用者来考虑(少用这样的事务就能减少开销)
+类SQL，也是为了解决大家对BigTable数据查询的需求，Spanner需要提供像SQL这样的结构化查询语句(和SQL有些不一样)
+对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大</description>
+    </item>
+    
+  </channel>
+</rss>

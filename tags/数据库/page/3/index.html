@@ -78,6 +78,135 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">Mongodb Data Modeling Introduction</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                原文
+Flexible Schema 不像SQL的数据库一样,Mongodb不需要我们准确定义一个数据格式的规范
+也就是说,一个collection里面的document不一定要每个字段都一样,我们也可以实时的更新document的字段(增加或减少)
+当然,有些时候为了让数据保持统一,Mongodb也可以让我们自定义collection的validation
+Document structure  how the application represents relationships between data
+ Embedded Data 这是官方推荐的一种数据结构
+ For many use cases in MongoDB, the denormalized data model is optimal.
+  This data model facilitates atomic operations.
+ 当一个写操作(insertOne or insertMany),对每一个document的修改都是atomic,但是并不是每一次改一个document
+References 这种就又是关系型了
+Data Use and Performance 当我们更侧重最近的数据的时候 &ndash;使用capped collection
+如果是侧重全局数据的读取 &ndash;使用索引会增加性能
+Document Growth and MMAPv1 当document size超过容量的时候,MongoDB会扩容……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-data-modeling-introduction/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">Mongodb Schema Validation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Schema Validation MongoDB 提供了模式验证,就像SQL里面的结构类型检查一样
+提前说一下,这些validation不能够设置在admin local config数据库,也不能设置在以system.*为名的collection
+如果是还未创建的collection
+ use db.createCollection() with the validator option.
+ 如果是已经创建了的collection
+ use collMod command with the validator option.
+ 这里还提供了两个options
+validationLevel 控制检查的程度 模式有两种:strict(default) and moderate,To disable validation entirely, you can set validationLevel to off. validationAction 当不符合规范的时候的响应动作(发出error,直接拒绝,还是warn然后接收) 模式有两种:error(default) and warn.  如果我们要具体一个JSON格式
+ use the $jsonSchema operator in your validator expression.
+ 官网例子
+db.createCollection(&quot;students&quot;, { validator: { $jsonSchema: { bsonType: &quot;object&quot;, required: [ &quot;name&quot;, &quot;year&quot;, &quot;major&quot;, &quot;gpa&quot;, &quot;address.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-schema-validation/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">Mongodb Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                关于数据库和collection的操作 db.createCollection() // create a collection db.dropDatabase() // delete a db show collections // show all collections in db show dbs // show all db use db // create if not exist db.collection_name.drop() // delete a collection  插入操作 db.collection.insert({}) //insert one db.collection.insert([{},{}]) //insert many db.collection.insertMany([{},{}]) //insert many db.collection.insertOne({}) //insert one  查询操作 db.collection.find() //find all documents db.collection.find().pretty //much easier to read db.inventory.find( { status: &quot;D&quot; } ) // selects from the inventory collection all documents where the status equals &quot;D&quot; db.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-command/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">SQL vs NoSQL</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月9日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                花了点时间去了解了一下NoSQL,总结一下一些概念
+SQL: Strcuture Query Language
+NoSQL: Not Only SQL
+一些概念 ACID 这是关系型数据库遵循的法则
+A: Atomatic -all or nothing,要么全部完成,要么回滚什么都不做 C: Consistancy -一致性,系统就算是并发多个的,也必须如同串行事务一样 I: Isolation -用于竟态保护,并行安全,确保只有一个事务在使用系统 D: Durability -once executed, data is immediately saved  CAP 这是Eric Brewer说的,三个指标不可能同时做到,这就是CAP定理
+Consistency 一致性 Availablility 可用性 Partition tolerance 分区容错  在分布式服务上,必须要满足P,所以只剩下了C和A选
+最常见的是AP组合,一致性靠一个时间窗口达到
+因为NoSQL常用在分布式系统上,所以这个概念也非常重要
+SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能够往table里添加固定的结构数据
+ 优点:开发者知道要往table里面添加什么值,已经清楚table里面有什么具体的field
+ 缺点:随着业务需求,可能对结构会有所变化,变化麻烦
+  NoSQL没有固定的collection字段,collection下面是document(一般是json),document里面的数据可以拥有不同的字段
+ 优点和缺点刚好和上面相反  关系(有利有弊) SQL通过table之间的关系来达到分布式数据
+ 优点:通过一个table将数据连接起来,没有过多的冗余数据
+ 缺点:对分布式不友好,并且一旦关系多了,会产生混乱
+  NoSQL没有关系,全部都是直接存储……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/mysql/SQL-highlevel/">SQL 进阶</a>
                                 </h1>
                             </header>
@@ -223,6 +352,22 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
     </li>
     
@@ -244,22 +389,6 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP">TCP vs UDP</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction">Transaction</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition">Partition</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern">Replication Other Pattern</a>
     </li>
     
 </ul>
@@ -324,7 +453,7 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(23)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
     </li>
     
     <li>
@@ -461,6 +590,8 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
     <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
     
     <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
     
     <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
     
