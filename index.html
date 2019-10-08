@@ -102,7 +102,14 @@ Spanner依赖这个时钟意味着Google需要完全保证时钟的稳定性(出
 可控的数据分布指的是，Spanner能够控制数据具体存放在哪个地方，这样能够更好的实现Locality，减少延迟。并且它还能把经常在一起访问的数据放在同一个地方，提高性能
 为了解决BigTable的一致性问题(BigTable只提供最终一致性)，Spanner使用了2PC(Two-Phase-Commit)，来保证强一致性。由于2PC会有比较大的开销，不过Spanner还是坚持用2PC，把开销留给使用者来考虑(少用这样的事务就能减少开销)
 类SQL，也是为了解决大家对BigTable数据查询的需求，Spanner需要提供像SQL这样的结构化查询语句(和SQL有些不一样)
-对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大……
+对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大
+Spanner还有更多的细节以及特性，可以参照Paper去理解
+数据的结构 虽然Spanner在说BigTable只提供了KV的结构，自己则要有关系型的结构，其实不然，Paper中指出，Spanner还是利用了映射的关系来存储数据，主要是分为
+ Primary Key
+ Non-Primary Key
+  其中映射关系就是 Primary Key的Column指向Non-Primary Key Column
+文中解释这样的好处是
+ it lets applications control data locality through their choices of keys……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/">阅读全文</a></p>
                         </article>

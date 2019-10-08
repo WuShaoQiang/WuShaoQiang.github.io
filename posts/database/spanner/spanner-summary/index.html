@@ -141,6 +141,106 @@
 
 <p>对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大</p>
 
+<p>Spanner还有更多的细节以及特性，可以参照Paper去理解</p>
+
+<h3 id="数据的结构">数据的结构</h3>
+
+<p>虽然Spanner在说BigTable只提供了KV的结构，自己则要有关系型的结构，其实不然，Paper中指出，Spanner还是利用了映射的关系来存储数据，主要是分为</p>
+
+<ul>
+<li><p>Primary Key</p></li>
+
+<li><p>Non-Primary Key</p></li>
+</ul>
+
+<p>其中映射关系就是 Primary Key的Column指向Non-Primary Key Column</p>
+
+<p>文中解释这样的好处是</p>
+
+<blockquote>
+<p>it lets applications control data locality through their choices of keys</p>
+</blockquote>
+
+<h3 id="framework">Framework</h3>
+
+<p><img src="https://blog.gavinblog.info/posts/image/spanner/f1.png" alt="f1" /></p>
+
+<p>简单介绍一下这里面的角色</p>
+
+<p>Zone是一个Physical Isolation的单元，也就一台机器</p>
+
+<p>Zone下面的有一个ZoneMaster，是用来将数据写入到下面的spanserver，而spanserver可以处理来自client的请求</p>
+
+<p>location proxy就是让client知道自己应该找哪一个spanserver</p>
+
+<p>Universe Master其实就是观看所有Zone的状态的终端</p>
+
+<p>Placement Driver处理数据迁移，负载均衡等，相当于整个系统的大脑部分</p>
+
+<p>这里我有一个疑问就是</p>
+
+<p><strong>我如何知道数据在哪一个Zone里呢?</strong></p>
+
+<h4 id="着重看spanserver">着重看spanserver</h4>
+
+<p><img src="https://blog.gavinblog.info/posts/image/spanner/f2.png" alt="f2" /></p>
+
+<p>这个图就能体现更多的技术细节了，下面简单解释一下它们的作用</p>
+
+<p>首先最底层的是一个分布式文件存储系统，可以看作是硬盘(为了简单理解)</p>
+
+<p>tablet可以看作是一个数据集，里面包含了多个真实的数据，这个和BigTable的tablet还是比较像的</p>
+
+<p>再上面是一个状态机，Paxos在一致性算法里面也是很出名的，当然也还有最近比较火的Raft，作用都是实现数据的一致性(在这里Spanner实现强一致性)</p>
+
+<p>在这里，Spanner也用了One Leader这样的一个副本模式，在几个副本里就只有一个Leader</p>
+
+<p>也就是在这个Leader里下发命令给Followers，利用Paxos来做一致性</p>
+
+<p>Paxos group是图上面没有直接写出来的，我们从图中可以看到，一个副本group是来自不同的Data Center，也就是说一定是来自不同的物理机的，这个group其实就是指这几个副本组合成的group</p>
+
+<p>lock table是用range key映射lock，我们可以简单认为这是一个锁的中心，这里用到的是(2PL)</p>
+
+<p>transaction manager是为了支持分布式事务的，当事务处在一个group的情况下，可以跳过这个模块。这里可以理解为平常时的副本集，往Leader写入就好，Leader在必要的时候会调用lock table来维护这个transaction。但是在不同的group里面就需要用到它了，因为不同group意味着group1无法持有group2的锁。这个时候就要一个中心的调度来维护这个transaction</p>
+
+<h3 id="关于truetime-api">关于TrueTime API</h3>
+
+<p>因为这个API的实现不是我想关注的点，我简单描述一下</p>
+
+<p>这个API是用了大量的GPS时钟和原子钟再加上一些算法一起组成的一个服务，能够保证下面几点</p>
+
+<ul>
+<li><p>TT.now() 返回一个时间区间[t_earliest, t_latest]，这个时间区间保证包含了在调用这个函数的绝对时间</p></li>
+
+<li><p>TT.before(t) 返回<code>t &gt; t_latest</code>，其中t_latest是指这个函数调用时最大的绝对时间(这个函数调用不会在这个时间之后)</p></li>
+
+<li><p>TT.after(t) 返回<code>t &lt; t_earliest</code>，其中t_earliest是指这个函数调用时最小的绝对时间(这个函数调用不会在这个时间之前)</p></li>
+</ul>
+
+<h3 id="介绍一个rw事务">介绍一个RW事务</h3>
+
+<p>Read-Write Transaction也算是事务里面比较复杂的那个，另外的事务可以按照Paper的解释去理解</p>
+
+<p>首先这里是用了2PL来处理这个事务</p>
+
+<p>我们来考虑一个RW-Tx涉及到不同的Paxos Group的情况</p>
+
+<p>首先，不同的Paxos Group在这里我们可以抽象成只有一个Leader(因为Followers都是受Leader指挥的)</p>
+
+<p>那么多个Leader又会组成一个新的group，这里叫coordinator group，这里也会选出一个Leader，叫coordinator group leader</p>
+
+<p>首先client会把第一个请求发给每一个Paxos Leader，获取相应的读锁(Shared Lock)，拿回最新的数据。然后client会发送第二个请求，这个请求包括要写入的数据，和选择一个coordinator group leader</p>
+
+<p>然后客户端会把第二个请求也会发给所有的Paxos Leader，还记得吗，它们一起组成了coordinator group，然后这个group里面的成员会把Prepare返回给coordinator leader(2PC的内容)</p>
+
+<p>一个非coordinator leader的coordinator在返回prepare之前会获取对应range key的write lock，并且广播给它的Followers(这里是Paxos Group的概念)</p>
+
+<p>根据2PC，coordinator leader会在接收到所有的prepare之后才会进行commit</p>
+
+<p>然后再commit，然后再返回信息给client</p>
+
+<p><strong>这里中间省略了很多关于时间的处理</strong>，主要是理解它的大概逻辑怎么走</p>
+
                         </div>
 
                         
