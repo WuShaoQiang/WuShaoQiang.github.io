@@ -78,6 +78,36 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview3/">Interview3</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95">面试</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                稍微总结一下今天面试遇到的一些问题以及自己的不足，再接再厉
+感觉这篇blog有点像日记了。。。
+Link 在前面时间里主要是问了三道和链表相关的题，可能因为平时少练题的缘故，答的不太好
+LRU缓存算法 我之前没有听过LRU(Latest Related Used)
+在假设一个场景下，一个值被请求，那么下面很有可能会再次多次请求这个值，那么用这种算法能够cache住最新的值，使得效率提高
+还好面试官通过解释，我才大概懂得这个LRU是用来干嘛的(但是当时还是没太多思路)
+现在用代码大概描述一下
+package main type DLinkNode struct { key int val int next *DLinkNode prev *DLinkNode } func addNodeAfter(prev, node *DLinkNode) { node.prev = prev node.next = prev.next if prev.next != nil { prev.next.prev = node } prev.next = node } func removeNode(node *DLinkNode) { if node.prev != nil { node.prev.next = node.next } if node.next != nil { node.next.prev = node.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview3/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">TenToSeventeen</a>
                                 </h1>
                             </header>
@@ -213,6 +243,18 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -238,18 +280,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -290,7 +320,7 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -322,7 +352,7 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -335,6 +365,10 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

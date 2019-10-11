@@ -78,6 +78,29 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">TenToSeventeen</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">Golang GC</a>
                                 </h1>
                             </header>
@@ -399,46 +422,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-map/">Golang Map</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月20日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Construct: m:=map[key]value{}
- Insert: m[k] = v
- Lookup: v = m[k]
- Delete: delete(m,k)
- lterate: for k,v := range m
- Size: len(m)
-  Key不能为 maps,slices,funcs. 因为它们不可比较
-Map底层 map header
-len lg(#buckets) bucket array hash seed  流程  接收到一个key
- 对key进行hash
- 通过hash找到是哪一个bucket
- 取hash前8bit作为extra(作为快速检查)
- 找到bucket的内存(对不同的类型，大小会有不同)
-  扩容  新创建一个两倍的空间
- 复制entries到新的bucket，但是这里的复制是递增式的，因为如果一次性将很大的数据复制到一块内存，它会很耗费时间，但是这种方法就代表着，在扩容的时候，查找会变得慢了，因为要查找两块内存空间。这也决定了我们不能直接用指针指向map的某一个value，因为这个value可能扩容后就不在那了
- 用新的bucket
-  和其它Map比较  Go map不能用指针指向单个value
- 迭代的时候，go map是可以修改的……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-map/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -499,6 +482,18 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -524,18 +519,6 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -576,7 +559,7 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -608,7 +591,7 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -621,6 +604,10 @@ len lg(#buckets) bucket array hash seed  流程  接收到一个key
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

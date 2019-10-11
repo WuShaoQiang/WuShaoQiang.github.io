@@ -78,6 +78,53 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">TCP 连接 --三次握手和四次挥手</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 首先这里所说的握手，是进程之间的握手
+三次握手 简单来说就是
+A --&gt; B 不承载有效负荷 B --&gt; A 不承载有效负荷 A --&gt; B 可以承载有效负荷  再细致点说就是
+ 客户端应用程序发起一个TCP连接
+ 发送报文里有SYN
+ 收到来自服务器端的SYN&amp;ACK
+ 再次向服务器端发送ACK
+  这里面总共有3次报文，所以为三次握手
+最大报文段长度&amp;最大传输单元 最大报文段长度(MSS):一般为1460
+最大传输单元(MTU):一般为1500
+之说以说一般，是因为一般来说TCP/IP的首部字段加起来是40字节
+1500-40=1460
+清除认识 当进程通过套接字把数据给到TCP的时候，数据就和进程没关系了，已经全权交给TCP了
+为什么不是两次握手？ 这是书本上的一个问题
+在我理解，握手其实是为了双方知道对方的初始序列号
+ 客户端给服务器端发送初始序列号
+ 服务器端收到了客户端的初始序列号，并且发送服务器端的初始序列号
+  如果客户端不产生第三次握手，那么服务器端不知道客户端到底拿到了初始序列号没
+ 客户端看到回复后就知道服务器端拿到了自己的初始序列号，于是也和服务器端说明，已经拿到它的初始序列号了  四次挥手  客户端应用程序发起关闭连接
+ 发送报文里包含FIN
+ 服务器端发送一个ACK表示接收到了
+ 服务器端再次发一个FIN
+ 客户端给服务器端发一个ACK
+ 等待一会，资源就释放了
+  ……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-connect/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-message-field/">TCP --报文</a>
                                 </h1>
                             </header>
@@ -245,6 +292,18 @@ P2P面临的挑战
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -270,18 +329,6 @@ P2P面临的挑战
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -322,7 +369,7 @@ P2P面临的挑战
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -354,7 +401,7 @@ P2P面临的挑战
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -367,6 +414,10 @@ P2P面临的挑战
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

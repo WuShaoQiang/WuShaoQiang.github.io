@@ -68,6 +68,121 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System" >Foundations of Data System</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                我们要知道，不同的数据库系统拥有着不同的特性，因此在不同的应用场景下会根据应用所需的特性来选择数据库系统，这也是开发者对数据库必须要了解的地方
+这一blog主要是覆盖三个方面
+ Reliability
+ Scalability
+ Maintainability
+  Reliability 一般来说，我们希望我们的软件
+ 正确执行我们所期望的
+ 就算user操作失误，也能一定程度上容忍
+ 性能在合适的压力下是好的
+ 系统可以防止外界未授权侵入
+  下面我想先解释一下两个经常搞混的名词
+ Fault，这个词是用来描述整个系统中的某一个部件(模块)出现了问题。当然，如果系统就只是一个模块，那么也就等价于Failure了，但是当今众多系统中，基本都由多个模块组成。
+ Failure，这个词是用来描述整个系统出了问题，说明系统不可用了
+  所以我们要打造的是一个Fault-tolerance的系统，以防止单个模块出问题影响整个系统
+用具体的例子说模块出问题就是，将某一个进程杀掉，看看整个系统有没有因此而不工作了(设想中是要工作的)
+Hardware Fault 硬件出错，其中包括
+ 内存满了
+ 断电
+ 磁盘损坏
+  &hellip;
+只要是电子原件，都会有坏的可能
+所以，如果软件对可用性要求非常苛刻，那么将服务部署在多台机器上是必不可少的，这也是常说的避免单点故障。而且，多台机器部署，在对服务进行升级的时候，可以控制在对外无感知的情况下升级。也就是帮天上的飞机换轮胎
+但是，硬件错误，一般只会是单个出错，同时出错的概率是非常低的(自然灾害除外)，所以一般来说，系统应该能够容忍少部分机器进入宕机的状态
+Software Fault 是人写的软件，都会有Bug。还记得一句话
+ 你以为Hello World就不会有Bug了吗，等什么时候链接器，编译器出现Bug了，就连Hello World这样的程序也跑不过
+ 所以在设计一个系统的时候，绝对不能假设某一个模块是没问题的，哪怕它的代码再少
+那我们应该怎么做可以最大程度减少Failure的可能性呢：
+ 设计这个系统的时候需要有容忍性的设计
+ 测试，必不可少的
+ 隔离，也就是一个模块的Fault不应该引起其它模块的Fault
+ 容忍宕机重启操作
+ 有观测整个系统的Monitor(可能是一些Web，或者命令行)
+  &hellip;等等……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting" >Greeting</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/"></a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Formal greeting Good &hellip;
+And your name is &hellip;
+Very nice to meet you
+My name&rsquo;s &hellip;
+Welcome to &hellip; (Welcome is not formal)
+How are you today (How are you is nature)
+Very well, thank you.
+I am fine, thank for asking
+Neutral Informal Introduce others Let me introduce my colleague, &hellip; (formal) May I introduce my colleague, &hellip; (formal)
+This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/greeting/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown" >Introduce Your Hometown</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/English">English</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 tips How to describe your hometown, follow these points will help you get there
+ Introducing your hometown briefly
+ Adding background and details about your hometown
+ Talking about what you like or dislike about it
+ Talking about how it&rsquo;s changed over time
+  Briefly I like in a __ (city, town, village...)  Background and details Like or dislike history and changes ____ has changed a lot in the last 20 years ____ is almost unrecognisible compared to 20 years ago it hasn't changed much in the last 20 years  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/hometown/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction" >Self Introduction</a>
                                 </h1>
                             </header>
@@ -342,129 +457,6 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array" >Javascript Array</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Reference 阮一峰
-数组的创建 假设我们创建一个数组
-var arr = new Array(10)  其实这个数组是没有key的，但是我们却能够用下标访问，并且可以越界
-Object.keys(arr) //[] arr[0] //undefined arr[100] //undefined  一般来说不推荐这种创建数组的方式
-var arr1 = [undefined,undefined] Object.keys(arr1) //[&quot;0&quot;,&quot;1&quot;]  静态方法 Array.isArray()
-因为typeof对于数组智能返回一个object
-所以我们可以用Array.isArray()来判断这个是否为数组
-从这里我们可以看到，array也是一个对象
-所以会有接下来的方法
-valueOf() &amp;&amp; toString()
-valueOf 会把数据结构原封不懂的输出
-typeof arr.valueOf() //object Array.isArray(arr.valueOf()) //true  说明它又是输出一个数组呀
-那么toString就不同了，这个会把元素一个个拆分，然后用逗号隔开组成一个string
-//数组 [1, 2, 3, Array(3), &quot;aa&quot;] //toString结果 &quot;1,2,3,4,5,6,aa&quot;  push() pop() shift() unshift()
-push和unshift都是往数组增加元素
-pop和shift都是减少数组元素
-push和pop都是在针对数组后面的元素
-shift和unshift都是针对数组前面的元素
-join()
-这个会返回一个字符串，默认用逗号分隔，也可以传入分隔符
-如果是undefined或者null会被转换为空字符串
-concat
-concat是数组的加法，可以将在原数组的基础上加上传入的参数，返回一个新的数组，原数组不变
-要注意的是
-如果数组成员包含对象，concat方法返回的是一个浅拷贝，也就是新数组拷贝的是对象的引用……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object" >Javascript Object</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                本篇笔记是学习阮一峰老师的ES6
-关于对象 Javascript所有对象都继承自Object
-所以一般对象有两种方法集：
- Object本身的方法
- 对象实例的方法
-  Object() 我们可以使用Object()来强制类型转换，将任意值转换为一个对象
-我们可以分为三种情况
- 空对象
- Object()
- Object(null)
- Object(undefined)
-  需要转换
- Number
- String
- Boolean
-  不需要转换
- Array
- Object
- Function
-   不需要转换的可以有Object(...) === Object(...) //true
-但是Object(undefined) === Object(undefined) //false
-静态方法 Object.keys() Object.getOwnPropertyNames()  这两者的区别在于Object.getOwnPropertyNames能够返回不可枚举的属性名
-什么叫不可枚举的属性名呢?
-类似一个数组包含了两个元素let a = [11,22],那么Object.keys返回的就是[&quot;0&quot;,&quot;1&quot;],而另一个方法返回的是[&quot;0&quot;,&quot;1&quot;,&quot;length&quot;]
-这里面的length就是一个不可枚举的属性名
-不过我们一般情况下是不希望将不可枚举的属性名抽取出来的，所以我们一般是用Object.keys()
-Object.prototype.getOwnPropertyDescriptor
-这个方法只能够用于自身的属性，作用是给出某个属性的详细信息(属性描述对象)
-{ value: 123, //值 writable: false, //是否可写 enumerable: true, //是否可遍历(是否可以用Object.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive" >Typescript Basic Primitive</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                I am using Typescript about 2 weeks on my team&rsquo;s project until now.
-But I am very new on front-end, and I have never learned Javascript or Typescript before. So, I decided to learn from open-source-tutorial.
-I planed to spend a week or two weeks to learn the basic syntax about JS and TS, so I will write some blogs to record the process and make a summary at the end.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -629,6 +621,18 @@ I planed to spend a week or two weeks to learn the basic syntax about JS and TS,
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -654,18 +658,6 @@ I planed to spend a week or two weeks to learn the basic syntax about JS and TS,
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -706,7 +698,7 @@ I planed to spend a week or two weeks to learn the basic syntax about JS and TS,
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -738,7 +730,7 @@ I planed to spend a week or two weeks to learn the basic syntax about JS and TS,
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -751,6 +743,10 @@ I planed to spend a week or two weeks to learn the basic syntax about JS and TS,
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

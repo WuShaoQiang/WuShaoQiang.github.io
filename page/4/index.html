@@ -68,6 +68,129 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/" title="Javascript Array" >Javascript Array</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Reference 阮一峰
+数组的创建 假设我们创建一个数组
+var arr = new Array(10)  其实这个数组是没有key的，但是我们却能够用下标访问，并且可以越界
+Object.keys(arr) //[] arr[0] //undefined arr[100] //undefined  一般来说不推荐这种创建数组的方式
+var arr1 = [undefined,undefined] Object.keys(arr1) //[&quot;0&quot;,&quot;1&quot;]  静态方法 Array.isArray()
+因为typeof对于数组智能返回一个object
+所以我们可以用Array.isArray()来判断这个是否为数组
+从这里我们可以看到，array也是一个对象
+所以会有接下来的方法
+valueOf() &amp;&amp; toString()
+valueOf 会把数据结构原封不懂的输出
+typeof arr.valueOf() //object Array.isArray(arr.valueOf()) //true  说明它又是输出一个数组呀
+那么toString就不同了，这个会把元素一个个拆分，然后用逗号隔开组成一个string
+//数组 [1, 2, 3, Array(3), &quot;aa&quot;] //toString结果 &quot;1,2,3,4,5,6,aa&quot;  push() pop() shift() unshift()
+push和unshift都是往数组增加元素
+pop和shift都是减少数组元素
+push和pop都是在针对数组后面的元素
+shift和unshift都是针对数组前面的元素
+join()
+这个会返回一个字符串，默认用逗号分隔，也可以传入分隔符
+如果是undefined或者null会被转换为空字符串
+concat
+concat是数组的加法，可以将在原数组的基础上加上传入的参数，返回一个新的数组，原数组不变
+要注意的是
+如果数组成员包含对象，concat方法返回的是一个浅拷贝，也就是新数组拷贝的是对象的引用……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-array/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/" title="Javascript Object" >Javascript Object</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                本篇笔记是学习阮一峰老师的ES6
+关于对象 Javascript所有对象都继承自Object
+所以一般对象有两种方法集：
+ Object本身的方法
+ 对象实例的方法
+  Object() 我们可以使用Object()来强制类型转换，将任意值转换为一个对象
+我们可以分为三种情况
+ 空对象
+ Object()
+ Object(null)
+ Object(undefined)
+  需要转换
+ Number
+ String
+ Boolean
+  不需要转换
+ Array
+ Object
+ Function
+   不需要转换的可以有Object(...) === Object(...) //true
+但是Object(undefined) === Object(undefined) //false
+静态方法 Object.keys() Object.getOwnPropertyNames()  这两者的区别在于Object.getOwnPropertyNames能够返回不可枚举的属性名
+什么叫不可枚举的属性名呢?
+类似一个数组包含了两个元素let a = [11,22],那么Object.keys返回的就是[&quot;0&quot;,&quot;1&quot;],而另一个方法返回的是[&quot;0&quot;,&quot;1&quot;,&quot;length&quot;]
+这里面的length就是一个不可枚举的属性名
+不过我们一般情况下是不希望将不可枚举的属性名抽取出来的，所以我们一般是用Object.keys()
+Object.prototype.getOwnPropertyDescriptor
+这个方法只能够用于自身的属性，作用是给出某个属性的详细信息(属性描述对象)
+{ value: 123, //值 writable: false, //是否可写 enumerable: true, //是否可遍历(是否可以用Object.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-object/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/" title="Typescript Basic Primitive" >Typescript Basic Primitive</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                I am using Typescript about 2 weeks on my team&rsquo;s project until now.
+But I am very new on front-end, and I have never learned Javascript or Typescript before. So, I decided to learn from open-source-tutorial.
+I planed to spend a week or two weeks to learn the basic syntax about JS and TS, so I will write some blogs to record the process and make a summary at the end.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/typescript-basic-primitive/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account" >Linux Account</a>
                                 </h1>
                             </header>
@@ -254,87 +377,6 @@ Here are some concepts:
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File" >Linux Search File</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Last time, I shared about how to read file content, and the most useful command
-Today, I will make a little cover about searching file
-which I do use a lot which to find binary file
-which ls //output /bin/ls  It is a simple command to help us searching the binary file
-locate locate is a powerful search command which is using database searching
-locate filename //search included filename locate -i filename //ignore case locate -r regexp //use regular expression to search  As we can see the commands above there, we can also do any search with it……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/" title="Linux Read File" >Linux Read File</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Last time, I talked about how to operate file like copy, move or remove
-Today, let&rsquo;s see how many ways do we have to read file content, I will introduce some basic and useful commands
-cat cat filename will print all the content at once, so it is helpful when you just simply want to print the file content
-cat -n filename // show the line number  but if the file is large(like 100M+), you may not want to use this.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-read-file/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/" title="Linux File System Basic Command" >Linux File System Basic Command</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Basic Command Last time, I shared about permission
-Today the topic is Basic Command of File System
-I am gonna give you some simple command you can use in your daily working situation
-cd //enter a directory pwd //show the work directory(Print Working Directory)  mkdir
-mkdir -m // set directory permission when create mkdir -p // If parent directory doesn't exist, it will help you create when you add -p flag  rmdir……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -499,6 +541,18 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -524,18 +578,6 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -576,7 +618,7 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -608,7 +650,7 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -621,6 +663,10 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

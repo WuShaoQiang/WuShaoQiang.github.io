@@ -68,6 +68,75 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-709/" title="Leetcode 709" >Leetcode 709</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Implement function ToLowerCase() that has a string parameter str, and returns the same string in lowercase. Example 1: Input: &quot;Hello&quot; Output: &quot;hello&quot; Example 2: Input: &quot;here&quot; Output: &quot;here&quot; Example 3: Input: &quot;LOVELY&quot; Output: &quot;lovely&quot;  我的解答 // Runtime: 0 ms, faster than 100.00% of Go online submissions for To Lower Case. // Memory Usage: 1.9 MB, less than 56.74% of Go online submissions for To Lower Case. func toLowerCase(str string) string { dis := byte(32) b := []byte(str) for i := 0; i &lt; len(b); i++ { if b[i] &gt;= 'A' &amp;&amp; b[i] &lt;= 'Z' { b[i] += dis } } return string(b) }  比较简单……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-709/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-696/" title="Leetcode 696" >Leetcode 696</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Give a string s, count the number of non-empty (contiguous) substrings that have the same number of 0's and 1's, and all the 0's and all the 1's in these substrings are grouped consecutively. Substrings that occur multiple times are counted the number of times they occur. Example 1: Input: &quot;00110011&quot; Output: 6 Explanation: There are 6 substrings that have equal number of consecutive 1's and 0's: &quot;0011&quot;, &quot;01&quot;, &quot;1100&quot;, &quot;10&quot;, &quot;0011&quot;, and &quot;01&quot;.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-696/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-686/" title="Leetcode 686" >Leetcode 686</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two strings A and B, find the minimum number of times A has to be repeated such that B is a substring of it. If no such solution, return -1. For example, with A = &quot;abcd&quot; and B = &quot;cdabcdab&quot;. Return 3, because by repeating A three times (“abcdabcdabcd”), B is a substring of it; and B is not a substring of A repeated two times (&quot;abcdabcd&quot;). Note: The length of A and B will be between 1 and 10000.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-686/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-680/" title="Leetcode 680" >Leetcode 680</a>
                                 </h1>
                             </header>
@@ -224,77 +293,6 @@
                                 题目 Given a word, you need to judge whether the usage of capitals in it is right or not. We define the usage of capitals in a word to be right when one of the following cases holds: All letters in this word are capitals, like &quot;USA&quot;. All letters in this word are not capitals, like &quot;leetcode&quot;. Only the first letter in this word is capital, like &quot;Google&quot;. Otherwise, we define that this word doesn't use capitals in a right way.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-520/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-459/" title="Leetcode 459" >Leetcode 459</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a non-empty string check if it can be constructed by taking a substring of it and appending multiple copies of the substring together. You may assume the given string consists of lowercase English letters only and its length will not exceed 10000. Example 1: Input: &quot;abab&quot; Output: True Explanation: It's the substring &quot;ab&quot; twice. Example 2: Input: &quot;aba&quot; Output: False Example 3: Input: &quot;abcabcabcabc&quot; Output: True Explanation: It's the substring &quot;abc&quot; four times.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-459/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/html-basic/" title="HTML Basic" >HTML Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月21日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Tag &lt;!DOCTYPE html&gt; &lt;html&gt;&lt;/html&gt; &lt;head&gt;&lt;head&gt; 通常是放title、meta、link、script、style的地方 &lt;link&gt; refer to an external CSS file &lt;title&gt;&lt;/title&gt; 网页的标题 &lt;body&gt;&lt;/body&gt; 网页的主体 &lt;h1&gt;&lt;/h1&gt; 标题h1-h6 &lt;p&gt;&lt;\p&gt; 段落 &lt;hr&gt; 分割线 &lt;br&gt; line break &lt;pre&gt;&lt;/pre&gt; 这个会将里面的内容输出，空格换行等都能被显示(pre-formatted text) &lt;div&gt;&lt;/div&gt; container for element &lt;span&gt; container for text &lt;iframe&gt; display a web page within a web page  Attr Some suggestions you should know:
- HTML5 does not require lowercase attribute name, but everybody should use lowercase in HTML
- HTML5 does not require quotes around attribute values, but everybody should quote attribute values……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/html-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-443/" title="Leetcode 443" >Leetcode 443</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月19日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an array of characters, compress it in-place. The length after compression must always be smaller than or equal to the original array. Every element of the array should be a character (not int) of length 1. After you are done modifying the input array in-place, return the new length of the array. Follow up: Could you solve it using only O(1) extra space? Example 1: Input: [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;] Output: Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;] Explanation: &quot;aa&quot; is replaced by &quot;a2&quot;.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-443/">阅读全文</a></p>
                         </article>
                     
 
@@ -461,6 +459,18 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -486,18 +496,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -538,7 +536,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -570,7 +568,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -583,6 +581,10 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

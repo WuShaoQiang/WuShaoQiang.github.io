@@ -78,6 +78,50 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">Golang Errandpanic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月11日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
+本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
+直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
+错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
+异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
+ but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
+ defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
+... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
+并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
+如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
+同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
+ 一般设计，如果输入有误，则返回错误
+ 异常设计，如果输入有误，直接抛出异常
+  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
+其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
+凡事要有规则 异常处理的作用域
+ 空指针引用
+ 下标越界
+ 除数为0
+ 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
+ 输入不应该引起函数错误
+  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">Golang Crawler</a>
                                 </h1>
                             </header>
@@ -336,35 +380,6 @@ func Hey(remark string) string { // Write some code here to pass the test suite.
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">Go圣经读书笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
-func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
-输出/tmp/go-build115927302/b001/exe/main 123
-查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
- func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
- func (s *Scanner) Text() string  返回scanner所在行的文本
-counts := make(map[string]int) input := bufio.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -397,6 +412,10 @@ counts := make(map[string]int) input := bufio.……
         <a href="https://wushaoqiang.github.io/tags/Golang/page/5/">5</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/Golang/page/6/">6</a>
+    </li>
+    
 
     
     <li class="next">
@@ -425,6 +444,18 @@ counts := make(map[string]int) input := bufio.……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -450,18 +481,6 @@ counts := make(map[string]int) input := bufio.……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -502,7 +521,7 @@ counts := make(map[string]int) input := bufio.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -534,7 +553,7 @@ counts := make(map[string]int) input := bufio.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -547,6 +566,10 @@ counts := make(map[string]int) input := bufio.……
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

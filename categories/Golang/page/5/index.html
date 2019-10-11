@@ -78,6 +78,35 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">Go圣经读书笔记</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年3月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
+func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
+输出/tmp/go-build115927302/b001/exe/main 123
+查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
+ func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
+ func (s *Scanner) Text() string  返回scanner所在行的文本
+counts := make(map[string]int) input := bufio.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">Go语言实战</a>
                                 </h1>
                             </header>
@@ -384,6 +413,18 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -409,18 +450,6 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -461,7 +490,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -493,7 +522,7 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -506,6 +535,10 @@ norm = fmt.Sprintf(&quot;%-[1]*s&quot;, c*r, norm): 其实就是将出c*r代入�
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

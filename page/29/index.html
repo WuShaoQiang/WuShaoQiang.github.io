@@ -68,6 +68,98 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/" title="Golangstd Request" >Golangstd Request</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
+我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
+所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
+Request结构体 type Request struct { Method string URL *url.URL Proto string // &quot;HTTP/1.0&quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
+Method 这就是一个请求的方法(如GET、POST)
+但是Go的HTTP客户端不支持发送方法为CONNECT的请求
+URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/" title="Golang Gorm" >Golang Gorm</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                连接数据库 Mysql db, err := gorm.Open(&quot;mysql&quot;, &quot;root:123456@tcp/test?charset=utf8&amp;parseTime=True&quot;) if err != nil { panic(&quot;连接数据库失败&quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
+db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
+比如db.CreateTable(&amp;Product{})，在数据库表单里面会得到一个名字为products
+所以一般都会加上这个函数
+创建Table db.CreateTable(&amp;Product{})  创建多个table
+db.CreateTable(&amp;Product{},&amp;User{})  删除Table 关于删除，有两个
+db.DropTableIfExist(interface{}) db.DropTable(interface{})  这里可以传入字符串，也可以传入一个结构体
+接着上面的例子
+db.DropTableIfExist(&quot;product&quot;) db.DropTableIfExist(&amp;Product{})  删除Column 删除Column是要指定Table，所以不能这样
+db.DropColumn(&quot;created_at&quot;)  要定位Table，则需要
+db.Model(&amp;Product).DropColumn(&quot;created_at&quot;)  创建数据 db.Create(&amp;Product{Code: &quot;L1213&quot;, Price: 1002})  查询数据 // 最后一个符合条件，默认id最后的那个 // Get last record, order by primary key db.Last(&amp;user) //// SELECT * FROM users ORDER BY id DESC LIMIT 1; // 将所有符合条件的返回，这里要传一个结构体数组 // Get all records db.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-viper/" title="Golang Viper" >Golang Viper</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月5日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Github
+ Viper is a complete configuration solution for Go applications
+ 这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用
+Reading Config Files  a single Viper instance only supports a single configuration file
+ 一个Viper对象只能对应一个配置文件，是一个一一对应的映射关系
+但是我们在搜索配置文件的时候，可以设置多个路径，如果没有设置路径，则当前程序的目录上寻找，所以我们要设置好路径
+这是Github上的一个例子
+viper.SetConfigName(&quot;config&quot;) // name of config file (without extension) viper.AddConfigPath(&quot;/etc/appname/&quot;) // path to look for the config file in viper.AddConfigPath(&quot;$HOME/.appname&quot;) // call multiple times to add many search paths viper.AddConfigPath(&quot;.&quot;) // optionally look for config in the working directory err := viper.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-viper/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/git/learn-gitflow/" title="Learn Gitflow" >Learn Gitflow</a>
                                 </h1>
                             </header>
@@ -271,97 +363,6 @@ tcp 0 0 localhost:mysql 0.0.0.0:* LISTEN 31238/mysqld  整个安装过程没有�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mysql/mysql-basic/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-bible/" title="Go圣经读书笔记" >Go圣经读书笔记</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                第一章 入门 命令行参数 os.Args变量是一个字符串的切片，并且它的第一个元素是命令本身的名字
-func main() { var s, sep string for i := 0; i &lt; len(os.Args); i++ { s += sep + os.Args[i] sep = &quot; &quot; } fmt.Println(s) }  运行go run main.go 123
-输出/tmp/go-build115927302/b001/exe/main 123
-查找重复的行  input := bufio.NewScanner(os.stdin) ~ func NewScanner(r io.Reader) *Scanner  返回一个从r读取的Scanner
- func (s *Scanner) Scan() bool  逐行扫描，当scan停止的时候，或者是到了读取的终点，又或者是发生了错误，这里都会返回false
- func (s *Scanner) Text() string  返回scanner所在行的文本
-counts := make(map[string]int) input := bufio.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-bible/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/" title="Go语言实战" >Go语言实战</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Go语言优点：
- Go语言可以说是夹在C/C++和Python这两类语言之间，即提供了较高的性能，又使得开发更加迅速了。
- Go语言内置并发机制，对并发有着更好的性能
- Go语言自带垃圾回收器
- goroutine使用的内存比线程要少，所以常常能够成千上万个goroutine并发
-  第六章 并发 概念  进程：当运行一个应用程序时，操作系统会为这个应用程序启动一个进程，可以将这个进程看作一个包含了应用程序在运行中需要用到和维护的各种资源 线程：一个线程是一个空间，这个空间会被操作系统调度来运行函数中所写的代码，线程会被调度到CPU上运行。 每个逻辑处理器绑定在一个线程上 逻辑处理器可以调度goroutine 并发：某一个事情的停止，另一个事情就开始(单线程) 并行：同时开始做(多线程)  goroutine 一个创建goroutine的示例 package main import ( &quot;fmt&quot; &quot;runtime&quot; &quot;sync&quot; ) // main is the entry point for all Go programs. func main() { // Allocate 1 logical processor for the scheduler to use. runtime.GOMAXPROCS(1) // wg is used to wait for the program to finish. // Add a count of two, one for each goroutine.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-inaction/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/" title="Go语言高级编程" >Go语言高级编程</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年3月17日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                感谢 在文章开头感谢两位作者:柴树杉和曹春晖
-这篇文章是开源的，欢迎大家去阅读
-本篇博客是笔者对这篇文章的理解，引用的图片也是来自原文，如有侵权请告知！
-第一章 基础 1.3 数组、字符串和切片  Go语言的数组是一种值类型，虽然数组的元素可以被修改，但是数组本身的赋值和函数传参都是以整体复制的方式处理的
- Go语言字符串底层数据也是对应的字节数组，但是字符串的只读属性禁止了在程序中对底层字节数组的元素的修改字符串赋值只是复制了数据地址和对应的长度，而不会导致底层数据的复制
- 切片头含有底层数据的指针，所以它的赋值也不会导致底层数据的复制
-  字符串  字符串的元素不可修改，是一个只读的字节数组
- 字符串虽然不是切片，但是支持切片操作
-type StringHeader struct { Data uintptr Len int }  字符串结构由两个信息组成：第一个是字符串指向的底层字节数组，第二个是字符串的字节的长度。
-  切片 type SliceHeader struct { Data uintptr Len int Cap int }  a = append(a, 0) // 切片扩展1个空间 copy(a[i+1:], a[i:]) // a[i:]向后移动1个位置 a[i] = x // 设置新添加的元素  copy将a[i:]直接搬到了a[i+1:]这个时候就可以在a[i]插入
-这种做法可以减少中间创建的临时切片
-copy append可以完成切片的添加 删除 插入操作……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-highlevel/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -526,6 +527,18 @@ copy append可以完成切片的添加 删除 插入操作……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -551,18 +564,6 @@ copy append可以完成切片的添加 删除 插入操作……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -603,7 +604,7 @@ copy append可以完成切片的添加 删除 插入操作……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -635,7 +636,7 @@ copy append可以完成切片的添加 删除 插入操作……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -648,6 +649,10 @@ copy append可以完成切片的添加 删除 插入操作……
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

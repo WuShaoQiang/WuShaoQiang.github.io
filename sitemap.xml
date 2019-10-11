@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/interview/interview3/</loc>
+    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/golang/go-scheduler/</loc>
+    <lastmod>2019-10-10T13:11:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/computer-network/get-vs-post/</loc>
+    <lastmod>2019-10-09T23:15:11+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/</loc>
     <lastmod>2019-10-08T18:58:01+08:00</lastmod>
   </url>
@@ -1706,7 +1721,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
+    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1742,13 +1757,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Golang/</loc>
-    <lastmod>2019-08-11T09:38:20+08:00</lastmod>
+    <lastmod>2019-10-10T13:11:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Golang/</loc>
-    <lastmod>2019-08-11T09:38:20+08:00</lastmod>
+    <lastmod>2019-10-10T13:11:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1940,7 +1955,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
+    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2148,7 +2163,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/</loc>
-    <lastmod>2019-04-28T10:19:02+08:00</lastmod>
+    <lastmod>2019-10-09T23:15:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2160,7 +2175,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</loc>
-    <lastmod>2019-09-29T15:23:25+08:00</lastmod>
+    <lastmod>2019-10-09T23:15:11+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2238,7 +2253,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2019-04-28T16:25:41+08:00</lastmod>
+    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   

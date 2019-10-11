@@ -68,6 +68,95 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/" title="Golang Build blog with gin" >Golang Build blog with gin</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 Package  ini &mdash;配置文件的读取
+ com &mdash;功能性
+ validation &mdash;做验证
+ jwt-go &mdash;Token
+ endless &mdash;服务器热启动
+ swag &mdash;API文档
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/" title="Golang标准库--os" >Golang标准库--os</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Open与OpenFile的区别 笔者在某天遇到一个情况，用Open打开文件并且想写入发生了错误
+bad file descriptor  检查过后发现Open在底层是调用了OpenFile，并且默认是只读的形式
+// Open opens the named file for reading. If successful, methods on // the returned file can be used for reading; the associated file // descriptor has mode O_RDONLY. // If there is an error, it will be of type *PathError. func Open(name string) (*File, error) { return OpenFile(name, O_RDONLY, 0) }  所以要是想要自己定义打开的文件限制的话，就用OpenFile吧
+// Flags to OpenFile wrapping those of the underlying system.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/" title="Golang Path Problem" >Golang Path Problem</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月12日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                笔者在学习的路上遇到了一些关于路径的奇怪问题，想着这个问题都埋了这么久了，赶紧出来总结一下，以防下次再出现这类型错误
+直接用相对路径 在os.Open()直接输入相对路径，这个相对路径决定于你的工作目录，如果工作目录发生改变，就不行了
+filepath.Abs() filepath.Abs()是根据当前工作目录返回的绝对路径，这个和上面的不同在于，这个可以打开工作目录之前的文件，而上面的只能打开后面的文件
+所谓前后是值文件夹的前后
+所以写在程序里面，你在这个目录执行成功了，你退一个目录就不行了，因为这个时候工作路径改变了
+笔者感觉这种方法不安全，或者我们写应用的时候指定要在某某目录执行，我有见过类似的项目
+同一目录下，package都为main，不能调用 如果我们有两个文件，package都为main，比如是这样的
+-main.go | -file.go  main.go想调用file.go的函数，会返回未定义的错误
+有两种解决方法
+ go install Or go build 转换为二进制文件执行
+ go run *.go Or go run main.go file.go 这个表达意思一样的，把包含的文件都包含进去
+  解决相对路径的最稳的方法 来自外国友人icza……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-path-problem/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/others/nice-sentences/" title="Nice Sentences" >Nice Sentences</a>
                                 </h1>
                             </header>
@@ -295,98 +384,6 @@ Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/" title="Golangstd Request" >Golangstd Request</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
-我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
-所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
-Request结构体 type Request struct { Method string URL *url.URL Proto string // &quot;HTTP/1.0&quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
-Method 这就是一个请求的方法(如GET、POST)
-但是Go的HTTP客户端不支持发送方法为CONNECT的请求
-URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/" title="Golang Gorm" >Golang Gorm</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                连接数据库 Mysql db, err := gorm.Open(&quot;mysql&quot;, &quot;root:123456@tcp/test?charset=utf8&amp;parseTime=True&quot;) if err != nil { panic(&quot;连接数据库失败&quot;) } defer db.Close() db.SingularTable(true)  选定好数据库后一般会配上
-db.SingularTable(true)  如果不调用这个函数，当在数据库加入某个表单的时候，名字会自动加一个s
-比如db.CreateTable(&amp;Product{})，在数据库表单里面会得到一个名字为products
-所以一般都会加上这个函数
-创建Table db.CreateTable(&amp;Product{})  创建多个table
-db.CreateTable(&amp;Product{},&amp;User{})  删除Table 关于删除，有两个
-db.DropTableIfExist(interface{}) db.DropTable(interface{})  这里可以传入字符串，也可以传入一个结构体
-接着上面的例子
-db.DropTableIfExist(&quot;product&quot;) db.DropTableIfExist(&amp;Product{})  删除Column 删除Column是要指定Table，所以不能这样
-db.DropColumn(&quot;created_at&quot;)  要定位Table，则需要
-db.Model(&amp;Product).DropColumn(&quot;created_at&quot;)  创建数据 db.Create(&amp;Product{Code: &quot;L1213&quot;, Price: 1002})  查询数据 // 最后一个符合条件，默认id最后的那个 // Get last record, order by primary key db.Last(&amp;user) //// SELECT * FROM users ORDER BY id DESC LIMIT 1; // 将所有符合条件的返回，这里要传一个结构体数组 // Get all records db.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gorm/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-viper/" title="Golang Viper" >Golang Viper</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Github
- Viper is a complete configuration solution for Go applications
- 这是一个帮组我们读取配置文件的包，总结一些方法，方便以后使用
-Reading Config Files  a single Viper instance only supports a single configuration file
- 一个Viper对象只能对应一个配置文件，是一个一一对应的映射关系
-但是我们在搜索配置文件的时候，可以设置多个路径，如果没有设置路径，则当前程序的目录上寻找，所以我们要设置好路径
-这是Github上的一个例子
-viper.SetConfigName(&quot;config&quot;) // name of config file (without extension) viper.AddConfigPath(&quot;/etc/appname/&quot;) // path to look for the config file in viper.AddConfigPath(&quot;$HOME/.appname&quot;) // call multiple times to add many search paths viper.AddConfigPath(&quot;.&quot;) // optionally look for config in the working directory err := viper.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-viper/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -551,6 +548,18 @@ viper.SetConfigName(&quot;config&quot;) // name of config file (without extensio
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -576,18 +585,6 @@ viper.SetConfigName(&quot;config&quot;) // name of config file (without extensio
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -628,7 +625,7 @@ viper.SetConfigName(&quot;config&quot;) // name of config file (without extensio
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -660,7 +657,7 @@ viper.SetConfigName(&quot;config&quot;) // name of config file (without extensio
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -673,6 +670,10 @@ viper.SetConfigName(&quot;config&quot;) // name of config file (without extensio
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

@@ -6,10 +6,78 @@
     <description>Recent content in Posts on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Oct 2019 18:58:01 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 11 Oct 2019 00:06:18 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Interview3</title>
+      <link>https://wushaoqiang.github.io/posts/interview/interview3/</link>
+      <pubDate>Fri, 11 Oct 2019 00:06:18 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/interview/interview3/</guid>
+      <description>稍微总结一下今天面试遇到的一些问题以及自己的不足，再接再厉
+感觉这篇blog有点像日记了。。。
+Link 在前面时间里主要是问了三道和链表相关的题，可能因为平时少练题的缘故，答的不太好
+LRU缓存算法 我之前没有听过LRU(Latest Related Used)
+在假设一个场景下，一个值被请求，那么下面很有可能会再次多次请求这个值，那么用这种算法能够cache住最新的值，使得效率提高
+还好面试官通过解释，我才大概懂得这个LRU是用来干嘛的(但是当时还是没太多思路)
+现在用代码大概描述一下
+package main type DLinkNode struct { key int val int next *DLinkNode prev *DLinkNode } func addNodeAfter(prev, node *DLinkNode) { node.prev = prev node.next = prev.next if prev.next != nil { prev.next.prev = node } prev.next = node } func removeNode(node *DLinkNode) { if node.prev != nil { node.prev.next = node.next } if node.next != nil { node.next.prev = node.</description>
+    </item>
+    
+    <item>
+      <title>Go Scheduler</title>
+      <link>https://wushaoqiang.github.io/posts/golang/go-scheduler/</link>
+      <pubDate>Thu, 10 Oct 2019 13:11:03 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang/go-scheduler/</guid>
+      <description>为什么要Go Scheduler Scheduler是为了实现用户态的线程(协程)的调度，这也也就是实现更加轻量级的并发单元，这也是为什么goroutine的并发数量能够那么多的原因
+Goroutine在哪里运行 Goroutine看似每个都在并发运行，其实它们还是通过Scheduler来调度到内核态的线程来执行的，也就是说Goroutine其实也是在内核态的thread里跑的
+我们知道，如果创建过多的thread，会有很大的负担，因为内核态的线程不是轻量级的，会消耗不少的系统资源，因此我们内核态的线程和用户态的协程是一个N:M的关系，其中N &amp;lt;= M
+如何Schedule goroutine在创建时会被存储在一个local run queue里面，go scheduler就是在这个queue的头拿goroutine，放到内核线程去执行
+同理，创建的时候放入local run queue的尾部
+并且每一个Kernel Thread 对应了一个local run queue
+Kernel Thread的数量 为了均衡性能以及资源的利用，Go Scheduler实现了Number(Core) == Number(Kernel Thread)这样的一个模式
+这样在每一个Core上都创建一个Kernel Thread，并且重用这个Thread，这样既能达到充分利用硬件的性能来并行执行
+要注意，这里是并行，不是并发
+重用也是协程轻量级的一个很大的因素，充分的减少了创建和销毁Kernel Thread
+负载均衡 因为每一个Kernel Thread对应了一个local run queue，那么就会有分配不均匀的情况。某些队列排队的goroutine特别多，某些特别少，导致有些Kernel Thread会闲置
+这个时候Go scheduler会从繁忙的队列中*偷*一些goroutine放在闲的队列
+长时间运行的goroutine 为了不让长时间的goroutine一直霸占着Thread，Go Scheduler会把长时间运行的goroutine在合适的时候停下来，并且将这个goroutine放入global run queue
+通过sysmon检测这个长时间运行的goroutine
+global run queue的优先级要比local run queue低，因此local run queue里面的goroutine就会被执行到
+block 在某一个thread被block的时候，这个thread不被算在limit上，也就是说，这个时候我们可以先创建一个Thread，去运行别的goroutine</description>
+    </item>
+    
+    <item>
+      <title>GET VS POST</title>
+      <link>https://wushaoqiang.github.io/posts/computer-network/get-vs-post/</link>
+      <pubDate>Wed, 09 Oct 2019 23:15:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/computer-network/get-vs-post/</guid>
+      <description>趁着晚上还有点时间，积累一下GET和POST的区别
+为什么不说其它方法？还是因为这两种比较容易让人混淆吧
+有时候在一个项目(一般是写的不太好的项目)的时候，你会惊奇的发现为什么GET请求需要解析里面的请求主体
+这个时候其实很大的一个可能就是API设计的不好
+我们都懂 当别人问我们他俩的区别是什么的时候，我们可能很快想到的是
+ GET是拿数据，POST是发送数据  其实无论是GET还是POST，其实都是HTTP里面的一个方法(只是一个字段不同而已)，说到底，无论是GET还是POST都是要被封装到HTTP报文里面的，HTTP同理也是走TCP/IP的
+从底层角度来讲 去看一下HTTP的报文你会发现，GET和POST其实真的没区别，那么为什么会产生出这两种请求方法呢
+我猜测这其实就是大家根据现实的一些用法设计出来的公用的方案吧，相当于行内的一套规矩，大家可以遵守这一规矩来达到共识
+我们通常来说，GET的请求主体是空的，但其实我们也可以加东西进去。因此不要觉得GET和POST是在底层上的不同，它们只是大家规矩上认同的不同方式
+怎么用 因为这一规矩，各大浏览器厂商默认大家的使用方法都是按照规矩来的，因此浏览器能够根据这个约定来对不同的请求方法来做优化，比如说：
+ 一般来说，我们浏览器会缓存一些GET请求返回的东西，因为我们默认GET请求在一般情况下是不变的，因此结果在短暂的时间内也是不变的，这样能够有效的加快页面的加载。同理，一般是不缓存POST请求的，因为POST的数据是千变万化的。
+ 需要携带参数的GET一般是通过URL来传递，而POST一般是通过请求主体来传递
+  看到这里你会发现，用法是根据职责来区分的，因此我们在用的时候只需要考虑这个HTTP请求方法的职能是什么？是否符合这个场景需求？
+这样设计的API才能够被大家所接收
+触类旁通 从上面的方法可以看到，通过分析其底层原理就能够分析出一些规律，可以看出它们的本质
+通过这方法，我们来看看TCP UDP的区别
+看看它们的底层，都是走IP协议的，因此不同之处在哪表现？
+其实就在它们的报文段，了解过它们俩的同学肯定能够发现TCP和UDP的报文段有很大的不同
+其实所说的TCP拥塞处理，流量管理等等性质，都是通过报文段来获取信息并且处理这些信息(比如超时，ACK，还有一些标志位等)
+所以说，在分析两个相似的东西的时候，我们可以先看看它们的底层基础是否一样，如果是一样的，那么我们就只需要关注它们上层有什么不一样了。</description>
+    </item>
     
     <item>
       <title>Spanner Summary</title>

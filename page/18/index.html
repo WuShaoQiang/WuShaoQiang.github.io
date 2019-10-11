@@ -68,6 +68,77 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-263/" title="Leetcode 263" >Leetcode 263</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Write a program to check whether a given number is an ugly number. Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. Example 1: Input: 6 Output: true Explanation: 6 = 2 × 3 Example 2: Input: 8 Output: true Explanation: 8 = 2 × 2 × 2 Example 3: Input: 14 Output: false Explanation: 14 is not ugly since it includes another prime factor 7.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-263/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-258/" title="Leetcode 258" >Leetcode 258</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-negative integer num, repeatedly add all its digits until the result has only one digit. Example: Input: 38 Output: 2 Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it. Follow up: Could you do it without any loop/recursion in O(1) runtime?  我的解答 这道题一开始我是用迭代去写的,运行效率太低,但是思路比较简单,读者可以自己尝试实现
+这里主要讲一下另一种快速的实现
+func addDigits(num int) int { if num &lt;= 9 { return num } if num%9 == 0 { return 9 } return num % 9 }  理论依据是 f(10*x+y) = f(9x+x+y) ?……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-258/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/" title="Leetcode 257" >Leetcode 257</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, return all root-to-leaf paths. Note: A leaf is a node with no children. Example: Input: 1 / \ 2 3 \ 5 Output: [&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;] Explanation: All root-to-leaf paths are: 1-&gt;2-&gt;5, 1-&gt;3  我的解答 /** * Definition for a binary tree node. * type TreeNode struct { * Val int * Left *TreeNode * Right *TreeNode * } */ func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-257/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-apt/" title="Ubuntu apt" >Ubuntu apt</a>
                                 </h1>
                             </header>
@@ -276,77 +347,6 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-235/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/" title="Leetcode 234" >Leetcode 234</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a singly linked list, determine if it is a palindrome. Example 1: Input: 1-&gt;2 Output: false Example 2: Input: 1-&gt;2-&gt;2-&gt;1 Output: true Follow up: Could you do it in O(n) time and O(1) space?  我的解答 如果不限定空间复杂度
-func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v = append(v, head.Val) head = head.Next } l := len(v) for i := 0; i &lt; l/2; i++ { if v[i] !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-234/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/" title="Leetcode 231" >Leetcode 231</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given an integer, write a function to determine if it is a power of two. Example 1: Input: 1 Output: true Explanation: 20 = 1 Example 2: Input: 16 Output: true Explanation: 24 = 16 Example 3: Input: 218 Output: false  我的解答 func isPowerOfTwo(n int) bool { if n == 0 { return false } return (n &amp; (n - 1)) == 0 }  这其实算是一道智力题，判断这个数是否是2的次方
-最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-231/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/" title="Leetcode 226" >Leetcode 226</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Invert a binary tree. Example: Input: 4 / \ 2 7 / \ / \ 1 3 6 9 Output: 4 / \ 7 2 / \ / \ 9 6 3 1 Trivia: This problem was inspired by this original tweet by Max Howell: Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so f*** off.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-226/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -511,6 +511,18 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -536,18 +548,6 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -588,7 +588,7 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -620,7 +620,7 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -633,6 +633,10 @@ func isPalindrome(head *ListNode) bool { v := make([]int, 0) for head != nil { v
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

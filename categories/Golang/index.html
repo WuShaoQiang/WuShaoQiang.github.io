@@ -78,6 +78,44 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/">Go Scheduler</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月10日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                为什么要Go Scheduler Scheduler是为了实现用户态的线程(协程)的调度，这也也就是实现更加轻量级的并发单元，这也是为什么goroutine的并发数量能够那么多的原因
+Goroutine在哪里运行 Goroutine看似每个都在并发运行，其实它们还是通过Scheduler来调度到内核态的线程来执行的，也就是说Goroutine其实也是在内核态的thread里跑的
+我们知道，如果创建过多的thread，会有很大的负担，因为内核态的线程不是轻量级的，会消耗不少的系统资源，因此我们内核态的线程和用户态的协程是一个N:M的关系，其中N &lt;= M
+如何Schedule goroutine在创建时会被存储在一个local run queue里面，go scheduler就是在这个queue的头拿goroutine，放到内核线程去执行
+同理，创建的时候放入local run queue的尾部
+并且每一个Kernel Thread 对应了一个local run queue
+Kernel Thread的数量 为了均衡性能以及资源的利用，Go Scheduler实现了Number(Core) == Number(Kernel Thread)这样的一个模式
+这样在每一个Core上都创建一个Kernel Thread，并且重用这个Thread，这样既能达到充分利用硬件的性能来并行执行
+要注意，这里是并行，不是并发
+重用也是协程轻量级的一个很大的因素，充分的减少了创建和销毁Kernel Thread
+负载均衡 因为每一个Kernel Thread对应了一个local run queue，那么就会有分配不均匀的情况。某些队列排队的goroutine特别多，某些特别少，导致有些Kernel Thread会闲置
+这个时候Go scheduler会从繁忙的队列中*偷*一些goroutine放在闲的队列
+长时间运行的goroutine 为了不让长时间的goroutine一直霸占着Thread，Go Scheduler会把长时间运行的goroutine在合适的时候停下来，并且将这个goroutine放入global run queue
+通过sysmon检测这个长时间运行的goroutine
+global run queue的优先级要比local run queue低，因此local run queue里面的goroutine就会被执行到
+block 在某一个thread被block的时候，这个thread不被算在limit上，也就是说，这个时候我们可以先创建一个Thread，去运行别的goroutine……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/">Gopher 2019 Micro Integration Test</a>
                                 </h1>
                             </header>
@@ -415,29 +453,6 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">TenToSeventeen</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月28日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -494,6 +509,18 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -519,18 +546,6 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -571,7 +586,7 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -603,7 +618,7 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -616,6 +631,10 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

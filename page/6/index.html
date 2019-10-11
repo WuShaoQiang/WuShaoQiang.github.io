@@ -68,6 +68,96 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/" title="Javascript Debugging" >Javascript Debugging</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Bug一般分为三类
+语法错误 运行错误 逻辑错误  往往编辑器帮我们做好了语法错误的检测，因此这个是最简单的，后面两个就要我们自己掌握一些debug的技能去fix这些bugs
+log log是一个很好的debug方法，能够在不同阶段看到输出的内容有利于我们找出出错的环节
+console.log()  typeof 检测一个值的类型
+undefined --&gt; undefined NaN --&gt; Number null --&gt; Object  false 在JavaScript里
+false 0 &quot;&quot; NaN undefined null  都被当做falsy，也就是在if判断语句和false作用一样的
+out of range 当数组越界的时候，JavaScript返回的是undefined……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-debugging/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp" >Javascript Regexp</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这一篇是讲正则表达式(Regular Expression)
+Test method 全匹配
+let waldoIsHiding = &quot;Somewhere Waldo is hiding in this text.&quot;; let waldoRegex = /Waldo/; // Change this line let result = waldoRegex.test(waldoIsHiding); console.log(result) //true  全匹配是大小写敏感的
+多可能性
+let petString = &quot;James has a pet cat.&quot;; let petRegex = /dog|cat|bird|fish/; // Change this line let result = petRegex.test(petString);  这样就是一个或关系
+忽略大小写
+let myString = &quot;freeCodeCamp&quot;; let fccRegex = /freeCodeCamp/i; // Change this line let result = fccRegex.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6" >Javascript ES6</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                let vs var 在ES6之前还没有let
+var是有一些很严重的缺点的，比如
+可以重复定义同名的变量而不会抛错 经常想定义一个局部变量，变成了一个全局变量，也就是shadow和我们平时熟悉的方式不一样  所以我们在定义变量的时候就用let，因为let就是修复了var的一些缺点，和平时的用法一样
+const 这个和let差不多，只是只能赋值一次(定义的时候就要赋值)
+并且建议const用全部大写的格式
+开发建议是：如果变量是不会重新赋值的，那么最好是使用const，除非是预测到要重新赋值就用let
+在这里还要强调的一点，赋值是值这个变量的赋值，如
+const s = [5,6,7] s = [1,2] //出错，重新赋值 s[2] = 10 //可行，这个不是对s的重新赋值  同理的还有Object、function
+Object freeze 可以防止一个Object的属性被修改
+Object.freeze(object_name);  Arrow functions () =&gt; {} () =&gt; value //如果是直接返回数据，这个是简化的写法 (arg1,arg2) =&gt; {}  filter map reduce A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic" >Javascript Basic</a>
                                 </h1>
                             </header>
@@ -283,75 +373,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-1010/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-989/" title="Leetcode 989" >Leetcode 989</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-989/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-985/" title="Leetcode 985" >Leetcode 985</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-985/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-977/" title="Leetcode 977" >Leetcode 977</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-977/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -516,6 +537,18 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
     </li>
     
@@ -541,18 +574,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument">Safety Argument</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer">TiDB Server源码分析 SQL Core Layer</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer">TiDB Server源码分析 Protocol Layer</a>
     </li>
     
 </ul>
@@ -593,7 +614,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(49)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
     </li>
     
     <li>
@@ -625,7 +646,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
     </li>
     
     <li>
@@ -638,6 +659,10 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     
     <li>
         <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
     </li>
     
 </ul>

@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Interview3 | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Interview3 - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-10-11T00:06:18&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-10-11T00:06:18&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Interview3">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/interview/interview3/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Interview3</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年10月11日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95">面试</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>稍微总结一下今天面试遇到的一些问题以及自己的不足，再接再厉</p>
+
+<p>感觉这篇blog有点像日记了。。。</p>
+
+<h3 id="link">Link</h3>
+
+<p>在前面时间里主要是问了三道和链表相关的题，可能因为平时少练题的缘故，答的不太好</p>
+
+<h4 id="lru缓存算法">LRU缓存算法</h4>
+
+<p>我之前没有听过LRU(Latest Related Used)</p>
+
+<p>在假设一个场景下，一个值被请求，那么下面很有可能会再次多次请求这个值，那么用这种算法能够cache住最新的值，使得效率提高</p>
+
+<p>还好面试官通过解释，我才大概懂得这个LRU是用来干嘛的(但是当时还是没太多思路)</p>
+
+<p>现在用代码大概描述一下</p>
+
+<pre><code class="language-go">package main
+
+type DLinkNode struct {
+	key  int
+	val  int
+	next *DLinkNode
+	prev *DLinkNode
+}
+
+func addNodeAfter(prev, node *DLinkNode) {
+	node.prev = prev
+	node.next = prev.next
+
+	if prev.next != nil {
+		prev.next.prev = node
+	}
+	prev.next = node
+}
+
+func removeNode(node *DLinkNode) {
+	if node.prev != nil {
+		node.prev.next = node.next
+	}
+
+	if node.next != nil {
+		node.next.prev = node.prev
+	}
+}
+
+func findNodeAfter(start *DLinkNode, key int) *DLinkNode {
+	if start == nil {
+		return nil
+	}
+
+	if start.key == key {
+		return start
+	}
+
+	return findNodeAfter(start.next, key)
+}
+
+func moveToHead(head, node *DLinkNode) {
+	removeNode(node)
+	addNodeAfter(head, node)
+}
+
+type LRU struct {
+	cap  int
+	head *DLinkNode
+	tail *DLinkNode
+}
+
+var lru LRU
+
+const maxCap = 5
+const notFount = -1
+
+func init() {
+	lru.head = new(DLinkNode)
+	lru.tail = new(DLinkNode)
+	addNodeAfter(lru.head, lru.tail)
+}
+
+func (l LRU) removeTail() {
+	node := l.tail.prev
+	if node == l.head {
+		return
+	}
+
+	removeNode(node)
+}
+
+func (l LRU) addNewNodeToHead(node *DLinkNode) {
+	addNodeAfter(l.head, node)
+}
+
+func (l LRU) findNode(key int) *DLinkNode {
+	return findNodeAfter(l.head, key)
+}
+
+func (l LRU) get(key int) int {
+	node := l.findNode(key)
+	if node == nil {
+		return notFount
+	}
+
+	return node.val
+}
+
+func (l LRU) put(key, val int) {
+	node := l.findNode(key)
+	if node == nil {
+		newNode := &amp;DLinkNode{
+			key: key,
+			val: val,
+		}
+
+		l.addNewNodeToHead(newNode)
+		l.cap++
+	} else {
+		moveToHead(l.head, node)
+	}
+}
+
+func main() {
+    // 一些测试
+}
+
+</code></pre>
+
+<p>可以加一些查找优化，比如加一个map来实现优化查找的时间复杂度</p>
+
+<h4 id="如何判断链表有环">如何判断链表有环</h4>
+
+<p>这道题我得知答案后发现当时是真的蠢死了，这都没想出来</p>
+
+<p>判断链表有环，用两个遍历去遍历这个链表，一个遍历一次走一步，一个遍历一次走两步，那么最终它们在环里面会相遇(在同一个node上，指针相同)，这样就能判断有环</p>
+
+<p>没环的情况下，走两步的遍历会先到终点，说明没环</p>
+
+<p>也来简单写一下</p>
+
+<pre><code class="language-go">package main
+
+type linkNode struct {
+	val  int
+	next *linkNode
+}
+
+var head *linkNode
+
+func isCyclic() bool {
+	n1 := head
+	n2 := head
+	for n1 != nil &amp;&amp; n2 != nil {
+		n1 = n1.next
+		if n2.next != nil {
+			n2 = n2.next.next
+		} else {
+			return false
+		}
+
+		if n1 == n2 {
+			return true
+		}
+	}
+
+	return false
+}
+
+</code></pre>
+
+<p>这里的代码我没有经过测试，所以参考思路即可</p>
+
+<h4 id="如何判断环的入口">如何判断环的入口</h4>
+
+<p>这道题有两种做法，其中一种是用map来记录节点，第一个重复的节点就是入口。不过还是要先用上面的方法来判断是否有环</p>
+
+<p>第二种方法是一个数学方法</p>
+
+<p>我也是看别人的推倒，这里放一个<a href="https://zhuanlan.zhihu.com/p/33663488">过程</a>，写的也是非常详细了</p>
+
+<p>在程序里面就是，在找到相遇的点后，在起点重新让一个步数为1的开始遍历，然后同时也在相遇点，步数为1的开始遍历，两者相遇的地方就是入口了</p>
+
+<h3 id="go">Go</h3>
+
+<p>Go还算是我比较熟悉的部分吧，觉得自己答的还算可以，不过在切片那里差点翻车了</p>
+
+<h4 id="golang的结构体-带指针和不带指针的区别">Golang的结构体，带指针和不带指针的区别</h4>
+
+<p>这里我主要讲了我平时在这两种情况下要注意的点(可能不全面)</p>
+
+<p>我在写代码的时候，对传指针和传值是比较敏感的，因为我觉得在软件层面上，我会认为尽可能少暴露一些东西会比较好</p>
+
+<p>因此在能传值的情况下，我一般不传指针(因为指针能够修改内存里面的值)</p>
+
+<p>第二是提到一个我认为应该要注意的点，就是在有锁的情况下，一定要传指针，不然锁就没用了(传值会新造一把锁，和原来的锁不是一把锁)</p>
+
+<p>其实我认为，在Golang里面，指针和传值这两个概念一定要搞清楚(我以前是经常混)</p>
+
+<h4 id="一段关于slice的golang代码">一段关于slice的Golang代码</h4>
+
+<p>这里还是不够小心，先贴上代码</p>
+
+<pre><code class="language-go">kv := []byte(&quot;key:value&quot;)
+i := bytes.Index(kv,[]byte(&quot;:&quot;))
+k := kv[:i]
+v := kv[i+1:]
+k = append(k,[]byte(&quot;233&quot;)...)
+</code></pre>
+
+<p>我其实是知道golang slice的一些相关原理的，因为也在这上面踩过坑，但是代码中的第三行我有点犹豫了，我不知道这个<code>k</code>是否继承了<code>kv</code>的容量</p>
+
+<p>如果不知道容量的话，第五行就没法分析了，当时还是猜错了，还好及时的一个纠正挽回了一点</p>
+
+<p>第三行这句话<code>k</code>是继承了<code>kv</code>的cap的，因此在第五行的时候并没有发生扩容，因此会影响原来的<code>kv</code></p>
+
+<h3 id="raft">Raft</h3>
+
+<p>Raft是我最近才接触的一个一致性算法，本打算看完论文后结合代码来理解深入一点，但是还没开始。不过也大概表达了一些学到的思路吧</p>
+
+<h4 id="解决什么问题">解决什么问题</h4>
+
+<p>这里面大概讲了一些论文里提到的点吧</p>
+
+<ul>
+<li><p>强Leader(为了简化模型)</p></li>
+
+<li><p>选举(因为是强Leader)</p></li>
+</ul>
+
+<p>可能说的乱七八糟，然后面试官直接问了我下一个问题(我当时还没怎么总结好这个，只是对一些关键点的了解而已)</p>
+
+<h4 id="如何解决读的时候不会读到旧的数据">如何解决读的时候不会读到旧的数据</h4>
+
+<p>这个地方我大概说了两个方案吧</p>
+
+<ol>
+<li><p>Leader读取，这个可以保证数据是最新的</p></li>
+
+<li><p>Followers，因为存在不一致的问题，因此可以从多个Followers读取数据做比较，还说了一下version control(不知道对不对)</p></li>
+</ol>
+
+<p>其实应该还可以使用强一致性来实现？不过性能会下降很多</p>
+
+<h3 id="结果">结果</h3>
+
+<p>其实面试完后心挺慌的，因为感觉自己处理的不是很好，很多问题想了不少时间(所以一个小时下来也才几个问题)</p>
+
+<p>不过后面HR还是说我有二面的机会。好好准备吧！</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/others/tenToSeventeen/">TenToSeventeen</a></li>
+        
+        <li><a href="/posts/interview/interview2/">Interview2</a></li>
+        
+        <li><a href="/posts/interview/interview/">Interview</a></li>
+        
+        <li><a href="/posts/golang/go-scheduler/">Go Scheduler</a></li>
+        
+        <li><a href="/posts/computer-network/get-vs-post/">GET VS POST</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95">面试</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Raft/">Raft</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TiDB/">TiDB</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

@@ -6,10 +6,38 @@
     <description>Recent content in 网络协议 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Apr 2019 10:19:02 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 09 Oct 2019 23:15:11 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GET VS POST</title>
+      <link>https://wushaoqiang.github.io/posts/computer-network/get-vs-post/</link>
+      <pubDate>Wed, 09 Oct 2019 23:15:11 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/computer-network/get-vs-post/</guid>
+      <description>趁着晚上还有点时间，积累一下GET和POST的区别
+为什么不说其它方法？还是因为这两种比较容易让人混淆吧
+有时候在一个项目(一般是写的不太好的项目)的时候，你会惊奇的发现为什么GET请求需要解析里面的请求主体
+这个时候其实很大的一个可能就是API设计的不好
+我们都懂 当别人问我们他俩的区别是什么的时候，我们可能很快想到的是
+ GET是拿数据，POST是发送数据  其实无论是GET还是POST，其实都是HTTP里面的一个方法(只是一个字段不同而已)，说到底，无论是GET还是POST都是要被封装到HTTP报文里面的，HTTP同理也是走TCP/IP的
+从底层角度来讲 去看一下HTTP的报文你会发现，GET和POST其实真的没区别，那么为什么会产生出这两种请求方法呢
+我猜测这其实就是大家根据现实的一些用法设计出来的公用的方案吧，相当于行内的一套规矩，大家可以遵守这一规矩来达到共识
+我们通常来说，GET的请求主体是空的，但其实我们也可以加东西进去。因此不要觉得GET和POST是在底层上的不同，它们只是大家规矩上认同的不同方式
+怎么用 因为这一规矩，各大浏览器厂商默认大家的使用方法都是按照规矩来的，因此浏览器能够根据这个约定来对不同的请求方法来做优化，比如说：
+ 一般来说，我们浏览器会缓存一些GET请求返回的东西，因为我们默认GET请求在一般情况下是不变的，因此结果在短暂的时间内也是不变的，这样能够有效的加快页面的加载。同理，一般是不缓存POST请求的，因为POST的数据是千变万化的。
+ 需要携带参数的GET一般是通过URL来传递，而POST一般是通过请求主体来传递
+  看到这里你会发现，用法是根据职责来区分的，因此我们在用的时候只需要考虑这个HTTP请求方法的职能是什么？是否符合这个场景需求？
+这样设计的API才能够被大家所接收
+触类旁通 从上面的方法可以看到，通过分析其底层原理就能够分析出一些规律，可以看出它们的本质
+通过这方法，我们来看看TCP UDP的区别
+看看它们的底层，都是走IP协议的，因此不同之处在哪表现？
+其实就在它们的报文段，了解过它们俩的同学肯定能够发现TCP和UDP的报文段有很大的不同
+其实所说的TCP拥塞处理，流量管理等等性质，都是通过报文段来获取信息并且处理这些信息(比如超时，ACK，还有一些标志位等)
+所以说，在分析两个相似的东西的时候，我们可以先看看它们的底层基础是否一样，如果是一样的，那么我们就只需要关注它们上层有什么不一样了。</description>
+    </item>
     
     <item>
       <title>Web请求历程</title>
