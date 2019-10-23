@@ -68,6 +68,198 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/" title="Data Structure" >Data Structure</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 前段时间复习了一些数据结构，一直没来得及总结一下
+链表(双向) 单向链表和循环链表思路是差不多的
+结构体 type LinkListNode struct { Value interface{} Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/" title="Web请求历程" >Web请求历程</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这几乎是做后端开发面试的时候必问的一道题，答案可以说得很简单，也可以是很复杂，当然面试官喜欢看到你对此有所深入，因此这篇文章就从头到尾详细的讲一遍这个历程
+参考 《计算机网络》
+1 当一台电脑将网线插上，网线的另一端是以太网的交换机(交换机能够知道连接它的机器的MAC地址，如果不清楚交换机是什么，建议自己搜一下，这里不做解释)
+首先，刚开始电脑是没有IP地址的，这个时候电脑会生成一个DHCP请求报文，这个报文是一个UDP报文，目的端口为67，源端口为68。这个UDP报文被装载到IP报文，有目的IP地址是255.255.255.255，因为电脑不知道可以从哪个IP请求到自己的IP地址，源IP地址是0.0.0.0。再次往下传递就到了链路层，我们这里假设用的是以太网，所以链路层会将网络层的数据包放置在以太网帧中，目的MAC地址为FF:FF:FF:FF:FF:FF，源MAC地址就是你电脑网卡的MAC地址了，这个我们不用关心。这个时候一个广播的报文就做好了
+报文被发送到交换机上，因为这是一个广播报文，因此在交换机上连接的所有设备都应该能收到这个报文，包括了DHCP服务器
+这里说多一句，现阶段，一般DHCP服务器集成在了路由器上，而这个路由器一般来说是我们的网关(至少在我这边是这样的)，具体如何查的，用wireshark抓包看看吧，抓到DHCP包你就知道了(记得先拔网线再插上)
+2 我们假设这个DHCP包已经完整到达了路由，这个路由生成了一个UDP-IP-以太网报文，这个时候数据报里包含了
+ 分配给电脑的IP
+ DNS服务器IP
+ 默认网关路由器IP
+ 网络掩码
+  这个数据包是具有一个准确的目的MAC地址的(也就是电脑的MAC，我们之前发送的报文里有记录)
+所以交换机能够将这个DHCP的响应报文发给电脑
+3 刚插上网线呢，就做了这么多东西了
+这个时候我们打开浏览器，输入网址域名
+这个时候我们需要得到这个域名的IP地址才能与其建立连接
+再次构造一个UDP报文，目的端口为53，源端口任意
+封装到IP数据包，源和目的IP地址在上面已经得到了，填上
+到了链路层需要两个MAC地址，好像我们只有自己的MAC地址，目的MAC地址未知
+这个时候电脑会生成一个ARP报文寻找默认网关的MAC地址(这个就不详细说了)
+关于DNS报文的所有要的东西都齐全了，发送DNS报文
+4 一般来说，常用的域名的IP都会存储在DNS缓存里，因此会比较快速
+关于更多的DNS相关的，不在这次范围内
+因此我们假设已经在某DNS服务器上拿到了DNS回答报文，这个报文就包括了我们要访问的URL的IP
+5 这个时候电脑以及具备和远程的服务器建立TCP连接了
+首先先是TCP的三次握手，三次握手在别的文章里讲到
+握手成功后，发送请求报文，经过互联网路由器的一系列转发到达了相应的服务器
+服务器收到了电脑发送的请求，并做出相应的处理，将结果写入响应报文，按照原来的TCP连接返回给电脑
+6 电脑的浏览器通过处理渲染以及加载就呈现出了看到的网页……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/web-request-process/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/" title="Leetcode 108" >Leetcode 108</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/" title="Leetcode 107" >Leetcode 107</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
+最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/" title="Leetcode 104" >Leetcode 104</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/" title="Leetcode 101" >Leetcode 101</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/" title="Leetcode 100" >Leetcode 100</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/" title="Leetcode 88" >Leetcode 88</a>
                                 </h1>
                             </header>
@@ -156,264 +348,6 @@ type Person struct{ name string age int } type Student struct{ person *Person } 
 有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/" title="Golang 泛型" >Golang 泛型</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者今天参加了一个面试，笔试第一题泛型，因为Go里没有泛型，因此对此毫无概念，开这篇文章解决这个问题
-泛型是什么 类型的参数化，在静态语言里，类型尤为重要，虽然Go里interface{}接口可以传入任何类型，但这不利于错误检查(程序不会在编译的时候检查到错误，而是在运行时出错，这就很不爽了)
-比如我们需要一个int双向链表，这个时候我们就要写一个结构体大概是
-type LinkListNode struct { Value int Next *LinkListNode Prev *LinkListNode } type LinkList struct { len int head *LinkListNode tail *LinkListNode }  如果我们还要写一个字符串的链表，这个时候将Value的类型改成string就行了，其它不用变，如果我们还要..balabala，可能就要定义上百个结构体了，到时候代码全是结构体
-有些同学说，用接口不就可以了吗？用接口不就无法实现类型的判断了吗，万一程序哪个地方本应该收到int，却收了一个string，然后程序boom
-关于网上很多网友使用interface来达到所谓的泛型，我是越看越像多态呀，并且还是达不到泛型所能提供的类型保护啊，虽然算法确实可以复用了(有些)
-泛型的目的是减少代码的重复性，也就是增加重用性，还能够确定数据类型，比如Java中的一个例子
-class Factory&lt;T&gt;{ private T value; public T getValue() { return value; } public void setValue(T v) { this.value = v; } }  T我可以是字符串，也可以是整数等，或者是自己定义的结构体。但是一旦定下来，创建了的变量类型就不能变了
-所以我说了那么多。。怎么实现啊
-实现 Go2草稿中有提到这个话题Go 2 Draft Designs
-目前只是一个草稿，并且是由Gopher们共同推进的一个话题，所以说现在Go内置里面还未实现泛型
-笔者也去看了一些关于泛型的讨论，到最后都还是建议不要在现阶段写泛型程序，因为Go有一个很本质的特点，就是简单写、简单读，如果通过一些自己的&rdquo;创造&rdquo;而造成别人阅读代码困难，那是得不偿失
-所以真香，还是用回多态吧，有机会再详细阅读一下草稿
-对此Go2还对错误处理进行了强烈的讨论，笔者也希望以后写Go不用一大堆错误处理了。。真的看到眼花
-这里是Go2官方对这些修改的想法视频……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-generic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/effective-go/" title="Effective Go" >Effective Go</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                参考Effective Go中英双语版
- It&rsquo;s also important to know the established conventions for programming in Go, such as naming, formatting, program construction, and so on, so that programs you write will be easy for other Go programmers to understand.
- Go的一个好处就是，大家的代码风格基本一致，看别人代码就不会显得很痛苦了(前提是开发者遵守)
-所以我们今天来谈谈代码规范吧，这里只记录了我自己有时候会忽略的点，有一些规范我以及掌握并且时刻用在编写Golang程序上了，因此不记录，想看完整的请阅读上面的开源书本
-格式化 Go的gofmt为我们做好了，所以安装这个程序，在保存的时候就可以自动帮你调整代码布局
-注释 行注释更为常用，而块注释则主要用作包的注释
-每个包都应包含一段包注释，即放置在包子句前的一个块注释。对于包含多个文件的包， 包注释只需出现在其中的任一文件中即可。包注释应在整体上对该包进行介绍，并提供包的相关信息。 它将出现在 godoc 页面中的最上面，并为紧随其后的内容建立详细的文档。
-每个可导出（首字母大写）的名称都应该有文档注释。
-命名 我记得有一个叫go-lint会检查这个
-Go 中约定使用驼峰记法 MixedCaps 或 mixedCaps 而非下划线的方式来对多单词名称进行命名。
-只包含一个方法的接口应当以该方法的名称加上 - er 后缀来命名，如 Reader
-若你有个名为 owner （小写，未导出）的字段，其获取器应当名为 Owner（大写，可导出）而非 GetOwner。大写字母即为可导出的这种规定为区分方法和字段提供了便利。 若要提供设置器方法，SetOwner 是个不错的选择……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/effective-go/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/interview/interview2/" title="Interview2" >Interview2</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最大连续子数组和  线程之间共享数据的方式  Go encourages the use of channels to pass references to data between goroutines
- 这里应该用channel来达到通信
-在Go里面，推荐使用数据交换来达到共享的效果，可能和别的编程语言有很大的不同
-进程和线程的区别 进程：操作系统对一个正在运行的程序的一种抽象，一个系统上可以运行多个进程，这些进程在单核的处理器下一样可以显得好像的并发的一样，这是通过处理器在进程之间的切换实现的，这种交错执行的机制称为上下文切换
-线程：一个进程可以由多个线程的执行单元组成，每个线程都运行在进程的上下文中
-区别：
- 进程在系统上运行，线程在进程上运行，因此进程是独立的地址空间、线程共享进程的地址空间
- 线程比进程的开销要小
- 线程一般来说比进程更高效
- 线程之间的数据共享比进程的简单
- 线程必须依赖在进程上执行
-  临界区是啥 临界区从通俗层面来讲就是我们锁-解锁之间的代码，通常会写在程序(或者说资源)无法同时被使用的地方
-这个区域只能允许一个线程或进程进入，其它后来的需要等待解锁
-死锁是啥。死锁产生的条件是什么 在我理解里，线程A占用了资源C，这个时候线程A还要申请资源D(占用且申请)，但线程B这时占用着资源D，而且线程A无法将资源抢过来，所以现在线程A就在等待线程B释放资源D。线程B在这个时候也需要使用资源C，并且不得到就不离开(一直等待)，所以现在局面就是A在等B释放D，B在等A释放C(循环等待)，并且都不肯让资源(不可抢占)，并且资源CD都是只能有一个线程占有的(互斥)
-若干进程竞争有限资源，但顺序或者决策不当，使得大家都在无限循环等待，就形成了死锁
- 互斥条件
- 不可抢占条件
- 占有且申请条件(这个的意思是在占有资源的情况下还要去申请别的资源)
- 循环等待条件
-  只要上述条件有一个不满足，就可以避免死锁
-给出很多串信息 包含ip url info 等信息 info包含error等状态码 用Linux命令统计出每个url对应的error概率 占时还不太清除这个
-Linux命令 如何杀死占用指定端口的进程 这个可能可以分解为两个问题，如果从端口找到进程pid，如何杀死指定pid的进程
-所以查找pid有lsof -i:port和netstat -p |grep port……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview2/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/" title="Linux 网络管理" >Linux 网络管理</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                ping -c 发送一定数量的报文
-ifconfig 其中输出信息里
-enp0s31f6：以太网(有线)
-lo：回传
-wlp4s0：无线网
-tcpdump 这是一个类似wireshark抓包的命令,需要权限
--c：指定抓取包的数量
--i：指定接口(上面说到有3个接口)
-port：指定端口
-netstat -r：显示路由
--i：显示接口
--n：显示IP
--t：tcp
--u：udp……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-network-management/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/" title="Linux 进程管理" >Linux 进程管理</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月25日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                进程状态  R 正在运行或在运行队列
- D 不可中断，进程不会因为信号被唤醒，只能等待中断发生
- S 中断，等待某个事件完成或者被信号唤醒
- Z 僵死，进程已经终止但其父进程没有用wait()或在waitpid()来释放它
- T 停止，可能是收到控制信号，也可能是被跟踪
-  相关命令 ps,pstree,top(htop),jobs,kill，nice，nohup
-Crtl+c:终结进程
-Ctrl+z:暂停进程
-ps(Process Status) ps 只会给当前终端中运行的进程
-ps -a Select all processes except both session leaders (see getsid(2)) and processes not associated with a terminal.
-ps -u root显示root用户的process，这里root也可以是别的用户名
-ps -l 相对ps，会显示父PID等信息
-ps aux 显示所有process
-ps -ef 详细显示所有process
-pstree pstree 进程树
-pstree -p 显示PID
-pstree (username) 显示用户的进程
-jobs jobs 查看后台运行的进程
-fg %num 将后台程序转移到前台……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-management/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/" title="Golang Vscode Problem" >Golang Vscode Problem</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Vscode">Vscode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                今天Vscode用着用着，突然自动补全不能用了，不仅没有自动导入，也没有函数提示等
-突然觉得自己被打入地狱(没有自动补全就像手写代码一样，很不是滋味)
-在Google上找了别人的方法也都没用，最后瞎搞一下搞好了
-方法 删掉gocode
-go get github.com/nsf/gocode,这是一个老版本的gocode，现在已经被新的替代了
-这个时候vscode会提示你下载推荐版本的gocode，按下载就可以了
-疑问 我也曾经重试下载最新版gocode，但是没用，不知道为什么直接在vscode更新就有用……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-vscode-problem/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-context/" title="Golang Context" >Golang Context</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Context又名上下文，在一开始接触这个词的时候就有点迷惑了，开一篇文章把这个困扰了我有一阵子的迷惑解开吧
-参考博客理解Go Context机制
-Golang的执行单元是goroutine，main也是一个goroutine
-上下文，上下则是存在上下层的传递，我们在编写Web后端的时候，接收到一个请求可能会执行一些列的goroutine(数据库，业务层处理)来达到并发效果
-这个时候，如果客户端那边取消了呢？如果我们在服务器端检测不到这个信号，那么我们服务器还是会继续服务，直到完成所有服务的时候，发现客户端已经不见了(资源就被浪费了)
-所以我们需要在每一个由Request产生的goroutine里面装一个监控，这个监控会告诉程序客户端是否还在等待返回，如果客户端离开，那么程序立即停止对客户端的服务
-Context接口 type Context interface { Deadline() (deadline time.Time, ok bool) Done() &lt;-chan struct{} Err() error Value(key interface{}) interface{} }   Deadline会返回一个超时时间，Goroutine获得了超时时间后，例如可以对某些io操作设定超时时间。
- Done方法返回一个信道（channel），当Context被撤销或过期时，该信道是关闭的，即它是一个表示Context是否已关闭的信号。
- 当Done信道关闭后，Err方法表明Context被撤的原因。
- Value可以让Goroutine共享一些数据，当然获得数据是协程安全的。但使用这些数据的时候要注意同步，比如返回了一个map，而这个map的读写则要加锁。
-  每当我们处理一个Request的时候，都应该从Request里拿一个Context
-req,err := http.NewRequest(http.MethodGet,&quot;http://127.0.0.1:8080&quot;,nil) if err != nil { log.Fatalln(err) } ctx := req.Context()   the context is canceled when the client&rsquo;s connection closes
- 如果Request的context是nil，那么它会返回一个context.Background()
-var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说了，Context是要上下传递的，我们需要达到一种效果： 上面的Context收到了中断信号，下面的也要进行中断……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-context/">阅读全文</a></p>
                         </article>
                     
 
@@ -552,6 +486,10 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
         <a href="https://wushaoqiang.github.io/page/31/">31</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/32/">32</a>
+    </li>
+    
 
     
     <li class="next">
@@ -580,6 +518,34 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
@@ -589,34 +555,6 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
     </li>
     
 </ul>
@@ -669,7 +607,7 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
     </li>
     
     <li>
@@ -681,7 +619,11 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86/">人生经历(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(29)</a>
     </li>
     
     <li>
@@ -791,6 +733,8 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     
     <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Life/">Life</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
@@ -873,6 +817,8 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
@@ -884,6 +830,8 @@ var ( background = new(emptyCtx) todo = new(emptyCtx) )  方法 我们前面说�
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     

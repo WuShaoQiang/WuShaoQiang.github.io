@@ -6,10 +6,106 @@
     <description>Recent content in 进程管理 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Apr 2019 17:04:19 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 23 Oct 2019 20:11:58 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Process Identifier</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-identifier/</link>
+      <pubDate>Wed, 23 Oct 2019 20:11:58 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-identifier/</guid>
+      <description>接触Linux系统也有一年时间了，大部分接触过Linux系统的人也都清除Linux依靠各种ID来实现区分
+这里面包括
+ PID
+ SID
+ PGID(Process Group ID)，值为进程组组长的PID
+ TGID(Thread Group ID)，如果是单线程，则与PID一样
+  初学者也能知道，PID是进程的唯一标识(Identifier)，再结合之前说的Namespace，我们应该换一种说法PID是某个Namespace下的进程唯一标识
+引入了Namespace之后，我们对ID会有两种
+ Global ID
+ Local ID
+  其实它们也类似，只是Global ID是boot的时候的第一个Namespace，因此我们叫它做整个系统的Namespace，Global也因此得名
+Local ID就是不同的Namespace下面的ID，也非常好理解
+task struct 在task struct里面，有
+1278 pid_t pid; 1279 pid_t tgid;  其中pid_t一般是32bit的int，因此可以包含足够的ID
+但这里面没有pgid以及sid，这些是存储在了signal字段里面
+PID不仅仅是数字 在我们大部分人的认知下，PID就是一个整数，用来标识进程
+但是在Linux下，需要维护PID之间的关系，比如所处的Namespace
+Linux下的PID Namespace 在Linux下的PID Namespace是有层级关系的，init所处的global PID Namespace是处于第0级，要创建新的PID Namespace就会在其父进程的Namespace的等级里加一
+也就是说Namespace level低的能够看到Namespace level高的，反过来则不行。这带来的结果就是，一个进程(Namespace.level &amp;gt; 0)会在不同层级的Namespace上有该层级的唯一PID，所以一个进程有多个PID，分别在不同的Namespace
+struct pid_namespace { struct kref kref; struct task_struct *child_reaper; unsigned int level; struct pid_namespace *parent; .</description>
+    </item>
+    
+    <item>
+      <title>Linux Namespace</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-namespace/</link>
+      <pubDate>Tue, 22 Oct 2019 21:35:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-namespace/</guid>
+      <description>Namespace是我最近一两个月才听到的词，但是它其实在早就已经出现，今天就来记录一下我对它的一些浅显的理解
+在一般情况下，我们都是以一个全局的角度来看整个linux系统。Namespace的存在使得我们能够换一个角度来看系统的全局属性
+在Linux系统中，许多资源都是全局管理的，如PID，UID等。这也是必须的
+在如今虚拟化和容器化的博弈中，容器化依靠自身的一些资源利用的优势，取得了不错的市场。其依赖的技术之中就有Namespace。我们来简单比较一下这两者的区别
+ 虚拟化就是在一台物理机上布置多个虚拟机，每一个虚拟机就像是一台独立的物理机，它拥有完整的内核，完整的系统。所以即使在Windows上，也能够运行Linux的虚拟机(因为内核在虚拟机上)。但也是因为如此，每一个虚拟机都需要有一个完整的操作系统，占用的资源会比较多
+ 容器化是一个特殊的进程，因此在资源上，它并不需要和虚拟机一样的资源，因为进程都是执行在当前的内核上的。这个进程特殊在哪里呢，它通过Namespace来使得这个进程所看到的系统视觉不一样。比如这个进程本身是PID为10000，但是因为设置了新的Namespace，那么它自己会认为自己的PID为1(因为这是第一个进程，像init进程一样)。因为容器这个进程也还是运行在同一个内核上的，因此并不能像虚拟机一样，将Linux跑在Windows上
+  在这里只是简单的说一下，我们可以通过这个例子来发现Namespace在现在的技术上是很火热的
+所有的资源都可以通过Namespace抽象出来，使得进程所看到的系统是不同的
+创建方法 因为我们在创建进程的时候，通过fork或者clone，这里是有标志位能够表明创建的进程是否和父进程保持一样的Namespace，还是新建一个Namespace
+这些标志位比如有 
+#define CLONE_NEWUTS // new uts namespace #define CLONE_NEWIPC // new ipc namespace ...  还有就是通过unshare的系统调用，具体可以看man page
+nsproxy 在task_struct里有一个字段
+1357 /* namespaces */ 1358 struct nsproxy *nsproxy;  其中
+14 * A structure to contain pointers to all per-process 15 * namespaces - fs (mount), uts, network, sysvipc, etc. 16 * 17 * &#39;count&#39; is the number of tasks holding a reference.</description>
+    </item>
+    
+    <item>
+      <title>Linux Process Types</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-types/</link>
+      <pubDate>Tue, 22 Oct 2019 21:16:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-types/</guid>
+      <description>Linux的进程不仅仅是由代码组成，它还包括分配给进程的资源(如内存，文件等)
+在Linux上，一个新的进程简单的创建可以通过fork和exec来实现
+就好比如我们在shell上面运行一个sleep命令，那么这个命令其实也是通过两个步骤
+ fork当前进程一个相同的副本(当前进程为shell)，我们可以这么认为，这两个相同的副本会具有相同的打开文件、工作目录以及内存数据等等，也会有不同的地方，比如PID这些具有唯一性的属性，还有进程之间的关系等(sleep进程的父进程就是shell本身)。
+ exec会从一个可执行文件里加载另外一个应用程序(这里是sleep的二进制文件)，然后代替刚才复制出来的副本进程的程序。也就是说exec不会创建新的进程，只是在fork出来的副本上创建新的程序
+  这里还要特别说一下，Linux为了解决fork的效率问题，在资源的复制上做了一些改进，使用(Copy-On-Write)的方式来复制副本：也就是说，副本并不是一次性完完全全的复制一份，而是等到其中一个进程要修改内存中的某一个共有的值的时候，才会去复制。否则按照只读的方式&amp;rdquo;共享&amp;rdquo;，后面详细讲一下
+要是能大概理解Linux下这些相关进程的创建方式，平时在写一些命令的时候可以对自己写下的命令后面到底运行了哪些东西有个认知。并且这也是一种非常通用的概念
+还有一种系统调用叫做clone，和fork相类似，不过clone不产生新的副本，而是共享资源，所以用于实现线程的创建。
+在Linux上，一个线程其实也是进程，只是共享了资源
+其实还有一个叫vfork，但是现在应该避免去调用它
+上面的解释是非常浅显的，并没有道出多少技术细节，想要知道具体的细节，需要参考其中的一些标志位，例如clone就是通过标志位来实现共享资源的类型的。这些需要查阅相关man page来了解
+COW Copy-On-Write
+我们前面讲到，使用COW主要是因为
+ 使用大量内存(以共享的方式减少)
+ 耗费时间(需要复制的时候再赋值，惰性复制)
+  因为我们可能在创建一个新进程的时候，完全不需要它的内存数据(两者数据没有关联)，因此直接的复制会导致做了很多无用功
+fork还通过只复制其页表的方式来达到物理内存的共享，也就是两个独立的虚拟内存地址指向同样的物理内存
+当然，进程之间不应该互相修改物理内存的数据，因此这个页表是只读的
+在很多情况下COW都会为我们节省很多时间</description>
+    </item>
+    
+    <item>
+      <title>Linux Process Life Cycle</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/</link>
+      <pubDate>Mon, 21 Oct 2019 20:23:27 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/</guid>
+      <description>我们知道，现在的操作系统，给用户的感觉都是多任务执行的，可能执行的任务(Process)要比CPU还多
+这个时候电脑程序看起来还是一起跑的
+在Linux的Process Management里面，通过不断的让Scheduler交换执行进程，就可以实现这样的效果
+State 这里先来了解一下关于进程生命周期的几个状态
+ R(Running or Runnable)是指这个Process正在占用一个CPU，处于执行状态。或者，它处于可被执行的状态
+ S(Interruptible Sleep)这种状态表示进程正在等待事件发生，这种情况下是可接收信号的，等到等待的时间发生再次满足Runnable的条件时，会置为R
+ D(Uninterruptible Sleep)与上面的区别，这种状态是无法接收信号的
+ T(Stopped)这里是暂停或者停止，比如在使用debugger的时候
+ Z(Zombie)状态发生在进程被结束，但是数据还有部分残留在Process table里，这个时候在等待父进程调用wait4
+  这些状态在linux源码里的linux/sched.h里面有定义
+181 #define TASK_RUNNING 0 182 #define TASK_INTERRUPTIBLE 1 183 #define TASK_UNINTERRUPTIBLE 2 184 #define __TASK_STOPPED 4 185 #define __TASK_TRACED 8 186 /* in tsk-&amp;gt;exit_state */ 187 #define EXIT_ZOMBIE 16 188 #define EXIT_DEAD 32 189 /* in tsk-&amp;gt;state again */ 190 #define TASK_DEAD 64 191 #define TASK_WAKEKILL 128 192 #define TASK_WAKING 256 193 #define TASK_STATE_MAX 512  其中TRACED是调用ptrace时用的，主要是为了区分STOPPED</description>
+    </item>
     
     <item>
       <title>Linux 进程管理</title>

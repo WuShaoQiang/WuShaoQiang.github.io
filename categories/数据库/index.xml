@@ -6,10 +6,42 @@
     <description>Recent content in 数据库 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Oct 2019 18:58:01 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 17:11:14 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Etcd Raft 源码实现-2</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/</link>
+      <pubDate>Sun, 13 Oct 2019 17:11:14 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/</guid>
+      <description>趁着周末有空，抽几个小时看看源码，这次看的是raftexample
+这是一个raft的简单实现，etcd/raft只是实现了raft的主要算法(例如选举、状态机等)
+ To keep the codebase small as well as provide flexibility, the library only implements the Raft algorithm; both network and disk IO are left to the user. Library users must implement their own transportation layer for message passing between Raft peers over the wire. Similarly, users must implement their own storage layer to persist the Raft log and state.
+ 因此我觉得先看一个完整的实例可能对raft的整个逻辑会有一个清晰的认识
+因此我们可以先从怎么用etcd的raft来入手
+这篇blog的范围仅在raftexample这部分，超过这部分的代码(例如raft和node这些细节，在后面的blog会慢慢接触)暂时不会说
+看看大体结构 ├── doc.go ├── httpapi.</description>
+    </item>
+    
+    <item>
+      <title>etcd Raft 源码实现-1</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/</link>
+      <pubDate>Sun, 13 Oct 2019 00:26:07 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/</guid>
+      <description>之前说过的结合源码来学习Raft的blog来了！
+这次想尝试写成一个系列吧，因为代码还是有一定量的，大概估计要半个月～一个月的时间(中间太多事情了)
+今天来开第一篇，说个稍微简单点的MemoryStorage
+MemoryStorage只是一种实现，并不是所有实现都应该和它一样
+在raft/storage.go里面就是全部是实现，逻辑也比较简单，因为代码实现比较简单，主要说一下这个的用法吧
+先看一下结构体
+type MemoryStorage struct { // 上锁 sync.Mutex // 这个暂时可以先不理会 hardState pb.HardState // Snapshot是一个快照 snapshot pb.Snapshot // 这里就是存放log entry的地方 ents []pb.Entry }  这里顺带说一下，如果没看过Raft Paper或者刚接触Raft，还是建议先理解一些概念，因为代码里有很多名词都是相关的
+这里我只会举一些稍微难一点的函数(有些太简单就不说了)
+取数据的Storage // Entries implements the Storage interface. func (ms *MemoryStorage) Entries(lo, hi, maxSize uint64) ([]pb.Entry, error) { // 先上锁 ms.Lock() defer ms.Unlock() // offset是相对数组而言的，在这里，数组的第一个元素，也就是ents[0]是不用做数据的 offset := ms.ents[0].Index // 这一步可以验证上面说的ents[0]不包含数据的说法 // 如果lo == offset，那么会发生Compact错误 // Compact错误代表着数据不存在(被清理了) if lo &amp;lt;= offset { return nil, ErrCompacted } // 因为是[lo,hi) 所以，hi是不包含的 // 这里的边界条件不加=，也是因为这个 if hi &amp;gt; ms.</description>
+    </item>
     
     <item>
       <title>Spanner Summary</title>

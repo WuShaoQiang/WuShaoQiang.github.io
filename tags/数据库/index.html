@@ -78,6 +78,66 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/">Etcd Raft 源码实现-2</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月13日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                趁着周末有空，抽几个小时看看源码，这次看的是raftexample
+这是一个raft的简单实现，etcd/raft只是实现了raft的主要算法(例如选举、状态机等)
+ To keep the codebase small as well as provide flexibility, the library only implements the Raft algorithm; both network and disk IO are left to the user. Library users must implement their own transportation layer for message passing between Raft peers over the wire. Similarly, users must implement their own storage layer to persist the Raft log and state.
+ 因此我觉得先看一个完整的实例可能对raft的整个逻辑会有一个清晰的认识
+因此我们可以先从怎么用etcd的raft来入手
+这篇blog的范围仅在raftexample这部分，超过这部分的代码(例如raft和node这些细节，在后面的blog会慢慢接触)暂时不会说
+看看大体结构 ├── doc.go ├── httpapi.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/">etcd Raft 源码实现-1</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月13日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                之前说过的结合源码来学习Raft的blog来了！
+这次想尝试写成一个系列吧，因为代码还是有一定量的，大概估计要半个月～一个月的时间(中间太多事情了)
+今天来开第一篇，说个稍微简单点的MemoryStorage
+MemoryStorage只是一种实现，并不是所有实现都应该和它一样
+在raft/storage.go里面就是全部是实现，逻辑也比较简单，因为代码实现比较简单，主要说一下这个的用法吧
+先看一下结构体
+type MemoryStorage struct { // 上锁 sync.Mutex // 这个暂时可以先不理会 hardState pb.HardState // Snapshot是一个快照 snapshot pb.Snapshot // 这里就是存放log entry的地方 ents []pb.Entry }  这里顺带说一下，如果没看过Raft Paper或者刚接触Raft，还是建议先理解一些概念，因为代码里有很多名词都是相关的
+这里我只会举一些稍微难一点的函数(有些太简单就不说了)
+取数据的Storage // Entries implements the Storage interface. func (ms *MemoryStorage) Entries(lo, hi, maxSize uint64) ([]pb.Entry, error) { // 先上锁 ms.Lock() defer ms.Unlock() // offset是相对数组而言的，在这里，数组的第一个元素，也就是ents[0]是不用做数据的 offset := ms.ents[0].Index // 这一步可以验证上面说的ents[0]不包含数据的说法 // 如果lo == offset，那么会发生Compact错误 // Compact错误代表着数据不存在(被清理了) if lo &lt;= offset { return nil, ErrCompacted } // 因为是[lo,hi) 所以，hi是不包含的 // 这里的边界条件不加=，也是因为这个 if hi &gt; ms.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/">Spanner Summary</a>
                                 </h1>
                             </header>
@@ -429,61 +489,6 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/">TiDB Server源码分析 SQL Core Layer</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月3日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                还是架构 还是先放一张架构图，当思路不清晰的时候，看一看架构图能够帮我们整理思路
-回想一下 上一篇blog是介绍了Protocol Layer，这一层整体思路还是比较简单，只是兼容MySQL协议会产生很多相应的函数方法
-应该还记得，在上一篇blog，我有提到Driver这个词，并且看到了它的接口只有一个函数OpenCtx(...)...，从结构图上来将，我们需要将SQL传入到Session Context里面，而OpenCtx就是帮我们从Protocol Layer打开到SQL Core Layer的通道，然后再通过这个通道将数据传入进去。打开后会返回QueryCtx接口，这个接口是我们执行SQL的唯一入口，也就是Protocol Layer到SQL Core Layer的唯一入口
-什么时候打开通道 通过编辑器可以发现，server/driver.go里的IDriver接口只在一个函数上有调用
-func (cc *clientConn) openSessionAndDoAuth(authData []byte) error { var tlsStatePtr *tls.ConnectionState // 如果是SSL连接，就取出这个连接的状态 if cc.tlsConn != nil { tlsState := cc.tlsConn.ConnectionState() tlsStatePtr = &amp;tlsState } var err error // 打开通道，这里将返回的QueryCtx给到clientConn，它以后就用这个Ctx和SQL Core Layer进行交互 cc.ctx, err = cc.server.driver.OpenCtx(uint64(cc.connectionID), cc.capability, cc.collation, cc.dbname, tlsStatePtr) if err != nil { return err } // 忽略验证过程 return nil }  这个函数也只有两个地方会调用到……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/">TiDB Server源码分析 Protocol Layer</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月3日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                简单介绍 最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图
-因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧
-怎么入手 TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边Protocol Layer
-我们可以简单的从tidb-server/main.go来入手，来简单了解一下基本组成
-为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍
-func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是输出version if *version { fmt.Println(printer.GetTiDBInfo()) os.Exit(0) } // (可忽略)这里是注册store，会分别注册&quot;tikv&quot;和&quot;mock-tikv&quot; registerStores() // (可忽略)这个是和prometheus相关的 registerMetrics() // (可忽略) 配置，我们暂时可以考虑默认 configWarning := loadConfig() overrideConfig() if err := cfg.Valid(); err != nil { fmt.Fprintln(os.Stderr, &quot;invalid config&quot;, err) os.Exit(1) } if *configCheck { fmt.Println(&quot;config check successful&quot;) os.Exit(0) } // (可忽略) 都只是一些配置 setGlobalVars() setCPUAffinity() setupLog() // If configStrict had been specified, and there had been an error, the server would already // have exited by now.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -532,6 +537,34 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
@@ -541,34 +574,6 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
     </li>
     
 </ul>
@@ -621,7 +626,7 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
     </li>
     
     <li>
@@ -633,7 +638,11 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86/">人生经历(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(29)</a>
     </li>
     
     <li>
@@ -743,6 +752,8 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
     
     <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Life/">Life</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
@@ -825,6 +836,8 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
@@ -836,6 +849,8 @@ func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     

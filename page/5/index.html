@@ -68,6 +68,195 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-account/" title="Linux Account" >Linux Account</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to login my Ubuntu as root. But, I don&rsquo;t even remember I have set a password for root.
+Fortunately, I learned some skills about how to manage accounts in linux, so I figure it out very quickly, I hope this experience can be helpful for you if you have the same(similar) problems
+UID and GID When you login in a linux system, you must have a user and its password.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-account/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/" title="Linux How to Identify Command" >Linux How to Identify Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to talk about a small topic &ndash; how to identify a command
+Specifically, If you want to know where are these commands from, there are three possibilities:
+ builtin
+ alias
+ file(external)
+  Let&rsquo;s try it type cd // Of course, cd is a builtin command &gt; cd is a shell builtin type ll &gt; ll is aliased to `ls -alhF' type mongod &gt; mongod is /usr/local/mongodb/bin/mongod  Basically you don&rsquo;t need to add any flags……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/" title="Linux Windows File" >Linux Windows File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                In linux, [Enter] =&gt; LF
+But in windows, [Enter] =&gt; CRLF
+So, if we cp a shell script file from windows to linux, we may not be able to run it because of the line break character is different
+we need a tool to transform between windows(DOS) and linux(UNIX)
+dos2unix [-kn] file [newfile] unix2dox [-kn] file [newfile] unix2mac [-kn] file [newfile]   k: keep modified date
+ n: create new file……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/" title="Linux Vim Basic" >Linux Vim Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, we talked about linux compression
+This time, I am gonna talk about basic usage about vim
+vim is a highly recommended editor in UNIX-Like system, so it is necessary to learn that
+To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScode) or IDE to develop software, I use vim only when I just want to edit a config file or just couple lines of code which is not worth opening a editor(or IDE)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/" title="Linux Compression" >Linux Compression</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last day, we took a quick look on file system, I just want to give you guys some basic understanding about that, If you are a software developer(engineer), may be that&rsquo;s enough for you.
+Today, let&rsquo;s talk about a very basic and useful tool in linux &ndash;&gt; compression
+Quick talk Basically, we use compression all the time, including surfing the internet, the server will give client(browser mostly) the compressed data instead of raw data which may cause the performance slow.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-compression/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-link/" title="Linux Link" >Linux Link</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                We have already talked about disk management, now we have a pretty simple topic&ndash;link
+Link is one of the file types in linux including hard link and symbol link
+Let&rsquo;s get into them
+hard link Remember inode?
+when we type ls -l, the second field is the inode number which means how many file(s) is using the same inode.
+Right, hard link file is using the same inode, and inode including the file information like permission, block number.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-link/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/" title="Linux Disk Manage" >Linux Disk Manage</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Now, let&rsquo;s get into the disk management of linux
+Concept There are some concepts you should know about linux file system
+Why we need to operate format before OS can use it?
+Because different Operate System may use different file system, like FAT, NTFS, Ext2 etc.
+After we know there are so many different file system, let&rsquo;s talk about linux file system.
+Here are some concepts:
+ superblock: superblock will store file system information(like inode number, block number, etc.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-search-file/" title="Linux Search File" >Linux Search File</a>
                                 </h1>
                             </header>
@@ -144,249 +333,6 @@ cd //enter a directory pwd //show the work directory(Print Working Directory)  m
 mkdir -m // set directory permission when create mkdir -p // If parent directory doesn't exist, it will help you create when you add -p flag  rmdir……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-system-basic-command/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/" title="Linux Permission" >Linux Permission</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Today, I am gonna talk about linux permission which is very basic for linux user.
-Basically, we have three different role in linux
-Owner Group Other  It is easy to understand what they mean.
-ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
--rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/" title="Linux Ps" >Linux Ps</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 ps命令有几种标准，这里只用UNIX版本的
-Background 首先了解一些概念
- PID 进程ID
- PPID 父进程ID
- PGID 进程所在GroupID
- SID 进程所在会话(Session)ID
-  一般来说，SID就是我们的shell
-一个SID管理多个PGID
-一个PGID管理很多PID
-既然是管理，那就会有leader角色，那么如何知道谁是leader
-PID == PGID的就是group leader
-PID == SID的就是session leader
-Flag Selection
--A -e 全部进程 -a 全部进程处理session leader -C 命令名字 -g group -u user -p pid -t tty  Format
--o pid,ppid,tty,time 选择输出某些字段 -F 全部字段(带字段名字 -f不带字段名字) --forest 树状形式输出  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/" title="CSS Basic Property" >CSS Basic Property</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最基本的一些属性
-text-align 文本对齐方式
- justify 对齐文本容器的左右两边
- center 每一行左右间距一样
- right
- left
-  width 指定容器大小，可以接受不同的单位
-常见单位：
- px 像素
- % 百分比
- em 根据父元素的倍数
- rem 根据根元素的倍数
- vh view-high
- vw view-width
- max/min
-  刚开始学习前端会不知道这个百分比是以什么为基准的
-宽度会相对于父元素的宽度 高度会相对与父元素的高度 字体大小会相对父元素字体大小 边界是相对自身的  一些标签  strong 加粗
- u 下划线
- em 斜体
- s 横线(画在字体中间)
- hr 水平线(无close tag)
-  box-shadow  The box-shadow property takes values for offset-x (how far to push the shadow horizontally from the element), offset-y (how far to push the shadow vertically from the element), blur-radius, spread-radius and a color value, in that order.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic-property/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-basic/" title="CSS Basic" >CSS Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                主要记录一下CSS的基本语法
-以标签来选择 以标签来选择可能并不是很好的选择，一旦项目规模大，这种是不好管理的
-后代选择器 div strong //这个是指凡是在div下面的strong标签，都会起作用 要注意 后代并不是单单指一代 子代选择器 div&gt;strong //这个和后代选择器很大的不同就是这个只会选择子代 相邻兄弟选择器 div&gt; p+h1 //二者有共同的父元素  id、class选择器 id
-#pro{ }  class
-.important{ }  也可以组合一些，下面给一些例子
-.important.warning{ }  这个属性要在class=&quot;important warning&quot;同时拥有这两个属性才可以有这里面的样式
-或者
-.important p{ }  属性选择器 选择属性
-a[href]{ color: red; }  只改变有href属性的a标签……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/" title="CSS3 Basic" >CSS3 Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                主要针对CSS3
-本篇是笔记，因此覆盖会不全面
-####Reference
-w3school
-border div { border:2px solid #ffffff; border-radius:25px; -moz-border-radius:25px; /* Old Firefox */ }  border控制边界的大小，形状和颜色
-border-radius控制着边框的弯曲的半径，随着数字越大，边框会越弯
-transition div { width:100px; height:100px; background:yellow; transition:width 10s; -moz-transition:width 2s; /* Firefox 4 */ -webkit-transition:width 10s; /* Safari and Chrome */ -o-transition:width 2s; /* Opera */ } div:hover { width:300px; }  这个的效果就是在div上悬停，就会将div的宽度在一定时间内切换到另一个指定的宽度
-可以看到，需要在transition那里声明哪个属性变化
-如果要有多个属性变化(比如 width和height都变)
-div { width:100px; height:100px; background:yellow; transition:width 2s, height 2s; -moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */ -webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */ -o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */ } div:hover { width:200px; height:200px; transform:rotate(180deg); -moz-transform:rotate(180deg); /* Firefox 4 */ -webkit-transform:rotate(180deg); /* Safari and Chrome */ -o-transform:rotate(180deg); /* Opera */ }  可以看到只是简单的用逗号隔开就可以了……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css3-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/" title="CSS Flexble" >CSS Flexble</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月12日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                今天来学习一下布局方式
-现在主流的布局方式flexbox
-Reference https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-Basic display: flex就将这个block变成了flexbox
-首先，我们要先搞明白container和item的关系
-一般来说item是最小的单位，也就是一个东西(比如：按键&hellip;)
-container就是我们的block，这个就是在页面设计的时候考虑要如何放置我们的block，container是可以嵌套的
-Axis For rows, the main axis is a horizontal line and for columns it is a vertical line.
-首先要搞懂轴的概念
-轴的方向是和flex-direction相关联的
-根据参数我们可以很快确定轴的方向
-row //main 左到右 cross 上到下 column //main 上到下 cross 左到右 row-reverse //... column-reverse //...  比如flex-direction: row，那么就按照上面这个图的方向
- 主方向为横向(也就是item的排列方向)
- cross方向为纵向
-  我们后面说到的属性可能会和轴有联系
-而这篇文章也是假设了flex-direction: row
-flex-wrap 可选参数
-nowrap (default) //这个就是将所有item按一个方向排列并且不会，并且只有一行 wrap //这个相对上面就会进行换行 wrap-reverse //反转,就是和wrap反过来，从底部到顶部  可以看出这个和两个轴都有关系
-先在main轴排列，不过空间可以wrap到cross轴……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/css-flexble/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/" title="Javascript Data Structure" >Javascript Data Structure</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月9日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                array method 内置的Array方法是普遍使用的
-push() unshift() pop() shift() splice() //第一个参数的index(包括),第二个参数是数量(表示删除多少个)  splice splice相对前几个方法稍微复杂一点，它的功能也相对强大
-当splice传入两个参数的时候
-function sumOfTen(arr) { // change code below this line arr.splice(4,2) arr.splice(2,1) arr.splice(0,1) console.log(arr) // change code above this line return arr.reduce((a, b) =&gt; a + b); } // do not change code below this line console.log(sumOfTen([2, 5, 1, 5, 2, 1]));  注意
-当你删除了元素之后，索引就已经发生变化了，所以最好的方式就是重后面开始删除
-当传入三个参数的时候
-这和传入两个参数是完全不一样的
-三个参数就是先执行两个参数时的操作，也就是删除从某一个索引开始的n个数据，然后再从索引的位置插入一个数据
-function htmlColorNames(arr) { // change code below this line arr.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-data-structure/">阅读全文</a></p>
                         </article>
                     
 
@@ -525,6 +471,10 @@ function htmlColorNames(arr) { // change code below this line arr.……
         <a href="https://wushaoqiang.github.io/page/31/">31</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/32/">32</a>
+    </li>
+    
 
     
     <li class="next">
@@ -553,6 +503,34 @@ function htmlColorNames(arr) { // change code below this line arr.……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
@@ -562,34 +540,6 @@ function htmlColorNames(arr) { // change code below this line arr.……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
     </li>
     
 </ul>
@@ -642,7 +592,7 @@ function htmlColorNames(arr) { // change code below this line arr.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
     </li>
     
     <li>
@@ -654,7 +604,11 @@ function htmlColorNames(arr) { // change code below this line arr.……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86/">人生经历(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(29)</a>
     </li>
     
     <li>
@@ -764,6 +718,8 @@ function htmlColorNames(arr) { // change code below this line arr.……
     
     <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Life/">Life</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
@@ -846,6 +802,8 @@ function htmlColorNames(arr) { // change code below this line arr.……
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
@@ -857,6 +815,8 @@ function htmlColorNames(arr) { // change code below this line arr.……
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     

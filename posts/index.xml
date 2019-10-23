@@ -6,10 +6,168 @@
     <description>Recent content in Posts on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2019 00:06:18 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 23 Oct 2019 20:11:58 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Process Identifier</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-identifier/</link>
+      <pubDate>Wed, 23 Oct 2019 20:11:58 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-identifier/</guid>
+      <description>接触Linux系统也有一年时间了，大部分接触过Linux系统的人也都清除Linux依靠各种ID来实现区分
+这里面包括
+ PID
+ SID
+ PGID(Process Group ID)，值为进程组组长的PID
+ TGID(Thread Group ID)，如果是单线程，则与PID一样
+  初学者也能知道，PID是进程的唯一标识(Identifier)，再结合之前说的Namespace，我们应该换一种说法PID是某个Namespace下的进程唯一标识
+引入了Namespace之后，我们对ID会有两种
+ Global ID
+ Local ID
+  其实它们也类似，只是Global ID是boot的时候的第一个Namespace，因此我们叫它做整个系统的Namespace，Global也因此得名
+Local ID就是不同的Namespace下面的ID，也非常好理解
+task struct 在task struct里面，有
+1278 pid_t pid; 1279 pid_t tgid;  其中pid_t一般是32bit的int，因此可以包含足够的ID
+但这里面没有pgid以及sid，这些是存储在了signal字段里面
+PID不仅仅是数字 在我们大部分人的认知下，PID就是一个整数，用来标识进程
+但是在Linux下，需要维护PID之间的关系，比如所处的Namespace
+Linux下的PID Namespace 在Linux下的PID Namespace是有层级关系的，init所处的global PID Namespace是处于第0级，要创建新的PID Namespace就会在其父进程的Namespace的等级里加一
+也就是说Namespace level低的能够看到Namespace level高的，反过来则不行。这带来的结果就是，一个进程(Namespace.level &amp;gt; 0)会在不同层级的Namespace上有该层级的唯一PID，所以一个进程有多个PID，分别在不同的Namespace
+struct pid_namespace { struct kref kref; struct task_struct *child_reaper; unsigned int level; struct pid_namespace *parent; .</description>
+    </item>
+    
+    <item>
+      <title>Linux Namespace</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-namespace/</link>
+      <pubDate>Tue, 22 Oct 2019 21:35:47 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-namespace/</guid>
+      <description>Namespace是我最近一两个月才听到的词，但是它其实在早就已经出现，今天就来记录一下我对它的一些浅显的理解
+在一般情况下，我们都是以一个全局的角度来看整个linux系统。Namespace的存在使得我们能够换一个角度来看系统的全局属性
+在Linux系统中，许多资源都是全局管理的，如PID，UID等。这也是必须的
+在如今虚拟化和容器化的博弈中，容器化依靠自身的一些资源利用的优势，取得了不错的市场。其依赖的技术之中就有Namespace。我们来简单比较一下这两者的区别
+ 虚拟化就是在一台物理机上布置多个虚拟机，每一个虚拟机就像是一台独立的物理机，它拥有完整的内核，完整的系统。所以即使在Windows上，也能够运行Linux的虚拟机(因为内核在虚拟机上)。但也是因为如此，每一个虚拟机都需要有一个完整的操作系统，占用的资源会比较多
+ 容器化是一个特殊的进程，因此在资源上，它并不需要和虚拟机一样的资源，因为进程都是执行在当前的内核上的。这个进程特殊在哪里呢，它通过Namespace来使得这个进程所看到的系统视觉不一样。比如这个进程本身是PID为10000，但是因为设置了新的Namespace，那么它自己会认为自己的PID为1(因为这是第一个进程，像init进程一样)。因为容器这个进程也还是运行在同一个内核上的，因此并不能像虚拟机一样，将Linux跑在Windows上
+  在这里只是简单的说一下，我们可以通过这个例子来发现Namespace在现在的技术上是很火热的
+所有的资源都可以通过Namespace抽象出来，使得进程所看到的系统是不同的
+创建方法 因为我们在创建进程的时候，通过fork或者clone，这里是有标志位能够表明创建的进程是否和父进程保持一样的Namespace，还是新建一个Namespace
+这些标志位比如有 
+#define CLONE_NEWUTS // new uts namespace #define CLONE_NEWIPC // new ipc namespace ...  还有就是通过unshare的系统调用，具体可以看man page
+nsproxy 在task_struct里有一个字段
+1357 /* namespaces */ 1358 struct nsproxy *nsproxy;  其中
+14 * A structure to contain pointers to all per-process 15 * namespaces - fs (mount), uts, network, sysvipc, etc. 16 * 17 * &#39;count&#39; is the number of tasks holding a reference.</description>
+    </item>
+    
+    <item>
+      <title>Linux Process Types</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-types/</link>
+      <pubDate>Tue, 22 Oct 2019 21:16:30 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-types/</guid>
+      <description>Linux的进程不仅仅是由代码组成，它还包括分配给进程的资源(如内存，文件等)
+在Linux上，一个新的进程简单的创建可以通过fork和exec来实现
+就好比如我们在shell上面运行一个sleep命令，那么这个命令其实也是通过两个步骤
+ fork当前进程一个相同的副本(当前进程为shell)，我们可以这么认为，这两个相同的副本会具有相同的打开文件、工作目录以及内存数据等等，也会有不同的地方，比如PID这些具有唯一性的属性，还有进程之间的关系等(sleep进程的父进程就是shell本身)。
+ exec会从一个可执行文件里加载另外一个应用程序(这里是sleep的二进制文件)，然后代替刚才复制出来的副本进程的程序。也就是说exec不会创建新的进程，只是在fork出来的副本上创建新的程序
+  这里还要特别说一下，Linux为了解决fork的效率问题，在资源的复制上做了一些改进，使用(Copy-On-Write)的方式来复制副本：也就是说，副本并不是一次性完完全全的复制一份，而是等到其中一个进程要修改内存中的某一个共有的值的时候，才会去复制。否则按照只读的方式&amp;rdquo;共享&amp;rdquo;，后面详细讲一下
+要是能大概理解Linux下这些相关进程的创建方式，平时在写一些命令的时候可以对自己写下的命令后面到底运行了哪些东西有个认知。并且这也是一种非常通用的概念
+还有一种系统调用叫做clone，和fork相类似，不过clone不产生新的副本，而是共享资源，所以用于实现线程的创建。
+在Linux上，一个线程其实也是进程，只是共享了资源
+其实还有一个叫vfork，但是现在应该避免去调用它
+上面的解释是非常浅显的，并没有道出多少技术细节，想要知道具体的细节，需要参考其中的一些标志位，例如clone就是通过标志位来实现共享资源的类型的。这些需要查阅相关man page来了解
+COW Copy-On-Write
+我们前面讲到，使用COW主要是因为
+ 使用大量内存(以共享的方式减少)
+ 耗费时间(需要复制的时候再赋值，惰性复制)
+  因为我们可能在创建一个新进程的时候，完全不需要它的内存数据(两者数据没有关联)，因此直接的复制会导致做了很多无用功
+fork还通过只复制其页表的方式来达到物理内存的共享，也就是两个独立的虚拟内存地址指向同样的物理内存
+当然，进程之间不应该互相修改物理内存的数据，因此这个页表是只读的
+在很多情况下COW都会为我们节省很多时间</description>
+    </item>
+    
+    <item>
+      <title>Linux Process Life Cycle</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/</link>
+      <pubDate>Mon, 21 Oct 2019 20:23:27 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/</guid>
+      <description>我们知道，现在的操作系统，给用户的感觉都是多任务执行的，可能执行的任务(Process)要比CPU还多
+这个时候电脑程序看起来还是一起跑的
+在Linux的Process Management里面，通过不断的让Scheduler交换执行进程，就可以实现这样的效果
+State 这里先来了解一下关于进程生命周期的几个状态
+ R(Running or Runnable)是指这个Process正在占用一个CPU，处于执行状态。或者，它处于可被执行的状态
+ S(Interruptible Sleep)这种状态表示进程正在等待事件发生，这种情况下是可接收信号的，等到等待的时间发生再次满足Runnable的条件时，会置为R
+ D(Uninterruptible Sleep)与上面的区别，这种状态是无法接收信号的
+ T(Stopped)这里是暂停或者停止，比如在使用debugger的时候
+ Z(Zombie)状态发生在进程被结束，但是数据还有部分残留在Process table里，这个时候在等待父进程调用wait4
+  这些状态在linux源码里的linux/sched.h里面有定义
+181 #define TASK_RUNNING 0 182 #define TASK_INTERRUPTIBLE 1 183 #define TASK_UNINTERRUPTIBLE 2 184 #define __TASK_STOPPED 4 185 #define __TASK_TRACED 8 186 /* in tsk-&amp;gt;exit_state */ 187 #define EXIT_ZOMBIE 16 188 #define EXIT_DEAD 32 189 /* in tsk-&amp;gt;state again */ 190 #define TASK_DEAD 64 191 #define TASK_WAKEKILL 128 192 #define TASK_WAKING 256 193 #define TASK_STATE_MAX 512  其中TRACED是调用ptrace时用的，主要是为了区分STOPPED</description>
+    </item>
+    
+    <item>
+      <title>我的0-Offer秋招之路</title>
+      <link>https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/</link>
+      <pubDate>Tue, 15 Oct 2019 22:07:48 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/</guid>
+      <description>今天算是我秋招的一个结束点了吧，至今还是0 offer，说不难受是假的，但是说很难受好像也没有，因为从中也收获不少。而且我相信秋招的失败经历也不会让我翻不了身(我是咸鱼)
+大概经过 我秋招开始的比较晚，是9月18号才开始投简历，那时候很多公司都截止收简历了，所以机会相对较少。再加上不愿意北上，所以只能在深圳和广州两地选择
+因为还在实习，所以不得不请了大半个月假来准备笔试面试相关东西
+投完简历第二天就开始笔试了，写的也是一塌糊涂，所以笔试这东西还是得提前准备的，就像临考的复习一样，虽然不是长久之计，但是很有效
+最多笔试面试的时候还是九月份，下面说一下自己在这些方面的不足和反省吧
+笔试 笔试大多考的就是数据结构和算法题，平时少刷算法题的会比较吃亏，这里没什么诀窍，也没有捷径，只能多刷题，一般最少提前半个月刷题，而且刷的题不要太简单。
+比如Leetcode上的easy题大多数都非常简单，最起码要刷medium以上的
+这里笔者因为时间比较少，再加上之前没有太多积累，很多连笔试都没过
+面试 面试是我最痛的伤，我想进的公司基本上都挂在面试上了
+状态不好 面试中，状态也很重要，因为很可能很简单的东西，在状态不好的时候会说的一塌糊涂。就像笔者背问了TCP和UDP的区别这种已经准备过的问题时，因为状态不好答的也不是特别令人满意
+不够深入 笔者觉得自己在这方面做的非常差，很多东西停留在了表层，没有深入到细节实现上，这样在面试官理解上，可能只是了解，并不会实际的操作
+举个例子，面试官问某某项目的某某部分的时候，如果只说了大概思路而没有更具体的东西，可能会让面试官觉得你只是背熟了这个架构，并没有体现出技术的东西
+知识面窄 我相信这是很多人都会有的问题，对于一早定位在某一领域上的同学来说，知识面会宽很多。比如说计算机科学，很多非科班的人(包括我)接触到的东西会比较窄(可能有时间关系，可能有个人关系)，这个时候面试官所掌握的技术栈很可能没有太多和你重叠的。意味着他问的东西，很多你都没听说过，这就非常糟糕(所以面试也带有一些运气在里面)
+我的感受 在面试的时候，我感觉我很容易会混乱，经常说出来的东西并不是面试官想要的答案(说完后我才发现)，在项目上没有体现细节(我最失败的地方)
+一些给自己的建议
+ 早准备
+ 准备多一些细节以及亮点
+ 平时多看开源代码(为了寻找共同的技术栈)
+ 对基础的东西要非常熟练(网络、操作系统等)
+ 多努力
+  0 offer倒是敲响了我的警钟，也让我明白了自己的大致方向。说实话，我差点就完全错过了整个秋招，还好还是尝试了，感觉还是不亏的
+我觉得我自己 不想说自己因为结果不好而不行，我觉得我还是具备成为一个优秀的engineer的因素。。。吧</description>
+    </item>
+    
+    <item>
+      <title>Etcd Raft 源码实现-2</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/</link>
+      <pubDate>Sun, 13 Oct 2019 17:11:14 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/</guid>
+      <description>趁着周末有空，抽几个小时看看源码，这次看的是raftexample
+这是一个raft的简单实现，etcd/raft只是实现了raft的主要算法(例如选举、状态机等)
+ To keep the codebase small as well as provide flexibility, the library only implements the Raft algorithm; both network and disk IO are left to the user. Library users must implement their own transportation layer for message passing between Raft peers over the wire. Similarly, users must implement their own storage layer to persist the Raft log and state.
+ 因此我觉得先看一个完整的实例可能对raft的整个逻辑会有一个清晰的认识
+因此我们可以先从怎么用etcd的raft来入手
+这篇blog的范围仅在raftexample这部分，超过这部分的代码(例如raft和node这些细节，在后面的blog会慢慢接触)暂时不会说
+看看大体结构 ├── doc.go ├── httpapi.</description>
+    </item>
+    
+    <item>
+      <title>etcd Raft 源码实现-1</title>
+      <link>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/</link>
+      <pubDate>Sun, 13 Oct 2019 00:26:07 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/</guid>
+      <description>之前说过的结合源码来学习Raft的blog来了！
+这次想尝试写成一个系列吧，因为代码还是有一定量的，大概估计要半个月～一个月的时间(中间太多事情了)
+今天来开第一篇，说个稍微简单点的MemoryStorage
+MemoryStorage只是一种实现，并不是所有实现都应该和它一样
+在raft/storage.go里面就是全部是实现，逻辑也比较简单，因为代码实现比较简单，主要说一下这个的用法吧
+先看一下结构体
+type MemoryStorage struct { // 上锁 sync.Mutex // 这个暂时可以先不理会 hardState pb.HardState // Snapshot是一个快照 snapshot pb.Snapshot // 这里就是存放log entry的地方 ents []pb.Entry }  这里顺带说一下，如果没看过Raft Paper或者刚接触Raft，还是建议先理解一些概念，因为代码里有很多名词都是相关的
+这里我只会举一些稍微难一点的函数(有些太简单就不说了)
+取数据的Storage // Entries implements the Storage interface. func (ms *MemoryStorage) Entries(lo, hi, maxSize uint64) ([]pb.Entry, error) { // 先上锁 ms.Lock() defer ms.Unlock() // offset是相对数组而言的，在这里，数组的第一个元素，也就是ents[0]是不用做数据的 offset := ms.ents[0].Index // 这一步可以验证上面说的ents[0]不包含数据的说法 // 如果lo == offset，那么会发生Compact错误 // Compact错误代表着数据不存在(被清理了) if lo &amp;lt;= offset { return nil, ErrCompacted } // 因为是[lo,hi) 所以，hi是不包含的 // 这里的边界条件不加=，也是因为这个 if hi &amp;gt; ms.</description>
+    </item>
     
     <item>
       <title>Interview3</title>

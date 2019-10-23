@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Life on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/Life/</link>
+    <description>Recent content in Life on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Oct 2019 22:07:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/Life/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>我的0-Offer秋招之路</title>
+      <link>https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/</link>
+      <pubDate>Tue, 15 Oct 2019 22:07:48 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/</guid>
+      <description>今天算是我秋招的一个结束点了吧，至今还是0 offer，说不难受是假的，但是说很难受好像也没有，因为从中也收获不少。而且我相信秋招的失败经历也不会让我翻不了身(我是咸鱼)
+大概经过 我秋招开始的比较晚，是9月18号才开始投简历，那时候很多公司都截止收简历了，所以机会相对较少。再加上不愿意北上，所以只能在深圳和广州两地选择
+因为还在实习，所以不得不请了大半个月假来准备笔试面试相关东西
+投完简历第二天就开始笔试了，写的也是一塌糊涂，所以笔试这东西还是得提前准备的，就像临考的复习一样，虽然不是长久之计，但是很有效
+最多笔试面试的时候还是九月份，下面说一下自己在这些方面的不足和反省吧
+笔试 笔试大多考的就是数据结构和算法题，平时少刷算法题的会比较吃亏，这里没什么诀窍，也没有捷径，只能多刷题，一般最少提前半个月刷题，而且刷的题不要太简单。
+比如Leetcode上的easy题大多数都非常简单，最起码要刷medium以上的
+这里笔者因为时间比较少，再加上之前没有太多积累，很多连笔试都没过
+面试 面试是我最痛的伤，我想进的公司基本上都挂在面试上了
+状态不好 面试中，状态也很重要，因为很可能很简单的东西，在状态不好的时候会说的一塌糊涂。就像笔者背问了TCP和UDP的区别这种已经准备过的问题时，因为状态不好答的也不是特别令人满意
+不够深入 笔者觉得自己在这方面做的非常差，很多东西停留在了表层，没有深入到细节实现上，这样在面试官理解上，可能只是了解，并不会实际的操作
+举个例子，面试官问某某项目的某某部分的时候，如果只说了大概思路而没有更具体的东西，可能会让面试官觉得你只是背熟了这个架构，并没有体现出技术的东西
+知识面窄 我相信这是很多人都会有的问题，对于一早定位在某一领域上的同学来说，知识面会宽很多。比如说计算机科学，很多非科班的人(包括我)接触到的东西会比较窄(可能有时间关系，可能有个人关系)，这个时候面试官所掌握的技术栈很可能没有太多和你重叠的。意味着他问的东西，很多你都没听说过，这就非常糟糕(所以面试也带有一些运气在里面)
+我的感受 在面试的时候，我感觉我很容易会混乱，经常说出来的东西并不是面试官想要的答案(说完后我才发现)，在项目上没有体现细节(我最失败的地方)
+一些给自己的建议
+ 早准备
+ 准备多一些细节以及亮点
+ 平时多看开源代码(为了寻找共同的技术栈)
+ 对基础的东西要非常熟练(网络、操作系统等)
+ 多努力
+  0 offer倒是敲响了我的警钟，也让我明白了自己的大致方向。说实话，我差点就完全错过了整个秋招，还好还是尝试了，感觉还是不亏的
+我觉得我自己 不想说自己因为结果不好而不行，我觉得我还是具备成为一个优秀的engineer的因素。。。吧</description>
+    </item>
+    
+  </channel>
+</rss>

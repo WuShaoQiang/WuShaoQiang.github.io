@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-process-identifier/</loc>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-namespace/</loc>
+    <lastmod>2019-10-22T21:35:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-process-types/</loc>
+    <lastmod>2019-10-22T21:16:30+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/</loc>
+    <lastmod>2019-10-21T20:23:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/</loc>
+    <lastmod>2019-10-15T22:07:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/</loc>
+    <lastmod>2019-10-13T17:11:14+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/</loc>
+    <lastmod>2019-10-13T00:26:07+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/posts/interview/interview3/</loc>
     <lastmod>2019-10-11T00:06:18+08:00</lastmod>
   </url>
@@ -1654,14 +1689,14 @@
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/easy/</loc>
-    <lastmod>2019-06-08T12:34:43+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/Easy/</loc>
+    <lastmod>2019-05-19T08:45:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://wushaoqiang.github.io/tags/Easy/</loc>
-    <lastmod>2019-05-19T08:45:24+08:00</lastmod>
+    <loc>https://wushaoqiang.github.io/tags/easy/</loc>
+    <lastmod>2019-06-08T12:34:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1721,7 +1756,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/</loc>
-    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1858,14 +1893,20 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/tags/Life/</loc>
+    <lastmod>2019-10-15T22:07:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/tags/Linux/</loc>
-    <lastmod>2019-07-22T20:55:48+08:00</lastmod>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/Linux/</loc>
-    <lastmod>2019-07-22T20:55:48+08:00</lastmod>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1955,7 +1996,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/posts/</loc>
-    <lastmod>2019-10-11T00:06:18+08:00</lastmod>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -1967,7 +2008,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/Raft/</loc>
-    <lastmod>2019-10-06T14:48:50+08:00</lastmod>
+    <lastmod>2019-10-13T17:11:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2080,6 +2121,12 @@
   </url>
   
   <url>
+    <loc>https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86/</loc>
+    <lastmod>2019-10-15T22:07:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</loc>
     <lastmod>2019-04-26T21:05:43+08:00</lastmod>
     <priority>0</priority>
@@ -2100,6 +2147,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2019-03-17T02:13:08+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2127,13 +2180,13 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
+    <lastmod>2019-10-13T17:11:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2019-10-08T18:58:01+08:00</lastmod>
+    <lastmod>2019-10-13T17:11:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2152,6 +2205,12 @@
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/</loc>
     <lastmod>2019-04-12T20:24:48+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2019-10-13T17:11:14+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -2235,7 +2294,7 @@
   
   <url>
     <loc>https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2019-04-25T17:04:19+08:00</lastmod>
+    <lastmod>2019-10-23T20:11:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -68,6 +68,329 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP" >TCP vs UDP</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                TCP和UDP的区别这个问题已经遇到过很多次了，有简简单单的回答，也有绞尽脑汁去想，今天来详细总结一下区别吧
+面向连接 TCP是面向连接的，也就是说TCP在连接上会有许多事情做，包括拥塞控制，流量控制，超时，重传，确认，序号等等。事情越多，负担就越多，并且对应的报文也比UDP报文要大
+关于拥塞控制和流量控制，可以看我别的blog
+UDP是没有连接的，我们只需要将数据传递给UDP，因此理论上UDP可支持的并发数要比TCP要高，UDP就会打包好数据传到网络层(IP)。反过来想，UDP这种“无法无天”的传输可能会造成很多不可靠问题。
+ UDP没有序号，因此会产生包的乱序问题
+ UDP没有流量控制，发太快可能会导致溢出，溢出的包可能因此就不见了
+  连接状态 由于TCP是面向连接的，所以会有连接状态
+发起连接 在还未连接的时候，客户端的状态为CLOSED，服务器端为LISTEN
+ 当客户端给服务器端发起一个SYN包的时候，客户端的状态变为SYS_SEND
+ 服务器端接收到，发一个SYN+ACK包，服务器端的状态变为SYS_RECV
+ 客户端接收到，并且会发一个ACK包，客户端状态变为ESTABLISH
+ 服务器端收到后也会变为ESTABLISH
+  结束连接 初始状态，客户端和服务器端都为ESTABLISH
+ 假设客户端发了一个FIN包过去，这个时候客户端状态为FIN_WAIT1
+ 服务器收到了这个包，并且发送一个ACK包，服务端状态为CLOSE_WAIT
+ 服务器主动发一个FIN包，状态改为LAST_ACK
+ 客户端收到服务器的包，并且发送一个ACK包，将状态改为TIME_WAIT
+ 服务器收到ACK后进入CLOSED状态
+ 等待一段时间后没收到包，客户端也进入CLOSED
+  这里为什么要等待一段时间呢？ 主要是要看最后面客户端给服务端的ACK是否到了，如果中间网络出了问题，服务器端没有收到这个ACK，那么它将会重发FIN，这个时候客户端还能够重新处理这个FIN……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction" >Transaction</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                事务这个词估计做软件开发的都不会陌生，我们可以简单的理解为：事务是一件事，要么成功，要么失败，而失败是全部失败，并不是局部失败
+事务这么流行的原因就是，它帮助软件开发者解决了很多难办的事情：
+ 数据库可能会在任意时间因为软件或者硬件问题直接挂掉(可能这个时候正在执行一些写操作)
+ 应用也可能会在任意时间宕机
+ 网络通信是不可靠的
+ 可能在高并发下，数据库会发生冲突
+  等等，这些事情，如果每一个都要想相应的解决方法，是需要大量的时间以及研究大量的算法，并且需要大量的测试集去验证这些算法实现是有用的
+事务是为了将这些事情变得简单点，当出现任何不希望出现的状况，我可以选择抛弃这个操作，然后告诉用户，这个操作失败了。最起码，它在操作失败这件事情上，它是正确的
+一般来说，事务会集合多个操作(Insert, Update, Delete)，变成一个操作，提交到数据库里，数据库会帮这些打包的操作看作是一个整体，因此操作到一半的时候发生错误，就会发生回滚，把之前的操作都抹去
+那么是否用事务就能解决一切复杂的事情呢？
+事务不是完美的，就像一直提到的，在数据库设计这一块，都是有的有舍，并没有完美的东西，因此我们也要很好的了解事务的优缺点。
+ACID 相信大家对这个词也是不陌生的，但是其实笔者一开始将里面的各个意思理解错了，现在从先来理解一边
+Atomicity 这里的中文虽然叫原子性，但是它和我们平常理解的原子性不一样，它这里并不是描述一个并发的过程
+这里是指，一系列的操作被打包成一个事务，如果这个事务具有Atomicity，那么它要么被commit，要么被abort，这也保证了这个事务不会修改一部分数据后失败，能够让client放心的去做retry了
+所以可以看出，这个Atomicity并不是在描述原子性，而是在描述操作的abortability，是否拥有abort操作
+Consistency Consistency在这里是指一个好的状态，这个好的状态是指你的数据应该不违反规则。
+但是在数据库层面，是不知道数据是否有效，所以这就需要开发者在应用的代码上写好事务的Consistency
+Isolation 这个才是真正和并发相关的特性，隔离机制，后面也会详细讲讲各种隔离机制，以及它们的优缺点
+我们在这里，可以简单的认为，我们可以利用隔离机制，将并发的事务一个个进行执行，这样就能够防止RACE发生，这种隔离机制叫serializable isolation但是，一个个执行是多么的低效，完完全全舍弃了并发的优势，所以下面我们会介绍许多没有如此强保证的隔离机制
+Durability 持久化是数据库最根本的目的，一个拥有Durability的事务意味着数据能够被写入到硬盘，这里也运用到了之前所说的log或者一些其它方式来记录操作，这样可以在数据库重启后能够自己恢复
+Weak Isolation Levels 因为性能问题，很多软件并不想用像serialzable isolation这种最高级别隔离的机制，因为这样的数据库很可能会在整个系统中称为瓶颈。
+Read Commited 最基础的一个隔离机制，它能够给我们保证：
+ 所有读取的数据都是经过committed的
+ 写入数据库的时候，你只能够重写以及committed的数据
+  但是多个事务在操作多个对象的时候，有可能会因为执行顺序不一样导致，事务之间读取到对方committed后的值
+如何实现这个隔离机制呢
+一般来说，会有一个row-level lock，每一个写操作都会请求对应行的lock，一个lock也只能被一个事务获取并且一直到它committed或者aborted才释放
+那读取数据呢？简单点的我们可以也持有lock，但是我们知道，持有lock的代价是很大的，万一读操作很久，或者写操作很久，整个系统的性能就会受到影响，因此我们需要更好的方法去让读尽可能的不用获取lock
+一个方法就是，数据库会帮忙记住lock之前的值，如果读取的时候发现是locked了，那么就那之前的值
+Snapshot Isolation 其功能和其名字差不多，Snapshot Isolation的做法就是这个事务读取的数据是从一个快照里面读取的，当然，这个快照是不会被改变的，所以所有的事务都只能看见某一个时间点之前的老数据。
+当我们在备份的时候， 我们可能不想在备份的时候，数据还在被修改，状态还是不稳定。所以这个隔离让我们不用担心这些问题。这个隔离机制在很多时候帮助我们很多，我们不用担心它有各种奇怪的问题，因为它已经是固定的了
+其实Snapshot的实现机制和Read Committed差不多，也是通过lock来控制写入操作，然后读是不用锁的
+ readers never block writers, and writers never block readers.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/transaction/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition" >Partition</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Partition And Replication 之前在学习Replication的时候，我们可以简单理解为副本集，也就是数据的复制
+但是如果数据量很大，然后还复制几分，那不就上天了。Partition提供一种叫分片的方法，能够有效的将数据分隔存储在不同的节点
+顺便说一下，默认的partition每个节点上的数据就只有该节点有，其它节点是没有的，也就是说，数据很可能会因为某一个结点不可用而导致该部分数据不可读取
+这个时候我们可以选择将Replication和Partition结合起来用，你可能会问这样的一个问题：那数据不是还是复制了好几份了吗?
+在Replication里，数据可以认为是相等的，假设我有5个节点，每个节点5TB的数据，总共25TB
+在Partition和Replication结合起来用，会有多少呢？我们来算一下
+首先，我们有5TB的数据，分片成5份，每一份1TB，每一份再通过Replication来复制到另外两个节点，所以每一份数据实际上有3份，也就是15TB。
+这里的巧妙之处在于，你并不用每台机器都要有，备份只需要根据你集群的大小来选择合适的备份数量即可
+How to partitioning the data 我们分片要有依据，如果随便存储，那么到时候不知道往哪查找了
+我们可以像字典一样，用某一个key的区间作为一个partition，用区间作为区分有一些优点：
+ 有序，这样在查找的时候，可以按照区间大小一次性取出大量数据(还记得LSM-Tree)
+ 每个partition的区间大小可以自己指定
+  但是也有一些缺点：
+ 分片有可能严重倾斜，有一些节点已经Overload，而别的节点却很闲  Partitioning by Hash of Key 为了解决Hot Spot问题，我们可以采用随机性较强的哈希函数对每一个key进行一次Hash，再进行分片，这样在大概率上是平均分配给每个节点的
+虽然解决了一些问题，但是上面的有序性就被破坏了
+我们知道，数据被分散了情况下，读取就会变得越来越麻烦，可能一次查询，就要用到许多的partition，所以也是有很多缺点
+Partitioning and Secondary Indexes Secondary Indexes不能唯一标识一个实例，它可以是一个颜色，一个城市等等，许多人可能都生活在一个城市，所以一个城市并不能标识哪个人
+这里主要有两种方法将数据库分片，并且是带上Secondary Indexes的
+ document-based partitioning
+ term-based partitioning
+  这两种不同的Secondary Indexes主要的区别在于，document-based只的对它当前节点的数据进行索引
+而term-based是对整个集群的索引
+我们来看一下它们在读写方面的优劣情况
+在写的时候，document-based理论上会有更好的性能
+在对一个数据进行更新的时候，document-based只需要修改被更新的partition里的索引，而term-based则可能需要修改多个partition里面的索引
+在读的时候，term-based理论上会有更好的性能
+因为document-based的索引是分开在各个partition的，所以查询的时候有可能要遍历所有的partition，而term-based因为某些索引集中在一个partition，所以很快能够找到索引值
+Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要做这件事情
+有一个方法可能大家都听过&ndash;mod
+这个方法会导致节点变动时，里面的数据会大量变动，并不是一个好的选择
+下面介绍一种方法fixed number of partitions……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/partition/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/" title="Replication Other Pattern" >Replication Other Pattern</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在之前，我着重介绍了一下One Leader的这种Replication模式，其实还有
+ Multi Leader
+ Leaderless
+  后面会写专门的blog去介绍一下这两种情况
+现在先简单的了解一下
+Multi-Leader这种模式，它可以往Leader上发起写操作，也就是多个节点都可以发生写操作，然后再广播给其它Leader和Followers
+Leaderless这种模式，写是写到多个几点上，读也是从多个节点上读，然后通过一些机制取出比较新的数据(也就是排除旧数据)
+Multi-Leader咋一听好像相对One-Leader这种模式有更好的写性能，好像看起来是这样的，但是关于冲突方面的奇奇怪怪的问题非常多，也非常难。因此也有很多劣势
+Leaderless也是，因为可以多个地方写，那么就会有并发的冲突，如何解决这些冲突就变得很重要了
+因此One Leader目前看来还是最多人用的一个，因为它不用太多考虑并发冲突问题……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/replication-other/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/" title="Replication One Leader" >Replication One Leader</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在之前的blog里，我也有大概说过关于单点故障等场景，但是大多数描述都是假设运行在单机上的
+在这blog里，我们关心的系统是由多个节点组成的
+Replication可以简单理解为副本集模式，它能够在多个节点上拥有同样的数据
+Why We Need Multi Machines 之前有讲过一些点：
+ 高可用
+ 高扩展
+ 以及单点容忍
+ 低延迟，低延迟可能是因为集群的方式处理请求更快，也可能是物理主机理用户距离比较近
+ 提高读取性能
+  One Leader and Followers 在MongoDB里，你可能会发现它们叫PRIMARYandSECONDARY，意思都是一样
+One Leader可以说是没那么复杂的一种模式
+它们的运作模式也比较简单
+在多台机器上运行同一个进程，这不同的进程就组成了一个cluster，cluster里面有且仅有一个Leader Leader是所有写操作的入口，当Leader在写入本地的时候，它也会将自己的Replication Log或者Change Stream(可以抽象成Leader给Followers发的写请求)发给集群上的Followers，这样Followers就能够更新自己的数据，和Leader保持一致
+而读操作可以从Leader上读，也可以在Followers上读。不同的是，Leader上的数据一定是最新的，而Followers上的数据有可能还没同步过来(在异步的通信方式下)，就像上面说的，同步是通过请求来的，谁也不能确保通信不出问题
+Synchronous Versus Asynchronous Replication 同步和异步拥有很大不同的特性
+同步意味着数据需要存入到每一个节点上，这个操作才算完成。如果其中一个节点因为网络问题，连接不上，那么整个系统就hang在这里不动了。所以一般情况下，我们不会选择同步的方式来处理数据
+异步意味着持久性会受到影响，为什么呢？设想当写操作还在Leader上的时候，Leader挂了，这个时候数据就完全丢失了，因为当前集群上没有一个节点拥有该份数据。
+半同步，我们折中一下双方的优劣，可以得到半同步，我们假设大部分节点都是正常的，这样只要有一定数量的节点收到了数据并且写入，那么我们就可以认为该数据已经得到了备份，这个时候Leader可以告诉外界，这个数据被存储好了
+Setting Up New Followers 有时候为了更好的服务，需要增加节点
+这个时候节点是没有任何数据的，我们需要让这个节点也能够处于服务状态的话，就必须通过复制数据给到这个节点
+How?
+传统的想法，直接拷贝文件行不行？
+ 是不行的，当这个系统是在运行状态，可能有很多中间的状态以及一些文件还是不完整的时候，我们直接拷贝文件很有可能这个文件都无法被解析。所以如果要这样做，可能需要将服务先关了，这样可以防止以上情况。但这又违反了系统的可用性，总不能加个节点就要关服拷贝吧  正确而又比较优雅的做法是利用隔离机制
+ 有一种隔离机制可以产生出一个快照(Snapshot)，这个快照一旦产生出来就不会改变了，因此新的节点完全可以按照这个快照来构建，然后Leader也不会因为这个新节点加入而停止服务。当新节点完成了快照的恢复，它就会向Leader拿Replication Log，也就是快照之后的数据更新，这样慢慢一步步赶上进度，最终可以像其它节点一样工作了。  Failover 在Followers节点挂了的时候，我们不会用这个词。这个词是描述一个cluster的Leader挂了
+当发生failover，我们应该要有相应的failover机制，一般情况下包含这几步
+ 确定Leader真的挂了，因为许多不可控因素，一般情况下判断一个服务是否挂了，可以用超时来判断，如果超时，那么就算进程没有挂，在对方的角度看来，它就是挂了
+ 当大多数的节点都判断Leader挂了(防止只是follower和Leader断开连接)，那么就开始挑选新的Leader，这里面应该有一个挑选算法，简单点就是投票机制，票数最多的节点当Leader。当然，每个Follower的票权也可以配置成不一样的。
+ 重新配置整个集群，使用新的Leader代替旧的Leader，旧的Leader就算后面重新连接，也需要Step Down成为一个Follower
+  不够，Failover没有想象中的那么简单，它会在一个高并发的系统上引发很多问题，我这里先不打算说太多(分布式系统的奇怪东西太多了)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/replication-one-leader/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/" title="Storage and Retrieval" >Storage and Retrieval</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                数据库简单理解，就为了两件事情：存储和读取
+So, Let&rsquo;s keep that simple
+Index 索引是与我们主要的数据分开的，我们可以创建索引，删除索引，这都不会影响我们的主要数据
+索引最初的目的是为了加快查询操作。但由于有除了主要数据之外的索引数据，因此我们在写入数据库的时候 就要维护多份数据(既要写入我们的主要数据，还要写入相应的索引数据，或者维护索引)，所以一般情况下加索引会 对写的性能有所影响
+所以，我们需要根据应用场景来决定是否加索引，这也是开发者应该知道的一些概念
+下面简单介绍一下索引种类以及原理
+Hash Indexes 其实和我们平时用编程语言里的哈希表有点类似
+在Go里，是一个叫做map的数据结构
+Go map 如何读写 接收到一个Key 对key进行Hash 通过Hash找到是哪一个bucket 取Hash的前8Bit做一个快速比较 找到bucket的内存(可以进行读写了)  我们可以简单将这个索引比作成一个offset，每一个offset都是某一个数据相对某一个内存的偏移量，这样我们就可以直接读取到该数据，而不用从头开始查找了。这是一个append-only的形式，在这种形式下，我们只需要关注最近的那个offset即可，在数据越来越大的时候，我们可以通过合并，将失效的数据删除
+Append-Only咋一眼看去很浪费空间，但它也有独特的优点值得关注：
+ 相对于随机读写(也就是in-place)，它具有更好的性能
+ 更好处理恢复
+  但是随着时间推移，这个索引变得越来越大，以至于要存入硬盘中，这样，索引相应的性能就会受到很大的影响
+并且Hash Index对取一批数据的操作是很不友好的
+SSTables and LSM-Trees SSTables = Sorted String Tables
+SSTables相对上面说的Hash有很大的优势，不过我们先看一下它需要满足的条件
+在上面我们可以看到k-v是直接加进来的，对SSTables，我们规定这些
+ k-v是按照key排序的
+ 每一个key在merge之后的segment都只出现一次
+  思考一下，每一个segment都是内部有序的，当我们要合并segment的时候，像什么算法？
+我们要清楚知道，每一个segment是有顺序产生的，也就是说相同的key在不同的segment里面也是可以区分先后的
+在这种有序的情况下，我们还可以解决上面Hash Index的一个内存爆满问题
+因为我是有序的，所以我不一定要知道某一个具体key的内存地址，我可以知道在它附近的key，并且根据排序来找到我想要的key，这样我们就可以极大减少存储在内存里的索引
+由于是有序的，我们可以针对一些连续的扫描做很大的优化
+说了这么多，都只是介绍，那具体怎么实现呢？
+回想一下它需要的第一个条件&ndash;有序
+我们都知道，现在有平衡树可以帮我们做到这一点
+ RB-Tree
+ AVL-Tree
+  然后归并算法可以帮我们解决segment合并的问题……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/storage-and-retrieval/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/" title="Data Model and Query Language" >Data Model and Query Language</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年9月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Different Between SQL and NoSQL 我们到目前为止，市面上主流的数据库还是环绕着关系型数据库和非关系型数据库，当然也还有别的，但是我们主要对这两个进行对比
+ 关系型数据库，发展到今天已经是数据库的一号大哥了，它相对NoSQL的优点有：   Many-to-One
+ Many-to-Many
+ 利用外键优势
+ 冗余少
+  这里所说的Many-to-*， 其实就是一个外键的引用，在写入数据库的时候，只需要写入外键的唯一标识(一般是某某ID)就能够在读取的时候，通过Join来得到完整的数据。这样做有一点好处就是，当某一个被多出指向的值需要改变的时候，只需要在哪个table里面改，而外面用的ID还是不变的。这在NoSQL里面是需要遍历update一次的，当数据量非常大的时候，这个操作很可能就会有奇怪的问题出现。
+ 非关系型数据库，是一个比较年轻，又很火的数据库，它主要是有以下优点：   读取快
+ 弹性的数据结构
+ 数据之间不会互相影响
+ 易横向扩展
+  非关系型数据库会更加适用于一些读多写少的场景，它读取快是因为它不用像关系型数据库这样去跨表查询，所有数据都在一个document上。但是这也带来一些缺点：重复数据反复出现造成冗余；批量修改的时候需要update多个document；如果只是需要document的某一个字段，可能也要load整个document(现在已经有数据库支持projection了)
+并且，我们在使用的时候可以发现，关系型数据库对数据结构是严格把控进入的(strict write)，而非关系型数据库则是读取解析到程序的时候严格把控的(strict read)
+还是那句话，根据应用场景进行选择，到底哪个更加贴合实际
+引用书里的一句话
+ It&rsquo;s not possible to say in general which data model leads to simpler application code; it depends on the kinds of relationships that exist between data items
+ 现在的又出现了NewSQL，是将很多SQL和NoSQL的优点集合在一起，既有SQL的查询特性，又有NoSQL的横向扩展特性……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/data-model-and-query-language/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/" title="Foundations of Data System" >Foundations of Data System</a>
                                 </h1>
                             </header>
@@ -178,283 +501,6 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
   Briefly I like in a __ (city, town, village...)  Background and details Like or dislike history and changes ____ has changed a lot in the last 20 years ____ is almost unrecognisible compared to 20 years ago it hasn't changed much in the last 20 years  ……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/hometown/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/english/self-introduction/" title="Self Introduction" >Self Introduction</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/English">English</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Name I am &hellip;
- I am Gavin  I&rsquo;m
- I&rsquo;m Gavin  My name is &hellip;
- My name is Gavin  My name&rsquo;s
- My name&rsquo;s Gavin  This is &hellip;(usually used in phone call)
- This is Gavin  Location I&rsquo;m from &hellip;
- I&rsquo;m from China  I&rsquo;m Chinese
-I come from &hellip;
- I come from China  I was born and raised in Chinese.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/self-introduction/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/" title="Gopher 2019 Micro Integration Test" >Gopher 2019 Micro Integration Test</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 这是19年Sg GopherCon上的视频
-源代码
-里面讲了微服务的测试
-种类 测试主要有三种
- E2E
- Integration
- UT
-  E2E的缺点 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-micro-integration-test/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/" title="Gopher 2018 Asyn Network" >Gopher 2018 Asyn Network</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Reference Video is here
-src is here
-In this post, I wanna summary a few tips I learned from Filippo Valsorda
-How to receive a connection l, err := net.Listen(&quot;tcp&quot;,&quot;localhost:8989&quot;) if err != nil { log.Fatal(err) } for { conn, err := l.Accept() if err != nil { log.Fatal(err) } go serveConn(conn) }  If you don&rsquo;t serve the connection as a goroutine, it will block and can&rsquo;t receive an another connection before current connection is broken……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2018-asyn-network/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/" title="Gopher 2019 Stack and Heap" >Gopher 2019 Stack and Heap</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最近在多多回顾之前的Gopher大会视频，下面分享的主题是在2019 GopherCon Sg上由Jacob Walker带来的Understanding Allocations: The Stack and the Heap
-这篇blog post只是为了总结
-Stack 在Go里，每一个goroutine都有一个自己的stack，因此我们如何在goroutine之间传达stack的数据？
-当然是用channel(推荐)或者全局变量(不推荐，且需要加锁)
-但是这篇post主题不是这个，所以不加深讨论了
-可能会有人有疑问，我只有一个main函数方法，没有起goroutine怎么办。可以这么理解，其实main函数本身就是一个goroutine
-Heap 如果变量不存储在stack上，那么就是存储在了heap上
-heap原则上不属于任何一个goroutine拥有，大家都可以对这里的变量进行引用
-存储在heap上的变量会受到GC的管理(也就是垃圾回收)
-Attention 其实在编写程序，我们更注重的是正确性，清晰性，可读性等
-唯独我们真正需要Improve performance的时候，才需要考虑性能问题
-什么时候要提升性能呢
- 用benchmark证明程序确确实实没有达到需求的速度  Optimize for correctness first, not performance
-How do we know where the variable is stored? 我们不知道，只有编译器知道，所以我们需要问编译器
-go build -gcflags &quot;-m&quot;  但是我们可以根据一些通行的规则大概判断
-Detail 我再简单的说说Go里面的stack
-Go stack会分成两部分，一部分是valid，另一部分是invalid
-从字面上也很容易看出，valid的内存才是真正有用的，可以被调用的.
-我们不应该触碰到invalid内存里的东西，因为那是不安全的
-什么时候是valid的呢
-func main() { a := 1 b := 1 c := sum(a,b) } func sum(x,y) int { return x+y }  一个很简单的程序……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-stack-and-heap/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/" title="Gopher 2016 Solid Design" >Gopher 2016 Solid Design</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                前几天有写过一些设计原则与设计模式
-两者之间，设计原则给了我较深的体会，真的是慢慢理解前人的思想，以及对代码质量的要求
-今天抽空看了Dave在2016 Gopher UK讲的SOLID Go Design
-觉得刚好和前面学习的设计原则产生了完美结合
-SOLID 首先解释一下每一个字母的意义
- S: 单一职责原则(Single Responsibility)
- O: 开放封闭原则(Open For Extension, Close For Modification)
- L: 里氏替换原则(Liskov)
- I: 接口隔离原则(Interface Segregation Principle)
- D: 依赖倒置原则(Dependency Inversion Principle)
-  Go 因为之前写过某些原则，就不重复说了，有兴趣可以看前面讲设计原则的blog
-这里主要看L和I
-里氏替换原则 这里它所描述的是，子类可以替换掉父类而不受影响，因为子类可以继承复用父类，具体是什么上网搜一下也很容易找到更清晰的解释
-这里重点还是将里氏替换原则和Go结合起来
-我们知道，Go是没有class的，只有组合，所以在这里，里氏替换原则可以变成
-某一个接口可以被所有实现了这个接口的对象所替代
-很简单的例子就是io.Reader,我们可以用任何实现了该接口的实例去替代这个接口
-相当于，接口对应着父类，而实现了这个接口的结构体对应着子类
-接口隔离原则 这在Go里面也是一个非常重要和常用的原则
-受益于Go的鸭子类型，我们在思考一个功能的时候，不需要知道它具体的细节，我们只用清楚输入和输出即可实现这个功能
-这里的实现，只是一个接口，我们并不关心具体的实现，这就是接口隔离
-对外界来说，我只暴露接口，这个接口也许有多个具体的实现实例，这些实例只是通过不同的方法达到了同一个目的
-这个时候，外界想要使用这个接口的功能，只需要将依赖注入就能够任意选择具体实现实例了
-如果没有想要的具体实例，我们还可以根据接口自己实现一个，而且不会改变任何其它代码，只要将自己的实现注入到接口，接口就能够按照某个实例去工作了
-接口隔离是软件设计非常重要的一环，它让软件内部耦合度降低，扩展性更优
-Dave Dave在讲完SOLID设计原则后，提出了一些对Gopher们的请求，尤其是设计
-Dave希望Go更加的侧重设计，用好的设计去解决实在的问题
-My Thought About Design 设计并非想象中那么神奇，我更觉得它是一种思路的转变，也许有人更喜欢把一些实现写死，而非用接口去解耦(也确实是因为改动机会不大)，但也有人觉得留有余地是好的选择，都有各自的道理吧
-各有优缺点
-接口确实将结构与结构之间隔离开了，并且更加好定义职责(还有一系列好处)
-但是接口让程序的中间层变多，使得代码的逻辑会经常在不同地方穿梭(不够依赖现代编辑器，这个难度不大)
-那到底要不要写接口呢？
-我的想法是，在设计的时候，对于不稳定的部分，强烈推荐用接口
-在有多个实现的时候，必须要有接口……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2016-solid-design/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/" title="Design Pattern Basic" >Design Pattern Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                简单的记录一下最近遇到的设计模式，希望能够多点吸取一些软件设计上的经验
-简单工厂模式 简单工厂模式和工厂模式还不一样，简单工厂模式和工厂模式的很主要的区别在于是否违反了开放-封闭原则。
-在简单工厂里，Fac是一个类，它按照条件来产生不同的实体工厂，比如很简单的运算
-type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac struct { } func (fac OperatorFac) CreateOperator(op string) Operator { switch op { case &quot;+&quot;: return AddOperate{} case &quot;-&quot;: return SubOperate{} } } type AddOperate struct { } func (addOp AddOperate) GetResult(num1 int, num2 int) int { return num1 + num2 } type SubOperate struct { } func (subOp AddOperate) GetResult(num1 int, num2 int) int { return num1 - num2 } func main() { fac := OperatorFac{} op := fac.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/" title="Design Principle Basic" >Design Principle Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年8月4日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F">设计模式</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                这几天阅读了一份代码，让我对设计模式有了很大兴趣，看到别人写的代码如此优雅，自己对代码的追求也跟着提高了
-写一个代码，不仅是要把当前的业务实现了，还要注意代码的整洁性，可读性，高可维护性等(我暂时就只知道这些了)
-而设计模式是为了我们整体代码的一个高可维护性，无论是对项目的设计，还是对某一个具体的功能实现，都有着很大的作用
-下面我就想简单的介绍一下我最近接触到的设计原则，并且结合&lt;&lt;大话设计模式&gt;&gt;这本书来进行稍微系统的理解
-单一职责原则 从程序角度来解释
- 就一个类而言，应该仅有一个引起它变化的原因
-软件设计真正要做的许多内容，就是发现职责并把那些职责相互分离。
-如果你能够想到多于一个的动机去改变一个类，那么这个类就具有多于一个的职责
- 举个栗子
-如果一个类，包含了一件物体的移动，又包含了这个物体的增加和删除，这个类所承担的职责过多了，把这些职责耦合在一起，可能会导致：当一个职责发生变化时，会影响另一个职责
-那么它理论上是可以拆分成两个类的
-单一职责原则是一个比较普遍被接收的原则，它有助于程序员针对某一个非常具体的一类功能进行开发
-不仅类有单一职责的原则，函数其实也是可以做到单一职责的
-无论是什么样的项目，都应该遵守这一原则，有助于提高维护性，扩展性以及可读性
-开发-封闭原则  软件实体(类、模块、函数)应该是可扩展，但是不可修改
- 对于扩展是开放的，对于修改是封闭的，这句话让我感觉就是在说接口这个概念
-比如说，我要实现一个server和client的通信方式，我就用这个通信方式来让双方交流数据
-一开始定的方案是用HTTP请求来实现API，实现好了，发现速度太慢，这时候要换一种通信方式，这个时候如果修改除了通信方式之外的代码，就违背了开放-封闭原则了
-按照这个原则，模块是可扩展的，也就是说我只是换一个通信方式，但是对于server和client应该是无感知的，或者低感知的，也就是说我的业务逻辑应该不受影响
-这个时候这种可能需要改变的地方(类)，我们应该将它抽象出来，成为一个接口，而HTTP、RPC等通信示例只是实现了这个接口，对通信层之上的业务层等应该是无感知的
-用生活的例子来说就是，老板让我买一个鼠标，他不管我在哪个平台买，不关心我买的方式
-与单一职责的对比
-刚开始接触设计模式，都会觉得每一个设计模式或者原则都在描述差不多的东西，因此作对比就能突出它们的不同，以及应用场景
-可以看见上面的例子，我们只是想换一个通信方式，利用开放-封闭原则，我们知道将通信方式抽象成一个接口，利用不同的通信示例来实现接口就好
-单一职责，这里的通信接口确实是只负责通信，并且也只有要通信的时候才会被触发，它的动机是唯一的，因此就算我们实现了不同的示例方法，它的动机依旧唯一，所以也没有违背单一职责
-依赖倒置原则 依赖倒置的原则
- 高层模块不应该依赖底层模块，两个都应该依赖抽象(接口)
- 抽象不应该依赖细节，细节应该依赖抽象(这里的细节可以理解为实例)
-  一个软件的架构很多时候就是为了把一些接口定义好，让不同开发人员依赖这个接口来编程，这样互相之间就不用知道对方的具体实现了，哪怕有一边突然要换一个实现方式，另外一边也不用改变(只要接口不变)
-所以设计一个稳定的接口是软件设计的关键一步
-所以面向对象编程变成了面向接口编程
-在编程上，应该尽可能的让各个组成部分面向抽象编程，而不是面向细节
-一个很好理解的例子 一部电脑，如果显然是内存的问题，那么就应该和CPU等其它硬件没有关系，只要替换内存，电脑便能继续工作，这就是单一职责，互不影响。
-再比如说，如果内存不够，只需要往内存插槽里添加内存条即可，这就是开放-封闭原则，我们只是扩展了，并没有修改原来的东西
-无论是主板还是CPU、内存等都是针对接口设计的，我们不能因为买了联想的电脑，就不能用三星的固态了吧
-这是不合理的，我们也经常说到兼容性问题，这个问题的原因可能就是接口不是完全吻合，出现了不兼容。
-所以只要某某品牌的内存实现了某一个接口，那么它理论上是可以在所有符合该内存插槽接口的主板上使用的，这种就是依赖倒置，依赖的并不是这个内存条，而是这个接口，这个接口是抽象的，所以我并不关心某个公司内存条具体是如何实现的
-迪米特法则 这个法则其实很简单
- 如果两个类不必直接通信，那么这两个类就不应当发生直接的相互作用，如果其中一个类需要调用另一个类的某一个方法的话，可以通过第三者转发这个调用
- 一般在软件设计的时候都会有层次架构，层层渐进。
-哪个很简单的例子，我们一般直接在应用层调用底层的数据库操作的，一般我们都会封装一个model层，专门来实现与数据库的操作
-一句话概括就是：能不暴露出去的尽量不暴露，也就是说尽量不公开让别人调用
-原理还是耦合度，暴露的越少，那么和别的组件耦合就会越松，程序相对好维护……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/design-pattern/design-principle-basic/">阅读全文</a></p>
                         </article>
                     
 
@@ -593,6 +639,10 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
         <a href="https://wushaoqiang.github.io/page/31/">31</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/32/">32</a>
+    </li>
+    
 
     
     <li class="next">
@@ -621,6 +671,34 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
@@ -630,34 +708,6 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary">Spanner Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation">Week Isolation</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage">Column Oriented Storage</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL">2PC and 2PL</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary">BigTable Summary</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election">Leader Election</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips">Tips</a>
     </li>
     
 </ul>
@@ -710,7 +760,7 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(20)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
     </li>
     
     <li>
@@ -722,7 +772,11 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(27)</a>
+        <a href="https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86/">人生经历(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(29)</a>
     </li>
     
     <li>
@@ -832,6 +886,8 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
     
     <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
     
+    <a href="https://wushaoqiang.github.io/tags/Life/">Life</a>
+    
     <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
     
     <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
@@ -914,6 +970,8 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
     
     <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
@@ -925,6 +983,8 @@ type Operator interface { GetResult(num1 int, num2 int) int } type OperatorFac s
     <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
     
