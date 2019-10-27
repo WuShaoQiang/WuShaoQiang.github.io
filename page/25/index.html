@@ -68,6 +68,65 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月24日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 我们现在接触较多的两种加密方式
+ 对称加密
+ 公钥加密
+  对称加密 利用一样的秘钥，在持有者双方进行加密和解密
+但是第一次建立连接并且传输秘钥的时候不安全(当然可以通过其它方式传输)
+速度快
+公钥加密 用对方的公钥加密，发送给对方，因为只要对方有自己的私钥，因此就算密文半路被拦截，也不会泄露信息
+安全性好，但速度慢
+结合 结合两种加密方式，创建一个既安全又快的连接
+ 利用对方公钥加密对称秘钥，发送给对方
+ 对方收到用自己秘钥解密，得到对称秘钥
+ 双方用对称秘钥进行接下来的通信
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/" title="Leetcode 83" >Leetcode 83</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月23日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
+最优解答 /** * Definition for singly-linked list.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-70/" title="Leetcode 70" >Leetcode 70</a>
                                 </h1>
                             </header>
@@ -258,52 +317,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-28/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-27/" title="Leetcode 27" >Leetcode 27</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。 示例 1: 给定 nums = [3,2,2,3], val = 3, 函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,1,2,2,3,0,4,2], val = 2, 函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。 注意这五个元素可为任意顺序。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝 int len = removeElement(nums, val); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); }  我的解答 func removeElement(nums []int, val int) int { if len(nums) == 0 { return 0 } i := 0 j := len(nums) - 1 for i &lt; j { if nums[i] == val { nums[i] = nums[j] j-- } else { i++ } } if nums[i] == val { return j } return j+1 }  因为题目说只需要给索引就可以了，因此不需要创建新的内存存放，只需要用一个索引将符合要求的值和不符合要求的值划分开(所以要交换它们位置)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-27/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-26/" title="Leetcode 26" >Leetcode 26</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。 示例 1: 给定数组 nums = [1,1,2], 函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 你不需要考虑数组中超出新长度后面的元素。 示例 2: 给定 nums = [0,0,1,1,1,2,2,3,3,4], 函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。 你不需要考虑数组中超出新长度后面的元素。 说明: 为什么返回数值是整数，但输出的答案是数组呢? 请注意，输入数组是以“引用”方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。 你可以想象内部操作如下: // nums 是以“引用”方式传递的。也就是说，不对实参做任何拷贝 int len = removeDuplicates(nums); // 在函数里修改输入数组对于调用者是可见的。 // 根据你的函数返回的长度, 它会打印出数组中该长度范围内的所有元素。 for (int i = 0; i &lt; len; i++) { print(nums[i]); }  我的解答 func removeDuplicates(nums []int) int { if len(nums) == 0 || len(nums) == 1 { return len(nums) } count := 0 existMap := make(map[int]bool) for _, num := range nums { if _, exist := existMap[num]; !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-26/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -472,6 +485,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -496,19 +517,11 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -561,7 +574,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

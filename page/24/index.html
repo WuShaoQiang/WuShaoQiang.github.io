@@ -68,6 +68,76 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/" title="Golang GC" >Golang GC</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月27日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
+参考  legendtkl
+ Golang UK Conference 2017 | Will Sewell &amp; Jim Fisher - Golang&rsquo;s Realtime GC in Theory and Practice
+  算法模型 三色标记算法(Mark-and-sweep)
+三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
+ 这个算法实现广度优先(BF)
+ 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
+ 这个重复选取直到没有灰色的对象为止
+  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
+ 黑色：已经遍历过这个对象的所有对象
+ 灰色：这个对象所指向的对象还没有被遍历过
+ 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
+  结束阶段里，按算法所解释的，是不会再有灰色了，只有
+ 黑色：有用的数据
+ 白色：已经不可能到达的数据(垃圾，会被清理)
+  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
+ 执行我们前面所说的模型里的循环
+ 在处理完循环后，清理所有白色标记的对象
+  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现
+2019.05.06 今天在看了一个视频
+在最后面讲到GC的问题的时候，发现GC的一个问题
+ 对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/" title="Golang 依赖注入" >Golang 依赖注入</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月26日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
+没有DI 把所有创建变量放在New函数里面
+type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
+有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-generic/" title="Golang 泛型" >Golang 泛型</a>
                                 </h1>
                             </header>
@@ -369,65 +439,6 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/" title="关于加密 --基础" >关于加密 --基础</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月24日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 我们现在接触较多的两种加密方式
- 对称加密
- 公钥加密
-  对称加密 利用一样的秘钥，在持有者双方进行加密和解密
-但是第一次建立连接并且传输秘钥的时候不安全(当然可以通过其它方式传输)
-速度快
-公钥加密 用对方的公钥加密，发送给对方，因为只要对方有自己的私钥，因此就算密文半路被拦截，也不会泄露信息
-安全性好，但速度慢
-结合 结合两种加密方式，创建一个既安全又快的连接
- 利用对方公钥加密对称秘钥，发送给对方
- 对方收到用自己秘钥解密，得到对称秘钥
- 双方用对称秘钥进行接下来的通信
-  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/encryption-basic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/" title="Leetcode 83" >Leetcode 83</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月23日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。 示例 1: 输入: 1-&gt;1-&gt;2 输出: 1-&gt;2 示例 2: 输入: 1-&gt;1-&gt;2-&gt;3-&gt;3 输出: 1-&gt;2-&gt;3  我的解答 type ListNode struct { Val int Next *ListNode } func deleteDuplicates(head *ListNode) *ListNode { c := head for c != nil { if c.Next == nil { return head } if c.Val == c.Next.Val { c.Next = c.Next.Next } else { c = c.Next } } return head }  因为是个排序的链表，因此只要前后对比，再根据指针的指向来改变链表
-最优解答 /** * Definition for singly-linked list.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-83/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -596,6 +607,14 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -620,19 +639,11 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -685,7 +696,7 @@ p1 := Person{Name: &quot;SQ&quot;, Age: 1} p2 := Person{Name: &quot;SQ&quot;, Ag
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

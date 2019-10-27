@@ -145,6 +145,10 @@
 
 <p>也就是说Namespace level低的能够看到Namespace level高的，反过来则不行。这带来的结果就是，一个进程(Namespace.level &gt; 0)会在不同层级的Namespace上有该层级的唯一PID，<strong>所以一个进程有多个PID，分别在不同的Namespace</strong></p>
 
+<p>这也告诉我们一个事情：<strong>一个进程的创建需要在每一个Namespace里面新建一个PID，赋值到进程结构体上</strong></p>
+
+<hr />
+
 <pre><code class="language-c">struct pid_namespace {
 	struct kref kref;
 
@@ -353,6 +357,14 @@ enum pid_type
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -377,19 +389,11 @@ enum pid_type
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -442,7 +446,7 @@ enum pid_type
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

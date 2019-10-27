@@ -78,6 +78,58 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/">Linux Process do_fork</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                上一篇说fork、clone的时候，可以看到它们都是调用了do_fork，这也很好的解释了为什么这两个系统调用如此相似了，也解释了很多我们平时听过的结论(不再赘述)
+do_fork大致流程 do_fork的大致代码如下
+/* * Ok, this is the main fork-routine. * * It copies the process, and if successful kick-starts * it and waits for it to finish using the VM if required. */ long do_fork(unsigned long clone_flags, unsigned long stack_start, struct pt_regs *regs, unsigned long stack_size, int __user *parent_tidptr, int __user *child_tidptr) { struct task_struct *p; int trace = 0; long nr; /* * Do some preliminary argument and permissions checking before we * actually start allocating stuff */ // 这里是一些clone_flag的检查 if (clone_flags &amp; CLONE_NEWUSER) { if (clone_flags &amp; CLONE_THREAD) return -EINVAL; /* hopefully this check will go away when userns support is * complete */ if (!……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/">Linux Process Fork&amp;Clone</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月24日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单的fork 之前也有大致介绍过fork，简单来说就是&rdquo;复制&rdquo;一个task_struct，其实系统调用的sys_fork比较简单
+int sys_fork(struct pt_regs *regs) { return do_fork(SIGCHLD, regs-&gt;sp, regs, 0, NULL, NULL); }  我们可以看到，主要是do_fork的逻辑，在这里传入了SIGCHLD表明子进程终止后发送SIGCHLD信号通知父进程
+像sys_vfork和sys_clone其实都是调用了do_fork，区别大多在于传入的标志位(flag)不同
+int sys_vfork(struct pt_regs *regs) { return do_fork(CLONE_VFORK | CLONE_VM | SIGCHLD, regs-&gt;sp, regs, 0, NULL, NULL); }  可以看到是多了一些flag在sys_vfork调用的参数上
+do_fork /* * Ok, this is the main fork-routine. * * It copies the process, and if successful kick-starts * it and waits for it to finish using the VM if required. */ long do_fork(unsigned long clone_flags, unsigned long stack_start, struct pt_regs *regs, unsigned long stack_size, int __user *parent_tidptr, int __user *child_tidptr)  我们可以简单的理解这些参数的意义……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/">Linux Process Identifier</a>
                                 </h1>
                             </header>
@@ -112,6 +164,7 @@ PID不仅仅是数字 在我们大部分人的认知下，PID就是一个整数�
 但是在Linux下，需要维护PID之间的关系，比如所处的Namespace
 Linux下的PID Namespace 在Linux下的PID Namespace是有层级关系的，init所处的global PID Namespace是处于第0级，要创建新的PID Namespace就会在其父进程的Namespace的等级里加一
 也就是说Namespace level低的能够看到Namespace level高的，反过来则不行。这带来的结果就是，一个进程(Namespace.level &gt; 0)会在不同层级的Namespace上有该层级的唯一PID，所以一个进程有多个PID，分别在不同的Namespace
+这也告诉我们一个事情：一个进程的创建需要在每一个Namespace里面新建一个PID，赋值到进程结构体上
 struct pid_namespace { struct kref kref; struct task_struct *child_reaper; unsigned int level; struct pid_namespace *parent; .……
                                 <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/">阅读全文</a></p>
                             </div>
@@ -292,6 +345,14 @@ fg %num 将后台程序转移到前台……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -316,19 +377,11 @@ fg %num 将后台程序转移到前台……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -381,7 +434,7 @@ fg %num 将后台程序转移到前台……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

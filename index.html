@@ -68,6 +68,58 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork" >Linux Process do_fork</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月24日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                上一篇说fork、clone的时候，可以看到它们都是调用了do_fork，这也很好的解释了为什么这两个系统调用如此相似了，也解释了很多我们平时听过的结论(不再赘述)
+do_fork大致流程 do_fork的大致代码如下
+/* * Ok, this is the main fork-routine. * * It copies the process, and if successful kick-starts * it and waits for it to finish using the VM if required. */ long do_fork(unsigned long clone_flags, unsigned long stack_start, struct pt_regs *regs, unsigned long stack_size, int __user *parent_tidptr, int __user *child_tidptr) { struct task_struct *p; int trace = 0; long nr; /* * Do some preliminary argument and permissions checking before we * actually start allocating stuff */ // 这里是一些clone_flag的检查 if (clone_flags &amp; CLONE_NEWUSER) { if (clone_flags &amp; CLONE_THREAD) return -EINVAL; /* hopefully this check will go away when userns support is * complete */ if (!……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone" >Linux Process Fork&amp;Clone</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月24日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单的fork 之前也有大致介绍过fork，简单来说就是&rdquo;复制&rdquo;一个task_struct，其实系统调用的sys_fork比较简单
+int sys_fork(struct pt_regs *regs) { return do_fork(SIGCHLD, regs-&gt;sp, regs, 0, NULL, NULL); }  我们可以看到，主要是do_fork的逻辑，在这里传入了SIGCHLD表明子进程终止后发送SIGCHLD信号通知父进程
+像sys_vfork和sys_clone其实都是调用了do_fork，区别大多在于传入的标志位(flag)不同
+int sys_vfork(struct pt_regs *regs) { return do_fork(CLONE_VFORK | CLONE_VM | SIGCHLD, regs-&gt;sp, regs, 0, NULL, NULL); }  可以看到是多了一些flag在sys_vfork调用的参数上
+do_fork /* * Ok, this is the main fork-routine. * * It copies the process, and if successful kick-starts * it and waits for it to finish using the VM if required. */ long do_fork(unsigned long clone_flags, unsigned long stack_start, struct pt_regs *regs, unsigned long stack_size, int __user *parent_tidptr, int __user *child_tidptr)  我们可以简单的理解这些参数的意义……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier" >Linux Process Identifier</a>
                                 </h1>
                             </header>
@@ -102,6 +154,7 @@ PID不仅仅是数字 在我们大部分人的认知下，PID就是一个整数�
 但是在Linux下，需要维护PID之间的关系，比如所处的Namespace
 Linux下的PID Namespace 在Linux下的PID Namespace是有层级关系的，init所处的global PID Namespace是处于第0级，要创建新的PID Namespace就会在其父进程的Namespace的等级里加一
 也就是说Namespace level低的能够看到Namespace level高的，反过来则不行。这带来的结果就是，一个进程(Namespace.level &gt; 0)会在不同层级的Namespace上有该层级的唯一PID，所以一个进程有多个PID，分别在不同的Namespace
+这也告诉我们一个事情：一个进程的创建需要在每一个Namespace里面新建一个PID，赋值到进程结构体上
 struct pid_namespace { struct kref kref; struct task_struct *child_reaper; unsigned int level; struct pid_namespace *parent; .……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/">阅读全文</a></p>
@@ -293,7 +346,7 @@ State 这里先来了解一下关于进程生命周期的几个状态
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1" >etcd Raft 源码实现-1</a>
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1" >Etcd Raft 源码实现-1</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -349,86 +402,6 @@ LRU缓存算法 我之前没有听过LRU(Latest Related Used)
 package main type DLinkNode struct { key int val int next *DLinkNode prev *DLinkNode } func addNodeAfter(prev, node *DLinkNode) { node.prev = prev node.next = prev.next if prev.next != nil { prev.next.prev = node } prev.next = node } func removeNode(node *DLinkNode) { if node.prev != nil { node.prev.next = node.next } if node.next != nil { node.next.prev = node.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview3/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler" >Go Scheduler</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月10日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                为什么要Go Scheduler Scheduler是为了实现用户态的线程(协程)的调度，这也也就是实现更加轻量级的并发单元，这也是为什么goroutine的并发数量能够那么多的原因
-Goroutine在哪里运行 Goroutine看似每个都在并发运行，其实它们还是通过Scheduler来调度到内核态的线程来执行的，也就是说Goroutine其实也是在内核态的thread里跑的
-我们知道，如果创建过多的thread，会有很大的负担，因为内核态的线程不是轻量级的，会消耗不少的系统资源，因此我们内核态的线程和用户态的协程是一个N:M的关系，其中N &lt;= M
-如何Schedule goroutine在创建时会被存储在一个local run queue里面，go scheduler就是在这个queue的头拿goroutine，放到内核线程去执行
-同理，创建的时候放入local run queue的尾部
-并且每一个Kernel Thread 对应了一个local run queue
-Kernel Thread的数量 为了均衡性能以及资源的利用，Go Scheduler实现了Number(Core) == Number(Kernel Thread)这样的一个模式
-这样在每一个Core上都创建一个Kernel Thread，并且重用这个Thread，这样既能达到充分利用硬件的性能来并行执行
-要注意，这里是并行，不是并发
-重用也是协程轻量级的一个很大的因素，充分的减少了创建和销毁Kernel Thread
-负载均衡 因为每一个Kernel Thread对应了一个local run queue，那么就会有分配不均匀的情况。某些队列排队的goroutine特别多，某些特别少，导致有些Kernel Thread会闲置
-这个时候Go scheduler会从繁忙的队列中*偷*一些goroutine放在闲的队列
-长时间运行的goroutine 为了不让长时间的goroutine一直霸占着Thread，Go Scheduler会把长时间运行的goroutine在合适的时候停下来，并且将这个goroutine放入global run queue
-通过sysmon检测这个长时间运行的goroutine
-global run queue的优先级要比local run queue低，因此local run queue里面的goroutine就会被执行到
-block 在某一个thread被block的时候，这个thread不被算在limit上，也就是说，这个时候我们可以先创建一个Thread，去运行别的goroutine……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST" >GET VS POST</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月9日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                趁着晚上还有点时间，积累一下GET和POST的区别
-为什么不说其它方法？还是因为这两种比较容易让人混淆吧
-有时候在一个项目(一般是写的不太好的项目)的时候，你会惊奇的发现为什么GET请求需要解析里面的请求主体
-这个时候其实很大的一个可能就是API设计的不好
-我们都懂 当别人问我们他俩的区别是什么的时候，我们可能很快想到的是
- GET是拿数据，POST是发送数据  其实无论是GET还是POST，其实都是HTTP里面的一个方法(只是一个字段不同而已)，说到底，无论是GET还是POST都是要被封装到HTTP报文里面的，HTTP同理也是走TCP/IP的
-从底层角度来讲 去看一下HTTP的报文你会发现，GET和POST其实真的没区别，那么为什么会产生出这两种请求方法呢
-我猜测这其实就是大家根据现实的一些用法设计出来的公用的方案吧，相当于行内的一套规矩，大家可以遵守这一规矩来达到共识
-我们通常来说，GET的请求主体是空的，但其实我们也可以加东西进去。因此不要觉得GET和POST是在底层上的不同，它们只是大家规矩上认同的不同方式
-怎么用 因为这一规矩，各大浏览器厂商默认大家的使用方法都是按照规矩来的，因此浏览器能够根据这个约定来对不同的请求方法来做优化，比如说：
- 一般来说，我们浏览器会缓存一些GET请求返回的东西，因为我们默认GET请求在一般情况下是不变的，因此结果在短暂的时间内也是不变的，这样能够有效的加快页面的加载。同理，一般是不缓存POST请求的，因为POST的数据是千变万化的。
- 需要携带参数的GET一般是通过URL来传递，而POST一般是通过请求主体来传递
-  看到这里你会发现，用法是根据职责来区分的，因此我们在用的时候只需要考虑这个HTTP请求方法的职能是什么？是否符合这个场景需求？
-这样设计的API才能够被大家所接收
-触类旁通 从上面的方法可以看到，通过分析其底层原理就能够分析出一些规律，可以看出它们的本质
-通过这方法，我们来看看TCP UDP的区别
-看看它们的底层，都是走IP协议的，因此不同之处在哪表现？
-其实就在它们的报文段，了解过它们俩的同学肯定能够发现TCP和UDP的报文段有很大的不同
-其实所说的TCP拥塞处理，流量管理等等性质，都是通过报文段来获取信息并且处理这些信息(比如超时，ACK，还有一些标志位等)
-所以说，在分析两个相似的东西的时候，我们可以先看看它们的底层基础是否一样，如果是一样的，那么我们就只需要关注它们上层有什么不一样了。……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/">阅读全文</a></p>
                         </article>
                     
 
@@ -595,6 +568,14 @@ block 在某一个thread被block的时候，这个thread不被算在limit上，�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -619,19 +600,11 @@ block 在某一个thread被block的时候，这个thread不被算在limit上，�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -684,7 +657,7 @@ block 在某一个thread被block的时候，这个thread不被算在limit上，�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

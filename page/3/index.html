@@ -68,6 +68,61 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer" >TiDB Server源码分析 SQL Core Layer</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                还是架构 还是先放一张架构图，当思路不清晰的时候，看一看架构图能够帮我们整理思路
+回想一下 上一篇blog是介绍了Protocol Layer，这一层整体思路还是比较简单，只是兼容MySQL协议会产生很多相应的函数方法
+应该还记得，在上一篇blog，我有提到Driver这个词，并且看到了它的接口只有一个函数OpenCtx(...)...，从结构图上来将，我们需要将SQL传入到Session Context里面，而OpenCtx就是帮我们从Protocol Layer打开到SQL Core Layer的通道，然后再通过这个通道将数据传入进去。打开后会返回QueryCtx接口，这个接口是我们执行SQL的唯一入口，也就是Protocol Layer到SQL Core Layer的唯一入口
+什么时候打开通道 通过编辑器可以发现，server/driver.go里的IDriver接口只在一个函数上有调用
+func (cc *clientConn) openSessionAndDoAuth(authData []byte) error { var tlsStatePtr *tls.ConnectionState // 如果是SSL连接，就取出这个连接的状态 if cc.tlsConn != nil { tlsState := cc.tlsConn.ConnectionState() tlsStatePtr = &amp;tlsState } var err error // 打开通道，这里将返回的QueryCtx给到clientConn，它以后就用这个Ctx和SQL Core Layer进行交互 cc.ctx, err = cc.server.driver.OpenCtx(uint64(cc.connectionID), cc.capability, cc.collation, cc.dbname, tlsStatePtr) if err != nil { return err } // 忽略验证过程 return nil }  这个函数也只有两个地方会调用到……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer" >TiDB Server源码分析 Protocol Layer</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                简单介绍 最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图
+因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧
+怎么入手 TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边Protocol Layer
+我们可以简单的从tidb-server/main.go来入手，来简单了解一下基本组成
+为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍
+func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是输出version if *version { fmt.Println(printer.GetTiDBInfo()) os.Exit(0) } // (可忽略)这里是注册store，会分别注册&quot;tikv&quot;和&quot;mock-tikv&quot; registerStores() // (可忽略)这个是和prometheus相关的 registerMetrics() // (可忽略) 配置，我们暂时可以考虑默认 configWarning := loadConfig() overrideConfig() if err := cfg.Valid(); err != nil { fmt.Fprintln(os.Stderr, &quot;invalid config&quot;, err) os.Exit(1) } if *configCheck { fmt.Println(&quot;config check successful&quot;) os.Exit(0) } // (可忽略) 都只是一些配置 setGlobalVars() setCPUAffinity() setupLog() // If configStrict had been specified, and there had been an error, the server would already // have exited by now.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP" >TCP vs UDP</a>
                                 </h1>
                             </header>
@@ -443,66 +498,6 @@ Software Fault 是人写的软件，都会有Bug。还记得一句话
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/foundations-of-data-system/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/english/greeting/" title="Greeting" >Greeting</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/"></a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Formal greeting Good &hellip;
-And your name is &hellip;
-Very nice to meet you
-My name&rsquo;s &hellip;
-Welcome to &hellip; (Welcome is not formal)
-How are you today (How are you is nature)
-Very well, thank you.
-I am fine, thank for asking
-Neutral Informal Introduce others Let me introduce my colleague, &hellip; (formal) May I introduce my colleague, &hellip; (formal)
-This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/greeting/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/english/hometown/" title="Introduce Your Hometown" >Introduce Your Hometown</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月14日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/English">English</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 tips How to describe your hometown, follow these points will help you get there
- Introducing your hometown briefly
- Adding background and details about your hometown
- Talking about what you like or dislike about it
- Talking about how it&rsquo;s changed over time
-  Briefly I like in a __ (city, town, village...)  Background and details Like or dislike history and changes ____ has changed a lot in the last 20 years ____ is almost unrecognisible compared to 20 years ago it hasn't changed much in the last 20 years  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/english/hometown/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -671,6 +666,14 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -695,19 +698,11 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -760,7 +755,7 @@ This is &hellip; (Neutral) Have you met &hellip; (Neutral)……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

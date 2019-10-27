@@ -78,6 +78,59 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/">Linux Compression</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last day, we took a quick look on file system, I just want to give you guys some basic understanding about that, If you are a software developer(engineer), may be that&rsquo;s enough for you.
+Today, let&rsquo;s talk about a very basic and useful tool in linux &ndash;&gt; compression
+Quick talk Basically, we use compression all the time, including surfing the internet, the server will give client(browser mostly) the compressed data instead of raw data which may cause the performance slow.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-compression/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-link/">Linux Link</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月20日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                We have already talked about disk management, now we have a pretty simple topic&ndash;link
+Link is one of the file types in linux including hard link and symbol link
+Let&rsquo;s get into them
+hard link Remember inode?
+when we type ls -l, the second field is the inode number which means how many file(s) is using the same inode.
+Right, hard link file is using the same inode, and inode including the file information like permission, block number.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-link/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-disk-manage/">Linux Disk Manage</a>
                                 </h1>
                             </header>
@@ -318,77 +371,6 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/">Linux Bash Basic Note</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                记录一些笔记
-参考 https://www.jianshu.com/p/e1c8e5bfa45e
-变量 注意变量赋值别加空格
-变量命名只能用字母、数字和下划线，且数字不能在开头
- readonly 只读变量，用法和read类似
- unset 可以删除变量，但不可删除只读变量
-  本质上来说，bash里面都是字符串，只有当变量是纯数字的时候才是所谓的数字类型
-局部和全局 这里要特别注意，普通变量默认是全局变量
-所以要想在函数中定义局部变量，需要加local声明
-local var1  环境变量 这个就和linux上的一些环境是一样的
-特殊变量 $0 当前脚本的文件名 $1,$2... 传递给脚本或函数的参数,按顺序的 $# 传递给脚本或函数的参数个数 $* 传递给脚本或函数的所有参数 $? 上个命令的退出状态，或函数的返回值 $$ 当前Shell进程ID  转义字符 echo默认是不转移字符的，但printf是会转义的
-转义字符的含义和其它编程语言基本一样
-命令替换 我们可以将命令的输出存储起来
-比如存储一个日期
-date=`date`  注意，这个是反引号
-运算符 shell脚本的运算符好像和其它编程语言有很大的差异，它主要是用flag形式
-关于数字的 -eq -ne -gt -lt -ge -le  关于布尔值 ! not -o or -a and  所以像其它编程语言可能会用 &amp;&amp; || 这些符号
-关于字符串 == !……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash/">Linux Bash</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                给自己定的一些规范 因为shell的语法太灵活，有许多语法是不唯一的，导致我很纠结，下面结合他人的实战经历，规定自己一套规范，以后写shell尽量按照这样的规范来
-用printf函数，在format-string上加引号 给所有变量加上花括号 ${VAR} 运算符尽量使用flag形式(字符串不能用这个形式) 判断只用[]  需要特别注意的一些点 关于字符串 单引号‘’会原样输出字符串，对里面的变量引用都是没用的，转义字符也没用 双引号可以引用变量和转义字符  初学例子
-开头指定解释器
-#!/bin/bash  这里记一些用过的语法
-取奇数
-for i in {1.99..2} do echo $i done  读取stdin
-read name echo &quot;Welcome $name&quot;  读取并输出运算后结果
-read x read y echo $((x+y)) echo $((x-y)) echo $((x*y)) echo $((x/y))  读取并比较
-read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (($X&lt;$Y)); then echo &quot;X is less than Y&quot;; else echo &quot;X is equal to Y&quot;; fi  字符串的比较……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -441,6 +423,14 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -465,19 +455,11 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -530,7 +512,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

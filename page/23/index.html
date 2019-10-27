@@ -68,6 +68,52 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/" title="Leetcode 110" >Leetcode 110</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 3 / \ 9 20 / \ 15 7 Return true. Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1 / \ 2 2 / \ 3 3 / \ 4 4 Return false.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/" title="TenToSeventeen" >TenToSeventeen</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月28日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                代码 func tenToSeventeen(num int) []int { len := 0 tmp := num for tmp/17 &gt; 0 { len++ tmp = tmp / 17 } result := make([]int, len+1) for num &gt; 0 { result[len] = num % 17 num = num / 17 len-- } return result } func intToString(result []int) []string { strs := make([]string, 0) for _, num := range result { switch { case num &lt; 10: strs = append(strs, strconv.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/tenToSeventeen/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure/" title="Data Structure" >Data Structure</a>
                                 </h1>
                             </header>
@@ -280,76 +326,6 @@
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-GC/" title="Golang GC" >Golang GC</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                用了Golang有一段时间了，知道Golang能够自动回收内存也有一段时间了，对于我这种不搞明白原理不甘心系列，今天就来搞明白什么是GC
-参考  legendtkl
- Golang UK Conference 2017 | Will Sewell &amp; Jim Fisher - Golang&rsquo;s Realtime GC in Theory and Practice
-  算法模型 三色标记算法(Mark-and-sweep)
-三色分别为(黑色，灰色，白色)，其中黑色不能够有指针指向白色的数据
- 这个算法实现广度优先(BF)
- 重复选取一个灰色，将它的所指向的所有对象都变成灰色，自己变成黑色
- 这个重复选取直到没有灰色的对象为止
-  在上面三个步骤能体会到各个颜色代表的意思(运行阶段)
- 黑色：已经遍历过这个对象的所有对象
- 灰色：这个对象所指向的对象还没有被遍历过
- 白色：它被指向的节点是灰色、或者它根本没有被指向(这就是垃圾)
-  结束阶段里，按算法所解释的，是不会再有灰色了，只有
- 黑色：有用的数据
- 白色：已经不可能到达的数据(垃圾，会被清理)
-  回收时主要的流程  从root开始找到所有可达的对象，标记灰色
- 执行我们前面所说的模型里的循环
- 在处理完循环后，清理所有白色标记的对象
-  小结 其实GC还有很多很多的细节，笔者只是在这里先建立一个概念，等后面到达一定阶段再去看看具体的实现
-2019.05.06 今天在看了一个视频
-在最后面讲到GC的问题的时候，发现GC的一个问题
- 对象太多的时候，GC会大量占用CPU  是怎么一回事呢，因为对象越多，GC在遍历的时候需要的资源就越多，所以会导致CPU被大量占用(因为GC是多协程并发的)……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-GC/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/" title="Golang 依赖注入" >Golang 依赖注入</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月26日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                面试时遇到一道题，问依赖注入带来了什么好处。。。？？？我连啥是依赖注入都不知道，真是打扰了，赶紧补回来
-没有DI 把所有创建变量放在New函数里面
-type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson() *Person{ return &amp;Person{} } func NewStudent() *Student{ return &amp;Student{ person:&amp;Person{}, } } func main(){ s := NewStudent() }  我们不能按照自己的意愿传入想要的参数,这样main函数比较简单
-有DI type Person struct{ name string age int } type Student struct{ person *Person } func NewPerson(name string,age int) *Person{ return &amp;Person{ name:name, age:age, } } func NewStudent(person *Person) *Student{ return &amp;Student{ person:person, } } func main(){ p := NewPerson(&quot;abc&quot;,12) s := NewStudent(p) }  这里我们就是有依赖注入，能够按照我们的需要传入参数，但是main的代码会随着结构体的传递变得很长……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-dependency-injection/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -518,6 +494,14 @@ type Person struct{ name string age int } type Student struct{ person *Person } 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -542,19 +526,11 @@ type Person struct{ name string age int } type Student struct{ person *Person } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -607,7 +583,7 @@ type Person struct{ name string age int } type Student struct{ person *Person } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>

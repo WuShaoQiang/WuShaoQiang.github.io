@@ -68,6 +68,53 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/" title="Leetcode 405" >Leetcode 405</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目  Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used. Note: All letters in hexadecimal (a-f) must be in lowercase. The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, the first character in the hexadecimal string will not be the zero character. The given number is guaranteed to fit within the range of a 32-bit signed integer.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/" title="Leetcode 404" >Leetcode 404</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Find the sum of all left leaves in a given binary tree. Example: 3 / \ 9 20 / \ 15 7 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.  我的解答 这个题参考了一下别人的思路写出来
+func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } search(root, false, &amp;sum) return sum } func search(root *TreeNode, flag bool, sum *int) { if root == nil { return } if flag &amp;&amp; root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/" title="Leetcode 400" >Leetcode 400</a>
                                 </h1>
                             </header>
@@ -256,54 +303,6 @@ func isPerfectSquare(num int) bool { if num == 1 { return true } total := 0 for 
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-349/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-345/" title="Leetcode 345" >Leetcode 345</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Write a function that takes a string as input and reverse only the vowels of a string. Example 1: Input: &quot;hello&quot; Output: &quot;holle&quot; Example 2: Input: &quot;leetcode&quot; Output: &quot;leotcede&quot; Note: The vowels does not include the letter &quot;y&quot;.  我的解答 这个题目意思是,两个元音字母交换
-func reverseVowels(s string) string { b := []byte(s) // m := map[byte]bool{ // 'a': true, // 'e': true, // 'i': true, // 'o': true, // 'u': true, // 'A': true, // 'E': true, // 'I': true, // 'O': true, // 'U': true, // } i := 0 j := len(b) - 1 for { for ; i &lt; len(b); i++ { if isVowel(b[i]) { break } } for ; j &gt;= 0; j-- { if isVowel(b[j]) { break } } if i &gt;= j { break } b[i], b[j] = b[j], b[i] i++ j-- } return string(b) } func isVowel(b byte) bool { return b == 'a' || b == 'e' || b == 'i' || b == 'o' || b == 'u' || b == 'A' || b == 'E' || b == 'I' || b == 'O' || b == 'U' }  这个有点像快速排序那样,这里用函数好像会比较快……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-345/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-344/" title="Leetcode 344" >Leetcode 344</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Write a function that reverses a string. The input string is given as an array of characters char[]. Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory. You may assume all the characters consist of printable ascii characters. Example 1: Input: [&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;] Output: [&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;] Example 2: Input: [&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;] Output: [&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]  我的解答 这个好像就没什么难度了..
-func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j := 0, len(s)-1; i &lt; j; i, j = i+1, j-1 { tmp = s[i] s[i] = s[j] s[j] = tmp } }  最优解答 无……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-344/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -472,6 +471,14 @@ func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j :=
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
     </li>
     
@@ -496,19 +503,11 @@ func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j :=
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="etcd Raft 源码实现-1">etcd Raft 源码实现-1</a>
+        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler">Go Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST">GET VS POST</a>
     </li>
     
 </ul>
@@ -561,7 +560,7 @@ func reverseString(s []byte) { if len(s) == 0 { return } tmp := s[0] for i, j :=
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(24)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
     </li>
     
     <li>
