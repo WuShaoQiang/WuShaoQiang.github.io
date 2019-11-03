@@ -68,6 +68,123 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/" title="Leetcode 653" >Leetcode 653</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the given target. Example 1: Input: 5 / \ 3 6 / \ \ 2 4 7 Target = 9 Output: True Example 2: Input: 5 / \ 3 6 / \ \ 2 4 7 Target = 28 Output: False  我的解答 // 第一思路,换成数组,利用双边夹方法 func findTarget(root *TreeNode, k int) bool { if root == nil { return false } res := make([]int, 0) inOrder(root, &amp;res) // 确定首尾索引 head := 0 tail := len(res) - 1 for head &lt; tail { sum := res[head] + res[tail] if sum == k { return true } if sum &gt; k { tail-- } else { head++ } } return false } // 执行用时 : 40 ms, 在Two Sum IV - Input is a BST的Go提交中击败了98.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-653/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/" title="Leetcode 637" >Leetcode 637</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定一个非空二叉树, 返回一个由每层节点平均值组成的数组. 示例 1: 输入: 3 / \ 9 20 / \ 15 7 输出: [3, 14.5, 11] 解释: 第0层的平均值是 3, 第1层是 14.5, 第2层是 11. 因此返回 [3, 14.5, 11]. 注意： 节点值的范围在32位有符号整数范围内。  我的解答 // 执行用时 : 28 ms, 在Average of Levels in Binary Tree的Go提交中击败了97.44% 的用户 // 内存消耗 : 8.1 MB, 在Average of Levels in Binary Tree的Go提交中击败了9.09% 的用户 func averageOfLevels(root *TreeNode) []float64 { if root == nil { return nil } res := make([]float64, 0) // 将第一个点放入队列 quene := []*TreeNode{root} for { // 确定这一次遍历的个数 l := len(quene) sum := 0 // 因为下面有判断quene长度,因此这里不可能为0,所以不用怕除数为0 count := l // 当遍历个数用完的时候表明这一层遍历完了,应当退出循环重新确定下一层 for l &gt; 0 { tmp := quene[l-1] sum += tmp.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-637/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/" title="Leetcode 617" >Leetcode 617</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。 你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为 NULL 的节点将直接作为新二叉树的节点。 示例 1: 输入: Tree 1 Tree 2 1 2 / \ / \ 3 2 1 3 / \ \ 5 4 7 输出: 合并后的树: 3 / \ 4 5 / \ \ 5 4 7 注意: 合并必须从两个树的根节点开始。  我的解答 // 执行用时 : 44 ms, 在Merge Two Binary Trees的Go提交中击败了96.46% 的用户 // 内存消耗 : 8.6 MB, 在Merge Two Binary Trees的Go提交中击败了46.94% 的用户 // 第一个想法就是同时遍历两颗树(非递归做法) func mergeTrees(t1 *TreeNode, t2 *TreeNode) *TreeNode { if t1 == nil { return t2 } if t2 == nil { return t1 } // 都不为nil iteration(t1, t2) return t1 } func iteration(t1 *TreeNode, t2 *TreeNode) { // 如果两棵树对应节点都不为nil,直接在t1上的值改变 t1.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-617/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/" title="Leetcode 606" >Leetcode 606</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 映射关系的空括号对。 示例 1: 输入: 二叉树: [1,2,3,4] 1 / \ 2 3 / 4 输出: &quot;1(2(4))(3)&quot; 解释: 原本将是“1(2(4)())(3())”， 在你省略所有不必要的空括号对之后， 它将是“1(2(4))(3)”。 示例 2: 输入: 二叉树: [1,2,3,null,4] 1 / \ 2 3 \ 4 输出: &quot;1(2()(4))(3)&quot; 解释: 和第一个示例相似， 除了我们不能省略第一个对括号来中断输入和输出之间的一对一映射关系。  我的解答 一个先序遍历的题目(题目都告诉你了),只是加上了一些感觉很难的括号,其实很简单,先看代码
+// 执行用时 : 40 ms, 在Construct String from Binary Tree的Go提交中击败了18.52% 的用户 // 内存消耗 : 8.8 MB, 在Construct String from Binary Tree的Go提交中击败了26.67% 的用户 func tree2str(t *TreeNode) string { if t == nil{ return &quot;&quot; } return createStr(t) } func createStr(t *TreeNode) string { if t.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-606/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/" title="Leetcode 572" >Leetcode 572</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 给定两个非空二叉树 s 和 t，检验 s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。s 也可以看做它自身的一棵子树。 示例 1: 给定的树 s: 3 / \ 4 5 / \ 1 2 给定的树 t： 4 / \ 1 2 返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。 示例 2: 给定的树 s： 3 / \ 4 5 / \ 1 2 / 0 给定的树 t： 4 / \ 1 2 返回 false。  我的解答 第一个实现
+// 执行用时 : 40 ms, 在Subtree of Another Tree的Go提交中击败了39.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-572/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-563/" title="Leetcode 563" >Leetcode 563</a>
                                 </h1>
                             </header>
@@ -184,136 +301,6 @@ func findTilt(root *TreeNode) int { var sum int findWeight(root, &amp;sum) retur
                                 题目 给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。 假定 BST 有如下定义： 结点左子树中所含结点的值小于等于当前结点的值 结点右子树中所含结点的值大于等于当前结点的值 左子树和右子树都是二叉搜索树 例如： 给定 BST [1,null,2,2], 1 \ 2 / 2 返回[2]. 提示：如果众数超过1个，不需考虑输出顺序 进阶：你可以不使用额外的空间吗？（假设由递归产生的隐式调用栈的开销不被计算在内）  我的解答 // 执行用时 : 24 ms, 在Find Mode in Binary Search Tree的Go提交中击败了71.43% 的用户 // 内存消耗 : 6.5 MB, 在Find Mode in Binary Search Tree的Go提交中击败了23.53% 的用户 func findMode(root *TreeNode) []int { if root == nil { return nil } m := make(map[int]int) iteration(root, m) res := make(map[int][]int) max := 0 for k, v := range m { if max &lt;= v { max = v res[v] = append(res[v], k) } } return res[max] } func iteration(root *TreeNode, m map[int]int) { if root !……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-501/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/" title="Leetcode 437" >Leetcode 437</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个二叉树，它的每个结点都存放着一个整数值。 找出路径和等于给定数值的路径总数。 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数。 示例： root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8 10 / \ 5 -3 / \ \ 3 2 11 / \ \ 3 -2 1 返回 3。和等于 8 的路径有: 1. 5 -&gt; 3 2. 5 -&gt; 2 -&gt; 1 3. -3 -&gt; 11  我的解答 // 执行用时 : 20 ms, 在Path Sum III的Go提交中击败了87.72% 的用户 // 内存消耗 : 4.6 MB, 在Path Sum III的Go提交中击败了47.06% 的用户 func pathSum(root *TreeNode, sum int) int { if root == nil { return 0 } var count int iteration(root, sum, &amp;count) return count } func iteration(root *TreeNode, target int, count *int) { // 每一个不为nil的节点都作为开始节点 if root !……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-437/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/" title="Leetcode 414" >Leetcode 414</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 给定一个非空数组，返回此数组中第三大的数。如果不存在，则返回数组中最大的数。要求算法时间复杂度必须是O(n)。 示例 1: 输入: [3, 2, 1] 输出: 1 解释: 第三大的数是 1. 示例 2: 输入: [1, 2] 输出: 2 解释: 第三大的数不存在, 所以返回最大的数 2 . 示例 3: 输入: [2, 2, 3, 1] 输出: 1 解释: 注意，要求返回第三大的数，是指第三大且唯一出现的数。 存在两个值为2的数，它们都排第二。  我的解答 用切片记录
-// 执行用时 : 16 ms, 在Third Maximum Number的Go提交中击败了27.08% 的用户 // 内存消耗 : 4 MB, 在Third Maximum Number的Go提交中击败了23.33% 的用户 func thirdMax(nums []int) int { max := make([]int, 3) for i := 0; i &lt; 3; i++ { max[i] = math.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-414/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/" title="Leetcode 412" >Leetcode 412</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 写一个程序，输出从 1 到 n 数字的字符串表示。 1. 如果 n 是3的倍数，输出“Fizz”； 2. 如果 n 是5的倍数，输出“Buzz”； 3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。 示例： n = 15, 返回: [ &quot;1&quot;, &quot;2&quot;, &quot;Fizz&quot;, &quot;4&quot;, &quot;Buzz&quot;, &quot;Fizz&quot;, &quot;7&quot;, &quot;8&quot;, &quot;Fizz&quot;, &quot;Buzz&quot;, &quot;11&quot;, &quot;Fizz&quot;, &quot;13&quot;, &quot;14&quot;, &quot;FizzBuzz&quot; ]  我的解答 // 执行用时 : 160 ms, 在Fizz Buzz的Go提交中击败了99.21% 的用户 // 内存消耗 : 69.7 MB, 在Fizz Buzz的Go提交中击败了18.18% 的用户 func fizzBuzz(n int) []string { res := make([]string, n) for i := 0; i &lt; n; i++ { if (i+1)%15 == 0 { res[i] = &quot;FizzBuzz&quot; } else if (i+1)%5 == 0 { res[i] = &quot;Buzz&quot; } else if (i+1)%3 == 0 { res[i] = &quot;Fizz&quot; } else { res[i] = strconv.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-412/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/" title="Leetcode 409" >Leetcode 409</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月15日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters. This is case sensitive, for example &quot;Aa&quot; is not considered a palindrome here. Note: Assume the length of given string will not exceed 1,010. Example: Input: &quot;abccccdd&quot; Output: 7 Explanation: One longest palindrome that can be built is &quot;dccaccd&quot;, whose length is 7.  我的解答 // 执行用时 : 0 ms, 在Longest Palindrome的Go提交中击败了100.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-409/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/others/good-resource/" title="Good Resource" >Good Resource</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月13日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90">资源</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 下面的笔者觉得比较好的一些资源,大多是关于Go和计算机方面的,像stackoverflow这类型知名的就不说了
-数据结构 data structure visualzation
-大牛博客 飞雪无情
-Tony Bai
-legendtkl
-公众号  stormzhang
- Go语言中文网
- 纯洁的微笑
- 架构师之路
- Go中国
-  开源书籍 Effective Go
-书栈网
-算法题  leetcode
- 牛客网
-  做简历  超级简历  开源资源  Gopherchina  ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/others/good-resource/">阅读全文</a></p>
                         </article>
                     
 
@@ -484,6 +471,26 @@ legendtkl
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -501,26 +508,6 @@ legendtkl
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -553,7 +540,7 @@ legendtkl
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -573,7 +560,7 @@ legendtkl
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -660,6 +647,8 @@ legendtkl
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -775,6 +764,8 @@ legendtkl
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -800,6 +791,8 @@ legendtkl
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

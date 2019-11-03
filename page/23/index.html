@@ -68,6 +68,121 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/" title="Leetcode 121" >Leetcode 121</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Say you have an array for which the ith element is the price of a given stock on day i. If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit. Note that you cannot sell a stock before you buy one. Example 1: Input: [7,1,5,3,6,4] Output: 5 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-121/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-119/" title="Leetcode 119" >Leetcode 119</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle. Note that the row index starts from 0. In Pascal's triangle, each number is the sum of the two numbers directly above it. Example: Input: 3 Output: [1,3,3,1] Follow up: Could you optimize your algorithm to use only O(k) extra space?  我的解答 func getRow(rowIndex int) []int { result := make([]int, rowIndex+1) result[0] = 1 for i := 0; i &lt; rowIndex; i++ { result[i+1] = result[i] for j := i; j &gt; 0; j-- { result[j] = result[j] + result[j-1] } } return result }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-119/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-118/" title="Leetcode 118" >Leetcode 118</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a non-negative integer numRows, generate the first numRows of Pascal's triangle. In Pascal's triangle, each number is the sum of the two numbers directly above it.  我的解答 func generate(numRows int) [][]int { if numRows == 0 { return nil } result := make([][]int, numRows) for i := 0; i &lt; numRows; i++ { result[i] = make([]int, i+1) result[i][0] = 1 result[i][i] = 1 for j := 1; j &lt; i; j++ { result[i][j] = result[i-1][j-1] + result[i-1][j] } } return result }  最优解答 无……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-118/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-112/" title="Leetcode 112" >Leetcode 112</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum. Note: A leaf is a node with no children. Example: Given the below binary tree and sum = 22, 5 / \ 4 8 / / \ 11 13 4 / \ \ 7 2 1 return true, as there exist a root-to-leaf path 5-&gt;4-&gt;11-&gt;2 which sum is 22.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-112/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-111/" title="Leetcode 111" >Leetcode 111</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月29日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                题目 Given a binary tree, find its minimum depth. The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its minimum depth = 2.  我的解答 func minDepth(root *TreeNode) int { return findMinDepth(root) } func findMinDepth(root *TreeNode) int { if root == nil { return 0 } return 1 + min(findMinDepth(root.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-111/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-110/" title="Leetcode 110" >Leetcode 110</a>
                                 </h1>
                             </header>
@@ -208,122 +323,6 @@
                                 题目 Given an array where elements are sorted in ascending order, convert it to a height balanced BST. For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example: Given the sorted array: [-10,-3,0,5,9], One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST: 0 / \ -3 9 / / -10 5  我的解答 func sortedArrayToBST(nums []int) *TreeNode { if len(nums) == 0 { return nil } mid := (len(nums) - 1) / 2 head := &amp;TreeNode{Val: nums[mid]} heightHalancedTree(head, nums, 0, mid-1) heightHalancedTree(head, nums, mid+1, len(nums)-1) return head } func heightHalancedTree(t *TreeNode, nums []int, left, right int) { if left &lt;= right { mid := (left + right) / 2 // fmt.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-108/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/" title="Leetcode 107" >Leetcode 107</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root). For example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its bottom-up level order traversal as: [ [15,7], [9,20], [3] ]  我的解答 没做出来
-最优解答 func levelOrderBottom(root *TreeNode) [][]int { var ret [][]int if root == nil { return nil } que := []*TreeNode{root} for len(que) &gt; 0 { //先记录这一层的长度 len := len(que) var level []int //只要遍历完len长度就退出循环 for i := 0; i &lt; len; i++ { // 每次遍历取队列第一个元素，因此队列遍历了一个元素之后要立即删除 node := que[0] que = que[1:] level = append(level, node.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-107/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/" title="Leetcode 104" >Leetcode 104</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, find its maximum depth. The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. Note: A leaf is a node with no children. Example: Given binary tree [3,9,20,null,null,15,7], 3 / \ 9 20 / \ 15 7 return its depth = 3.  我的解答 func maxDepth(root *TreeNode) int { if root == nil { return 0 } if root.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-104/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/" title="Leetcode 101" >Leetcode 101</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center). For example, this binary tree [1,2,2,3,4,4,3] is symmetric: 1 / \ 2 2 / \ / \ 3 4 4 3 But the following [1,2,2,null,3,null,3] is not: 1 / \ 2 2 \ \ 3 3 Note: Bonus points if you could solve it both recursively and iteratively.  我的解答 这题做的比较蠢，没有任何参考价值，就不放了……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-101/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/" title="Leetcode 100" >Leetcode 100</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value. Example 1: Input: 1 1 / \ / \ 2 3 2 3 [1,2,3], [1,2,3] Output: true Example 2: Input: 1 1 / \ 2 2 [1,2], [1,null,2] Output: false Example 3: Input: 1 1 / \ / \ 2 1 1 2 [1,2,1], [1,1,2] Output: false  我的解答 /** * Definition for a binary tree node.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-100/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/" title="Leetcode 88" >Leetcode 88</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月27日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array. Note: The number of elements initialized in nums1 and nums2 are m and n respectively. You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. Example: Input: nums1 = [1,2,3,0,0,0], m = 3 nums2 = [2,5,6], n = 3 Output: [1,2,2,3,5,6]  我的解答 func merge(nums1 []int, m int, nums2 []int, n int) { for m &gt; 0 &amp;&amp; n &gt; 0 { if nums1[m-1] &gt;= nums2[n-1] { nums1[n+m-1] = nums1[m-1] m-- } else { nums1[n+m-1] = nums2[n-1] n-- } } if m == 0 { for n &gt; 0 { nums1[n-1] = nums2[n-1] n-- } return } }  解法思路是归并排序，这相当于归并排序的最后一步了……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-88/">阅读全文</a></p>
                         </article>
                     
 
@@ -494,6 +493,26 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -511,26 +530,6 @@
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -563,7 +562,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -583,7 +582,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -670,6 +669,8 @@
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -785,6 +786,8 @@
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -810,6 +813,8 @@
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

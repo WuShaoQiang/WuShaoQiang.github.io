@@ -6,10 +6,133 @@
     <description>Recent content in 基础知识 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Oct 2019 20:08:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Nov 2019 11:16:26 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Interrupt Top Halves</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-interrupt/</link>
+      <pubDate>Fri, 01 Nov 2019 11:16:26 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-interrupt/</guid>
+      <description>简单说说 由于CPU的速度和外围硬件的速度不在一个量级上，为了不会大量耗费CPU的时间(让CPU去检查外围硬件)，由此引用了中断
+中断可以这样解释：
+ 中断本质上是一种特殊的电信号，由硬件设备发向处理器。处理器接收到中断后，会马上向操作系统反映此信号的到来
+ 中断生成是异步的，因此可以不用和处理器的时钟同步，可以随时产生，因此内核随时可能因为新的中断到来而中断
+不同的外设给的中断也不同，因此操作系统可以区分这些中断，这样也才能用合适的中断处理来处理这些中断
+可能有些时候会搞混中断和异常的概念
+中断是由硬件产生的，并且是异步的。异常是由软件产生的(发生了PANIC)，并且是同步的
+中断处理程序 因为中断随时发生，并且它会抢占CPU，因此我们希望中断做的事情能够尽快完成，这样才能让被中断的代码恢复执行(有可能抢占其它中断)
+因为有一些中断处理程序的工作量也很多，因此我们一般把中断分为上半部和下半部
+中断处理程序是上半部，接收到中断后会立刻开始执行，并且只做有严格时限的工作。这里严格时限说明，我们的中断处理程序不能够包含阻塞(睡眠)的情况
+并且这些工作都是在所有中断被禁止的情况下完成的
+下半部就是一些能够被推迟的工作，会在一些合适的时机去执行
+我们所理解的驱动 我相信很多人都听过驱动，也知道一个新的外设很有可能是需要装驱动的(有些不用)
+那么我们平时所谈到的驱动和上面的中断处理程序有上面关系呢？
+驱动是和硬件配套的，而中断处理程序只是驱动的一个组成部分，在运行驱动程序的时候，驱动程序会将中断处理程序注册到内核
+这个驱动程序一般都是厂商按照规范写好的了
+如何注册 在linux/interrupt.h里
+request_irq(unsigned int irq, irq_handler_t handler, unsigned long flags, const char *name, void *dev);  其中
+ irq是中断号，有些设备是有固定的中断号，而大多数来说都是通过探测获取
+ handler就是我们所说的中断处理程序
+ flags是一些标志位
+ IROF_DISABLED意味着内核在处理中断程序期间，要禁止所有的其他中断(这里是指其它中断线)
+ IROF_SAMPLE_RANDOM表明这个设备产生的中断对内核熵池有贡献(和随机数有关)，因此当外设的中断产生数率是不可预估的时候，设置这个可以让它称为熵源
+ IRQF_TIMER专门为系统定时器的中断处理准备
+ IRQF_SHARED，和IRQF_DISABLED不同，这个标志可以让多个中断处理程序共享中断线。在同一个给定线上注册的每个处理程序必须指定这个标志，否则在每条线上只能有一个处理程序
+  name顾名思义就是中断的名字(一般是产生中断的硬件的名字)
+ dev用于共享中断线，因为在SHARED模式的时候，需要知道某一个中断所对应的是哪个中断处理程序，所以dev必须是唯一的(这也需要硬件支持)。以及我们还会删除某一条中断线上的某一个中断处理函数(不应该影响别的中断处理函数)
+  无论如何，如果中断线正在执行一个中断处理程序，那么这个中断线不会再接收新的中断，直到中断执行完毕
+说说我对中断线的理解 在blog最开头，我说到中断是由硬件产生的电信号，最终是通过芯片的管脚来接收这个信号，触发执行相应程序
+在我的理解里，这个管脚就是一个中断线，是某一组中断的入口，相同入口的它们需要找到自己的中断处理程序就是靠dev实现
+在以前玩单片机的时候，中断就是被我用来处理一些紧急情况，在Linux内核里，貌似有着相似之处
+销毁(删除) 清除系统中不需要的驱动程序，在内核里就是将中断处理程序删除了，这里也要用到唯一的dev。如果中断线已经没有中断处理程序了，那么它就会被禁用</description>
+    </item>
+    
+    <item>
+      <title>Linux System Call</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-system-call/</link>
+      <pubDate>Wed, 30 Oct 2019 20:38:49 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-system-call/</guid>
+      <description>我之前写Go程序的时候，碰到了直接调用系统调用的时候，完全不明白这那些传入参数的意思，今天就来揭开它神秘的面纱
+前言 我相信有很多像我一样刚接触到计算机行业的新手都不太清楚Linux内核的一些实现，以及它的意义所在。为什么Linux要提供系统调用呢
+举个例子，比如说读取文件，我们需要从硬盘上读取数据，那么如何操作硬盘这个事情，我们从没关心过(之前我是没关心过)，其实这就是Linux的系统调用帮我们实现的部分。通过隔离了硬件，提供一致的系统调用接口，在编程的时候大大提高了效率
+因为Linux是一个多任务多用户的系统，因此是不能够让用户直接操作硬件的，必须通过内核的检验(包括权限等)才能保证一个操作是合法的。这样才能保证系统的安全性
+所以说只有内核才能够直接操作硬件设备，而只有通过系统调用才能够进入内核态
+在我们平时编程的时候也会比较少见直接对Linux的系统调用，因为很多常用的函数都是经过多层封装的
+系统调用 通常来说，系统调用的名字通常是sys_xxx()，这是一种规范
+一般来说，在用户空间调用系统调用会得到一个int类型，这个数字表示系统调用的执行结果。一般来说0表示成功，负数表示错误(错误码)
+在Linux内核中，系统调用都会有一个唯一的系统调用号，系统调用号一旦分配就不会回收，因此如果一个系统调用被删除，那么它就会调用sys_ni_syscall
+从用户态到内核态 从上面所说可知，我们要进入进入内核，执行内核代码来和硬件打交道。
+在用户态的代码需要调用系统调用的时候，Linux会产生一个软中断(引发一个异常，引发异常需要切换到内核态来处理异常)，这个时候处理异常的机制就是执行系统调用
+这种是通过引起异常来进入内核态，还有一种是可以直接陷入内核的(这里不细说)
+进入内核后，如何知道应该执行哪个系统调用。通过前面，我们知道每一个系统调用都有一个唯一的系统调用号，系统调用号是通过寄存器传给内核的，它所需要的参数也是通过寄存器传入
+欺骗内核 用户的程序不一定是诚实的，内核需要保证不能够让使坏的进程去影响别的进程或者影响整个系统
+在调用系统调用的时候，通过内核检验来达到这个目的
+ 内存区域必须属于用户空间的所在进程的地址空间里
+ 内存的读、写、执行权限不能绕过内存访问限制
+ 检查操作是否有合法权限capable
+  系统调用的宏 Linux本身提供了一组宏，用于直接对系统调用进行访问，它的格式是_syscalln()，其中n是一个数字，范围是0~6
+举个例子
+long open(const char *filename, int flag, int mode)  在使用上面_syscalln()是这样的
+_syscall3(long,open,const char*, filename, int, flags, int ,mode)  因为open的参数是3个，因此n=3
+所以对于每个宏来说，参数的个数是2+2*n
+小结 在这blog里希望能够有一个对系统调用的概念，对直接使用系统调用的代码有一个认知(知道它在干嘛)</description>
+    </item>
+    
+    <item>
+      <title>Linux Memory Management</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-memory-management/</link>
+      <pubDate>Tue, 29 Oct 2019 14:29:32 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-memory-management/</guid>
+      <description>这里主要说的是内核内存，而不是我们平时写代码时的用户内存
+page 页(page)是内存管理的单元，虽然在物理内存中最小处理单位可能是字节，但从虚拟内存的角度来说，页就是最小单位
+一般来说我们现在使用的电脑系统，页的大小为4KB
+$ getconf PAGE_SIZE 4096  可以用上面的这个命令来查看当前物理机的页大小
+相应的结构体 相应的结构体定义在了include/linux/mm_types.h
+/* * Each physical page in the system has a struct page associated with * it to keep track of whatever it is we are using the page for at the * moment. Note that we have no way to track which tasks are using * a page, though if it is a pagecache page, rmap structures can tell us * who is mapping it.</description>
+    </item>
+    
+    <item>
+      <title>Linux Process Scheduler</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/</link>
+      <pubDate>Sun, 27 Oct 2019 21:46:02 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/</guid>
+      <description>概述 Linux调度器的一个杰出的特性是它不需要时间片(time slice)的概念
+经典的调度系统需要分别对进程计算其时间片，进程会运行直至时间片用完。等到所有时间片都执行完后又会再次计算，从而进入下一次执行。
+在现在的Linux内核里，每次调用调度器的时候，它会挑选具有最高等待时间(wait_runtime)的进程。这个进程被维护在一颗红黑树，因此就是最左边的那个叶子节点
+策略 策略是整个调度算法的核心，它决定了调度哪些应该被执行的进程，并且能够最大化利用资源
+Linux提供三种策略
+ SCHED_NORMAL(一般进程，CFS)
+ SCHED_FIFO(实时进程，无时间概念)
+ SCHED_RT(实施进程，有时间概念)
+  IO消耗性和CPU消耗性 简单理解一下调度器所要面对的两种极端的进程，一般的进程会处于这两种极端进程之间
+进程可大致被分为两种
+ IO消耗性
+ CPU消耗性
+  从名字上面可以看出两种进程所需要的资源种类是不同的。这里的IO不仅是表示硬盘、内存等物理的IO，网络等IO也包含在内
+举个例子，编辑器的进程就属于IO消耗型。而我们写的算法题一般都是CPU消耗性
+为了更好的体验，我们希望IO消耗性的进程能够及时响应(当IO满足条件后)，也希望CPU消耗性能够尽可能利用CPU资源
+但两者是冲突的，假设我们只有一个CPU，我们希望IO消耗性的进程能够尽快响应，因此这个进程所被调度的时间(RUNNING的时间)会更多。这样就导致其它的CPU消耗性进程被调度的时间减少，执行总时间会上升。
+进程优先级 ps -eo pid,nice,rtprio,command  执行上面这条命令会显示进程ID nice值 实时优先级 命令
+其中nice值和实时优先级就是描述进程优先级的字段
+一般来说，实时进程的数量会比一般进程的数量少很多，就像我自己的电脑，执行上面的命令后得到的rtprio都是-，表明没有一个实时进程
+这些优先级都是用数字表示的
+ nice(-20~19，一般默认是0)，数字越小，优先级越高
+ rtprio(0~99)，数字越大，优先级越高
+  因此这两种优先级的单调性还刚好相反
+优先级也是调度器决定给进程分配资源的一个重要指标
+时间片 我们在概述讲到，Linux的CFS是不需要时间片的，这里这个时间片指的是绝对的时间片(具体的运行时间)
+在CFS中，抢占一个进程是根据新的可运行的进程消耗了多少的处理器使用比，如果消耗的使用比要比当前进程要小，那么新进程立刻投入运行。否则推迟
+还是上面编辑器和算法的例子，当它们被分配的资源的各50%的时候，由于算法是CPU消耗性，那么它所消耗的资源会比编辑器的多，因此在编辑器被唤醒的时候，调度器会比较这两者，发现编辑器所消耗的资源要比算法小，因此编辑器能够抢占算法，获得执行权利
+这也说明，两者的执行时间也不是对半分的(相对经典调度器，时间片应该是一样的)，CFS的做法是选择运行最少的进程作为下一个运行进程
+这种控制调度时间的方法比较有效的解决了我们之前所说的资源利用问题，以及响应问题</description>
+    </item>
     
     <item>
       <title>Linux Process do_fork</title>

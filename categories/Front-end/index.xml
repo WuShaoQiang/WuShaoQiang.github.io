@@ -6,10 +6,42 @@
     <description>Recent content in Front-end on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Jul 2019 10:36:10 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 19:56:51 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Front-end/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Different Encoding</title>
+      <link>https://wushaoqiang.github.io/posts/front-end/different-encoding/</link>
+      <pubDate>Wed, 30 Oct 2019 19:56:51 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/front-end/different-encoding/</guid>
+      <description>记录一下今天踩到的一些坑
+之前也有在处理URL编码格式的时候被搞晕，今天也遇到了相似的问题，大概总结一下
+Before 在这篇文章中，我们简单的认为
+URI+params = URL
+也简单解析一下escape的意思，在编码这个话题中，escape是指在一个字符序列中，某一个子序列拥有多种意思，所以这个子序列就要被称为escape character，像下面所说的URL，那么/就是一个escape character
+为什么URL需要编码 reference: wiki
+因为在很多时候，一些字符是具有特殊意义的，如/不能随意在URL出现，因为它有特殊的含义(用来分隔URL)
+这也是为什么要编码，让它成为一个能够唯一解析的语句
+ RFC 3986 section 2.2 Reserved Characters (January 2005)
+! * &amp;lsquo; ( ) ; : @ &amp;amp; = + $ , / ? # [ ]
+ 可以看到这些是标准里面需要被转换的字符
+而一般的字母以及数字还有一些符号- _ . ~是不需要被转换的
+Percent-encoding 这里面首先说的是percent-encoding，意思就是将需要转换的字符转换为%xx这种形式
+一般来说xx是这个字符在ASCII的序号，例如：
+space -&amp;gt; %20
+具体的对应关系可以查看wiki
+并不是所有转换字符都要被转换，字符是否含有特殊意义是取决于上下文的，因此在percent-encoding下也派生了几种不同的encode方式
+这几种不同的encode方式区别主要在于转换哪些字符
+ encodeURI
+ encodeURIComponent
+ escape
+  具体不转换哪些上网搜一下就有了，这里不贴了
+用途 一般来说不推荐使用escape，因为它对non-ascii的字符处理有问题，因此尽量避免使用
+encodeURI是用来编码一个URI，注意这里是不能编码params，因为params的一些特殊字符这里不会做转换</description>
+    </item>
     
     <item>
       <title>Javascript Array</title>

@@ -78,6 +78,34 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/">Linux Memory Management</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月29日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这里主要说的是内核内存，而不是我们平时写代码时的用户内存
+page 页(page)是内存管理的单元，虽然在物理内存中最小处理单位可能是字节，但从虚拟内存的角度来说，页就是最小单位
+一般来说我们现在使用的电脑系统，页的大小为4KB
+$ getconf PAGE_SIZE 4096  可以用上面的这个命令来查看当前物理机的页大小
+相应的结构体 相应的结构体定义在了include/linux/mm_types.h
+/* * Each physical page in the system has a struct page associated with * it to keep track of whatever it is we are using the page for at the * moment. Note that we have no way to track which tasks are using * a page, though if it is a pagecache page, rmap structures can tell us * who is mapping it.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-note/">Linux命令笔记</a>
                                 </h1>
                             </header>
@@ -140,6 +168,26 @@ update 能够看到电脑持续开机时间……
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -157,26 +205,6 @@ update 能够看到电脑持续开机时间……
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -209,7 +237,7 @@ update 能够看到电脑持续开机时间……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -229,7 +257,7 @@ update 能够看到电脑持续开机时间……
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -316,6 +344,8 @@ update 能够看到电脑持续开机时间……
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -431,6 +461,8 @@ update 能够看到电脑持续开机时间……
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -456,6 +488,8 @@ update 能够看到电脑持续开机时间……
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

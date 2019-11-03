@@ -6,10 +6,24 @@
     <description>Recent content in 内存管理 on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Mar 2019 01:52:15 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 29 Oct 2019 14:29:32 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Memory Management</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-memory-management/</link>
+      <pubDate>Tue, 29 Oct 2019 14:29:32 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-memory-management/</guid>
+      <description>这里主要说的是内核内存，而不是我们平时写代码时的用户内存
+page 页(page)是内存管理的单元，虽然在物理内存中最小处理单位可能是字节，但从虚拟内存的角度来说，页就是最小单位
+一般来说我们现在使用的电脑系统，页的大小为4KB
+$ getconf PAGE_SIZE 4096  可以用上面的这个命令来查看当前物理机的页大小
+相应的结构体 相应的结构体定义在了include/linux/mm_types.h
+/* * Each physical page in the system has a struct page associated with * it to keep track of whatever it is we are using the page for at the * moment. Note that we have no way to track which tasks are using * a page, though if it is a pagecache page, rmap structures can tell us * who is mapping it.</description>
+    </item>
     
     <item>
       <title>Linux命令笔记</title>

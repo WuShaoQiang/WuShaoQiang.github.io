@@ -78,6 +78,113 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-account/">Linux Account</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to login my Ubuntu as root. But, I don&rsquo;t even remember I have set a password for root.
+Fortunately, I learned some skills about how to manage accounts in linux, so I figure it out very quickly, I hope this experience can be helpful for you if you have the same(similar) problems
+UID and GID When you login in a linux system, you must have a user and its password.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-account/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/">Linux How to Identify Command</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月22日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Today, I want to talk about a small topic &ndash; how to identify a command
+Specifically, If you want to know where are these commands from, there are three possibilities:
+ builtin
+ alias
+ file(external)
+  Let&rsquo;s try it type cd // Of course, cd is a builtin command &gt; cd is a shell builtin type ll &gt; ll is aliased to `ls -alhF' type mongod &gt; mongod is /usr/local/mongodb/bin/mongod  Basically you don&rsquo;t need to add any flags……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-how-to-identify-command/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">Linux Windows File</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                In linux, [Enter] =&gt; LF
+But in windows, [Enter] =&gt; CRLF
+So, if we cp a shell script file from windows to linux, we may not be able to run it because of the line break character is different
+we need a tool to transform between windows(DOS) and linux(UNIX)
+dos2unix [-kn] file [newfile] unix2dox [-kn] file [newfile] unix2mac [-kn] file [newfile]   k: keep modified date
+ n: create new file……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">Linux Vim Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月21日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Last time, we talked about linux compression
+This time, I am gonna talk about basic usage about vim
+vim is a highly recommended editor in UNIX-Like system, so it is necessary to learn that
+To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScode) or IDE to develop software, I use vim only when I just want to edit a config file or just couple lines of code which is not worth opening a editor(or IDE)……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/">Linux Compression</a>
                                 </h1>
                             </header>
@@ -238,139 +345,6 @@ mkdir -m // set directory permission when create mkdir -p // If parent directory
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">Linux Permission</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月20日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Today, I am gonna talk about linux permission which is very basic for linux user.
-Basically, we have three different role in linux
-Owner Group Other  It is easy to understand what they mean.
-ls -al In your home directory, type ls -al command and click Enter, you will see the output like:
--rw------- 1 user group 254 Oct 22 2018 .xsession-errors.old  Fields meaning As we can see, this line include several field separated by white space……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-permission/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">Linux Ps</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月14日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 ps命令有几种标准，这里只用UNIX版本的
-Background 首先了解一些概念
- PID 进程ID
- PPID 父进程ID
- PGID 进程所在GroupID
- SID 进程所在会话(Session)ID
-  一般来说，SID就是我们的shell
-一个SID管理多个PGID
-一个PGID管理很多PID
-既然是管理，那就会有leader角色，那么如何知道谁是leader
-PID == PGID的就是group leader
-PID == SID的就是session leader
-Flag Selection
--A -e 全部进程 -a 全部进程处理session leader -C 命令名字 -g group -u user -p pid -t tty  Format
--o pid,ppid,tty,time 选择输出某些字段 -F 全部字段(带字段名字 -f不带字段名字) --forest 树状形式输出  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-ps/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/">Linux Bash Awk</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                awk的一些用法
-常见模式 awk '/reg/' 'BEGIN{} condition {condition action} END{}' filename  其中
- /reg/ 是一个正则的匹配
- condition 是判断条件
- action 就是要执行的操作
- BEGIN 开始前的操作
- END 结束后的操作
-  对文件 awk '{print $1}' test.txt  对管道 df -h | awk '{print $1}'  这里面的$1是指第一部分，默认分隔符是空格(制表符)
-echo &quot;This is a test&quot; | awk '{print $1}'  输出的是This
-如果想要的分隔符不是默认的，可以使用-F
-例如
-echo &quot;This,is,a,test&quot; | awk '{print $1}' #输出 This,is,a,test echo &quot;This,is,a,test&quot; | awk -F ',' '{print $1}' #输出 This  更多高级的用法 先说说内置的变量……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/">Linux Bash Test</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月9日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 test命令是bash中一个重要的判断命令
-虽然我们在其它编程语言上习惯使用if判断语句去实施判断，但也有必要了解一下这一种的判断手段
-if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上面那种结合if条件判断的和原有的差不多，所以我们一般常用的是[]
-例子
-[ -e ./test.txt ] &amp;&amp; echo &quot;exist&quot; || echo &quot;doesn't exist&quot;  这里就是存在就会输出exist，不存在就会输出后面的那个
-而且这还适用于
- 文件类型判断
- 文件权限
- 两文件之间
- 整数之间
- 字符串之间
- 多重条件(也就是AND和OR还有NOT)
-  ……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -423,6 +397,26 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -440,26 +434,6 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -492,7 +466,7 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -512,7 +486,7 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -599,6 +573,8 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -714,6 +690,8 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -739,6 +717,8 @@ if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上�
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

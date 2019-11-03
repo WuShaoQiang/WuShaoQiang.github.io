@@ -78,6 +78,52 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/">Different Encoding</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月30日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                记录一下今天踩到的一些坑
+之前也有在处理URL编码格式的时候被搞晕，今天也遇到了相似的问题，大概总结一下
+Before 在这篇文章中，我们简单的认为
+URI+params = URL
+也简单解析一下escape的意思，在编码这个话题中，escape是指在一个字符序列中，某一个子序列拥有多种意思，所以这个子序列就要被称为escape character，像下面所说的URL，那么/就是一个escape character
+为什么URL需要编码 reference: wiki
+因为在很多时候，一些字符是具有特殊意义的，如/不能随意在URL出现，因为它有特殊的含义(用来分隔URL)
+这也是为什么要编码，让它成为一个能够唯一解析的语句
+ RFC 3986 section 2.2 Reserved Characters (January 2005)
+! * &lsquo; ( ) ; : @ &amp; = + $ , / ? # [ ]
+ 可以看到这些是标准里面需要被转换的字符
+而一般的字母以及数字还有一些符号- _ . ~是不需要被转换的
+Percent-encoding 这里面首先说的是percent-encoding，意思就是将需要转换的字符转换为%xx这种形式
+一般来说xx是这个字符在ASCII的序号，例如：
+space -&gt; %20
+具体的对应关系可以查看wiki
+并不是所有转换字符都要被转换，字符是否含有特殊意义是取决于上下文的，因此在percent-encoding下也派生了几种不同的encode方式
+这几种不同的encode方式区别主要在于转换哪些字符
+ encodeURI
+ encodeURIComponent
+ escape
+  具体不转换哪些上网搜一下就有了，这里不贴了
+用途 一般来说不推荐使用escape，因为它对non-ascii的字符处理有问题，因此尽量避免使用
+encodeURI是用来编码一个URI，注意这里是不能编码params，因为params的一些特殊字符这里不会做转换……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/design-pattern/design-pattern-basic/">Design Pattern Basic</a>
                                 </h1>
                             </header>
@@ -396,31 +442,6 @@ To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScod
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-compression/">Linux Compression</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月21日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Last day, we took a quick look on file system, I just want to give you guys some basic understanding about that, If you are a software developer(engineer), may be that&rsquo;s enough for you.
-Today, let&rsquo;s talk about a very basic and useful tool in linux &ndash;&gt; compression
-Quick talk Basically, we use compression all the time, including surfing the internet, the server will give client(browser mostly) the compressed data instead of raw data which may cause the performance slow.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-compression/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -469,6 +490,26 @@ Quick talk Basically, we use compression all the time, including surfing the int
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -486,26 +527,6 @@ Quick talk Basically, we use compression all the time, including surfing the int
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -538,7 +559,7 @@ Quick talk Basically, we use compression all the time, including surfing the int
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -558,7 +579,7 @@ Quick talk Basically, we use compression all the time, including surfing the int
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -645,6 +666,8 @@ Quick talk Basically, we use compression all the time, including surfing the int
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -760,6 +783,8 @@ Quick talk Basically, we use compression all the time, including surfing the int
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -785,6 +810,8 @@ Quick talk Basically, we use compression all the time, including surfing the int
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

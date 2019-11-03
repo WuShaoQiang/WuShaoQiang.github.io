@@ -68,6 +68,142 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-tips/" title="Golang Tips" >Golang Tips</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月18日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                关于select case runtime.GOMAXPROCS(1) int_chan := make(chan int, 1) string_chan := make(chan string, 1) int_chan &lt;- 1 string_chan &lt;- &quot;hello&quot; select { case value := &lt;-string_chan: fmt.Println(value) case value := &lt;-int_chan: panic(value) }  上面代码两个case都满足，会伪随机的执行一个
+关于defer func DeferCalc() { a := 1 b := 2 defer calc(&quot;1&quot;, a, calc(&quot;10&quot;, a, b)) a = 0 defer calc(&quot;2&quot;, a, calc(&quot;20&quot;, a, b)) b = 1 time.Sleep(1 * time.Second) } func calc(index string, a, b int) int { ret := a + b fmt.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-tips/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/" title="Algorithm 排序" >Algorithm 排序</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Algorithm">Algorithm</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                排序时间复杂度 堆排序 参考dreamcatcher-cx博客
+最好最坏的平均时间复杂度都为O(NlogN)
+代码 func HeapSortUp(a []int) []int { for i := len(a)/2 - 1; i &gt;= 0; i-- { adjustHeapUp(a, i, len(a)) } for j := len(a) - 1; j &gt; 0; j-- { a[0], a[j] = a[j], a[0] adjustHeapUp(a, 0, j) } return a } func adjustHeapUp(a []int, i int, length int) { tmp := a[i] for k := 2*i + 1; k &lt; length; k = 2*k + 1 { if k+1 &lt; length &amp;&amp; a[k+1] &gt; a[k] { k++ } if a[k] &gt; tmp { a[i] = a[k] i = k } else { break } } a[i] = tmp }  思路  先将数组变换为一个大顶堆……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/algorithm/algorithm-sort/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-gin/" title="Golang Gin" >Golang Gin</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 中间件 在Gin的中间件可以这样定义，这是Gin定义的中间件的接口
+func JWT() gin.HandlerFunc { return func(c *gin.Context){ //这个就和我们平时编写的路由函数一样了 } }  然后利用Use()函数注册进去
+gin函数 //这三步和gin.Default()返回的Engine一样,之说gin.Default()会有一个输出消息 debugPrintWARNINGDefault() r := gin.New() r.Use(gin.Logger()) r.Use(gin.Recovery()) gin.SetMode(setting.RunMode)  分组 apiv1 := r.Group(&quot;/api/v1&quot;)  gin.HandlerFunc func GetTags(c *gin.Context){ }  Context方法 ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-gin/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-validation/" title="Golang Validation" >Golang Validation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Validation项目地址
+创建 valid := validation.Validation{}  Validation方法 valid是创建过的对象
+ valid.Required(name,&quot;name&quot;)：检验变量不能为空，字符串不能为&quot;&quot;,后面的&quot;name&quot;是用来标识而已
+ valid.MaxSize(name,100,&quot;name&quot;)：最大长度
+ valid.Range(state,0,1,&quot;state&quot;)：范围
+ valid.HasErrors()：这个会返回布尔值，是否有不符合限定的内容
+ valid.Errors：这个是一个Error数组，其中Error是这个包自带的，并不是标准库的error
+ valid.Min(id,1,&quot;id&quot;)：id最小为1
+  以上这些都返回*Result
+Result方法 我们拿上面一个返回*Result对象做例子
+ valid.Required(name,&quot;name&quot;).Message(&quot;name不能为空&quot;)  当加了Message后，发生错误返回*Error对象，Error.key就是name Error.Message就是上面的信息……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-validation/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-blog/" title="Golang Build blog with gin" >Golang Build blog with gin</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年4月14日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 Package  ini &mdash;配置文件的读取
+ com &mdash;功能性
+ validation &mdash;做验证
+ jwt-go &mdash;Token
+ endless &mdash;服务器热启动
+ swag &mdash;API文档
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-blog/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golangstd-os/" title="Golang标准库--os" >Golang标准库--os</a>
                                 </h1>
                             </header>
@@ -218,170 +354,6 @@ stackoverflow上赞同较多的答案说
  You should assume that a panic will be immediately fatal, for the entire program, or at the very least for the current goroutine.……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-log/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/" title="Golang Errandpanic" >Golang Errandpanic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者在自己做一个小项目的时候，从0开始写呀写呀写，忽然发现代码里充满了错误处理，异常处理，乱七八糟，心情非常不好，所以是时候学习一下这方面的知识了，于是在网上搜索别的博主的总结
-本文参考了张伯雨的博客 飞雪无情的博客 外国友人的博客
-直观理解 虽然我一开始也知道错误和异常是两码事，但我处理起来就把它们当成一码事了，这是不对的，我们先从直观上去判断什么是错误，什么是异常
-错误是我们意料之中的，比如我们在做一个Get请求，我们知道这个操作是有可能发生错误的(比如超时等)，意料之中的事情
-异常是我们意料之外的事情，比如空指针、数组越界等，程序在编译阶段是无法辨认出数组越界，或者空指针的
- but unable to check mistakes like an out-of-bounds array, access or nil pointer deference which require checks at run time
- defer 说到异常就要提一下defer，它是一个关键字，用于延迟函数的执行，我们常见的是
-... defer file1.Close() defer file2.Close() ...  当一个函数触发panic，或者正常的return，总之它所在的函数执行完毕了，这个时候就轮到defer的函数了
-并且它是按照一个栈的形式来执行，也就是先进后出，在上面的例子中，file2会比file1先执行Close()
-如果是panic，那么这个panic将会一直被传递上去，直到最后一个defer执行完毕
-同样的功能，不同的设计 比如说，许多标准库里的函数，会有两种设计
- 一般设计，如果输入有误，则返回错误
- 异常设计，如果输入有误，直接抛出异常
-  怎么看都觉得第二种好恐怖啊，动不动就抛出异常
-其实不然，我们在编写程序的时候，有些时候是硬编码的，也就是说这个部分是很大概率不会出错的，比如说我们在调用template标准库时，我们写好的网页(H5)，一般来说到上线的时候都是固定死了的,所以在读取模板的时候基本不会出错，这个时候就不用再写错误处理了
-凡事要有规则 异常处理的作用域
- 空指针引用
- 下标越界
- 除数为0
- 不应该出现的分支，比如我们在switch的时候，没有一个符合，就会到default分支
- 输入不应该引起函数错误
-  错误处理正确姿势 1.失败原因只有一个时，不用error 比如只是一些简单的判断，这个时候输出bool会更好……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-errandpanic/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/" title="Golang Crawler" >Golang Crawler</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                笔者最近用了几天时间用Golang写一个爬虫并且做数据分析，先记录一下用了哪些包，方便后面总结
-goquery --处理HTML标签 viper --读取配置文件 go-echarts --图表显示 gorm --Mysql数据库 golang-proxy --代理IP pkg/errors --更好追踪错误 logrus --美化log lfhook --为了生成log本地文件，与logrus配合使用  过程中遇到的错误(不分顺序)
- first path segment in URL cannot contain colon 这里把IP地址当做协议了，但是程序一样能运行，只要在IP地址前面加上//即可，就像//127.0.0.1:1080
- invalid memory address or nil pointer dereference 在我把IP替换成代理后，出现了这个情况，初步估计是resp.Body搞的鬼，在后面我多尝试几次后，也成功过。我在这里的做法是将函数重新调用(递归)，设置好递归的最大次数，如果超过这个次数就终止，或者使用下面的错误处理
-  defer func () { if resp != nil { resp.Body.Close() } }()  单元测试 func TestCrawler(t *testing.T) { // keywords := []string{&quot;golang&quot;, &quot;java&quot;} keywords := &quot;golang,java&quot; refresh := &quot;on&quot; value := url.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-crawler/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-handle/" title="Golang Handle" >Golang Handle</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月11日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                本文主要解释Golang中http-handler几个容易混淆的概念
-HandleFunc 源代码
-在源码文件(net/http/server.go)中定义了一个默认的路由管理器(Mux)，我们如果直接调用
-http.HandleFunc(...)  其实就用了默认的路由管理器，然后通过这个默认的路由器来调用路由管理器的方法
-当然我们也可以自己定义一个路由管理器，然后通过这个对象来调用这些方法,和调用默认Mux不同的是
-myMux.HandleFunc(...)  来看一下源码的这两个函数，验证上面所说的。
-// HandleFunc registers the handler function for the given pattern // in the DefaultServeMux. // The documentation for ServeMux explains how patterns are matched. func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { DefaultServeMux.HandleFunc(pattern, handler) }  利用DefaultServeMux来调用HandleFunc()方法
-// HandleFunc registers the handler function for the given pattern. func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) { if handler == nil { panic(&quot;http: nil handler&quot;) } mux.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-handle/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/" title="Golang goquery" >Golang goquery</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                goquery是一个开源的库，针对解析HTML
-今天在做爬虫的时候用到了一些功能，记录下来方便查阅
-创建Document对象 doc, err := goquery.NewDocumentFromReader(resp.Body) if err != nil { log.Fatalf(&quot;go query Error %s\n&quot;, err) }  doc对象就包含了我们要解析的HTML主体
-一般我们这样用，Find()里面的字符串就是我们要填写的规则
-doc.Find(&quot;div&quot;).Each(func(i int, s *goquery.Selection) { fmt.Println(i,s.Text()) })  规则 我们可以根据HTML的源码分析对应的属性id，class等等
- div#id #id是某个div的id属性，筛选出此id的div标签
- div.class .class 同理，是class属性
- div[class],div[lang] 这个也是属性的筛选
- div&gt;p div嵌套的p标签，这里规定只有一级标签，一级以后的p标签不会被筛选出来
- div p div嵌套的p标签，这里无论第几级都会被筛选出来
-  属性可以和嵌套一起使用，例如div.class&gt;p&gt;li
-Size num := doc.Find(&quot;ul&gt;li&gt;div.job-primary&quot;).Size()  取出标签内的属性 doc.Find(&quot;ul&gt;li&gt;div.job-primary&gt;div&gt;h3&gt;a&quot;).Each(func(i int, s *goquery.Selection) { detail := s.Get(0).Attr[0].Val // fmt.Println(i, nextPage) jobs[i].Detail = detail })  我在这里踩过一个坑……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-goquery/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/" title="Golangstd Request" >Golangstd Request</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年4月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                最近笔者看了一些源代码，也找了一些Web示例跟着学习，这次是Go源代码的request.go的学习总结
-我们知道，在处理Web后端的时候，都会有两个参数http.ResponseWriter和*http.Request
-所以Request是我们处理用户请求的接口，学习这个对Web开发也相当重要
-Request结构体 type Request struct { Method string URL *url.URL Proto string // &quot;HTTP/1.0&quot; ProtoMajor int // 1 ProtoMinor int // 0 Header Header Body io.ReadCloser GetBody func() (io.ReadCloser, error) ContentLength int64 TransferEncoding []string Close bool Host string Form url.Values PostForm url.Values MultipartForm *multipart.Form Trailer Header RemoteAddr string RequestURI string TLS *tls.ConnectionState Cancel &lt;-chan struct{} Response *Response ctx context.Context }  下面详细介绍每个字段的意义
-Method 这就是一个请求的方法(如GET、POST)
-但是Go的HTTP客户端不支持发送方法为CONNECT的请求
-URL  // URL specifies either the URI being requested (for server // requests) or the URL to access (for client requests).……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golangstd-request/">阅读全文</a></p>
                         </article>
                     
 
@@ -552,6 +524,26 @@ URL  // URL specifies either the URI being requested (for server // requests) or
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -569,26 +561,6 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -621,7 +593,7 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -641,7 +613,7 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -728,6 +700,8 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -843,6 +817,8 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -868,6 +844,8 @@ URL  // URL specifies either the URI being requested (for server // requests) or
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

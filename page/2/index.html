@@ -68,6 +68,173 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle" >Linux Process Life Cycle</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月21日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                我们知道，现在的操作系统，给用户的感觉都是多任务执行的，可能执行的任务(Process)要比CPU还多
+这个时候电脑程序看起来还是一起跑的
+在Linux的Process Management里面，通过不断的让Scheduler交换执行进程，就可以实现这样的效果
+State 这里先来了解一下关于进程生命周期的几个状态
+ R(Running or Runnable)是指这个Process正在占用一个CPU，处于执行状态。或者，它处于可被执行的状态
+ S(Interruptible Sleep)这种状态表示进程正在等待事件发生，这种情况下是可接收信号的，等到等待的时间发生再次满足Runnable的条件时，会置为R
+ D(Uninterruptible Sleep)与上面的区别，这种状态是无法接收信号的
+ T(Stopped)这里是暂停或者停止，比如在使用debugger的时候
+ Z(Zombie)状态发生在进程被结束，但是数据还有部分残留在Process table里，这个时候在等待父进程调用wait4
+  这些状态在linux源码里的linux/sched.h里面有定义
+181 #define TASK_RUNNING 0 182 #define TASK_INTERRUPTIBLE 1 183 #define TASK_UNINTERRUPTIBLE 2 184 #define __TASK_STOPPED 4 185 #define __TASK_TRACED 8 186 /* in tsk-&gt;exit_state */ 187 #define EXIT_ZOMBIE 16 188 #define EXIT_DEAD 32 189 /* in tsk-&gt;state again */ 190 #define TASK_DEAD 64 191 #define TASK_WAKEKILL 128 192 #define TASK_WAKING 256 193 #define TASK_STATE_MAX 512  其中TRACED是调用ptrace时用的，主要是为了区分STOPPED……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路" >我的0-Offer秋招之路</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月15日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86">人生经历</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                今天算是我秋招的一个结束点了吧，至今还是0 offer，说不难受是假的，但是说很难受好像也没有，因为从中也收获不少。而且我相信秋招的失败经历也不会让我翻不了身(我是咸鱼)
+大概经过 我秋招开始的比较晚，是9月18号才开始投简历，那时候很多公司都截止收简历了，所以机会相对较少。再加上不愿意北上，所以只能在深圳和广州两地选择
+因为还在实习，所以不得不请了大半个月假来准备笔试面试相关东西
+投完简历第二天就开始笔试了，写的也是一塌糊涂，所以笔试这东西还是得提前准备的，就像临考的复习一样，虽然不是长久之计，但是很有效
+最多笔试面试的时候还是九月份，下面说一下自己在这些方面的不足和反省吧
+笔试 笔试大多考的就是数据结构和算法题，平时少刷算法题的会比较吃亏，这里没什么诀窍，也没有捷径，只能多刷题，一般最少提前半个月刷题，而且刷的题不要太简单。
+比如Leetcode上的easy题大多数都非常简单，最起码要刷medium以上的
+这里笔者因为时间比较少，再加上之前没有太多积累，很多连笔试都没过
+面试 面试是我最痛的伤，我想进的公司基本上都挂在面试上了
+状态不好 面试中，状态也很重要，因为很可能很简单的东西，在状态不好的时候会说的一塌糊涂。就像笔者背问了TCP和UDP的区别这种已经准备过的问题时，因为状态不好答的也不是特别令人满意
+不够深入 笔者觉得自己在这方面做的非常差，很多东西停留在了表层，没有深入到细节实现上，这样在面试官理解上，可能只是了解，并不会实际的操作
+举个例子，面试官问某某项目的某某部分的时候，如果只说了大概思路而没有更具体的东西，可能会让面试官觉得你只是背熟了这个架构，并没有体现出技术的东西
+知识面窄 我相信这是很多人都会有的问题，对于一早定位在某一领域上的同学来说，知识面会宽很多。比如说计算机科学，很多非科班的人(包括我)接触到的东西会比较窄(可能有时间关系，可能有个人关系)，这个时候面试官所掌握的技术栈很可能没有太多和你重叠的。意味着他问的东西，很多你都没听说过，这就非常糟糕(所以面试也带有一些运气在里面)
+我的感受 在面试的时候，我感觉我很容易会混乱，经常说出来的东西并不是面试官想要的答案(说完后我才发现)，在项目上没有体现细节(我最失败的地方)
+一些给自己的建议
+ 早准备
+ 准备多一些细节以及亮点
+ 平时多看开源代码(为了寻找共同的技术栈)
+ 对基础的东西要非常熟练(网络、操作系统等)
+ 多努力
+  0 offer倒是敲响了我的警钟，也让我明白了自己的大致方向。说实话，我差点就完全错过了整个秋招，还好还是尝试了，感觉还是不亏的
+我觉得我自己 不想说自己因为结果不好而不行，我觉得我还是具备成为一个优秀的engineer的因素。。。吧……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2" >Etcd Raft 源码实现-2</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                趁着周末有空，抽几个小时看看源码，这次看的是raftexample
+这是一个raft的简单实现，etcd/raft只是实现了raft的主要算法(例如选举、状态机等)
+ To keep the codebase small as well as provide flexibility, the library only implements the Raft algorithm; both network and disk IO are left to the user. Library users must implement their own transportation layer for message passing between Raft peers over the wire. Similarly, users must implement their own storage layer to persist the Raft log and state.
+ 因此我觉得先看一个完整的实例可能对raft的整个逻辑会有一个清晰的认识
+因此我们可以先从怎么用etcd的raft来入手
+这篇blog的范围仅在raftexample这部分，超过这部分的代码(例如raft和node这些细节，在后面的blog会慢慢接触)暂时不会说
+看看大体结构 ├── doc.go ├── httpapi.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1" >Etcd Raft 源码实现-1</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                之前说过的结合源码来学习Raft的blog来了！
+这次想尝试写成一个系列吧，因为代码还是有一定量的，大概估计要半个月～一个月的时间(中间太多事情了)
+今天来开第一篇，说个稍微简单点的MemoryStorage
+MemoryStorage只是一种实现，并不是所有实现都应该和它一样
+在raft/storage.go里面就是全部是实现，逻辑也比较简单，因为代码实现比较简单，主要说一下这个的用法吧
+先看一下结构体
+type MemoryStorage struct { // 上锁 sync.Mutex // 这个暂时可以先不理会 hardState pb.HardState // Snapshot是一个快照 snapshot pb.Snapshot // 这里就是存放log entry的地方 ents []pb.Entry }  这里顺带说一下，如果没看过Raft Paper或者刚接触Raft，还是建议先理解一些概念，因为代码里有很多名词都是相关的
+这里我只会举一些稍微难一点的函数(有些太简单就不说了)
+取数据的Storage // Entries implements the Storage interface. func (ms *MemoryStorage) Entries(lo, hi, maxSize uint64) ([]pb.Entry, error) { // 先上锁 ms.Lock() defer ms.Unlock() // offset是相对数组而言的，在这里，数组的第一个元素，也就是ents[0]是不用做数据的 offset := ms.ents[0].Index // 这一步可以验证上面说的ents[0]不包含数据的说法 // 如果lo == offset，那么会发生Compact错误 // Compact错误代表着数据不存在(被清理了) if lo &lt;= offset { return nil, ErrCompacted } // 因为是[lo,hi) 所以，hi是不包含的 // 这里的边界条件不加=，也是因为这个 if hi &gt; ms.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3" >Interview3</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95">面试</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                稍微总结一下今天面试遇到的一些问题以及自己的不足，再接再厉
+感觉这篇blog有点像日记了。。。
+Link 在前面时间里主要是问了三道和链表相关的题，可能因为平时少练题的缘故，答的不太好
+LRU缓存算法 我之前没有听过LRU(Latest Related Used)
+在假设一个场景下，一个值被请求，那么下面很有可能会再次多次请求这个值，那么用这种算法能够cache住最新的值，使得效率提高
+还好面试官通过解释，我才大概懂得这个LRU是用来干嘛的(但是当时还是没太多思路)
+现在用代码大概描述一下
+package main type DLinkNode struct { key int val int next *DLinkNode prev *DLinkNode } func addNodeAfter(prev, node *DLinkNode) { node.prev = prev node.next = prev.next if prev.next != nil { prev.next.prev = node } prev.next = node } func removeNode(node *DLinkNode) { if node.prev != nil { node.prev.next = node.next } if node.next != nil { node.next.prev = node.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/interview/interview3/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler" >Go Scheduler</a>
                                 </h1>
                             </header>
@@ -283,222 +450,6 @@ Snapshot Isolation 这也是一个比较热门，应用比较广泛的一个Isol
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL" >2PC and 2PL</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                2PC == Two Phase Commit
-2PL == Two Phase Lock
-两者是完全不一样的东西
-目的 2PC的目的是为了达到多节点的Consensus
-2PL的目的是一种Isolation，防止并发的冲突
-简单讲讲 今天看到2PC，在名词上和之前看到的2PL有点相像，为了区分开来，我觉得还是有必要简单总结一下
-2PL
-Two Phase Lock包含两种Lock
- Shared Lock
- Exclusive Lock
-  在多个线程并发读取某一个数据的时候，它们申请的都是Shared Lock，也就是说Shared Lock是能够共存的
-Exclusive Lock是写的时候申请获取的Lock，它能够把所有操作都排除在外，必须要得到释放后，后面的操作才能执行
-因此2PL是一种Isolation，这是一种强保证的Isolation
-2PC
-Two Phase Commit是解决多节点事务共识提出来的方案
-简单描述就是，当事务被提交到多个节点，会有一个中心化的Coordinator来决定这个事务是commit还是abort
-在接收到一个外界提交的事务后
- Coordinate会给这个事务一个唯一的id
- Coordinate会将这个事务发给所有的节点
- 当这个事务准备要commit的时候，Coordinate会先发一个Prepare请求，询问所有节点是否准备好commit
- 只有收到所有节点的肯定回复，这个时候Coordinate才会进入第二阶段，给所有节点发送commit命令，这样所有节点都一定会commit，以此来保证共识
-  这只是一个正常commit的流程
-在分布式系统中还要充分考虑很多意外情况，因此2PC并没有这么简单
-不过有一个非常重要的点，一旦Coordinate决定这个事务要commit，那么这个事务就一定要被commit，无论中间出了什么差错。所以这是不可逆转的决定，也只有这样才能保证节点的一致性
-简单总结 这里除了是让我分清楚2PC和2PL是完全不一样的东西之外，还大概阐述了一下它们的作用以及目的……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/" title="BigTable Summary" >BigTable Summary</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                国庆放假前几天，去翻阅了一下有关分布式存储的论文，其中有
- Google BigTable
- Google Spanner
- Raft
-  不得不说，Google大法好
-BigTable  Bigtable is a distributed storage system for managing structured data that is designed to scale to a very large size
- BigTable还结合了GFS，Chubby以及SSTable
-先了解一些名词  tablet server 一个tablet server可以管理多个tablet
- tablet 是管理数据的最小单位
- table 一个table可以由多个tablet组成，或者说一个table可以分割成多个tablet
-  它的数据模型 BigTable用了三个索引来标识一个数据
- Row
- Column
- Timestamp
-  (row:string, column:string, time:int64) -&gt; string
-Row BigTable会根据Row Key对数据进行排序，所以在同一个tablet上的数据都是有序的。所以相对Hash这种存储方式，有序能够方便范围性的Scan
-Column and Column Family 一般来说Column Family包含多个Column，一个Column可以由family:qualifier来唯一标识。并且，Column Family一般是由同类型的Column组成，这样有助于压缩(压缩在下面优化的时候说到)。……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/bigtable/bigtable-summary/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/" title="Leader Election" >Leader Election</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月6日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                在这里总结一些Leader Election的Case，通过例子来理解Raft的Leader Election或许会更有印象
-下面用到的term是指任期值，index是最后一个committed log的位置
-大家的Term和Index都相同 当大家的term和index都相同的时候，某一个Follower长时间未收到Leader的心跳发生timeout，就会变成candidate，并且term = currentTerm + 1， 这个时候这个candidate就会号召大家为它投票
-投票是按照两个依据来选择是否投票的
- 投票请求(RPC)带来的term一定要大于currentTerm，这样节点才知道这是新的一轮投票了
- 满足上面条件后，还需要检测请求带来的lastLogIndex以及lastLogTerm以确保candidate拥有比自己新或者和自己一样的状态
-  主要满足这两个条件，拥有投票权的节点就会给这个candidate投票
-投票是需要majority节点同意的
-在我们假设term和index都相同的前提下，发起选举，那么就会有谁先发起谁就非常大概率当Leader
-Term相同，Index不一样 我们假设有两个candidate在竞选Leader，candidate1.index &lt; candidate2.index
-也就是说candidate2拥有更加新的状态，我们来模拟一下竞选过程
-candidate1和candidate2都会向所有节点发起投票请求(RPC)，candidate自己是给自己投票的
-那么其它节点如何判断呢？
-其实还是上面的那两个依据，不记得请往上面翻一翻
-term相同，那么它们都会比currentTerm大(通过)
-第二个是比较index，由于Raft会保证committed会在majority上，因此candidate1肯定会被majority拒绝(可能会得到一小部分未更新的节点的投票)
-所以candidate2会得到majority的投票，因此成为Leader
-结论就是term值一样的candidate，index新的会赢
-Term不一样，Index相同 这种情况是term大的会赢
-假设candidate1.term &lt; candidate2.term
-这一部分我的理解可能不一定正确
-因为对于所有server来说，接收到请求里的term要比自己的term大，都会变为Follower，因此我觉得candidate1 在接收到 candidate2的term时，会转换为Follower，这个时候candidate1就像是被迫离场一样
-Term不一样，Index不一样 这里假设Leader.term &lt; Candidate.term 但是 Leader.index &gt; candidate.index
-这个时候Leader收到了比自己term大的term，因此转换为Follower
-但是因为candidate的index不是最新的，因此它不能够得到majority的投票，因此它会再次超时并且sleep一段时间
-这个时候之前的Leader term已经是追上了，因此参加选举，这个时候满足选举投票的两个条件，因此再次成为Leader，并且宣布自己是Leader，所以之前的candidate看到有人宣布了Leader，就会放弃选举，变成Follower
-不严谨 以上只是读者自己在看Raft Paper以及一些参考的理解，不一定是严谨的，有疑惑的地方还是参照更加官方的资料……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/leader-election/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/raft/tips/" title="Tips" >Tips</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                大概情况 今天看了Raft Paper，这是第一遍，我觉得自己还是有很多地方没有理解到位的(尽管我看了将近五个小时)
-所以先是记录一下tips，后面重新回来看的时候再追加一下细节(或者还可以结合一下源码)，在raft官网上有相应的源码实现
-tips 整体来理解Raft 当Leader接收到来自client的非读请求时，它会先记录在自己的log里面，然后再并发传递给Followers Server，一旦传递给了majority，那么每一个Server都会将log里面的东西放到state machine去执行，结果也将返回给client
-先理解一些专有名词  term是描述一个版本号的，越大代表版本越新
- log entry就是我们要保证一致性的信息，整个算法核心就是如何让每一个节点上的log entry一致
- index是索引，节点上面存的log entry都是具有唯一标识的，这个标识就是由term和index来组成，这里可以简单理解为log entry所在的位置
- AppendEntries RPC代表Leader向Followers发送log entry(也可能是心跳)的RPC调用
-  一些规则 对所有server来说
- 自身的commitIndex &gt; lastApplied，那么就会lastApplied++，然后加入到state machine里
- 只要接收到的term比自己的currentTerm大，那么就更新currentTerm，并且转换为Follower
-  对于Follower来说
- 要处理来自Leader和Candidate的请求
- 如果因为没有收到AppendEntries而发生timeout或者给某一个candidate投票了，都会转换为candidate
-  对于Candidate来说：
- 在选举期间：
- currentTerm++
- 给自己投票
- 重置election timer
- 给其它server发生RequestVote请求
-  如果接收到了来自majority的投票，成为Leader
- 如果收到了来自新Leader的AppendEntries，成为Follower
- 如果过了election timeout的时间，开始新一轮竞选
-  对于Leader来说：
- 如果是赢得竞选，则发生空的AppendEntries(心跳)来告知其它server，并且持续发送心跳来维护自己Leader地位……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/tips/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/" title="Safety Argument" >Safety Argument</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                起因 笔者在看Raft Paper的时候，遇到一个比较有意思的证明过程，不过这个证明过程对上下文有着紧密关系，因此在这里想用简单点的逻辑进行描述
-这个证明有意思的在于，它通过引出矛盾来证明这个结论是正确的，也算是一种反证法吧
-Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥有最新的committed
-假设一下 这里假设有两个Leader，分别为Old Leader，New Leader。
-我们假设New Leader在被选举出来的时候并没有最新的committed，什么意思呢，也就是说Old Leader在Crash之前已经commit了一个log，但是这个log并没有在New Leader里
-我们知道，要commit一个log需要majority的followers同意。然后，选举一个新的Leader也是需要majority的candidates同意的。这就给出一个结论
-因为两者都需要超过半数的节点同意，因此它们肯定有交集的节点
- 注：这里用节点是因为不同的场景会有不同的角色，所以统一称为节点  引出矛盾 交集的节点做了两件事情(按顺序)
- 接收到了Old Leader宕机之前的log，并且是committed
- 给New Leader投票
-  我们知道，选举的时候是有限制的，只有拥有最新committed log的节点才有被选举权，所以给New Leader投票说明New Leader在还没成为Leader之前是有这个committed log的(和前面假设冲突)
-或者说，New Leader拥有比这个投票者所知道的更加新的committed log，换句话说，New Leader在之前就已经有更新版本的committed log，但是按照原则，创建这个最新版本log的Leader应该是拥有Old Leader的全部committed log的，所以按道理New Leader也应该要有这个log(所以还是和假设冲突)
-结论 所以说，New Leader保证是会拥有Old Leader的所有committed log……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -667,6 +618,26 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
     </li>
     
@@ -684,26 +655,6 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/" title="Linux Process Life Cycle">Linux Process Life Cycle</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/life/0-offer-campus-recruitment/" title="我的0-Offer秋招之路">我的0-Offer秋招之路</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-2/" title="Etcd Raft 源码实现-2">Etcd Raft 源码实现-2</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/database/raft/etcd-raft-1/" title="Etcd Raft 源码实现-1">Etcd Raft 源码实现-1</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/interview/interview3/" title="Interview3">Interview3</a>
     </li>
     
 </ul>
@@ -736,7 +687,7 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(13)</a>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
     </li>
     
     <li>
@@ -756,7 +707,7 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(26)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
     </li>
     
     <li>
@@ -843,6 +794,8 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
     <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
     
     <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
     
     <a href="https://wushaoqiang.github.io/tags/English/">English</a>
     
@@ -958,6 +911,8 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
     
     <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
     
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
     <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
@@ -983,6 +938,8 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
     <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
     
     <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
     

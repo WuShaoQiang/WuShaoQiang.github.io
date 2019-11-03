@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>系统调用 on Gavin&#39;s Blog</title>
+    <link>https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/</link>
+    <description>Recent content in 系统调用 on Gavin&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Oct 2019 20:38:49 +0800</lastBuildDate>
+    
+	<atom:link href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux System Call</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-system-call/</link>
+      <pubDate>Wed, 30 Oct 2019 20:38:49 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-system-call/</guid>
+      <description>我之前写Go程序的时候，碰到了直接调用系统调用的时候，完全不明白这那些传入参数的意思，今天就来揭开它神秘的面纱
+前言 我相信有很多像我一样刚接触到计算机行业的新手都不太清楚Linux内核的一些实现，以及它的意义所在。为什么Linux要提供系统调用呢
+举个例子，比如说读取文件，我们需要从硬盘上读取数据，那么如何操作硬盘这个事情，我们从没关心过(之前我是没关心过)，其实这就是Linux的系统调用帮我们实现的部分。通过隔离了硬件，提供一致的系统调用接口，在编程的时候大大提高了效率
+因为Linux是一个多任务多用户的系统，因此是不能够让用户直接操作硬件的，必须通过内核的检验(包括权限等)才能保证一个操作是合法的。这样才能保证系统的安全性
+所以说只有内核才能够直接操作硬件设备，而只有通过系统调用才能够进入内核态
+在我们平时编程的时候也会比较少见直接对Linux的系统调用，因为很多常用的函数都是经过多层封装的
+系统调用 通常来说，系统调用的名字通常是sys_xxx()，这是一种规范
+一般来说，在用户空间调用系统调用会得到一个int类型，这个数字表示系统调用的执行结果。一般来说0表示成功，负数表示错误(错误码)
+在Linux内核中，系统调用都会有一个唯一的系统调用号，系统调用号一旦分配就不会回收，因此如果一个系统调用被删除，那么它就会调用sys_ni_syscall
+从用户态到内核态 从上面所说可知，我们要进入进入内核，执行内核代码来和硬件打交道。
+在用户态的代码需要调用系统调用的时候，Linux会产生一个软中断(引发一个异常，引发异常需要切换到内核态来处理异常)，这个时候处理异常的机制就是执行系统调用
+这种是通过引起异常来进入内核态，还有一种是可以直接陷入内核的(这里不细说)
+进入内核后，如何知道应该执行哪个系统调用。通过前面，我们知道每一个系统调用都有一个唯一的系统调用号，系统调用号是通过寄存器传给内核的，它所需要的参数也是通过寄存器传入
+欺骗内核 用户的程序不一定是诚实的，内核需要保证不能够让使坏的进程去影响别的进程或者影响整个系统
+在调用系统调用的时候，通过内核检验来达到这个目的
+ 内存区域必须属于用户空间的所在进程的地址空间里
+ 内存的读、写、执行权限不能绕过内存访问限制
+ 检查操作是否有合法权限capable
+  系统调用的宏 Linux本身提供了一组宏，用于直接对系统调用进行访问，它的格式是_syscalln()，其中n是一个数字，范围是0~6
+举个例子
+long open(const char *filename, int flag, int mode)  在使用上面_syscalln()是这样的
+_syscall3(long,open,const char*, filename, int, flags, int ,mode)  因为open的参数是3个，因此n=3
+所以对于每个宏来说，参数的个数是2+2*n
+小结 在这blog里希望能够有一个对系统调用的概念，对直接使用系统调用的代码有一个认知(知道它在干嘛)</description>
+    </item>
+    
+  </channel>
+</rss>
