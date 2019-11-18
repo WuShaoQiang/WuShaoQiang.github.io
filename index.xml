@@ -6,10 +6,148 @@
     <description>Recent content on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Nov 2019 11:16:26 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 17 Nov 2019 16:23:29 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Process Relation</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-relation/</link>
+      <pubDate>Sun, 17 Nov 2019 16:23:29 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-relation/</guid>
+      <description>Process Group Process Group的声明周期是：从Group被创建，到这个Group里面最后一个Process退出这个Group(Terminated或者加入到别的Group中去)
+int setpgid(pid_t pid, pid_t pgid)  参数的含义
+如果pid和pgid相同，那么pid这个进程就是Process Group Leader
+如果pid是0，那么是指当前进程
+如果pgid是0，那么pgid = pid
+setpgid只能对自己使用，或者是对子进程使用
+一般来说，这个函数会在fork之后调用，因为当一个进程调用exec之后，pgid就无法改变了。由于父进程和子进程无法保证执行顺序，因此通常会在两个进程里面都调用setpgid，以确保后面依赖于这个进程组关系的程序不会发生RACE。
+关于如何区分是父子进程，根据fork返回值来确认(在不发生错误的情况下)
+ 子进程的fork返回的是0
+ 父进程的fork返回的是子进程的pid
+  Session 当我们创建一个session的时候，会发生下面三件事情
+ 进程是Session Leader，并且整个Session中只有它一个进程
+ 进程变成Process Group Leader，并且pgid = pid
+ 进程没有controlling terminal
+  创建一个新的Session的进程必须不是一个Process Group Leader，因此最常见的实现方式是这样的：
+ 先调用fork，产生子进程，父进程退出
+ 子进程调用setsid创建新的session
+  由于子进程不可能是进程组Leader，因此这里可以保证创建新Session的条件成立
+Controlling Terminal 一般情况下，我们只需要知道，当我们Login进Linux系统的时候，我们调用命令行的地方(简单来说)就是Controlling Terminal
+我们可以运用Process和Session的知识对它大概了解：
+ Session Leader是建立这个Controlling Terminal的Process
+ 一个Controlling Terminal只能包含一个foreground process group，能够包含多个background process group</description>
+    </item>
+    
+    <item>
+      <title>Linux File And Dir</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/</link>
+      <pubDate>Sat, 16 Nov 2019 13:56:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/</guid>
+      <description>一些规则 UNIX的一些文件函数中，经常会出现名字差不多，但是参数不同的函数，它们的作用一般遵从这样的规则
+比如
+int stat(const char *restrict pathname, struct stat *restrict buf) int fstatat(int fd, const char *restrict pathname, struct stat *restrict buf, int flag)  在以下情况下，这两个函数的作用相同
+ fd = AT_FDCWD &amp;amp;&amp;amp; pathname是一个相对路径
+ pathname是一个绝对路径
+  还可以根据flag的值区分是stat还是lstat，主要是这个标志AT_SYMLINK_NOFOLLOW，当这个标志位被置位的时候，就是lstat，如果没置位，就是stat
+以上并不是要求对函数的掌握，而是一种规律，UNIX许多文件操作的函数都会有相类似的结构
+Stat结构体 struct stat { unsigned long	st_dev;	/* Device. */ unsigned long	st_ino;	/* File serial number. */ unsigned int	st_mode;	/* File mode. */ unsigned int	st_nlink;	/* Link count.</description>
+    </item>
+    
+    <item>
+      <title>Linux File I/O --Structure</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-file-io/</link>
+      <pubDate>Thu, 14 Nov 2019 16:44:27 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-file-io/</guid>
+      <description>这篇blog主要讲述Linux关于文件的粗略结构
+Process里的file descriptor 一般情况下，我们Linux下的进程都会默认打开三个file descriptor，分别是：
+ stdin
+ stdout
+ stderr
+  在Linux内核里，这些fd存储在一个记录项，每一个fd与之相关联的是
+ 文件描述标志(close-on-exec:在执行exec后关闭)
+ 指向一个文件表项的指针
+  文件表项 内核为所有打开文件维持一张文件表，里面包含了
+ 文件状态标志(读、写、同步等)
+ 当前文件的偏移量(关系到读写)
+ 指向该文件的i节点的指针
+  i-node 这个就是index node，专门存放一个文件的信息，包括文件的所有者、文件的权限、文件内容所指向的磁盘位置等
+关系 在了解了这三种结构后不难发现，它们都是拥有着层级关系的fd-&amp;gt;文件表项-&amp;gt;inode
+一般来说，我们需要搞明白两种情况
+ fd指向的是否是同一文件表项
+ 文件表项是否指向同一inode
+  如果不同fd指向同一文件表项，只有在fork的时候才会发生，因为子进程继承了父进程的fd
+如果文件表项指向的是同一inode，说明它们打开的是同一个文件，也就是说两个进程同时open了一个文件
+不同文件表项指向同一inode 如上所说，这里是不同的进程同时打开了一个文件，这些进程各自维护着自己的文件表项，因此拥有独立的文件偏移量
+在只读的情况下，是没问题的，但是在写的时候，因为偏移量的不同，可能会出现意想不到的结果
+但是多个进程写一个文件是很常见的操作，比如打log，就非常有可能会把多个进程的log打在一个地方上
+解决方法 通过原子操作来保证即使有多个进程在写入文件，也不会产生冲突(Race condition)
+UNIX为此提供了一种原子操作的方法，在Open的时候加入O_APPEND标志，这样内核会在写入的时候将当前的偏移量修改到当前文件的尾部
+小结 这篇blog大概讲述了Linux内核在文件上的结构，以及通过fork，或者是不同进程打开同一文件所不同的地方，最后以大概提及一下原子操作的作用</description>
+    </item>
+    
+    <item>
+      <title>Golang Process --How to create a process in Go</title>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-process/</link>
+      <pubDate>Tue, 05 Nov 2019 18:51:17 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-process/</guid>
+      <description>最近花了点时间在学习Linux Process这一块，发现对日常的工作还是很有帮助的，并且最近发现阅读Go相应部分的源码也比较容易理解，所以整合出这一篇blog.
+这篇blog和语言相关，如果只是想了解Linux Process，可以去看我别的blog，这里主要是源码解析
+概述 由于Golang对启动进程这一功能跨越了三个package:exec,os,syscall
+而且它们是一个向下引用的关系，因此我们先从exec这一层开始说起
+exec 我们启动进程使用的最多的方式应该就是exec.Cmd的Run方法，这里其中包含了Start和Wait
+容易忽略的点 很多人可能会认为构建一个*exec.Cmd只是单纯的利用Command()构建(后面我省略exec这个包名，直接使用函数名)
+我们来看看源码
+func Command(name string, arg ...string) *Cmd { cmd := &amp;amp;Cmd{ Path: name, Args: append([]string{name}, arg...), } if filepath.Base(name) == name { if lp, err := LookPath(name); err != nil { cmd.lookPathErr = err } else { cmd.Path = lp } } return cmd }  可以看到if filepath.Base(name) == name这句话的意思是，如果传入的name不是一个全路径，那么这里是通过PATH来找的
+如果找不到，其实这里的cmd.lookPathErr就被赋值了
+对应Linux里面的exec实现
+ 如果filename里面不包含/，那么就按PATH环境所指定的各个目录中搜寻可执行文件
+ 如果这个可执行文件不是二进制文件，Linux还会试着调用/bin/sh，让filename作为参数
+我们可以看到，Go在这个实现上其实是和Linux的思路相似的
+Start 构造一个Cmd其实和我们在shell终端的命令行类似，而我们在按下回车键的时候，其实就是执行了Run，而Run的第一步就是Start</description>
+    </item>
+    
+    <item>
+      <title>Linux Process Exit</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-process-exit/</link>
+      <pubDate>Mon, 04 Nov 2019 19:25:51 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-process-exit/</guid>
+      <description>之前几篇blog对进程的创建(fork&amp;amp;clone)，以及执行(exec)的大概设计和具体的思路，但还没有将进程的退出是怎么回事
+进程终止的条件 在大多时候，我们所看到的程序退出包括：
+ 执行完退出
+ 异常退出
+  但是在Linux下，进程有5种正常终止和3种异常终止
+这里的种类虽然多，但是常用的也就三种吧
+ 调用exit
+ 自己abort
+ 内核产生信号
+  隐式exit 首先，调用exit并不是意味着你每次都要显式的去调用这个函数，其实在很多编程语言里(比如我用的Go)，在main函数里，我通常不会在最后去显式地调用exit。比如HelloWorld
+func main() { fmt.Println(&amp;quot;Hello World&amp;quot;) }  这里应该是编译器帮我在main函数执行完后调用了exit，并且exit status是0
+echo $? #用这个验证  这里我也只是猜测，我还没具体考究到底是不是编译器帮我们做了这件事情
+但是能肯定的是，我们的程序最后肯定调用了Linux给到的exit
+显式exit 这个就很明显了
+func main() { fmt.Println(&amp;quot;Hello World&amp;quot;) os.Exit(1) }  通过程序显式的调用exit，同理echo $?可以得到相应的退出码
+无论是显式调用还是隐式调用，这种退出方式都是进程的正常退出方式
+不正常退出 其实2和3也算是一类，它们都可归类为信号退出
+内核产生信号使得进程不正常退出一般是因为进程有非常严重的违法操作
+ 引用了地址空间之外的存储单元
+ 除以0
+  &amp;hellip;
+出现了这类操作，内核会产生一个让进程abort的信号
+但是Golang将这类不正常退出转换为了正常退出(panic)
+所以在Golang里，不正常退出一般都是由外界信号导致的，比如SIGKILL
+无论如何 无论进程如何退出，最后都会执行内核中同一段代码
+无论是正常还是非正常，进程都会能够让父进程取到自己的退出状态(exit status)
+父进程会通过wait来获取子进程的退出状态，但是正常和非正常退出的获取方式有些许不同
+POSIX.1规定，用4个互斥的宏来取得进程终止的原因
+WIFEXITED(status) WIFSIGNALED(status) WIFSTOPPED(status) WIFCONTINUED(status)  如果一个进程是被信号杀死的(非正常终止)，那么用EXITED来获取status是不可以的，要用SIGNALED，一般来说，都会有相应的API提供使用</description>
+    </item>
     
     <item>
       <title>Linux Interrupt Top Halves</title>
@@ -116,7 +254,7 @@ encodeURI是用来编码一个URI，注意这里是不能编码params，因为pa
     </item>
     
     <item>
-      <title>Linux Memory Management</title>
+      <title>Linux Memory Management --Page and Zone</title>
       <link>https://wushaoqiang.github.io/posts/linux/linux-memory-management/</link>
       <pubDate>Tue, 29 Oct 2019 14:29:32 +0800</pubDate>
       
@@ -242,7 +380,7 @@ nsproxy 在task_struct里有一个字段
     </item>
     
     <item>
-      <title>Linux Process Types</title>
+      <title>Linux Process Creation</title>
       <link>https://wushaoqiang.github.io/posts/linux/linux-process-types/</link>
       <pubDate>Tue, 22 Oct 2019 21:16:30 +0800</pubDate>
       
@@ -4777,7 +4915,7 @@ config.toml 这个文件是配置我们的一些博客信息以及Hugo的配置
       
       <guid>https://wushaoqiang.github.io/about/</guid>
       <description>Working harder, learning quicker.
- Github : https://github.com/wushaoqiang Email : 592350960@qq.com  </description>
+ Github : https://github.com/wushaoqiang Email : 592350960@qq.com  Writing blog is one of my hobbies which can give me a lot of thinking and re-learning. And this blog is aimed for knowledge sharing(notebook for me). I hope it is helpful for somebody, at least for me, it is helpful.</description>
     </item>
     
     <item>

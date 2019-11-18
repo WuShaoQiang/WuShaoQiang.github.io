@@ -68,6 +68,224 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/" title="Go Scheduler" >Go Scheduler</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                为什么要Go Scheduler Scheduler是为了实现用户态的线程(协程)的调度，这也也就是实现更加轻量级的并发单元，这也是为什么goroutine的并发数量能够那么多的原因
+Goroutine在哪里运行 Goroutine看似每个都在并发运行，其实它们还是通过Scheduler来调度到内核态的线程来执行的，也就是说Goroutine其实也是在内核态的thread里跑的
+我们知道，如果创建过多的thread，会有很大的负担，因为内核态的线程不是轻量级的，会消耗不少的系统资源，因此我们内核态的线程和用户态的协程是一个N:M的关系，其中N &lt;= M
+如何Schedule goroutine在创建时会被存储在一个local run queue里面，go scheduler就是在这个queue的头拿goroutine，放到内核线程去执行
+同理，创建的时候放入local run queue的尾部
+并且每一个Kernel Thread 对应了一个local run queue
+Kernel Thread的数量 为了均衡性能以及资源的利用，Go Scheduler实现了Number(Core) == Number(Kernel Thread)这样的一个模式
+这样在每一个Core上都创建一个Kernel Thread，并且重用这个Thread，这样既能达到充分利用硬件的性能来并行执行
+要注意，这里是并行，不是并发
+重用也是协程轻量级的一个很大的因素，充分的减少了创建和销毁Kernel Thread
+负载均衡 因为每一个Kernel Thread对应了一个local run queue，那么就会有分配不均匀的情况。某些队列排队的goroutine特别多，某些特别少，导致有些Kernel Thread会闲置
+这个时候Go scheduler会从繁忙的队列中*偷*一些goroutine放在闲的队列
+长时间运行的goroutine 为了不让长时间的goroutine一直霸占着Thread，Go Scheduler会把长时间运行的goroutine在合适的时候停下来，并且将这个goroutine放入global run queue
+通过sysmon检测这个长时间运行的goroutine
+global run queue的优先级要比local run queue低，因此local run queue里面的goroutine就会被执行到
+block 在某一个thread被block的时候，这个thread不被算在limit上，也就是说，这个时候我们可以先创建一个Thread，去运行别的goroutine……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/" title="GET VS POST" >GET VS POST</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                趁着晚上还有点时间，积累一下GET和POST的区别
+为什么不说其它方法？还是因为这两种比较容易让人混淆吧
+有时候在一个项目(一般是写的不太好的项目)的时候，你会惊奇的发现为什么GET请求需要解析里面的请求主体
+这个时候其实很大的一个可能就是API设计的不好
+我们都懂 当别人问我们他俩的区别是什么的时候，我们可能很快想到的是
+ GET是拿数据，POST是发送数据  其实无论是GET还是POST，其实都是HTTP里面的一个方法(只是一个字段不同而已)，说到底，无论是GET还是POST都是要被封装到HTTP报文里面的，HTTP同理也是走TCP/IP的
+从底层角度来讲 去看一下HTTP的报文你会发现，GET和POST其实真的没区别，那么为什么会产生出这两种请求方法呢
+我猜测这其实就是大家根据现实的一些用法设计出来的公用的方案吧，相当于行内的一套规矩，大家可以遵守这一规矩来达到共识
+我们通常来说，GET的请求主体是空的，但其实我们也可以加东西进去。因此不要觉得GET和POST是在底层上的不同，它们只是大家规矩上认同的不同方式
+怎么用 因为这一规矩，各大浏览器厂商默认大家的使用方法都是按照规矩来的，因此浏览器能够根据这个约定来对不同的请求方法来做优化，比如说：
+ 一般来说，我们浏览器会缓存一些GET请求返回的东西，因为我们默认GET请求在一般情况下是不变的，因此结果在短暂的时间内也是不变的，这样能够有效的加快页面的加载。同理，一般是不缓存POST请求的，因为POST的数据是千变万化的。
+ 需要携带参数的GET一般是通过URL来传递，而POST一般是通过请求主体来传递
+  看到这里你会发现，用法是根据职责来区分的，因此我们在用的时候只需要考虑这个HTTP请求方法的职能是什么？是否符合这个场景需求？
+这样设计的API才能够被大家所接收
+触类旁通 从上面的方法可以看到，通过分析其底层原理就能够分析出一些规律，可以看出它们的本质
+通过这方法，我们来看看TCP UDP的区别
+看看它们的底层，都是走IP协议的，因此不同之处在哪表现？
+其实就在它们的报文段，了解过它们俩的同学肯定能够发现TCP和UDP的报文段有很大的不同
+其实所说的TCP拥塞处理，流量管理等等性质，都是通过报文段来获取信息并且处理这些信息(比如超时，ACK，还有一些标志位等)
+所以说，在分析两个相似的东西的时候，我们可以先看看它们的底层基础是否一样，如果是一样的，那么我们就只需要关注它们上层有什么不一样了。……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/get-vs-post/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/" title="Spanner Summary" >Spanner Summary</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                近些日子，有来来回回看一些关于Database的论文，也都是一些非常经典的论文。
+有关Spanner的论文可以直接在Google上获得，这里想根据自己所看所想做些笔记，记录一些思路
+并且这个blog只会将一些复杂的东西尽量简单化，重在理解，想要深入细节还需参考Paper
+先说总结 在Paper的总结中说到
+ One aspect of our design stands out: the linchpin(核心) of Spanner&rsquo;s feature set is TrueTime.
+ Spanner这个系统是和时钟强绑定在一起的。
+在我们日常的分布式系统里面，时钟是不可靠的，因为时钟有可能会发生回退，振荡等不稳定现象，并且在分布式下，可能会由于地域问题，取得的时间也可能有所偏差(取得的时间戳可能来自不同的源)。
+因此在一般的分布式系统下，我们不会去依赖时钟
+Spanner依赖这个时钟意味着Google需要完全保证时钟的稳定性(出错概率无限接近0)，这在后面会稍微提及一下
+介绍一下 这里只介绍Spanner较为突出的点
+ 全球性分布式
+ 可控的数据分布
+ 强一致性(一般系统可能是最终一致性)
+ 类SQL
+ 强大的Transaction
+  我们一般接触的分布式可能是全国性的，Spanner做Global-Distributed的原因可能是为了容忍国家战乱和自然灾害这些因素吧
+可控的数据分布指的是，Spanner能够控制数据具体存放在哪个地方，这样能够更好的实现Locality，减少延迟。并且它还能把经常在一起访问的数据放在同一个地方，提高性能
+为了解决BigTable的一致性问题(BigTable只提供最终一致性)，Spanner使用了2PC(Two-Phase-Commit)，来保证强一致性。由于2PC会有比较大的开销，不过Spanner还是坚持用2PC，把开销留给使用者来考虑(少用这样的事务就能减少开销)
+类SQL，也是为了解决大家对BigTable数据查询的需求，Spanner需要提供像SQL这样的结构化查询语句(和SQL有些不一样)
+对于单机的Transaction已经不足以满足现在的需求了，由于数据可能会分布在不同的机器上，因此Spanner能够提供跨多行的Transaction(有可能这个多行分布在不同的地方),相对BigTable的单行Transaction而言更为强大
+Spanner还有更多的细节以及特性，可以参照Paper去理解
+数据的结构 虽然Spanner在说BigTable只提供了KV的结构，自己则要有关系型的结构，其实不然，Paper中指出，Spanner还是利用了映射的关系来存储数据，主要是分为
+ Primary Key
+ Non-Primary Key
+  其中映射关系就是 Primary Key的Column指向Non-Primary Key Column
+文中解释这样的好处是
+ it lets applications control data locality through their choices of keys……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/spanner/spanner-summary/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/" title="Week Isolation" >Week Isolation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                之前在写Transaction的时候有简单介绍过一些Isolation
+对于事务来说，Isolation是一个很重要的性质，随着应用的高并发，数据库对冲突的处理显得尤为重要，这blog里面简单说一些Week Isolation
+Week Isolation之所以Week是相对Serializability而言
+因为Serializability能够将并发处理转换为串行处理
+Read Committed 它保证了两点
+ 只读committed data
+ 只覆盖committed data
+  也就是No dirty read, No dirty write
+先来介绍一下脏读(dirty read)和脏写(dirty write)
+在并发的情况下，有可能会有许多事务在并行的执行，如果一个Tx(事务)读到了另一个还没有committed(或者abort)的Tx就称之为Dirty Read。
+同理，覆盖了还未committed data就称为Dirty Write
+我们要防止这两种情况出现可以使用Read Committed这种Isolation
+它主要采取了下面的措施
+ 对于脏写，采用了Row-Lock，在要写这个Row的时候，先获取Lock再执行操作，操作完(committed或者abort)就释放，理解起来也比较简单
+ 对于脏读，为了提高性能，避免了Lock的方式，因为读取可能会涉及大量的Row(一个很大的Scan)，因此用了Version的概念。如果一个事务正在执行写操作，那么会有一个Old Value和一个New Value，其中Old Value是已经committed过了的，所以返回Old Value。等到写操作committed或者aborted，就只剩下一个committed的value
+  不足的地方 由于读的是可以和写并发进行的，因此在执行Compare and Set操作的时候，会发生问题
+因为Compare的时候是读，这个时候如果是符合条件的，那么就会执行写操作。如果有一个并行的写操作正在修改Compare的条件导致Compare不符合写入的条件，但是由于读的时候和写的时候不是一个时刻，因此会产生问题。
+书中举了个例子帮助理解
+ 医生A和B必须要有一个人值班，这个时候两个医生都不想值班，他们需要通过网上的系统进行申请，医生A在申请的时候，系统看到剩余人数是2，因此批准A不值班。同一个时刻，医生B执行操作的时候也看到剩余人数是2，因此也批准。这个时候两个医生都申请成功了，这就违反了值班的原则
+ 优点 很明显，这个Isolation的优点是性能好，能够并行执行Read和Write
+很多数据库默认的Isolation也是这个
+Snapshot Isolation 这也是一个比较热门，应用比较广泛的一个Isolation
+前面介绍的Read Committed给我们提供了很多很好的功能，但是在某些特定场景下还是会发生问题
+我们知道，上一个Isolation的读写是并发执行的，当我们想要备份一个大的数据库文件的时候，我们的读操作会执行很久，这个时候它如果还在继续接收写操作，可能我们保存的数据库文件就会有问题。通常来说我们希望存下来的备份文件是某一个时刻固有的
+同理，我们在分析某一个时刻之前的数据时，可能会query很多数据，但我们只想看到这个时刻之前的数据
+这个时候Snapshot Isolation可以解决这类问题
+每当一个Tx开始的时候，它会保存一份当前时刻数据库的快照，所有的读操作都会在这个快照里面，这个快照是肯定不会被修改的
+实现 和Read Committed类似，Write也是用了Lock来避免冲突……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/week-isolation/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/" title="Column Oriented Storage" >Column Oriented Storage</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                背景 现在大多数的Database都是Row Oriented，因为Row Oriented对OLTP系统的操作友好
+但是对于OLAP系统，常常是需要查询上百万条数据，因此Row Oriented的数据库会因为要Load大量数据导致大量的IO
+但其实很多的数据可能都是没有用到的，只是为了用一两个Column(Field)而把所有都导入到内存并不是一个好买卖
+不仅如此，把全部数据Load到内存上，还需要对其进行过滤，因此在计算资源上也会有一定的开销
+因此诞生了Column Oriented。
+不同 与Row Oriented不同的是，数据库会把列的数据在硬件上存的更相近，这样在读取的时候会明显块很多(Row Oriented是按Row来存到硬盘上)
+其实Column Oriented也很简单，把Column存在一个文件上，Scan的时候就不用都扫描了
+其它优势 在除了少读取无用数据之外，还有一些其它的优势值得我们认识
+压缩 在一般情况下，一个Column的数据类型都是一样的，而且有很多时候内容也是非常相近的，这个时候是压缩最容易得到有效利用的时候(理论上，越相近的数据压缩越好)
+有一种对比较好的压缩方法叫Bitmap，这里我不打算讲这个，有兴趣的可以查阅相关资料
+更好的利用CPU缓存 如果是按照Row来读取数据，CPU的数据缓存可能有大部分都是存储我们不用到的数据
+相反，当数据的有效率提升了，CPU的缓存利用率也会大大提升，因此可以加快处理速度
+排序 为了再进一步提高读取的性能，我们还可以针对Column做排序
+一般来说我们可以指定一两个索引进行排序，以至于指定哪个需要根据业务需求来决定
+比如业务经常会按照时间来分析一些数据，那么我会在date字段上做排序，这样我在取数据的时候就非常快速
+有可能我的业务需要按照不同的排序，这个时候也有一个参考的方法
+通过Replication，在每一个副本集上按照不同的排序方式进行存放，然后按照业务需求去取对应的副本集……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/column-oriented-storage/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/database/theory/2pc-and-2pl/" title="2PC and 2PL" >2PC and 2PL</a>
                                 </h1>
                             </header>
@@ -281,211 +499,6 @@ Let&rsquo;s Go 这里证明的是，通过Raft选择出来的Leader，一定拥�
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/raft/safety-argument/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/" title="TiDB Server源码分析 SQL Core Layer" >TiDB Server源码分析 SQL Core Layer</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月3日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                还是架构 还是先放一张架构图，当思路不清晰的时候，看一看架构图能够帮我们整理思路
-回想一下 上一篇blog是介绍了Protocol Layer，这一层整体思路还是比较简单，只是兼容MySQL协议会产生很多相应的函数方法
-应该还记得，在上一篇blog，我有提到Driver这个词，并且看到了它的接口只有一个函数OpenCtx(...)...，从结构图上来将，我们需要将SQL传入到Session Context里面，而OpenCtx就是帮我们从Protocol Layer打开到SQL Core Layer的通道，然后再通过这个通道将数据传入进去。打开后会返回QueryCtx接口，这个接口是我们执行SQL的唯一入口，也就是Protocol Layer到SQL Core Layer的唯一入口
-什么时候打开通道 通过编辑器可以发现，server/driver.go里的IDriver接口只在一个函数上有调用
-func (cc *clientConn) openSessionAndDoAuth(authData []byte) error { var tlsStatePtr *tls.ConnectionState // 如果是SSL连接，就取出这个连接的状态 if cc.tlsConn != nil { tlsState := cc.tlsConn.ConnectionState() tlsStatePtr = &amp;tlsState } var err error // 打开通道，这里将返回的QueryCtx给到clientConn，它以后就用这个Ctx和SQL Core Layer进行交互 cc.ctx, err = cc.server.driver.OpenCtx(uint64(cc.connectionID), cc.capability, cc.collation, cc.dbname, tlsStatePtr) if err != nil { return err } // 忽略验证过程 return nil }  这个函数也只有两个地方会调用到……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server-source-sql-core-layer/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/" title="TiDB Server源码分析 Protocol Layer" >TiDB Server源码分析 Protocol Layer</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月3日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                简单介绍 最近趁着国庆放假，花点时间来看看TiDB这个工程，关于TiDB我就不介绍了，这一个blog主要是关于如何入手了解TiDB Server层，先来看一下这个架构图
-因为TiDB源码还是比较多的，因此也是花了两天时间去看了下源码才准备写这个blog，算是个人的一个记录吧
-怎么入手 TiDB-Server的架构图还是非常容易懂的，并且这篇文章只用关心左边Protocol Layer
-我们可以简单的从tidb-server/main.go来入手，来简单了解一下基本组成
-为了方便看源码，我这里直接贴上来了，为了保持逻辑简单，我建议前几次看的时候把一些关系不大的模块忽略，我只做简单的介绍
-func main() { // 解析命令行 flag.Parse() // 如果带有version，则只是输出version if *version { fmt.Println(printer.GetTiDBInfo()) os.Exit(0) } // (可忽略)这里是注册store，会分别注册&quot;tikv&quot;和&quot;mock-tikv&quot; registerStores() // (可忽略)这个是和prometheus相关的 registerMetrics() // (可忽略) 配置，我们暂时可以考虑默认 configWarning := loadConfig() overrideConfig() if err := cfg.Valid(); err != nil { fmt.Fprintln(os.Stderr, &quot;invalid config&quot;, err) os.Exit(1) } if *configCheck { fmt.Println(&quot;config check successful&quot;) os.Exit(0) } // (可忽略) 都只是一些配置 setGlobalVars() setCPUAffinity() setupLog() // If configStrict had been specified, and there had been an error, the server would already // have exited by now.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/tidb/tidb-server/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/" title="TCP vs UDP" >TCP vs UDP</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月29日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80">网络基础</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                TCP和UDP的区别这个问题已经遇到过很多次了，有简简单单的回答，也有绞尽脑汁去想，今天来详细总结一下区别吧
-面向连接 TCP是面向连接的，也就是说TCP在连接上会有许多事情做，包括拥塞控制，流量控制，超时，重传，确认，序号等等。事情越多，负担就越多，并且对应的报文也比UDP报文要大
-关于拥塞控制和流量控制，可以看我别的blog
-UDP是没有连接的，我们只需要将数据传递给UDP，因此理论上UDP可支持的并发数要比TCP要高，UDP就会打包好数据传到网络层(IP)。反过来想，UDP这种“无法无天”的传输可能会造成很多不可靠问题。
- UDP没有序号，因此会产生包的乱序问题
- UDP没有流量控制，发太快可能会导致溢出，溢出的包可能因此就不见了
-  连接状态 由于TCP是面向连接的，所以会有连接状态
-发起连接 在还未连接的时候，客户端的状态为CLOSED，服务器端为LISTEN
- 当客户端给服务器端发起一个SYN包的时候，客户端的状态变为SYS_SEND
- 服务器端接收到，发一个SYN+ACK包，服务器端的状态变为SYS_RECV
- 客户端接收到，并且会发一个ACK包，客户端状态变为ESTABLISH
- 服务器端收到后也会变为ESTABLISH
-  结束连接 初始状态，客户端和服务器端都为ESTABLISH
- 假设客户端发了一个FIN包过去，这个时候客户端状态为FIN_WAIT1
- 服务器收到了这个包，并且发送一个ACK包，服务端状态为CLOSE_WAIT
- 服务器主动发一个FIN包，状态改为LAST_ACK
- 客户端收到服务器的包，并且发送一个ACK包，将状态改为TIME_WAIT
- 服务器收到ACK后进入CLOSED状态
- 等待一段时间后没收到包，客户端也进入CLOSED
-  这里为什么要等待一段时间呢？ 主要是要看最后面客户端给服务端的ACK是否到了，如果中间网络出了问题，服务器端没有收到这个ACK，那么它将会重发FIN，这个时候客户端还能够重新处理这个FIN……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/computer-network/tcp-vs-upd/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/transaction/" title="Transaction" >Transaction</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                事务这个词估计做软件开发的都不会陌生，我们可以简单的理解为：事务是一件事，要么成功，要么失败，而失败是全部失败，并不是局部失败
-事务这么流行的原因就是，它帮助软件开发者解决了很多难办的事情：
- 数据库可能会在任意时间因为软件或者硬件问题直接挂掉(可能这个时候正在执行一些写操作)
- 应用也可能会在任意时间宕机
- 网络通信是不可靠的
- 可能在高并发下，数据库会发生冲突
-  等等，这些事情，如果每一个都要想相应的解决方法，是需要大量的时间以及研究大量的算法，并且需要大量的测试集去验证这些算法实现是有用的
-事务是为了将这些事情变得简单点，当出现任何不希望出现的状况，我可以选择抛弃这个操作，然后告诉用户，这个操作失败了。最起码，它在操作失败这件事情上，它是正确的
-一般来说，事务会集合多个操作(Insert, Update, Delete)，变成一个操作，提交到数据库里，数据库会帮这些打包的操作看作是一个整体，因此操作到一半的时候发生错误，就会发生回滚，把之前的操作都抹去
-那么是否用事务就能解决一切复杂的事情呢？
-事务不是完美的，就像一直提到的，在数据库设计这一块，都是有的有舍，并没有完美的东西，因此我们也要很好的了解事务的优缺点。
-ACID 相信大家对这个词也是不陌生的，但是其实笔者一开始将里面的各个意思理解错了，现在从先来理解一边
-Atomicity 这里的中文虽然叫原子性，但是它和我们平常理解的原子性不一样，它这里并不是描述一个并发的过程
-这里是指，一系列的操作被打包成一个事务，如果这个事务具有Atomicity，那么它要么被commit，要么被abort，这也保证了这个事务不会修改一部分数据后失败，能够让client放心的去做retry了
-所以可以看出，这个Atomicity并不是在描述原子性，而是在描述操作的abortability，是否拥有abort操作
-Consistency Consistency在这里是指一个好的状态，这个好的状态是指你的数据应该不违反规则。
-但是在数据库层面，是不知道数据是否有效，所以这就需要开发者在应用的代码上写好事务的Consistency
-Isolation 这个才是真正和并发相关的特性，隔离机制，后面也会详细讲讲各种隔离机制，以及它们的优缺点
-我们在这里，可以简单的认为，我们可以利用隔离机制，将并发的事务一个个进行执行，这样就能够防止RACE发生，这种隔离机制叫serializable isolation但是，一个个执行是多么的低效，完完全全舍弃了并发的优势，所以下面我们会介绍许多没有如此强保证的隔离机制
-Durability 持久化是数据库最根本的目的，一个拥有Durability的事务意味着数据能够被写入到硬盘，这里也运用到了之前所说的log或者一些其它方式来记录操作，这样可以在数据库重启后能够自己恢复
-Weak Isolation Levels 因为性能问题，很多软件并不想用像serialzable isolation这种最高级别隔离的机制，因为这样的数据库很可能会在整个系统中称为瓶颈。
-Read Commited 最基础的一个隔离机制，它能够给我们保证：
- 所有读取的数据都是经过committed的
- 写入数据库的时候，你只能够重写以及committed的数据
-  但是多个事务在操作多个对象的时候，有可能会因为执行顺序不一样导致，事务之间读取到对方committed后的值
-如何实现这个隔离机制呢
-一般来说，会有一个row-level lock，每一个写操作都会请求对应行的lock，一个lock也只能被一个事务获取并且一直到它committed或者aborted才释放
-那读取数据呢？简单点的我们可以也持有lock，但是我们知道，持有lock的代价是很大的，万一读操作很久，或者写操作很久，整个系统的性能就会受到影响，因此我们需要更好的方法去让读尽可能的不用获取lock
-一个方法就是，数据库会帮忙记住lock之前的值，如果读取的时候发现是locked了，那么就那之前的值
-Snapshot Isolation 其功能和其名字差不多，Snapshot Isolation的做法就是这个事务读取的数据是从一个快照里面读取的，当然，这个快照是不会被改变的，所以所有的事务都只能看见某一个时间点之前的老数据。
-当我们在备份的时候， 我们可能不想在备份的时候，数据还在被修改，状态还是不稳定。所以这个隔离让我们不用担心这些问题。这个隔离机制在很多时候帮助我们很多，我们不用担心它有各种奇怪的问题，因为它已经是固定的了
-其实Snapshot的实现机制和Read Committed差不多，也是通过lock来控制写入操作，然后读是不用锁的
- readers never block writers, and writers never block readers.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/transaction/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/database/theory/partition/" title="Partition" >Partition</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年9月28日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Partition And Replication 之前在学习Replication的时候，我们可以简单理解为副本集，也就是数据的复制
-但是如果数据量很大，然后还复制几分，那不就上天了。Partition提供一种叫分片的方法，能够有效的将数据分隔存储在不同的节点
-顺便说一下，默认的partition每个节点上的数据就只有该节点有，其它节点是没有的，也就是说，数据很可能会因为某一个结点不可用而导致该部分数据不可读取
-这个时候我们可以选择将Replication和Partition结合起来用，你可能会问这样的一个问题：那数据不是还是复制了好几份了吗?
-在Replication里，数据可以认为是相等的，假设我有5个节点，每个节点5TB的数据，总共25TB
-在Partition和Replication结合起来用，会有多少呢？我们来算一下
-首先，我们有5TB的数据，分片成5份，每一份1TB，每一份再通过Replication来复制到另外两个节点，所以每一份数据实际上有3份，也就是15TB。
-这里的巧妙之处在于，你并不用每台机器都要有，备份只需要根据你集群的大小来选择合适的备份数量即可
-How to partitioning the data 我们分片要有依据，如果随便存储，那么到时候不知道往哪查找了
-我们可以像字典一样，用某一个key的区间作为一个partition，用区间作为区分有一些优点：
- 有序，这样在查找的时候，可以按照区间大小一次性取出大量数据(还记得LSM-Tree)
- 每个partition的区间大小可以自己指定
-  但是也有一些缺点：
- 分片有可能严重倾斜，有一些节点已经Overload，而别的节点却很闲  Partitioning by Hash of Key 为了解决Hot Spot问题，我们可以采用随机性较强的哈希函数对每一个key进行一次Hash，再进行分片，这样在大概率上是平均分配给每个节点的
-虽然解决了一些问题，但是上面的有序性就被破坏了
-我们知道，数据被分散了情况下，读取就会变得越来越麻烦，可能一次查询，就要用到许多的partition，所以也是有很多缺点
-Partitioning and Secondary Indexes Secondary Indexes不能唯一标识一个实例，它可以是一个颜色，一个城市等等，许多人可能都生活在一个城市，所以一个城市并不能标识哪个人
-这里主要有两种方法将数据库分片，并且是带上Secondary Indexes的
- document-based partitioning
- term-based partitioning
-  这两种不同的Secondary Indexes主要的区别在于，document-based只的对它当前节点的数据进行索引
-而term-based是对整个集群的索引
-我们来看一下它们在读写方面的优劣情况
-在写的时候，document-based理论上会有更好的性能
-在对一个数据进行更新的时候，document-based只需要修改被更新的partition里的索引，而term-based则可能需要修改多个partition里面的索引
-在读的时候，term-based理论上会有更好的性能
-因为document-based的索引是分开在各个partition的，所以查询的时候有可能要遍历所有的partition，而term-based因为某些索引集中在一个partition，所以很快能够找到索引值
-Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要做这件事情
-有一个方法可能大家都听过&ndash;mod
-这个方法会导致节点变动时，里面的数据会大量变动，并不是一个好的选择
-下面介绍一种方法fixed number of partitions……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/theory/partition/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -626,6 +639,10 @@ Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要
         <a href="https://wushaoqiang.github.io/page/32/">32</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/33/">33</a>
+    </li>
+    
 
     
     <li class="next">
@@ -654,6 +671,26 @@ Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -666,31 +703,11 @@ Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -731,7 +748,7 @@ Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -743,7 +760,7 @@ Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -838,6 +855,8 @@ Rebalancing Partitions 我们无论是新增节点还是删除节点，都需要
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

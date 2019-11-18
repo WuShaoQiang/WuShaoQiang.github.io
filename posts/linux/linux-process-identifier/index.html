@@ -232,7 +232,7 @@ enum pid_type
 <p>这里有一个问题还不是很清晰的被解决。hlist_node的作用是什么，如何发挥作用</p>
 
 <p><strong>解:</strong>
-按照书本上的说法，这里存储的是task struct，这也其实就说得过去了</p>
+按照书本上的说法，这里的hlist_node是Linux内核实现的一套双向链表，它和我们平时接触的链表可能有点不同，平时的链表是把数据存在链表里。这里是在数据里存储链表，然后通过偏移量来拿到对应的字段，所以这里我们可以简单的认为这里的链表的作用是将多个task_struct相连起来</p>
 
 <h4 id="task-struct下的pid存储在哪">task struct下的PID存储在哪</h4>
 
@@ -299,7 +299,7 @@ enum pid_type
         
         <li><a href="/posts/linux/linux-namespace/">Linux Namespace</a></li>
         
-        <li><a href="/posts/linux/linux-process-types/">Linux Process Types</a></li>
+        <li><a href="/posts/linux/linux-process-types/">Linux Process Creation</a></li>
         
         <li><a href="/posts/linux/linux-process-life-cycle/">Linux Process Life Cycle</a></li>
         
@@ -357,6 +357,26 @@ enum pid_type
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -369,31 +389,11 @@ enum pid_type
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -434,7 +434,7 @@ enum pid_type
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -446,7 +446,7 @@ enum pid_type
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -541,6 +541,8 @@ enum pid_type
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.40.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Golang Process --How to create a process in Go | Gavin&#39;s Blog</title>
+    <meta property="og:title" content="Golang Process --How to create a process in Go - Gavin&#39;s Blog">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-11-05T18:51:17&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-11-05T18:51:17&#43;08:00">
+        
+    <meta name="Keywords" content="Golang,Gavin,Blog">
+    <meta name="description" content="Golang Process --How to create a process in Go">
+        
+    <meta name="author" content="Gavin">
+    <meta property="og:url" content="https://wushaoqiang.github.io/posts/golang/golang-process/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://wushaoqiang.github.io">
+                        Gavin&#39;s Blog
+                    </a>
+                
+                <p class="description">Gopher，后端开发，网络基础，WEB协议、架构、存储、缓冲、安全，学习笔记</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://wushaoqiang.github.io">首页</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://wushaoqiang.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Golang Process --How to create a process in Go</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年11月5日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        <div class="post-content">
+                            
+
+<p>最近花了点时间在学习<code>Linux Process</code>这一块，发现对日常的工作还是很有帮助的，并且最近发现阅读Go相应部分的源码也比较容易理解，所以整合出这一篇blog.</p>
+
+<p>这篇blog和语言相关，如果只是想了解<code>Linux Process</code>，可以去看我别的blog，这里主要是<code>源码解析</code></p>
+
+<h3 id="概述">概述</h3>
+
+<p>由于Golang对启动进程这一功能跨越了三个<code>package</code>:<code>exec</code>,<code>os</code>,<code>syscall</code></p>
+
+<p>而且它们是一个向下引用的关系，因此我们先从<code>exec</code>这一层开始说起</p>
+
+<h3 id="exec">exec</h3>
+
+<p>我们启动进程使用的最多的方式应该就是<code>exec.Cmd</code>的<code>Run</code>方法，这里其中包含了<code>Start</code>和<code>Wait</code></p>
+
+<h4 id="容易忽略的点">容易忽略的点</h4>
+
+<p>很多人可能会认为构建一个<code>*exec.Cmd</code>只是单纯的利用<code>Command()</code>构建(后面我省略exec这个包名，直接使用函数名)</p>
+
+<p>我们来看看源码</p>
+
+<pre><code class="language-go">func Command(name string, arg ...string) *Cmd {
+	cmd := &amp;Cmd{
+		Path: name,
+		Args: append([]string{name}, arg...),
+	}
+	if filepath.Base(name) == name {
+		if lp, err := LookPath(name); err != nil {
+			cmd.lookPathErr = err
+		} else {
+			cmd.Path = lp
+		}
+	}
+	return cmd
+}
+</code></pre>
+
+<p>可以看到<code>if filepath.Base(name) == name</code>这句话的意思是，如果传入的<code>name</code>不是一个全路径，那么这里是通过<code>PATH</code>来找的</p>
+
+<p>如果找不到，其实这里的<code>cmd.lookPathErr</code>就被赋值了</p>
+
+<p><strong>对应Linux里面的exec实现</strong></p>
+
+<blockquote>
+<p>如果filename里面不包含/，那么就按PATH环境所指定的各个目录中搜寻可执行文件</p>
+</blockquote>
+
+<p>如果这个可执行文件不是二进制文件，Linux还会试着调用<code>/bin/sh</code>，让<code>filename</code>作为参数</p>
+
+<p>我们可以看到，Go在这个实现上其实是和Linux的思路相似的</p>
+
+<h4 id="start">Start</h4>
+
+<p>构造一个Cmd其实和我们在shell终端的命令行类似，而我们在按下回车键的时候，其实就是执行了<code>Run</code>，而<code>Run</code>的第一步就是<code>Start</code></p>
+
+<p>为什么要分成两部分呢？待会就知道了</p>
+
+<pre><code class="language-go">func (c *Cmd) Start() error {
+    // 上面构建Cmd的时候，如果找不到可执行文件，就会在这里退出
+	if c.lookPathErr != nil {
+		c.closeDescriptors(c.closeAfterStart)
+		c.closeDescriptors(c.closeAfterWait)
+		return c.lookPathErr
+	}
+	if runtime.GOOS == &quot;windows&quot; {
+		// 不考虑windows
+	}
+    // 确保这个Cmd还没有Start过，所以Cmd是不可以复用的
+    // 在Go里一个Cmd只有一个进程
+	if c.Process != nil {
+		return errors.New(&quot;exec: already started&quot;)
+	}
+	if c.ctx != nil {
+		// ctx只是一种用法 ContextCommand 
+	}
+
+    // 构造子进程的文件描述符
+	c.childFiles = make([]*os.File, 0, 3+len(c.ExtraFiles))
+	type F func(*Cmd) (*os.File, error)
+    // 按照默认的文件描述符
+    //  1-&gt;stdin 2-&gt;stdout 3-&gt;stderr
+	for _, setupFd := range []F{(*Cmd).stdin, (*Cmd).stdout, (*Cmd).stderr} {
+		fd, err := setupFd(c)
+		if err != nil {
+			c.closeDescriptors(c.closeAfterStart)
+			c.closeDescriptors(c.closeAfterWait)
+			return err
+		}
+		c.childFiles = append(c.childFiles, fd)
+	}
+	c.childFiles = append(c.childFiles, c.ExtraFiles...)
+
+    // 真正的启动进程会进入到os包
+	var err error
+	c.Process, err = os.StartProcess(c.Path, c.argv(), &amp;os.ProcAttr{
+		Dir:   c.Dir,
+		Files: c.childFiles,
+        // 这个addCriticalEnv只对windows有用，可忽略
+		Env:   addCriticalEnv(dedupEnv(c.envv())),
+		Sys:   c.SysProcAttr,
+	})
+	if err != nil {
+		c.closeDescriptors(c.closeAfterStart)
+		c.closeDescriptors(c.closeAfterWait)
+		return err
+	}
+
+	c.closeDescriptors(c.closeAfterStart)
+
+	// Don't allocate the channel unless there are goroutines to fire.
+    // 一般来说goroutine长度为0，只有需要用到管道的时候才会启动
+    // 目的就是将管道连接起来，暂时可以忽略
+	if len(c.goroutine) &gt; 0 {
+		...
+	}
+
+    // 暂时可以忽略
+	if c.ctx != nil {
+		...
+	}
+
+	return nil
+}
+</code></pre>
+
+<p>其实到这里，你会发现其实<code>exec.Start</code>没做什么和<code>Linux Process</code>相关的东西，它主要的工作分为三部分</p>
+
+<ol>
+<li><p>检查(包括错误，是否启动过，context)</p></li>
+
+<li><p>匹配文件描述符(为下面启动使用)</p></li>
+
+<li><p>将实际的工作交给os package</p></li>
+
+<li><p>收尾(关闭资源)</p></li>
+</ol>
+
+<h4 id="wait">Wait</h4>
+
+<p><code>Wait</code>其实做的工作和<code>Start</code>在层次上是差不多的</p>
+
+<ol>
+<li><p>检查(包括进程是否真的启动了，是否已经调用过<code>Wait</code>)</p></li>
+
+<li><p>将实质的<code>Wait</code>工作交给os package</p></li>
+
+<li><p>因为<code>Wait</code>是阻塞的，因此在得到返回后做相应的收尾工作(关闭文件描述符，返回错误信息)</p></li>
+</ol>
+
+<p><code>Wait</code>的逻辑要比<code>Start</code>简单，因此就不贴源码出来了</p>
+
+<h3 id="os">os</h3>
+
+<p>在上面，我们已经知道exec实质的工人是os，我们来看看os到底做了什么</p>
+
+<h4 id="startprocess">StartProcess</h4>
+
+<p>这个函数在<code>exec.Start</code>上调用，是主要的进程启动逻辑(对exec来说)，源码：</p>
+
+<pre><code class="language-go">func startProcess(name string, argv []string, attr *ProcAttr) (p *Process, err error) {
+	// If there is no SysProcAttr (ie. no Chroot or changed
+	// UID/GID), double-check existence of the directory we want
+	// to chdir into. We can make the error clearer this way.
+	if attr != nil &amp;&amp; attr.Sys == nil &amp;&amp; attr.Dir != &quot;&quot; {
+		if _, err := Stat(attr.Dir); err != nil {
+			pe := err.(*PathError)
+			pe.Op = &quot;chdir&quot;
+			return nil, pe
+		}
+	}
+
+    // 构建syscall.ProcAttr
+	sysattr := &amp;syscall.ProcAttr{
+		Dir: attr.Dir,
+		Env: attr.Env,
+		Sys: attr.Sys,
+	}
+    // environment
+	if sysattr.Env == nil {
+		sysattr.Env, err = environForSysProcAttr(sysattr.Sys)
+		if err != nil {
+			return nil, err
+		}
+	}
+    // 文件描述符
+	sysattr.Files = make([]uintptr, 0, len(attr.Files))
+	for _, f := range attr.Files {
+		sysattr.Files = append(sysattr.Files, f.Fd())
+	}
+
+    // 主要其进程的操作
+	pid, h, e := syscall.StartProcess(name, argv, sysattr)
+	if e != nil {
+		return nil, &amp;PathError{&quot;fork/exec&quot;, name, e}
+	}
+	return newProcess(pid, h), nil
+}
+</code></pre>
+
+<p>没错，os包还不是和Linux Process相关的，这里只是为了不同的操作系统做的一层封装，到这里我们可以感知到，Golang在这里的设计大概是这样的</p>
+
+<ul>
+<li><p>exec：面向用户</p></li>
+
+<li><p>os：面向操作系统</p></li>
+
+<li><p>syscall：面向内核</p></li>
+</ul>
+
+<h4 id="wait-1">wait</h4>
+
+<pre><code class="language-go">func (p *Process) wait() (ps *ProcessState, err error) {
+    // 检查
+	if p.Pid == -1 {
+		return nil, syscall.EINVAL
+	}
+
+	// If we can block until Wait4 will succeed immediately, do so.
+	ready, err := p.blockUntilWaitable()
+	if err != nil {
+		return nil, err
+	}
+	if ready {
+		// Mark the process done now, before the call to Wait4,
+		// so that Process.signal will not send a signal.
+		p.setDone()
+		// Acquire a write lock on sigMu to wait for any
+		// active call to the signal method to complete.
+		p.sigMu.Lock()
+		p.sigMu.Unlock()
+	}
+
+	var status syscall.WaitStatus
+	var rusage syscall.Rusage
+	pid1, e := syscall.Wait4(p.Pid, &amp;status, 0, &amp;rusage)
+	if e != nil {
+		return nil, NewSyscallError(&quot;wait&quot;, e)
+	}
+	if pid1 != 0 {
+		p.setDone()
+	}
+	ps = &amp;ProcessState{
+		pid:    pid1,
+		status: status,
+		rusage: &amp;rusage,
+	}
+	return ps, nil
+}
+</code></pre>
+
+<p>和<code>StartProcess</code>不同，这里os包含了Golang到底是如何Wait进程结束的主要逻辑：</p>
+
+<ol>
+<li><p>检查进程是否有效</p></li>
+
+<li><p>阻塞到子进程退出，这个时候子进程是Zombie状态</p></li>
+
+<li><p>中间逻辑</p></li>
+
+<li><p>最终调用Wait4系统调用将子进程的终止状态回收</p></li>
+
+<li><p>返回</p></li>
+</ol>
+
+<p>我们先看第二步，如何知道什么时候才能知道子进程可以被回收</p>
+
+<h5 id="blockuntilwaitable">blockUntilWaitable</h5>
+
+<pre><code class="language-go">// blockUntilWaitable attempts to block until a call to p.Wait will
+// succeed immediately, and reports whether it has done so.
+// It does not actually call p.Wait.
+func (p *Process) blockUntilWaitable() (bool, error) {
+	// The waitid system call expects a pointer to a siginfo_t,
+	// which is 128 bytes on all GNU/Linux systems.
+	// On Darwin, it requires greater than or equal to 64 bytes
+	// for darwin/{386,arm} and 104 bytes for darwin/amd64.
+	// We don't care about the values it returns.
+	var siginfo [16]uint64
+	psig := &amp;siginfo[0]
+	_, _, e := syscall.Syscall6(syscall.SYS_WAITID, _P_PID, uintptr(p.Pid), uintptr(unsafe.Pointer(psig)), syscall.WEXITED|syscall.WNOWAIT, 0, 0)
+	runtime.KeepAlive(p)
+	if e != 0 {
+		// waitid has been available since Linux 2.6.9, but
+		// reportedly is not available in Ubuntu on Windows.
+		// See issue 16610.
+		if e == syscall.ENOSYS {
+			return false, nil
+		}
+		return false, NewSyscallError(&quot;waitid&quot;, e)
+	}
+	return true, nil
+}
+</code></pre>
+
+<p>其实主要发挥阻塞作用的是这句话</p>
+
+<pre><code class="language-go">_, _, e := syscall.Syscall6(syscall.SYS_WAITID, _P_PID, uintptr(p.Pid), uintptr(unsafe.Pointer(psig)), syscall.WEXITED|syscall.WNOWAIT, 0, 0)
+</code></pre>
+
+<p>这里是一个<code>waitid()</code>的系统调用，如果不明白系统调用的参数是如何传递的，可以参考我之前写的关于系统调用的blog，这里简单说一下参数</p>
+
+<ol>
+<li><p>系统调用的调用号是<code>247</code></p></li>
+
+<li><p>所选用的id_type是PID，也就是根据PID来匹配，它还可以根据PGID，或者不根据任何ID来匹配</p></li>
+
+<li><p>PID</p></li>
+
+<li><p>waitid会写入一些信息，但这里我们不关心</p></li>
+
+<li><p>标志位，这里是系统调用的关键</p></li>
+</ol>
+
+<p>关于标志位，有这几个</p>
+
+<pre><code>       WEXITED     Wait for children that have terminated.
+
+       WSTOPPED    Wait for children that have been stopped by delivery of a signal.
+
+       WCONTINUED  Wait  for (previously stopped) children that have been resumed by delivery of SIG‐
+                   CONT.
+
+       The following flags may additionally be ORed in options:
+
+       WNOHANG     As for waitpid().
+
+       WNOWAIT     Leave the child in a waitable state; a later  wait  call  can  be  used  to  again
+                   retrieve the child status information.
+
+</code></pre>
+
+<p>在Go实现的标准里面，只用了<code>WEXITED</code>和<code>WNOWAIT</code>。</p>
+
+<p>所以子进程退出后，这个阻塞才会消失，并且这个wait系统调用并没有回收子进程的状态信息，而是放到后面再去回收</p>
+
+<p>所以这样解释了为什么我们将一个进程STOPPED了，这个阻塞并没有消失</p>
+
+<p>关于以上更详细的可以参考man page，里面会更详尽<code>man waitid</code></p>
+
+<h5 id="中间步骤">中间步骤</h5>
+
+<pre><code class="language-go">if ready {
+		// Mark the process done now, before the call to Wait4,
+		// so that Process.signal will not send a signal.
+		p.setDone()
+		// Acquire a write lock on sigMu to wait for any
+		// active call to the signal method to complete.
+		p.sigMu.Lock()
+		p.sigMu.Unlock()
+	}
+</code></pre>
+
+<p>这里按照注释可以知道，这里是做了两件事</p>
+
+<ol>
+<li><p>标志进程done，防止对进程发送信号</p></li>
+
+<li><p>等待信号处理完，这里利用了抢锁的机制，只要能够拿到锁，就表明处理完了(处理的时候带锁)</p></li>
+</ol>
+
+<p>这里只是简单过一下，重点是下面的</p>
+
+<h5 id="wait4">Wait4</h5>
+
+<p>关于<code>syscall.Wait4</code>和上面所说的<code>waitid</code>的理解方法是差不多的</p>
+
+<p>可以看一下源码</p>
+
+<pre><code class="language-go">func Wait4(pid int, wstatus *WaitStatus, options int, rusage *Rusage) (wpid int, err error) {
+	var status _C_int
+	wpid, err = wait4(pid, &amp;status, options, rusage)
+	if wstatus != nil {
+		*wstatus = WaitStatus(status)
+	}
+	return
+}
+</code></pre>
+
+<p>其中<code>wait4</code>就是调用了系统调用</p>
+
+<pre><code class="language-go">Syscall6(SYS_WAIT4, uintptr(pid), uintptr(unsafe.Pointer(wstatus)), uintptr(options), uintptr(unsafe.Pointer(rusage)), 0, 0)
+</code></pre>
+
+<p>其中<code>wstatus</code>就是保存退出状态的结构体，它里面定义了一下方法可以让我们比较方便的检测出这个进程是EXITED或者SIGNALED</p>
+
+<p>这里为什么没有STOPPED？CONTINUED？</p>
+
+<p>其实方法是有，但是由于Go的实现，在标准的exec.Cmd里面是捕获不了这两种状态的，如果需要捕获这两种状态，就要自己去实现了。</p>
+
+<p><code>rusage</code>是指这个子进程所使用的资源，这里我们不展开说这个</p>
+
+<h4 id="我们还剩下start没说完">我们还剩下Start没说完</h4>
+
+<p>看到这里，Wait的部分已经说完了，也看到Go的实现实质上是调用了<code>wait4</code>的系统调用，以及其能捕捉到的状态是因为<code>waitid</code>的系统调用的flag</p>
+
+<p>那么剩下的就是还有Start的底层，我们直接跟踪函数调用来到<code>forkExec</code></p>
+
+<pre><code class="language-go">func forkExec(argv0 string, argv []string, attr *ProcAttr) (pid int, err error) {
+	var p [2]int
+	var n int
+	var err1 Errno
+	var wstatus WaitStatus
+
+	if attr == nil {
+		attr = &amp;zeroProcAttr
+	}
+	sys := attr.Sys
+	if sys == nil {
+		sys = &amp;zeroSysProcAttr
+	}
+
+	p[0] = -1
+	p[1] = -1
+
+	// Convert args to C form.
+	argv0p, err := BytePtrFromString(argv0)
+	if err != nil {
+		return 0, err
+	}
+	argvp, err := SlicePtrFromStrings(argv)
+	if err != nil {
+		return 0, err
+	}
+	envvp, err := SlicePtrFromStrings(attr.Env)
+	if err != nil {
+		return 0, err
+	}
+
+	if (runtime.GOOS == &quot;freebsd&quot; || runtime.GOOS == &quot;dragonfly&quot;) &amp;&amp; len(argv[0]) &gt; len(argv0) {
+		argvp[0] = argv0p
+	}
+
+	var chroot *byte
+	if sys.Chroot != &quot;&quot; {
+		chroot, err = BytePtrFromString(sys.Chroot)
+		if err != nil {
+			return 0, err
+		}
+	}
+	var dir *byte
+	if attr.Dir != &quot;&quot; {
+		dir, err = BytePtrFromString(attr.Dir)
+		if err != nil {
+			return 0, err
+		}
+	}
+
+	// Acquire the fork lock so that no other threads
+	// create new fds that are not yet close-on-exec
+	// before we fork.
+	ForkLock.Lock()
+
+	// Allocate child status pipe close on exec.
+	if err = forkExecPipe(p[:]); err != nil {
+		goto error
+	}
+
+	// Kick off child.
+	pid, err1 = forkAndExecInChild(argv0p, argvp, envvp, chroot, dir, attr, sys, p[1])
+	if err1 != 0 {
+		err = Errno(err1)
+		goto error
+	}
+	ForkLock.Unlock()
+
+	// Read child error status from pipe.
+	Close(p[1])
+	n, err = readlen(p[0], (*byte)(unsafe.Pointer(&amp;err1)), int(unsafe.Sizeof(err1)))
+	Close(p[0])
+	if err != nil || n != 0 {
+		if n == int(unsafe.Sizeof(err1)) {
+			err = Errno(err1)
+		}
+		if err == nil {
+			err = EPIPE
+		}
+
+		// Child failed; wait for it to exit, to make sure
+		// the zombies don't accumulate.
+		_, err1 := Wait4(pid, &amp;wstatus, 0, nil)
+		for err1 == EINTR {
+			_, err1 = Wait4(pid, &amp;wstatus, 0, nil)
+		}
+		return 0, err
+	}
+
+	// Read got EOF, so pipe closed on exec, so exec succeeded.
+	return pid, nil
+
+error:
+	if p[0] &gt;= 0 {
+		Close(p[0])
+		Close(p[1])
+	}
+	ForkLock.Unlock()
+	return 0, err
+}
+</code></pre>
+
+<p>咋一看这么长，先不要害怕，其实这个函数分为这几部分</p>
+
+<ol>
+<li><p>为后面真正启动进程准备参数</p></li>
+
+<li><p>在锁中真正的去启动进程</p></li>
+
+<li><p>返回</p></li>
+</ol>
+
+<p>可以看出我们的主要逻辑还是在第2步，我们直接看到这里</p>
+
+<pre><code class="language-go">// Acquire the fork lock so that no other threads
+// create new fds that are not yet close-on-exec
+// before we fork.
+ForkLock.Lock()
+
+// Allocate child status pipe close on exec.
+if err = forkExecPipe(p[:]); err != nil {
+    goto error
+}
+
+// Kick off child.
+pid, err1 = forkAndExecInChild(argv0p, argvp, envvp, chroot, dir, attr, sys, p[1])
+if err1 != 0 {
+    err = Errno(err1)
+    goto error
+}
+ForkLock.Unlock()
+</code></pre>
+
+<p>首先是有关pipe，这里涉及到3个系统调用</p>
+
+<ul>
+<li><p>pipe</p></li>
+
+<li><p>pipe2</p></li>
+
+<li><p>fcntl</p></li>
+</ul>
+
+<h5 id="forkexecpipe">forkExecPipe</h5>
+
+<p>这两个非常类似，pipe2要比pipe多一个flag参数，不过它们的目的类似</p>
+
+<blockquote>
+<p>pipe()  creates a pipe, a unidirectional data channel that can be used for interprocess communication.  The array pipefd is used to return two file descriptors referring to  the  ends  of the pipe.  pipefd[0] refers to the read end of the pipe.  pipefd[1] refers to the write end of the pipe.  Data written to the write end of the pipe is buffered by the  kernel  until  it  is read from the read end of the pipe.</p>
+</blockquote>
+
+<p>意思就是，会给回一个管道，其中数组第一个元素是<code>读端</code>，第二个元素是<code>写端</code></p>
+
+<pre><code class="language-go">func forkExecPipe(p []int) (err error) {
+	err = Pipe2(p, O_CLOEXEC)
+	// pipe2 was added in 2.6.27 and our minimum requirement is 2.6.23, so it
+	// might not be implemented.
+	if err == ENOSYS {
+		if err = Pipe(p); err != nil {
+			return
+		}
+		if _, err = fcntl(p[0], F_SETFD, FD_CLOEXEC); err != nil {
+			return
+		}
+		_, err = fcntl(p[1], F_SETFD, FD_CLOEXEC)
+	}
+	return
+}
+</code></pre>
+
+<p><code>forkExecPipe</code>实现目的如下：</p>
+
+<ol>
+<li><p>利用pipe2或者pipe来建立管道</p></li>
+
+<li><p>并且置位两个管道的<code>close-on-exec</code>标志位，这个标志位是指，在执行exec的时候，将管道的描述符关闭</p></li>
+</ol>
+
+<p>可以看到先是调用了Pipe2，如果系统是支持Pipe2，那么就不会产生错误，并且标志位是<code>O_CLOEXEC</code>，这是表明<code>close-on-exec</code></p>
+
+<p>如果是要用Pipe，那么就要用<code>fcntl</code>为管道描述符标志<code>close-on-exec</code></p>
+
+<h5 id="forkandexecinchild">forkAndExecInChild</h5>
+
+<pre><code class="language-go">pid, err1 = forkAndExecInChild(argv0p, argvp, envvp, chroot, dir, attr, sys, p[1])
+</code></pre>
+
+<p>这句话才是真正启动进程的逻辑，我们深入进去追到最底层的源码是<code>forkAndExecInChild1</code>，由于篇幅有点长，我留到后一篇blog来接上来</p>
+
+<h3 id="小结">小结</h3>
+
+<p>虽然Start还没有讲完，但我们已经很接近它了(Linux的系统调用)，其实观察仔细的我们可以发现，Go源码对系统调用的层层封装正是出于多年经验累计的最佳实践，虽然没有将Linux底层的所有功能都封装一边(这样太多了)，但是我们可以举一反三，通过分析Go的源码，来理解Linux的系统调用，反过来通过理解系统调用，知道大概如何实现别的功能(可能比较少用的功能)</p>
+
+<p>但是刚开始学习<code>Linux Process</code>的学者来说，参考着Go的例子学习是很好的，另外还有一些经典的书籍，以及强大的man page</p>
+
+<p>最后我希望这篇blog最起码能够让你理解Go起进程的大概流程，以及它的封装思想。</p>
+
+<p>并且能够知道Wait的具体细节，以及为什么阻塞，以及它所捕获的状态是只有EXITED和SIGNALED的</p>
+
+<p>Start虽然还没说完，但是我们可以体会到每一层它是如何封装参数，然后传递给下一层，并且下一篇我会说道和Linux底层最直接相关的源码</p>
+
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/posts/linux/linux-process-exit/">Linux Process Exit</a></li>
+        
+        <li><a href="/posts/linux/linux-process-scheduler/">Linux Process Scheduler</a></li>
+        
+        <li><a href="/posts/linux/linux-process-dofork/">Linux Process do_fork</a></li>
+        
+        <li><a href="/posts/linux/linux-process-fork/">Linux Process Fork&amp;Clone</a></li>
+        
+        <li><a href="/posts/linux/linux-process-identifier/">Linux Process Identifier</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Golang">Golang</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/Linux">Linux</a></li>
+                                
+                                <li><a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86">进程管理</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "wushaoqiang/blogcomment"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://wushaoqiang.github.io">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-system-call/" title="Linux System Call">Linux System Call</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/" title="Different Encoding">Different Encoding</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories//">(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Algorithm/">Algorithm(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Definition/">Definition(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/English/">English(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Favorite/">Favorite(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Front-end/">Front-end(14)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Git/">Git(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Hugo/">Hugo(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Leetcode/">Leetcode(161)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Opinion/">Opinion(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/Vscode/">Vscode(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E4%BA%BA%E7%94%9F%E7%BB%8F%E5%8E%86/">人生经历(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库(29)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础(14)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式(2)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E8%B5%84%E6%BA%90/">资源(1)</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/categories/%E9%9D%A2%E8%AF%95/">面试(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://wushaoqiang.github.io/tags//"></a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Algorithm/">Algorithm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Array/">Array</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Bash/">Bash</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Basic/">Basic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Beego/">Beego</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BigTable/">BigTable</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/BinaryTree/">BinaryTree</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Blog/">Blog</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS/">CSS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/CSS3/">CSS3</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Channel/">Channel</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Command/">Command</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Context/">Context</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Crawler/">Crawler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/DHCP/">DHCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Definition/">Definition</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Easy/">Easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Effective/">Effective</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Encoding/">Encoding</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/English/">English</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/GC/">GC</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Generic/">Generic</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gin/">Gin</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Git/">Git</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Golang/">Golang</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Gopher/">Gopher</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTML/">HTML</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/HTTP/">HTTP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Hugo/">Hugo</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/IP/">IP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Interface/">Interface</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Internet/">Internet</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/JS/">JS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/LeetCode/">LeetCode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Leetcode/">Leetcode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Life/">Life</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Linux/">Linux</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Log/">Log</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Map/">Map</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Module/">Module</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Mongodb/">Mongodb</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NAT/">NAT</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/NoSQL/">NoSQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Paper/">Paper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Path/">Path</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Pipeline/">Pipeline</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Raft/">Raft</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/SQL/">SQL</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Search/">Search</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sentences/">Sentences</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Slice/">Slice</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Sort/">Sort</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Spanner/">Spanner</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Strings/">Strings</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TCP/">TCP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TS/">TS</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/TiDB/">TiDB</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/UDP/">UDP</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Ubuntu/">Ubuntu</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Validation/">Validation</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Vscode/">Vscode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/Web/">Web</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/easy/">easy</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gocode/">gocode</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/goquery/">goquery</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/gorm/">gorm</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/handler/">handler</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/make/">make</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/mega/">mega</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/network/">network</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/new/">new</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/questions/">questions</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/viper/">viper</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%B8%AD%E6%96%AD/">中断&#34;</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">依赖注入</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%8A%A0%E5%AF%86/">加密</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%A0%87%E5%87%86%E5%BA%93/">标准库</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%8C%85/">第三方包</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8/">系统调用</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">网络基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E7%BD%91%E7%BB%9C%E7%AE%A1%E7%90%86/">网络管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%A7%82%E7%82%B9/">观点</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/">计算机系统</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%B5%84%E6%BA%90/">资源</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">进程管理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/">配置问题</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/">错误处理</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="https://wushaoqiang.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="https://wushaoqiang.github.io">Gavin&#39;s Blog By Gavin</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script type="text/javascript">
+    
+    (function(){
+        $("pre code").parent().addClass("line-numbers")
+    }())
+
+    window.MathJax = {
+        tex2jax: {
+            inlineMath: [ ['$','$'] ],
+            processEscapes: true
+        }
+    };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+<script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>

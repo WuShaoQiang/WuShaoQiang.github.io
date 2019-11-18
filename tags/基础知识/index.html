@@ -78,6 +78,101 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/">Linux Process Relation</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年11月17日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                Process Group Process Group的声明周期是：从Group被创建，到这个Group里面最后一个Process退出这个Group(Terminated或者加入到别的Group中去)
+int setpgid(pid_t pid, pid_t pgid)  参数的含义
+如果pid和pgid相同，那么pid这个进程就是Process Group Leader
+如果pid是0，那么是指当前进程
+如果pgid是0，那么pgid = pid
+setpgid只能对自己使用，或者是对子进程使用
+一般来说，这个函数会在fork之后调用，因为当一个进程调用exec之后，pgid就无法改变了。由于父进程和子进程无法保证执行顺序，因此通常会在两个进程里面都调用setpgid，以确保后面依赖于这个进程组关系的程序不会发生RACE。
+关于如何区分是父子进程，根据fork返回值来确认(在不发生错误的情况下)
+ 子进程的fork返回的是0
+ 父进程的fork返回的是子进程的pid
+  Session 当我们创建一个session的时候，会发生下面三件事情
+ 进程是Session Leader，并且整个Session中只有它一个进程
+ 进程变成Process Group Leader，并且pgid = pid
+ 进程没有controlling terminal
+  创建一个新的Session的进程必须不是一个Process Group Leader，因此最常见的实现方式是这样的：
+ 先调用fork，产生子进程，父进程退出
+ 子进程调用setsid创建新的session
+  由于子进程不可能是进程组Leader，因此这里可以保证创建新Session的条件成立
+Controlling Terminal 一般情况下，我们只需要知道，当我们Login进Linux系统的时候，我们调用命令行的地方(简单来说)就是Controlling Terminal
+我们可以运用Process和Session的知识对它大概了解：
+ Session Leader是建立这个Controlling Terminal的Process
+ 一个Controlling Terminal只能包含一个foreground process group，能够包含多个background process group……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/">Linux Process Exit</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年11月4日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                之前几篇blog对进程的创建(fork&amp;clone)，以及执行(exec)的大概设计和具体的思路，但还没有将进程的退出是怎么回事
+进程终止的条件 在大多时候，我们所看到的程序退出包括：
+ 执行完退出
+ 异常退出
+  但是在Linux下，进程有5种正常终止和3种异常终止
+这里的种类虽然多，但是常用的也就三种吧
+ 调用exit
+ 自己abort
+ 内核产生信号
+  隐式exit 首先，调用exit并不是意味着你每次都要显式的去调用这个函数，其实在很多编程语言里(比如我用的Go)，在main函数里，我通常不会在最后去显式地调用exit。比如HelloWorld
+func main() { fmt.Println(&quot;Hello World&quot;) }  这里应该是编译器帮我在main函数执行完后调用了exit，并且exit status是0
+echo $? #用这个验证  这里我也只是猜测，我还没具体考究到底是不是编译器帮我们做了这件事情
+但是能肯定的是，我们的程序最后肯定调用了Linux给到的exit
+显式exit 这个就很明显了
+func main() { fmt.Println(&quot;Hello World&quot;) os.Exit(1) }  通过程序显式的调用exit，同理echo $?可以得到相应的退出码
+无论是显式调用还是隐式调用，这种退出方式都是进程的正常退出方式
+不正常退出 其实2和3也算是一类，它们都可归类为信号退出
+内核产生信号使得进程不正常退出一般是因为进程有非常严重的违法操作
+ 引用了地址空间之外的存储单元
+ 除以0
+  &hellip;
+出现了这类操作，内核会产生一个让进程abort的信号
+但是Golang将这类不正常退出转换为了正常退出(panic)
+所以在Golang里，不正常退出一般都是由外界信号导致的，比如SIGKILL
+无论如何 无论进程如何退出，最后都会执行内核中同一段代码
+无论是正常还是非正常，进程都会能够让父进程取到自己的退出状态(exit status)
+父进程会通过wait来获取子进程的退出状态，但是正常和非正常退出的获取方式有些许不同
+POSIX.1规定，用4个互斥的宏来取得进程终止的原因
+WIFEXITED(status) WIFSIGNALED(status) WIFSTOPPED(status) WIFCONTINUED(status)  如果一个进程是被信号杀死的(非正常终止)，那么用EXITED来获取status是不可以的，要用SIGNALED，一般来说，都会有相应的API提供使用……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/">Linux Interrupt Top Halves</a>
                                 </h1>
                             </header>
@@ -178,7 +273,7 @@ _syscall3(long,open,const char*, filename, int, flags, int ,mode)  因为open的
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/">Linux Memory Management</a>
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/">Linux Memory Management --Page and Zone</a>
                                 </h1>
                             </header>
                             <date class="post-meta meta-date">
@@ -385,83 +480,29 @@ nsproxy 在task_struct里有一个字段
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/">Linux Process Types</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月22日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Linux的进程不仅仅是由代码组成，它还包括分配给进程的资源(如内存，文件等)
-在Linux上，一个新的进程简单的创建可以通过fork和exec来实现
-就好比如我们在shell上面运行一个sleep命令，那么这个命令其实也是通过两个步骤
- fork当前进程一个相同的副本(当前进程为shell)，我们可以这么认为，这两个相同的副本会具有相同的打开文件、工作目录以及内存数据等等，也会有不同的地方，比如PID这些具有唯一性的属性，还有进程之间的关系等(sleep进程的父进程就是shell本身)。
- exec会从一个可执行文件里加载另外一个应用程序(这里是sleep的二进制文件)，然后代替刚才复制出来的副本进程的程序。也就是说exec不会创建新的进程，只是在fork出来的副本上创建新的程序
-  这里还要特别说一下，Linux为了解决fork的效率问题，在资源的复制上做了一些改进，使用(Copy-On-Write)的方式来复制副本：也就是说，副本并不是一次性完完全全的复制一份，而是等到其中一个进程要修改内存中的某一个共有的值的时候，才会去复制。否则按照只读的方式&rdquo;共享&rdquo;，后面详细讲一下
-要是能大概理解Linux下这些相关进程的创建方式，平时在写一些命令的时候可以对自己写下的命令后面到底运行了哪些东西有个认知。并且这也是一种非常通用的概念
-还有一种系统调用叫做clone，和fork相类似，不过clone不产生新的副本，而是共享资源，所以用于实现线程的创建。
-在Linux上，一个线程其实也是进程，只是共享了资源
-其实还有一个叫vfork，但是现在应该避免去调用它
-上面的解释是非常浅显的，并没有道出多少技术细节，想要知道具体的细节，需要参考其中的一些标志位，例如clone就是通过标志位来实现共享资源的类型的。这些需要查阅相关man page来了解
-COW Copy-On-Write
-我们前面讲到，使用COW主要是因为
- 使用大量内存(以共享的方式减少)
- 耗费时间(需要复制的时候再赋值，惰性复制)
-  因为我们可能在创建一个新进程的时候，完全不需要它的内存数据(两者数据没有关联)，因此直接的复制会导致做了很多无用功
-fork还通过只复制其页表的方式来达到物理内存的共享，也就是两个独立的虚拟内存地址指向同样的物理内存
-当然，进程之间不应该互相修改物理内存的数据，因此这个页表是只读的
-在很多情况下COW都会为我们节省很多时间……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/">Linux Process Life Cycle</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年10月21日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                我们知道，现在的操作系统，给用户的感觉都是多任务执行的，可能执行的任务(Process)要比CPU还多
-这个时候电脑程序看起来还是一起跑的
-在Linux的Process Management里面，通过不断的让Scheduler交换执行进程，就可以实现这样的效果
-State 这里先来了解一下关于进程生命周期的几个状态
- R(Running or Runnable)是指这个Process正在占用一个CPU，处于执行状态。或者，它处于可被执行的状态
- S(Interruptible Sleep)这种状态表示进程正在等待事件发生，这种情况下是可接收信号的，等到等待的时间发生再次满足Runnable的条件时，会置为R
- D(Uninterruptible Sleep)与上面的区别，这种状态是无法接收信号的
- T(Stopped)这里是暂停或者停止，比如在使用debugger的时候
- Z(Zombie)状态发生在进程被结束，但是数据还有部分残留在Process table里，这个时候在等待父进程调用wait4
-  这些状态在linux源码里的linux/sched.h里面有定义
-181 #define TASK_RUNNING 0 182 #define TASK_INTERRUPTIBLE 1 183 #define TASK_UNINTERRUPTIBLE 2 184 #define __TASK_STOPPED 4 185 #define __TASK_TRACED 8 186 /* in tsk-&gt;exit_state */ 187 #define EXIT_ZOMBIE 16 188 #define EXIT_DEAD 32 189 /* in tsk-&gt;state again */ 190 #define TASK_DEAD 64 191 #define TASK_WAKEKILL 128 192 #define TASK_WAKING 256 193 #define TASK_STATE_MAX 512  其中TRACED是调用ptrace时用的，主要是为了区分STOPPED……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-process-life-cycle/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
+
+<ol class="page-navigator">
+    
+
+    
+    <li  class="current">
+        <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">1</a>
+    </li>
+    
+    <li >
+        <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/page/2/">2</a>
+    </li>
+    
+
+    
+    <li class="next">
+        <a href="https://wushaoqiang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/page/2/">下一页</a>
+    </li>
+    
+</ol>
 
 
 
@@ -483,6 +524,26 @@ State 这里先来了解一下关于进程生命周期的几个状态
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -495,31 +556,11 @@ State 这里先来了解一下关于进程生命周期的几个状态
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -560,7 +601,7 @@ State 这里先来了解一下关于进程生命周期的几个状态
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -572,7 +613,7 @@ State 这里先来了解一下关于进程生命周期的几个状态
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -667,6 +708,8 @@ State 这里先来了解一下关于进程生命周期的几个状态
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

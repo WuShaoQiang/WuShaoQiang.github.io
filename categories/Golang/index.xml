@@ -6,10 +6,32 @@
     <description>Recent content in Golang on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Oct 2019 13:11:03 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 Nov 2019 18:51:17 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/categories/Golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Golang Process --How to create a process in Go</title>
+      <link>https://wushaoqiang.github.io/posts/golang/golang-process/</link>
+      <pubDate>Tue, 05 Nov 2019 18:51:17 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/golang/golang-process/</guid>
+      <description>最近花了点时间在学习Linux Process这一块，发现对日常的工作还是很有帮助的，并且最近发现阅读Go相应部分的源码也比较容易理解，所以整合出这一篇blog.
+这篇blog和语言相关，如果只是想了解Linux Process，可以去看我别的blog，这里主要是源码解析
+概述 由于Golang对启动进程这一功能跨越了三个package:exec,os,syscall
+而且它们是一个向下引用的关系，因此我们先从exec这一层开始说起
+exec 我们启动进程使用的最多的方式应该就是exec.Cmd的Run方法，这里其中包含了Start和Wait
+容易忽略的点 很多人可能会认为构建一个*exec.Cmd只是单纯的利用Command()构建(后面我省略exec这个包名，直接使用函数名)
+我们来看看源码
+func Command(name string, arg ...string) *Cmd { cmd := &amp;amp;Cmd{ Path: name, Args: append([]string{name}, arg...), } if filepath.Base(name) == name { if lp, err := LookPath(name); err != nil { cmd.lookPathErr = err } else { cmd.Path = lp } } return cmd }  可以看到if filepath.Base(name) == name这句话的意思是，如果传入的name不是一个全路径，那么这里是通过PATH来找的
+如果找不到，其实这里的cmd.lookPathErr就被赋值了
+对应Linux里面的exec实现
+ 如果filename里面不包含/，那么就按PATH环境所指定的各个目录中搜寻可执行文件
+ 如果这个可执行文件不是二进制文件，Linux还会试着调用/bin/sh，让filename作为参数
+我们可以看到，Go在这个实现上其实是和Linux的思路相似的
+Start 构造一个Cmd其实和我们在shell终端的命令行类似，而我们在按下回车键的时候，其实就是执行了Run，而Run的第一步就是Start</description>
+    </item>
     
     <item>
       <title>Go Scheduler</title>

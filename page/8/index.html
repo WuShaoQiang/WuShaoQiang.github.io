@@ -68,6 +68,168 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/" title="Javascript Regexp" >Javascript Regexp</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月8日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这一篇是讲正则表达式(Regular Expression)
+Test method 全匹配
+let waldoIsHiding = &quot;Somewhere Waldo is hiding in this text.&quot;; let waldoRegex = /Waldo/; // Change this line let result = waldoRegex.test(waldoIsHiding); console.log(result) //true  全匹配是大小写敏感的
+多可能性
+let petString = &quot;James has a pet cat.&quot;; let petRegex = /dog|cat|bird|fish/; // Change this line let result = petRegex.test(petString);  这样就是一个或关系
+忽略大小写
+let myString = &quot;freeCodeCamp&quot;; let fccRegex = /freeCodeCamp/i; // Change this line let result = fccRegex.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-regexp/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/" title="Javascript ES6" >Javascript ES6</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月7日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                let vs var 在ES6之前还没有let
+var是有一些很严重的缺点的，比如
+可以重复定义同名的变量而不会抛错 经常想定义一个局部变量，变成了一个全局变量，也就是shadow和我们平时熟悉的方式不一样  所以我们在定义变量的时候就用let，因为let就是修复了var的一些缺点，和平时的用法一样
+const 这个和let差不多，只是只能赋值一次(定义的时候就要赋值)
+并且建议const用全部大写的格式
+开发建议是：如果变量是不会重新赋值的，那么最好是使用const，除非是预测到要重新赋值就用let
+在这里还要强调的一点，赋值是值这个变量的赋值，如
+const s = [5,6,7] s = [1,2] //出错，重新赋值 s[2] = 10 //可行，这个不是对s的重新赋值  同理的还有Object、function
+Object freeze 可以防止一个Object的属性被修改
+Object.freeze(object_name);  Arrow functions () =&gt; {} () =&gt; value //如果是直接返回数据，这个是简化的写法 (arg1,arg2) =&gt; {}  filter map reduce A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-ES6/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/" title="Javascript Basic" >Javascript Basic</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年7月3日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Front-end">Front-end</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                数组的方法 push 插入数据到数组的后面 pop 取出数组的最后一个数据 shift 取出数组的第一个数据 unshift 插入数据到数组的前面  JS的数组里面的元素是可以不相同的
+作用域 当变量没有用var等关键字声明时，这个变量是全局变量，这个可能会导致一些问题
+function func(){ funcVar = 1 }  等于号 比较符有两个==和===
+在JS里面
+1 == '1' //true 1 === '1' //false  ==会在类型不同进行自动转换
+===不会进行类型转换
+同理!=和!==也是一样
+比较符 &gt; &lt; &gt;= &lt;=
+这些当类型不同时，也会进行类型转换
+Switch function caseInSwitch(val) { var answer = &quot;&quot;; // Only change code below this line switch(val){ case 1: answer = &quot;alpha&quot;; break; case 2: answer = &quot;beta&quot;; break; case 3: answer = &quot;gamma&quot;; break; case 4: answer = &quot;delta&quot;; break; } // Only change code above this line return answer; }  需要注意的是，这里的比较是用===，而且要注意，如果不写break，会继续匹配下去……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/front-end/javascript-basic/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/" title="Linux Bash Awk" >Linux Bash Awk</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年6月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                awk的一些用法
+常见模式 awk '/reg/' 'BEGIN{} condition {condition action} END{}' filename  其中
+ /reg/ 是一个正则的匹配
+ condition 是判断条件
+ action 就是要执行的操作
+ BEGIN 开始前的操作
+ END 结束后的操作
+  对文件 awk '{print $1}' test.txt  对管道 df -h | awk '{print $1}'  这里面的$1是指第一部分，默认分隔符是空格(制表符)
+echo &quot;This is a test&quot; | awk '{print $1}'  输出的是This
+如果想要的分隔符不是默认的，可以使用-F
+例如
+echo &quot;This,is,a,test&quot; | awk '{print $1}' #输出 This,is,a,test echo &quot;This,is,a,test&quot; | awk -F ',' '{print $1}' #输出 This  更多高级的用法 先说说内置的变量……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-awk/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/" title="Linux Bash Test" >Linux Bash Test</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年6月9日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Linux">Linux</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                 test命令是bash中一个重要的判断命令
+虽然我们在其它编程语言上习惯使用if判断语句去实施判断，但也有必要了解一下这一种的判断手段
+if + test if test -e ./test.txt; then echo &quot;exist&quot;; fi  [ ] 因为上面那种结合if条件判断的和原有的差不多，所以我们一般常用的是[]
+例子
+[ -e ./test.txt ] &amp;&amp; echo &quot;exist&quot; || echo &quot;doesn't exist&quot;  这里就是存在就会输出exist，不存在就会输出后面的那个
+而且这还适用于
+ 文件类型判断
+ 文件权限
+ 两文件之间
+ 整数之间
+ 字符串之间
+ 多重条件(也就是AND和OR还有NOT)
+  ……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-bash-test/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/linux/linux-bash-basic-note/" title="Linux Bash Basic Note" >Linux Bash Basic Note</a>
                                 </h1>
                             </header>
@@ -203,121 +365,6 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
                                  题目 我的解答 最优解答 难疑点&amp;核心 ……
                             </div>
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-989/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-985/" title="Leetcode 985" >Leetcode 985</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-985/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-977/" title="Leetcode 977" >Leetcode 977</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-977/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-941/" title="Leetcode 941" >Leetcode 941</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-941/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-922/" title="Leetcode 922" >Leetcode 922</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月8日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-922/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-914/" title="Leetcode 914" >Leetcode 914</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年6月5日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                 题目 我的解答 最优解答 难疑点&amp;核心 ……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-914/">阅读全文</a></p>
                         </article>
                     
 
@@ -460,6 +507,10 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
         <a href="https://wushaoqiang.github.io/page/32/">32</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/33/">33</a>
+    </li>
+    
 
     
     <li class="next">
@@ -488,6 +539,26 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -500,31 +571,11 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -565,7 +616,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -577,7 +628,7 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -672,6 +723,8 @@ read X read Y if (($X&gt;$Y)); then echo &quot;X is greater than Y&quot;; elif (
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

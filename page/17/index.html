@@ -68,6 +68,205 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/" title="Data Structure Tree" >Data Structure Tree</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                为了搞明白关于数据库的一些索引结构开的一篇数据结构-树博客
+前言 这只是笔者的一些笔记和觉得不错的教学资源,分享一下
+推荐一个可视化的数据结构网站
+树是一个重要的数据结构,不仅要知道相关概念,建议在leetcode上刷上几十题
+BST BST相信很多人都已经比较了解,不赘述了,说说会有哪些问题
+BST按照不同的插入顺序会有不同的形状,在极端的条件下会变成一个线性链表,这样查找的时间复杂度就变成了O(logN)
+因为查找和插入都相对比较简单,这里就不说了,说说删除的思路
+ 二叉树删除某个叶子节点,就直接删除就好
+ 二叉树删除某个中间节点(包括root节点),则需要一定的操作(建议多在上面推荐的网站上多试几次,就明白了)
+  以要被删除的节点A开始,把它当做root节点(也就是把子树先看做整个树,其它部分先不管)
+往左边找第一个节点B,如果左边不存在节点,直接用A的右节点去代替它
+找到左边第一个节点B后,找基于这个节点的最右节点C(也就是路径是一直往右边走的,不存在往左走一段后再往右)
+如果没有右边节点(一个右子树都没),则直接用刚才找到的节点B去代替它
+如果有右节点C(并且已经按照规则找到最右的),那么我们将用这个结点C去替代它
+如果这个结点C有左节点,那么节点C的父亲节点的右子树会指向C的左节点
+完!
+我相信看到这段文字心态是崩的,再建议一次,用上面的网站去得到图形化的结构
+AVL 参考Youtube学习
+又名(Balanced binary search tree)
+解决了上面BST的问题:容易因为插入顺序问题造成一棵树倾斜(这样就无法得到该有的查询速度)
+先解释一下什么叫平衡(Balanced)
+一颗平衡的数满足这个条件
+ 无论从哪个节点开始数,它的左子树深度和右子树深度的差值的绝对值小于1  因为这个条件的限定,所以即使我们插入顺序比较极端,只要我们实现了AVL Tree,那么它就能自动帮我们平衡
+这里要提醒一点
+ 不是说以前的不平衡树放进去就能平衡,这是要重新一个个插入才能达到这样的效果  所以说,如果以前的二叉树要转为AVL树,需要将二叉树的值重新插入一遍
+这里再提醒一个点,我们所有的反转操作(rotation)都是只看三个节点
+进入正题
+1 \ 2 \ 3  这样的一个树就是不平衡的,因为从结点1看来,左子树的深度为0,右子树的深度为2,因此|0-2|&lt;=1不成立
+这种情况就是RR-imbalanced,需要做的操作叫RR-rotation(RR:Right of right)
+变成
+ 2 / \ 1 3  再复杂一点就是这也(注意focus三个节点就好)
+ 6 / \ 4 7 / \ 2 5 / \ 1 3  这里我要再说明一点……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/data-structure/data-structure-bplus-tree/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/" title="Gopher 2019 Testing Talk" >Gopher 2019 Testing Talk</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月13日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇文章来自Gopher China 2019的Dave演讲的Testing Talk
+下面是一些我觉得有借鉴价值的东西
+这里是如何查看一个coverage
+// 生成.out文件 go test -coverprofile cover.out // 生产html文件 go tool cover -html=cover.out -o cover.html  下面是我按照Dave的建议写的一个东西
+func TestFindTarget(t *testing.T) { type Input struct { node *TreeNode k int } tests := map[string]struct { input Input want bool }{ &quot;Number 1&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 9, }, want: true, }, &quot;Number 2&quot;: { input: Input{ node: &amp;TreeNode{Val: 5, Left: &amp;TreeNode{Val: 3, Left: &amp;TreeNode{Val: 2}, Right: &amp;TreeNode{Val: 4}}, Right: &amp;TreeNode{Val: 6, Right: &amp;TreeNode{Val: 7}}}, k: 28, }, want: false, }, } for name, tc := range tests { t.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/gopher/gopher-2019-testing-talk/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/" title="Mongodb Installation And Config" >Mongodb Installation And Config</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                总结一下最近在配置MongoDB时遇到的坑吧
+首先,在搜索安装教程的时候,很多文章写的是直接安装.tar包,然后解压缩来用
+嗯,确实是个直接的方法,用起来也可以,只是稍微麻烦自己去设置环境而已
+直接下载tar包 解压后,要将/bin添加到环境变量
+然后还要自己创建一个mongod.conf,往里面配置一些东西.或者可以直接在每次开启mongod的时候加入参数(比较麻烦)
+这里是我初步的一个配置文件
+# mongod.conf # for documentation of all options, see: # http://docs.mongodb.org/manual/reference/configuration-options/ # Where and how to store data. storage: dbPath: /home/shelljo/mongodb/data/db journal: enabled: true # engine: # mmapv1: # wiredTiger: # where to write logging data. systemLog: destination: file logAppend: true path: /home/shelljo/mongodb/log/mongod.log # network interfaces net: port: 27017 bindIp: 0.0.0.0 # how the process runs processManagement: timeZoneInfo: /usr/share/zoneinfo security: authorization: enabled #operationProfiling: #replication: #sharding: ## Enterprise-Only Options: #auditLog: #snmp:  其实这里面还遇到一些别的坑,不太记得了,我搜索了几篇关于安装的教程都是这个样子……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-installation-and-config/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/" title="Mongodb Role" >Mongodb Role</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月11日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                参照 User Management Methods
+build-in role
+这篇文章主要介绍一下关于role的概念,希望读者还是以官网为主,本文为辅
+简介 毫无以为,设置role是为了方便管理权限问题,保证数据库的一个安全使用(不然谁都可以删库跑路那还怎么搞)
+所以这也算是一个很必要知道的东西
+本文只讨论build-in role,不讨论自己设计的role
+笔者会一一尝试每一个role
+首先 MongoDB对普通的数据库只能添加database user and database administration的role
+对admin数据库,则可以添加任何其它类型的role
+Database User Role read 简单来说就是只提供对某个数据库读的权利(细节可以上官网上看具体描述)
+例如db.collections.find()
+我们如何添加呢,这里简单讲一下,后面的都一样
+use admin //进入admin database db.createUser({user:&quot;%s&quot;,pwd:&quot;%s&quot;,roles:[{role:&quot;read&quot;,db:&quot;%s&quot;}]})  其中%s是大家自己选择的意思
+readWrite 同上多了写的权限
+Database Administration Roles dbAdmin 提供权限运行管理类的任务
+例如schema-related tasks,indexing and gathering statistics
+但是这个role不能够管理user and role management
+userAdmin 提供能够在当前database修改roles和users的权利
+注意:这样的一个权限代表着它是这个database的superuser,如果在admin database上设置了这种权限意味着间接提供了超级权限(可以看到集群的数据库了)
+所以用这个权限的时候要小心点
+dbOwner 这个就集成了readWrite,dbAdmin and userAdmin
+Cluster Administration Roles 由于笔者对集群化了解还比较浅薄,这里就直接做一些简单翻译
+这些administration就不像之前那样是指定某一个数据库了,这是管理整个系统的role
+clusterAdmin 这是cluster的最高权限,结合了clusterManager,clusterMonitor,hostManager,additionally dropDatabase action
+这是一个可以删库的权限,可见其权限很高了吧……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/mongodb/mongodb-role/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-module/" title="Golang Module" >Golang Module</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年5月10日
+                            </date>
+                            
+                            <div class="post-meta">
+                                <span>|</span>
+                                
+                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Golang">Golang</a></span>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                在dep还没正式登上Go的亲生包依赖管理工具位置的时候,Go Module出来了,并且Russ还建议广大Gopher用Go Module来代替go get,不知不觉go get以及存在了十年了,下一个十年应该由go module来主持了吧
+不知道大家用Go Module还爽不爽,反正我一开始还挺不爽的,不过解决了不爽的问题之后就挺爽的了
+不爽的地方 因为你懂的原因,某些golang.org包不能够根据依赖的版本直接下载下来,就和之前用go get一样,但是go get不行的们还能去github上clone一份
+因为go module对版本有着严格的控制,因此如果我们按照同样的方法去github clone一份的话,就没有这么方便了
+爽的地方 可能这个我认为好的地方,也有人认为不好,就是它把所有的package存放在了$GOPATH/pkg/mod里面了,在以前,我基本都是直接go get到src上的,所以整个src的文件夹都是库
+这样一来,可以让src整洁很多吧
+当然还不止一些,如果当上面关系下载包的问题被解决了,也就意味着,下载别人的代码,即使本地不存在它的依赖,也可以一键运行了?
+如何解决下载问题 goproxy &ndash;最简单的方法
+通过他人做好的一个代理,之后对包的请求都会经过这个代理,但是无法下载私密仓库(也就是没有认证功能)
+athens &ndash;复杂点但全面的方法
+这个是微软大力支持的一个开源项目,规模和功能什么的都比上面的多,但是现在还没有v1版本
+对我来说,我更多的还是在github上下载公共仓库,所以,先用第一个吧
+好,万一哪天代理不好用了,那还有一种比较难受的方法
+在go.mod里面用replace替换下载的目的地
+一些简单介绍 要启用module模式,需要
+export GO111MODULE=on  在Go1.12版本中,不再依赖go.mod文件了(虽然是方便了,但我感觉有也不错)
+如果打开了module模式,那么程序在寻找包的依赖就不再是在GOPATH/src上找了,而是在GOPATH/pkg/mod
+如果想要查看一个程序的所有module依赖
+go list -m -json all //以JSON格式显示会好看点  虽然Google的工程师提议使用go module,但毕竟还是要点事件,并且go get也有一些比较好用的特性,来列举一下
+go get -u //get lastest go get -u=patch //首先,patch版本的不同一般是bug fixed,一般不会有其它功能的变化 go get package@v1.1.1 //得到一个package的v1.1.1版本 go get package@lastest //得到最新的tag版本,如果没有tag,就是最新commit go get package@master //得到最新commit版本  在module模式下,go get也会影响到go.……
+                            </div>
+                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-module/">阅读全文</a></p>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/golang-mongodb/" title="Golang Mongodb" >Golang Mongodb</a>
                                 </h1>
                             </header>
@@ -219,126 +418,6 @@ SQL vs NoSQL 字段(有利有弊) SQL有固定的table字段(field),所以只能
                             <p class="readmore"><a href="https://wushaoqiang.github.io/posts/database/sql-vs-nosql/">阅读全文</a></p>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/" title="Leetcode 405" >Leetcode 405</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used. Note: All letters in hexadecimal (a-f) must be in lowercase. The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, the first character in the hexadecimal string will not be the zero character. The given number is guaranteed to fit within the range of a 32-bit signed integer.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-405/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/" title="Leetcode 404" >Leetcode 404</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Find the sum of all left leaves in a given binary tree. Example: 3 / \ 9 20 / \ 15 7 There are two left leaves in the binary tree, with values 9 and 15 respectively. Return 24.  我的解答 这个题参考了一下别人的思路写出来
-func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } search(root, false, &amp;sum) return sum } func search(root *TreeNode, flag bool, sum *int) { if root == nil { return } if flag &amp;&amp; root.……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-404/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/" title="Leetcode 400" >Leetcode 400</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... Note: n is positive and will fit within the range of a 32-bit signed integer (n &lt; 231). Example 1: Input: 3 Output: 3 Example 2: Input: 11 Output: 0 Explanation: The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, .……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-400/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/" title="Leetcode 389" >Leetcode 389</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given two strings s and t which consist of only lowercase letters. String t is generated by random shuffling string s and then add one more letter at a random position. Find the letter that was added in t. Example: Input: s = &quot;abcd&quot; t = &quot;abcde&quot; Output: e Explanation: 'e' is the letter that was added.  我的解答 这道题我用了三种方法
- 全部统计,因为只会有一个字符是奇数,所以那个就是新增
- 用t-byte的总和减去s-byte的总和
- 异或,最后剩下那个增加的
-  其中第三种方法最快……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-389/">阅读全文</a></p>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/" title="Leetcode 387" >Leetcode 387</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月7日
-                            </date>
-                            
-                            <div class="post-meta">
-                                <span>|</span>
-                                
-                                <span class="meta-category"><a href="https://wushaoqiang.github.io/categories/Leetcode">Leetcode</a></span>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                题目  Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1. Examples: s = &quot;leetcode&quot; return 0. s = &quot;loveleetcode&quot;, return 2. Note: You may assume the string contain only lowercase letters.  我的解答 func firstUniqChar(s string) int { m := make([]int, 26) for _, b := range s { m[b-'a']++ } for idx, b := range s { if m[b-'a'] == 1 { return idx } } return -1 }  记录所有字符的个数,然后从头开始遍历,找到第一个count=1的索引……
-                            </div>
-                            <p class="readmore"><a href="https://wushaoqiang.github.io/posts/leetcode/leetcode-387/">阅读全文</a></p>
-                        </article>
-                    
 
                     
 
@@ -479,6 +558,10 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
         <a href="https://wushaoqiang.github.io/page/32/">32</a>
     </li>
     
+    <li >
+        <a href="https://wushaoqiang.github.io/page/33/">33</a>
+    </li>
+    
 
     
     <li class="next">
@@ -507,6 +590,26 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -519,31 +622,11 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -584,7 +667,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -596,7 +679,7 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -691,6 +774,8 @@ func sumOfLeftLeaves(root *TreeNode) int { sum := 0 if root == nil { return 0 } 
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

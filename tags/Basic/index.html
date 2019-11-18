@@ -78,6 +78,83 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/">Linux File And Dir</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年11月16日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                一些规则 UNIX的一些文件函数中，经常会出现名字差不多，但是参数不同的函数，它们的作用一般遵从这样的规则
+比如
+int stat(const char *restrict pathname, struct stat *restrict buf) int fstatat(int fd, const char *restrict pathname, struct stat *restrict buf, int flag)  在以下情况下，这两个函数的作用相同
+ fd = AT_FDCWD &amp;&amp; pathname是一个相对路径
+ pathname是一个绝对路径
+  还可以根据flag的值区分是stat还是lstat，主要是这个标志AT_SYMLINK_NOFOLLOW，当这个标志位被置位的时候，就是lstat，如果没置位，就是stat
+以上并不是要求对函数的掌握，而是一种规律，UNIX许多文件操作的函数都会有相类似的结构
+Stat结构体 struct stat { unsigned long	st_dev;	/* Device. */ unsigned long	st_ino;	/* File serial number. */ unsigned int	st_mode;	/* File mode. */ unsigned int	st_nlink;	/* Link count.……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/">Linux File I/O --Structure</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年11月14日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                这篇blog主要讲述Linux关于文件的粗略结构
+Process里的file descriptor 一般情况下，我们Linux下的进程都会默认打开三个file descriptor，分别是：
+ stdin
+ stdout
+ stderr
+  在Linux内核里，这些fd存储在一个记录项，每一个fd与之相关联的是
+ 文件描述标志(close-on-exec:在执行exec后关闭)
+ 指向一个文件表项的指针
+  文件表项 内核为所有打开文件维持一张文件表，里面包含了
+ 文件状态标志(读、写、同步等)
+ 当前文件的偏移量(关系到读写)
+ 指向该文件的i节点的指针
+  i-node 这个就是index node，专门存放一个文件的信息，包括文件的所有者、文件的权限、文件内容所指向的磁盘位置等
+关系 在了解了这三种结构后不难发现，它们都是拥有着层级关系的fd-&gt;文件表项-&gt;inode
+一般来说，我们需要搞明白两种情况
+ fd指向的是否是同一文件表项
+ 文件表项是否指向同一inode
+  如果不同fd指向同一文件表项，只有在fork的时候才会发生，因为子进程继承了父进程的fd
+如果文件表项指向的是同一inode，说明它们打开的是同一个文件，也就是说两个进程同时open了一个文件
+不同文件表项指向同一inode 如上所说，这里是不同的进程同时打开了一个文件，这些进程各自维护着自己的文件表项，因此拥有独立的文件偏移量
+在只读的情况下，是没问题的，但是在写的时候，因为偏移量的不同，可能会出现意想不到的结果
+但是多个进程写一个文件是很常见的操作，比如打log，就非常有可能会把多个进程的log打在一个地方上
+解决方法 通过原子操作来保证即使有多个进程在写入文件，也不会产生冲突(Race condition)
+UNIX为此提供了一种原子操作的方法，在Open的时候加入O_APPEND标志，这样内核会在写入的时候将当前的偏移量修改到当前文件的尾部
+小结 这篇blog大概讲述了Linux内核在文件上的结构，以及通过fork，或者是不同进程打开同一文件所不同的地方，最后以大概提及一下原子操作的作用……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/front-end/different-encoding/">Different Encoding</a>
                                 </h1>
                             </header>
@@ -388,60 +465,6 @@ Specifically, If you want to know where are these commands from, there are three
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">Linux Windows File</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月21日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                In linux, [Enter] =&gt; LF
-But in windows, [Enter] =&gt; CRLF
-So, if we cp a shell script file from windows to linux, we may not be able to run it because of the line break character is different
-we need a tool to transform between windows(DOS) and linux(UNIX)
-dos2unix [-kn] file [newfile] unix2dox [-kn] file [newfile] unix2mac [-kn] file [newfile]   k: keep modified date
- n: create new file……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-windows-file/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">Linux Vim Basic</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年7月21日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Linux">Linux</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                Last time, we talked about linux compression
-This time, I am gonna talk about basic usage about vim
-vim is a highly recommended editor in UNIX-Like system, so it is necessary to learn that
-To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScode) or IDE to develop software, I use vim only when I just want to edit a config file or just couple lines of code which is not worth opening a editor(or IDE)……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/linux/linux-vim-basic/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -490,6 +513,26 @@ To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScod
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -502,31 +545,11 @@ To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScod
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -567,7 +590,7 @@ To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScod
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -579,7 +602,7 @@ To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScod
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -674,6 +697,8 @@ To be honest I am not one of the vim-fans. Mostly, I use other editor(like VScod
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

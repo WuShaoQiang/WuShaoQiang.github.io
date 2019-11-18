@@ -138,6 +138,20 @@
 
 <p>在用gdb调试的时候，实际上一开始就是发生了STOP信号，使得被调试的进程进入S状态，然后后面可以发送别的信号，例如<code>CONT</code></p>
 
+<h4 id="孤儿进程和僵尸进程">孤儿进程和僵尸进程</h4>
+
+<p>一般来说孤儿进程和僵尸进程产生的原因都是大量的使用了<code>fork</code>，它两有很明显的区别</p>
+
+<ul>
+<li><p>孤儿进程，父进程已经退出了，但它自己(子进程)还没退出</p></li>
+
+<li><p>僵尸进程，自己已经退出了，在等待父进程回收最后的状态(还未回收)</p></li>
+</ul>
+
+<p>回收子进程的状态信息是父进程的责任，但是有时候父进程就是没有去调用<code>wait</code>来回收，这样会产生大量的僵尸进程</p>
+
+<p>孤儿进程最后会被init进程(PID=1)&ldquo;收养&rdquo;，成为init进程的子进程，由init进程负责回收它的退出状态</p>
+
 <h3 id="preemptive-multitasking">Preemptive Multitasking</h3>
 
 <p>抢占式的多任务执行是现在许多系统都会用到的方式，也包括了Linux</p>
@@ -153,7 +167,7 @@
 <p>我们程序一般情况下是在<strong>自己(程序)</strong> 的用户空间下执行，要从User space到Kernel space有两种方法</p>
 
 <ol>
-<li><p>系统调用(常见)</p></li>
+<li><p>系统调用(常见，本质是通过给内核发出异常)</p></li>
 
 <li><p>中断(一般观察不到)</p></li>
 </ol>
@@ -251,6 +265,26 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -263,31 +297,11 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -328,7 +342,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -340,7 +354,7 @@
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -435,6 +449,8 @@
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     

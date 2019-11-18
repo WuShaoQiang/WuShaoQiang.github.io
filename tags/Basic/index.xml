@@ -6,10 +6,59 @@
     <description>Recent content in Basic on Gavin&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Oct 2019 19:56:51 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2019 13:56:13 +0800</lastBuildDate>
     
 	<atom:link href="https://wushaoqiang.github.io/tags/Basic/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux File And Dir</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/</link>
+      <pubDate>Sat, 16 Nov 2019 13:56:13 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/</guid>
+      <description>一些规则 UNIX的一些文件函数中，经常会出现名字差不多，但是参数不同的函数，它们的作用一般遵从这样的规则
+比如
+int stat(const char *restrict pathname, struct stat *restrict buf) int fstatat(int fd, const char *restrict pathname, struct stat *restrict buf, int flag)  在以下情况下，这两个函数的作用相同
+ fd = AT_FDCWD &amp;amp;&amp;amp; pathname是一个相对路径
+ pathname是一个绝对路径
+  还可以根据flag的值区分是stat还是lstat，主要是这个标志AT_SYMLINK_NOFOLLOW，当这个标志位被置位的时候，就是lstat，如果没置位，就是stat
+以上并不是要求对函数的掌握，而是一种规律，UNIX许多文件操作的函数都会有相类似的结构
+Stat结构体 struct stat { unsigned long	st_dev;	/* Device. */ unsigned long	st_ino;	/* File serial number. */ unsigned int	st_mode;	/* File mode. */ unsigned int	st_nlink;	/* Link count.</description>
+    </item>
+    
+    <item>
+      <title>Linux File I/O --Structure</title>
+      <link>https://wushaoqiang.github.io/posts/linux/linux-file-io/</link>
+      <pubDate>Thu, 14 Nov 2019 16:44:27 +0800</pubDate>
+      
+      <guid>https://wushaoqiang.github.io/posts/linux/linux-file-io/</guid>
+      <description>这篇blog主要讲述Linux关于文件的粗略结构
+Process里的file descriptor 一般情况下，我们Linux下的进程都会默认打开三个file descriptor，分别是：
+ stdin
+ stdout
+ stderr
+  在Linux内核里，这些fd存储在一个记录项，每一个fd与之相关联的是
+ 文件描述标志(close-on-exec:在执行exec后关闭)
+ 指向一个文件表项的指针
+  文件表项 内核为所有打开文件维持一张文件表，里面包含了
+ 文件状态标志(读、写、同步等)
+ 当前文件的偏移量(关系到读写)
+ 指向该文件的i节点的指针
+  i-node 这个就是index node，专门存放一个文件的信息，包括文件的所有者、文件的权限、文件内容所指向的磁盘位置等
+关系 在了解了这三种结构后不难发现，它们都是拥有着层级关系的fd-&amp;gt;文件表项-&amp;gt;inode
+一般来说，我们需要搞明白两种情况
+ fd指向的是否是同一文件表项
+ 文件表项是否指向同一inode
+  如果不同fd指向同一文件表项，只有在fork的时候才会发生，因为子进程继承了父进程的fd
+如果文件表项指向的是同一inode，说明它们打开的是同一个文件，也就是说两个进程同时open了一个文件
+不同文件表项指向同一inode 如上所说，这里是不同的进程同时打开了一个文件，这些进程各自维护着自己的文件表项，因此拥有独立的文件偏移量
+在只读的情况下，是没问题的，但是在写的时候，因为偏移量的不同，可能会出现意想不到的结果
+但是多个进程写一个文件是很常见的操作，比如打log，就非常有可能会把多个进程的log打在一个地方上
+解决方法 通过原子操作来保证即使有多个进程在写入文件，也不会产生冲突(Race condition)
+UNIX为此提供了一种原子操作的方法，在Open的时候加入O_APPEND标志，这样内核会在写入的时候将当前的偏移量修改到当前文件的尾部
+小结 这篇blog大概讲述了Linux内核在文件上的结构，以及通过fork，或者是不同进程打开同一文件所不同的地方，最后以大概提及一下原子操作的作用</description>
+    </item>
     
     <item>
       <title>Different Encoding</title>

@@ -78,6 +78,42 @@
                         <article class="post">
                             <header>
                                 <h1 class="post-title">
+                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-process/">Golang Process --How to create a process in Go</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年11月5日
+                            </date>
+                            
+                            <div class="post-meta meta-category">
+                                |
+                                
+                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
+                                
+                            </div>
+                            
+                            <div class="post-content">
+                                最近花了点时间在学习Linux Process这一块，发现对日常的工作还是很有帮助的，并且最近发现阅读Go相应部分的源码也比较容易理解，所以整合出这一篇blog.
+这篇blog和语言相关，如果只是想了解Linux Process，可以去看我别的blog，这里主要是源码解析
+概述 由于Golang对启动进程这一功能跨越了三个package:exec,os,syscall
+而且它们是一个向下引用的关系，因此我们先从exec这一层开始说起
+exec 我们启动进程使用的最多的方式应该就是exec.Cmd的Run方法，这里其中包含了Start和Wait
+容易忽略的点 很多人可能会认为构建一个*exec.Cmd只是单纯的利用Command()构建(后面我省略exec这个包名，直接使用函数名)
+我们来看看源码
+func Command(name string, arg ...string) *Cmd { cmd := &amp;Cmd{ Path: name, Args: append([]string{name}, arg...), } if filepath.Base(name) == name { if lp, err := LookPath(name); err != nil { cmd.lookPathErr = err } else { cmd.Path = lp } } return cmd }  可以看到if filepath.Base(name) == name这句话的意思是，如果传入的name不是一个全路径，那么这里是通过PATH来找的
+如果找不到，其实这里的cmd.lookPathErr就被赋值了
+对应Linux里面的exec实现
+ 如果filename里面不包含/，那么就按PATH环境所指定的各个目录中搜寻可执行文件
+ 如果这个可执行文件不是二进制文件，Linux还会试着调用/bin/sh，让filename作为参数
+我们可以看到，Go在这个实现上其实是和Linux的思路相似的
+Start 构造一个Cmd其实和我们在shell终端的命令行类似，而我们在按下回车键的时候，其实就是执行了Run，而Run的第一步就是Start……
+                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-process/">阅读全文</a></p>
+                            </div>
+                        </article>
+                    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
                                     <a href="https://wushaoqiang.github.io/posts/golang/go-scheduler/">Go Scheduler</a>
                                 </h1>
                             </header>
@@ -402,57 +438,6 @@ Youtu
                             </div>
                         </article>
                     
-                        <article class="post">
-                            <header>
-                                <h1 class="post-title">
-                                    <a href="https://wushaoqiang.github.io/posts/golang/golang-slice/">Golang Slice底层</a>
-                                </h1>
-                            </header>
-                            <date class="post-meta meta-date">
-                                2019年5月5日
-                            </date>
-                            
-                            <div class="post-meta meta-category">
-                                |
-                                
-                                    <a href="https://wushaoqiang.github.io/categories/Golang">Golang</a>
-                                
-                            </div>
-                            
-                            <div class="post-content">
-                                参考 golang blog
-之前一直对slice有一定的误解
-误解  以为是引用传递
- 以为子函数改变切片，主函数会跟着变
- 以为扩容只是简单的内存扩大
-  开始 我们可以把byte的slice比喻成
-type sliceHeader struct { Length int Capacity int ZerothElement *byte }   slice的传递是值传递，类似一个结构体的传递  这意味着，我们把一个slice传入到函数里，在主函数上的slice可能是不变的
-为什么说可能，我们来看一下情况
-值传递 发生扩容 这种情况下，切片所指向的数组发生变化，因此和原来的那块内存失去了联系
-长度发生改变 在子函数里面，切片长度发生改变并不会影响主函数切片的长度(值传递)
-同理容量也是
-唯一造成影响 所以唯一能够在子函数里面影响主函数切片的方法只有一种
-就是指向的数据数组，子函数修改了相同内存空间的数组，主函数切片也会跟着改变(只有不扩容的情况下才会维持同一个数组内存地址)
-小结 不要认为切片是引用传递(很多博客为了方便解释会这样说)，它们唯一能够达到这个效果的情况是共用同一个数组，只要对切片底层认识够深就不会被这个困惑
-记住切片是值传递
-切片指针传递 我们也可以传递一个切片的指针，这个时候类似于传入一个指向结构体的指针
-注意指针
-这个指针并不是说数组数据的指针，而是指向这个切片结构体的指针
-这个时候和上面的值传递就有很大的不同了
-长度、容量、数组指针发生改变 因为是指针传递，改变这个切片的任何东西都会影响到主函数的切片，因此无论是长度发生改变、扩容导致容量发生改变、扩容导致数组指针发生改变，主函数的切片都能看见这些改变
- 切片在扩容的时候，指针会发生改变(以前的数据会复制到新的内存上，新的内存能够存储更多数据)
- 在容量大于长度的时候，不会进行扩容
-  小结 对切片进行指针传递才是真正的引用传递，所有的改变都不会产生新的切片变量
-用途 一般来说我们都会选择使用值传递，我们只要看什么时候需要用指针传递
- 当你不清除一个切片到程序最后有多少个元素(也就是无法提前估计容量)，但是你又需要把所有结果放入这个切片，这个时候要用指针传递(这里说的是传入给函数参数)  为什么呢？
-由于切片扩容的时候，改变了数据的指向。值传递切片不会因为子函数改变了指向而改变指向(事实上我们需要改变指向)
-给个例子吧
-这是一个二叉树所有根节点到叶子节点路径的程序
-type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreePaths(root *TreeNode) []string { if root == nil { return nil } res := make([]string, 0) findPaths(root, &quot;&quot;, &amp;res) return res } func findPaths(root *TreeNode, str string, result *[]string) { if root.……
-                                <p class="readmore"><a href="https://wushaoqiang.github.io/posts/golang/golang-slice/">阅读全文</a></p>
-                            </div>
-                        </article>
-                    
 
                     
 
@@ -513,6 +498,26 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
 <ul class="widget-list">
     
     <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-relation/" title="Linux Process Relation">Linux Process Relation</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-and-dir/" title="Linux File And Dir">Linux File And Dir</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-file-io/" title="Linux File I/O --Structure">Linux File I/O --Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/golang/golang-process/" title="Golang Process --How to create a process in Go">Golang Process --How to create a process in Go</a>
+    </li>
+    
+    <li>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-exit/" title="Linux Process Exit">Linux Process Exit</a>
+    </li>
+    
+    <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-interrupt/" title="Linux Interrupt Top Halves">Linux Interrupt Top Halves</a>
     </li>
     
@@ -525,31 +530,11 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management">Linux Memory Management</a>
+        <a href="https://wushaoqiang.github.io/posts/linux/linux-memory-management/" title="Linux Memory Management --Page and Zone">Linux Memory Management --Page and Zone</a>
     </li>
     
     <li>
         <a href="https://wushaoqiang.github.io/posts/linux/linux-process-scheduler/" title="Linux Process Scheduler">Linux Process Scheduler</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-dofork/" title="Linux Process do_fork">Linux Process do_fork</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-fork/" title="Linux Process Fork&amp;Clone">Linux Process Fork&amp;Clone</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-identifier/" title="Linux Process Identifier">Linux Process Identifier</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-namespace/" title="Linux Namespace">Linux Namespace</a>
-    </li>
-    
-    <li>
-        <a href="https://wushaoqiang.github.io/posts/linux/linux-process-types/" title="Linux Process Types">Linux Process Types</a>
     </li>
     
 </ul>
@@ -590,7 +575,7 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(50)</a>
+        <a href="https://wushaoqiang.github.io/categories/Golang/">Golang(51)</a>
     </li>
     
     <li>
@@ -602,7 +587,7 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     </li>
     
     <li>
-        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(30)</a>
+        <a href="https://wushaoqiang.github.io/categories/Linux/">Linux(34)</a>
     </li>
     
     <li>
@@ -697,6 +682,8 @@ type TreeNode struct { Val int Left *TreeNode Right *TreeNode } func binaryTreeP
     <a href="https://wushaoqiang.github.io/tags/Exercism/">Exercism</a>
     
     <a href="https://wushaoqiang.github.io/tags/Favorite/">Favorite</a>
+    
+    <a href="https://wushaoqiang.github.io/tags/File/">File</a>
     
     <a href="https://wushaoqiang.github.io/tags/Front-end/">Front-end</a>
     
